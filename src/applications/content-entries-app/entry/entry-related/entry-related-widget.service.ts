@@ -10,31 +10,31 @@ import {
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { KalturaAssetFilter } from 'kaltura-ngx-client';
-import { KalturaAttachmentAsset } from 'kaltura-ngx-client';
-import { KalturaAttachmentType } from 'kaltura-ngx-client';
-import { AttachmentAssetListAction } from 'kaltura-ngx-client';
-import { KalturaUploadedFileTokenResource } from 'kaltura-ngx-client';
-import { AttachmentAssetSetContentAction } from 'kaltura-ngx-client';
-import { AttachmentAssetDeleteAction } from 'kaltura-ngx-client';
-import { AttachmentAssetUpdateAction } from 'kaltura-ngx-client';
-import { AttachmentAssetAddAction } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { VidiunAssetFilter } from 'vidiun-ngx-client';
+import { VidiunAttachmentAsset } from 'vidiun-ngx-client';
+import { VidiunAttachmentType } from 'vidiun-ngx-client';
+import { AttachmentAssetListAction } from 'vidiun-ngx-client';
+import { VidiunUploadedFileTokenResource } from 'vidiun-ngx-client';
+import { AttachmentAssetSetContentAction } from 'vidiun-ngx-client';
+import { AttachmentAssetDeleteAction } from 'vidiun-ngx-client';
+import { AttachmentAssetUpdateAction } from 'vidiun-ngx-client';
+import { AttachmentAssetAddAction } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { NewEntryRelatedFile } from './new-entry-related-file';
 import { EntryWidget } from '../entry-widget';
-import { KalturaAttachmentAssetListResponse } from 'kaltura-ngx-client';
-import { getKalturaServerUri } from 'config/server';
+import { VidiunAttachmentAssetListResponse } from 'vidiun-ngx-client';
+import { getVidiunServerUri } from 'config/server';
 import { globalConfig } from 'config/global';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
-export interface RelatedFile extends KalturaAttachmentAsset {
+export interface RelatedFile extends VidiunAttachmentAsset {
   uploading?: boolean,
   uploadFileId?: string,
   serverUploadToken?: string,
@@ -57,14 +57,14 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
 
 	private _entryId: string = '';
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               private _appAuthentication: AppAuthentication,
               private _objectDiffers: KeyValueDiffers,
               private _listDiffers: IterableDiffers,
               private _uploadManagement: UploadManagement,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(ContentEntryViewSections.Related, logger);
   }
 
@@ -144,8 +144,8 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
 
     this._relatedFiles.next({ items: [] });
 
-    return this._kalturaServerClient.request(new AttachmentAssetListAction({
-      filter: new KalturaAssetFilter({ entryIdEqual: this._entryId })
+    return this._vidiunServerClient.request(new AttachmentAssetListAction({
+      filter: new VidiunAssetFilter({ entryIdEqual: this._entryId })
     }))
       .pipe(cancelOnDestroy(this, this.widgetReset$))
       .map(response => {
@@ -174,7 +174,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
       );
   }
 
-  protected onDataSaving(data: KalturaMediaEntry, request: KalturaMultiRequest) {
+  protected onDataSaving(data: VidiunMediaEntry, request: VidiunMultiRequest) {
     if (this._relatedFiles.getValue().items) {
       // check for added and removed assets
       if (this.relatedFilesListDiffer) {
@@ -186,7 +186,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
             const addAssetRequest = new AttachmentAssetAddAction({ entryId: this.data.id, attachmentAsset: newAsset });
             request.requests.push(addAssetRequest);
 
-            const resource = new KalturaUploadedFileTokenResource();
+            const resource = new VidiunUploadedFileTokenResource();
             resource.token = record.item.serverUploadToken;
             const setContentRequest = new AttachmentAssetSetContentAction({ id: '0', contentResource: resource })
               .setDependency(['id', (request.requests.length - 1), 'id'])
@@ -235,7 +235,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
     }
   }
 
-  private _updateAssetsResponse(response: KalturaAttachmentAssetListResponse): void {
+  private _updateAssetsResponse(response: VidiunAttachmentAssetListResponse): void {
     response.objects.forEach((asset: RelatedFile) => {
       if (!asset.format && asset.fileExt) {
         asset.format = this._getFormatByExtension(asset.fileExt);
@@ -263,10 +263,10 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
     this.updateState({ isBusy });
   }
 
-	private _addFile(fileName : string, format :KalturaAttachmentType) : KalturaAttachmentAsset {
+	private _addFile(fileName : string, format :VidiunAttachmentType) : VidiunAttachmentAsset {
     	const existingItems = this._relatedFiles.getValue().items;
 
-		const newFile = new KalturaAttachmentAsset({
+		const newFile = new VidiunAttachmentAsset({
 			filename: fileName,
 			format: format
 		});
@@ -285,7 +285,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
 	}
 
   private _validateFileSize(file: File): boolean {
-    const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+    const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
     const fileSize = file.size / 1024 / 1024; // convert to Mb
 
     return this._uploadManagement.supportChunkUpload(new NewEntryRelatedFile(null)) || fileSize < maxFileSize;
@@ -306,7 +306,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
   }
 
 	private _openFile(fileId: string, operation: string): void {
-        let url = getKalturaServerUri("/api_v3/service/attachment_attachmentasset/action/serve/ks/" + this._appAuthentication.appUser.ks + "/attachmentAssetId/" + fileId);
+        let url = getVidiunServerUri("/api_v3/service/attachment_attachmentasset/action/serve/vs/" + this._appAuthentication.appUser.vs + "/attachmentAssetId/" + fileId);
 		this._browserService.openLink(url);
 	}
 
@@ -357,8 +357,8 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
     }
   }
 
-  private _getFormatByExtension(ext: string): KalturaAttachmentType {
-    let format: KalturaAttachmentType = null;
+  private _getFormatByExtension(ext: string): VidiunAttachmentType {
+    let format: VidiunAttachmentType = null;
     ext = typeof ext === 'string' ? ext.toLowerCase() : ext;
     switch (ext) {
       case 'doc':
@@ -370,7 +370,7 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
       case 'xls':
       case 'xlsx':
       case 'xml':
-        format = KalturaAttachmentType.document;
+        format = VidiunAttachmentType.document;
         break;
       case 'gif':
       case 'png':
@@ -378,13 +378,13 @@ export class EntryRelatedWidget extends EntryWidget implements OnDestroy
       case 'jpeg':
       case 'mp3':
       case 'mp4':
-        format = KalturaAttachmentType.media;
+        format = VidiunAttachmentType.media;
         break;
       case 'txt':
-        format = KalturaAttachmentType.text;
+        format = VidiunAttachmentType.text;
         break;
       case 'json':
-        format = KalturaAttachmentType.json;
+        format = VidiunAttachmentType.json;
         break;
       default:
         break;

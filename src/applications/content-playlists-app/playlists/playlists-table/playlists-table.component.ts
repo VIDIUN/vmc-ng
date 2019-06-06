@@ -10,16 +10,16 @@ import {
     ViewChild
 } from '@angular/core';
 import { Menu, MenuItem } from 'primeng/primeng';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { globalConfig } from 'config/global';
-import { KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kPlaylistsTable',
+  selector: 'vPlaylistsTable',
   templateUrl: './playlists-table.component.html',
   styleUrls: ['./playlists-table.component.scss'],
     providers: [
@@ -28,7 +28,7 @@ import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shar
     ]
 })
 export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy {
-  @Input() set playlists(data: KalturaPlaylist[]) {
+  @Input() set playlists(data: VidiunPlaylist[]) {
     if (!this._deferredLoading) {
       this._playlists = [];
       this._cdRef.detectChanges();
@@ -49,11 +49,11 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
 
   @ViewChild('actionsmenu') private actionsMenu: Menu;
 
-  private _deferredPlaylists: KalturaPlaylist[];
+  private _deferredPlaylists: VidiunPlaylist[];
 
   public _deferredLoading = true;
   public _emptyMessage = '';
-  public _playlists: KalturaPlaylist[] = [];
+  public _playlists: VidiunPlaylist[] = [];
   public _items: MenuItem[];
   public _defaultSortOrder = globalConfig.client.views.tables.defaultSortOrder;
 
@@ -61,7 +61,7 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
 
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _cdRef: ChangeDetectorRef,
               private _el: ElementRef<HTMLElement>) {
   }
@@ -84,7 +84,7 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
       this._columnsResizeManager.updateColumns(this._el.nativeElement);
   }
 
-  openActionsMenu(event: any, playlist: KalturaPlaylist) {
+  openActionsMenu(event: any, playlist: VidiunPlaylist) {
     if (this.actionsMenu) {
       this.buildMenu(playlist);
       this.actionsMenu.toggle(event);
@@ -95,7 +95,7 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
     this.actionsMenu.hide();
   }
 
-  buildMenu(playlist: KalturaPlaylist): void {
+  buildMenu(playlist: VidiunPlaylist): void {
     this._items = [
       {
         id: 'previewAndEmbed',
@@ -110,16 +110,16 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
       {
         id: 'delete',
         label: this._appLocalization.get('applications.content.table.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this.onActionSelected('delete', playlist)
       }
     ];
 
-    if (playlist.status !== KalturaEntryStatus.ready) {
+    if (playlist.status !== VidiunEntryStatus.ready) {
       this._items.shift();
     }else
     {
-      const hasEmbedPermission = this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_EMBED_CODE);
+      const hasEmbedPermission = this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_EMBED_CODE);
       if (!hasEmbedPermission) {
         this._items[0].label = this._appLocalization.get('applications.content.table.previewInPlayer');
       }
@@ -128,7 +128,7 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
     this._permissionsService.filterList(
       <{id: string}[]>this._items,
       {
-        'delete': KMCPermissions.PLAYLIST_DELETE
+        'delete': VMCPermissions.PLAYLIST_DELETE
       }
     );
   }
@@ -138,7 +138,7 @@ export class PlaylistsTableComponent implements AfterViewInit, OnInit, OnDestroy
     this.selectedPlaylistsChange.emit(event);
   }
 
-  onActionSelected(action: string, playlist: KalturaPlaylist) {
+  onActionSelected(action: string, playlist: VidiunPlaylist) {
     this.actionSelected.emit({ 'action': action, 'playlist': playlist });
   }
 

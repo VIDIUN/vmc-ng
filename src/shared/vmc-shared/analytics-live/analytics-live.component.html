@@ -1,0 +1,12 @@
+<div class="vLiveAnalytics">
+    <div class="vHeader">
+        <div>
+            <i class="vIconclose_small vClose" (click)="parentPopup.close()"></i>
+            <span class="vTitle">{{entry?.name}}</span>
+        </div>
+    </div>
+
+    <div class="vContent">
+        <vAnalyticsLiveFrame [entryId]="entry?.id"></vAnalyticsLiveFrame>
+    </div>
+</div>

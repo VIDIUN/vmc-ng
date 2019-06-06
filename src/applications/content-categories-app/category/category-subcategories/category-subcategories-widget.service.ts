@@ -1,42 +1,42 @@
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {Injectable, OnDestroy} from '@angular/core';
 import { Observable } from 'rxjs';
-import {KalturaUtils} from '@kaltura-ng/kaltura-common';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunUtils} from '@vidiun-ng/vidiun-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import {CategoryWidget} from '../category-widget';
-import {KalturaCategoryFilter} from 'kaltura-ngx-client';
-import {KalturaCategoryListResponse} from 'kaltura-ngx-client';
-import {CategoryListAction} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {KalturaCategoryOrderBy} from 'kaltura-ngx-client';
-import {KalturaClient, KalturaMultiRequest} from 'kaltura-ngx-client';
-import {CategoryUpdateAction} from 'kaltura-ngx-client';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {CategoryDeleteAction} from 'kaltura-ngx-client';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
+import {VidiunCategoryFilter} from 'vidiun-ngx-client';
+import {VidiunCategoryListResponse} from 'vidiun-ngx-client';
+import {CategoryListAction} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {VidiunCategoryOrderBy} from 'vidiun-ngx-client';
+import {VidiunClient, VidiunMultiRequest} from 'vidiun-ngx-client';
+import {CategoryUpdateAction} from 'vidiun-ngx-client';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {CategoryDeleteAction} from 'vidiun-ngx-client';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {CategoriesUtilsService} from '../../categories-utils.service';
 import {CategoryService} from '../category.service';
 import { modulesConfig } from 'config/modules';
 import { globalConfig } from 'config/global';
-import { ContentCategoryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { ContentCategoryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
 export class CategorySubcategoriesWidget extends CategoryWidget implements OnDestroy {
-  private _subcategories = new BehaviorSubject<KalturaCategory[]>([]);
+  private _subcategories = new BehaviorSubject<VidiunCategory[]>([]);
   public subcategories$ = this._subcategories.asObservable();
-  private _subcategoriesMarkedForDelete: KalturaCategory[];
+  private _subcategoriesMarkedForDelete: VidiunCategory[];
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _browserService: BrowserService,
               private _categoriesUtilsService: CategoriesUtilsService,
               private _categoryService: CategoryService,
               private _appLocalization: AppLocalization,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(ContentCategoryViewSections.SubCategories, logger);
   }
 
@@ -79,7 +79,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
   }
 
 
-  private _getSubcategories(parentCategory: KalturaCategory): Observable<KalturaCategoryListResponse> {
+  private _getSubcategories(parentCategory: VidiunCategory): Observable<VidiunCategoryListResponse> {
     const subcategoriesLimit: number = modulesConfig.contentShared.categories.subCategoriesLimit || globalConfig.client.views.tables.defaultPageSize;
     if (!parentCategory) {
       return Observable.throw(new Error('parentCategory to get subcategories for is not defined'));
@@ -88,24 +88,24 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
       return Observable.throw(new Error(`parent category subcategories count exceeds ${{subcategoriesLimit}} limit`));
     }
     try {
-      const filter: KalturaCategoryFilter = new KalturaCategoryFilter({
+      const filter: VidiunCategoryFilter = new VidiunCategoryFilter({
         parentIdEqual: parentCategory.id,
-        orderBy: KalturaCategoryOrderBy.partnerSortValueAsc.toString()
+        orderBy: VidiunCategoryOrderBy.partnerSortValueAsc.toString()
       });
-      const pagination: KalturaFilterPager = new KalturaFilterPager(
+      const pagination: VidiunFilterPager = new VidiunFilterPager(
         {
           pageSize: subcategoriesLimit,
           pageIndex: 1
         }
       );
 
-      const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-        type: KalturaResponseProfileType.includeFields,
+      const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+        type: VidiunResponseProfileType.includeFields,
         fields: 'id,name, createdAt, directSubCategoriesCount, entriesCount, tags, partnerSortValue'
       });
 
       // build the request
-      return <any>this._kalturaClient.request(
+      return <any>this._vidiunClient.request(
             new CategoryListAction({
                 filter,
                 pager: pagination
@@ -118,7 +118,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
     }
   }
 
-  public onActionSelected({action, subcategory}: { action: 'delete' | 'moveUp' | 'moveDown', subcategory: KalturaCategory }): void {
+  public onActionSelected({action, subcategory}: { action: 'delete' | 'moveUp' | 'moveDown', subcategory: VidiunCategory }): void {
     switch (action) {
       case 'delete':
         this._deleteSubcategory(subcategory);
@@ -134,7 +134,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
     }
   }
 
-  private _deleteSubcategory(subcategory: KalturaCategory) {
+  private _deleteSubcategory(subcategory: VidiunCategory) {
     this._categoriesUtilsService.confirmDelete(subcategory, this._subcategories.getValue())
       .subscribe(confirmationResult => {
         if (confirmationResult.confirmed) {
@@ -157,7 +157,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
       });
   }
 
-  public deleteSelectedSubcategories(subcategories: KalturaCategory[]): void {
+  public deleteSelectedSubcategories(subcategories: VidiunCategory[]): void {
     this._categoriesUtilsService.confirmDeleteMultiple(subcategories, this._subcategories.getValue())
       .subscribe(result => {
         if (result.confirmed) {
@@ -192,7 +192,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
   }
 
 
-  public moveSubcategories({items, direction}: { items: KalturaCategory[], direction: 'up' | 'down' }): void {
+  public moveSubcategories({items, direction}: { items: VidiunCategory[], direction: 'up' | 'down' }): void {
     if (direction === 'up') {
       this._moveUpSubcategories(items);
     } else {
@@ -200,21 +200,21 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
     }
   }
 
-  private _moveUpSubcategories(selectedSubcategories: KalturaCategory[]): void {
-    if (KalturaUtils.moveUpItems(this._subcategories.getValue(), selectedSubcategories)) {
+  private _moveUpSubcategories(selectedSubcategories: VidiunCategory[]): void {
+    if (VidiunUtils.moveUpItems(this._subcategories.getValue(), selectedSubcategories)) {
         this._categoryService.notifySubcategoriesMoved();
       this._setDirty();
     }
   }
 
-  private _moveDownSubcategories(selectedSubcategories: KalturaCategory[]): void {
-    if (KalturaUtils.moveDownItems(this._subcategories.getValue(), selectedSubcategories)) {
+  private _moveDownSubcategories(selectedSubcategories: VidiunCategory[]): void {
+    if (VidiunUtils.moveDownItems(this._subcategories.getValue(), selectedSubcategories)) {
         this._categoryService.notifySubcategoriesMoved();
       this._setDirty();
     }
   }
 
-  protected onDataSaving(newData: KalturaCategory, request: KalturaMultiRequest): void {
+  protected onDataSaving(newData: VidiunCategory, request: VidiunMultiRequest): void {
     if (this.isDirty) {
       this._subcategoriesMarkedForDelete.forEach(subcategory => {
         request.requests.push(new CategoryDeleteAction({
@@ -225,7 +225,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
       this._subcategories.getValue().forEach((subcategory, index) => {
         request.requests.push(new CategoryUpdateAction({
           id: subcategory.id,
-          category: new KalturaCategory({
+          category: new VidiunCategory({
             partnerSortValue: index
           })
         }));
@@ -269,7 +269,7 @@ export class CategorySubcategoriesWidget extends CategoryWidget implements OnDes
   ngOnDestroy() {
   }
 
-  public addSubcategoryToList({category}: {category: KalturaCategory}) {
+  public addSubcategoryToList({category}: {category: VidiunCategory}) {
     this._subcategories.next([...this._subcategories.getValue(), category]);
     this._categoryService.notifyChangesInCategory();
   }

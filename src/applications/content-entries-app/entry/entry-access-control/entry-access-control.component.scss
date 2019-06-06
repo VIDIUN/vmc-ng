@@ -1,17 +1,17 @@
 @import 'app-theme/_variables.scss';
 
-.kAccessControl{
-	.kTitle{
+.vAccessControl{
+	.vTitle{
 		padding-left: 24px;
-		color: $kGrayscale1;
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 	}
-	.kAccessControlDetails{
+	.vAccessControlDetails{
         padding: 0 24px 24px 24px;
         word-break: break-word;
 
-        .kAccessProfileItem {
+        .vAccessProfileItem {
             white-space: nowrap;
             display: inline-block;
             overflow: hidden;
@@ -20,15 +20,15 @@
             font-weight: normal;
         }
 
-		.kRow{
+		.vRow{
 			display: flex;
 			padding-top: 24px;
 			align-items: center;
 		}
-		.kMultiLine{
+		.vMultiLine{
 			white-space: pre-wrap;
 		}
-		.kLabels{
+		.vLabels{
 			width: 180px;
 			flex: 0 0 auto;
 		}
@@ -45,7 +45,7 @@
 :host /deep/ .ui-dropdown-label {
   text-overflow: ellipsis;
 }
-:host /deep/ .kAccessControlProfiles {
+:host /deep/ .vAccessControlProfiles {
     .ui-dropdown-panel {
         width: 250px;
     }
@@ -54,7 +54,7 @@
         text-overflow: ellipsis;
         font-weight: normal;
         font-size: 15px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
     }
 
     .ui-dropdown.ui-widget {

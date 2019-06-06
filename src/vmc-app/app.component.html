@@ -1,0 +1,31 @@
+<v-area-blocker [showLoader]="_isBusy" [bodyScroll]="true" [classes]="'vAreaBlockerCoverAll'">
+    <router-outlet></router-outlet>
+</v-area-blocker>
+<!--router-outlet></router-outlet-->
+<p-confirmDialog
+    #confirm
+    header="Confirmation"
+    [key]="'confirm'"
+    [closeOnEscape]="false"
+    width="500"
+    [class.vAlignToLeft]="_confirmDialogAlignLeft"
+    [acceptLabel]="_confirmationLabels.yes"
+    [rejectLabel]="_confirmationLabels.no"
+    >
+</p-confirmDialog>
+<p-confirmDialog #alert header="Alert" [key]="'alert'" [closeOnEscape]="true" width="440"
+                 [class.vAlignToLeft]="_confirmDialogAlignLeft">
+    <p-footer>
+        <button type="button" pButton icon="fa-check" label="{{_confirmationLabels.ok}}" (click)="alert.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
+
+<vPopupWidget #openEmailPopup data-aid="openEmailPopup" [modal]="true" [popupWidth]="500" [popupHeight]="320">
+    <ng-template>
+        <vOpenEmail [parentPopupWidget]="openEmailPopup" [emailConfig]="_openEmailConfig"></vOpenEmail>
+    </ng-template>
+</vPopupWidget>
+
+<p-growl [(value)]="_growlMessages" [immutable]="true"></p-growl>
+<vPreviewEmbed></vPreviewEmbed>
+<vCaptionRequest></vCaptionRequest>

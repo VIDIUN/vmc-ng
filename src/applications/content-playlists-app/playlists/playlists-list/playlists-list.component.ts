@@ -3,30 +3,30 @@ import { Router } from '@angular/router';
 import { subApplicationsConfig } from 'config/sub-applications';
 import { PlaylistsFilters, PlaylistsStore, SortDirection } from '../playlists-store/playlists-store.service';
 import { BulkDeleteService } from '../bulk-service/bulk-delete.service';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import { StickyComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { PreviewAndEmbedEvent } from 'app-shared/kmc-shared/events';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import { StickyComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { PreviewAndEmbedEvent } from 'app-shared/vmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 import { async } from 'rxjs/scheduler/async';
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-playlist-view.service';
-import { ContentPlaylistViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentPlaylistsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-playlist-view.service';
+import { ContentPlaylistViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentPlaylistsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kPlaylistsList',
+  selector: 'vPlaylistsList',
   templateUrl: './playlists-list.component.html',
   styleUrls: ['./playlists-list.component.scss'],
   providers: [BulkDeleteService]
 })
 export class PlaylistsListComponent implements OnInit, OnDestroy {
 
-	public _kmcPermissions = KMCPermissions;
+	public _vmcPermissions = VMCPermissions;
 
 	@ViewChild('addNewPlaylist') public addNewPlaylist: PopupWidgetComponent;
   @ViewChild('tags') private tags: StickyComponent;
@@ -46,7 +46,7 @@ export class PlaylistsListComponent implements OnInit, OnDestroy {
     sortDirection: SortDirection.Desc
   };
 
-  public _selectedPlaylists: KalturaPlaylist[] = [];
+  public _selectedPlaylists: VidiunPlaylist[] = [];
 
   constructor(public _playlistsStore: PlaylistsStore,
               private _appLocalization: AppLocalization,
@@ -214,7 +214,7 @@ export class PlaylistsListComponent implements OnInit, OnDestroy {
                     }
                 },
                 error => {
-                    console.warn('[kmcng] -> could not load playlists'); // navigate to error page
+                    console.warn('[vmcng] -> could not load playlists'); // navigate to error page
                     throw error;
                 });
     }
@@ -223,7 +223,7 @@ export class PlaylistsListComponent implements OnInit, OnDestroy {
     this.tags.updateLayout();
   }
 
-  public _onActionSelected(event: { action: string, playlist: KalturaPlaylist }): void {
+  public _onActionSelected(event: { action: string, playlist: VidiunPlaylist }): void {
       switch (event.action) {
           case 'preview':
               this._appEvents.publish(new PreviewAndEmbedEvent(event.playlist));
@@ -283,7 +283,7 @@ export class PlaylistsListComponent implements OnInit, OnDestroy {
     this._selectedPlaylists = [];
   }
 
-  public _deletePlaylists(selectedPlaylists: KalturaPlaylist[]): void {
+  public _deletePlaylists(selectedPlaylists: VidiunPlaylist[]): void {
     const playlistsToDelete = selectedPlaylists.map((playlist, index) => `${index + 1}: ${playlist.name}`);
     const playlists = selectedPlaylists.length <= 10 ? playlistsToDelete.join(',').replace(/,/gi, '\n') : '';
     const message = selectedPlaylists.length > 1 ?

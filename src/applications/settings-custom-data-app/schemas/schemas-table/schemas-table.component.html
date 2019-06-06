@@ -1,4 +1,4 @@
-<div class="kSchemasTable" [class.noResults]="!_schemas.length">
+<div class="vSchemasTable" [class.noResults]="!_schemas.length">
     <p-table
         scrollHeight="100%"
         dataKey="id"
@@ -55,41 +55,41 @@
                     <p-tableCheckbox [value]="schema"></p-tableCheckbox>
                 </td>
                 <td class="ui-resizable-column">
-                    <div class="kTitle kTableColumn"
-                         [class.kProfileDisabled]="schema?.profileDisabled"
-                         [kTooltip]="schema?.profileDisabled ? ('applications.settings.metadata.table.disabledLabel' | translate) : schema.name"
+                    <div class="vTitle vTableColumn"
+                         [class.vProfileDisabled]="schema?.profileDisabled"
+                         [vTooltip]="schema?.profileDisabled ? ('applications.settings.metadata.table.disabledLabel' | translate) : schema.name"
                          (click)="_onActionSelected('edit', schema)">
                         {{schema.name}} <span *ngIf="schema?.profileDisabled">*</span>
                     </div>
                 </td>
                 <td class="ui-resizable-column">
-                    <span class="kTableColumn" [kTooltip]="schema.id" [showOnEllipsis]="true">
+                    <span class="vTableColumn" [vTooltip]="schema.id" [showOnEllipsis]="true">
                         {{schema.id}}
                     </span>
                 </td>
                 <td class="ui-resizable-column">
-                    <span class="kTableColumn" [kTooltip]="schema.systemName" [showOnEllipsis]="true">
+                    <span class="vTableColumn" [vTooltip]="schema.systemName" [showOnEllipsis]="true">
                         {{schema.systemName}}
                     </span>
                 </td>
                 <td class="ui-resizable-column">
-                    <span class="kTableColumn" [kTooltip]="schema.description" [showOnEllipsis]="true">
+                    <span class="vTableColumn" [vTooltip]="schema.description" [showOnEllipsis]="true">
                         {{schema.description}}
                     </span>
                 </td>
                 <td class="ui-resizable-column">
-                    <span class="kTableColumn" [kTooltip]="schema.applyTo | kMetadataObjectType" [showOnEllipsis]="true">
-                        {{schema.applyTo | kMetadataObjectType}}
+                    <span class="vTableColumn" [vTooltip]="schema.applyTo | vMetadataObjectType" [showOnEllipsis]="true">
+                        {{schema.applyTo | vMetadataObjectType}}
                     </span>
                 </td>
                 <td>
-                    <span class="kTableColumn" [kTooltip]="schema.defaultLabel" [showOnEllipsis]="true">
+                    <span class="vTableColumn" [vTooltip]="schema.defaultLabel" [showOnEllipsis]="true">
                         {{schema.defaultLabel}}
                     </span>
                 </td>
                 <td [ngStyle]="{'overflow':'visible', 'width':'80px'}">
-                    <div class="kSchemasTableActions">
-                        <button type="button" pButton icon="kIconmore" class="kMoreActionsButton"
+                    <div class="vSchemasTableActions">
+                        <button type="button" pButton icon="vIconmore" class="vMoreActionsButton"
                                 (click)="_openActionsMenu($event, schema)"></button>
                     </div>
                 </td>
@@ -98,10 +98,10 @@
 
         <ng-template pTemplate="emptymessage">
             <div class="emptymessage">
-                <div class="kEmptyMessage">{{_emptyMessage}}</div>
+                <div class="vEmptyMessage">{{_emptyMessage}}</div>
             </div>
         </ng-template>
     </p-table>
 </div>
 
-<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>

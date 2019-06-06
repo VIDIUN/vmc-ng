@@ -11,7 +11,7 @@ async function executeNPMLinkToLibrary(library) {
 }
 
 async function main() {
-    console.log(`setup KMCng workspace`);
+    console.log(`setup VMCng workspace`);
 
     await executeCommand('npm', ['install']);
 

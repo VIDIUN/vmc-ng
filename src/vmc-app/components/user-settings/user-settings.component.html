@@ -1,0 +1,41 @@
+<div class="vUserSettings">
+    <ul>
+        <!--li class="vMenuItemLabel"><span class="vIcon vIconuser_small"></span>
+            <div class="vMenuItem">
+                <div>{{_userAuthentication.appUser?.fullName}}</div>
+            </div>
+        </li-->
+        <li class="vMenuItemLabel"><span (dblclick)="egg()" class="vIcon vIconhouse"></span>
+            <div class="vMenuItem">
+                <div>{{_userAuthentication.appUser?.partnerInfo?.name}}</div>
+            </div>
+        </li>
+    </ul>
+
+    <hr>
+    <!--div class="vMenuItemLabel">
+        <span>{{'app.languageMenu.selectLang' | translate}}</span>
+    </div-->
+
+    <ul class="vLanguages vOverrideFAIcons">
+        <p-dropdown [options]="_languages" [(ngModel)]="_selectedLanguage"
+                    (onChange)="onLangSelected($event)"></p-dropdown>
+    </ul>
+
+    <ul class="vLanguages vOverrideFAIcons">
+        <p-dropdown [options]="_dateFormats" [(ngModel)]="_selectedDateFormat"
+                    (onChange)="onDateFormatSelected($event)"></p-dropdown>
+    </ul>
+
+    <hr>
+    <div class="vLinks">
+        <a (click)="changeAccountPopup.open();parentPopup.close()">{{'app.userSettings.changeAccount' | translate}}</a>
+        <a (click)="logout()">{{'app.userSettings.logout' | translate}}</a>
+    </div>
+
+</div>
+<vPopupWidget #changeAccountPopup data-aid="changeAccountPopup" [popupWidth]="500" [popupHeight]="370" [modal]="true">
+    <ng-template>
+        <vChangeAccount></vChangeAccount>
+    </ng-template>
+</vPopupWidget>

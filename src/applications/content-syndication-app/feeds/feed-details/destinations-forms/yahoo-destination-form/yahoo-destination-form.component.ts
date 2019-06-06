@@ -1,22 +1,22 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaUiConf} from 'kaltura-ngx-client';
-import {KalturaFlavorParams} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunUiConf} from 'vidiun-ngx-client';
+import {VidiunFlavorParams} from 'vidiun-ngx-client';
 import { DestinationComponentBase, FeedFormMode } from '../../feed-details.component';
-import {KalturaYahooSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaValidators} from '@kaltura-ng/kaltura-ui';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunYahooSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunValidators} from '@vidiun-ng/vidiun-ui';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kYahooDestinationForm',
+  selector: 'vYahooDestinationForm',
   templateUrl: './yahoo-destination-form.component.html',
   styleUrls: ['./yahoo-destination-form.component.scss'],
   providers: [
       {provide: DestinationComponentBase, useExisting: YahooDestinationFormComponent},
-      KalturaLogger.createLogger('YahooDestinationFormComponent')
+      VidiunLogger.createLogger('YahooDestinationFormComponent')
   ]
 })
 export class YahooDestinationFormComponent extends DestinationComponentBase implements OnInit, OnDestroy {
@@ -26,13 +26,13 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
   onFormStateChanged = new EventEmitter<{ isValid: boolean, isDirty: boolean }>();
 
   @Input()
-  feed: KalturaYahooSyndicationFeed = null;
+  feed: VidiunYahooSyndicationFeed = null;
 
   @Input()
-  public players: KalturaUiConf[] = null;
+  public players: VidiunUiConf[] = null;
 
   @Input()
-  public contentFlavors: KalturaFlavorParams[] = null;
+  public contentFlavors: VidiunFlavorParams[] = null;
 
   public _form: FormGroup;
   public _availableContentFlavors: Array<{ value: number, label: string }> = [];
@@ -44,8 +44,8 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
     'News &amp; Politics', 'Products &amp; Tech.', 'Sports', 'Travel'];
 
   constructor(private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
-              private _logger: KalturaLogger,
+              private _permissionsService: VMCPermissionsService,
+              private _logger: VidiunLogger,
               private _fb: FormBuilder) {
     super();
     // prepare form
@@ -58,7 +58,7 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
     this._fillAvailableCategories();
     this._resetFormData();
 
-    if (this.mode === 'edit' && !this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE)) {
+    if (this.mode === 'edit' && !this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE)) {
         this._logger.debug(`user doesn't have SYNDICATION_UPDATE permission, disable form for editing`);
       this._form.disable({ emitEvent: false });
     } else {
@@ -83,7 +83,7 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
   ngOnDestroy() {
   }
 
-  public getData(): KalturaYahooSyndicationFeed {
+  public getData(): VidiunYahooSyndicationFeed {
       this._logger.info(`handle get feed data action`);
     if (!this._form.valid) {
         this._logger.info(`form is not valid, abort action`);
@@ -91,7 +91,7 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
       return null;
     }
 
-    const data = new KalturaYahooSyndicationFeed({
+    const data = new VidiunYahooSyndicationFeed({
       flavorParamId: this._form.get('contentFlavor').value,
       addToDefaultConversionProfile: this._form.get('addToDefaultTranscodingProfile').value,
       landingPage: this._form.get('landingPage').value,
@@ -116,10 +116,10 @@ export class YahooDestinationFormComponent extends DestinationComponentBase impl
     this._form = this._fb.group({
       contentFlavor: [null],
       addToDefaultTranscodingProfile: [true],
-      landingPage: [null, [KalturaValidators.urlHttp, Validators.required]],
+      landingPage: [null, [VidiunValidators.urlHttp, Validators.required]],
       playback: ['fromYahoo'],
       selectedPlayer: [null],
-      website: [null, [KalturaValidators.urlHttp, Validators.required]],
+      website: [null, [VidiunValidators.urlHttp, Validators.required]],
       description: [null],
       selectedCategories: [[]]
     });

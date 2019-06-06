@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MetadataItemTypes } from 'shared/kmc-shared/custom-metadata/metadata-profile';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { MetadataItemTypes } from 'shared/vmc-shared/custom-metadata/metadata-profile';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kCustomSchemaTypePipe' })
+@Pipe({ name: 'vCustomSchemaTypePipe' })
 export class CustomSchemaTypePipe implements PipeTransform {
   constructor(private _appLocalization: AppLocalization) {
 
@@ -13,22 +13,22 @@ export class CustomSchemaTypePipe implements PipeTransform {
 
     switch (value) {
       case MetadataItemTypes.Object:
-        result.icon = 'kIconcheckbox';
+        result.icon = 'vIconcheckbox';
         result.label = this._appLocalization.get('applications.settings.metadata.type.object');
         break;
 
       case MetadataItemTypes.Date:
-        result.icon = 'kIcondate-and-time';
+        result.icon = 'vIcondate-and-time';
         result.label = this._appLocalization.get('applications.settings.metadata.type.date');
         break;
 
       case MetadataItemTypes.List:
-        result.icon = 'kIconList';
+        result.icon = 'vIconList';
         result.label = this._appLocalization.get('applications.settings.metadata.type.list');
         break;
 
       case MetadataItemTypes.Text:
-        result.icon = 'kIconinput-field';
+        result.icon = 'vIconinput-field';
         result.label = this._appLocalization.get('applications.settings.metadata.type.text');
         break;
 

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlaylistRule } from '../playlist-rule/playlist-rule.interface';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kPlaylistRulesListBulkOperationsContent',
+  selector: 'vPlaylistRulesListBulkOperationsContent',
   templateUrl: './bulk-operations.component.html',
   styleUrls: ['./bulk-operations.component.scss'],
 })
@@ -19,7 +19,7 @@ export class RuleBasedBulkOperationsComponent {
   @Output() deleteRules = new EventEmitter<PlaylistRule[]>();
   @Output() moveRules = new EventEmitter<{ rules: PlaylistRule[], direction: 'up' | 'down' }>();
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _moveRules(direction: 'up' | 'down'): void {
     this.moveRules.emit({ rules: this.selectedRules, direction });

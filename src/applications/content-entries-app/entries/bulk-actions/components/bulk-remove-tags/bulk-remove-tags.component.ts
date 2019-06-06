@@ -1,18 +1,18 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kBulkRemoveTags',
+  selector: 'vBulkRemoveTags',
   templateUrl: './bulk-remove-tags.component.html',
   styleUrls: ['./bulk-remove-tags.component.scss']
 })
 export class BulkRemoveTags implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Output() removeTagsChanged = new EventEmitter<string[]>();
 

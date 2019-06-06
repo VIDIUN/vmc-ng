@@ -1,35 +1,35 @@
-<div class="kFeedDetailsContainer">
-  <div class="kFeedDetailsContainerHeader">
-    <div class="kFeedIcon">
-      <i class="kIconfeed"></i>
+<div class="vFeedDetailsContainer">
+  <div class="vFeedDetailsContainerHeader">
+    <div class="vFeedIcon">
+      <i class="vIconfeed"></i>
     </div>
-    <div class="kFeedName">{{_mode === 'edit' ? feed.name : _newFeedText}}</div>
-    <a class="kBulkCancel" (click)="_close()">
+    <div class="vFeedName">{{_mode === 'edit' ? feed.name : _newFeedText}}</div>
+    <a class="vBulkCancel" (click)="_close()">
       {{'applications.content.syndication.details.header.cancel' | translate}}
     </a>
-    <button [disabled]="(_kmcPermissions.SYNDICATION_DELETE | kDisabledIfNotPermitted) || _isBusy || _blockerMessage" *ngIf="_mode === 'edit'" class="kDeletehBtn kButtonDanger" pButton icon="kIcontrash"
+    <button [disabled]="(_vmcPermissions.SYNDICATION_DELETE | vDisabledIfNotPermitted) || _isBusy || _blockerMessage" *ngIf="_mode === 'edit'" class="vDeletehBtn vButtonDanger" pButton icon="vIcontrash"
             label="{{'applications.content.syndication.details.header.delete' | translate}}"
             (click)="_deleteFeed()"></button>
 
-    <button pButton class="kSaveBtn kButtonBranded"
+    <button pButton class="vSaveBtn vButtonBranded"
             (click)="_save()"
             [disabled]="_saveBtnDisabled"
             label="{{'applications.content.syndication.details.header.save' | translate}}">
     </button>
   </div>
-  <div class="kFeedDetailsContainerBody">
-    <k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vFeedDetailsContainerBody">
+    <v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
       <form [formGroup]="_form" novalidate>
 
         <!--Name-->
-        <div class="kRow" [class.kInputValidationError]="_form.get('name').touched && _form.get('name').invalid">
-          <span class="kLabel">{{'applications.content.syndication.details.name' | translate}}</span>
-          <div class="kAsterix" [ngClass]="{'kHasError':!_form.get('name').valid && _form.get('name').touched}">
+        <div class="vRow" [class.vInputValidationError]="_form.get('name').touched && _form.get('name').invalid">
+          <span class="vLabel">{{'applications.content.syndication.details.name' | translate}}</span>
+          <div class="vAsterix" [ngClass]="{'vHasError':!_form.get('name').valid && _form.get('name').touched}">
             *
           </div>
-          <div class="kControlContainer">
-            <input class="kControl" formControlName="name" pInputText
-                   [ngClass]="{'kHasError':!_form.get('name').valid && _form.get('name').touched}">
+          <div class="vControlContainer">
+            <input class="vControl" formControlName="name" pInputText
+                   [ngClass]="{'vHasError':!_form.get('name').valid && _form.get('name').touched}">
             <div *ngIf="_form.get('name').touched && _form.get('name').hasError('required')"
                  class="error">
               {{'applications.content.syndication.details.errors.enterName' | translate}}
@@ -38,16 +38,16 @@
         </div>
 
         <!--Content-->
-        <div class="kRow kContentType kMultiLine">
-          <span class="kLabel">{{'applications.content.syndication.details.contentType.content' | translate}}</span>
-          <div class="kControlContainer">
-            <span class="kControl">
-              <p-radioButton class="kContentTypeAll" name="contentType" (click)="_setAllContent()"
+        <div class="vRow vContentType vMultiLine">
+          <span class="vLabel">{{'applications.content.syndication.details.contentType.content' | translate}}</span>
+          <div class="vControlContainer">
+            <span class="vControl">
+              <p-radioButton class="vContentTypeAll" name="contentType" (click)="_setAllContent()"
                              [value]="'allContent'"
                              formControlName="contentType"
                              label="{{'applications.content.syndication.details.contentType.allContent' | translate}}">
               </p-radioButton>
-              <p-radioButton class="kContentTypePlaylist" name="contentType"
+              <p-radioButton class="vContentTypePlaylist" name="contentType"
                              [value]="'playlist'"
                              formControlName="contentType"
                              label="{{'applications.content.syndication.details.contentType.fromPlaylist' | translate}}"
@@ -55,12 +55,12 @@
               </p-radioButton>
             </span>
             <!--Select Playlist-->
-            <div class="kSelectPlaylist" *ngIf="_form.get('contentType').value === 'playlist'">
-                <kSearchableDropdown filter="true"
+            <div class="vSelectPlaylist" *ngIf="_form.get('contentType').value === 'playlist'">
+                <vSearchableDropdown filter="true"
                                      formControlName="selectedPlaylist"
                                      [loading]="loadingPlaylists"
                                      [options]="_availablePlaylists"
-                                     [class.kInvalid]="_missingPlaylist"
+                                     [class.vInvalid]="_missingPlaylist"
                                      [placeholder]="'applications.content.syndication.details.choosePlaylist' | translate"
                                      [filterPlaceholder]="'applications.content.syndication.details.search' | translate"
                                      [autoWidth]="false"
@@ -68,21 +68,21 @@
                                      (onChange)="_onSelectPlaylist($event)">
                     <!--template for the selected item-->
                     <ng-template let-item pTemplate="selectedItem">
-                        <div class="kPlaylist">
-                            <span class="kPlaylistIcon"
-                                  [ngClass]="item.value | kToPlaylistIcon: _idToPlaylistMap"></span>
-                            <span class="kPlaylistLabel kElipsis">{{item.label}}</span>
+                        <div class="vPlaylist">
+                            <span class="vPlaylistIcon"
+                                  [ngClass]="item.value | vToPlaylistIcon: _idToPlaylistMap"></span>
+                            <span class="vPlaylistLabel vElipsis">{{item.label}}</span>
                         </div>
                     </ng-template>
                     <ng-template let-item pTemplate="item">
-                        <div class="kPlaylist">
-                            <span class="kPlaylistIcon"
-                                  [ngClass]="item.value | kToPlaylistIcon: _idToPlaylistMap"></span>
-                            <span class="kPlaylistLabel kElipsis">{{item.label}}</span>
+                        <div class="vPlaylist">
+                            <span class="vPlaylistIcon"
+                                  [ngClass]="item.value | vToPlaylistIcon: _idToPlaylistMap"></span>
+                            <span class="vPlaylistLabel vElipsis">{{item.label}}</span>
                         </div>
                     </ng-template>
-                </kSearchableDropdown>
-                <p class="kInvalid" *ngIf="_missingPlaylist">
+                </vSearchableDropdown>
+                <p class="vInvalid" *ngIf="_missingPlaylist">
                     {{'applications.content.syndication.details.missingPlaylist' | translate:[this.feed.playlistId]}}
                 </p>
             </div>
@@ -90,31 +90,31 @@
         </div>
 
         <!--Entries Count-->
-        <div class="kRow kEntriesCount kMultiLine" [class.kHidden]="_mode === 'new'">
-          <span class="kLabel">{{'applications.content.syndication.details.entriesCountData.count' | translate}}</span>
-          <div class="kControlContainer">
-            <span class="kControl">
+        <div class="vRow vEntriesCount vMultiLine" [class.vHidden]="_mode === 'new'">
+          <span class="vLabel">{{'applications.content.syndication.details.entriesCountData.count' | translate}}</span>
+          <div class="vControlContainer">
+            <span class="vControl">
               {{'applications.content.syndication.details.entriesCountData.numOfEntries' | translate: {'0': _entriesCountData.count} }}
             </span>
-            <div [class.kHidden]="!_entriesCountData.showWarning" class="error" #warning>
-              <i class="kIconwarning"></i>
+            <div [class.vHidden]="!_entriesCountData.showWarning" class="error" #warning>
+              <i class="vIconwarning"></i>
               <span>{{'applications.content.syndication.details.entriesCountData.warning' | translate: {'0': _entriesCountData.warningCount} }}</span>
-              <a class="kMoreInfo" #moreInfo>{{'applications.content.syndication.details.entriesCountData.moreInfo' | translate}}</a>
+              <a class="vMoreInfo" #moreInfo>{{'applications.content.syndication.details.entriesCountData.moreInfo' | translate}}</a>
             </div>
           </div>
         </div>
 
         <!--Destination-->
-        <div class="kRow kDestination"
-             [class.kInputValidationError]="_form.get('destination').touched && _form.get('destination').invalid">
-          <span class="kLabel">{{'applications.content.syndication.details.destination' | translate}}</span>
-          <div class="kAsterix">
+        <div class="vRow vDestination"
+             [class.vInputValidationError]="_form.get('destination').touched && _form.get('destination').invalid">
+          <span class="vLabel">{{'applications.content.syndication.details.destination' | translate}}</span>
+          <div class="vAsterix">
             *
           </div>
-          <div class="kControlContainer">
+          <div class="vControlContainer">
             <p-dropdown
               placeholder="{{'applications.content.syndication.details.availableDestinations.promptText' | translate}}"
-              class="kControl"
+              class="vControl"
               [options]="_availableDestinations"
               formControlName="destination"
               [autoWidth]="false">
@@ -123,62 +123,62 @@
         </div>
 
         <!--Destination Form-->
-        <div class="kRow kDestinationForm" *ngIf="_isReady">
+        <div class="vRow vDestinationForm" *ngIf="_isReady">
           <ng-container [ngSwitch]="_form.get('destination').value">
             <!--Google-->
-            <kGoogleDestinationForm
-              *ngSwitchCase="_kalturaSyndicationFeedType.googleVideo" [feed]="feed"
+            <vGoogleDestinationForm
+              *ngSwitchCase="_vidiunSyndicationFeedType.googleVideo" [feed]="feed"
               [contentFlavors]="_flavors" [players]="_players"
               [mode]="_mode"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kGoogleDestinationForm>
+            </vGoogleDestinationForm>
             <!--Yahoo-->
-            <kYahooDestinationForm
-              *ngSwitchCase="_kalturaSyndicationFeedType.yahoo" [feed]="feed"
+            <vYahooDestinationForm
+              *ngSwitchCase="_vidiunSyndicationFeedType.yahoo" [feed]="feed"
               [contentFlavors]="_flavors" [players]="_players"
               [mode]="_mode"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kYahooDestinationForm>
+            </vYahooDestinationForm>
             <!--iTunes-->
-            <kItunesDestinationForm
-              *ngSwitchCase="_kalturaSyndicationFeedType.itunes"
+            <vItunesDestinationForm
+              *ngSwitchCase="_vidiunSyndicationFeedType.itunes"
               [feed]="feed"
               [mode]="_mode"
               [contentFlavors]="_flavors"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kItunesDestinationForm>
+            </vItunesDestinationForm>
             <!--Roku-->
-            <kRokuDestinationForm
-              *ngSwitchCase="_kalturaSyndicationFeedType.rokuDirectPublisher"
+            <vRokuDestinationForm
+              *ngSwitchCase="_vidiunSyndicationFeedType.rokuDirectPublisher"
               [mode]="_mode"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kRokuDestinationForm>
+            </vRokuDestinationForm>
             <!--Opera-->
-            <kOperaDestinationForm
-              *ngSwitchCase="_kalturaSyndicationFeedType.operaTvSnap"
+            <vOperaDestinationForm
+              *ngSwitchCase="_vidiunSyndicationFeedType.operaTvSnap"
               [mode]="_mode"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kOperaDestinationForm>
+            </vOperaDestinationForm>
             <!--Flexible Format (xsl code)-->
-            <kFlexibleFormatDestinationForm
+            <vFlexibleFormatDestinationForm
               [mode]="_mode"
-              *ngSwitchCase="_kalturaSyndicationFeedType.kalturaXslt" [feed]="feed"
+              *ngSwitchCase="_vidiunSyndicationFeedType.vidiunXslt" [feed]="feed"
               (onFormStateChanged)="_updateCurrentDestinationFormState($event)">
-            </kFlexibleFormatDestinationForm>
+            </vFlexibleFormatDestinationForm>
           </ng-container>
         </div>
       </form>
-    </k-area-blocker>
+    </v-area-blocker>
   </div>
 </div>
 
 
-<kPopupWidget data-aid="warningMoreInfoTooltip" [popupWidth]="443" [targetRef]="moreInfo" [appendTo]="warning"
+<vPopupWidget data-aid="warningMoreInfoTooltip" [popupWidth]="443" [targetRef]="moreInfo" [appendTo]="warning"
               [targetOffset]="{'x': 197, 'y': _form.get('contentType').value === 'playlist' ? 10 : -38}"
               [closeBtn]="false">
-  <div class="kWarningMoreInfoTooltip">
-    <div class="kTooltipContent"
+  <div class="vWarningMoreInfoTooltip">
+    <div class="vTooltipContent"
          [innerHTML]="'applications.content.syndication.details.entriesCountData.warningMoreInfo' | translate: {'0': _entriesCountData.warningCount, '1': _entriesCountData.flavorName}">
     </div>
   </div>
-</kPopupWidget>
+</vPopupWidget>

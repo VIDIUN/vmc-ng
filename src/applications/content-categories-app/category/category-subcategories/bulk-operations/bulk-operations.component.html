@@ -1,23 +1,23 @@
-<div class="kSubcategoriesTableFilters">
-  <kSticky stickyId="subcategoryContentBulk"
+<div class="vSubcategoriesTableFilters">
+  <vSticky stickyId="subcategoryContentBulk"
            sticksTo="categoryHeader"
-           stickyClass="kStickyHeader"
+           stickyClass="vStickyHeader"
            [scrollOffset]="120">
-    <div class="kHeader">
-      <div class="kBulkActionsContainer">
-        <div class="kBulkActions" *ngIf="selectedItems.length; else addItemWrap">
+    <div class="vHeader">
+      <div class="vBulkActionsContainer">
+        <div class="vBulkActions" *ngIf="selectedItems.length; else addItemWrap">
           <button pButton
-                  [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
-                  class="kButtonDefault kMoveBtn kMoveBtnTop"
-                  icon="kIcondropdown_arrow_top"
+                  [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
+                  class="vButtonDefault vMoveBtn vMoveBtnTop"
+                  icon="vIcondropdown_arrow_top"
                   (click)="_moveItems('up')"></button>
           <button pButton
-                  class="kButtonDefault kMoveBtn kMoveBtnBottom"
-                  [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
-                  icon="kIcondropdown_arrow_bottom"
+                  class="vButtonDefault vMoveBtn vMoveBtnBottom"
+                  [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
+                  icon="vIcondropdown_arrow_bottom"
                   (click)="_moveItems('down')"></button>
-          <button pButton class="kButtonDanger kBulkDeleteBtn"
-                  [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
+          <button pButton class="vButtonDanger vBulkDeleteBtn"
+                  [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
                   label="{{'applications.content.categoryDetails.subcategories.tableHeaderDetails.remove' | translate}}"
                   (click)="_deleteItems()"></button>
         </div>
@@ -25,25 +25,25 @@
           <button
             pButton
             type="button"
-            [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
+            [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
             label="{{'applications.content.categoryDetails.subcategories.tableHeaderDetails.addSubcategory' | translate}}"
-            class="kButtonBranded kAddItemBtn"
+            class="vButtonBranded vAddItemBtn"
             (click)="addItem.emit()">
           </button>
         </ng-template>
-        <span class="kSelectedItemsNum" *ngIf="itemsTotalCount">
+        <span class="vSelectedItemsNum" *ngIf="itemsTotalCount">
           {{ _getTranslation('applications.content.categoryDetails.subcategories.tableHeaderDetails.total', itemsTotalCount) }}
       </span>
-        <div *ngIf="selectedItems.length" class="kSelected">
-          <span class="kSelectedItemsLabel">
+        <div *ngIf="selectedItems.length" class="vSelected">
+          <span class="vSelectedItemsLabel">
             • {{ _getTranslation('applications.content.categoryDetails.subcategories.tableHeaderDetails.selected', selectedItems.length) }}
           </span>
-          <a class="kBulkCancel" (click)="clearSelection.emit()">
+          <a class="vBulkCancel" (click)="clearSelection.emit()">
             {{'applications.content.categoryDetails.subcategories.tableHeaderDetails.cancel' | translate}}
           </a>
         </div>
       </div>
     </div>
-  </kSticky>
+  </vSticky>
 </div>
 

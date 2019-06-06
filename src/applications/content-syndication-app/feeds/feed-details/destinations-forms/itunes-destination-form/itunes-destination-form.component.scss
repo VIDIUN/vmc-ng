@@ -1,16 +1,16 @@
 @import 'app-theme/_variables.scss';
 
-.kTitle {
+.vTitle {
   height: 24px;
   width: 100%;
-  color: $kGrayscale1;
+  color: $vGrayscale1;
   font-size: 20px;
   font-weight: bold;
   line-height: 24px;
 }
 
-.kAddToDefaultTranscodingProfile,
-.kEnforceFeedAuthor {
+.vAddToDefaultTranscodingProfile,
+.vEnforceFeedAuthor {
   padding-top: 11px;
   /deep/ {
     .ui-chkbox-label {
@@ -19,16 +19,16 @@
   }
 }
 
-.kHint {
+.vHint {
   width: 500px;
   margin-top: 10px;
 }
 
-.kLabel, .kAsterix {
+.vLabel, .vAsterix {
   align-self: flex-start;
 }
 
-.kAsterix {
+.vAsterix {
   padding-top: 12px !important;
 }
 
@@ -36,14 +36,14 @@
   width: 500px;
 }
 
-.kHasError {
+.vHasError {
   /deep/ .ui-multiselect {
-    border: 1px solid $kDandger;
+    border: 1px solid $vDandger;
   }
 }
 
-.kLandingPageExplanation {
-  color: $kGrayscale1;
+.vLandingPageExplanation {
+  color: $vGrayscale1;
   width: 710px;
   padding-top: 12px;
   font-size: 15px;
@@ -51,30 +51,30 @@
   padding-bottom: 20px;
 }
 
-.kPlayback {
-  .kSelectPlayer {
+.vPlayback {
+  .vSelectPlayer {
     padding-top: 17px;
     display: flex;
     align-items: center;
 
-    .kSelectPlayerLabel {
+    .vSelectPlayerLabel {
       flex: 0 0 auto;
     }
-    .kSelectPlayerControl {
+    .vSelectPlayerControl {
       padding-left:23px;
     }
   }
 
-  .kPlaybackLinkback {
+  .vPlaybackLinkback {
     padding-left: 31px;
   }
 
-  .kSelectPlayerInfo {
+  .vSelectPlayerInfo {
     padding-top: 12px;
   }
 }
 
-:host /deep/ .kCategories {
+:host /deep/ .vCategories {
   .ui-multiselect {
     padding-left: 0;
   }

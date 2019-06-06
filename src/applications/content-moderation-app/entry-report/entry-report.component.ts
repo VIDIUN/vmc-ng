@@ -1,23 +1,23 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage, KalturaPlayerComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage, VidiunPlayerComponent } from '@vidiun-ng/vidiun-ui';
 import { ModerationStore } from '../moderation-store/moderation-store.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Router } from '@angular/router';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
 import { BulkService } from '../bulk-service/bulk.service';
 import { EntriesStore } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 import { EntryReportSections } from './entry-report-sections';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaModerationFlag } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunModerationFlag } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
 import { Observer } from 'rxjs/Observer';
-import { serverConfig, getKalturaServerUri } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { serverConfig, getVidiunServerUri } from 'config/server';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
 import { ISubscription } from 'rxjs/Subscription';
 
 export interface Tabs {
@@ -27,7 +27,7 @@ export interface Tabs {
 }
 
 @Component({
-  selector: 'kEntryReport',
+  selector: 'vEntryReport',
   templateUrl: './entry-report.component.html',
   styleUrls: ['./entry-report.component.scss'],
   providers: [ModerationStore]
@@ -35,8 +35,8 @@ export interface Tabs {
 
 export class EntryReportComponent implements OnInit, OnDestroy {
 
-    public _kmcPermissions = KMCPermissions;
-  @ViewChild('player') player: KalturaPlayerComponent;
+    public _vmcPermissions = VMCPermissions;
+  @ViewChild('player') player: VidiunPlayerComponent;
 
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Input() entryId: string;
@@ -44,11 +44,11 @@ export class EntryReportComponent implements OnInit, OnDestroy {
   private _isRecordedLive = false;
   private _userId = '';
 
-  public serverUri = getKalturaServerUri();
+  public serverUri = getVidiunServerUri();
   public _areaBlockerMessage: AreaBlockerMessage = null;
   public _tabs: Tabs[] = [];
-  public _flags: KalturaModerationFlag[] = null;
-  public _entry: KalturaMediaEntry = null;
+  public _flags: VidiunModerationFlag[] = null;
+  public _entry: VidiunMediaEntry = null;
   public _hasDuration = false;
   public _isEntryReady = false;
   public _isClip = false;
@@ -65,20 +65,20 @@ export class EntryReportComponent implements OnInit, OnDestroy {
               private _bulkService: BulkService,
               private appAuthentication: AppAuthentication,
               private _contentEntryViewService: ContentEntryViewService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _entriesStore: EntriesStore) {
   }
 
   ngOnInit() {
     this._loadEntryModerationDetails();
     this._playerConfig = {
-      uiconfid: serverConfig.kalturaServer.previewUIConf,
+      uiconfid: serverConfig.vidiunServer.previewUIConf,
       pid: this.appAuthentication.appUser.partnerId,
       entryid: this.entryId,
-      flashvars: {'closedCaptions': { 'plugin': true }, 'ks': this.appAuthentication.appUser.ks}
+      flashvars: {'closedCaptions': { 'plugin': true }, 'vs': this.appAuthentication.appUser.vs}
     };
 
-    const shouldDisableAlerts = this._permissionsService.hasPermission(KMCPermissions.FEATURE_DISABLE_KMC_KDP_ALERTS);
+    const shouldDisableAlerts = this._permissionsService.hasPermission(VMCPermissions.FEATURE_DISABLE_VMC_VDP_ALERTS);
     if (shouldDisableAlerts) {
       this._playerConfig.flashvars['disableAlerts'] = true;
     }
@@ -169,18 +169,18 @@ export class EntryReportComponent implements OnInit, OnDestroy {
 
             if (this._entry.sourceType) {
               const sourceType = this._entry.sourceType.toString();
-              const isLive = (sourceType === KalturaSourceType.liveStream.toString() ||
-                sourceType === KalturaSourceType.akamaiLive.toString() ||
-                sourceType === KalturaSourceType.akamaiUniversalLive.toString() ||
-                sourceType === KalturaSourceType.manualLiveStream.toString());
-              this._hasDuration = this._entry.status !== KalturaEntryStatus.noContent
+              const isLive = (sourceType === VidiunSourceType.liveStream.toString() ||
+                sourceType === VidiunSourceType.akamaiLive.toString() ||
+                sourceType === VidiunSourceType.akamaiUniversalLive.toString() ||
+                sourceType === VidiunSourceType.manualLiveStream.toString());
+              this._hasDuration = this._entry.status !== VidiunEntryStatus.noContent
                 && !isLive
-                && this._entry.mediaType.toString() !== KalturaMediaType.image.toString();
-              this._isEntryReady = this._entry.status.toString() === KalturaEntryStatus.ready.toString();
+                && this._entry.mediaType.toString() !== VidiunMediaType.image.toString();
+              this._isEntryReady = this._entry.status.toString() === VidiunEntryStatus.ready.toString();
               if (isLive) {
                 this._playerConfig['flashvars']['disableEntryRedirect'] = true;
               }
-              this._isRecordedLive = (sourceType === KalturaSourceType.recordedLive.toString());
+              this._isRecordedLive = (sourceType === VidiunSourceType.recordedLive.toString());
               this._isClip = !this._isRecordedLive && (this._entry.id !== this._entry.rootEntryId);
             }
             this.player.Embed();
@@ -263,7 +263,7 @@ export class EntryReportComponent implements OnInit, OnDestroy {
   }
 
   public _approveEntry(): void {
-    if (this._permissionsService.hasPermission(KMCPermissions.FEATURE_KMC_VERIFY_MODERATION)) {
+    if (this._permissionsService.hasPermission(VMCPermissions.FEATURE_VMC_VERIFY_MODERATION)) {
       this._browserService.confirm({
         header: this._appLocalization.get('applications.content.moderation.approveMedia'),
         message: this._appLocalization.get('applications.content.moderation.sureToApprove', { 0: this._entry.name }),
@@ -275,7 +275,7 @@ export class EntryReportComponent implements OnInit, OnDestroy {
   }
 
   public _rejectEntry(): void {
-    if (this._permissionsService.hasPermission(KMCPermissions.FEATURE_KMC_VERIFY_MODERATION)) {
+    if (this._permissionsService.hasPermission(VMCPermissions.FEATURE_VMC_VERIFY_MODERATION)) {
       this._browserService.confirm({
         header: this._appLocalization.get('applications.content.moderation.rejectMedia'),
         message: this._appLocalization.get('applications.content.moderation.sureToReject', { 0: this._entry.name }),

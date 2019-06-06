@@ -3,18 +3,18 @@
 $app-styles-path: '../../../styles';
 @import '../../../styles/icons.scss';
 
-.kUndistributedProfile {
+.vUndistributedProfile {
   min-height: 52px;
   display: flex;
-  border-bottom: 1px solid $kGrayscale4;
+  border-bottom: 1px solid $vGrayscale4;
   padding: 30px 28px 28px 28px;
 
-  .kProfileIcon {
+  .vProfileIcon {
     width: 28px;
     background-repeat: no-repeat;
   }
 
-  .kUndistributedProfileContent {
+  .vUndistributedProfileContent {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -22,26 +22,26 @@ $app-styles-path: '../../../styles';
     min-height: 52px;
     margin-left: 16px;
 
-    .kTitle {
+    .vTitle {
       margin-bottom: 16px;
 
-      &.kClickable {
+      &.vClickable {
         cursor: pointer;
       }
 
-      .kTitleLabel {
+      .vTitleLabel {
         font-size: 15px;
         font-weight: bold;
         line-height: 18px;
       }
     }
 
-    .kMetadata {
-      color: $kGrayscale1;
+    .vMetadata {
+      color: $vGrayscale1;
 
-      .kStatus {
-        .kIconinactive {
-          color: $kGrayscale3;
+      .vStatus {
+        .vIconinactive {
+          color: $vGrayscale3;
           margin-right: 8px;
           position: relative;
           top: 1px;
@@ -50,12 +50,12 @@ $app-styles-path: '../../../styles';
     }
   }
 
-  .kControls {
+  .vControls {
     display: flex;
     position: relative;
     top: -6px;
 
-    .kExportBtn {
+    .vExportBtn {
       height: 34px;
       width: 120px;
     }

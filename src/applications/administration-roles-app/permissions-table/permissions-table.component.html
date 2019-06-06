@@ -1,4 +1,4 @@
-<div class="kPermissionsTable">
+<div class="vPermissionsTable">
   <p-table [value]="_rolePermissions" [customSort]="true">
     <ng-template pTemplate="header">
       <tr>
@@ -11,21 +11,21 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-permission>
-      <tr [pSelectableRow]="permission" class="kTableRow">
+      <tr [pSelectableRow]="permission" class="vTableRow">
 
         <td [ngStyle]="{'width': '350px', 'padding-left': '28px'}">
-          <span class="kPermissionGroup">{{permission.label}}</span>
+          <span class="vPermissionGroup">{{permission.label}}</span>
         </td>
 
         <td [ngStyle]="{'overflow': 'visible'}">
-          <kMultiSelect *ngIf="permission.items"
-                        class="kPermissionsList"
-                        [class.kHasError]="permission.hasError"
-                        panelStyleClass="kPermissionsListPanel"
+          <vMultiSelect *ngIf="permission.items"
+                        class="vPermissionsList"
+                        [class.vHasError]="permission.hasError"
+                        panelStyleClass="vPermissionsListPanel"
                         menuItemDisplayStyle="flex"
                         [hideOnScroll]="scrollableContainer"
                         [options]="permission.items"
-                        [disabled]="!permission.checked || permission.disabled || (!isNewRole && (_kmcPermissions.ADMIN_ROLE_UPDATE | kDisabledIfNotPermitted))"
+                        [disabled]="!permission.checked || permission.disabled || (!isNewRole && (_vmcPermissions.ADMIN_ROLE_UPDATE | vDisabledIfNotPermitted))"
                         [showToggleAll]="true"
                         [maxSelectedLabels]="0"
                         [defaultLabel]="permission.isAdvancedGroup ? ('applications.administration.role.permissionsTable.viewOnly' | translate) : ('applications.administration.role.permissionsTable.selectPermissions' | translate)"
@@ -38,19 +38,19 @@
                         (onChange)="_onChange($event, permission)"
                         [(ngModel)]="permission.formValue">
             <ng-template let-item pTemplate="item">
-              <span class="kPermissionItem">
+              <span class="vPermissionItem">
                 {{item.label}}
               </span>
             </ng-template>
-          </kMultiSelect>
+          </vMultiSelect>
 
           <i *ngIf="permission.hasError"
-             class="kIconerror kIconError"
-             [kTooltip]="'applications.administration.role.permissionsTable.requiredError' | translate"></i>
+             class="vIconerror vIconError"
+             [vTooltip]="'applications.administration.role.permissionsTable.requiredError' | translate"></i>
         </td>
 
         <td [ngStyle]="{'width': '80px'}">
-          <p-inputSwitch [disabled]="!isNewRole && (_kmcPermissions.ADMIN_ROLE_UPDATE | kDisabledIfNotPermitted)"
+          <p-inputSwitch [disabled]="!isNewRole && (_vmcPermissions.ADMIN_ROLE_UPDATE | vDisabledIfNotPermitted)"
                          [(ngModel)]="permission.checked"
                          (onChange)="_togglePermission($event, permission)"></p-inputSwitch>
         </td>

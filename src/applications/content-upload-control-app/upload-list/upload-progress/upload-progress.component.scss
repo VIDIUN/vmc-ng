@@ -18,41 +18,41 @@
   }
 }
 
-.kProgressBar {
-  .kProgressBarBackground {
+.vProgressBar {
+  .vProgressBarBackground {
     box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.3) inset;
     background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.35) 25%, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0.35) 75%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0));
     background-repeat: repeat-x;
     background-size: 20px 20px;
   }
 
-  .kProgressBarAnimation {
+  .vProgressBarAnimation {
     -webkit-animation: candystripe 1s linear infinite;
     -moz-animation: candystripe 1s linear infinite;
     animation: candystripe 1s linear infinite;
   }
 }
 
-:host /deep/ .kProgressBar {
+:host /deep/ .vProgressBar {
   &.uploading .ui-progressbar-value {
-    background-color: $kSecondary;
+    background-color: $vSecondary;
   }
 
   &.uploaded .ui-progressbar-value {
-    background-color: $kSuccess;
+    background-color: $vSuccess;
   }
 
   &.uploadFailure .ui-progressbar-value {
-    background-color: $kDandger;
+    background-color: $vDandger;
   }
 
   &.pending .ui-progressbar {
-    background-color: $kGrayscale6;
+    background-color: $vGrayscale6;
   }
 
   &:not(.pending) .ui-progressbar {
-    @extend .kProgressBarBackground;
-    background-color: $kGrayscale6;
+    @extend .vProgressBarBackground;
+    background-color: $vGrayscale6;
   }
 
   .ui-progressbar {
@@ -61,7 +61,7 @@
   }
 
   .ui-progressbar-value {
-    @extend .kProgressBarBackground;
-    @extend .kProgressBarAnimation;
+    @extend .vProgressBarBackground;
+    @extend .vProgressBarAnimation;
   }
 }

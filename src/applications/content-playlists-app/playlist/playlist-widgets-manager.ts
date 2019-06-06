@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { WidgetsManagerBase } from '@kaltura-ng/kaltura-ui'
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { WidgetsManagerBase } from '@vidiun-ng/vidiun-ui'
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
 import { PlaylistStore } from './playlist-store.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class PlaylistWidgetsManager extends WidgetsManagerBase<KalturaPlaylist, KalturaMultiRequest> {
+export class PlaylistWidgetsManager extends WidgetsManagerBase<VidiunPlaylist, VidiunMultiRequest> {
   private _playlistStore: PlaylistStore;
 
-  constructor(logger: KalturaLogger) {
+  constructor(logger: VidiunLogger) {
     super(logger.subLogger('PlaylistWidgetsManager'));
   }
 

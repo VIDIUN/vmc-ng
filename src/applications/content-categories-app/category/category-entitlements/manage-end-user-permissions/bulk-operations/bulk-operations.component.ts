@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {MenuItem} from 'primeng/primeng';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
 import {UserActionData} from '../manage-end-user-permissions.component';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
 import { EndUserPermissionsUser } from '../manage-end-user-permissions.service';
 
 @Component({
-  selector: 'kManageEndUserPermissionsBulkOperationsContent',
+  selector: 'vManageEndUserPermissionsBulkOperationsContent',
   templateUrl: './bulk-operations.component.html',
   styleUrls: ['./bulk-operations.component.scss']
 })
@@ -47,26 +47,26 @@ export class ManageEndUserPermissionsBulkOperationsComponent implements OnInit {
       {
         label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.setPermissionLevel'), items: [
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.setPermissionLevelOptions.member'), command: (event) => {
-          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: KalturaCategoryUserPermissionLevel.member}});
+          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: VidiunCategoryUserPermissionLevel.member}});
         } },
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.setPermissionLevelOptions.contributor'), command: (event) => {
-          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: KalturaCategoryUserPermissionLevel.contributor}});
+          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: VidiunCategoryUserPermissionLevel.contributor}});
         } },
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.setPermissionLevelOptions.moderator'), command: (event) => {
-          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: KalturaCategoryUserPermissionLevel.moderator}});
+          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: VidiunCategoryUserPermissionLevel.moderator}});
         } },
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.setPermissionLevelOptions.manager'), command: (event) => {
-          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: KalturaCategoryUserPermissionLevel.manager}});
+          this.onActionSelected.emit({action: 'permissionLevel', users: this.selectedItems, payload: {level: VidiunCategoryUserPermissionLevel.manager}});
         } }]
       },
       {
         label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.updateMethod'), items: [
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.updateMethodOptions.automatic'), command: (event) => {
 
-          this.onActionSelected.emit({action: 'updateMethod', users: this.selectedItems, payload: { method: KalturaUpdateMethodType.automatic}});
+          this.onActionSelected.emit({action: 'updateMethod', users: this.selectedItems, payload: { method: VidiunUpdateMethodType.automatic}});
         } },
         { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.updateMethodOptions.manual'), command: (event) => {
-          this.onActionSelected.emit({action: 'updateMethod', users: this.selectedItems, payload: { method: KalturaUpdateMethodType.manual}});
+          this.onActionSelected.emit({action: 'updateMethod', users: this.selectedItems, payload: { method: VidiunUpdateMethodType.manual}});
         } }]
       },
       { label: this._appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.removeUsers'), command: (event) => {

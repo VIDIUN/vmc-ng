@@ -1,21 +1,21 @@
 @import 'app-theme/_variables.scss';
 
-.kTable {
+.vTable {
   /deep/ {
-    .kApplicationRootCategory {
-      .kApplicationRootCategoryLabel {
-        color: $kGrayscale1;
+    .vApplicationRootCategory {
+      .vApplicationRootCategoryLabel {
+        color: $vGrayscale1;
         font-size: 15px;
         font-weight: bold;
         line-height: 18px;
       }
     }
 
-    .kPrivacyContextLabel {
+    .vPrivacyContextLabel {
 
     }
 
-    .kActionsColumn {
+    .vActionsColumn {
       width: 60px;
     }
   }

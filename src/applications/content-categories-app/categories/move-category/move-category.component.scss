@@ -1,42 +1,42 @@
 @import "app-theme/_variables.scss";
 
-.kTreeContainer {
+.vTreeContainer {
   position: relative;
   width: 100%;
   height: 100%;
-  .kHeader {
+  .vHeader {
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid $kGrayscale4;
+    border-bottom: 1px solid $vGrayscale4;
     height: 78px;
     padding-top: 24px;
     box-sizing: border-box;
-    .kTitle {
-      color: $kGrayscale1;
+    .vTitle {
+      color: $vGrayscale1;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer {
+  .vContainer {
     width: 540px;
     margin: 0 auto;
     height: 457px;
 
-    .kRow {
+    .vRow {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       padding-bottom: 20px;
-      .kSelectParentMsg{
+      .vSelectParentMsg{
         width: 100%;
         text-align: left;
       }
-      .kSpinnerBkg{
+      .vSpinnerBkg{
         width: 20px;
         height: 20px;
         position: relative;
         margin-top: -1px;
-        .kSpinnerAnim{
+        .vSpinnerAnim{
           width: 12px;
           height: 12px;
         }
@@ -46,20 +46,20 @@
       }
     }
 
-    .kRow.kNoParentOption {
+    .vRow.vNoParentOption {
       padding-bottom: 0;
     }
   }
-  .kFooter {
-    border-top: 1px solid $kGrayscale4;
+  .vFooter {
+    border-top: 1px solid $vGrayscale4;
     padding-top: 15px;
     box-sizing: border-box;
     text-align: center;
     height: 66px;
-    .kButtonBranded {
+    .vButtonBranded {
       height: 34px;
     }
-    .kLink {
+    .vLink {
       padding-left: 24px;
     }
   }

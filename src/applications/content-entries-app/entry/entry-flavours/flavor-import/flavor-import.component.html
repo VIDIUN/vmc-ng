@@ -1,13 +1,13 @@
-<div class="kFlavorImport">
-  <div class="kHeader">
-    <span class="kTitle">{{'applications.content.entryDetails.flavours.update' | translate}} - {{currentFlavor?.name}}</span>
+<div class="vFlavorImport">
+  <div class="vHeader">
+    <span class="vTitle">{{'applications.content.entryDetails.flavours.update' | translate}} - {{currentFlavor?.name}}</span>
   </div>
-  <div class="kContainer">
+  <div class="vContainer">
     <span>{{'applications.content.entryDetails.flavours.fileUrl' | translate}}</span>
-    <input class="kFlavorUrl" placeholder="{{'applications.content.entryDetails.flavours.urlPlaceholder' | translate}}" type="text" [(ngModel)]="_flavorURL" (blur)="_validate()" (keyup)="_onChange()" pInputText/>
-    <span class="kInvalid">{{_validationErrorMsg}}</span>
+    <input class="vFlavorUrl" placeholder="{{'applications.content.entryDetails.flavours.urlPlaceholder' | translate}}" type="text" [(ngModel)]="_flavorURL" (blur)="_validate()" (keyup)="_onChange()" pInputText/>
+    <span class="vInvalid">{{_validationErrorMsg}}</span>
   </div>
-	<div class="kFooter">
-		<button type="button" class="kButtonBranded" [disabled]="_flavorURL === '' || _validationErrorMsg.length" (click)="_saveAndClose()" pButton label="{{'applications.content.entryDetails.flavours.actions.import' | translate}}"></button>
+	<div class="vFooter">
+		<button type="button" class="vButtonBranded" [disabled]="_flavorURL === '' || _validationErrorMsg.length" (click)="_saveAndClose()" pButton label="{{'applications.content.entryDetails.flavours.actions.import' | translate}}"></button>
 	</div>
 </div>

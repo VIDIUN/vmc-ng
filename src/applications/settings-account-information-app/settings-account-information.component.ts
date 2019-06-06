@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {SettingsAccountInformationService} from './settings-account-information.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { SettingsAccountInformationMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { SettingsAccountInformationMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 function phoneValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: boolean} | null => {
@@ -22,12 +22,12 @@ function phoneValidator(): ValidatorFn {
 }
 
 @Component({
-  selector: 'kmc-settings-account-information',
+  selector: 'vmc-settings-account-information',
   templateUrl: './settings-account-information.component.html',
   styleUrls: ['./settings-account-information.component.scss'],
   providers: [
     SettingsAccountInformationService,
-    KalturaLogger.createLogger('SettingsAccountInformationComponent')
+    VidiunLogger.createLogger('SettingsAccountInformationComponent')
   ],
 })
 export class SettingsAccountInformationComponent implements OnInit, OnDestroy {
@@ -42,7 +42,7 @@ export class SettingsAccountInformationComponent implements OnInit, OnDestroy {
               private _appLocalization: AppLocalization,
               private _fb: FormBuilder,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _appAuthentication: AppAuthentication,
               private _settingsAccountInformationMainView: SettingsAccountInformationMainViewService) {
   }
@@ -90,11 +90,11 @@ export class SettingsAccountInformationComponent implements OnInit, OnDestroy {
     this._updateAreaBlockerState(true, null);
     const pid = this._appAuthentication.appUser.partnerId.toString();
     const sub_pid = pid+'00';
-    const ks = this._appAuthentication.appUser.ks;
+    const vs = this._appAuthentication.appUser.vs;
     const name = this.contactUsForm.controls['name'].value;
     const comments = this.contactUsForm.controls['comments'].value;
     const phone = this.contactUsForm.controls['phone'].value;
-    const formData = `name=${name}&comments=${comments}&phone=${phone}&ks=${ks}&services=none&partner_id=${pid}&subp_id=${sub_pid}&format=1`;
+    const formData = `name=${name}&comments=${comments}&phone=${phone}&vs=${vs}&services=none&partner_id=${pid}&subp_id=${sub_pid}&format=1`;
     this._accountInformationService
       .sendContactSalesForceInformation(formData)
       .pipe(cancelOnDestroy(this))

@@ -1,0 +1,106 @@
+@import 'app-theme/_variables.scss';
+
+.vUploadMenu {
+  color: #FFFFFF;
+
+  a {
+    color: #FFFFFF;
+    text-decoration: none;
+    &:hover:not(.disabled) {
+      color: #FFFFFF;
+    }
+    &:active:not(.disabled) {
+      color: #FFFFFF;
+    }
+  }
+
+  .vUploadMenuListItem {
+    height: 64px;
+    margin-bottom: 33px;
+    display: flex;
+    align-items: center;
+
+    &.last {
+      margin-bottom: 32px;
+    }
+
+    i {
+      font-size: 32px;
+      text-align: center;
+      line-height: 48px;
+      width: 48px;
+      height: 48px;
+      background-color: $vPrimary;
+      border-radius: 50%;
+      flex: 0 0 auto;
+
+      &.vUploadMenuLiveStreamIcon {
+        cursor: pointer;
+        background-color: $vDandger;
+      }
+
+      &.vUploadMenuLinkIcon {
+        cursor: pointer;
+        background-color: $vPrimary;
+      }
+
+      &.vUploadMenuBulkUploadIcon {
+        cursor: pointer;
+        background-color: $vOrange;
+      }
+
+      &.vUploadMenuUploadIcon {
+        cursor: pointer;
+        background-color: $vSecondary;
+      }
+    }
+
+    span {
+      margin-left: 35px;
+        margin-top: 30px;
+
+        &.vSingleItem {
+            margin-top: 0;
+        }
+
+        &.vUploadMenuListItemLive {
+            margin-top: 0;
+        }
+
+      a {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .vBulkUploadSamplesLink {
+        margin-top: 16px;
+        display: block;
+        opacity: 0.6;
+        font-size: 14px;
+        font-weight: normal;
+        &.vDisabled{
+            opacity: 0.2;
+            cursor: default;
+            pointer-events: none;
+        }
+      }
+    }
+  }
+
+  .vPrepareEntryList {
+    margin-left: 83px;
+
+    .vPrepareEntryListTitle {
+      font-size: 14px;
+      text-transform: uppercase;
+      opacity: 0.6;
+        letter-spacing: 1.75px;
+    }
+
+    .vPrepareEntryListItem {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 19px;
+    }
+  }
+}

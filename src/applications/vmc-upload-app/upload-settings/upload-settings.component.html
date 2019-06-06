@@ -1,0 +1,142 @@
+<v-area-blocker [showLoader]="_transcodingProfileLoading" [message]="_transcodingProfileError">
+    <div class="vUploadSettings">
+        <div class="vHeader">
+            <h1>{{_title}}</h1>
+        </div>
+        <div class="vContent">
+            <form [formGroup]="_profileForm" class="vProfile">
+                <span>{{ 'applications.upload.uploadSettings.profile' | translate }}</span>
+                <p-dropdown class="vTranscodingProfile"
+                            [options]="_transcodingProfiles"
+                            [autoWidth]="false"
+                            [placeholder]="'applications.upload.uploadSettings.profilePlaceholder' | translate"
+                            [formControl]="_transcodingProfileField">
+                    <ng-template let-profile pTemplate="item">
+                        <span class="vTranscodingProfileItem" [vTooltip]="profile.label">{{profile.label}}</span>
+                    </ng-template>
+                </p-dropdown>
+
+                <button type="button"
+                        class="vButtonDefault vAddFileButton"
+                        pButton icon="vIconplus"
+                        [label]="'applications.upload.uploadSettings.addFileBtn' | translate"
+                        (click)="_addFile()"></button>
+            </form>
+
+            <div class="vTable" [class.empty]="_files.length === 0">
+                <p-table [value]="_files" [scrollable]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th [ngStyle]="{'width': '28px'}"></th>
+                            <th *ngIf="creationType === _creationTypes.import">
+                                {{'applications.upload.uploadSettings.fileUrl' | translate}}
+                            </th>
+                            <th *ngIf="creationType === _creationTypes.upload">
+                                {{'applications.upload.uploadSettings.table.header.fileName' | translate}}
+                            </th>
+                            <th *ngIf="creationType === _creationTypes.upload"
+                                [ngStyle]="{'width': '150px', 'overflow':'visible'}">
+                                {{'applications.upload.uploadSettings.table.header.mediaType' | translate}}
+                            </th>
+                            <th *ngIf="creationType === _creationTypes.upload"
+                                [ngStyle]="{'width': '100px'}">
+                                {{'applications.upload.uploadSettings.table.header.size' | translate}}
+                            </th>
+                            <th [ngStyle]="{'width': '40px', 'text-align': 'center'}"></th>
+                            <th [ngStyle]="{'width': '45px', 'text-align': 'center'}"></th>
+                            <th [ngStyle]="{'width': '28px'}"></th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-file>
+                        <tr>
+                            <td [ngStyle]="{'width': '28px'}"></td>
+                            <td *ngIf="creationType === _creationTypes.import">
+                                <input pInputText type="text"
+                                       class="vImportUrl"
+                                       [placeholder]="'applications.upload.uploadSettings.fileUrlPlaceholder' | translate"
+                                       [class.vHasError]="file.hasError"
+                                       [(ngModel)]="file.url">
+                            </td>
+                            <td *ngIf="creationType === _creationTypes.upload">
+                                <div *ngIf="!file.isEditing" class="vFileNameCell">
+                                    <span class="vFileName">{{ file.name }}</span>
+                                    <i class="vIconpen vIconEditFileName"
+                                       [vTooltip]="'applications.upload.uploadSettings.table.edit' | translate"
+                                       placement="top"
+                                       (click)="_editName(file)"></i>
+                                </div>
+                                <div *ngIf="file.isEditing">
+                                    <input pInputText
+                                           class="vFileNameInput"
+                                           [class.vHasError]="file.hasError"
+                                           vAutofocus
+                                           [(ngModel)]="file.name"
+                                           (blur)="_cancelEdit(file)"
+                                           (keyup.enter)="_cancelEdit(file)">
+                                </div>
+                            </td>
+                            <td *ngIf="creationType === _creationTypes.upload"
+                                [ngStyle]="{ 'width': '150px', 'overflow':'visible' }">
+                                <p-dropdown class="vFileType"
+                                            [options]="_fileTypes"
+                                            [autoWidth]="false"
+                                            appendTo="body"
+                                            vDropdownCloseOnScroll
+                                            [scrollTarget]="_tableScrollableWrapper"
+                                            [(ngModel)]="file.mediaType"
+                                            (onChange)="_updateFileValidityOnTypeChange(file)"
+                                            [placeholder]="'applications.content.entryDetails.related.select' | translate"></p-dropdown>
+                            </td>
+                            <td *ngIf="creationType === _creationTypes.upload"
+                                [ngStyle]="{ 'width': '100px' }">{{ file.size | vFileSize }}
+                            </td>
+                            <td [ngStyle]="{'width': '40px', 'text-align': 'center'}">
+                                <i *ngIf="file.hasError"
+                                   class="vIconerror vIconError"
+                                   [vTooltip]="file.errorToken | translate"
+                                   placement="top"></i>
+                            </td>
+                            <td [ngStyle]="{'width': '45px', 'text-align': 'center'}">
+                                <i class="vIcontrash vIconRemoveFile"
+                                   [vTooltip]="'applications.upload.uploadSettings.table.remove' | translate"
+                                   placement="top"
+                                   (click)="_removeFile(file)"></i>
+                            </td>
+                            <td [ngStyle]="{'width': '28px'}"></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <div *ngIf="_files.length === 0" class="vEmptyMessage">
+                    <h1>{{ 'applications.upload.uploadSettings.table.emptyMessage.title' | translate }}</h1>
+                    <p>
+                        {{ 'applications.upload.uploadSettings.table.emptyMessage.getStarted' | translate }}
+                        <a *ngIf="creationType === _creationTypes.upload" (click)="_addFile()">
+                            {{ 'applications.upload.uploadSettings.table.emptyMessage.browse' | translate }}
+                        </a>
+                        <a *ngIf="creationType === _creationTypes.import" (click)="_addFile()">
+                            {{ 'applications.upload.uploadSettings.table.emptyMessage.add' | translate }}
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="vFooter">
+            <button class="vButtonDefault vUploadButton"
+                    pButton
+                    [label]="'applications.upload.uploadSettings.cancel' | translate"
+                    (click)="parentPopupWidget?.close()"></button>
+
+            <button class="vButtonBranded vUploadButton"
+                    pButton
+                    [disabled]="_files.length === 0 || _transcodingProfileLoading || !!_transcodingProfileError"
+                    [label]="_uploadBtnLabel"
+                    (click)="_upload()"></button>
+        </div>
+    </div>
+</v-area-blocker>
+<vFileDialog #fileDialog
+             [filter]="_allowedExtensions"
+             [allowMultiple]="true"
+             (onFileSelected)="_handleSelectedFiles($event)"></vFileDialog>

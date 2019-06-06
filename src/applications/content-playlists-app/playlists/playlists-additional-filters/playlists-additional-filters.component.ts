@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-  selector: 'kPlaylistsAdditionalFilter',
+  selector: 'vPlaylistsAdditionalFilter',
   templateUrl: './playlists-additional-filters.component.html',
   styleUrls: ['./playlists-additional-filters.component.scss']
 })

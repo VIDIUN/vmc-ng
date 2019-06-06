@@ -10,31 +10,31 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { CaptionAssetListAction } from 'kaltura-ngx-client';
-import { CaptionAssetDeleteAction } from 'kaltura-ngx-client';
-import { CaptionAssetSetAsDefaultAction } from 'kaltura-ngx-client';
-import { CaptionAssetUpdateAction } from 'kaltura-ngx-client';
-import { CaptionAssetSetContentAction } from 'kaltura-ngx-client';
-import { CaptionAssetAddAction } from 'kaltura-ngx-client';
-import { KalturaUrlResource } from 'kaltura-ngx-client';
-import { KalturaUploadedFileTokenResource } from 'kaltura-ngx-client';
-import { KalturaCaptionAsset } from 'kaltura-ngx-client';
-import { KalturaAssetFilter } from 'kaltura-ngx-client';
-import { KalturaCaptionType } from 'kaltura-ngx-client';
-import { KalturaCaptionAssetStatus } from 'kaltura-ngx-client';
-import { KalturaLanguage } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { CaptionAssetServeAction } from 'kaltura-ngx-client';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { CaptionAssetListAction } from 'vidiun-ngx-client';
+import { CaptionAssetDeleteAction } from 'vidiun-ngx-client';
+import { CaptionAssetSetAsDefaultAction } from 'vidiun-ngx-client';
+import { CaptionAssetUpdateAction } from 'vidiun-ngx-client';
+import { CaptionAssetSetContentAction } from 'vidiun-ngx-client';
+import { CaptionAssetAddAction } from 'vidiun-ngx-client';
+import { VidiunUrlResource } from 'vidiun-ngx-client';
+import { VidiunUploadedFileTokenResource } from 'vidiun-ngx-client';
+import { VidiunCaptionAsset } from 'vidiun-ngx-client';
+import { VidiunAssetFilter } from 'vidiun-ngx-client';
+import { VidiunCaptionType } from 'vidiun-ngx-client';
+import { VidiunCaptionAssetStatus } from 'vidiun-ngx-client';
+import { VidiunLanguage } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { CaptionAssetServeAction } from 'vidiun-ngx-client';
 import { NewEntryCaptionFile } from './new-entry-caption-file';
 import { EntryWidget } from '../entry-widget';
-import { FriendlyHashId } from '@kaltura-ng/kaltura-common';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { FriendlyHashId } from '@vidiun-ng/vidiun-common';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface CaptionRow {
     uploading: boolean;
@@ -45,11 +45,11 @@ export interface CaptionRow {
     uploadUrl: string;
     id: string;
     isDefault: number;
-    format: KalturaCaptionType;
-    language: KalturaLanguage;
+    format: VidiunCaptionType;
+    language: VidiunLanguage;
     label: string;
     fileExt: string;
-    status?: KalturaCaptionAssetStatus;
+    status?: VidiunCaptionAssetStatus;
 }
 
 @Injectable()
@@ -69,8 +69,8 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
     private _entryId: string = '';
 
     constructor(private _objectDiffers: KeyValueDiffers, private _listDiffers: IterableDiffers,
-                private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _uploadManagement: UploadManagement,
-                logger: KalturaLogger) {
+                private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _uploadManagement: UploadManagement,
+                logger: VidiunLogger) {
         super(ContentEntryViewSections.Captions, logger);
     }
 
@@ -106,7 +106,7 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
               relevantCaption.uploading = false;
               relevantCaption.uploadFailure = false;
               if (relevantCaption.partnerId) { // indicator that entry was saved
-                relevantCaption.status = KalturaCaptionAssetStatus.ready;
+                relevantCaption.status = VidiunCaptionAssetStatus.ready;
               }
               break;
             case TrackedFileStatuses.failure:
@@ -145,8 +145,8 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
     }
     this._captions.next({ items: [] });
 
-    return this._kalturaServerClient.request(new CaptionAssetListAction({
-      filter: new KalturaAssetFilter({ entryIdEqual: this._entryId })
+    return this._vidiunServerClient.request(new CaptionAssetListAction({
+      filter: new VidiunAssetFilter({ entryIdEqual: this._entryId })
     }))
       .pipe(cancelOnDestroy(this, this.widgetReset$))
       .map(response => {
@@ -200,7 +200,7 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
     });
   }
 
-    public _setAsDefault(caption: KalturaCaptionAsset): void {
+    public _setAsDefault(caption: VidiunCaptionAsset): void {
         const captionId = caption.id;
         let captions = Array.from(this._captions.getValue().items); // create a copy of the captions array withour a reference to the original array
         captions.forEach((caption) => {
@@ -210,16 +210,16 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
         this.setDirty();
     }
 
-    public _getCaptionType(captionFormat: KalturaCaptionType): string {
+    public _getCaptionType(captionFormat: VidiunCaptionType): string {
         let type = this._appLocalization.get('app.common.n_a');
         switch (captionFormat.toString()) {
-            case KalturaCaptionType.srt.toString():
+            case VidiunCaptionType.srt.toString():
                 type = "SRT";
                 break;
-            case KalturaCaptionType.dfxp.toString():
+            case VidiunCaptionType.dfxp.toString():
                 type = "DFXP";
                 break;
-            case KalturaCaptionType.webvtt.toString():
+            case VidiunCaptionType.webvtt.toString():
                 type = "WEBVTT";
                 break;
         }
@@ -230,10 +230,10 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
       let status = '';
       if (caption.status !== null) {
         switch (caption.status) {
-          case KalturaCaptionAssetStatus.error:
+          case VidiunCaptionAssetStatus.error:
             status = this._appLocalization.get('applications.content.entryDetails.captions.error');
             break;
-          case KalturaCaptionAssetStatus.ready:
+          case VidiunCaptionAssetStatus.ready:
             status = this._appLocalization.get('applications.content.entryDetails.captions.saved');
             break;
           default:
@@ -258,8 +258,8 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
       serverUploadToken: '',
       uploadUrl: '',
       id: null,
-      format: KalturaCaptionType.srt,
-      language: KalturaLanguage.en,
+      format: VidiunCaptionType.srt,
+      language: VidiunLanguage.en,
       label: 'English',
       isDefault: 0,
       fileExt: '',
@@ -321,7 +321,7 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
     }
 
   // save data
-  protected onDataSaving(data: KalturaMediaEntry, request: KalturaMultiRequest) {
+  protected onDataSaving(data: VidiunMediaEntry, request: VidiunMultiRequest) {
     if (this._captions.getValue().items) {
       // check for added and removed captions
       if (this.captionsListDiffer) {
@@ -330,7 +330,7 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
           changes.forEachAddedItem((record: IterableChangeRecord<CaptionRow>) => {
             // added captions
             const newCaption = record.item as CaptionRow;
-            const captionAsset = new KalturaCaptionAsset({
+            const captionAsset = new VidiunCaptionAsset({
               language: record.item.language,
               format: record.item.format,
               label: record.item.label,
@@ -341,10 +341,10 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
 
             let resource = null;
             if ((record.item).uploadUrl) { // add new caption from URL
-              resource = new KalturaUrlResource({ url: (record.item).uploadUrl });
+              resource = new VidiunUrlResource({ url: (record.item).uploadUrl });
             }
             if ((record.item).serverUploadToken) { // add new caption from upload token
-              resource = new KalturaUploadedFileTokenResource({ token: (record.item).serverUploadToken });
+              resource = new VidiunUploadedFileTokenResource({ token: (record.item).serverUploadToken });
             }
             if (resource) {
               const setContentRequest = new CaptionAssetSetContentAction({ id: '0', contentResource: resource })
@@ -405,7 +405,7 @@ export class EntryCaptionsWidget extends EntryWidget  implements OnDestroy {
 
     getCaptionPreviewUrl(): Observable<{ url: string }> {
         if (this.currentCaption.id) {
-            return this._kalturaServerClient.request(new CaptionAssetServeAction({captionAssetId: this.currentCaption.id}));
+            return this._vidiunServerClient.request(new CaptionAssetServeAction({captionAssetId: this.currentCaption.id}));
         } else {
             return Observable.throw(new Error('cannot generate caption preview url. missing caption id'));
         }

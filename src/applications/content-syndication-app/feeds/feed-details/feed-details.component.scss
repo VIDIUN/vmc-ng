@@ -1,57 +1,57 @@
 @import 'app-theme/_variables.scss';
 
-.kFeedDetailsContainer {
+.vFeedDetailsContainer {
 
-  .kFeedDetailsContainerHeader {
+  .vFeedDetailsContainerHeader {
     height: 34px;
     padding: 19px 28px 19px 28px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $kGrayscale4;
-    .kFeedIcon {
+    border-bottom: 1px solid $vGrayscale4;
+    .vFeedIcon {
       flex: 0 0 auto;
       font-size: 24px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
 
     }
-    .kFeedName {
+    .vFeedName {
       flex: 1 1 auto;
       padding: 0 18px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
       font-weight: bold;
     }
 
-    .kBulkCancel {
+    .vBulkCancel {
       flex: 0 0 auto;
-      color: $kBlack;
+      color: $vBlack;
     }
 
-    .kDeletehBtn {
+    .vDeletehBtn {
       flex: 0 0 auto;
       margin-left: 16px;
       height: 34px;
       width: 100px;
     }
 
-    .kSaveBtn {
+    .vSaveBtn {
       flex: 0 0 auto;
       margin-left: 16px;
       height: 34px;
       width: 100px;
     }
   }
-  .kFeedDetailsContainerBody {
+  .vFeedDetailsContainerBody {
     padding: 20px 28px;
     height: calc(100vh - 193px);
     overflow-y: auto;
 
-    .kDestination {
-      .kControl {
+    .vDestination {
+      .vControl {
         display: block;
         width: 258px;
 
-        &.kHasError{
+        &.vHasError{
           /deep/ .ui-widget.ui-dropdown {
             border: none;
             padding-top: 1px;
@@ -64,34 +64,34 @@
       }
     }
 
-    .kContentType {
-      .kSelectPlaylist {
+    .vContentType {
+      .vSelectPlaylist {
         padding-top: 17px;
       }
 
-      .kContentTypePlaylist {
+      .vContentTypePlaylist {
         padding-left: 31px;
       }
 
-        .kInvalid {
-            color: $kDandger;
+        .vInvalid {
+            color: $vDandger;
         }
     }
 
-    .kEntriesCount {
+    .vEntriesCount {
       .error {
           display: flex;
           align-items: center;
 
-        .kIconwarning {
+        .vIconwarning {
           font-size: 20px;
           vertical-align: middle;
           padding-right: 5px;
         }
 
-        .kMoreInfo{
+        .vMoreInfo{
           padding-left: 4px;
-          color: $kDandger;
+          color: $vDandger;
         }
       }
     }
@@ -99,10 +99,10 @@
 }
 
 :host /deep/ {
-  .kWarningMoreInfoTooltip {
+  .vWarningMoreInfoTooltip {
     font-size: 15px;
     font-weight: normal;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     padding: 16px;
     line-height: 20px;
   }
@@ -110,52 +110,52 @@
 
 // Form styling
 :host /deep/ {
-  .kRow {
+  .vRow {
     display: flex;
     padding-bottom: 20px;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     align-items: center;
 
-    &.kMultiLine {
+    &.vMultiLine {
       align-items: flex-start;
     }
 
-    .kAsterix {
+    .vAsterix {
       width: 12px;
       font-size: 16px;
       padding-top: 8px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
 
-      &.kHasError {
-        color: $kDandger;
+      &.vHasError {
+        color: $vDandger;
         font-weight: bold;
       }
 
-      & + .kControlContainer {
+      & + .vControlContainer {
         padding-left: 0;
       }
     }
 
-    .kLabel {
+    .vLabel {
       width: 180px;
       flex: 0 0 auto;
       height: 18px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
       line-height: 18px;
       padding: 0px 4px 0px 0px;
     }
-    .kControlContainer {
+    .vControlContainer {
       flex: 1 1 auto;
       padding-left: 12px;
 
-      .kControl {
+      .vControl {
         height: 34px;
-        color: $kGrayscale2;
+        color: $vGrayscale2;
         width: 500px;
         border-radius: 3px;
-        &.kHasError {
-          border: 1px solid $kDandger;
+        &.vHasError {
+          border: 1px solid $vDandger;
           background: initial;
         }
       }
@@ -165,20 +165,20 @@
       padding-top: 8px;
     }
 
-    &.kInputValidationError{
+    &.vInputValidationError{
       align-items: flex-start;
 
-      .kLabel {
+      .vLabel {
         padding-top: 8px;
       }
 
-      .kAsterix {
+      .vAsterix {
         padding-top: 12px;
       }
     }
   }
 
-  .kElipsis {
+  .vElipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -187,23 +187,23 @@
 }
 
 :host /deep/ {
-  .kPlaylist {
+  .vPlaylist {
     display: flex;
     align-items: center;
     float: left;
     max-width: 200px;
 
-    .kPlaylistIcon {
+    .vPlaylistIcon {
       font-size: 24px;
       flex: 0 0 auto;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
     }
-    .kPlaylistLabel {
+    .vPlaylistLabel {
       padding-left: 13px;
       font-size: 15px;
       flex: 1 1 auto;
       max-width: 200px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
     }
   }
 
@@ -219,12 +219,12 @@
 
 
   .ui-radiobutton-label {
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     font-weight: normal;
     font-size: 15px;
   }
 
-  .kIcontrash {
+  .vIcontrash {
     font-size: 24px !important;
     left: 8px;
 
@@ -235,7 +235,7 @@
 
   textarea.threeRows {
     border-radius: 3px;
-    border: 1px solid $kGrayscale4;
+    border: 1px solid $vGrayscale4;
     resize: none;
     box-sizing: border-box;
     outline: none;
@@ -243,11 +243,11 @@
     font-size: 15px;
 
     &:hover {
-      border-color: $kGrayscale2;
+      border-color: $vGrayscale2;
     }
 
     &:focus {
-      border-color: $kGrayscale2;
+      border-color: $vGrayscale2;
       background: white;
     }
   }
@@ -255,7 +255,7 @@
   .ui-multiselect{
     width: 258px;
     height: 34px;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     padding-left: 8px;
     font-size: 15px;
 
@@ -272,14 +272,14 @@
     }
 
     .ui-multiselect-trigger {
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       border: none;
       padding-top: 7px;
     }
 
     .ui-widget-header {
       border: none;
-      border-bottom: 1px solid $kGrayscale5;
+      border-bottom: 1px solid $vGrayscale5;
       width: 100%;
     }
   }
@@ -287,6 +287,6 @@
   .ui-chkbox-label{
     font-weight: normal;
     font-size: 15px;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
   }
 }

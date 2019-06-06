@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {KalturaClient} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import {CategoryUpdateAction} from 'kaltura-ngx-client';
+import {CategoryUpdateAction} from 'vidiun-ngx-client';
 
 export interface Entitlement {
-  categories: KalturaCategory[];
+  categories: VidiunCategory[];
   partnerDefaultEntitlementEnforcement: boolean
 }
 
@@ -13,15 +13,15 @@ export interface Entitlement {
 export class EditEntitlementService {
 
 
-  constructor(private _kalturaServerClient: KalturaClient) {
+  constructor(private _vidiunServerClient: VidiunClient) {
   }
 
 
   public updateEntitlementPrivacyContext(id: number, privacyContextLabel: string): Observable<void> {
 
-    return this._kalturaServerClient.request(new CategoryUpdateAction({
+    return this._vidiunServerClient.request(new CategoryUpdateAction({
       id,
-      category: new KalturaCategory({
+      category: new VidiunCategory({
         privacyContext: privacyContextLabel
       })
     }))

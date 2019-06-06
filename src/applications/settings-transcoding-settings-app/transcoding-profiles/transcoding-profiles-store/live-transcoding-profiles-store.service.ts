@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
 import { BaseTranscodingProfilesStore } from './base-transcoding-profiles-store.service';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsTranscodingMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsTranscodingMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Injectable()
 export class LiveTranscodingProfilesStore extends BaseTranscodingProfilesStore {
   protected localStoragePageSizeKey = 'live.transcodingProfiles.list.pageSize';
-  protected transcodingProfilesListType = KalturaConversionProfileType.liveStream;
+  protected transcodingProfilesListType = VidiunConversionProfileType.liveStream;
 
-  constructor(_kalturaServerClient: KalturaClient,
+  constructor(_vidiunServerClient: VidiunClient,
               _browserService: BrowserService,
               settingsTranscodingMainView: SettingsTranscodingMainViewService,
-              _logger: KalturaLogger) {
-    super(_kalturaServerClient, _browserService, settingsTranscodingMainView, _logger.subLogger('LiveTranscodingProfilesStore'));
+              _logger: VidiunLogger) {
+    super(_vidiunServerClient, _browserService, settingsTranscodingMainView, _logger.subLogger('LiveTranscodingProfilesStore'));
   }
 }
 

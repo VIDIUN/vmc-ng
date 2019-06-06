@@ -70,12 +70,12 @@
         },
         "helpMenu": {
             "gettingStarted": "はじめに",
-            "kmcOverview": "KMC概要",
+            "vmcOverview": "VMC概要",
             "mediaManagement": "メディア管理&amp;ワークフロー",
             "productTour": "製品ツアーを観覧",
             "support": "ヘルプとサポート",
             "userManual": "ユーザーマニュアルをダウンロード",
-            "legacy": "レガシーKMC",
+            "legacy": "レガシーVMC",
             "contact": "サポートに問い合わせる",
             "currentPage": "現在のページ",
             "changelog": "変更ログ"
@@ -107,7 +107,7 @@
             "save": "保存",
             "error": "エラー",
             "connectionError": "サーバーへの接続中にエラーが発生しました",
-            "invalidKs": "ユーザーセッションの有効期限が切れました。再度ログインしてください。"
+            "invalidVs": "ユーザーセッションの有効期限が切れました。再度ログインしてください。"
         },
         "redirect":{
             "redirect1": "デフォルトビューにリダイレクトしています...",
@@ -115,11 +115,11 @@
             "redirect3": "ここをクリックしてください"
         },
         "openMail":{
-            "supportMailTitle": "Kalturaサポートに問い合わせる",
+            "supportMailTitle": "Vidiunサポートに問い合わせる",
             "supportMailMsg": "次の電子メールアドレスに電子メールを送信してください:",
-            "supportMailMsgNoMail": "Kalturaサポートチームに電子メールを送信してください。",
-            "customerCare": "Kalturaカスタマーケアは24時間365日、カスタマーポータルからご利用いただけます:",
-            "customerPortal": "新しいケースの送信、カスタマーケアとのコミュニケーション、サポートチケットのステータスの追跡をするための最も簡単で速い方法は、Kalturaカスタマーポータルです:"
+            "supportMailMsgNoMail": "Vidiunサポートチームに電子メールを送信してください。",
+            "customerCare": "Vidiunカスタマーケアは24時間365日、カスタマーポータルからご利用いただけます:",
+            "customerPortal": "新しいケースの送信、カスタマーケアとのコミュニケーション、サポートチケットのステータスの追跡をするための最も簡単で速い方法は、Vidiunカスタマーポータルです:"
         },
         "login": {
             "login": {
@@ -171,9 +171,9 @@
                 }
             },
             "restorePassword": {
-                "welcome": "Kalturaへようこそ。",
+                "welcome": "Vidiunへようこそ。",
                 "selectPassword": "パスワードを選択してください。",
-                "restored": "新しいパスワードが設定されました。Kaltura管理コンソールにログインしてください。",
+                "restored": "新しいパスワードが設定されました。Vidiun管理コンソールにログインしてください。",
                 "error": {
                     "equal": "パスワードが一致しません",
                     "required": "フィールドは必須です",
@@ -189,20 +189,20 @@
                 "badCredentials": "入力されたユーザー名またはパスワードが正しくありません。",
                 "retriesExceeded": {
                     "yourAccountHasBeenLocked":"アカウントはロックされたため、24時間ご利用いただけません。アカウントのロックを解除するには、 ",
-                    "toUnblockYourAccount": " からKalturaサポートにお問い合わせください。"
+                    "toUnblockYourAccount": " からVidiunサポートにお問い合わせください。"
                 },
                 "userNotFound": "入力されたユーザー名またはパスワードが正しくありません。",
                 "invalidStructure": "入力されたパスワードの構造は無効です。パスワードは次のルールに従う必要があります: - 8～14文字の長さであること。- 名前を含まないこと。- 小文字（a-z）を少なくとも1文字含んでいること。- 数字（0-9）を少なくとも1文字含んでいること。- 次の記号を少なくとも1文字含んでいること: %~!@#\\$^*=+?[]{}。- 次の文字を含んでいないこと: &lt;または>",
                 "alreadyUsed": "パスワードが無効です。<br> このパスワードは過去に使用されています。新しいパスワードを選択してください。",
                 "loginBlocked": {
                     "loginDenied":"ログインが拒否されました。無効なログイン試行数が一定回数を超えました。アカウントのロックを解除するには、 ",
-                    "toUnblockYourAccount": " からKalturaサポートにお問い合わせください。"
+                    "toUnblockYourAccount": " からVidiunサポートにお問い合わせください。"
                 },
                 "newPasswordHashKeyInvalid": "このリンクは有効ではありません。",
                 "newPasswordHashKeyExpired": "このリンクは24時間より前のものであるか、もう有効ではなくなりました。",
                 "wrongOldPassword": "古いパスワードが正しくありません。",
                 "invalidField": "フィールド{{value}}の値は有効ではありません。",
-                "userForbiddenForBeta": "これは新しいKaltura管理コンソールのクローズドベータ版です。間もなく正規版がリリースされますのでお待ち下さい。"
+                "userForbiddenForBeta": "これは新しいVidiun管理コンソールのクローズドベータ版です。間もなく正規版がリリースされますのでお待ち下さい。"
             },
             "send": "送信",
             "wait": "待機中...",
@@ -218,8 +218,8 @@
         },
         "UnpermittedActionReasons": {
             "header": "無効なビュー",
-            "message": "このビューはロードできません。問題が解決されない場合は、Kalturaサポートにお問い合わせください。",
-            "messageNav": "このビューはロードできません。問題が解決されない場合は、Kalturaサポートにお問い合わせください。OKをクリックするとメインビューに移動します。"
+            "message": "このビューはロードできません。問題が解決されない場合は、Vidiunサポートにお問い合わせください。",
+            "messageNav": "このビューはロードできません。問題が解決されない場合は、Vidiunサポートにお問い合わせください。OKをクリックするとメインビューに移動します。"
         }
     },
     "applications": {
@@ -247,7 +247,7 @@
             "helpTip1": "自動埋め込みはデフォルトの埋め込みコードタイプであり、ランタイムカスタマイズが不要で、ページ上ですぐにプレーヤーを開く場合に最適です。",
             "helpTip2": "詳細を読む",
             "helpTip3": "さまざまな埋め込みコードタイプについて",
-            "helpTip4": "配信方法の定義に関するロジックは、ユーザーエクスペリエンスを最適化するためにKaltura Playerによって自動化されます。",
+            "helpTip4": "配信方法の定義に関するロジックは、ユーザーエクスペリエンスを最適化するためにVidiun Playerによって自動化されます。",
             "helpTip5": "特定の配信プロトコルの ",
             "helpTip6": "強制に関する詳細を確認してください。",
             "playersErrorPlaylist": "このアカウントではプレーリストプレーヤーが見つかりません。スタジオタブを使用すると新しいプレーリストを作成できます。",
@@ -416,12 +416,12 @@
                 "createLiveStreamTitle": "ライブストリームエントリを作成",
                 "streamTypeLabel": "ストリームタイプ",
                 "streamTypes": {
-                    "kaltura": "Kalturaライブストリーミング（HDS/HLS/DASH）",
+                    "vidiun": "Vidiunライブストリーミング（HDS/HLS/DASH）",
                     "universal": "ユニバーサルストリーミング、Flashおよびモバイル（HDS/HLS）",
                     "manual": "手動ライブストリームURL"
                 },
                 "create": "作成",
-                "kalturaStreamType": {
+                "vidiunStreamType": {
                     "name": "名前",
                     "description": "説明",
                     "transcodingProfile": "ライブトランスコーディングプロファイル",
@@ -454,7 +454,7 @@
                     "description": "説明",
                     "primaryEncoderIp": "プライマリエンコーダーIP",
                     "secondaryEncoderIp": "セカンダリエンコーダーIP",
-                    "secondaryEncoderIp_message": "デフォルトでは、KalturaはこのKMCへのアクセスにパブリックIPを使用します。",
+                    "secondaryEncoderIp_message": "デフォルトでは、VidiunはこのVMCへのアクセスにパブリックIPを使用します。",
                     "broadcastPassword": "ブロードキャストパスワード",
                     "liveDvr": "ライブDVR",
                     "liveDVR_message": "ライブストリームの以前の部分をシークしています。デフォルトでは、DVR期間は2時間です。",
@@ -466,7 +466,7 @@
                 "confirmEntryNavigation": {
                     "title": "成功",
                     "generalMessage": "ライブストリームエントリの作成に成功しました。",
-                    "kalturaMessage": "ライブストリームエントリの作成に成功しました。エントリ詳細を表示しますか?",
+                    "vidiunMessage": "ライブストリームエントリの作成に成功しました。エントリ詳細を表示しますか?",
                     "universalMessage": "CDNによるブロードキャストのためのストリームアクティベーションには最大3時間かかる場合があります。",
                     "manualMessage": "指定されたURLはエントリに関連付けられています。{{0}}。"
                 }
@@ -516,7 +516,7 @@
                     "fileSize": "ファイルサイズ",
                     "entryId": "エントリID",
                     "status": "ステータス",
-                    "datesTooltip": "アップロードの開始が検出されました:{{0}}件のアップロードの完了が検出されました:ドロップフォルダーからKalturaへの{{1}}件のファイル転送が開始されました:ドロップフォルダーのKalturaへの{{2}}件のファイル転送が終了しました: {{3}}",
+                    "datesTooltip": "アップロードの開始が検出されました:{{0}}件のアップロードの完了が検出されました:ドロップフォルダーからVidiunへの{{1}}件のファイル転送が開始されました:ドロップフォルダーのVidiunへの{{2}}件のファイル転送が終了しました: {{3}}",
                     "notAvailable": "該当なし",
                     "unknown": "不明",
                     "delete": "削除"
@@ -544,7 +544,7 @@
                 },
                 "dropFolderStatusTooltips": {
                     "uploading": "現在ドロップフォルダーにファイルをアップロードしています。",
-                    "downloading": "現在ドロップフォルダーからKalturaにファイルをインポートしています。",
+                    "downloading": "現在ドロップフォルダーからVidiunにファイルをインポートしています。",
                     "pending": "ファイルのアップロードが完了しました。ドロップフォルダー処理の開始を待機しています。",
                     "processing": "ドロップフォルダーエンジンは現在このファイルを処理しています。",
                     "parsedFromXml": "XMLからファイル参照が解析されました。ファイルが期待されていましたが、ドロップフォルダーではまだ利用できません。",
@@ -553,7 +553,7 @@
                     "error": "ドロップフォルダーエンジンの処理が失敗しました。",
                     "deleteFailed": "ドロップフォルダーからのファイルの削除に失敗しました。",
                     "done": "このファイルについて、ドロップフォルダーの処理が完了しました。",
-                    "downloadFailed": "ドロップフォルダーからKalturaへのファイルのインポートに失敗しました。"
+                    "downloadFailed": "ドロップフォルダーからVidiunへのファイルのインポートに失敗しました。"
                 },
                 "errors": {
                     "retry": "再試行",
@@ -778,7 +778,7 @@
                         "numOfEntries": "{{0}}件のエントリ",
                         "warning": "{{0}}件のエントリはこのフィードに含まれていません。",
                         "moreInfo": "詳細情報。",
-                        "warningMoreInfo": "<b>注意:</b> 必要な{{1}}フレーバーでトランスコードされていないため、{{0}}件のエントリはこのフィードに含まれせん。<br>KMCの管理セクションに移動すると、エントリを{{1}}にトランスコードできます。トランスコードしたい特定のエントリを開き、フレーバータブに移動して、「変換」オプションを選択します。",
+                        "warningMoreInfo": "<b>注意:</b> 必要な{{1}}フレーバーでトランスコードされていないため、{{0}}件のエントリはこのフィードに含まれせん。<br>VMCの管理セクションに移動すると、エントリを{{1}}にトランスコードできます。トランスコードしたい特定のエントリを開き、フレーバータブに移動して、「変換」オプションを選択します。",
                         "flavorId": "（フレーバーID）{{0}}"
                     },
                     "destination": "デスティネーション",
@@ -1189,7 +1189,7 @@
                     "messages": {
                         "uploadError": {
                             "header": "エラー",
-                            "message": "予期せぬ権限エラーが発生しました。ブラウザを更新してください。エラーが解決されない場合は、追加情報について、Kalturaサポートにお問い合わせください。{{value}}"
+                            "message": "予期せぬ権限エラーが発生しました。ブラウザを更新してください。エラーが解決されない場合は、追加情報について、Vidiunサポートにお問い合わせください。{{value}}"
                         },
                         "uploadSuccess": {
                             "body": "リクエストが送信されました。一括ジョブの進捗状況は ",
@@ -1331,7 +1331,7 @@
                 "removePublishers": "共同公開者を削除",
                 "removePublishersLabel": "このリストから削除された共同公開者は、選択されたすべてのエントリから削除されます",
                 "noPublishersToRemove": "削除する共同公開者がいません",
-                "userTooltip": "ユーザーはまだKalturaでリスト化されていません。{{0}}はユーザーの識別子とみなされます。",
+                "userTooltip": "ユーザーはまだVidiunでリスト化されていません。{{0}}はユーザーの識別子とみなされます。",
                 "addRemoveEditors": "共同編集者の追加/削除",
                 "addEditors": "共同編集者の追加",
                 "addEditorsLabel": "選択されたすべてのエントリに追加される共同編集者を入力",
@@ -1555,10 +1555,10 @@
                     "fileUrl": "ファイルURL",
                     "urlPlaceholder": "フレーバーURLを入力してください。",
                     "urlInvalid": "有効なURLを入力してください。",
-                    "kStatusNoContent": "このエントリで利用できるトランスコーディングフレーバーはありません。エントリは公開の準備ができていません。",
-                    "kStatusReady": "必要なトランスコーディングフレーバーはすべて利用可能です。エントリは公開の準備ができています。",
-                    "kStatusError": "フレーバーの処理中にエラーが発生しました。",
-                    "kStatusErrorProcessing": "トランスコーディングフレーバーは現在処理されています。エントリは数分で準備ができます。",
+                    "vStatusNoContent": "このエントリで利用できるトランスコーディングフレーバーはありません。エントリは公開の準備ができていません。",
+                    "vStatusReady": "必要なトランスコーディングフレーバーはすべて利用可能です。エントリは公開の準備ができています。",
+                    "vStatusError": "フレーバーの処理中にエラーが発生しました。",
+                    "vStatusErrorProcessing": "トランスコーディングフレーバーは現在処理されています。エントリは数分で準備ができます。",
                     "status": {
                         "converting": "変換中",
                         "error": "エラー",
@@ -1691,7 +1691,7 @@
                             "url": "ストレージURL:",
                             "directory": "ストレージベースディレクトリ:",
                             "noteTitle": "注意",
-                            "note": "Kalturaによる変換が必要な場合は、ソースとして定義されているファイルがKalturaにインポートされます。"
+                            "note": "Vidiunによる変換が必要な場合は、ソースとして定義されているファイルがVidiunにインポートされます。"
                         },
                         "replacementStatus": {
                             "replacementInProcess": "ビデオの置換は処理中です",
@@ -1822,7 +1822,7 @@
                 },
                 "advertisements": {
                     "title":"広告",
-                    "description": "Kalturaビデオエディターツールを使用して時間ベース広告を作成および管理します。",
+                    "description": "Vidiunビデオエディターツールを使用して時間ベース広告を作成および管理します。",
                     "manageAdvertisements": "広告を管理",
                     "cancelEdit": "編集をキャンセル",
                     "discard": "すべての変更を破棄しますか?"
@@ -1837,7 +1837,7 @@
                     "save": "保存",
                     "co-editors": "共同編集者",
                     "co-publishers": "共同公開者",
-                    "tooltip": "ユーザーはKalturaでリスト化されていません。{{0}}はユーザーの識別子とみなされます。",
+                    "tooltip": "ユーザーはVidiunでリスト化されていません。{{0}}はユーザーの識別子とみなされます。",
                     "noScreenName": "ユーザーを適用できません。スクリーン名が空です。"
 
                 },
@@ -1890,7 +1890,7 @@
                         "attUverse": "AttUverse",
                         "avn": "AVN",
                         "comcastMrss": "ComcastMrss",
-                        "crossKaltura": "CrossKaltura",
+                        "crossVidiun": "CrossVidiun",
                         "dailymotion": "Dailymotion",
                         "doubleclick": "Doubleclick",
                         "facebook": "Facebook",
@@ -2098,7 +2098,7 @@
                         "changeOwnerPlaceholder": "ユーザー名/IDを入力してください",
                         "cancelEdit": "編集をキャンセル",
                         "discard": "すべての変更を破棄しますか?",
-                        "tooltip": "ユーザーはまだKalturaでリスト化されていません。{{0}}はユーザーの識別子とみなされます",
+                        "tooltip": "ユーザーはまだVidiunでリスト化されていません。{{0}}はユーザーの識別子とみなされます",
                         "errors": {
                             "changeOwnerFailed" : "所有者の変更中にエラーが発生しました。",
                             "unableToChange": "現在のカテゴリの所有者を変更できません。",
@@ -2330,7 +2330,7 @@
             "users": {
                 "user": "ユーザー",
                 "users": "ユーザー",
-                "moreUsers": "追加のKMCユーザーが必要ですか?",
+                "moreUsers": "追加のVMCユーザーが必要ですか?",
                 "clickHere": "ここをクリック",
                 "usersUpgrade": "してアカウントをアップグレードしてください!",
                 "you": "あなた",
@@ -2347,7 +2347,7 @@
                 "addRole": "ロールを追加",
                 "addUser": "ユーザーを追加",
                 "currentStatus": "現在のステータス:",
-                "usersInfo": "{{0}} KMC {{1}}が使用中、{{2}}が追加で利用可能です。",
+                "usersInfo": "{{0}} VMC {{1}}が使用中、{{2}}が追加で利用可能です。",
                 "failedLoading": "ユーザーデータのロードに失敗しました",
                 "cantPerform": "このアクションを実行するためのアクセス権がありません",
                 "successSavingUser": "変更はすぐに反映されます。ブラウザを更新するようユーザーに指示してください。",
@@ -2356,11 +2356,11 @@
                 "required": "このフィールドは必須です。",
                 "emailFormat": "電子メールのフォーマットが無効です",
                 "publisherIdFormat": "パブリッシャーIDのフォーマットが無効です",
-                "userAlreadyExist": "{{0}}はすでにシステムに存在しており、別のKMCアカウントに関連付けられています。このユーザーもこのアカウントに関連付けますか?",
+                "userAlreadyExist": "{{0}}はすでにシステムに存在しており、別のVMCアカウントに関連付けられています。このユーザーもこのアカウントに関連付けますか?",
                 "alreadyExist": "ユーザーはすでに存在しています",
                 "alreadyExistError": "ログイン電子メール{{0}}は、アカウントの認証済みユーザーとしてすでにシステム内に存在しています。",
                 "userAssociatedCaption": "関連ユーザー",
-                "userAssociated": "IDが{{0}}のユーザーはアカウント上にすでに存在しています。このユーザーへのKMCアクセスを有効化しますか?",
+                "userAssociated": "IDが{{0}}のユーザーはアカウント上にすでに存在しています。このユーザーへのVMCアクセスを有効化しますか?",
                 "refresh": "更新",
                 "commonError": "サーバーリクエスト中にエラーが発生しました。",
                 "addUserError": "必須フィールドのいずれかが見つかりません",
@@ -2478,7 +2478,7 @@
                     "schemaNameMaxLength": "名前は{{0}}文字未満である必要があります"
                 },
                 "table": {
-                    "disabledLabel": "データスキーマは、Kalturaプロフェッショナルサービスによって手動でセットアップされました。更新/変更については、アカウントマネージャーにお問い合わせください。",
+                    "disabledLabel": "データスキーマは、Vidiunプロフェッショナルサービスによって手動でセットアップされました。更新/変更については、アカウントマネージャーにお問い合わせください。",
                     "name": "カスタムスキーマタイトル",
                     "id": "ID",
                     "systemName": "システム名",
@@ -2565,7 +2565,7 @@
                     },
                     "notifications": {
                         "title": "通知",
-                        "message": " 通知設定をセットアップするには、Kalturaの担当者にお問い合わせください。"
+                        "message": " 通知設定をセットアップするには、Vidiunの担当者にお問い合わせください。"
                     }
                 },
                 "entitlement": {
@@ -2580,7 +2580,7 @@
                         "title": "資格情報を追加",
                         "explanation": "アプリケーションと統合されたルートカテゴリを選択し、下にラベルを付けます。",
                         "addPrivacyContextLabel": "プライバシーコンテキストラベルを追加",
-                        "confirmation": "資格情報設定は、非同期プロセスですべてのサブカテゴリに追加されます。この操作には数分ほどかかる場合があります。注意:このアクションは、Kaltura資格情報サービスと連動するように更新されていない既存のアプリケーションからの、選択されたカテゴリのコンテンツへのアクセスに影響を与える可能性があります。続行してもよろしいですか?",
+                        "confirmation": "資格情報設定は、非同期プロセスですべてのサブカテゴリに追加されます。この操作には数分ほどかかる場合があります。注意:このアクションは、Vidiun資格情報サービスと連動するように更新されていない既存のアプリケーションからの、選択されたカテゴリのコンテンツへのアクセスに影響を与える可能性があります。続行してもよろしいですか?",
                         "apply": "適用",
                         "errors": {
                             "requiredPrivacyContextLabel": "プライバシーコンテキストラベルを入力する必要があります。"
@@ -2591,7 +2591,7 @@
                         "categoryName": "カテゴリ名",
                         "privacyContextLabel": "プライバシーコンテキストラベル",
                         "confirmationTitle": "編集を確認",
-                        "confirmation": "資格情報設定は、非同期プロセスですべてのサブカテゴリに追加されます。この操作には数分ほどかかる場合があります。注意:このアクションは、Kaltura資格情報サービスと連動するように更新されていない既存のアプリケーションからの、{{0}}カテゴリのコンテンツへのアクセスに影響を与える可能性があります。続行してもよろしいですか?",
+                        "confirmation": "資格情報設定は、非同期プロセスですべてのサブカテゴリに追加されます。この操作には数分ほどかかる場合があります。注意:このアクションは、Vidiun資格情報サービスと連動するように更新されていない既存のアプリケーションからの、{{0}}カテゴリのコンテンツへのアクセスに影響を与える可能性があります。続行してもよろしいですか?",
                         "errors": {
                             "privacyContextLabelRequired": "プライバシーコンテキストラベルを入力してください",
                             "privacyContextLabelExists": "カテゴリはすでにプライバシーコンテキストラベルで設定されています。",
@@ -2792,7 +2792,7 @@
                     "profileName": "プロファイル名",
                     "flavorName": "フレーバー名",
                     "impactOnEntryReadiness": "エントリの準備への影響",
-                    "useKalturaTranscoding": "Kalturaトランスコーディングを使用",
+                    "useVidiunTranscoding": "Vidiunトランスコーディングを使用",
                     "systemName": "システム名: （オプション）",
                     "flavorGenerationPolicy": "フレーバー生成ポリシー",
                     "intermediateFlavorHandling": "中間フレーバーハンドリング",
@@ -2863,7 +2863,7 @@
                     "profileName": "プロファイル名",
                     "flavorName": "フレーバー名",
                     "impactOnEntryReadiness": "エントリの準備への影響",
-                    "useKalturaTranscoding": "Kalturaトランスコーディングを使用",
+                    "useVidiunTranscoding": "Vidiunトランスコーディングを使用",
                     "systemName": "システム名: （オプション）",
                     "flavorGenerationPolicy": "フレーバー生成ポリシー",
                     "intermediateFlavorHandling": "中間フレーバーハンドリング",
@@ -2873,7 +2873,7 @@
                     "always": "常時",
                     "asAFallback": "フォールバックとして",
                     "never": "なし",
-                    "useKalturaOptimization": "Kalturaの最適化を使用",
+                    "useVidiunOptimization": "Vidiunの最適化を使用",
                     "forceFlavorGeneration": "フレーバー生成を強制",
                     "keepFlavor": "フレーバーを維持",
                     "deleteFlavor": "フレーバーを削除",
@@ -2883,7 +2883,7 @@
         },
         "analytics": {
             "comingSoon": "間もなく登場すべてのメディアタイプについて分析します。",
-            "releaseSupports": "このリリースでは、「ライブ」エントリの分析のみがサポートされます。他のすべてのメディアについては、<a href=\"{{0}}\" target=\"_blank\">レガシーKMCにログイン</a>して、分析およびレポートを表示および作成してください。すべてのメディアの分析については、間もなく利用できるようになるはずです"
+            "releaseSupports": "このリリースでは、「ライブ」エントリの分析のみがサポートされます。他のすべてのメディアについては、<a href=\"{{0}}\" target=\"_blank\">レガシーVMCにログイン</a>して、分析およびレポートを表示および作成してください。すべてのメディアの分析については、間もなく利用できるようになるはずです"
         },
         "reach": {
             "captionRequests": "キャプションリクエスト",

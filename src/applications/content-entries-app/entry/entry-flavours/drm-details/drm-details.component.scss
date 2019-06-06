@@ -1,39 +1,39 @@
 @import 'app-theme/_variables.scss';
 
-.kDRMDetails{
-  .kHeader {
+.vDRMDetails{
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer{
+  .vContainer{
     margin: 12px;
     height: 70px;
   }
-  .kName{
+  .vName{
     font-weight: 700;
     margin-bottom: 30px;
     display: block;
   }
-	.kRow{
+	.vRow{
 		display: flex;
 		margin-bottom: 12px;
 		flex-direction: row;
 		align-items: center;
-		.kLabel{
+		.vLabel{
 			width: 350px;
 		}
 	}
-	.kSources{
-		background-color: $kGrayscale6;
+	.vSources{
+		background-color: $vGrayscale6;
 		border: 1px solid white;
 		border-radius: 3px;
     box-sizing: border-box;

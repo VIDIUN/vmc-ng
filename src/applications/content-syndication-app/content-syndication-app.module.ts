@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {routing} from './content-syndication-app.routes';
-import {AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
 import {
   CheckboxModule,
   ConfirmDialogModule,
@@ -15,13 +15,13 @@ import {
   TieredMenuModule
 } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import {KMCShellModule} from 'app-shared/kmc-shell';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import {VMCShellModule} from 'app-shared/vmc-shell';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {ButtonModule} from 'primeng/components/button/button';
-import {KalturaPrimeNgUIModule} from '@kaltura-ng/kaltura-primeng-ui';
+import {VidiunPrimeNgUIModule} from '@vidiun-ng/vidiun-primeng-ui';
 import {FeedsListComponent} from './feeds/feeds-list/feeds-list.component';
 import {FeedsTableComponent} from './feeds/feeds-table/feeds-table.component';
 import {ContentSyndicationComponent} from './content-syndication.component';
@@ -30,10 +30,10 @@ import {PlaylistNamePipe} from './pipes/playlist-name.pipe';
 import {PlaylistIconPipe} from './pipes/playlist-icon.pipe';
 import {DestinationIconPipe} from './pipes/destination-icon.pipe';
 import {FeedDetailsComponentsList} from './feeds/feed-details/feed-details-components-list';
-import {CopyToClipboardModule} from '@kaltura-ng/mc-shared';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { InputHelperModule } from '@kaltura-ng/kaltura-ui';
-import { SearchableDropdownModule } from 'app-shared/kmc-shared/searchable-dropdown';
+import {CopyToClipboardModule} from '@vidiun-ng/mc-shared';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { InputHelperModule } from '@vidiun-ng/vidiun-ui';
+import { SearchableDropdownModule } from 'app-shared/vmc-shared/searchable-dropdown';
 
 @NgModule({
   imports: [
@@ -46,9 +46,9 @@ import { SearchableDropdownModule } from 'app-shared/kmc-shared/searchable-dropd
     InputTextModule,
     RadioButtonModule,
     LocalizationModule,
-    KalturaPrimeNgUIModule,
-    KalturaUIModule,
-    KMCShellModule,
+    VidiunPrimeNgUIModule,
+    VidiunUIModule,
+    VMCShellModule,
     MenuModule,
     PaginatorModule,
     PopupWidgetModule,
@@ -62,7 +62,7 @@ import { SearchableDropdownModule } from 'app-shared/kmc-shared/searchable-dropd
     FormsModule,
     CopyToClipboardModule,
     TableModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
     InputHelperModule,
       SearchableDropdownModule,
   ],

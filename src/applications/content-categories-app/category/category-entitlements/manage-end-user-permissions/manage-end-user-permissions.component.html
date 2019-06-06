@@ -1,22 +1,22 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
-  <div class="kContainer">
-    <div class="kHeader" [class.kInheritance]="categoryInheritUserPermissions">
-        <span class="kTitle">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vContainer">
+    <div class="vHeader" [class.vInheritance]="categoryInheritUserPermissions">
+        <span class="vTitle">
           {{(categoryInheritUserPermissions ? 'applications.content.categoryDetails.entitlements.usersPermissions.titleView' : 'applications.content.categoryDetails.entitlements.usersPermissions.title') | translate}}
         </span>
-      <button pButton class="kButtonDefault kButton"
+      <button pButton class="vButtonDefault vButton"
               label="{{'applications.content.categoryDetails.entitlements.usersPermissions.close' | translate}}"
               (click)="parentPopupWidget?.close()"></button>
-      <span class="kInheritanceMessage" *ngIf="categoryInheritUserPermissions"
-            [kTooltip]="'applications.content.categoryDetails.entitlements.usersPermissions.inheritanceMessage' | translate:{'0': parentCategory.fullName}"
+      <span class="vInheritanceMessage" *ngIf="categoryInheritUserPermissions"
+            [vTooltip]="'applications.content.categoryDetails.entitlements.usersPermissions.inheritanceMessage' | translate:{'0': parentCategory.fullName}"
             [maxWidth]="850">
           {{'applications.content.categoryDetails.entitlements.usersPermissions.inheritanceMessage' | translate:{'0': parentCategory.fullName} }}
         </span>
     </div>
-    <div class="kBulkActionsContainer">
+    <div class="vBulkActionsContainer">
 
-      <button class="kButtonBranded kAddItemBtn"
-              *ngIf="!_selectedUsers.length && _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kNgIfPermitted"
+      <button class="vButtonBranded vAddItemBtn"
+              *ngIf="!_selectedUsers.length && _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vNgIfPermitted"
               pButton
               type="button"
               label="{{'applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.addUsers' | translate}}"
@@ -24,88 +24,88 @@
               [disabled]="!_actualUsersCount.updated || categoryInheritUserPermissions">
       </button>
 
-      <div class="kItemsNum" [class.kSelected]="_selectedUsers.length">
+      <div class="vItemsNum" [class.vSelected]="_selectedUsers.length">
           <span *ngIf="_usersCount">
               {{'applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.usersCount' | translate: {'0': _usersCount } }}
           </span>
       </div>
 
-      <div class="kFiltersContainer"
-           [class.kHidden]="_selectedUsers.length">
+      <div class="vFiltersContainer"
+           [class.vHidden]="_selectedUsers.length">
         <input type="text"
                pInputText
-               class="kSearchInput"
+               class="vSearchInput"
                [(ngModel)]="_query.freetext"
                (keyup.enter)="onFreetextChanged()"
                placeholder="{{'applications.content.categoryDetails.entitlements.usersPermissions.searchUsers' | translate}}">
 
-        <div #refineBtn class="kRefine kDropdown">
-          <i class="kIconfilter"></i>
+        <div #refineBtn class="vRefine vDropdown">
+          <i class="vIconfilter"></i>
           <span>{{'applications.content.categoryDetails.entitlements.usersPermissions.refine' | translate}}</span>
-          <i class="kIcondropdown_arrow_bottom dropdown"></i>
+          <i class="vIcondropdown_arrow_bottom dropdown"></i>
         </div>
 
       </div>
 
-      <div class="kBulkActions" [class.kHidden]="!_selectedUsers.length || _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kHiddenIfNotPermitted">
-        <span class="kSelectedItems">
+      <div class="vBulkActions" [class.vHidden]="!_selectedUsers.length || _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vHiddenIfNotPermitted">
+        <span class="vSelectedItems">
              • {{'applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.selectedUsersCount' | translate: {'0':_selectedUsers.length} }}
         </span>
-        <kManageEndUserPermissionsBulkOperationsContent
+        <vManageEndUserPermissionsBulkOperationsContent
           (clearSelection)="_clearSelection()"
           [selectedItems]="_selectedUsers"
           (onActionSelected)="_onActionSelected($event)">
-        </kManageEndUserPermissionsBulkOperationsContent>
-        <a class="kBulkCancel" (click)="_clearSelection()">
+        </vManageEndUserPermissionsBulkOperationsContent>
+        <a class="vBulkCancel" (click)="_clearSelection()">
           {{'applications.content.categoryDetails.entitlements.usersPermissions.bulkOperations.cancel' |
           translate}}
         </a>
       </div>
     </div>
-    <div class="kManageEndUserPermissionsFiltersTags">
-      <kManageEndUserPermissionsFilterTags
+    <div class="vManageEndUserPermissionsFiltersTags">
+      <vManageEndUserPermissionsFilterTags
               [refineFilters]="_refineFilters"
               (onTagsBarVisible)="_isTagsBarVisible = $event"
-      ></kManageEndUserPermissionsFilterTags>
+      ></vManageEndUserPermissionsFilterTags>
     </div>
-    <div class="kManageEndUserPermissionsTable">
+    <div class="vManageEndUserPermissionsTable">
 
-      <k-area-blocker [showLoader]="_tableIsBusy"
+      <v-area-blocker [showLoader]="_tableIsBusy"
                       [message]="_tableBlockerMessage"
                       [bodyScroll]="true">
-      <kManageEndUserPermissionsTable
+      <vManageEndUserPermissionsTable
         [(selectedUsers)]="_selectedUsers"
         [users]="_users"
         [isTagsBarVisible]="_isTagsBarVisible"
         (onActionSelected)="_onActionSelected($event)"
         [categoryInheritUserPermissions]="categoryInheritUserPermissions"
         (closeParentPopup)="parentPopupWidget?.close()">
-      </kManageEndUserPermissionsTable>
-      </k-area-blocker>
+      </vManageEndUserPermissionsTable>
+      </v-area-blocker>
     </div>
-    <div class="kTableFooter" #footer *ngIf="_usersCount">
+    <div class="vTableFooter" #footer *ngIf="_usersCount">
       <p-paginator [rows]="_query.pageSize" (onPageChange)="_onPaginationChanged($event)"
                    [first]="_query.pageIndex * _query.pageSize"
                    [totalRecords]="_usersCount" [rowsPerPageOptions]="[25,50,75,100]"></p-paginator>
-      <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+      <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
  
  
-<kPopupWidget #addUser data-aid="addUser" [popupWidth]="790" [popupHeight]="447" [modal]="true">
+<vPopupWidget #addUser data-aid="addUser" [popupWidth]="790" [popupHeight]="447" [modal]="true">
   <ng-template>
-    <kAddUsers [parentPopupWidget]="addUser"
+    <vAddUsers [parentPopupWidget]="addUser"
                [category]="category"
                [parentCategoryMembersCount]="parentCategory?.membersCount"
                [usersCount]="_actualUsersCount.total"
                (usersAdded)="_onUsersAdded()"
-    ></kAddUsers>
+    ></vAddUsers>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 
-<kPopupWidget #refinePopup
+<vPopupWidget #refinePopup
               data-aid="manageUsersRefinePopup"
               placement="top"
               [popupWidth]="400"
@@ -114,8 +114,8 @@
               [targetRef]="refineBtn"
               [targetOffset]="{'x':-190, 'y': -9}">
   <ng-template>
-    <kManageEndUserPermissionsRefineFilters
+    <vManageEndUserPermissionsRefineFilters
             [refineFilters]="_refineFilters"
-            [parentPopupWidget]="refinePopup"></kManageEndUserPermissionsRefineFilters>
+            [parentPopupWidget]="refinePopup"></vManageEndUserPermissionsRefineFilters>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

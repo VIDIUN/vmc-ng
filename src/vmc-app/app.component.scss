@@ -1,0 +1,13 @@
+:host /deep/ .vAreaBlockerCoverAll{
+  position: fixed;
+  z-index: 1200;
+}
+
+:host /deep/ {
+    .vAlignToLeft {
+        .ui-dialog.ui-confirmdialog .ui-dialog-content.ui-widget-content {
+            text-align: left;
+            line-height: 1.4em;
+        }
+    }
+}

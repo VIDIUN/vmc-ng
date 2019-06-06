@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PlaylistMetadataWidget } from './playlist-metadata-widget.service';
 import { Subject } from 'rxjs/Subject';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'kPlaylistMetadata',
+  selector: 'vPlaylistMetadata',
   templateUrl: './playlist-metadata.component.html',
   styleUrls: ['./playlist-metadata.component.scss']
 })

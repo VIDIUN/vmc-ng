@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kCountryFromCode' })
+@Pipe({ name: 'vCountryFromCode' })
 
 export class CountryFromCodePipe implements PipeTransform {
 
@@ -16,7 +16,7 @@ export class CountryFromCodePipe implements PipeTransform {
     const countryCode = value.toLowerCase();
 
     return type === 'icon'
-      ? `kFlag-${countryCode}`
+      ? `vFlag-${countryCode}`
       : this._appLocalization.get(`countries.${countryCode}`);
   }
 }

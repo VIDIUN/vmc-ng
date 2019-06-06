@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {KalturaPartner} from 'kaltura-ngx-client';
-import {PartnerGetInfoAction} from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {VidiunPartner} from 'vidiun-ngx-client';
+import {PartnerGetInfoAction} from 'vidiun-ngx-client';
 
 export interface AccountInfo {
   partnerId: number;
@@ -15,16 +15,16 @@ export interface AccountInfo {
 @Injectable()
 export class AccountInfoService {
 
-  constructor(private _kalturaServerClient: KalturaClient) {
+  constructor(private _vidiunServerClient: VidiunClient) {
   }
 
   /** Get the account owners list for current partner */
   public getAccountInfo(): Observable<AccountInfo> {
 
 
-    return this._kalturaServerClient.request(new PartnerGetInfoAction())
+    return this._vidiunServerClient.request(new PartnerGetInfoAction())
       .map(
-        (response: KalturaPartner) => {
+        (response: VidiunPartner) => {
 
           const accountInfo: AccountInfo = {
             partnerId: response.id,

@@ -1,9 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MetadataItem } from 'app-shared/kmc-shared/custom-metadata/metadata-profile';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { MetadataItem } from 'app-shared/vmc-shared/custom-metadata/metadata-profile';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kCustomSchemaFieldsTable',
+  selector: 'vCustomSchemaFieldsTable',
   templateUrl: './custom-schema-fields-table.component.html',
   styleUrls: ['./custom-schema-fields-table.component.scss']
 })
@@ -29,7 +29,7 @@ export class CustomSchemaFieldsTableComponent implements AfterViewInit {
 
   public _fields: MetadataItem[] = [];
   public _deferredLoading = true;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public rowTrackBy: Function = (index: number, item: any) => item.id;
 

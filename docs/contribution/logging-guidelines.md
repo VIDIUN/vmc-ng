@@ -1,4 +1,4 @@
-# KMCng logging
+# VMCng logging
 
 Maintaining complex software is almost impossible without good tracking of all errors and events. Logging the application enables you to:
 - Have a better understanding of how your application works.
@@ -25,7 +25,7 @@ You should log anything that happen in the application. A best way to know if yo
 When you are adding context, you can add almost everything. Still there is a rule of thumb that you should follow: never, ever log:
  - credentials
  - passwords
- - any sensitive information (for example ks)
+ - any sensitive information (for example vs)
 
 ## Log message structure
 - Start with the action (send data / enter state / exit state etc.)
@@ -56,16 +56,16 @@ this._logger.info(`abort action, role permissions has invalid selections`);
 ```
 
 ### Add logger instance to a component
-1. import `KalturaLogger`:
+1. import `VidiunLogger`:
 ```
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 ```
 
-2. add provider to `KalturaLogger`, use the same name as the component name:
+2. add provider to `VidiunLogger`, use the same name as the component name:
 ```
 @Component({
   providers: [
-      KalturaLogger.createLogger('EditRoleComponent')
+      VidiunLogger.createLogger('EditRoleComponent')
   ]
 })
 export class EditRoleComponent {
@@ -74,9 +74,9 @@ export class EditRoleComponent {
 
 
 ### Add logger instance to a service
-1. import `KalturaLogger`:
+1. import `VidiunLogger`:
 ```
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 ```
 
 2. create sub logger as shown below, use the same name as the service name:
@@ -84,9 +84,9 @@ import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
 @Injectable()
 export class YourServiceName {
 
-    private _logger: KalturaLogger;
+    private _logger: VidiunLogger;
 
-    constructor(logger: KalturaLogger) {
+    constructor(logger: VidiunLogger) {
         this._logger = logger.subLogger('YourServiceName');
     }
 }

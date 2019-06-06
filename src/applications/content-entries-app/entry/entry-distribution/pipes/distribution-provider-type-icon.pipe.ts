@@ -1,58 +1,58 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaDistributionProviderType } from 'kaltura-ngx-client';
+import { VidiunDistributionProviderType } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kEntriesDistributionProviderTypeIcon' })
+@Pipe({ name: 'vEntriesDistributionProviderTypeIcon' })
 export class DistributionProviderTypeIconPipe implements PipeTransform {
 
-  transform(providerType: KalturaDistributionProviderType): string {
+  transform(providerType: VidiunDistributionProviderType): string {
     let className;
 
     switch (true) {
-      case KalturaDistributionProviderType.comcastMrss === providerType:
+      case VidiunDistributionProviderType.comcastMrss === providerType:
         className = 'comcast';
         break;
 
-      case KalturaDistributionProviderType.dailymotion === providerType:
+      case VidiunDistributionProviderType.dailymotion === providerType:
         className = 'dailymotion';
         break;
 
-      case KalturaDistributionProviderType.doubleclick === providerType:
+      case VidiunDistributionProviderType.doubleclick === providerType:
         className = 'doubleclick';
         break;
 
-      case KalturaDistributionProviderType.facebook === providerType:
+      case VidiunDistributionProviderType.facebook === providerType:
         className = 'facebook';
         break;
 
-      case KalturaDistributionProviderType.freewheel === providerType:
-      case KalturaDistributionProviderType.freewheelGeneric === providerType:
+      case VidiunDistributionProviderType.freewheel === providerType:
+      case VidiunDistributionProviderType.freewheelGeneric === providerType:
         className = 'freewheel';
         break;
 
-      case KalturaDistributionProviderType.hulu === providerType:
+      case VidiunDistributionProviderType.hulu === providerType:
         className = 'hulu';
         break;
 
-      case KalturaDistributionProviderType.crossKaltura === providerType:
-        className = 'kaltura';
+      case VidiunDistributionProviderType.crossVidiun === providerType:
+        className = 'vidiun';
         break;
 
-      case KalturaDistributionProviderType.quickplay === providerType:
+      case VidiunDistributionProviderType.quickplay === providerType:
         className = 'quickplay';
         break;
 
-      case KalturaDistributionProviderType.uverse === providerType:
-      case KalturaDistributionProviderType.uverseClickToOrder === providerType:
-      case KalturaDistributionProviderType.attUverse === providerType:
+      case VidiunDistributionProviderType.uverse === providerType:
+      case VidiunDistributionProviderType.uverseClickToOrder === providerType:
+      case VidiunDistributionProviderType.attUverse === providerType:
         className = 'uverse';
         break;
 
-      case KalturaDistributionProviderType.yahoo === providerType:
+      case VidiunDistributionProviderType.yahoo === providerType:
         className = 'yahoo';
         break;
 
-      case KalturaDistributionProviderType.youtube === providerType:
-      case KalturaDistributionProviderType.youtubeApi === providerType:
+      case VidiunDistributionProviderType.youtube === providerType:
+      case VidiunDistributionProviderType.youtubeApi === providerType:
         className = 'youtube';
         break;
 

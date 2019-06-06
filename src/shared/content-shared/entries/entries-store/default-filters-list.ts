@@ -1,4 +1,4 @@
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
 
 export interface DefaultFilterList {
     label: string;
@@ -19,12 +19,12 @@ export const DefaultFiltersList: DefaultFilterList[] = [
     {
         name: 'ingestionStatuses', label: 'Ingestion Statuses',
         items: [
-            { value: KalturaEntryStatus.ready.toString(), label: 'Ready' },
-            { value: KalturaEntryStatus.noContent.toString(), label: 'No Media' },
-            { value: KalturaEntryStatus.pending.toString(), label: 'Pending' },
-            { value: KalturaEntryStatus.import.toString(), label: 'Uploading' },
-            { value: KalturaEntryStatus.preconvert.toString(), label: 'Transcoding' },
-            { value: [KalturaEntryStatus.errorConverting.toString(), KalturaEntryStatus.errorImporting.toString()].join(','), label: 'Error' }
+            { value: VidiunEntryStatus.ready.toString(), label: 'Ready' },
+            { value: VidiunEntryStatus.noContent.toString(), label: 'No Media' },
+            { value: VidiunEntryStatus.pending.toString(), label: 'Pending' },
+            { value: VidiunEntryStatus.import.toString(), label: 'Uploading' },
+            { value: VidiunEntryStatus.preconvert.toString(), label: 'Transcoding' },
+            { value: [VidiunEntryStatus.errorConverting.toString(), VidiunEntryStatus.errorImporting.toString()].join(','), label: 'Error' }
         ]
     },
     {

@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TrackedFileStatuses } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { TrackedFileStatuses } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kUploadStatus' })
+@Pipe({ name: 'vUploadStatus' })
 export class UploadStatusPipe implements PipeTransform {
 
   constructor(private _appLocalization: AppLocalization) {

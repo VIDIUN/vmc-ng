@@ -64,8 +64,8 @@
             "plugin": true
         },
         "logo": {
-            "href": "http://www.kaltura.com",
-            "title": "Kaltura",
+            "href": "http://www.vidiun.com",
+            "title": "Vidiun",
             "plugin": true
         },
         "playersJsReceiver": {
@@ -95,6 +95,6 @@
         }
     ],
     "layout": {
-        "skin": "kdark"
+        "skin": "vdark"
     }
 }

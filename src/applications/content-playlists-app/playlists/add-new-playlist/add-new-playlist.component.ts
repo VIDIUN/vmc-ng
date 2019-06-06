@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { CreateNewPlaylistEvent } from 'app-shared/kmc-shared/events/playlist-creation';
-import { KalturaPlaylistType } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { CreateNewPlaylistEvent } from 'app-shared/vmc-shared/events/playlist-creation';
+import { VidiunPlaylistType } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kAddNewPlaylist',
+  selector: 'vAddNewPlaylist',
   templateUrl: './add-new-playlist.component.html',
   styleUrls: ['./add-new-playlist.component.scss']
 })
@@ -20,7 +20,7 @@ export class AddNewPlaylistComponent implements OnInit, AfterViewInit, OnDestroy
   addNewPlaylistForm: FormGroup;
   private _showConfirmationOnClose = true;
 
-  public _playlistTypes = KalturaPlaylistType;
+  public _playlistTypes = VidiunPlaylistType;
 
   constructor(private _formBuilder: FormBuilder,
               public router: Router,
@@ -31,7 +31,7 @@ export class AddNewPlaylistComponent implements OnInit, AfterViewInit, OnDestroy
     this.addNewPlaylistForm = _formBuilder.group({
       name: ['', Validators.required],
       description: '',
-      playlistType: KalturaPlaylistType.staticList
+      playlistType: VidiunPlaylistType.staticList
     });
   }
 

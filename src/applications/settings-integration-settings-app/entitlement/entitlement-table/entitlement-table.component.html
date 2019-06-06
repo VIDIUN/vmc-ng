@@ -1,5 +1,5 @@
-<div class="kTable">
-    <k-area-blocker [showLoader]="_deferredLoading"
+<div class="vTable">
+    <v-area-blocker [showLoader]="_deferredLoading"
                     [message]="_blockerMessage">
         <p-table dataKey="id"
                  scrollHeight="100%"
@@ -9,30 +9,30 @@
                  [rowTrackBy]="rowTrackBy">
             <ng-template pTemplate="header">
                 <tr>
-                    <th class="kApplicationRootCategory">
+                    <th class="vApplicationRootCategory">
                         {{'applications.settings.integrationSettings.entitlement.table.applicationRootCategory' | translate}}
                     </th>
-                    <th class="kPrivacyContextLabel">
+                    <th class="vPrivacyContextLabel">
                         {{'applications.settings.integrationSettings.entitlement.table.privacyContextLabel' | translate}}
                     </th>
-                    <th class="kActionsColumn"></th>
+                    <th class="vActionsColumn"></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-entitlement>
                 <tr>
-                    <td class="kApplicationRootCategory">
-                        <div class="kApplicationRootCategoryLabel kTableColumn" [kTooltip]="entitlement.fullName">
+                    <td class="vApplicationRootCategory">
+                        <div class="vApplicationRootCategoryLabel vTableColumn" [vTooltip]="entitlement.fullName">
                             {{entitlement.fullName}}
                         </div>
                     </td>
-                    <td class="kPrivacyContextLabel">
-                    <span class="kTableColumn" [kTooltip]="entitlement.privacyContext">
+                    <td class="vPrivacyContextLabel">
+                    <span class="vTableColumn" [vTooltip]="entitlement.privacyContext">
                         {{entitlement.privacyContext}}
                     </span>
                     </td>
-                    <td class="kActionsColumn">
-                        <div class="kTableActions">
-                            <button type="button" pButton icon="kIconmore" class="kMoreActionsButton"
+                    <td class="vActionsColumn">
+                        <div class="vTableActions">
+                            <button type="button" pButton icon="vIconmore" class="vMoreActionsButton"
                                     (click)="_openActionsMenu($event, entitlement)"></button>
                         </div>
                     </td>
@@ -43,6 +43,6 @@
                 <div class="emptymessage">{{_emptyMessage}}</div>
             </ng-template>
         </p-table>
-        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
-    </k-area-blocker>
+        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
+    </v-area-blocker>
 </div>

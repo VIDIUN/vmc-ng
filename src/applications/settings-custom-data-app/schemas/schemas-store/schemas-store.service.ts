@@ -2,30 +2,30 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { MetadataProfileListAction } from 'kaltura-ngx-client';
-import { KalturaMetadataProfileFilter } from 'kaltura-ngx-client';
-import { KalturaMetadataOrderBy } from 'kaltura-ngx-client';
-import { KalturaMetadataProfileCreateMode } from 'kaltura-ngx-client';
-import { KalturaMetadataObjectType } from 'kaltura-ngx-client';
-import { KalturaMetadataProfileListResponse } from 'kaltura-ngx-client';
-import { MetadataProfileParser } from 'app-shared/kmc-shared';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { MetadataProfileDeleteAction } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { MetadataProfileListAction } from 'vidiun-ngx-client';
+import { VidiunMetadataProfileFilter } from 'vidiun-ngx-client';
+import { VidiunMetadataOrderBy } from 'vidiun-ngx-client';
+import { VidiunMetadataProfileCreateMode } from 'vidiun-ngx-client';
+import { VidiunMetadataObjectType } from 'vidiun-ngx-client';
+import { VidiunMetadataProfileListResponse } from 'vidiun-ngx-client';
+import { MetadataProfileParser } from 'app-shared/vmc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { MetadataProfileDeleteAction } from 'vidiun-ngx-client';
 import { SettingsMetadataProfile } from './settings-metadata-profile.interface';
-import { KalturaRequest } from 'kaltura-ngx-client';
-import { KalturaMetadataProfile } from 'kaltura-ngx-client';
-import { MetadataProfileUpdateAction } from 'kaltura-ngx-client';
-import { MetadataProfileAddAction } from 'kaltura-ngx-client';
-import { getKalturaServerUri } from 'config/server';
-import { SettingsMetadataMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunRequest } from 'vidiun-ngx-client';
+import { VidiunMetadataProfile } from 'vidiun-ngx-client';
+import { MetadataProfileUpdateAction } from 'vidiun-ngx-client';
+import { MetadataProfileAddAction } from 'vidiun-ngx-client';
+import { getVidiunServerUri } from 'config/server';
+import { SettingsMetadataMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 export interface SchemasFilters {
   pageSize: number;
   pageIndex: number;
@@ -49,12 +49,12 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
     data: () => this._schemas.data.value
   };
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _appAuth: AppAuthentication,
               private _browserService: BrowserService,
               settingsMetadataMainView: SettingsMetadataMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('SchemasStore'));
     if (settingsMetadataMainView.isAvailable()) {
         this._prepare();
@@ -109,16 +109,16 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
       .pipe(cancelOnDestroy(this))
       .map(({ objects, totalCount }) => {
         objects.forEach((object: SettingsMetadataProfile) => {
-          if (!object.createMode || object.createMode === KalturaMetadataProfileCreateMode.kmc) {
+          if (!object.createMode || object.createMode === VidiunMetadataProfileCreateMode.vmc) {
             const parsedProfile = this._metadataProfileParser.parse(object);
             object.profileDisabled = !!parsedProfile.error || !parsedProfile.profile; // disable profile if there's error during parsing
             object.parsedProfile = parsedProfile.profile;
 
             if (!object.profileDisabled) {
               object.defaultLabel = object.parsedProfile.items.map(({ key }) => key).join(', ');
-              const ks = this._appAuth.appUser.ks;
+              const vs = this._appAuth.appUser.vs;
               const id = object.id;
-              object.downloadUrl = getKalturaServerUri(`/api_v3/index.php/service/metadata_metadataprofile/action/serve/ks/${ks}/id/${id}`);
+              object.downloadUrl = getVidiunServerUri(`/api_v3/index.php/service/metadata_metadataprofile/action/serve/vs/${vs}/id/${id}`);
             }
           } else {
             object.profileDisabled = true; // disabled
@@ -150,21 +150,21 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
         });
   }
 
-  private _buildQueryRequest(): Observable<KalturaMetadataProfileListResponse> {
+  private _buildQueryRequest(): Observable<VidiunMetadataProfileListResponse> {
     try {
       // default readonly filter
-      const filter = new KalturaMetadataProfileFilter({
-        orderBy: KalturaMetadataOrderBy.createdAtDesc.toString(),
-        createModeNotEqual: KalturaMetadataProfileCreateMode.app,
-        metadataObjectTypeIn: [KalturaMetadataObjectType.entry, KalturaMetadataObjectType.category].join(',')
+      const filter = new VidiunMetadataProfileFilter({
+        orderBy: VidiunMetadataOrderBy.createdAtDesc.toString(),
+        createModeNotEqual: VidiunMetadataProfileCreateMode.app,
+        metadataObjectTypeIn: [VidiunMetadataObjectType.entry, VidiunMetadataObjectType.category].join(',')
       });
-      let pager: KalturaFilterPager = null;
+      let pager: VidiunFilterPager = null;
 
       const data: SchemasFilters = this._getFiltersAsReadonly();
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager(
+        pager = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -173,7 +173,7 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
       }
 
       // build the request
-      return <any>this._kalturaServerClient.request(
+      return <any>this._vidiunServerClient.request(
         new MetadataProfileListAction({ filter, pager })
       );
     } catch (err) {
@@ -181,8 +181,8 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
     }
   }
 
-  private _getUpdateSchemaAction(schema: SettingsMetadataProfile): KalturaRequest<KalturaMetadataProfile> {
-    const updatedProfile = new KalturaMetadataProfile({
+  private _getUpdateSchemaAction(schema: SettingsMetadataProfile): VidiunRequest<VidiunMetadataProfile> {
+    const updatedProfile = new VidiunMetadataProfile({
       name: schema.name,
       systemName: schema.systemName,
       description: schema.description,
@@ -198,9 +198,9 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
     });
   }
 
-  private _getCreateSchemaAction(schema: SettingsMetadataProfile): KalturaRequest<KalturaMetadataProfile> {
-    const newProfile = new KalturaMetadataProfile({
-      createMode: KalturaMetadataProfileCreateMode.kmc,
+  private _getCreateSchemaAction(schema: SettingsMetadataProfile): VidiunRequest<VidiunMetadataProfile> {
+    const newProfile = new VidiunMetadataProfile({
+      createMode: VidiunMetadataProfileCreateMode.vmc,
       name: schema.name,
       systemName: schema.systemName,
       description: schema.description,
@@ -254,10 +254,10 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
   }
 
   public deleteProfiles(profiles: SettingsMetadataProfile[]): Observable<void> {
-    const request = new KalturaMultiRequest(
+    const request = new VidiunMultiRequest(
       ...profiles.map(profile => new MetadataProfileDeleteAction({ id: profile.id }))
     );
-    return this._kalturaServerClient.multiRequest(request)
+    return this._vidiunServerClient.multiRequest(request)
       .map(() => {
       });
   }
@@ -265,7 +265,7 @@ export class SchemasStore extends FiltersStoreBase<SchemasFilters> implements On
   public saveSchema(schema: SettingsMetadataProfile): Observable<void> {
     const action = schema.isNew ? this._getCreateSchemaAction(schema) : this._getUpdateSchemaAction(schema);
 
-    return this._kalturaServerClient.request(action)
+    return this._vidiunServerClient.request(action)
       .map(() => {
       });
   }

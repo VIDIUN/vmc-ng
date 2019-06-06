@@ -1,70 +1,70 @@
 @import 'app-theme/_variables.scss';
 
-.kAddEntryWrap {
-  .kFloater{
+.vAddEntryWrap {
+  .vFloater{
     display: flex;
     flex-direction: column;
 
-    .kHeader {
+    .vHeader {
       height: 78px;
       width: 100%;
       padding: 0 24px;
       box-sizing: border-box;
-      border-bottom: 1px solid $kGrayscale4;
+      border-bottom: 1px solid $vGrayscale4;
       flex: 0 0 auto;
       display: flex;
       align-items: center;
 
-      .kTitle {
+      .vTitle {
         color: #333333;
         font-size: 15px;
         font-weight: 700;
       }
 
-      .kButtons {
+      .vButtons {
         display: flex;
         margin-left: auto;
 
-        .kCancel {
+        .vCancel {
           font-size: 15px;
           color: #333333;
           align-self: center;
           margin-right: 24px;
         }
 
-        .kButtonDefault {
+        .vButtonDefault {
           font-weight: normal;
         }
       }
     }
 
-    .kContainer{
+    .vContainer{
       flex: 1 1 auto;
     }
   }
 }
 
-:host /deep/ .kLinkedEntrySelector {
-  .kContent {
+:host /deep/ .vLinkedEntrySelector {
+  .vContent {
     width: 100%;
     margin: 0 !important;
   }
 
-  .kEntries {
+  .vEntries {
     padding-top: 0;
     min-width: 0;
   }
 
-  div.kEntriesTable {
+  div.vEntriesTable {
     height: calc(100vh - 223px);
     overflow-y: auto;
 
-    &.kTagsVisible {
+    &.vTagsVisible {
       height: calc(100vh - 264px);
     }
   }
 
-  .kEntriesTableFooter {
+  .vEntriesTableFooter {
     width: 994px;
   }
 }

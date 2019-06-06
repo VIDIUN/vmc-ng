@@ -9,15 +9,15 @@ import {
     ViewChild
 } from '@angular/core';
 import { Menu, MenuItem } from 'primeng/primeng';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { SchemasStore } from '../schemas-store/schemas-store.service';
 import { SettingsMetadataProfile } from '../schemas-store/settings-metadata-profile.interface';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kSchemasTable',
+  selector: 'vSchemasTable',
   templateUrl: './schemas-table.component.html',
   styleUrls: ['./schemas-table.component.scss'],
     providers: [
@@ -56,7 +56,7 @@ export class SchemasTableComponent implements AfterViewInit, OnDestroy {
 
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               public _schemasStore: SchemasStore,
               private _cdRef: ChangeDetectorRef,
               private _el: ElementRef<HTMLElement>) {
@@ -98,7 +98,7 @@ export class SchemasTableComponent implements AfterViewInit, OnDestroy {
       {
         id: 'delete',
         label: this._appLocalization.get('applications.settings.metadata.table.actions.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this._onActionSelected('delete', schema)
       }
     ];
@@ -107,7 +107,7 @@ export class SchemasTableComponent implements AfterViewInit, OnDestroy {
       this._items = [...nonDisableSchemaActions, ...this._items];
     }
 
-    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': KMCPermissions.CUSTOM_DATA_PROFILE_DELETE });
+    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': VMCPermissions.CUSTOM_DATA_PROFILE_DELETE });
   }
 
   public _openActionsMenu(event: any, schema: SettingsMetadataProfile): void {
@@ -125,7 +125,7 @@ export class SchemasTableComponent implements AfterViewInit, OnDestroy {
   }
 
   public _schemaTableRowStyle(rowData: SettingsMetadataProfile): string {
-    return rowData.profileDisabled ? 'kProfileDisabled' : '';
+    return rowData.profileDisabled ? 'vProfileDisabled' : '';
   }
 }
 

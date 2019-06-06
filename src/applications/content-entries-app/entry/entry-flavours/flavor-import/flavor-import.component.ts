@@ -1,13 +1,13 @@
 import { Component, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaValidators } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunValidators } from '@vidiun-ng/vidiun-ui';
 import { Flavor } from '../flavor';
 
 
 @Component({
-	selector: 'kFlavorImport',
+	selector: 'vFlavorImport',
 	templateUrl: './flavor-import.component.html',
 	styleUrls: ['./flavor-import.component.scss']
 })
@@ -36,7 +36,7 @@ export class FlavorImport implements AfterViewInit, OnDestroy {
 	}
 
 	_validate(){
-    this._validationErrorMsg = !(KalturaValidators.isUrlValid(this._flavorURL) || !this._flavorURL.length) ? this._appLocalization.get('applications.content.entryDetails.flavours.urlInvalid') : '';
+    this._validationErrorMsg = !(VidiunValidators.isUrlValid(this._flavorURL) || !this._flavorURL.length) ? this._appLocalization.get('applications.content.entryDetails.flavours.urlInvalid') : '';
 	}
 
 	_onChange(){

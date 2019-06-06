@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { KalturaPrivacyType } from 'kaltura-ngx-client';
-import { KalturaAppearInListType } from 'kaltura-ngx-client';
-import { KalturaContributionPolicyType } from 'kaltura-ngx-client';
+import { VidiunPrivacyType } from 'vidiun-ngx-client';
+import { VidiunAppearInListType } from 'vidiun-ngx-client';
+import { VidiunContributionPolicyType } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kCategoryTooltip' })
+@Pipe({ name: 'vCategoryTooltip' })
 export class CategoryTooltipPipe implements PipeTransform {
     constructor(private _appLocalization: AppLocalization) {
     }
@@ -26,13 +26,13 @@ export class CategoryTooltipPipe implements PipeTransform {
             const title = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.contentPrivacy');
             let value = '';
             switch (category.privacy) {
-                case KalturaPrivacyType.all:
+                case VidiunPrivacyType.all:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.noRestriction');
                     break;
-                case KalturaPrivacyType.authenticatedUsers:
+                case VidiunPrivacyType.authenticatedUsers:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.requiresAuth');
                     break;
-                case KalturaPrivacyType.membersOnly:
+                case VidiunPrivacyType.membersOnly:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.noMembers');
                     break;
                 default:
@@ -48,10 +48,10 @@ export class CategoryTooltipPipe implements PipeTransform {
             let value = '';
             let title = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.categoryListing');
             switch (category.appearInList) {
-                case KalturaAppearInListType.categoryMembersOnly:
+                case VidiunAppearInListType.categoryMembersOnly:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.private');
                     break;
-                case KalturaAppearInListType.partnerOnly:
+                case VidiunAppearInListType.partnerOnly:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.noRestriction');
                     break;
                 default:
@@ -66,10 +66,10 @@ export class CategoryTooltipPipe implements PipeTransform {
             title = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.contributionPolicy');
 
             switch (category.contributionPolicy) {
-                case KalturaContributionPolicyType.all:
+                case VidiunContributionPolicyType.all:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.noRestriction');
                     break;
-                case KalturaContributionPolicyType.membersWithContributionPermission:
+                case VidiunContributionPolicyType.membersWithContributionPermission:
                     value = this._appLocalization.get('applications.entries.entryMetadata.categoryTooltip.private');
                     break;
                 default:

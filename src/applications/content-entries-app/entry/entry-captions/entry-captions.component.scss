@@ -1,32 +1,32 @@
 @import 'app-theme/_variables.scss';
 
-.kCaptions{
+.vCaptions{
 	button{
 		margin-left: 24px;
         font-weight: bold;
 	}
-	.kTitle{
+	.vTitle{
 		padding-left: 24px;
-		color: $kGrayscale1;
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 	}
-	.kTable{
+	.vTable{
 		margin-top: 24px;
 	}
-	.kCaptionsTableActions {
+	.vCaptionsTableActions {
 		width: 100%;
 		text-align: center;
 	}
-	.kLocationHolder{
+	.vLocationHolder{
 		padding-right: 12px;
 		position: relative;
-		.kCaptionLocation{
+		.vCaptionLocation{
 			white-space: nowrap;
 		}
 	}
-	.kError{
-		color: $kDandger;
+	.vError{
+		color: $vDandger;
 	}
 }
 :host /deep/ .ui-table .ui-table-data tr.uoloading{
@@ -34,8 +34,8 @@
 			-75deg,
 			#ffffff,
 			#ffffff 15px,
-			$kGrayscale7 15px,
-			$kGrayscale7 30px
+			$vGrayscale7 15px,
+			$vGrayscale7 30px
 	);
 	background-attachment: fixed;
 

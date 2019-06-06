@@ -1,4 +1,4 @@
-<div class="kFieldsTable" [class.noResults]="!fields?.length">
+<div class="vFieldsTable" [class.noResults]="!fields?.length">
     <p-table
         scrollHeight="100%"
         dataKey="id"
@@ -34,7 +34,7 @@
                 <th [ngStyle]="{'width':'90px'}">
                     {{'applications.settings.metadata.table.searchable' | translate}}
                 </th>
-                <th *ngIf="(isNew && (_kmcPermissions.CUSTOM_DATA_PROFILE_ADD | kNgIfPermitted)) || (!isNew && (_kmcPermissions.CUSTOM_DATA_PROFILE_UPDATE | kNgIfPermitted))"></th>
+                <th *ngIf="(isNew && (_vmcPermissions.CUSTOM_DATA_PROFILE_ADD | vNgIfPermitted)) || (!isNew && (_vmcPermissions.CUSTOM_DATA_PROFILE_UPDATE | vNgIfPermitted))"></th>
             </tr>
         </ng-template>
 
@@ -44,16 +44,16 @@
                     <p-tableCheckbox [value]="field"></p-tableCheckbox>
                 </td>
                 <td [ngStyle]="{'width':'50px'}">
-                    <i class="kTypeIcon" [ngClass]="field.type | kCustomSchemaTypePipe:'icon'"></i>
+                    <i class="vTypeIcon" [ngClass]="field.type | vCustomSchemaTypePipe:'icon'"></i>
                 </td>
                 <td>
-                    <div class="kTitle kTableColumn"
-                         [kTooltip]="field.key"
+                    <div class="vTitle vTableColumn"
+                         [vTooltip]="field.key"
                          (click)="_editField(field)">
                         {{field.key}}
                     </div>
                 </td>
-                <td [ngStyle]="{'width':'115px'}">{{field.type | kCustomSchemaTypePipe:'label'}}</td>
+                <td [ngStyle]="{'width':'115px'}">{{field.type | vCustomSchemaTypePipe:'label'}}</td>
                 <td>{{field.name}}</td>
                 <td>{{field.description}}</td>
                 <td>{{field.documentations}}</td>
@@ -63,22 +63,22 @@
                 <td [ngStyle]="{'width':'90px'}">
                     {{(field.isSearchable ? 'app.common.yes' : 'app.common.no') | translate}}
                 </td>
-                <td *ngIf="(isNew && (_kmcPermissions.CUSTOM_DATA_PROFILE_ADD | kNgIfPermitted)) || (!isNew && (_kmcPermissions.CUSTOM_DATA_PROFILE_UPDATE | kNgIfPermitted))">
-                    <span class="kFieldsTableActions">
-                        <i class="kIconarrow_up kActionMoveDown"
+                <td *ngIf="(isNew && (_vmcPermissions.CUSTOM_DATA_PROFILE_ADD | vNgIfPermitted)) || (!isNew && (_vmcPermissions.CUSTOM_DATA_PROFILE_UPDATE | vNgIfPermitted))">
+                    <span class="vFieldsTableActions">
+                        <i class="vIconarrow_up vActionMoveDown"
                            *ngIf="_fields.length > 1"
-                           [kTooltip]="'applications.settings.metadata.table.moveDown' | translate"
-                           [class.kActionDisabled]="i + 1 === _fields?.length"
+                           [vTooltip]="'applications.settings.metadata.table.moveDown' | translate"
+                           [class.vActionDisabled]="i + 1 === _fields?.length"
                            (click)="i + 1 !== _fields?.length && _moveField(field, 'down')"></i>
 
-                        <i class="kIconarrow_up"
+                        <i class="vIconarrow_up"
                            *ngIf="_fields.length > 1"
-                           [kTooltip]="'applications.settings.metadata.table.moveUp' | translate"
-                           [class.kActionDisabled]="i === 0"
+                           [vTooltip]="'applications.settings.metadata.table.moveUp' | translate"
+                           [class.vActionDisabled]="i === 0"
                            (click)="i !== 0 && _moveField(field, 'up')"></i>
 
-                        <i class="kIconremove kActionDelete"
-                           [kTooltip]="'applications.settings.metadata.table.remove' | translate"
+                        <i class="vIconremove vActionDelete"
+                           [vTooltip]="'applications.settings.metadata.table.remove' | translate"
                            (click)="_removeField(field)"></i>
                     </span>
                 </td>

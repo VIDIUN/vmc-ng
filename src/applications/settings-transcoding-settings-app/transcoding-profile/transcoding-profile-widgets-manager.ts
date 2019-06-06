@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { WidgetsManagerBase } from '@kaltura-ng/kaltura-ui';
+import { WidgetsManagerBase } from '@vidiun-ng/vidiun-ui';
 import { TranscodingProfileStore } from './transcoding-profile-store.service';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaConversionProfileWithAsset } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunConversionProfileWithAsset } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
 
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class TranscodingProfileWidgetsManager extends WidgetsManagerBase<KalturaConversionProfileWithAsset, KalturaMultiRequest> {
+export class TranscodingProfileWidgetsManager extends WidgetsManagerBase<VidiunConversionProfileWithAsset, VidiunMultiRequest> {
   private _profileStore: TranscodingProfileStore;
 
-  constructor(logger: KalturaLogger) {
+  constructor(logger: VidiunLogger) {
     super(logger.subLogger('TranscodingProfileWidgetsManager'));
   }
 

@@ -1,42 +1,42 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { Flavor } from '../flavor';
-import { KalturaStorageProfile } from 'kaltura-ngx-client';
+import { VidiunStorageProfile } from 'vidiun-ngx-client';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaRemoteStorageResource } from 'kaltura-ngx-client';
-import { FlavorAssetSetContentAction } from 'kaltura-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunRemoteStorageResource } from 'vidiun-ngx-client';
+import { FlavorAssetSetContentAction } from 'vidiun-ngx-client';
 import { EntryFlavoursWidget } from '../entry-flavours-widget.service';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { Observable } from 'rxjs';
-import { KalturaFlavorAsset } from 'kaltura-ngx-client';
-import { FlavorAssetAddAction } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaFlavorReadyBehaviorType } from 'kaltura-ngx-client';
-import { KalturaAssetParamsOrigin } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunFlavorAsset } from 'vidiun-ngx-client';
+import { FlavorAssetAddAction } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunFlavorReadyBehaviorType } from 'vidiun-ngx-client';
+import { VidiunAssetParamsOrigin } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-    selector: 'kFlavorLink',
+    selector: 'vFlavorLink',
     templateUrl: './flavor-link.component.html',
     styleUrls: ['./flavor-link.component.scss'],
-    providers: [KalturaLogger.createLogger('FlavorLinkComponent')]
+    providers: [VidiunLogger.createLogger('FlavorLinkComponent')]
 })
 export class FlavorLinkComponent implements OnDestroy {
     @Input() flavor: Flavor;
-    @Input() storageProfile: KalturaStorageProfile;
-    @Input() conversionProfileAsset: KalturaConversionProfileAssetParams;
+    @Input() storageProfile: VidiunStorageProfile;
+    @Input() conversionProfileAsset: VidiunConversionProfileAssetParams;
     @Input() parentPopupWidget: PopupWidgetComponent;
 
     public _form: FormGroup;
     public _filePathField: AbstractControl;
 
     constructor(private _appLocalization: AppLocalization,
-                private _logger: KalturaLogger,
+                private _logger: VidiunLogger,
                 private _widgetService: EntryFlavoursWidget,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _browserService: BrowserService,
                 private _fb: FormBuilder) {
         this._buildForm();
@@ -58,10 +58,10 @@ export class FlavorLinkComponent implements OnDestroy {
             fileUrl: this._form.value.filePath,
             flavorAssetId: this.flavor.flavorAsset.id
         });
-        return this._kalturaClient
+        return this._vidiunClient
             .request(new FlavorAssetSetContentAction({
                 id: this.flavor.flavorAsset.id,
-                contentResource: new KalturaRemoteStorageResource({
+                contentResource: new VidiunRemoteStorageResource({
                     url: this._form.value.filePath,
                     storageProfileId: this.storageProfile.id
                 })
@@ -75,18 +75,18 @@ export class FlavorLinkComponent implements OnDestroy {
             fileUrl: this._form.value.filePath,
         });
         const entryId = this._widgetService.data.id;
-        const flavorAsset = new KalturaFlavorAsset({ flavorParamsId: this.flavor.flavorParams.id });
+        const flavorAsset = new VidiunFlavorAsset({ flavorParamsId: this.flavor.flavorParams.id });
         const flavorAssetAddAction = new FlavorAssetAddAction({ entryId, flavorAsset });
         const flavorAssetSetContentAction = new FlavorAssetSetContentAction({
             id: '0',
-            contentResource: new KalturaRemoteStorageResource({
+            contentResource: new VidiunRemoteStorageResource({
                 storageProfileId: this.storageProfile.id,
                 url: this._form.value.filePath
             })
         }).setDependency(['id', 0, 'id']);
 
-        return this._kalturaClient
-            .multiRequest(new KalturaMultiRequest(flavorAssetAddAction, flavorAssetSetContentAction))
+        return this._vidiunClient
+            .multiRequest(new VidiunMultiRequest(flavorAssetAddAction, flavorAssetSetContentAction))
             .map(responses => {
                 if (responses.hasErrors()) {
                     throw new Error(responses.reduce((acc, val) => `${acc}\n${val.error ? val.error.message : ''}`, ''));
@@ -97,7 +97,7 @@ export class FlavorLinkComponent implements OnDestroy {
 
     private _validate(): boolean {
         const asset = this.conversionProfileAsset;
-        if (!asset || asset.readyBehavior !== KalturaFlavorReadyBehaviorType.required || asset.origin !== KalturaAssetParamsOrigin.ingest) {
+        if (!asset || asset.readyBehavior !== VidiunFlavorReadyBehaviorType.required || asset.origin !== VidiunAssetParamsOrigin.ingest) {
             return true;
         }
 

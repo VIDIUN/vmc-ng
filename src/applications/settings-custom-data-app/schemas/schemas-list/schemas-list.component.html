@@ -1,65 +1,65 @@
-<k-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kSchemas kOverrideFAIcons">
-    <div #schemasTableHolder class="kSchemasHolder kContent">
-      <kSticky stickyId="schemasFilters" [scrollOffset]="80" [sticksTo]="'header'">
-        <div class="kContent kFiltersWrapper">
-          <div class="kSchemasTableFilters kContent">
+<v-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vSchemas vOverrideFAIcons">
+    <div #schemasTableHolder class="vSchemasHolder vContent">
+      <vSticky stickyId="schemasFilters" [scrollOffset]="80" [sticksTo]="'header'">
+        <div class="vContent vFiltersWrapper">
+          <div class="vSchemasTableFilters vContent">
             <button
               pButton
               type="button"
-              [disabled]="_kmcPermissions.CUSTOM_DATA_PROFILE_ADD | kDisabledIfNotPermitted"
+              [disabled]="_vmcPermissions.CUSTOM_DATA_PROFILE_ADD | vDisabledIfNotPermitted"
               [label]="'applications.settings.metadata.addCustomSchema' | translate"
-              class="kButtonBranded kAddSchemaBtn"
+              class="vButtonBranded vAddSchemaBtn"
               (click)="_addNewSchema()"></button>
             <span
-              class="kSelectedSchemasNum"
+              class="vSelectedSchemasNum"
               *ngIf="(_schemasStore.schemas.data$ | async)?.totalCount">
                 {{'applications.settings.metadata.schemas' | translate : [(_schemasStore.schemas.data$ | async)?.totalCount] }}
               </span>
 
-          <div class="kBulkOperations" *ngIf="_selectedSchemas.length">
-            <span class="kSelectedSchemasLabel">
+          <div class="vBulkOperations" *ngIf="_selectedSchemas.length">
+            <span class="vSelectedSchemasLabel">
               • {{ 'applications.settings.metadata.selected' | translate : [_selectedSchemas.length] }}
             </span>
-            <button pButton icon="kIcontrash" class="kButtonDanger kBulkDeleteBtn"
-                    [kTooltip]="'applications.settings.metadata.deleteProfiles' | translate"
-                    [disabled]="_kmcPermissions.CUSTOM_DATA_PROFILE_DELETE | kDisabledIfNotPermitted"
+            <button pButton icon="vIcontrash" class="vButtonDanger vBulkDeleteBtn"
+                    [vTooltip]="'applications.settings.metadata.deleteProfiles' | translate"
+                    [disabled]="_vmcPermissions.CUSTOM_DATA_PROFILE_DELETE | vDisabledIfNotPermitted"
                     (click)="_deleteSchemas(_selectedSchemas)"></button>
-            <a class="kBulkCancel" (click)="_clearSelection()">
+            <a class="vBulkCancel" (click)="_clearSelection()">
               {{'applications.settings.metadata.cancel' | translate}}
             </a>
           </div>
         </div>
       </div>
-    </kSticky>
-    <k-area-blocker [showLoader]="_tableIsBusy"
+    </vSticky>
+    <v-area-blocker [showLoader]="_tableIsBusy"
                     [bodyScroll]="true">
-      <kSchemasTable
-        class="kSchemasTable"
+      <vSchemasTable
+        class="vSchemasTable"
         [schemas]="(_schemasStore.schemas.data$ | async)?.items"
         (actionSelected)="_onActionSelected($event)"
-        [(selectedSchemas)]="_selectedSchemas"></kSchemasTable>
-    </k-area-blocker>
+        [(selectedSchemas)]="_selectedSchemas"></vSchemasTable>
+    </v-area-blocker>
 
-      <div class="kSchemasTableFooter kContent" #footer *ngIf="(_schemasStore.schemas.data$ | async)?.totalCount">
+      <div class="vSchemasTableFooter vContent" #footer *ngIf="(_schemasStore.schemas.data$ | async)?.totalCount">
         <p-paginator
           [rows]="_query.pageSize"
           [first]="_query.pageIndex * _query.pageSize"
           [rowsPerPageOptions]="[25,50,75,100]"
           [totalRecords]="(_schemasStore.schemas.data$ | async)?.totalCount"
           (onPageChange)="_onPaginationChanged($event)"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
 
-<kPopupWidget #customSchema data-aid="customSchema" [popupWidth]="995" [slider]="true">
+<vPopupWidget #customSchema data-aid="customSchema" [popupWidth]="995" [slider]="true">
   <ng-template>
-    <kCustomSchema [schema]="_selectedSchema"
+    <vCustomSchema [schema]="_selectedSchema"
                    [serverValidationError]="_serverValidationError"
                    (onSave)="_saveSchema($event)"
-                   (onClosePopupWidget)="_onClosePopup()"></kCustomSchema>
+                   (onClosePopupWidget)="_onClosePopup()"></vCustomSchema>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

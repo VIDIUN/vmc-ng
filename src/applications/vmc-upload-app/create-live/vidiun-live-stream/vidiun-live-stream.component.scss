@@ -1,0 +1,16 @@
+@import 'app-theme/_variables.scss';
+@import "../live-form";
+
+.vFieldMessage {
+  padding-top: 10px;
+  min-height: 32px;
+  max-width: 310px;
+  color: $vGrayscale3;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.vEnableRecordingOptions {
+  display: block;
+  padding-top: 28px;
+}

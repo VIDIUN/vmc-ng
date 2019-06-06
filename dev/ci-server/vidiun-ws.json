@@ -1,0 +1,16 @@
+{
+  "version" : "2.0.0",
+  "repositories": [
+    { "origin" : "github", "uri": "https://github.com/vidiun/vidiun-ng.git"},
+    { "origin" : "github", "uri": "https://github.com/vidiun/vmc-ng.git"}
+  ],
+  "licenses" : {
+    "ignoreList" : [
+      "@vidiun-ng/vidiun-common",
+      "@vidiun-ng/vidiun-primeng-ui",
+      "@vidiun-ng/vidiun-ui",
+      "@vidiun-ng/mc-theme",
+      "@vidiun-ng/dev-workspace",
+    ]
+  }
+}

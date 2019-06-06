@@ -1,4 +1,4 @@
-<div class="kTranscodingProfilesTable" [ngClass]="{'noResults' :!_profiles?.length, 'kSingleTableMode': singleTableMode}">
+<div class="vTranscodingProfilesTable" [ngClass]="{'noResults' :!_profiles?.length, 'vSingleTableMode': singleTableMode}">
     <p-table
         scrollHeight="100%"
         dataKey="id"
@@ -47,33 +47,33 @@
                     <p-tableCheckbox [value]="profile"></p-tableCheckbox>
                 </td>
                 <td class="ui-resizable-column">
-                    <div class="kTranscodingProfileNameWrapper">
-                        <div class="kTranscodingProfileName kTableColumn"
-                             [kTooltip]="profile.name"
+                    <div class="vTranscodingProfileNameWrapper">
+                        <div class="vTranscodingProfileName vTableColumn"
+                             [vTooltip]="profile.name"
                              (click)="_onActionSelected('edit', profile)">
                             {{profile.name}}
                         </div>
-                        <span *ngIf="profile?.isDefault" class="kTranscodingProfileNameDefault">
+                        <span *ngIf="profile?.isDefault" class="vTranscodingProfileNameDefault">
                             {{'applications.settings.transcoding.table.default' | translate}}
                         </span>
                     </div>
                 </td>
                 <td class="ui-resizable-column">
-                    <span class="kTableColumn" [kTooltip]="profile.description" [showOnEllipsis]="true" [maxWidth]="300">
+                    <span class="vTableColumn" [vTooltip]="profile.description" [showOnEllipsis]="true" [maxWidth]="300">
                         {{profile.description}}
                     </span>
                 </td>
                 <td class="ui-resizable-column">{{profile.id}}</td>
                 <td>
-                    <span class="kTableColumn"
-                          [kTooltip]="'applications.settings.transcoding.profile.flavors' | translate:[profile.flavors || 0]"
+                    <span class="vTableColumn"
+                          [vTooltip]="'applications.settings.transcoding.profile.flavors' | translate:[profile.flavors || 0]"
                           [showOnEllipsis]="true">
                         {{'applications.settings.transcoding.profile.flavors' | translate:[profile.flavors || 0]}}
                     </span>
                 </td>
                 <td [ngStyle]="{'overflow':'visible', 'width':'80px'}">
-                    <div class="kTranscodingProfilesTableActions">
-                        <button class="kMoreActionsButton" type="button" pButton icon="kIconmore"
+                    <div class="vTranscodingProfilesTableActions">
+                        <button class="vMoreActionsButton" type="button" pButton icon="vIconmore"
                                 (click)="_openActionsMenu($event, profile)"></button>
                     </div>
                 </td>
@@ -82,9 +82,9 @@
 
         <ng-template pTemplate="emptymessage">
             <div class="emptymessage">
-                <div class="kEmptyMessage">{{_emptyMessage}}</div>
+                <div class="vEmptyMessage">{{_emptyMessage}}</div>
             </div>
         </ng-template>
     </p-table>
-    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 </div>

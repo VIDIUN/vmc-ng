@@ -1,25 +1,25 @@
 @import 'app-theme/_variables.scss';
 
-.kEditDistributionProfileFlavors {
-  .kFormHeader {
+.vEditDistributionProfileFlavors {
+  .vFormHeader {
     margin-top: 32px;
     margin-bottom: 24px;
   }
 
-  .kFlavor {
+  .vFlavor {
     margin-bottom: 24px;
 
-    .kFlavorInfo {
-      color: $kGrayscale1;
+    .vFlavorInfo {
+      color: $vGrayscale1;
       margin-bottom: 14px;
 
-      .kFlavorName {
+      .vFlavorName {
         font-weight: bold;
       }
 
-      .kFlavorIcon {
+      .vFlavorIcon {
         font-size: 24px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         margin-right: 20px;
         position: relative;
         top: 5px;
@@ -27,26 +27,26 @@
 
     }
 
-    .kFlavorMetadata {
-      color: $kGrayscale2;
+    .vFlavorMetadata {
+      color: $vGrayscale2;
       font-size: 14px;
 
-      .kFlavorMetadataDelimiter {
+      .vFlavorMetadataDelimiter {
         margin: 0 10px;
 
         &:after {
           content: '|';
           font-size: 12px;
-          color: $kGrayscale4;
+          color: $vGrayscale4;
           top: -1px;
           position: relative;
         }
       }
 
-      .kFlavorMissingMetadata {
-        color: $kDandger;
+      .vFlavorMissingMetadata {
+        color: $vDandger;
 
-        .kFlavorMissingIcon {
+        .vFlavorMissingIcon {
           font-size: 24px;
           margin-right: 20px;
           position: relative;

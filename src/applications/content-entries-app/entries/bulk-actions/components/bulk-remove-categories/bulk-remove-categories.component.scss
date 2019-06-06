@@ -1,40 +1,40 @@
 @import "app-theme/_variables.scss";
 
-.kTitle{
-  color: $kGrayscale1;
+.vTitle{
+  color: $vGrayscale1;
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  border-bottom: 1px solid $kGrayscale4;
+  border-bottom: 1px solid $vGrayscale4;
   height: 78px;
   line-height: 78px;
 }
-.kContent{
+.vContent{
   display: flex;
   flex-direction: column;
   height: 500px;
   overflow-x: hidden;
-  .kLabel{
+  .vLabel{
     display: block;
     margin-bottom: 12px;
   }
-  .kCategory{
+  .vCategory{
     margin-bottom: 12px;
   }
-  .kCategories{
+  .vCategories{
     padding: 12px;
     height: 330px;
     overflow-y: auto;
     overflow-x: hidden;
   }
 }
-.kFooter{
+.vFooter{
   position: absolute;
   bottom: 0px;
   display: flex;
   width: 100%;
   height: 66px;
-  border-top: 1px solid $kGrayscale4;
+  border-top: 1px solid $vGrayscale4;
   align-items: center;
   justify-content: center;
 }

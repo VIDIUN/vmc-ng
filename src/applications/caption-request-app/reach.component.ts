@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { ReachData } from 'app-shared/kmc-shared/reach-frame';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { ReachData } from 'app-shared/vmc-shared/reach-frame';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 @Component({
-    selector: 'kReach',
+    selector: 'vReach',
     templateUrl: './reach.component.html',
     styleUrls: ['./reach.component.scss']
 })

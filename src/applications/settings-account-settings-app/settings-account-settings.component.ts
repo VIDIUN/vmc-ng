@@ -1,17 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {KalturaPartner} from 'kaltura-ngx-client';
+import {VidiunPartner} from 'vidiun-ngx-client';
 import {SettingsAccountSettingsService} from './settings-account-settings.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {SelectItem} from 'primeng/primeng';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsAccountSettingsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsAccountSettingsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
 import { Observable } from 'rxjs';
-import { PageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification';
+import { PageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification';
 
 function phoneValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: boolean} | null => {
@@ -27,17 +27,17 @@ function phoneValidator(): ValidatorFn {
 
 
 @Component({
-  selector: 'kmc-settings-account-settings',
+  selector: 'vmc-settings-account-settings',
   templateUrl: './settings-account-settings.component.html',
   styleUrls: ['./settings-account-settings.component.scss'],
   providers: [
     SettingsAccountSettingsService,
-    KalturaLogger.createLogger('SettingsAccountSettingsComponent')
+    VidiunLogger.createLogger('SettingsAccountSettingsComponent')
   ],
 })
 export class SettingsAccountSettingsComponent implements OnInit, OnDestroy {
     private _pageExitVerificationToken: string;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public accountSettingsForm: FormGroup;
   public nameOfAccountOwnerOptions: SelectItem[] = [];
   public describeYourselfOptions: SelectItem[] = [];
@@ -48,10 +48,10 @@ export class SettingsAccountSettingsComponent implements OnInit, OnDestroy {
 
   constructor(private _accountSettingsService: SettingsAccountSettingsService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _pageExitVerificationService: PageExitVerificationService,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsAccountSettingsMainView: SettingsAccountSettingsMainViewService,
               private _fb: FormBuilder) {
   }
@@ -218,7 +218,7 @@ export class SettingsAccountSettingsComponent implements OnInit, OnDestroy {
   }
 
   // Fill the form with data
-  private _fillForm(partner: KalturaPartner): void {
+  private _fillForm(partner: VidiunPartner): void {
       this.partnerAdminEmail = partner.adminEmail;
     this.accountSettingsForm.reset({
       name: partner.name,
@@ -231,7 +231,7 @@ export class SettingsAccountSettingsComponent implements OnInit, OnDestroy {
       referenceId: partner.referenceId
     });
 
-    if (!this._permissionsService.hasPermission(KMCPermissions.ACCOUNT_UPDATE_SETTINGS)) {
+    if (!this._permissionsService.hasPermission(VMCPermissions.ACCOUNT_UPDATE_SETTINGS)) {
       this.accountSettingsForm.disable({ emitEvent: false });
     }
    }

@@ -5,19 +5,19 @@ import {
   SortDirection
 } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 import { EntriesTableColumns } from 'app-shared/content-shared/entries/entries-table/entries-table.component';
-import { KalturaPlayableEntryOrderBy } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunPlayableEntryOrderBy } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { subApplicationsConfig } from 'config/sub-applications';
 import { PlaylistRuleParserService } from './playlist-rule-parser.service';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaEntryModerationStatus } from 'kaltura-ngx-client';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunEntryModerationStatus } from 'vidiun-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
 import { PlaylistRule } from './playlist-rule.interface';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kPlaylistRule',
+  selector: 'vPlaylistRule',
   templateUrl: './playlist-rule.component.html',
   styleUrls: ['./playlist-rule.component.scss'],
   providers: [
@@ -41,14 +41,14 @@ export class PlaylistRuleComponent implements OnInit {
   public _nameRequiredError = false;
   public _enforcedFilters: Partial<EntriesFilters> = {
     'moderationStatuses': [
-      KalturaEntryModerationStatus.pendingModeration.toString(),
-      KalturaEntryModerationStatus.approved.toString(),
-      KalturaEntryModerationStatus.flaggedForReview.toString(),
-      KalturaEntryModerationStatus.autoApproved.toString()
+      VidiunEntryModerationStatus.pendingModeration.toString(),
+      VidiunEntryModerationStatus.approved.toString(),
+      VidiunEntryModerationStatus.flaggedForReview.toString(),
+      VidiunEntryModerationStatus.autoApproved.toString()
     ],
     'ingestionStatuses': [
-      KalturaEntryStatus.preconvert.toString(),
-      KalturaEntryStatus.ready.toString()
+      VidiunEntryStatus.preconvert.toString(),
+      VidiunEntryStatus.ready.toString()
     ],
     'accessControlProfiles': [],
     'timeScheduling': []
@@ -66,26 +66,26 @@ export class PlaylistRuleComponent implements OnInit {
 
   public _orderByOptions = [
     {
-      value: KalturaPlayableEntryOrderBy.playsDesc,
+      value: VidiunPlayableEntryOrderBy.playsDesc,
       label: this._appLocalization.get('applications.content.playlistDetails.content.orderBy.mostPlayed')
     },
     {
-      value: KalturaPlayableEntryOrderBy.recentDesc,
+      value: VidiunPlayableEntryOrderBy.recentDesc,
       label: this._appLocalization.get('applications.content.playlistDetails.content.orderBy.mostRecent')
     },
     {
-      value: KalturaPlayableEntryOrderBy.rankDesc,
+      value: VidiunPlayableEntryOrderBy.rankDesc,
       label: this._appLocalization.get('applications.content.playlistDetails.content.orderBy.highestRated')
     },
     {
-      value: KalturaPlayableEntryOrderBy.nameAsc,
+      value: VidiunPlayableEntryOrderBy.nameAsc,
       label: this._appLocalization.get('applications.content.playlistDetails.content.orderBy.entryName')
     }
   ];
 
   public _resultsLimit = subApplicationsConfig.contentPlaylistsApp.ruleBasedTotalResults;
   public _ruleName = '';
-  public _orderBy = KalturaPlayableEntryOrderBy.playsDesc; // default
+  public _orderBy = VidiunPlayableEntryOrderBy.playsDesc; // default
 
   constructor(public _entriesStore: EntriesStore,
               private _browserService: BrowserService,

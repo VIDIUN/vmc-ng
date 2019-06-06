@@ -1,88 +1,88 @@
 @import 'app-theme/_variables.scss';
 
-.kFloater {
+.vFloater {
   width: 100%;
   display: flex;
   flex-direction: column;
 
-  .kHeader {
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
+    border-bottom: 1px solid $vGrayscale4;
     flex: 0 0 auto;
 
-    .kTitle {
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
 
-  .kErrorRow {
+  .vErrorRow {
     margin-left: 199px;
   }
 
-  .kContainer {
+  .vContainer {
     flex: 0 0 auto;
     margin: 0 28px 20px;
     min-height: 507px;
 
-    .kLabel {
+    .vLabel {
       display: block;
       margin-bottom: 5px;
     }
 
-    .kControl {
+    .vControl {
       width: 360px;
     }
 
-    .kCaption {
+    .vCaption {
       font-size: 20px;
       font-weight: bold;
       margin: 20px 0 8px;
     }
 
-    .kExtraPadding {
+    .vExtraPadding {
       padding-top: 12px;
     }
   }
 
   /deep/ {
 
-    .kRow {
+    .vRow {
       display: flex;
       padding-top: 22px;
 
-      .kLabel {
+      .vLabel {
         width: 166px;
         flex: 0 0 auto;
         word-wrap: break-word;
         padding-right: 12px;
       }
 
-      .kExtraWidth {
+      .vExtraWidth {
         width: 186px;
       }
 
-      .kRequired {
+      .vRequired {
         width: 20px;
         font-size: 24px;
-        color: $kGrayscale2;
+        color: $vGrayscale2;
         margin-top: 7px;
         font-weight: bold;
 
-        &.kHasError {
-          color: $kDandger;
+        &.vHasError {
+          color: $vDandger;
         }
       }
 
-      .kSelectedRole {
+      .vSelectedRole {
           word-wrap: break-word;
         font-size: 13px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         line-height: 16px;
         margin-top: -4px;
       }
@@ -90,7 +90,7 @@
       input {
         width: 100%;
         height: 34px;
-        border: 1px solid $kGrayscale4;
+        border: 1px solid $vGrayscale4;
         color: #333333;
         box-sizing: border-box;
         border-radius: 3px;
@@ -101,22 +101,22 @@
 
         &:focus {
           background-color: white;
-          border: 1px solid $kGrayscale3;
+          border: 1px solid $vGrayscale3;
           outline: 0 none;
         }
 
         &:disabled {
-          background: $kGrayscale6;
-          color: $kGrayscale3;
-          border: 1px solid $kGrayscale4;
+          background: $vGrayscale6;
+          color: $vGrayscale3;
+          border: 1px solid $vGrayscale4;
         }
-        &.kHasError {
-          border-color: $kDandger;
+        &.vHasError {
+          border-color: $vDandger;
         }
       }
 
       .ng-touched.ng-invalid {
-        border-color: $kDandger;
+        border-color: $vDandger;
       }
 
       textarea {
@@ -124,7 +124,7 @@
         height: 76px;
       }
 
-      .kControl, k-prime-control {
+      .vControl, v-prime-control {
         width: 100%;
       }
 
@@ -138,12 +138,12 @@
     }
   }
 
-  .kValign {
+  .vValign {
     align-items: center;
   }
 
   .invalid {
-    color: $kDandger;
+    color: $vDandger;
     padding-top: 5px;
     font-size: 15px;
   }
@@ -153,13 +153,13 @@
   /*********************/
 
   .ui-inputtext.ng-invalid {
-    border-color: $kDandger;
+    border-color: $vDandger;
   }
 
-  .kFooter {
+  .vFooter {
     flex: 0 0 auto;
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +171,7 @@
       border: none;
 
       &:disabled {
-        border: 1px solid $kGrayscale4;
+        border: 1px solid $vGrayscale4;
       }
     }
   }

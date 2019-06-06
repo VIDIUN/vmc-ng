@@ -1,83 +1,83 @@
 @import 'app-theme/_variables.scss';
 
-.kPlaylistRuleWrap {
-  .kFloater {
+.vPlaylistRuleWrap {
+  .vFloater {
     display: flex;
     flex-direction: column;
 
-    .kHeader {
+    .vHeader {
       height: 78px;
       width: 100%;
       padding: 0 24px;
       box-sizing: border-box;
-      border-bottom: 1px solid $kGrayscale4;
+      border-bottom: 1px solid $vGrayscale4;
       flex: 0 0 auto;
       display: flex;
       align-items: center;
 
-      .kTitle {
+      .vTitle {
         color: #333333;
         font-size: 15px;
         font-weight: 700;
       }
 
-      .kButtons {
+      .vButtons {
         display: flex;
         margin-left: auto;
 
-        .kCancel {
+        .vCancel {
           font-size: 15px;
           color: #333333;
           align-self: center;
           margin-right: 24px;
         }
 
-        .KAddRule {
+        .VAddRule {
           width: 100px;
         }
 
-        .kButtonDefault {
+        .vButtonDefault {
           font-weight: normal;
         }
       }
     }
 
-    .kContainer {
+    .vContainer {
       flex: 1 1 auto;
 
-      .kFilters {
+      .vFilters {
         display: flex;
         margin-left: auto;
 
-        .kResultsLimit {
+        .vResultsLimit {
           width: 248px !important;
           margin-right: 16px;
           padding-left: 10px;
-          border: 1px solid $kGrayscale4;
+          border: 1px solid $vGrayscale4;
           border-radius: 4px;
           display: flex;
           background-color: #ffffff;
           height: 32px;
           align-items: center;
           cursor: pointer;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           position: relative;
           i {
             margin-right: 12px;
             margin-left: 8px;
             font-size: 24px;
-            color: $kGrayscale4;
+            color: $vGrayscale4;
             &.dropdown {
               font-size: 10px;
             }
           }
           &:hover {
-            color: $kPrimary;
+            color: $vPrimary;
             i {
-              color: $kPrimary;
+              color: $vPrimary;
             }
-            i.kIcondropdown_arrow_bottom.dropdown {
-              color: $kGrayscale3;
+            i.vIcondropdown_arrow_bottom.dropdown {
+              color: $vGrayscale3;
             }
           }
           .dropdown {
@@ -87,24 +87,24 @@
           }
         }
 
-        .kRuleNameInput {
+        .vRuleNameInput {
           width: 298px;
           margin-right: 16px;
           padding-left: 10px;
 
           &.hasError {
-            border-color: $kDandger;
+            border-color: $vDandger;
           }
         }
 
-        .kRuleNameLabel {
+        .vRuleNameLabel {
           font-size: 15px;
           font-weight: normal;
           line-height: 32px;
           margin-right: 16px;
         }
 
-        .kOrderBy {
+        .vOrderBy {
           width: 260px;
           margin-right: 16px;
 
@@ -117,48 +117,48 @@
   }
 }
 
-.kResultsLimitPopup {
+.vResultsLimitPopup {
   padding: 29px 16px 24px 16px;
 
-  .kResultsLimitSlider {
+  .vResultsLimitSlider {
 
   }
 
-  .kResultsLimitPopupFooter {
+  .vResultsLimitPopupFooter {
     margin-top: 24px;
     display: flex;
     justify-content: space-between;
 
     span {
-      color: $kGrayscale3;
+      color: $vGrayscale3;
     }
   }
 }
 
-:host /deep/ .kPlaylistRuleWrap {
-  .kEntries {
+:host /deep/ .vPlaylistRuleWrap {
+  .vEntries {
     min-width: auto;
     padding-top: 0;
   }
 
-  .kContent {
+  .vContent {
     width: 992px;
 
     .ui-table-scrollable-body {
       height: calc(100vh - 409px) !important;
     }
 
-    .kTagsVisible .ui-table-scrollable-body {
+    .vTagsVisible .ui-table-scrollable-body {
       height: calc(100vh - 450px) !important;
     }
 
   }
 }
 
-:host /deep/ .kOrderBy .ui-dropdown {
+:host /deep/ .vOrderBy .ui-dropdown {
   width: 100%;
 
   label {
-    color: $kGrayscale1;
+    color: $vGrayscale1;
   }
 }

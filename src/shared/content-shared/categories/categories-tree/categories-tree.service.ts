@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CategoriesTreeNode, NodeChildrenStatuses } from './categories-tree-node';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { CategoriesSearchService, CategoryData } from '../categories-search.service';
 import { modulesConfig } from 'config/modules';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 
 @Injectable()
@@ -13,9 +13,9 @@ export class CategoriesTreeService {
     private _inLazyMode = false;
 
     constructor(private _categoriesSearchService: CategoriesSearchService,
-                private _permissions: KMCPermissionsService,
+                private _permissions: VMCPermissionsService,
                 private appLocalization: AppLocalization) {
-        this._inLazyMode = this._permissions.hasPermission(KMCPermissions.DYNAMIC_FLAG_KMC_CHUNKED_CATEGORY_LOAD);
+        this._inLazyMode = this._permissions.hasPermission(VMCPermissions.DYNAMIC_FLAG_VMC_CHUNKED_CATEGORY_LOAD);
     }
 
     public getCategories(): Observable<{ categories: CategoriesTreeNode[] }> {
@@ -74,7 +74,7 @@ export class CategoriesTreeService {
                 }
             }
         } else {
-            console.warn('[kmcng] - not in lazy mode loading. Ignoring call');
+            console.warn('[vmcng] - not in lazy mode loading. Ignoring call');
         }
     }
 

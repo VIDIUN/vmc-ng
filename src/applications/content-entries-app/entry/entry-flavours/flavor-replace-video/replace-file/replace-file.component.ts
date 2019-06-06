@@ -1,44 +1,44 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
-import { UploadManagement } from '@kaltura-ng/kaltura-common';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { NewEntryUploadFile } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage, FileDialogComponent } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { TranscodingProfileManagement } from 'app-shared/kmc-shared/transcoding-profile-management';
+import { UploadManagement } from '@vidiun-ng/vidiun-common';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { NewEntryUploadFile } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage, FileDialogComponent } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { TranscodingProfileManagement } from 'app-shared/vmc-shared/transcoding-profile-management';
 import { globalConfig } from 'config/global';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { Flavor } from '../../flavor';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { ConversionProfileAssetParamsListAction } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParamsFilter } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaConversionProfileFilter } from 'kaltura-ngx-client';
-import { KalturaConversionProfileOrderBy } from 'kaltura-ngx-client';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaAssetParamsOrigin } from 'kaltura-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { ConversionProfileAssetParamsListAction } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParamsFilter } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunConversionProfileFilter } from 'vidiun-ngx-client';
+import { VidiunConversionProfileOrderBy } from 'vidiun-ngx-client';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunAssetParamsOrigin } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { KalturaFlavorReadyBehaviorType } from 'kaltura-ngx-client';
-import { urlRegex } from '@kaltura-ng/kaltura-ui';
-import { NewReplaceVideoUploadService } from 'app-shared/kmc-shell/new-replace-video-upload';
+import { VidiunFlavorReadyBehaviorType } from 'vidiun-ngx-client';
+import { urlRegex } from '@vidiun-ng/vidiun-ui';
+import { NewReplaceVideoUploadService } from 'app-shared/vmc-shell/new-replace-video-upload';
 import { EntryFlavoursWidget } from '../../entry-flavours-widget.service';
 import { UploadMenuType } from '../replace-media-button/replace-media-button.component';
-import { StorageProfileListAction } from 'kaltura-ngx-client';
-import { KalturaStorageProfile } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { StorageProfileListAction } from 'vidiun-ngx-client';
+import { VidiunStorageProfile } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Observer } from 'rxjs/Observer';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { switchMap, map } from 'rxjs/operators';
 import { of as ObservableOf} from 'rxjs';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
-export interface KalturaTranscodingProfileWithAsset extends Partial<KalturaConversionProfile> {
-    assets: KalturaConversionProfileAssetParams[];
+export interface VidiunTranscodingProfileWithAsset extends Partial<VidiunConversionProfile> {
+    assets: VidiunConversionProfileAssetParams[];
 }
 
 export interface UploadReplacementFile {
@@ -52,21 +52,21 @@ export interface UploadReplacementFile {
 }
 
 @Component({
-    selector: 'kFlavorReplaceFile',
+    selector: 'vFlavorReplaceFile',
     templateUrl: './replace-file.component.html',
     styleUrls: ['./replace-file.component.scss'],
-    providers: [KalturaLogger.createLogger('ReplaceFileComponent')]
+    providers: [VidiunLogger.createLogger('ReplaceFileComponent')]
 })
 export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() parentPopupWidget: PopupWidgetComponent;
-    @Input() entry: KalturaMediaEntry;
+    @Input() entry: VidiunMediaEntry;
     @Input() flavors: Flavor[] = [];
     @Input() replaceType: UploadMenuType;
 
     @ViewChild('fileDialog') _fileDialog: FileDialogComponent;
 
-    private _storageProfiles: KalturaStorageProfile[] = [];
-    private _transcodingProfiles: KalturaTranscodingProfileWithAsset[] = [];
+    private _storageProfiles: VidiunStorageProfile[] = [];
+    private _transcodingProfiles: VidiunTranscodingProfileWithAsset[] = [];
     private _replacementResultHandler: Observer<void> = {
         next: () => {
             this._logger.info(`handle successful replace files action, reload widget data`);
@@ -100,7 +100,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
     public _blockerMessage: AreaBlockerMessage;
     public _isLoading = false;
     public _files: UploadReplacementFile[] = [];
-    public _kmcPermissions = KMCPermissions;
+    public _vmcPermissions = VMCPermissions;
     public _title: string;
     public _flavorOptions: SelectItem[] = [];
     public _flavorsFieldDisabled = false;
@@ -120,12 +120,12 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(private _newReplaceVideoUpload: NewReplaceVideoUploadService,
                 private _formBuilder: FormBuilder,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _widgetService: EntryFlavoursWidget,
                 private _transcodingProfileManagement: TranscodingProfileManagement,
                 private _uploadManagement: UploadManagement,
-                private _permissionsService: KMCPermissionsService,
-                private _logger: KalturaLogger,
+                private _permissionsService: VMCPermissionsService,
+                private _logger: VidiunLogger,
                 private _appLocalization: AppLocalization) {
         this._buildForm();
     }
@@ -141,7 +141,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         setTimeout(()=>{
             this._addFile();
-            this._tableScrollableWrapper = document.querySelector('.kUploadSettings .ui-table-scrollable-body');
+            this._tableScrollableWrapper = document.querySelector('.vUploadSettings .ui-table-scrollable-body');
         },200);
 
     }
@@ -153,14 +153,14 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _prepare(): void {
         this._logger.info(`prepare replace file view`, { type: this.replaceType, entryId: this.entry.id, mediaType: this.entry.mediaType });
-        if (this.entry.mediaType === KalturaMediaType.video) {
+        if (this.entry.mediaType === VidiunMediaType.video) {
             this._allowedExtensions = this._allowedVideoExtensions;
-            this._title = this.entry.status === KalturaEntryStatus.noContent
+            this._title = this.entry.status === VidiunEntryStatus.noContent
                 ? this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.addVideo')
                 : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.updateVideo');
-        } else if (this.entry.mediaType === KalturaMediaType.audio) {
+        } else if (this.entry.mediaType === VidiunMediaType.audio) {
             this._allowedExtensions = this._allowedAudioExtensions;
-            this._title = this.entry.status === KalturaEntryStatus.noContent
+            this._title = this.entry.status === VidiunEntryStatus.noContent
                 ? this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.addAudio')
                 : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.updateAudio');
         }
@@ -196,17 +196,17 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
         this._files = [...this._files, ...newItems];
     }
 
-    private _loadConversionProfiles(): Observable<KalturaConversionProfileAssetParams[]> {
-        const filter = new KalturaConversionProfileFilter({
-            orderBy: KalturaConversionProfileOrderBy.createdAtDesc.toString(),
-            typeEqual: KalturaConversionProfileType.media
+    private _loadConversionProfiles(): Observable<VidiunConversionProfileAssetParams[]> {
+        const filter = new VidiunConversionProfileFilter({
+            orderBy: VidiunConversionProfileOrderBy.createdAtDesc.toString(),
+            typeEqual: VidiunConversionProfileType.media
         });
 
         // build the request
-        return this._kalturaClient
+        return this._vidiunClient
             .request(new ConversionProfileAssetParamsListAction({
-                filter: new KalturaConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
-                pager: new KalturaFilterPager({ pageSize: 1000 })
+                filter: new VidiunConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
+                pager: new VidiunFilterPager({ pageSize: 1000 })
             })).map(res => res.objects);
     }
 
@@ -225,7 +225,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
                             isDefault: profile.isDefault,
                             storageProfileId: profile.storageProfileId,
                             assets: assets.filter(item => {
-                                return item.conversionProfileId === profile.id && item.origin !== KalturaAssetParamsOrigin.convert;
+                                return item.conversionProfileId === profile.id && item.origin !== VidiunAssetParamsOrigin.convert;
                             })
                         };
                     });
@@ -236,7 +236,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
                     let result;
                     if (this.replaceType === 'link') {
                         this._logger.debug(`link replace type detected, load storage profiles list`);
-                        result = this._kalturaClient
+                        result = this._vidiunClient
                             .request(new StorageProfileListAction())
                             .map(response => response.objects);
                     }else {
@@ -513,7 +513,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
     private _validateFiles(files: UploadReplacementFile[]): { isValid: boolean, code?: string } {
         let isValid = true;
         let code = null;
-        const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+        const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
         const selectedProfile = this._transcodingProfiles.find(profile => profile.id === this._transcodingProfileField.value);
         const conversionProfileAssetParams = selectedProfile ? selectedProfile.assets : [];
         const filesFlavors = files.map(({ flavor }) => flavor);
@@ -524,7 +524,7 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
             file.errorToken = null;
             file.hasError = false;
 
-            if (!Number.isInteger(file.flavor) && !this._flavorsFieldDisabled && this._permissionsService.hasPermission(KMCPermissions.FEATURE_MULTI_FLAVOR_INGESTION)) {
+            if (!Number.isInteger(file.flavor) && !this._flavorsFieldDisabled && this._permissionsService.hasPermission(VMCPermissions.FEATURE_MULTI_FLAVOR_INGESTION)) {
                 isValid = false;
                 file.errorToken = 'applications.upload.validation.selectFlavor';
                 file.hasError = true;
@@ -555,8 +555,8 @@ export class ReplaceFileComponent implements OnInit, AfterViewInit, OnDestroy {
             }
 
             conversionProfileAssetParams.forEach(asset => {
-                if (asset.readyBehavior === KalturaFlavorReadyBehaviorType.required
-                    && asset.origin === KalturaAssetParamsOrigin.ingest
+                if (asset.readyBehavior === VidiunFlavorReadyBehaviorType.required
+                    && asset.origin === VidiunAssetParamsOrigin.ingest
                     && file.flavor !== asset.assetParamsId) {
                     isValid = false;
                     code = 'missingFlavors';

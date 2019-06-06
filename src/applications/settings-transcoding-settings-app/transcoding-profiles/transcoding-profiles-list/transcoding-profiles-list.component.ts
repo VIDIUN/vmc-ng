@@ -1,53 +1,53 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
 import {
   BaseTranscodingProfilesStore,
-  KalturaConversionProfileWithAsset,
+  VidiunConversionProfileWithAsset,
   TranscodingProfilesFilters
 } from '../transcoding-profiles-store/base-transcoding-profiles-store.service';
 import { MediaTranscodingProfilesStore } from '../transcoding-profiles-store/media-transcoding-profiles-store.service';
 import { LiveTranscodingProfilesStore } from '../transcoding-profiles-store/live-transcoding-profiles-store.service';
 import { Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KalturaNullableBoolean } from 'kaltura-ngx-client';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VidiunNullableBoolean } from 'vidiun-ngx-client';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import {
     SettingsTranscodingProfileViewSections,
     SettingsTranscodingProfileViewService
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { SettingsTranscodingMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { SettingsTranscodingMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'k-transcoding-profiles-list',
+  selector: 'v-transcoding-profiles-list',
   templateUrl: './transcoding-profiles-list.component.html',
   styleUrls: ['./transcoding-profiles-list.component.scss'],
-  providers: [KalturaLogger.createLogger('TranscodingProfilesListComponent')]
+  providers: [VidiunLogger.createLogger('TranscodingProfilesListComponent')]
 })
 export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
   @Input() title = '';
     @Input() singleTableMode: boolean;
 
-  @Input() set storeFor(value: KalturaConversionProfileType) {
+  @Input() set storeFor(value: VidiunConversionProfileType) {
     if (value) {
       this._profilesType = value;
       this._setStoreServiceByType(value);
     }
   }
 
-  @Output() addProfile = new EventEmitter<KalturaConversionProfileType>();
+  @Output() addProfile = new EventEmitter<VidiunConversionProfileType>();
   @Output() setParentBlockerMessage = new EventEmitter<AreaBlockerMessage>();
 
-  public _profilesType: KalturaConversionProfileType;
-  public _profilesTypes = KalturaConversionProfileType;
+  public _profilesType: VidiunConversionProfileType;
+  public _profilesTypes = VidiunConversionProfileType;
   public _storeService: BaseTranscodingProfilesStore;
-  public _selectedProfiles: KalturaConversionProfileWithAsset[] = [];
+  public _selectedProfiles: VidiunConversionProfileWithAsset[] = [];
   public _tableIsBusy = false;
   public _tableBlockerMessage: AreaBlockerMessage;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _query = {
     pageIndex: 0,
@@ -56,7 +56,7 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
 
   constructor(private _appLocalization: AppLocalization,
               private _router: Router,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService,
               private _settingsTranscodingProfileViewService: SettingsTranscodingProfileViewService,
               private _settingsTranscodingProfilesMainViewService: SettingsTranscodingMainViewService,
@@ -90,15 +90,15 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
       });
   }
 
-  private _setStoreServiceByType(serviceType: KalturaConversionProfileType): void {
-    if (serviceType === KalturaConversionProfileType.media) {
+  private _setStoreServiceByType(serviceType: VidiunConversionProfileType): void {
+    if (serviceType === VidiunConversionProfileType.media) {
       this._logger.info(`set 'MediaTranscodingProfilesStore' as store service`, { serviceType });
       this._storeService = this._mediaTranscodingProfilesStore;
-    } else if (serviceType === KalturaConversionProfileType.liveStream) {
+    } else if (serviceType === VidiunConversionProfileType.liveStream) {
       this._logger.info(`set 'LiveTranscodingProfilesStore' as store service`, { serviceType });
       this._storeService = this._liveTranscodingProfilesStore;
     } else {
-      throw Error('Incorrect serviceType provided. It can be either KalturaConversionProfileType.media or KalturaConversionProfileType.liveStream type');
+      throw Error('Incorrect serviceType provided. It can be either VidiunConversionProfileType.media or VidiunConversionProfileType.liveStream type');
     }
   }
 
@@ -171,7 +171,7 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _setAsDefault(profile: KalturaConversionProfileWithAsset): void {
+  private _setAsDefault(profile: VidiunConversionProfileWithAsset): void {
     this._logger.info(`handle 'setAsDefault' request by the user`, { id: profile.id, name: profile.name });
     if (!profile.isDefault) {
       this._storeService.setAsDefault(profile)
@@ -212,7 +212,7 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _proceedDeleteProfiles(profiles: KalturaConversionProfileWithAsset[]): void {
+  private _proceedDeleteProfiles(profiles: VidiunConversionProfileWithAsset[]): void {
     this._logger.info(
       `handle 'delete' profiles request by the user`,
       () => profiles.map(profile => ({ id: profile.id, name: profile.name }))
@@ -254,7 +254,7 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
       );
   }
 
-  private _deleteProfiles(profiles: KalturaConversionProfileWithAsset[], includesDefault = false): void {
+  private _deleteProfiles(profiles: VidiunConversionProfileWithAsset[], includesDefault = false): void {
     this._logger.info(`handle 'delete profiles' action, show confirmation`);
     const profileNames = profiles.map(({ name }) => name).join('\n');
     const includesDefaultWarning = includesDefault
@@ -290,9 +290,9 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
 
   public _deleteSelected(): void {
     this._logger.info(`handle 'deleteSelected' profiles action by the user`);
-    const includesDefault = this._selectedProfiles.some(({ isDefault }) => isDefault === KalturaNullableBoolean.trueValue);
+    const includesDefault = this._selectedProfiles.some(({ isDefault }) => isDefault === VidiunNullableBoolean.trueValue);
     const profiles = includesDefault
-      ? this._selectedProfiles.filter(({ isDefault }) => isDefault !== KalturaNullableBoolean.trueValue)
+      ? this._selectedProfiles.filter(({ isDefault }) => isDefault !== VidiunNullableBoolean.trueValue)
       : this._selectedProfiles;
 
     if (profiles.length) {
@@ -315,7 +315,7 @@ export class TranscodingProfilesListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _actionSelected(event: { action: string, profile: KalturaConversionProfileWithAsset }): void {
+  public _actionSelected(event: { action: string, profile: VidiunConversionProfileWithAsset }): void {
     switch (event.action) {
       case 'setAsDefault':
         this._setAsDefault(event.profile);

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CategoriesModes } from 'app-shared/content-shared/categories/categories-mode-type';
 
 @Component({
-  selector: 'kCategoriesFilterPrefs',
+  selector: 'vCategoriesFilterPrefs',
   templateUrl: './categories-filter-preferences.component.html',
   styleUrls: ['./categories-filter-preferences.component.scss']
 })

@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { RefinePrimeTree } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { RefinePrimeTree } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { RefineGroup } from '../entries-store/entries-refine-filters.service';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
-import { ScrollToTopContainerComponent } from '@kaltura-ng/kaltura-ui';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
+import { ScrollToTopContainerComponent } from '@vidiun-ng/vidiun-ui';
 import { EntriesFilters, EntriesStore } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 import { subApplicationsConfig } from 'config/sub-applications';
 import { Calendar } from 'primeng/primeng';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 const listOfFilterNames: (keyof EntriesFilters)[] = [
     'createdAt',
@@ -47,7 +47,7 @@ export interface PrimeListsGroup {
 
 
 @Component({
-  selector: 'k-entries-refine-filters',
+  selector: 'v-entries-refine-filters',
   templateUrl: './entries-refine-filters.component.html',
   styleUrls: ['./entries-refine-filters.component.scss']
 })

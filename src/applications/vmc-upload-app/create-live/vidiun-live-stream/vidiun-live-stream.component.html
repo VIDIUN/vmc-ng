@@ -1,0 +1,83 @@
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+<form [formGroup]="_form" novalidate class="vContent">
+  <section class="vFormContainer">
+    <div class="vFormSection">
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.vidiunStreamType.name' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                   _form.controls['name'].touched}">*
+        </div>
+        <div>
+          <input class="vControl" formControlName="name" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                   _form.controls['name'].touched}">
+          <div *ngIf="_form.controls['name'].touched">
+            <div *ngIf="_form.controls['name'].hasError('required')"
+                 class="error">
+              {{'applications.upload.prepareLive.vidiunStreamType.errors.required' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.vidiunStreamType.description' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <input class="vControl" formControlName="description" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['description'].valid &&
+                   _form.controls['description'].touched}">
+          <div *ngIf="_form.controls['description'].touched">
+            <div *ngIf="_form.controls['description'].hasError('required')"
+                 class="error">
+              {{'applications.upload.prepareLive.vidiunStreamType.errors.required' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.vidiunStreamType.transcodingProfile' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <p-dropdown class="vControl" formControlName="transcodingProfile"
+                      [options]="_availableTranscodingProfiles" [autoWidth]="false"></p-dropdown>
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel vInputSwitchLabel">{{'applications.upload.prepareLive.vidiunStreamType.liveDVR' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <p-inputSwitch class="vControl vInputSwitch" formControlName="liveDVR"></p-inputSwitch>
+          <span>{{_form.controls['liveDVR'].value ? ( 'app.common.on' | translate) : ( 'app.common.off' | translate)}}</span>
+          <div class="vFieldMessage">{{'applications.upload.prepareLive.vidiunStreamType.liveDVR_message' | translate}}</div>
+
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel vInputSwitchLabel">{{'applications.upload.prepareLive.vidiunStreamType.enableRecording' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <p-inputSwitch class="vControl vInputSwitch" formControlName="enableRecording" (onChange)="_toggleRecordingSelectedOption($event.checked)"></p-inputSwitch>
+          <span>{{_form.controls['enableRecording'].value ? ( 'app.common.on' | translate) : ( 'app.common.off' | translate)}}</span>
+          <p-dropdown class="vControl vEnableRecordingOptions" formControlName="enableRecordingSelectedOption"
+                      [options]="_enableRecordingOptions" [autoWidth]="false"></p-dropdown>
+        </div>
+      </div>
+
+        <div class="vRow">
+            <span class="vLabel vInputSwitchLabel">{{'applications.upload.prepareLive.vidiunStreamType.previewMode' | translate}}</span>
+            <div class="vRequired"></div>
+            <div>
+                <p-inputSwitch class="vControl vInputSwitch" formControlName="previewMode"></p-inputSwitch>
+                <span>{{_form.controls['previewMode'].value ? ( 'app.common.on' | translate) : ( 'app.common.off' | translate)}}</span>
+            </div>
+        </div>
+
+    </div>
+  </section>
+</form>
+</v-area-blocker>

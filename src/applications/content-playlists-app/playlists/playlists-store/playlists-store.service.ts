@@ -2,28 +2,28 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { PlaylistListAction } from 'kaltura-ngx-client';
-import { KalturaPlaylistFilter } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { PlaylistDeleteAction } from 'kaltura-ngx-client';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { DatesRangeAdapter, DatesRangeType } from '@kaltura-ng/mc-shared';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaSearchOperatorType } from 'kaltura-ngx-client';
-import { KalturaSearchOperator } from 'kaltura-ngx-client';
-import { StringTypeAdapter } from '@kaltura-ng/mc-shared';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { KalturaUtils } from '@kaltura-ng/kaltura-common';
-import { ContentPlaylistsMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { PlaylistListAction } from 'vidiun-ngx-client';
+import { VidiunPlaylistFilter } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { PlaylistDeleteAction } from 'vidiun-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { DatesRangeAdapter, DatesRangeType } from '@vidiun-ng/mc-shared';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunSearchOperatorType } from 'vidiun-ngx-client';
+import { VidiunSearchOperator } from 'vidiun-ngx-client';
+import { StringTypeAdapter } from '@vidiun-ng/mc-shared';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { VidiunUtils } from '@vidiun-ng/vidiun-common';
+import { ContentPlaylistsMainViewService } from 'app-shared/vmc-shared/vmc-views';
 import { globalConfig } from 'config/global';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaPlaylistListResponse } from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunPlaylistListResponse } from 'vidiun-ngx-client';
 
 export enum SortDirection {
   Desc = -1,
@@ -39,7 +39,7 @@ export interface PlaylistsFilters {
   createdAt: DatesRangeType
 }
 
-export interface ExtendedPlaylist extends KalturaPlaylist {
+export interface ExtendedPlaylist extends VidiunPlaylist {
     tooltip?: string;
 }
 
@@ -60,11 +60,11 @@ export class PlaylistsStore extends FiltersStoreBase<PlaylistsFilters> implement
     data: () => this._playlists.data.value
   };
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               contentPlaylistsMainView: ContentPlaylistsMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
         super(_logger);
         if (contentPlaylistsMainView.isAvailable()) {
             this._prepare();
@@ -147,33 +147,33 @@ export class PlaylistsStore extends FiltersStoreBase<PlaylistsFilters> implement
       });
       return playlists;
   }
-    private _buildQueryRequest(): Observable<KalturaPlaylistListResponse> {
+    private _buildQueryRequest(): Observable<VidiunPlaylistListResponse> {
     try {
 
       // create request items
-      const filter = new KalturaPlaylistFilter({});
-      let responseProfile: KalturaDetachedResponseProfile = null;
-      let pager: KalturaFilterPager = null;
+      const filter = new VidiunPlaylistFilter({});
+      let responseProfile: VidiunDetachedResponseProfile = null;
+      let pager: VidiunFilterPager = null;
 
-      const advancedSearch = filter.advancedSearch = new KalturaSearchOperator({});
-      advancedSearch.type = KalturaSearchOperatorType.searchAnd;
+      const advancedSearch = filter.advancedSearch = new VidiunSearchOperator({});
+      advancedSearch.type = VidiunSearchOperatorType.searchAnd;
 
       const data: PlaylistsFilters = this._getFiltersAsReadonly();
 
       // filter 'createdAt'
       if (data.createdAt) {
         if (data.createdAt.fromDate) {
-          filter.createdAtGreaterThanOrEqual = KalturaUtils.getStartDateValue(data.createdAt.fromDate);
+          filter.createdAtGreaterThanOrEqual = VidiunUtils.getStartDateValue(data.createdAt.fromDate);
         }
 
         if (data.createdAt.toDate) {
-          filter.createdAtLessThanOrEqual = KalturaUtils.getEndDateValue(data.createdAt.toDate);
+          filter.createdAtLessThanOrEqual = VidiunUtils.getEndDateValue(data.createdAt.toDate);
         }
       }
 
       // update desired fields of entries
-        responseProfile = new KalturaDetachedResponseProfile({
-          type: KalturaResponseProfileType.includeFields,
+        responseProfile = new VidiunDetachedResponseProfile({
+          type: VidiunResponseProfileType.includeFields,
           fields: 'id,name,createdAt,playlistType,status,tags'
         });
 
@@ -189,7 +189,7 @@ export class PlaylistsStore extends FiltersStoreBase<PlaylistsFilters> implement
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager(
+        pager = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -198,7 +198,7 @@ export class PlaylistsStore extends FiltersStoreBase<PlaylistsFilters> implement
       }
 
       // build the request
-      return this._kalturaServerClient.request(
+      return this._vidiunServerClient.request(
         new PlaylistListAction({ filter, pager}).setRequestOptions({
             responseProfile
         })
@@ -259,7 +259,7 @@ export class PlaylistsStore extends FiltersStoreBase<PlaylistsFilters> implement
   }
 
   public deletePlaylist(id: string): Observable<void> {
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new PlaylistDeleteAction({ id }))
       .map(() => {
       });

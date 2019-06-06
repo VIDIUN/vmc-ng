@@ -1,15 +1,15 @@
-<div class="kEditorContainer">
-  <div class="kHeader">
-    <i class="kIconclose_small kClose" (click)="_close()"></i>
-    <span class="kTitle">{{'applications.content.entryDetails.entryEditor.title' | translate}}</span>
+<div class="vEditorContainer">
+  <div class="vHeader">
+    <i class="vIconclose_small vClose" (click)="_close()"></i>
+    <span class="vTitle">{{'applications.content.entryDetails.entryEditor.title' | translate}}</span>
   </div>
-  <div class="kKeditHoster">
-    <kKeditHoster [tab]="tab"
+  <div class="vVeditHoster">
+    <vVeditHoster [tab]="tab"
                   [entry]="entry"
                   [entryHasSource]="entryHasSource"
                   (closeEditor)="_confirmClose = false; _close()"
                   (enteredDraftMode)="_confirmClose = true"
                   (exitDraftMode)="_confirmClose = false"
-    ></kKeditHoster>
+    ></vVeditHoster>
   </div>
 </div>

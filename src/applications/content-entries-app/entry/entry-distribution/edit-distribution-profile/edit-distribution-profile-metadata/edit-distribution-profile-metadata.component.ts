@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'kEditDistributionProfileMetadata',
+  selector: 'vEditDistributionProfileMetadata',
   templateUrl: './edit-distribution-profile-metadata.component.html',
   styleUrls: ['./edit-distribution-profile-metadata.component.scss']
 })
 export class EditDistributionProfileMetadataComponent implements OnInit {
-  @Input() entry: KalturaMediaEntry;
+  @Input() entry: VidiunMediaEntry;
 
   public _metadataForm: FormGroup;
   public _nameField: AbstractControl;

@@ -1,0 +1,81 @@
+<form [formGroup]="_form" novalidate class="vContent">
+  <section class="vFormContainer">
+    <div class="vFormSection">
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.name' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                   _form.controls['name'].touched}">*
+        </div>
+        <div>
+          <input class="vControl" formControlName="name" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                   _form.controls['name'].touched}">
+          <div *ngIf="_form.controls['name'].touched">
+            <div *ngIf="_form.controls['name'].hasError('required')"
+                 class="error">
+              {{'applications.upload.prepareLive.manualStreamType.errors.required' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.description' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <input class="vControl" formControlName="description" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['description'].valid &&
+                   _form.controls['description'].touched}">
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="_streamUrlForm" novalidate>
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.flashHDSURL' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <input class="vControl" formControlName="flashHDSURL" pInputText
+                 [ngClass]="{'vHasError':!_streamUrlForm.controls['flashHDSURL'].valid &&
+                   _streamUrlForm.controls['flashHDSURL'].touched}">
+          <div *ngIf="_streamUrlForm.controls['flashHDSURL'].touched">
+            <div *ngIf="_streamUrlForm.controls['flashHDSURL'].hasError('url')"
+                 class="error">
+              {{'applications.upload.prepareLive.manualStreamType.errors.invalidUrl' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.hlsStreamUrl' | translate}}</span>
+        <div class="vRequired"></div>
+        <div>
+          <input class="vControl" formControlName="hlsStreamUrl" pInputText
+                 [ngClass]="{'vHasError':!_streamUrlForm.controls['hlsStreamUrl'].valid &&
+                   _streamUrlForm.controls['hlsStreamUrl'].touched}">
+          <div *ngIf="_streamUrlForm.controls['hlsStreamUrl'].touched">
+            <div *ngIf="_streamUrlForm.controls['hlsStreamUrl'].hasError('url')"
+                 class="error">
+              {{'applications.upload.prepareLive.manualStreamType.errors.invalidUrl' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="vRow">
+      <div
+        *ngIf="_streamUrlForm.touched && _streamUrlForm.hasError('atLeastOneUrl')"
+        class="error">
+        {{'applications.upload.prepareLive.manualStreamType.errors.enterUrl' | translate}}
+      </div>
+    </div>
+
+    <div class="vRow">
+        <span class="vPreviewMode">
+          <p-checkbox
+            label="{{'applications.upload.prepareLive.manualStreamType.useAkamaiHdProtocol' | translate}}"
+            formControlName="useAkamaiHdProtocol" binary="true"></p-checkbox></span>
+    </div>
+  </section>
+</form>

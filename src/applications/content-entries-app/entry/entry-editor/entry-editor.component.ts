@@ -1,12 +1,12 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kEntryEditor',
+  selector: 'vEntryEditor',
   templateUrl: './entry-editor.component.html',
   styleUrls: ['./entry-editor.component.scss']
 })
@@ -16,7 +16,7 @@ export class EntryEditorComponent implements OnInit, OnDestroy {
     tab: string = null;
 
   @Input()
-  entry: KalturaMediaEntry = null;
+  entry: VidiunMediaEntry = null;
 
     @Input() entryHasSource = false;
 

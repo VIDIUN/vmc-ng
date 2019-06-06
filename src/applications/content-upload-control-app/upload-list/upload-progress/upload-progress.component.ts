@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { TrackedFileStatuses } from '@kaltura-ng/kaltura-common';
+import { TrackedFileStatuses } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kUploadProgress',
+  selector: 'vUploadProgress',
   templateUrl: './upload-progress.component.html',
   styleUrls: ['./upload-progress.component.scss'],
 })

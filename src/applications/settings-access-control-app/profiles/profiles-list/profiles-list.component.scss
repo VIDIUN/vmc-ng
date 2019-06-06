@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kAccessControlProfiles {
+.vAccessControlProfiles {
   font-size: 15px;
   background-color: $appBkgColor;
   height: $contentArea;
@@ -11,35 +11,35 @@
   display: flex;
   flex-flow: row wrap;
   margin: 0px;
-  .kAccessControlProfilesHolder {
+  .vAccessControlProfilesHolder {
     height: 100%;
     border: none;
     position: relative;
     display: flex;
     flex-direction: column;
   }
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     &:active {
       box-shadow: none;
       transform: rotate(45deg);
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
-  .kSelectedEntriesNum {
+  .vSelectedEntriesNum {
     padding-left: 16px;
   }
-  .kAccessControlProfileTableFilters {
-    color: $kGrayscale1;
+  .vAccessControlProfileTableFilters {
+    color: $vGrayscale1;
     z-index: 502;
     height: 66px;
     background-color: white;
@@ -50,48 +50,48 @@
     border-top-right-radius: 5px;
     display: flex;
 
-    .kSelectedEntriesNum {
+    .vSelectedEntriesNum {
       padding-left: 16px;
     }
 
-    .kAddProfileBtn {
+    .vAddProfileBtn {
       margin-left: 14px;
       height: 36px;
       border: none;
     }
   }
-  .kBulkLogTableTags {
+  .vBulkLogTableTags {
     width: 100%;
     height: 50px;
     background-color: #f3f3f3;
     border: 1px solid grey;
     flex: 0 0 50px;
   }
-  .kAccessControlProfilesTableFooter {
+  .vAccessControlProfilesTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
     padding: 0 14px 28px;
     display: block;
   }
-  .kAccessControlProfilesTable {
+  .vAccessControlProfilesTable {
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
   }
-  .kSelectedEntriesLabel {
+  .vSelectedEntriesLabel {
     font-weight: bold;
     margin-right: 36px;
     margin-left: 5px;
   }
-  .kSearchInput {
-    background: $kMagnifyingGlassBkg;
-    background-color: $kGrayscale6;
+  .vSearchInput {
+    background: $vMagnifyingGlassBkg;
+    background-color: $vGrayscale6;
     padding-left: 30px;
     margin-right: 8px;
     width: 260px;
@@ -99,47 +99,47 @@
       background-color: white;
     }
   }
-  .kBulkOperations {
+  .vBulkOperations {
     display: flex;
     align-items: center;
   }
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
-  .kAccessControlProfilesCancel {
+  .vAccessControlProfilesCancel {
     margin-left: 10px;
   }
-  .kBulkDeleteBtn {
+  .vBulkDeleteBtn {
     margin-right: 10px;
     width: 44px;
     font-size: 24px;
   }
-  .kBulkActionsBtn {
+  .vBulkActionsBtn {
     font-weight: 400;
     font-size: 15px;
   }
-  .kFilters {
+  .vFilters {
     display: flex;
     margin-left: auto;
   }
-  .kHidden {
+  .vHidden {
     visibility: hidden;
     width: 0px;
     height: 0px;
   }
-  .kTagContent {
+  .vTagContent {
     display: flex;
     align-items: center;
   }
-  .kTagLabel {
+  .vTagLabel {
     flex: 0 0 auto;
     user-select: none;
     cursor: default;
   }
-  .kTagRemove {
+  .vTagRemove {
     flex: 0 0 auto;
     margin-top: 2px;
     margin-left: 8px;
@@ -154,7 +154,7 @@
   }
 }
 
-:host /deep/ span.ui-button-icon-left.pi-kIcontrash {
+:host /deep/ span.ui-button-icon-left.pi-vIcontrash {
   margin-left: -.5em;
 }
 
@@ -162,7 +162,7 @@
   width: 380px;
 }
 
-:host /deep/ .ui-button-icon-right.kIcondropdown_arrow_bottom {
+:host /deep/ .ui-button-icon-right.vIcondropdown_arrow_bottom {
   font-size: 10px;
   margin-right: 2px;
   pointer-events: none;
@@ -180,11 +180,11 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kStickyClass {
-  border-bottom: 1px solid $kGrayscale5;
+:host /deep/ .vStickyClass {
+  border-bottom: 1px solid $vGrayscale5;
 }
 
-:host /deep/ .kSchemasTableFooter {
+:host /deep/ .vSchemasTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

@@ -1,21 +1,21 @@
-<k-area-blocker [showLoader]="false" [message]="_blockerMessage" style="height: 100%">
+<v-area-blocker [showLoader]="false" [message]="_blockerMessage" style="height: 100%">
 
-  <div class="kAddNewCategory kTreeContainer kOverrideFAIcons">
+  <div class="vAddNewCategory vTreeContainer vOverrideFAIcons">
 
-    <div class="kHeader">
-    <span class="kTitle">
+    <div class="vHeader">
+    <span class="vTitle">
       <span>{{('applications.content.addNewCategory.newCategory') | translate}}</span>
     </span>
     </div>
-    <div class="kContainer">
-      <form class="kRow" [formGroup]="newCategoryForm" novalidate>
-        <span class="kLabel">{{'applications.content.addNewCategory.name' | translate}}</span>
-        <div class="kRequired" [ngClass]="{'kHasError':!newCategoryForm.get('name').valid &&
+    <div class="vContainer">
+      <form class="vRow" [formGroup]="newCategoryForm" novalidate>
+        <span class="vLabel">{{'applications.content.addNewCategory.name' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!newCategoryForm.get('name').valid &&
                    newCategoryForm.get('name').touched}">*
         </div>
         <div>
-          <input class="kControl" formControlName="name" pInputText
-                 [ngClass]="{'kHasError':!newCategoryForm.get('name').valid &&
+          <input class="vControl" formControlName="name" pInputText
+                 [ngClass]="{'vHasError':!newCategoryForm.get('name').valid &&
                    newCategoryForm.get('name').touched}">
           <div *ngIf="newCategoryForm.get('name').touched &&
                  newCategoryForm.get('name').hasError('required')"
@@ -24,19 +24,19 @@
           </div>
         </div>
       </form>
-      <div class="kRow">
-        <span class="kSelectParentMsg">{{('applications.content.addNewCategory.selectCategoryParent') | translate}}</span>
-        <div *ngIf="_categoriesUpdating" class="k-spinner-background kSpinnerBkg" kTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
-          <div class="k-spinner-animation kSpinnerAnim"></div>
+      <div class="vRow">
+        <span class="vSelectParentMsg">{{('applications.content.addNewCategory.selectCategoryParent') | translate}}</span>
+        <div *ngIf="_categoriesUpdating" class="v-spinner-background vSpinnerBkg" vTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
+          <div class="v-spinner-animation vSpinnerAnim"></div>
         </div>
       </div>
-      <kCategorySelector (onCategorySelected)="_onCategorySelected($event)"></kCategorySelector>
+      <vCategorySelector (onCategorySelected)="_onCategorySelected($event)"></vCategorySelector>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded" pButton
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded" pButton
               label="{{'applications.content.addNewCategory.apply' | translate}}"
               (click)="_apply()" [disabled]="!newCategoryForm.get('name').valid || _selectedParentCategory === 'missing'"></button>
-      <a class="kLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
+      <a class="vLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

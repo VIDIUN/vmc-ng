@@ -1,13 +1,13 @@
-<k-details-bar #detailsBar [data]="_currentCategory">
+<v-details-bar #detailsBar [data]="_currentCategory">
 
-  <kDetailInfo *ngIf="_parentCategoryId > 0" [label]="'applications.content.categoryDetails.headerProps.parent' | translate"
+  <vDetailInfo *ngIf="_parentCategoryId > 0" [label]="'applications.content.categoryDetails.headerProps.parent' | translate"
                [value]="_parentCategoryId?.toString()"
-               (itemClick)="_onParentClicked($event)"></kDetailInfo>
-  <kDetailInfo [label]="'applications.content.categoryDetails.headerProps.id' | translate" [valueField]="'id'"></kDetailInfo>
-  <kDetailInfo [label]="'applications.content.categoryDetails.headerProps.subCategories' | translate" [valueField]="'directSubCategoriesCount'"></kDetailInfo>
-  <kDetailInfo [label]="'applications.content.categoryDetails.headerProps.entries' | translate" [valueField]="'entriesCount'"></kDetailInfo>
-  <kDetailInfo [label]="'applications.content.categoryDetails.headerProps.creationDate' | translate" [valueField]="'createdAt'"
-               [value]="_currentCategory?.createdAt | kmcDate:'dateOnly'" [tooltip]="_currentCategory?.createdAt | kmcDate"></kDetailInfo>
-  <kDetailInfo [label]="'applications.content.categoryDetails.headerProps.lastUpdate' | translate"
-               [value]="_currentCategory?.updatedAt | kmcDate:'dateOnly'" [tooltip]="_currentCategory?.updatedAt | kmcDate"></kDetailInfo>
-</k-details-bar>
+               (itemClick)="_onParentClicked($event)"></vDetailInfo>
+  <vDetailInfo [label]="'applications.content.categoryDetails.headerProps.id' | translate" [valueField]="'id'"></vDetailInfo>
+  <vDetailInfo [label]="'applications.content.categoryDetails.headerProps.subCategories' | translate" [valueField]="'directSubCategoriesCount'"></vDetailInfo>
+  <vDetailInfo [label]="'applications.content.categoryDetails.headerProps.entries' | translate" [valueField]="'entriesCount'"></vDetailInfo>
+  <vDetailInfo [label]="'applications.content.categoryDetails.headerProps.creationDate' | translate" [valueField]="'createdAt'"
+               [value]="_currentCategory?.createdAt | vmcDate:'dateOnly'" [tooltip]="_currentCategory?.createdAt | vmcDate"></vDetailInfo>
+  <vDetailInfo [label]="'applications.content.categoryDetails.headerProps.lastUpdate' | translate"
+               [value]="_currentCategory?.updatedAt | vmcDate:'dateOnly'" [tooltip]="_currentCategory?.updatedAt | vmcDate"></vDetailInfo>
+</v-details-bar>

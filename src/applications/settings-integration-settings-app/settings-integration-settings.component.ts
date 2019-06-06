@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { SettingsIntegrationSettingsMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { SettingsIntegrationSettingsMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Component({
-  selector: 'kIntegrationSettings',
+  selector: 'vIntegrationSettings',
   templateUrl: './settings-integration-settings.component.html',
   styleUrls: ['./settings-integration-settings.component.scss']
 })
 export class SettingsIntegrationSettingsComponent {
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   constructor(settingsIntegrationSettingsMainViewService: SettingsIntegrationSettingsMainViewService) {
       settingsIntegrationSettingsMainViewService.viewEntered();
   }

@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaModerationFlagType } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunModerationFlagType } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kFlagType' })
+@Pipe({ name: 'vFlagType' })
 export class FlagTypePipe implements PipeTransform {
   constructor(private appLocalization: AppLocalization) {
   }
@@ -11,16 +11,16 @@ export class FlagTypePipe implements PipeTransform {
     let flagType = '';
     if (value) {
       switch (value.toString()) {
-        case KalturaModerationFlagType.sexualContent.toString():
+        case VidiunModerationFlagType.sexualContent.toString():
           flagType = this.appLocalization.get('applications.content.moderation.sexualContent');
           break;
-        case KalturaModerationFlagType.harmfulDangerous.toString():
+        case VidiunModerationFlagType.harmfulDangerous.toString():
           flagType = this.appLocalization.get('applications.content.moderation.harmfulOrDangerousAct');
           break;
-        case KalturaModerationFlagType.spamCommercials.toString():
+        case VidiunModerationFlagType.spamCommercials.toString():
           flagType = this.appLocalization.get('applications.content.moderation.spamOrCommercials');
           break;
-        case KalturaModerationFlagType.violentRepulsive.toString():
+        case VidiunModerationFlagType.violentRepulsive.toString():
           flagType = this.appLocalization.get('applications.content.moderation.violentOrRepulsive');
           break;
       }

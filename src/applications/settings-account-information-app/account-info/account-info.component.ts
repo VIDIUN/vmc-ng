@@ -1,19 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SettingsAccountInformationService} from '../settings-account-information.service';
-import { AppAuthentication, BrowserService, PartnerPackageTypes } from 'app-shared/kmc-shell';
-import {KalturaPartnerStatistics} from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { SettingsAccountInformationMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { AppAuthentication, BrowserService, PartnerPackageTypes } from 'app-shared/vmc-shell';
+import {VidiunPartnerStatistics} from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { SettingsAccountInformationMainViewService } from 'app-shared/vmc-shared/vmc-views';
 import { serverConfig } from 'config/server';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
 
 @Component({
-  selector: 'kAccountInfo',
+  selector: 'vAccountInfo',
   templateUrl: './account-info.component.html',
   styleUrls: ['./account-info.component.scss'],
-  providers: [KalturaLogger.createLogger('AccountInfoComponent')]
+  providers: [VidiunLogger.createLogger('AccountInfoComponent')]
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
   public _isBusy = false;
@@ -27,7 +27,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   constructor(private _accountInformationService: SettingsAccountInformationService,
               private _appAuthentication: AppAuthentication,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService,
               private _settingsAccountInformationMainView: SettingsAccountInformationMainViewService) {
   }
@@ -35,10 +35,10 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._logger.info(`initiate accont information view`);
     this._showTrialUserInfo = this._appAuthentication.appUser.partnerInfo.partnerPackage === PartnerPackageTypes.PartnerPackageFree
-        && serverConfig.kalturaServer.freeTrialExpiration
+        && serverConfig.vidiunServer.freeTrialExpiration
         && !!this._appAuthentication.appUser.createdAt;
     if (this._showTrialUserInfo) {
-      const trialPeriod: number = serverConfig.kalturaServer.freeTrialExpiration.trialPeriodInDays;
+      const trialPeriod: number = serverConfig.vidiunServer.freeTrialExpiration.trialPeriodInDays;
 
       this._trialExpirationDateString =
         (new DatePipe(this._browserService)).transform(this._appAuthentication.appUser.createdAt.getTime() + trialPeriod, 'dateOnly'); // "01/15/1992"
@@ -53,7 +53,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
     this._isBusy = true;
     this._accountInformationService.getStatistics()
       .pipe(cancelOnDestroy(this))
-      .subscribe((response: KalturaPartnerStatistics) => {
+      .subscribe((response: VidiunPartnerStatistics) => {
         this._isBusy = false;
         this._bandwidthNA = typeof response.bandwidth !== 'number';
         this._storageNA = typeof response.hosting !== 'number';

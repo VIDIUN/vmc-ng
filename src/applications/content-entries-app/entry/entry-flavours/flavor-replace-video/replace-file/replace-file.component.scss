@@ -1,23 +1,23 @@
 @import 'app-theme/_variables.scss';
 
-.kUploadSettings {
-    color: $kGrayscale1;
+.vUploadSettings {
+    color: $vGrayscale1;
     height: 607px;
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
 
-    .kHeader, .kFooter {
+    .vHeader, .vFooter {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .kHeader {
+    .vHeader {
         text-align: center;
         height: 77px;
-        border-bottom: 1px $kGrayscale4 solid;
+        border-bottom: 1px $vGrayscale4 solid;
 
         h1 {
             font-size: 24px;
@@ -26,7 +26,7 @@
 
     }
 
-    .kContent {
+    .vContent {
         flex: 1 1 auto;
         padding-top: 20px;
         display: flex;
@@ -34,9 +34,9 @@
         width: 100%;
         height: 442px;
 
-        .kProfile {
+        .vProfile {
             padding: 0 28px 20px 28px;
-            border-bottom: 1px $kGrayscale6 solid;
+            border-bottom: 1px $vGrayscale6 solid;
             font-size: 15px;
             display: flex;
             align-items: center;
@@ -45,10 +45,10 @@
                 font-weight: bold;
             }
 
-            .kTranscodingProfile {
+            .vTranscodingProfile {
                 margin-left: 7px;
 
-                .kTranscodingProfileItem {
+                .vTranscodingProfileItem {
                     white-space: nowrap;
                     display: inline-block;
                     overflow: hidden;
@@ -58,90 +58,90 @@
                 }
             }
 
-            .kTranscodingProfileError {
+            .vTranscodingProfileError {
                 margin-left: 7px;
-                color: $kDandger;
+                color: $vDandger;
             }
 
-            .kAddFileButton {
+            .vAddFileButton {
                 width: 110px;
                 height: 34px;
                 font-size: 14px;
-                color: $kGrayscale1;
+                color: $vGrayscale1;
                 margin-left: 24px;
             }
         }
 
-        .kStorageProfile {
+        .vStorageProfile {
             padding: 5px 28px;
-            color: $kGrayscale1;
+            color: $vGrayscale1;
             font-size: 15px;
 
-            .kStorageProfileMetadata {
+            .vStorageProfileMetadata {
                 display: inline-block;
                 padding: 5px 0;
 
-                .kStorageProfileMetadataTitle {
+                .vStorageProfileMetadataTitle {
                     font-weight: bold;
                 }
             }
 
-            .kDelimiter {
+            .vDelimiter {
                 margin: 0 10px;
 
                 &:after {
                     content: '|';
                     font-size: 12px;
-                    color: $kGrayscale4;
+                    color: $vGrayscale4;
                     top: -2px;
                     position: relative;
                 }
             }
         }
 
-        .kTable {
-            .kFileNameInput {
+        .vTable {
+            .vFileNameInput {
                 width: 380px;
             }
 
-            .kFileName {
-                color: $kGrayscale1;
+            .vFileName {
+                color: $vGrayscale1;
                 font-weight: bold;
             }
 
-            .kIconError {
+            .vIconError {
                 font-size: 24px;
-                color: $kDandger;
+                color: $vDandger;
             }
 
-            .kIconRemoveFile {
-                color: $kDandger;
+            .vIconRemoveFile {
+                color: $vDandger;
                 font-size: 24px;
                 display: none;
                 cursor: pointer;
             }
 
-            .kReplaceUrl {
+            .vReplaceUrl {
                 width: 400px;
 
-                &.kHasError {
-                    border-color: $kDandger;
+                &.vHasError {
+                    border-color: $vDandger;
                 }
             }
 
-            .kHasError /deep/ .ui-dropdown {
-                border-color: $kDandger;
+            .vHasError /deep/ .ui-dropdown {
+                border-color: $vDandger;
             }
         }
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 280px;
-            color: $kGrayscale3;
+            color: $vGrayscale3;
 
             h1 {
                 font-size: 28px;
@@ -156,13 +156,13 @@
         }
     }
 
-    .kFooter {
+    .vFooter {
         z-index: 1;
         height: 69px;
-        border-top: 1px $kGrayscale4 solid;
+        border-top: 1px $vGrayscale4 solid;
         text-align: center;
 
-        .kUploadButton {
+        .vUploadButton {
             width: 130px;
             height: 34px;
             font-weight: normal;
@@ -176,7 +176,7 @@
     }
 }
 
-:host /deep/ .kTranscodingProfile {
+:host /deep/ .vTranscodingProfile {
     .ui-dropdown-panel {
         width: 250px;
     }
@@ -185,7 +185,7 @@
         text-overflow: ellipsis;
         font-weight: normal;
         font-size: 15px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
     }
 
     .ui-dropdown.ui-widget {
@@ -193,32 +193,32 @@
     }
 }
 
-:host /deep/ .kTable.empty .ui-widget-content {
+:host /deep/ .vTable.empty .ui-widget-content {
     display: none;
 }
 
-:host /deep/ .kTable .ui-table-scrollable-header,
-:host /deep/ .kTable .ui-table-scrollable-body {
-    border-top: 1px $kGrayscale6 solid;
+:host /deep/ .vTable .ui-table-scrollable-header,
+:host /deep/ .vTable .ui-table-scrollable-body {
+    border-top: 1px $vGrayscale6 solid;
 }
 
-:host /deep/ .kTable .ui-table-scrollable-body {
+:host /deep/ .vTable .ui-table-scrollable-body {
     margin-bottom: -1px;
     max-height: 352px !important;
 }
 
-:host /deep/ .kTable.kLink .ui-table-scrollable-body {
+:host /deep/ .vTable.vLink .ui-table-scrollable-body {
     max-height: 281px !important;
 }
 
-:host /deep/ .kTable tr:hover .kIconRemoveFile { // show remove icon when hovering a row
+:host /deep/ .vTable tr:hover .vIconRemoveFile { // show remove icon when hovering a row
     display: block !important;
 }
 
-:host /deep/ .kTable .ui-table-scrollable-table-wrapper {
+:host /deep/ .vTable .ui-table-scrollable-table-wrapper {
     height: 280px;
 }
 
-button.kAddFileButton /deep/ .ui-button-icon-left {
+button.vAddFileButton /deep/ .ui-button-icon-left {
     font-size: 18px;
 }

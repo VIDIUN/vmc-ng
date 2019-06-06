@@ -70,12 +70,12 @@
         },
         "helpMenu": {
             "gettingStarted": "Erste Schritte",
-            "kmcOverview": "KMC-Übersicht",
+            "vmcOverview": "VMC-Übersicht",
             "mediaManagement": "Medienverwaltung & Abläufe",
             "productTour": "Die Produkttour ansehen",
             "support": "Hilfe und Kundendienst",
             "userManual": "Benutzerhandbuch herunterladen",
-            "legacy": "Legacy KMC",
+            "legacy": "Legacy VMC",
             "contact": "Kundendienst kontaktieren",
             "currentPage": "Aktuelle Seite",
             "changelog": "Änderungsprotokoll"
@@ -107,7 +107,7 @@
             "save": "Speichern",
             "error": "Fehler",
             "connectionError": "Fehler bei der Verbindung mit dem Server",
-            "invalidKs": "Benutzersitzung abgelaufen. Bitte erneut einloggen."
+            "invalidVs": "Benutzersitzung abgelaufen. Bitte erneut einloggen."
         },
         "redirect":{
             "redirect1": "Weiterleitung an Standardansicht ...",
@@ -115,11 +115,11 @@
             "redirect3": "hier"
         },
         "openMail":{
-            "supportMailTitle": "Kontaktieren Sie den Kaltura-Kundendienst",
+            "supportMailTitle": "Kontaktieren Sie den Vidiun-Kundendienst",
             "supportMailMsg": "Schicken Sie bitte eine E-Mail an folgende E-Mail-Adresse:",
-            "supportMailMsgNoMail": "Schicken Sie bitte eine E-Mail an das Kaltura-Kundendienstteam.",
-            "customerCare": "Der Kaltura Kundendienst ist 24/7, 365 Tage lang im Jahr über das Kundenportal verfügbar:",
-            "customerPortal": "Die einfachste und schnellste Weise einen neuen Fall einzureichen, mit dem Kundendienst zu kommunizieren und den Status Ihrer Supportanfragen nachzuverfolgen ist über das Kaltura Kundenportal:"
+            "supportMailMsgNoMail": "Schicken Sie bitte eine E-Mail an das Vidiun-Kundendienstteam.",
+            "customerCare": "Der Vidiun Kundendienst ist 24/7, 365 Tage lang im Jahr über das Kundenportal verfügbar:",
+            "customerPortal": "Die einfachste und schnellste Weise einen neuen Fall einzureichen, mit dem Kundendienst zu kommunizieren und den Status Ihrer Supportanfragen nachzuverfolgen ist über das Vidiun Kundenportal:"
         },
         "login": {
             "login": {
@@ -171,9 +171,9 @@
                 }
             },
             "restorePassword": {
-                "welcome": "Willkommen bei Kaltura.",
+                "welcome": "Willkommen bei Vidiun.",
                 "selectPassword": "Bitte wählen Sie Ihr Passwort.",
-                "restored": "Ihr neues Passwort wurde eingerichtet. Loggen Sie sich bitte in die Managementkonsole von Kaltura ein.",
+                "restored": "Ihr neues Passwort wurde eingerichtet. Loggen Sie sich bitte in die Managementkonsole von Vidiun ein.",
                 "error": {
                     "equal": "Passwörter stimmen nicht überein",
                     "required": "Dieses Feld ist ein Pflichtfeld",
@@ -188,21 +188,21 @@
                 "email": "Ungültiges E-Mail-Format",
                 "badCredentials": "Der von Ihnen eingegebene Benutzername oder das Passwort ist falsch.",
                 "retriesExceeded": {
-                    "yourAccountHasBeenLocked":"Ihr Konto wurde gesperrt und ist für 24 Stunden nicht verfügbar. Kontaktieren Sie den Kaltura-Kundendienst unter ",
+                    "yourAccountHasBeenLocked":"Ihr Konto wurde gesperrt und ist für 24 Stunden nicht verfügbar. Kontaktieren Sie den Vidiun-Kundendienst unter ",
                     "toUnblockYourAccount": " um Ihr Konto zu entsperren."
                 },
                 "userNotFound": "Der von Ihnen eingegebene Benutzername oder das Passwort ist falsch.",
                 "invalidStructure": "Das von Ihnen eingegebene Passwort hat eine ungültige Struktur. Passwörter müssen den folgenden Regeln entsprechen: - Sie müssen zwischen 8 und 14 Zeichen lang sein. - Sie dürfen nicht Ihren Namen enthalten. - Sie müssen mindestens einen Kleinbuchstaben enthalten (a-z). - Sie müssen mindestens eine Zahl enthalten (0-9). - Sie müssen mindestens eines der folgenden Symbole enthalten: %~!@#\\$^*=+?[]{}. - Sie dürfen keines der folgenden Symbole enthalten: &lt; oder >.",
                 "alreadyUsed": "Ungültiges Passwort. <br> Dieses Passwort wurde bereits in der Vergangenheit benutzt. Bitte wählen Sie ein neues Passwort aus.",
                 "loginBlocked": {
-                    "loginDenied":"Anmeldung verweigert. Sie haben die Anzahl ungültiger Anmeldeversuche überschritten. Den Kaltura-kontaktieren können Sie kontaktieren unter ",
+                    "loginDenied":"Anmeldung verweigert. Sie haben die Anzahl ungültiger Anmeldeversuche überschritten. Den Vidiun-kontaktieren können Sie kontaktieren unter ",
                     "toUnblockYourAccount": " um Ihr Konto zu entsperren."
                 },
                 "newPasswordHashKeyInvalid": "Dieser Link ist ungültig.",
                 "newPasswordHashKeyExpired": "Dieser Link ist älter als 24 Stunden und nicht mehr gültig.",
                 "wrongOldPassword": "Das alte Passwort ist falsch.",
                 "invalidField": "Der Wert im Feld {{value}} ist ungültig.",
-                "userForbiddenForBeta": "Dies ist eine geschlossene Beta der neuen Managementkonsole von Kaltura. In Kürze steht sie allgemein zur Verfügung. Bleiben Sie dran."
+                "userForbiddenForBeta": "Dies ist eine geschlossene Beta der neuen Managementkonsole von Vidiun. In Kürze steht sie allgemein zur Verfügung. Bleiben Sie dran."
             },
             "send": "Senden",
             "wait": "Warten...",
@@ -218,8 +218,8 @@
         },
         "UnpermittedActionReasons": {
             "header": "Ansicht deaktiviert",
-            "message": "Diese Ansicht kann nicht geladen werden. Wenn das Problem weiterhin besteht, wenden Sie sich an den Kaltura-Kundendienst.",
-            "messageNav": "Diese Ansicht kann nicht geladen werden. Wenn das Problem weiterhin besteht, wenden Sie sich an den Kaltura-Kundendienst. Klicken Sie auf OK, um zur Hauptansicht zu gelangen."
+            "message": "Diese Ansicht kann nicht geladen werden. Wenn das Problem weiterhin besteht, wenden Sie sich an den Vidiun-Kundendienst.",
+            "messageNav": "Diese Ansicht kann nicht geladen werden. Wenn das Problem weiterhin besteht, wenden Sie sich an den Vidiun-Kundendienst. Klicken Sie auf OK, um zur Hauptansicht zu gelangen."
         }
     },
     "applications": {
@@ -247,7 +247,7 @@
             "helpTip1": "Die automatische Einbettung ist die standardmäßige Code-Einbettungsart und eignet sich am besten dazu, einen Player schnell und ohne Laufzeitanpassungen auf eine Seite zu bringen.",
             "helpTip2": "Weitere Informationen",
             "helpTip3": "über die unterschiedlichen Code-Einbettungsarten.",
-            "helpTip4": "Die Logik zur Festlegung der Übermittlungsart wird vom Kaltura Player automatisiert, um die beste Nutzererfahrung zu gewährleisten. ",
+            "helpTip4": "Die Logik zur Festlegung der Übermittlungsart wird vom Vidiun Player automatisiert, um die beste Nutzererfahrung zu gewährleisten. ",
             "helpTip5": "Weitere Informationen zur Durchsetzung ",
             "helpTip6": "von besonderen Übermittlungsprotokollen.",
             "playersErrorPlaylist": "Auf diesem Konto konnten keine Wiedergabelisten-Player gefunden werden. Sie können auf der Studio-Registerkarte neue Player erstellen.",
@@ -416,12 +416,12 @@
                 "createLiveStreamTitle": "Live-Stream-Eintrag erstellen",
                 "streamTypeLabel": "Stream-Art",
                 "streamTypes": {
-                    "kaltura": "Kaltura-Live-Stream (HDS/HLS/DASH)",
+                    "vidiun": "Vidiun-Live-Stream (HDS/HLS/DASH)",
                     "universal": "Universeller Stream, Flash und Mobilgeräte (HDS/HLS)",
                     "manual": "Manuelle Live-Stream-URLs"
                 },
                 "create": "Erstellen",
-                "kalturaStreamType": {
+                "vidiunStreamType": {
                     "name": "Name",
                     "description": "Beschreibung",
                     "transcodingProfile": "Live-Transkodierungsprofile",
@@ -454,7 +454,7 @@
                     "description": "Beschreibung",
                     "primaryEncoderIp": "Primärkodierer-IP",
                     "secondaryEncoderIp": "Sekundärkodierer-IP",
-                    "secondaryEncoderIp_message": "Kaltura benutzt standardmäßig Ihre öffentliche IP, um auf diese KMC zuzugreifen.",
+                    "secondaryEncoderIp_message": "Vidiun benutzt standardmäßig Ihre öffentliche IP, um auf diese VMC zuzugreifen.",
                     "broadcastPassword": "Passwort für die Übertragung",
                     "liveDvr": "Live DVR",
                     "liveDVR_message": "Suche nach vorherigen Teilen des Live-Streams. Das DVR-Fenster beträgt standardmäßig 2 Stunden.",
@@ -466,7 +466,7 @@
                 "confirmEntryNavigation": {
                     "title": "Erfolg",
                     "generalMessage": "Live-Stream-Eintrag wurde erfolgreich erstellt.",
-                    "kalturaMessage": "Live-Stream-Eintrag wurde erfolgreich erstellt. Wollen Sie die Details des Eintrags ansehen?",
+                    "vidiunMessage": "Live-Stream-Eintrag wurde erfolgreich erstellt. Wollen Sie die Details des Eintrags ansehen?",
                     "universalMessage": "Die Stream-Aktivierung für eine Übertragung mit CDN kann bis zu 3 Stunden dauern.",
                     "manualMessage": "Die angegebenen URLs wurden mit dem Eintrag {{0}} verbunden."
                 }
@@ -516,7 +516,7 @@
                     "fileSize": "Dateigröße",
                     "entryId": "Eintrags-ID",
                     "status": "Status",
-                    "datesTooltip": "Upload-Beginn erkannt am: {{0}} Upload-Fertigstellung erkannt am: {{1}} Datei-Übertragung von Ablageordner zu Kaltura begonnen am: {{2}} Datei-Übertragung von Ablageordner zu Kaltura beendet am: {{3}}",
+                    "datesTooltip": "Upload-Beginn erkannt am: {{0}} Upload-Fertigstellung erkannt am: {{1}} Datei-Übertragung von Ablageordner zu Vidiun begonnen am: {{2}} Datei-Übertragung von Ablageordner zu Vidiun beendet am: {{3}}",
                     "notAvailable": "k. A.",
                     "unknown": "Unbekannt",
                     "delete": "Löschen"
@@ -544,7 +544,7 @@
                 },
                 "dropFolderStatusTooltips": {
                     "uploading": "Die Datei wird momentan in den Ablageorder hochgeladen.",
-                    "downloading": "Die Datei wird momentan vom Ablageorder zu Kaltura importiert.",
+                    "downloading": "Die Datei wird momentan vom Ablageorder zu Vidiun importiert.",
                     "pending": "Hochladen der Datei abgeschlossen. Warten, bis die Verarbeitung des Ablageordners startet.",
                     "processing": "Die Ablageordner-Engine verarbeitet diese Datei momentan.",
                     "parsedFromXml": "Die Dateireferenz wurde aus der XML-Datei analysiert. Die Datei wird erwartet, ist jedoch noch nicht im Ablageordner verfügbar.",
@@ -553,7 +553,7 @@
                     "error": "Verarbeitung durch die Ablageordner-Engine fehlgeschlagen.",
                     "deleteFailed": "Löschen der Datei aus dem Ablageordner fehlgeschlagen.",
                     "done": "Die Verarbeitung des Ablageordners für diese Datei wurde abgeschlossen.",
-                    "downloadFailed": "Importieren der Datei aus dem Ablageordner zu Kaltura fehlgeschlagen."
+                    "downloadFailed": "Importieren der Datei aus dem Ablageordner zu Vidiun fehlgeschlagen."
                 },
                 "errors": {
                     "retry": "Erneut versuchen",
@@ -778,7 +778,7 @@
                         "numOfEntries": "{{0}} Einträge",
                         "warning": "{{0}} Einträge sind nicht in diesem Feed enthalten.",
                         "moreInfo": "Weitere Informationen.",
-                        "warningMoreInfo": "<b>Hinweis: </b> {{0}} Einträge sind nicht in diesem Feed enthalten, da sie nicht mit der benötigten {{1}} Variante transkodiert sind.<br>Sie können jeden Eintrag auf {{1}} transkodieren, indem Sie im KMC in den Bereich „Verwalten“ gehen. Öffnen Sie den Eintrag, den Sie transkodieren möchten, gehen Sie zur Registerkarte „Variante“ und wählen Sie die Option „Konvertieren“.",
+                        "warningMoreInfo": "<b>Hinweis: </b> {{0}} Einträge sind nicht in diesem Feed enthalten, da sie nicht mit der benötigten {{1}} Variante transkodiert sind.<br>Sie können jeden Eintrag auf {{1}} transkodieren, indem Sie im VMC in den Bereich „Verwalten“ gehen. Öffnen Sie den Eintrag, den Sie transkodieren möchten, gehen Sie zur Registerkarte „Variante“ und wählen Sie die Option „Konvertieren“.",
                         "flavorId": "(Varianten-ID) {{0}}"
                     },
                     "destination": "Zielort",
@@ -862,11 +862,11 @@
                                     "Science &amp; Medicine/Medicine": "Wissenschaft & Medizin/Medizin",
                                     "Science &amp; Medicine/Natural Sciences": "Wissenschaft & Medizin/Naturwissenschaften",
                                     "Science &amp; Medicine/Social Sciences": "Wissenschaft & Medizin/Sozialwissenschaften",
-                                    "Society &amp; Culture": "Gesellschaft & Kultur",
-                                    "Society &amp; Culture/History": "Gesellschaft & Kultur/Geschichte",
-                                    "Society &amp; Culture/Personal Journals": "Gesellschaft & Kultur/Tagebücher",
-                                    "Society &amp; Culture/Philosophy": "Gesellschaft & Kultur/Philosophie",
-                                    "Society &amp; Culture/Places &amp; Travel": "Gesellschaft & Kultur/Orte & Reisen",
+                                    "Society &amp; Culture": "Gesellschaft & Vidiun",
+                                    "Society &amp; Culture/History": "Gesellschaft & Vidiun/Geschichte",
+                                    "Society &amp; Culture/Personal Journals": "Gesellschaft & Vidiun/Tagebücher",
+                                    "Society &amp; Culture/Philosophy": "Gesellschaft & Vidiun/Philosophie",
+                                    "Society &amp; Culture/Places &amp; Travel": "Gesellschaft & Vidiun/Orte & Reisen",
                                     "Sports &amp; Recreation": "Sport & Freizeit",
                                     "Sports &amp; Recreation/Amateur": "Sport & Freizeit/Amateure",
                                     "Sports &amp; Recreation/College &amp; High School": "Sport & Freizeit/Realschule & Gymnasium",
@@ -1189,7 +1189,7 @@
                     "messages": {
                         "uploadError": {
                             "header": "Fehler",
-                            "message": "Ein unerwarteter Berechtigungsfehler ist aufgetreten. Versuchen Sie, Ihr Browserfenster zu aktualisieren. Falls der Fehler weiterhin auftritt, wenden Sie sich für weitere Informationen bitte an den Kaltura-Kundendienst. {{value}}"
+                            "message": "Ein unerwarteter Berechtigungsfehler ist aufgetreten. Versuchen Sie, Ihr Browserfenster zu aktualisieren. Falls der Fehler weiterhin auftritt, wenden Sie sich für weitere Informationen bitte an den Vidiun-Kundendienst. {{value}}"
                         },
                         "uploadSuccess": {
                             "body": "Ihre Anfrage wurde abgesendet. Verfolgen Sie den Fortschritt Ihres Massenauftrags auf der ",
@@ -1331,7 +1331,7 @@
                 "removePublishers": "Mitverleger entfernen",
                 "removePublishersLabel": "Aus dieser Liste entfernte Mitverleger werden aus allen ausgewählten Einträgen entfernt",
                 "noPublishersToRemove": "Keine zu entfernenden Mitverleger",
-                "userTooltip": "Der Benutzer ist noch nicht in Kaltura aufgeführt. {{0}} wird als die Kennung des Benutzers festgelegt.",
+                "userTooltip": "Der Benutzer ist noch nicht in Vidiun aufgeführt. {{0}} wird als die Kennung des Benutzers festgelegt.",
                 "addRemoveEditors": "Mitherausgeber hinzufügen/entfernen",
                 "addEditors": "Mitherausgeber hinzufügen",
                 "addEditorsLabel": "Mitherausgeber eingeben, die allen ausgewählten Einträgen angefügt werden.",
@@ -1555,10 +1555,10 @@
                     "fileUrl": "Datei-URL",
                     "urlPlaceholder": "Geben Sie die URL der Variante ein.",
                     "urlInvalid": "Bitte geben Sie eine gültige URL ein.",
-                    "kStatusNoContent": "Für diesen Eintrag sind keine Transkodierungsvarianten verfügbar. Eintrag ist nicht für die Veröffentlichung bereit.",
-                    "kStatusReady": "Alle erforderlichen Transkodierungsvarianten sind verfügbar. Eintrag ist für die Veröffentlichung bereit.",
-                    "kStatusError": "Während der Verarbeitung der Varianten trat ein Fehler auf.",
-                    "kStatusErrorProcessing": "Die Transkodierungsvarianten werden derzeit bearbeitet. Der Eintrag ist in wenigen Minuten bereit.",
+                    "vStatusNoContent": "Für diesen Eintrag sind keine Transkodierungsvarianten verfügbar. Eintrag ist nicht für die Veröffentlichung bereit.",
+                    "vStatusReady": "Alle erforderlichen Transkodierungsvarianten sind verfügbar. Eintrag ist für die Veröffentlichung bereit.",
+                    "vStatusError": "Während der Verarbeitung der Varianten trat ein Fehler auf.",
+                    "vStatusErrorProcessing": "Die Transkodierungsvarianten werden derzeit bearbeitet. Der Eintrag ist in wenigen Minuten bereit.",
                     "status": {
                         "converting": "Wird konvertiert",
                         "error": "Fehler",
@@ -1691,7 +1691,7 @@
                             "url": "Speicher-URL:",
                             "directory": "Speicher-Basisverzeichnis:",
                             "noteTitle": "Hinweis",
-                            "note": "Ist die Konvertierung durch Kaltura erforderlich, wird die als Quelle definierte Datei nach Kaltura importiert."
+                            "note": "Ist die Konvertierung durch Vidiun erforderlich, wird die als Quelle definierte Datei nach Vidiun importiert."
                         },
                         "replacementStatus": {
                             "replacementInProcess": "Video-Austausch in Bearbeitung",
@@ -1822,7 +1822,7 @@
                 },
                 "advertisements": {
                     "title":"Werbeanzeigen",
-                    "description": "Erstellen und verwalten Sie zeitbasierte Werbeanzeigen mit dem Kaltura Videobearbeitungstool.",
+                    "description": "Erstellen und verwalten Sie zeitbasierte Werbeanzeigen mit dem Vidiun Videobearbeitungstool.",
                     "manageAdvertisements": "Werbeanzeigen verwalten",
                     "cancelEdit": "Bearbeitung abbrechen",
                     "discard": "Alle Änderungen verwerfen?"
@@ -1837,7 +1837,7 @@
                     "save": "Speichern",
                     "co-editors": "Mitherausgeber",
                     "co-publishers": "Mitverleger",
-                    "tooltip": "Der Benutzer ist nicht in Kaltura aufgeführt. {{0}} wird als die Kennung des Benutzers festgelegt.",
+                    "tooltip": "Der Benutzer ist nicht in Vidiun aufgeführt. {{0}} wird als die Kennung des Benutzers festgelegt.",
                     "noScreenName": "Benutzer kann nicht übernommen werden, Bildschirmname ist leer"
 
                 },
@@ -1890,7 +1890,7 @@
                         "attUverse": "AttUverse",
                         "avn": "AVN",
                         "comcastMrss": "ComcastMrss",
-                        "crossKaltura": "CrossKaltura",
+                        "crossVidiun": "CrossVidiun",
                         "dailymotion": "Dailymotion",
                         "doubleclick": "Doubleclick",
                         "facebook": "Facebook",
@@ -2098,7 +2098,7 @@
                         "changeOwnerPlaceholder": "Benutzername/ID eingeben",
                         "cancelEdit": "Bearbeitung abbrechen",
                         "discard": "Alle Änderungen verwerfen?",
-                        "tooltip": "Der Benutzer ist nicht in Kaltura aufgeführt. {{0}} wird als die Kennung des Benutzers angesehen",
+                        "tooltip": "Der Benutzer ist nicht in Vidiun aufgeführt. {{0}} wird als die Kennung des Benutzers angesehen",
                         "errors": {
                             "changeOwnerFailed" : "Beim Ändern des Inhabers ist ein Fehler aufgetreten.",
                             "unableToChange": "Der Inhaber der aktuellen Kategorie konnte nicht geändert werden.",
@@ -2330,7 +2330,7 @@
             "users": {
                 "user": "Benutzer",
                 "users": "Benutzer",
-                "moreUsers": "Werden mehr KMC-Benutzer benötigt?",
+                "moreUsers": "Werden mehr VMC-Benutzer benötigt?",
                 "clickHere": "Hier klicken,",
                 "usersUpgrade": "um Ihr Konto zu erweitern!",
                 "you": "Sie",
@@ -2347,7 +2347,7 @@
                 "addRole": "Rolle hinzufügen",
                 "addUser": "Benutzer hinzufügen",
                 "currentStatus": "Derzeitiger Status:",
-                "usersInfo": "{{0}} KMC {{1}} in Benutzung, {{2}} zusätzliche verfügbar.",
+                "usersInfo": "{{0}} VMC {{1}} in Benutzung, {{2}} zusätzliche verfügbar.",
                 "failedLoading": "Laden von Benutzerdaten fehlgeschlagen",
                 "cantPerform": "Sie verfügen nicht über die Zugriffsrechte, um diese Aktion auszuführen",
                 "successSavingUser": "Änderungen treten sofort in Kraft. Bitte weisen Sie den Benutzer an, seinen Browser zu aktualisieren.",
@@ -2356,11 +2356,11 @@
                 "required": "Dieses Feld ist ein Pflichtfeld.",
                 "emailFormat": "Ungültiges E-Mail-Format",
                 "publisherIdFormat": "Ungültiges Herausgeber-ID-Format",
-                "userAlreadyExist": "{{0}} ist bereits im System aufgeführt und mit einem anderen KMC-Konto verbunden. Wollen Sie diesen Benutzer ebenfalls mit diesem Konto verbinden?",
+                "userAlreadyExist": "{{0}} ist bereits im System aufgeführt und mit einem anderen VMC-Konto verbunden. Wollen Sie diesen Benutzer ebenfalls mit diesem Konto verbinden?",
                 "alreadyExist": "Der Benutzer existiert bereits",
                 "alreadyExistError": "Die E-Mail-Adresse für die Anmeldung {{0}} ist im System bereits als autorisierter Benutzer für Ihr Konto aufgelistet.",
                 "userAssociatedCaption": "Verbundener Benutzer",
-                "userAssociated": "Der Benutzer mit der ID {{0}} existiert bereits für dieses Konto. Möchten Sie diesem Benutzer KMC-Zugriff gewähren?",
+                "userAssociated": "Der Benutzer mit der ID {{0}} existiert bereits für dieses Konto. Möchten Sie diesem Benutzer VMC-Zugriff gewähren?",
                 "refresh": "Aktualisieren",
                 "commonError": "Während der Serveranfrage ist ein Fehler aufgetreten.",
                 "addUserError": "Eines der erforderlichen Felder fehlt",
@@ -2478,7 +2478,7 @@
                     "schemaNameMaxLength": "Name muss weniger als {{0}} Zeichen enthalten"
                 },
                 "table": {
-                    "disabledLabel": "Das Datenschema wurde manuell von Kaltura Professional Services eingerichtet. Bitte wenden Sie sich an den Kundenbetreuer, wenn Aktualisierungen / Änderungen nötig sind.",
+                    "disabledLabel": "Das Datenschema wurde manuell von Vidiun Professional Services eingerichtet. Bitte wenden Sie sich an den Kundenbetreuer, wenn Aktualisierungen / Änderungen nötig sind.",
                     "name": "Titel des benutzerdefinierten Schemas",
                     "id": "ID",
                     "systemName": "Systemname",
@@ -2565,7 +2565,7 @@
                     },
                     "notifications": {
                         "title": "Benachrichtigungen",
-                        "message": " Kontaktieren Sie Ihren Ansprechpartner bei Kaltura, um Benachrichtigungseinstellungen einzurichten."
+                        "message": " Kontaktieren Sie Ihren Ansprechpartner bei Vidiun, um Benachrichtigungseinstellungen einzurichten."
                     }
                 },
                 "entitlement": {
@@ -2580,7 +2580,7 @@
                         "title": "Berechtigung hinzufügen",
                         "explanation": "Wählen Sie die Root-Kategorie aus, die in Ihre Anwendung integriert ist, und beschriften Sie sie unten.",
                         "addPrivacyContextLabel": "Datenschutzkontext-Beschriftung hinzufügen",
-                        "confirmation": "Berechtigungseinstellungen werden allen Unterkategorien in einem asynchronen Vorgang hinzugefügt. Dieser Vorgang kann einige Minuten dauern. Hinweis: Diese Aktion kann durch bestehende Anwendungen, die nicht für eine Zusammenarbeit mit den Kaltura-Berechtigungsdiensten aktualisiert wurden, Einfluss auf Inhalte in der ausgewählten Kategorie haben. Möchten Sie wirklich fortfahren?",
+                        "confirmation": "Berechtigungseinstellungen werden allen Unterkategorien in einem asynchronen Vorgang hinzugefügt. Dieser Vorgang kann einige Minuten dauern. Hinweis: Diese Aktion kann durch bestehende Anwendungen, die nicht für eine Zusammenarbeit mit den Vidiun-Berechtigungsdiensten aktualisiert wurden, Einfluss auf Inhalte in der ausgewählten Kategorie haben. Möchten Sie wirklich fortfahren?",
                         "apply": "Übernehmen",
                         "errors": {
                             "requiredPrivacyContextLabel": "Sie müssen eine Datenschutzkontext-Beschriftung eingeben."
@@ -2591,7 +2591,7 @@
                         "categoryName": "Kategoriename",
                         "privacyContextLabel": "Datenschutz-kontext-Beschriftung",
                         "confirmationTitle": "Bearbeitung bestätigen",
-                        "confirmation": "Berechtigungseinstellungen werden allen Unterkategorien in einem asynchronen Vorgang hinzugefügt. Dieser Vorgang kann einige Minuten dauern. Hinweis: Diese Aktion kann durch bestehende Anwendungen, die nicht für eine Zusammenarbeit mit den Kaltura-Berechtigungsdiensten aktualisiert wurden, Einfluss auf Inhalte in der Kategorie {{0}} haben. Möchten Sie wirklich fortfahren?",
+                        "confirmation": "Berechtigungseinstellungen werden allen Unterkategorien in einem asynchronen Vorgang hinzugefügt. Dieser Vorgang kann einige Minuten dauern. Hinweis: Diese Aktion kann durch bestehende Anwendungen, die nicht für eine Zusammenarbeit mit den Vidiun-Berechtigungsdiensten aktualisiert wurden, Einfluss auf Inhalte in der Kategorie {{0}} haben. Möchten Sie wirklich fortfahren?",
                         "errors": {
                             "privacyContextLabelRequired": "Bitte geben Sie eine Datenschutzkontext-Beschriftung ein",
                             "privacyContextLabelExists": "Für die Kategorie wurde bereits eine Datenschutzkontext-Beschriftung festgelegt.",
@@ -2792,7 +2792,7 @@
                     "profileName": "Profilname",
                     "flavorName": "Variantenname",
                     "impactOnEntryReadiness": "Auswirkung auf die Bereitschaft des Eintrags",
-                    "useKalturaTranscoding": "Kaltura-Transkodierung verwenden",
+                    "useVidiunTranscoding": "Vidiun-Transkodierung verwenden",
                     "systemName": "Systemname: (Optional)",
                     "flavorGenerationPolicy": "Richtlinie für die Erzeugung von Varianten",
                     "intermediateFlavorHandling": "Handhabung von Zwischenvarianten",
@@ -2863,7 +2863,7 @@
                     "profileName": "Profilname",
                     "flavorName": "Variantenname",
                     "impactOnEntryReadiness": "Auswirkung auf die Bereitschaft des Eintrags",
-                    "useKalturaTranscoding": "Kaltura-Transkodierung verwenden",
+                    "useVidiunTranscoding": "Vidiun-Transkodierung verwenden",
                     "systemName": "Systemname: (Optional)",
                     "flavorGenerationPolicy": "Richtlinie für die Erzeugung von Varianten",
                     "intermediateFlavorHandling": "Handhabung von Zwischenvarianten",
@@ -2873,7 +2873,7 @@
                     "always": "Immer",
                     "asAFallback": "Als Ausweichmethode",
                     "never": "Niemals",
-                    "useKalturaOptimization": "Kaltura-Optimierung verwenden",
+                    "useVidiunOptimization": "Vidiun-Optimierung verwenden",
                     "forceFlavorGeneration": "Variantenerzeugung erzwingen",
                     "keepFlavor": "Variante behalten",
                     "deleteFlavor": "Variante löschen",
@@ -2883,7 +2883,7 @@
         },
         "analytics": {
             "comingSoon": "In Kürze! Analytics für alle Medientypen.",
-            "releaseSupports": "Diese Version unterstützt nur Analytics für „Live“-Einträge. Für alle anderen Medien <a href=\"{{0}}\" target=\"_blank\">loggen Sie sich bitte in der Legacy-KMC</a> ein, um Analytics und Berichte anzuzeigen und zu erstellen. Analytics für alle Medien sollte in Kürze verfügbar sein"
+            "releaseSupports": "Diese Version unterstützt nur Analytics für „Live“-Einträge. Für alle anderen Medien <a href=\"{{0}}\" target=\"_blank\">loggen Sie sich bitte in der Legacy-VMC</a> ein, um Analytics und Berichte anzuzeigen und zu erstellen. Analytics für alle Medien sollte in Kürze verfügbar sein"
         },
         "reach": {
             "captionRequests": "Untertitelanforderungen",

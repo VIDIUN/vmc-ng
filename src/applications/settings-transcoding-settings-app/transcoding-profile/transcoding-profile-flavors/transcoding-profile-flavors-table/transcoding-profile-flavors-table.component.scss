@@ -1,16 +1,16 @@
 @import 'app-theme/_variables.scss';
 
-.kTranscodingProfileFlavorsTable {
+.vTranscodingProfileFlavorsTable {
   background-color: white;
   overflow: hidden;
   position: relative;
   padding: 0;
 
-  .kEditFlavorIconWrapper {
+  .vEditFlavorIconWrapper {
     display: none;
     position: relative;
 
-    .kEditFlavorIcon {
+    .vEditFlavorIcon {
       font-size: 24px;
       position: absolute;
       top: -10px;
@@ -20,7 +20,7 @@
     }
   }
 
-  .kTitle {
+  .vTitle {
     color: #333333;
     font-weight: 700;
   }
@@ -34,15 +34,15 @@
 }
 
 :host /deep/ p-table {
-  tr.ui-state-highlight .kEditFlavorIcon {
+  tr.ui-state-highlight .vEditFlavorIcon {
     display: block !important;
   }
 
-  tr.ui-state-highlight .kTitle {
+  tr.ui-state-highlight .vTitle {
     cursor: pointer;
   }
 
-  tr:hover .kEditFlavorIconWrapper {
+  tr:hover .vEditFlavorIconWrapper {
     display: block !important;
   }
 
@@ -57,7 +57,7 @@
 }
 
 :host /deep/ {
-    .kDisabled {
+    .vDisabled {
         .ui-chkbox {
             cursor: default;
         }

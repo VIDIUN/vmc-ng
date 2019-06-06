@@ -1,5 +1,5 @@
-<k-area-blocker [showLoader]="_deferredLoading">
-    <div class="kPlaylistEntriesTable" [class.noResults]="!_entries?.length">
+<v-area-blocker [showLoader]="_deferredLoading">
+    <div class="vPlaylistEntriesTable" [class.noResults]="!_entries?.length">
         <p-table
             dataKey="selectionId"
             scrollHeight="100%"
@@ -16,27 +16,27 @@
                     <th class="selectionColumn">
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                     </th>
-                    <th class="thumbnailColumn" *ngIf="!(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
+                    <th class="thumbnailColumn" *ngIf="!(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
                         {{'applications.content.table.thumbnail' | translate}}
                     </th>
-                    <th [kpSortableColumn]="'name'">
+                    <th [vpSortableColumn]="'name'">
                         {{'applications.content.table.name' | translate}}
                         <p-sortIcon [field]="'name'"></p-sortIcon>
                     </th>
-                    <th class="mediaTypeColumn" [kpSortableColumn]="'mediaType'">
+                    <th class="mediaTypeColumn" [vpSortableColumn]="'mediaType'">
                         {{'applications.content.table.type' | translate}}
                         <p-sortIcon [field]="'mediaType'"></p-sortIcon>
                     </th>
-                    <th class="createdAtColumn" [kpSortableColumn]="'createdAt'">
+                    <th class="createdAtColumn" [vpSortableColumn]="'createdAt'">
                         {{'applications.content.table.createdOn' | translate}}
                         <p-sortIcon [field]="'createdAt'"></p-sortIcon>
                     </th>
-                    <th class="durationColumn" [kpSortableColumn]="'duration'">
+                    <th class="durationColumn" [vpSortableColumn]="'duration'">
                         {{'applications.content.table.duration' | translate}}
                         <p-sortIcon [field]="'duration'"></p-sortIcon>
                     </th>
                     <th class="actionsColumn"
-                        *ngIf="isNewPlaylist || (_kmcPermissions.PLAYLIST_UPDATE | kNgIfPermitted)"></th>
+                        *ngIf="isNewPlaylist || (_vmcPermissions.PLAYLIST_UPDATE | vNgIfPermitted)"></th>
                 </tr>
             </ng-template>
 
@@ -46,31 +46,31 @@
                     <td class="selectionColumn">
                         <p-tableCheckbox [value]="entry"></p-tableCheckbox>
                     </td>
-                    <td class="thumbnailColumn" *ngIf="!(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
-                        <div class="kThumbnailHolder"
-                             [class.kShowAsDisabled]="_kmcPermissions.CONTENT_MANAGE_BASE | kDisabledIfNotPermitted"
+                    <td class="thumbnailColumn" *ngIf="!(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
+                        <div class="vThumbnailHolder"
+                             [class.vShowAsDisabled]="_vmcPermissions.CONTENT_MANAGE_BASE | vDisabledIfNotPermitted"
                              (click)="_goToEntry(entry)">
                             <img [src]="entry.thumbnailUrl" onError="this.onerror=null;this.style.display='none'">
-                            <i class="kIconyoutube kThumbnailTypeIcon" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></i>
-                            <div class="kYoutubeIconFix" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></div>
-                            <i class="kIconquiz kThumbnailTypeIcon" *ngIf="entry.isQuizEntry"></i>
+                            <i class="vIconyoutube vThumbnailTypeIcon" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></i>
+                            <div class="vYoutubeIconFix" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></div>
+                            <i class="vIconquiz vThumbnailTypeIcon" *ngIf="entry.isQuizEntry"></i>
                         </div>
                     </td>
                     <td>
-                    <span class="kTitle kTableColumn"
-                          [class.kShowAsDisabled]="_kmcPermissions.CONTENT_MANAGE_BASE | kDisabledIfNotPermitted"
-                          [kTooltip]="entry.name"
+                    <span class="vTitle vTableColumn"
+                          [class.vShowAsDisabled]="_vmcPermissions.CONTENT_MANAGE_BASE | vDisabledIfNotPermitted"
+                          [vTooltip]="entry.name"
                           (click)="_goToEntry(entry)">{{entry.name}}</span>
                     </td>
                     <td class="mediaTypeColumn">
-                        <div [kTooltip]="entry.mediaType | entryType: true"
+                        <div [vTooltip]="entry.mediaType | entryType: true"
                              [ngClass]="entry.mediaType | entryType: false"></div>
                     </td>
-                    <td class="createdAtColumn">{{entry.createdAt | kmcDate}}</td>
-                    <td class="durationColumn">{{entry.duration | kTime | entryDuration:entry}}</td>
+                    <td class="createdAtColumn">{{entry.createdAt | vmcDate}}</td>
+                    <td class="durationColumn">{{entry.duration | vTime | entryDuration:entry}}</td>
                     <td class="actionsColumn">
-                        <div class="kPlaylistEntriesTableActions">
-                            <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
+                        <div class="vPlaylistEntriesTableActions">
+                            <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
                                     (click)="_openActionsMenu($event, i, entry)"></button>
                         </div>
                     </td>
@@ -81,6 +81,6 @@
                 <div class="emptymessage">{{_emptyMessage}}</div>
             </ng-template>
         </p-table>
-        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
     </div>
-</k-area-blocker>
+</v-area-blocker>

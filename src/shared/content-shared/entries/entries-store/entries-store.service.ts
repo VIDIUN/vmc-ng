@@ -2,12 +2,12 @@ import { Inject, Injectable, InjectionToken, OnDestroy, Optional } from '@angula
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { MetadataProfileStore } from 'app-shared/kmc-shared';
-import { BaseEntryDeleteAction } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { MetadataProfileStore } from 'app-shared/vmc-shared';
+import { BaseEntryDeleteAction } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import {
   DatesRangeAdapter,
   DatesRangeType,
@@ -19,13 +19,13 @@ import {
   NumberTypeAdapter,
   StringTypeAdapter,
   TypeAdaptersMapping
-} from '@kaltura-ng/mc-shared';
+} from '@vidiun-ng/mc-shared';
 import { CategoriesModeAdapter, CategoriesModes, CategoriesModeType } from 'app-shared/content-shared/categories/categories-mode-type';
 import { Subject } from 'rxjs/Subject';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { KalturaMediaEntryFilter } from 'kaltura-ngx-client';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { VidiunMediaEntryFilter } from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum SortDirection {
   Desc = -1,
@@ -33,11 +33,11 @@ export enum SortDirection {
 }
 
 export interface EntriesDataProvider {
-  executeQuery(filters: EntriesFilters): Observable<{ entries: KalturaBaseEntry[], totalCount?: number }>;
+  executeQuery(filters: EntriesFilters): Observable<{ entries: VidiunBaseEntry[], totalCount?: number }>;
 
   getDefaultFilterValues(savedAutoSelectChildren: CategoriesModes, pageSize: number): EntriesFilters;
 
-  getServerFilter(filters: EntriesFilters, forRequest?: boolean): Observable<KalturaMediaEntryFilter>;
+  getServerFilter(filters: EntriesFilters, forRequest?: boolean): Observable<VidiunMediaEntryFilter>;
 }
 
 export interface MetadataProfileData {
@@ -77,7 +77,7 @@ export const EntriesStorePaginationCacheToken = new InjectionToken('entries-stor
 @Injectable()
 export class EntriesStore extends FiltersStoreBase<EntriesFilters> implements OnDestroy {
   private _entries = {
-    data: new BehaviorSubject<{ items: KalturaMediaEntry[], totalCount: number }>({ items: [], totalCount: 0 }),
+    data: new BehaviorSubject<{ items: VidiunMediaEntry[], totalCount: number }>({ items: [], totalCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
 
@@ -92,13 +92,13 @@ export class EntriesStore extends FiltersStoreBase<EntriesFilters> implements On
     data: () => this._entries.data.getValue().items
   };
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _browserService: BrowserService,
               private _metadataProfileService: MetadataProfileStore,
               @Inject(EntriesDataProviderToken) private _dataProvider: EntriesDataProvider,
               @Inject(EntriesStorePaginationCacheToken) @Optional() private _paginationCacheToken: string,
               @Inject(EntriesManualExecutionModeToken) @Optional() manualExecutionMode: boolean,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger);
 
     if (!this._paginationCacheToken) {
@@ -220,7 +220,7 @@ export class EntriesStore extends FiltersStoreBase<EntriesFilters> implements On
     }
 
 
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new BaseEntryDeleteAction({ entryId }))
       .map(() => {
         return;
@@ -259,7 +259,7 @@ export class EntriesStore extends FiltersStoreBase<EntriesFilters> implements On
     };
   }
 
-  public convertFiltersToServerStruct(): Observable<KalturaMediaEntryFilter> {
+  public convertFiltersToServerStruct(): Observable<VidiunMediaEntryFilter> {
     return this._dataProvider.getServerFilter(this._getFiltersAsReadonly(), false);
   }
 }

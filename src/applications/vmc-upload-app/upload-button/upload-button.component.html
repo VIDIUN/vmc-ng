@@ -1,0 +1,37 @@
+<button pButton [disabled]="_disabled"
+        label="{{'app.titles.create' | translate | uppercase}}"
+        class="vButtonDefault vUploadBtn"
+        (click)="uploadmenu.open()"></button>
+
+<vPopupWidget #uploadmenu data-aid="uploadmenu" [popupWidth]="360" [popupHeight]="385" [closeBtn]="true"
+              [modal]="true" [transparent]="true" [preventPageScroll]="true">
+  <ng-template>
+    <vVMCUploadMenu (onItemSelected)="_onMenuItemSelected($event)"></vVMCUploadMenu>
+  </ng-template>
+</vPopupWidget>
+
+<vPopupWidget #uploadsettings data-aid="uploadsettings" [popupWidth]="791" [popupHeight]="607" [closeBtn]="true" [modal]="true" [preventPageScroll]="true">
+  <ng-template>
+    <vVMCUploadSettings [parentPopupWidget]="uploadsettings" [creationType]="_creationType"></vVMCUploadSettings>
+  </ng-template>
+</vPopupWidget>
+
+<vPopupWidget #bulkuploadmenu data-aid="bulkuploadmenu" [popupWidth]="382" [popupHeight]="436" [closeBtn]="true" [modal]="true">
+  <ng-template>
+    <vVMCBulkUploadMenu (onClose)="bulkuploadmenu.close()"></vVMCBulkUploadMenu>
+  </ng-template>
+</vPopupWidget>
+
+<vPrepareEntry #prepareEntry></vPrepareEntry>
+
+<vPopupWidget #createLive data-aid="createLive" [popupWidth]="791" [popupHeight]="675" [closeBtn]="true" [modal]="true">
+  <ng-template>
+    <vCreateLive [parentPopupWidget]="createLive"></vCreateLive>
+  </ng-template>
+</vPopupWidget>
+
+<vPopupWidget #createFromYoutube data-aid="createFromYoutube" [popupWidth]="791" [popupHeight]="357" [closeBtn]="true" [modal]="true">
+  <ng-template>
+    <vVMCUploadFromYoutube [parentPopupWidget]="createFromYoutube"></vVMCUploadFromYoutube>
+  </ng-template>
+</vPopupWidget>

@@ -5,19 +5,19 @@ import { routing } from './settings-transcoding-settings-app.routes';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, DropdownModule, InputTextModule, InputTextareaModule, PaginatorModule } from 'primeng/primeng';
-import { AreaBlockerModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule } from '@vidiun-ng/vidiun-ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranscodingProfilesComponentsList } from './transcoding-profiles/components-list';
-import { KalturaUIModule, TooltipModule, StickyModule } from '@kaltura-ng/kaltura-ui';
+import { VidiunUIModule, TooltipModule, StickyModule } from '@vidiun-ng/vidiun-ui';
 import { MenuModule } from 'primeng/menu';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
 import { TranscodingProfileComponentsList } from './transcoding-profile/components-list';
-import { DetailsBarModule } from '@kaltura-ng/kaltura-ui';
+import { DetailsBarModule } from '@vidiun-ng/vidiun-ui';
 import { TranscodingProfileCanDeactivate } from './transcoding-profile/transcoding-profile-can-deactivate.service';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     TranslateModule,
     TooltipModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     PaginatorModule,
     StickyModule,
     MenuModule,
@@ -40,7 +40,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     TooltipModule,
     PopupWidgetModule,
     DropdownModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       TableModule,
       DateFormatModule,
   ],

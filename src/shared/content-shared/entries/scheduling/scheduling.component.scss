@@ -1,37 +1,37 @@
-.kScheduling {
+.vScheduling {
   padding-left: 30px;
   padding-top: 6px;
   p {
     line-height: 30px;
     padding-left: 0px;
   }
-  .kTitle {
+  .vTitle {
     font-size: 20px;
     font-weight: 700;
   }
-  .kBlock {
+  .vBlock {
     display: block;
     width: 100%;
     margin-bottom: 24px;
   }
-  .kNote {
+  .vNote {
     margin-top: 24px;
   }
-  .kSchedulingDetails {
+  .vSchedulingDetails {
     padding-right: 12px;
     margin-top: 12px;
     width: 100%;
-    .kRow {
+    .vRow {
       display: flex;
       padding-top: 18px;
     }
-    .kLabels {
+    .vLabels {
       margin-top: 5px;
       width: 130px;
       flex: 0 0 auto;
     }
   }
-  .kDisabled {
+  .vDisabled {
     opacity: 0.3;
     cursor: default;
     pointer-events: none;

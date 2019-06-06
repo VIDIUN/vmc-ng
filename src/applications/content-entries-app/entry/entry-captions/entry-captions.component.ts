@@ -3,30 +3,30 @@ import { Component, AfterViewInit, OnInit, OnDestroy, ViewChild } from '@angular
 import { Menu, MenuItem } from 'primeng/primeng';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaCaptionAssetStatus } from 'kaltura-ngx-client';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunCaptionAssetStatus } from 'vidiun-ngx-client';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 
 import { EntryCaptionsWidget } from './entry-captions-widget.service';
 
-import { getKalturaServerUri, serverConfig } from 'config/server';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
-import { ReachAppViewService, ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { getVidiunServerUri, serverConfig } from 'config/server';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
+import { ReachAppViewService, ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 
 @Component({
-    selector: 'kEntryCaptions',
+    selector: 'vEntryCaptions',
     templateUrl: './entry-captions.component.html',
     styleUrls: ['./entry-captions.component.scss']
 })
 export class EntryCaptions implements AfterViewInit, OnInit, OnDestroy {
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
 	public _actions: MenuItem[] = [];
-    public _captionStatusReady = KalturaCaptionAssetStatus.ready;
+    public _captionStatusReady = VidiunCaptionAssetStatus.ready;
     public _requestCaptionsAvailable = false;
 
 	@ViewChild('actionsmenu') private actionsMenu: Menu;
@@ -48,7 +48,7 @@ export class EntryCaptions implements AfterViewInit, OnInit, OnDestroy {
 			{label: this._appLocalization.get('applications.content.entryDetails.captions.edit'), command: (event) => {this.actionSelected("edit");}},
 			{label: this._appLocalization.get('applications.content.entryDetails.captions.download'), command: (event) => {this.actionSelected("download");}},
 			{label: this._appLocalization.get('applications.content.entryDetails.captions.preview'), command: (event) => {this.actionSelected("preview");}},
-			{label: this._appLocalization.get('applications.content.entryDetails.captions.delete'), styleClass: 'kDanger', command: (event) => {this.actionSelected("delete");}}
+			{label: this._appLocalization.get('applications.content.entryDetails.captions.delete'), styleClass: 'vDanger', command: (event) => {this.actionSelected("delete");}}
 		];
 
         this._widgetService.data$
@@ -122,7 +122,7 @@ export class EntryCaptions implements AfterViewInit, OnInit, OnDestroy {
 			let url = baseUrl + '/p/' + partnerId +'/sp/' + partnerId + '00/playManifest/entryId/' + entryId + '/flavorId/' + this._widgetService.currentCaption.id + '/format/download/protocol/' + protocol;
 			this._browserService.openLink(url);
 		}else {
-            const url = getKalturaServerUri("/api_v3/service/caption_captionasset/action/serve/ks/" + this._appAuthentication.appUser.ks + "/captionAssetId/" + this._widgetService.currentCaption.id);
+            const url = getVidiunServerUri("/api_v3/service/caption_captionasset/action/serve/vs/" + this._appAuthentication.appUser.vs + "/captionAssetId/" + this._widgetService.currentCaption.id);
 
 			this._browserService.download(url, this._widgetService.currentCaption.id + "." + this._widgetService.currentCaption.fileExt, this._widgetService.currentCaption.fileExt);
 		}

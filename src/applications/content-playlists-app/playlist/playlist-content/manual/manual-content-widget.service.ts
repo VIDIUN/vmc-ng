@@ -1,24 +1,24 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaClient, KalturaMultiRequest, KalturaObjectBaseFactory } from 'kaltura-ngx-client';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunMultiRequest, VidiunObjectBaseFactory } from 'vidiun-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { PlaylistExecuteAction } from 'kaltura-ngx-client';
-import { FriendlyHashId } from '@kaltura-ng/kaltura-common';
-import { KalturaUtils } from '@kaltura-ng/kaltura-common';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { BaseEntryListAction } from 'kaltura-ngx-client';
-import { KalturaBaseEntryFilter } from 'kaltura-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { PlaylistExecuteAction } from 'vidiun-ngx-client';
+import { FriendlyHashId } from '@vidiun-ng/vidiun-common';
+import { VidiunUtils } from '@vidiun-ng/vidiun-common';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { BaseEntryListAction } from 'vidiun-ngx-client';
+import { VidiunBaseEntryFilter } from 'vidiun-ngx-client';
 import { PlaylistWidget } from '../../playlist-widget';
-import { KalturaPlaylistType } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunPlaylistType } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
-export interface PlaylistContentMediaEntry extends KalturaMediaEntry {
+export interface PlaylistContentMediaEntry extends VidiunMediaEntry {
   selectionId?: string;
 }
 
@@ -31,7 +31,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
   public entriesDuration = 0;
 
 
-  constructor(private _kalturaClient: KalturaClient, logger: KalturaLogger) {
+  constructor(private _vidiunClient: VidiunClient, logger: VidiunLogger) {
     super(ContentPlaylistViewSections.Content, logger);
   }
 
@@ -39,7 +39,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
   }
 
   protected onValidate(wasActivated: boolean): Observable<{ isValid: boolean }> {
-    if (this.data.playlistType === KalturaPlaylistType.staticList) { // validate only manual playlist
+    if (this.data.playlistType === VidiunPlaylistType.staticList) { // validate only manual playlist
       if (this.wasActivated) {
         return Observable.of({ isValid: !!this.entries.length });
       }
@@ -54,8 +54,8 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
     return Observable.of({ isValid: true });
   }
 
-  protected onDataSaving(data: KalturaPlaylist, request: KalturaMultiRequest): void {
-    if (this.data.playlistType === KalturaPlaylistType.staticList) { // handle only manual playlist
+  protected onDataSaving(data: VidiunPlaylist, request: VidiunMultiRequest): void {
+    if (this.data.playlistType === VidiunPlaylistType.staticList) { // handle only manual playlist
       if (this.wasActivated) {
         data.playlistContent = this.entries.map(({ id }) => id).join(',');
       } else if (this.isNewData && (this.data.playlistContent || '').trim().length > 0) {
@@ -82,7 +82,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
 
     return this._getEntriesRequest()
       .pipe(cancelOnDestroy(this, this.widgetReset$))
-      .map((entries: KalturaMediaEntry[]) => {
+      .map((entries: VidiunMediaEntry[]) => {
         this.entries = this._extendWithSelectionId(entries);
         this._recalculateCountAndDuration();
         super._hideLoader();
@@ -95,18 +95,18 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
       });
   }
 
-  private _getEntriesRequest(): Observable<KalturaBaseEntry[]> {
+  private _getEntriesRequest(): Observable<VidiunBaseEntry[]> {
 
-    const responseProfile = new KalturaDetachedResponseProfile({
-      type: KalturaResponseProfileType.includeFields,
+    const responseProfile = new VidiunDetachedResponseProfile({
+      type: VidiunResponseProfileType.includeFields,
       fields: 'thumbnailUrl,id,name,mediaType,createdAt,duration,externalSourceType,capabilities'
     });
     if (this.isNewData) {
       if (this.data.playlistContent) {
-        return this._kalturaClient.request(new BaseEntryListAction({
-          filter: new KalturaBaseEntryFilter({ idIn: this.data.playlistContent }),
+        return this._vidiunClient.request(new BaseEntryListAction({
+          filter: new VidiunBaseEntryFilter({ idIn: this.data.playlistContent }),
 
-          pager: new KalturaFilterPager({ pageSize: 500 })
+          pager: new VidiunFilterPager({ pageSize: 500 })
         }).setRequestOptions({
             responseProfile
         }))
@@ -123,10 +123,10 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
         return Observable.of([]);
       }
     } else {
-      return this._kalturaClient.request(new PlaylistExecuteAction({
+      return this._vidiunClient.request(new PlaylistExecuteAction({
         id: this.data.id
       }).setRequestOptions({
-          acceptedTypes: [KalturaMediaEntry],
+          acceptedTypes: [VidiunMediaEntry],
           responseProfile
       })).map(entries => {
           return entries.map(entry => {
@@ -140,7 +140,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
     }
   }
 
-  private _extendWithSelectionId(entries: KalturaMediaEntry[]): PlaylistContentMediaEntry[] {
+  private _extendWithSelectionId(entries: VidiunMediaEntry[]): PlaylistContentMediaEntry[] {
     return entries.map(entry => {
       (<PlaylistContentMediaEntry>entry).selectionId = this._selectionIdGenerator.generateUnique(this.entries.map(item => item.selectionId));
 
@@ -172,7 +172,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
     const entryIndex = this.entries.indexOf(entry);
 
     if (entryIndex !== -1) {
-      const clonedEntry = <PlaylistContentMediaEntry>Object.assign(KalturaObjectBaseFactory.createObject(entry), entry);
+      const clonedEntry = <PlaylistContentMediaEntry>Object.assign(VidiunObjectBaseFactory.createObject(entry), entry);
       this._extendWithSelectionId([clonedEntry]);
       this.entries.splice(entryIndex, 0, clonedEntry);
       this._recalculateCountAndDuration();
@@ -181,13 +181,13 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
   }
 
   private _moveUpEntries(selectedEntries: PlaylistContentMediaEntry[]): void {
-    if (KalturaUtils.moveUpItems(this.entries, selectedEntries)) {
+    if (VidiunUtils.moveUpItems(this.entries, selectedEntries)) {
       this._setDirty();
     }
   }
 
   private _moveDownEntries(selectedEntries: PlaylistContentMediaEntry[]): void {
-    if (KalturaUtils.moveDownItems(this.entries, selectedEntries)) {
+    if (VidiunUtils.moveDownItems(this.entries, selectedEntries)) {
       this._setDirty();
     }
   }
@@ -247,7 +247,7 @@ export class ManualContentWidget extends PlaylistWidget implements OnDestroy {
     }
   }
 
-  public addEntries(entries: KalturaMediaEntry[]): void {
+  public addEntries(entries: VidiunMediaEntry[]): void {
     this.entries.push(...this._extendWithSelectionId(entries));
     this._recalculateCountAndDuration();
     this._setDirty();

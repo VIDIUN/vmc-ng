@@ -1,17 +1,17 @@
 import {  Injectable } from '@angular/core';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { WidgetsManagerBase } from '@kaltura-ng/kaltura-ui'
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { WidgetsManagerBase } from '@vidiun-ng/vidiun-ui'
 import { EntryStore } from './entry-store.service';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class EntryWidgetsManager extends WidgetsManagerBase<KalturaMediaEntry, KalturaMultiRequest>
+export class EntryWidgetsManager extends WidgetsManagerBase<VidiunMediaEntry, VidiunMultiRequest>
 {
     private _entryStore : EntryStore;
 
-    constructor(logger: KalturaLogger)
+    constructor(logger: VidiunLogger)
     {
         super(logger.subLogger('EntryWidgetsManager'));
     }

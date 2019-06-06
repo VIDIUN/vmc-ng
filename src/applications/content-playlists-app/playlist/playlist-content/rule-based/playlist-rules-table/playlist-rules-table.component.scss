@@ -1,17 +1,17 @@
 @import 'app-theme/_variables.scss';
 
-.kPlaylistRulesTable {
+.vPlaylistRulesTable {
   background-color: white;
   overflow: hidden;
   position: relative;
   padding: 0;
 
-  .kThumbnailHolder {
+  .vThumbnailHolder {
     overflow: hidden;
     position: relative;
     width: 80px;
     height: 46px;
-    background-color: $kGrayscale6;
+    background-color: $vGrayscale6;
     white-space: nowrap;
     text-align: center;
     border-radius: 3px;
@@ -29,24 +29,24 @@
     }
   }
 
-  .kPlaylistRulesTableActions {
+  .vPlaylistRulesTableActions {
     width: 100%;
     text-align: center;
   }
 
-  .kIconvideo {
+  .vIconvideo {
     font-size: 20px;
   }
 
-  .kIconsound {
+  .vIconsound {
     font-size: 22px;
   }
 
-  .kIconimage {
+  .vIconimage {
     font-size: 24px;
   }
 
-  .kTitle {
+  .vTitle {
     color: #333333;
     font-weight: 700;
     cursor: pointer;

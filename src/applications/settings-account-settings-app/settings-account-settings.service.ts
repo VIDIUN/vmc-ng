@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {KalturaClient} from 'kaltura-ngx-client';
-import { KalturaMultiRequest, KalturaRequest, KalturaRequestBase } from 'kaltura-ngx-client';
-import {KalturaUserRoleFilter} from 'kaltura-ngx-client';
-import {KalturaUserRoleStatus} from 'kaltura-ngx-client';
-import {KalturaUserFilter} from 'kaltura-ngx-client';
-import {KalturaNullableBoolean} from 'kaltura-ngx-client';
-import {KalturaUserStatus} from 'kaltura-ngx-client';
-import {UserRoleListAction} from 'kaltura-ngx-client';
-import {UserListAction} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
+import { VidiunMultiRequest, VidiunRequest, VidiunRequestBase } from 'vidiun-ngx-client';
+import {VidiunUserRoleFilter} from 'vidiun-ngx-client';
+import {VidiunUserRoleStatus} from 'vidiun-ngx-client';
+import {VidiunUserFilter} from 'vidiun-ngx-client';
+import {VidiunNullableBoolean} from 'vidiun-ngx-client';
+import {VidiunUserStatus} from 'vidiun-ngx-client';
+import {UserRoleListAction} from 'vidiun-ngx-client';
+import {UserListAction} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {KalturaPartner} from 'kaltura-ngx-client';
-import {PartnerGetInfoAction} from 'kaltura-ngx-client';
-import {PartnerUpdateAction} from 'kaltura-ngx-client';
-import {KalturaUserListResponse} from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {VidiunPartner} from 'vidiun-ngx-client';
+import {PartnerGetInfoAction} from 'vidiun-ngx-client';
+import {PartnerUpdateAction} from 'vidiun-ngx-client';
+import {VidiunUserListResponse} from 'vidiun-ngx-client';
 
 
 export interface AccountSettings {
@@ -28,12 +28,12 @@ export interface AccountSettings {
 @Injectable()
 export class SettingsAccountSettingsService {
 
-  constructor(private _kalturaServerClient: KalturaClient) {
+  constructor(private _vidiunServerClient: VidiunClient) {
   }
 
   /** update the data for current partner */
-  public updatePartnerData(data: AccountSettings): Observable<KalturaPartner> {
-    const partner = new KalturaPartner({
+  public updatePartnerData(data: AccountSettings): Observable<VidiunPartner> {
+    const partner = new VidiunPartner({
       website: data.website,
       name: data.name,
       adminUserId: data.adminUserId,
@@ -41,7 +41,7 @@ export class SettingsAccountSettingsService {
       describeYourself: data.describeYourself,
       referenceId: data.referenceId
     });
-    return this._kalturaServerClient.request(new PartnerUpdateAction({
+    return this._vidiunServerClient.request(new PartnerUpdateAction({
       partner
     }));
   }
@@ -50,27 +50,27 @@ export class SettingsAccountSettingsService {
   /** Get the account owners list for current partner */
   public getPartnerAccountSettings(): Observable<any> {
 
-    const userRoleFilter: KalturaUserRoleFilter = new KalturaUserRoleFilter({
+    const userRoleFilter: VidiunUserRoleFilter = new VidiunUserRoleFilter({
       tagsMultiLikeOr: 'partner_admin',
-      statusEqual: KalturaUserRoleStatus.active
+      statusEqual: VidiunUserRoleStatus.active
     });
 
-    const userFilter: KalturaUserFilter = new KalturaUserFilter({
-      isAdminEqual: KalturaNullableBoolean.trueValue,
-      loginEnabledEqual: KalturaNullableBoolean.trueValue,
-      statusEqual: KalturaUserStatus.active,
+    const userFilter: VidiunUserFilter = new VidiunUserFilter({
+      isAdminEqual: VidiunNullableBoolean.trueValue,
+      loginEnabledEqual: VidiunNullableBoolean.trueValue,
+      statusEqual: VidiunUserStatus.active,
       roleIdsEqual: '0'
     })
       .setDependency(['roleIdsEqual', 0, 'objects:0:id']);
 
 
-    const multiRequest = new KalturaMultiRequest(
+    const multiRequest = new VidiunMultiRequest(
       new UserRoleListAction({filter: userRoleFilter}),
       new UserListAction({filter: userFilter}),
       new PartnerGetInfoAction()
     );
 
-    return this._kalturaServerClient.multiRequest(multiRequest)
+    return this._vidiunServerClient.multiRequest(multiRequest)
       .map(
         data => {
           if (data.hasErrors()) {
@@ -78,9 +78,9 @@ export class SettingsAccountSettingsService {
           }
 
           let accountOwners: {name: string, id: string }[] = [];
-          let partnerData: KalturaPartner;
+          let partnerData: VidiunPartner;
           data.forEach(response => {
-            if (response.result instanceof KalturaUserListResponse) {
+            if (response.result instanceof VidiunUserListResponse) {
                 const usersList = response.result.objects;
                 accountOwners = usersList
                   .filter(({ fullName }) => fullName && fullName !== '')
@@ -88,7 +88,7 @@ export class SettingsAccountSettingsService {
                 if (!accountOwners.length) {
                     throw new Error('error occurred in action \'getPartnerAccountSettings\'');
                 }
-            } else if (response.result instanceof KalturaPartner) {
+            } else if (response.result instanceof VidiunPartner) {
               partnerData = response.result;
             }
           });

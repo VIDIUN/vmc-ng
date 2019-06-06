@@ -1,15 +1,15 @@
 {
-  "kalturaServer": {
-    "uri" : "@kalturaServer.uri@",
-    "defaultPrivileges" : "@kalturaServer.defaultPrivileges@",
-    "deployUrl": "@kalturaServer.deployUrl@",
-    "previewUIConf": @kalturaServer.previewUIConf@,
-    "resetPasswordUri": "@kalturaServer.resetPasswordUri@",
+  "vidiunServer": {
+    "uri" : "@vidiunServer.uri@",
+    "defaultPrivileges" : "@vidiunServer.defaultPrivileges@",
+    "deployUrl": "@vidiunServer.deployUrl@",
+    "previewUIConf": @vidiunServer.previewUIConf@,
+    "resetPasswordUri": "@vidiunServer.resetPasswordUri@",
     "freeTrialExpiration": {
-      "trialPeriodInDays": @kalturaServer.freeTrialExpiration.trialPeriodInDays@
+      "trialPeriodInDays": @vidiunServer.freeTrialExpiration.trialPeriodInDays@
     },
       "limitAccess": {
-          "serviceUrl": "@kalturaServer.limitAccess.serviceUrl@"
+          "serviceUrl": "@vidiunServer.limitAccess.serviceUrl@"
       }
   },
   "cdnServers": {
@@ -52,16 +52,16 @@
       "embedTypes": "@externalLinks.previewAndEmbed.embedTypes@",
       "deliveryProtocols": "@externalLinks.previewAndEmbed.deliveryProtocols@"
     },
-    "kaltura": {
-      "userManual": "@externalLinks.kaltura.userManual@",
-      "support": "@externalLinks.kaltura.support@",
-      "signUp": "@externalLinks.kaltura.signUp@",
-      "contactUs": "@externalLinks.kaltura.contactUs@",
-      "upgradeAccount":"@externalLinks.kaltura.upgradeAccount@",
-      "contactSalesforce": "@externalLinks.kaltura.contactSalesforce@",
-      "dropFoldersManual": "@externalLinks.kaltura.dropFoldersManual@",
-      "customerCare": "@externalLinks.kaltura.customerCare@",
-      "customerPortal": "@externalLinks.kaltura.customerPortal@"
+    "vidiun": {
+      "userManual": "@externalLinks.vidiun.userManual@",
+      "support": "@externalLinks.vidiun.support@",
+      "signUp": "@externalLinks.vidiun.signUp@",
+      "contactUs": "@externalLinks.vidiun.contactUs@",
+      "upgradeAccount":"@externalLinks.vidiun.upgradeAccount@",
+      "contactSalesforce": "@externalLinks.vidiun.contactSalesforce@",
+      "dropFoldersManual": "@externalLinks.vidiun.dropFoldersManual@",
+      "customerCare": "@externalLinks.vidiun.customerCare@",
+      "customerPortal": "@externalLinks.vidiun.customerPortal@"
     },
     "uploads": {
       "highSpeedUpload": "@externalLinks.uploads.highSpeedUpload@",

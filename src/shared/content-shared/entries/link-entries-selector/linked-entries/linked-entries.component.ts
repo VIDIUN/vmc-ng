@@ -1,22 +1,22 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KalturaUtils } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { LinkedEntriesControl } from 'app-shared/kmc-shared/dynamic-metadata-form/linked-entries-control';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { FriendlyHashId } from '@kaltura-ng/kaltura-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VidiunUtils } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { LinkedEntriesControl } from 'app-shared/vmc-shared/dynamic-metadata-form/linked-entries-control';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { FriendlyHashId } from '@vidiun-ng/vidiun-common';
 
-export interface LinkedMediaEntry extends KalturaMediaEntry {
+export interface LinkedMediaEntry extends VidiunMediaEntry {
   selectionId?: string;
 }
 
 @Component({
-  selector: 'k-linked-entries',
+  selector: 'v-linked-entries',
   templateUrl: './linked-entries.component.html',
   styleUrls: ['./linked-entries.component.scss'],
   providers: [{
@@ -47,7 +47,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
   private onChangeCallback: (_: any) => void = () => {
   };
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization) {
   }
@@ -72,7 +72,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
 
       const requests = this._innerValue.map(entryId => new BaseEntryGetAction({ entryId }));
 
-      this._kalturaClient.multiRequest(requests)
+      this._vidiunClient.multiRequest(requests)
         .subscribe(
           responses => {
             const missingEntryIds = [];
@@ -91,7 +91,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
 
               responses.forEach((response, index) => {
                 if (response.error && response.error.code === 'ENTRY_ID_NOT_FOUND') {
-                  missingEntryIds.push(this._innerValue[index]); // TODO [kmcng] replace with args value after client lib fixed
+                  missingEntryIds.push(this._innerValue[index]); // TODO [vmcng] replace with args value after client lib fixed
                 } else {
                   this._entries.push({
                     id: response.result.id,
@@ -131,7 +131,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
     return this._selectionIdGenerator.generateUnique(this._entries.map(item => item.selectionId));
   }
 
-  private _extendWithSelectionId(entries: KalturaMediaEntry[]): LinkedMediaEntry[] {
+  private _extendWithSelectionId(entries: VidiunMediaEntry[]): LinkedMediaEntry[] {
     return entries.map(entry => {
       (<LinkedMediaEntry>entry).selectionId = this._generateUniqueSelectionId();
 
@@ -162,7 +162,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
     this.onTouchedCallback = fn;
   }
 
-  public _deleteEntry(entry: KalturaMediaEntry): void {
+  public _deleteEntry(entry: VidiunMediaEntry): void {
     this._clearSelection();
     this._entries.splice(this._entries.indexOf(entry), 1);
     this._propogateChanges();
@@ -170,13 +170,13 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
 
 
   public _moveUpSelections(): void {
-    if (KalturaUtils.moveUpItems(this._entries, this._selectedEntries)) {
+    if (VidiunUtils.moveUpItems(this._entries, this._selectedEntries)) {
       this._propogateChanges();
     }
   }
 
   public _moveDownSelections(): void {
-    if (KalturaUtils.moveDownItems(this._entries, this._selectedEntries)) {
+    if (VidiunUtils.moveDownItems(this._entries, this._selectedEntries)) {
       this._propogateChanges();
     }
   }
@@ -200,7 +200,7 @@ export class LinkedEntriesComponent implements OnInit, OnDestroy, ControlValueAc
     this._selectedEntries = [];
   }
 
-  public _addEntries(entries: KalturaMediaEntry[]): void {
+  public _addEntries(entries: VidiunMediaEntry[]): void {
     this._entries = this._extendWithSelectionId(entries);
     this._propogateChanges();
   }

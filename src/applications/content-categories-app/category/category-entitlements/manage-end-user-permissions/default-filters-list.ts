@@ -1,6 +1,6 @@
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
-import {KalturaCategoryUserStatus} from 'kaltura-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
+import {VidiunCategoryUserStatus} from 'vidiun-ngx-client';
 
 export interface DefaultFilterList {
   label: string;
@@ -8,22 +8,22 @@ export interface DefaultFilterList {
   items: { value: string, label: string }[]
 }
 
-// TODO [kmcng] - add translations to labels
+// TODO [vmcng] - add translations to labels
 export const DefaultFiltersList: DefaultFilterList[] = [
   {
     name: 'permissionLevels', label: 'Permission Levels',
     items: [
       {
-        value: KalturaCategoryUserPermissionLevel.contributor.toString(),
+        value: VidiunCategoryUserPermissionLevel.contributor.toString(),
         label: 'Contributor'
       }, {
-        value: KalturaCategoryUserPermissionLevel.moderator.toString(),
+        value: VidiunCategoryUserPermissionLevel.moderator.toString(),
         label: 'Moderator'
       }, {
-        value: KalturaCategoryUserPermissionLevel.member.toString(),
+        value: VidiunCategoryUserPermissionLevel.member.toString(),
         label: 'Member'
       }, {
-        value: KalturaCategoryUserPermissionLevel.manager.toString(),
+        value: VidiunCategoryUserPermissionLevel.manager.toString(),
         label: 'Manager'
       }
     ]
@@ -31,19 +31,19 @@ export const DefaultFiltersList: DefaultFilterList[] = [
   {
     name: 'status', label: 'Status',
     items: [
-      {value: KalturaCategoryUserStatus.active.toString(), label: 'Active'},
-      {value: KalturaCategoryUserStatus.notActive.toString(), label: 'Deactivated'}
+      {value: VidiunCategoryUserStatus.active.toString(), label: 'Active'},
+      {value: VidiunCategoryUserStatus.notActive.toString(), label: 'Deactivated'}
     ]
   },
   {
     name: 'updateMethod', label: 'Update Method',
     items: [
       {
-        value: KalturaUpdateMethodType.manual.toString(),
+        value: VidiunUpdateMethodType.manual.toString(),
         label: 'Manual'
       },
       {
-        value: KalturaUpdateMethodType.automatic.toString(),
+        value: VidiunUpdateMethodType.automatic.toString(),
         label: 'Automatic'
       }
     ]

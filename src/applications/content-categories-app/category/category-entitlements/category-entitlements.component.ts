@@ -1,35 +1,35 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {CategoryEntitlementsWidget} from './category-entitlements-widget.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
-import {KalturaContributionPolicyType} from 'kaltura-ngx-client';
-import {KalturaAppearInListType} from 'kaltura-ngx-client';
-import {KalturaPrivacyType} from 'kaltura-ngx-client';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from 'app-shared/kmc-shell';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
+import {VidiunContributionPolicyType} from 'vidiun-ngx-client';
+import {VidiunAppearInListType} from 'vidiun-ngx-client';
+import {VidiunPrivacyType} from 'vidiun-ngx-client';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from 'app-shared/vmc-shell';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategoryEntitlements',
+  selector: 'vCategoryEntitlements',
   templateUrl: './category-entitlements.component.html',
   styleUrls: ['./category-entitlements.component.scss'],
-    providers: [KalturaLogger.createLogger('CategoryEntitlementsComponent')]
+    providers: [VidiunLogger.createLogger('CategoryEntitlementsComponent')]
 })
 export class CategoryEntitlementsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('manageUsersPopup') manageUsersPopup: PopupWidgetComponent;
   public _defaultPermissionLevelOptions: { value: number, label: string }[] = [];
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _membersCount: { loading: boolean, value: number, hasError?: boolean } = { loading: true, value: 0, hasError : false };
   constructor(public _widgetService: CategoryEntitlementsWidget,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -43,16 +43,16 @@ export class CategoryEntitlementsComponent implements OnInit, AfterViewInit, OnD
         });
 
     this._defaultPermissionLevelOptions = [{
-      value: KalturaCategoryUserPermissionLevel.member,
+      value: VidiunCategoryUserPermissionLevel.member,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.member')
     }, {
-      value: KalturaCategoryUserPermissionLevel.contributor,
+      value: VidiunCategoryUserPermissionLevel.contributor,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.contributor')
     }, {
-      value: KalturaCategoryUserPermissionLevel.moderator,
+      value: VidiunCategoryUserPermissionLevel.moderator,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.moderator')
     }, {
-      value: KalturaCategoryUserPermissionLevel.manager,
+      value: VidiunCategoryUserPermissionLevel.manager,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.manager')
     }];
   }
@@ -89,19 +89,19 @@ export class CategoryEntitlementsComponent implements OnInit, AfterViewInit, OnD
   }
 
   get _contentPrivacyOptions() {
-    return KalturaPrivacyType;
+    return VidiunPrivacyType;
   }
 
   get _categoryListingOptions() {
-    return KalturaAppearInListType;
+    return VidiunAppearInListType;
   }
 
   get _contentPublishPermissionsOptions() {
-    return KalturaContributionPolicyType;
+    return VidiunContributionPolicyType;
   }
 
   // owner changed
-  onOwnerChanged(owner: KalturaUser): void {
+  onOwnerChanged(owner: VidiunUser): void {
     // reset the form to have the new user in the textbox
     this._widgetService.entitlementsForm.patchValue({ owner });
     this._widgetService.setDirty();

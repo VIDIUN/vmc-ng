@@ -1,16 +1,16 @@
-import { KalturaBulkUploadType } from 'kaltura-ngx-client';
+import { VidiunBulkUploadType } from 'vidiun-ngx-client';
 
-export function getBulkUploadType(type: KalturaBulkUploadType): string {
+export function getBulkUploadType(type: VidiunBulkUploadType): string {
   switch (true) {
-    case KalturaBulkUploadType.csv === type:
+    case VidiunBulkUploadType.csv === type:
       return 'csv';
 
-    case KalturaBulkUploadType.xml === type:
-    case KalturaBulkUploadType.dropFolderXml === type:
+    case VidiunBulkUploadType.xml === type:
+    case VidiunBulkUploadType.dropFolderXml === type:
       return 'xml';
 
-    case KalturaBulkUploadType.ical === type:
-    case KalturaBulkUploadType.dropFolderIcal === type:
+    case VidiunBulkUploadType.ical === type:
+    case VidiunBulkUploadType.dropFolderIcal === type:
       return 'ics';
 
     default:

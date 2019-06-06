@@ -1,42 +1,42 @@
-<k-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kRoles kOverrideFAIcons">
-    <div #rolesTableHolder class="kRolesHolder kContent">
-      <div class="kContent kFiltersWrapper">
-        <kSticky stickyId="rolesFilters" [sticksTo]="'header'" [scrollOffset]="80">
-          <div class="kRolesTableFilters kContent">
-            <button pButton type="button" class="kButtonBranded kAddRoleBtn"
+<v-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vRoles vOverrideFAIcons">
+    <div #rolesTableHolder class="vRolesHolder vContent">
+      <div class="vContent vFiltersWrapper">
+        <vSticky stickyId="rolesFilters" [sticksTo]="'header'" [scrollOffset]="80">
+          <div class="vRolesTableFilters vContent">
+            <button pButton type="button" class="vButtonBranded vAddRoleBtn"
                     [label]="'applications.administration.roles.addRole' | translate"
-                    [disabled]="_kmcPermissions.ADMIN_ROLE_ADD | kDisabledIfNotPermitted"
+                    [disabled]="_vmcPermissions.ADMIN_ROLE_ADD | vDisabledIfNotPermitted"
                     (click)="_addRole()"></button>
-            <span class="kSelectedRolesNum" *ngIf="(_rolesStore.roles.data$ | async)?.totalCount">
+            <span class="vSelectedRolesNum" *ngIf="(_rolesStore.roles.data$ | async)?.totalCount">
               {{ 'applications.administration.roles.rolesNum' | translate:[(_rolesStore.roles.data$ | async)?.totalCount] }}
             </span>
-            <button pButton class="kButtonDefault kRefreshBtn small" (click)="_reload()" type="text" icon="kIconrefresh"
-                    [kTooltip]="'applications.administration.roles.refresh' | translate"></button>
+            <button pButton class="vButtonDefault vRefreshBtn small" (click)="_reload()" type="text" icon="vIconrefresh"
+                    [vTooltip]="'applications.administration.roles.refresh' | translate"></button>
           </div>
-        </kSticky>
+        </vSticky>
       </div>
-      <k-area-blocker [showLoader]="_tableIsBusy"
+      <v-area-blocker [showLoader]="_tableIsBusy"
                       [message]="_tableBlockerMessage"
                       [bodyScroll]="true">
-        <kRolesTable class="kRolesTable"
+        <vRolesTable class="vRolesTable"
                      [roles]="(_rolesStore.roles.data$ | async)?.items"
                      (actionSelected)="_onActionSelected($event)">
-        </kRolesTable>
-      </k-area-blocker>
-      <div class="kRolesTableFooter kContent" #footer *ngIf="(_rolesStore.roles.data$ | async)?.totalCount">
+        </vRolesTable>
+      </v-area-blocker>
+      <div class="vRolesTableFooter vContent" #footer *ngIf="(_rolesStore.roles.data$ | async)?.totalCount">
         <p-paginator [rows]="_query.pageSize" (onPageChange)="_onPaginationChanged($event)"
                      [first]="_query.pageIndex * _query.pageSize"
                      [totalRecords]="(_rolesStore.roles.data$ | async)?.totalCount"
                      [rowsPerPageOptions]="[25,50,75,100]"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.administration.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.administration.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-  <kPopupWidget #editPopup data-aid="rolesEditPopup" [popupWidth]="995" [slider]="true">
+  <vPopupWidget #editPopup data-aid="rolesEditPopup" [popupWidth]="995" [slider]="true">
     <ng-template>
-      <kEditRole [role]="_currentEditRole"
-                 [parentPopupWidget]="editPopup"></kEditRole>
+      <vEditRole [role]="_currentEditRole"
+                 [parentPopupWidget]="editPopup"></vEditRole>
     </ng-template>
-  </kPopupWidget>
-</k-area-blocker>
+  </vPopupWidget>
+</v-area-blocker>

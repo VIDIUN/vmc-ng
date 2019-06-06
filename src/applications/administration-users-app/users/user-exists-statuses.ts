@@ -1,5 +1,5 @@
 export enum IsUserExistsStatuses {
-  kmcUser,
-  otherKMCUser,
+  vmcUser,
+  otherVMCUser,
   unknownUser
 }

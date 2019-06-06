@@ -8,7 +8,7 @@ export interface SubApplicationsConfig {
         ruleBasedTotalResults: number
     };
     previewAndEmbedApp: {
-        includeKalturaLinks: boolean,
+        includeVidiunLinks: boolean,
         secureEmbed: boolean,
         includeSeoMetadata: boolean,
         embedType: 'dynamic' | 'iframe' | 'auto' | 'thumb'
@@ -37,7 +37,7 @@ export const subApplicationsConfig: SubApplicationsConfig = {
         'ruleBasedTotalResults': 200
     },
     'previewAndEmbedApp': {
-        'includeKalturaLinks': false,
+        'includeVidiunLinks': false,
         'secureEmbed': true,
         'includeSeoMetadata': false,
         'embedType': 'dynamic'
@@ -53,7 +53,7 @@ export const subApplicationsConfig: SubApplicationsConfig = {
         }
     },
     'administrationRolesApp': {
-        'contactUsLink': 'http://site.kaltura.com/Request-Users.html'
+        'contactUsLink': 'http://site.vidiun.com/Request-Users.html'
     }
 };
 

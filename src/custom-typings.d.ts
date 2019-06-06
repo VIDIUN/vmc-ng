@@ -58,10 +58,10 @@ declare module 'modern-lru' {
 
 // Extra variables that live on Global that will be replaced by webpack DefinePlugin
 declare var ENV: string;
-declare var KMCngVersion : string;
+declare var VMCngVersion : string;
 declare var HMR: boolean;
 declare var System: SystemJS;
-declare var __KMCng__ : {
+declare var __VMCng__ : {
   version : string
 };
 

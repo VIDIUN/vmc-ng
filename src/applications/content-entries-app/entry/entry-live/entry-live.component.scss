@@ -1,42 +1,42 @@
 @import 'app-theme/_variables.scss';
 
-.kLiveDashboardContainer {
+.vLiveDashboardContainer {
   width: 100%;
 }
-.kLive{
+.vLive{
   padding: 24px;
   padding-top: 0;
   width: 100%;
-	.kTitle{
-		color: $kGrayscale1;
+	.vTitle{
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 	}
-  .kButtons{
+  .vButtons{
     padding-top: 12px;
 
-    .kButtonLiveDashboard {
+    .vButtonLiveDashboard {
       height:34px;
       width: 160px;
-      /deep/ .kIconstatistic{
+      /deep/ .vIconstatistic{
         line-height: 18px;
 
         &:before {
           font-size: 22px;
-          color: $kGrayscale3;
+          color: $vGrayscale3;
         }
       }
     }
   }
-	.kLiveDetails{
+	.vLiveDetails{
 		box-sizing: border-box;
 		width: 100%;
 		button{
 			font-weight: 400;
 		}
-		.kSubTitle{
+		.vSubTitle{
 			display: block;
-			color: $kGrayscale1;
+			color: $vGrayscale1;
 			font-size: 16px;
 			font-weight: 700;
             padding-top: 42px;
@@ -45,17 +45,17 @@
         margin-top:0;
       }
 		}
-		.kRow{
+		.vRow{
 			display: flex;
 			padding-top: 18px;
 			align-items: center;
 
-            .kControl {
-                color: $kGrayscale2;
+            .vControl {
+                color: $vGrayscale2;
                 height: 34px;
                 width: 360px;
                 border-radius: 3px;
-                &.kInputSwitch {
+                &.vInputSwitch {
                     padding-right: 12px;
 
                     & + span {
@@ -64,7 +64,7 @@
                 }
             }
 		}
-		.kCopyBtn{
+		.vCopyBtn{
 			border: 0px solid white;
 			&:active:not(:disabled){
 				box-shadow: none;
@@ -73,58 +73,58 @@
 			font-size: 18px;
 		}
 
-		.kTableHeader{
+		.vTableHeader{
 			font-weight: 700;
 		}
-		.kNote{
+		.vNote{
 			display: block;
 			margin-top: 14px;
 			margin-bottom: 14px;
 		}
-		.kLabels{
+		.vLabels{
 			flex: 0 0 auto;
 			width: 150px;
 		}
-		.kWideLabels{
+		.vWideLabels{
 			flex: 0 0 auto;
 			width: 225px;
 		}
-		.kLiveNumber{
+		.vLiveNumber{
 			width:20px;
 		}
-		.kLiveBitrateCB{
+		.vLiveBitrateCB{
 			margin-top: -2px;
 			width:26px;
 		}
-		.kLiveBitrate{
+		.vLiveBitrate{
 			width:200px;
 			flex: 0 0 auto;
 		}
-		.kLiveKbps{
+		.vLiveKbps{
 			font-size:13px;
 			margin-left: 4px;
 		}
-		.kLiveWidth{
+		.vLiveWidth{
 			width:80px;
 		}
-		.kLiveX{
+		.vLiveX{
 			text-align: center;
 			width:40px;
 		}
-		.kLiveHeight{
+		.vLiveHeight{
 			width:80px;
 		}
-		.kReportLink{
+		.vReportLink{
 			margin-left: 12px;
-			&.kDisabled{
+			&.vDisabled{
 				pointer-events: none;
-				color: $kGrayscale4;
+				color: $vGrayscale4;
 			}
 		}
-		.kError{
+		.vError{
 			line-height: 28px;
 			padding-left: 20px;
-			color: $kDandger;
+			color: $vDandger;
 			font-size: 13px;
 		}
 	}
@@ -134,7 +134,7 @@
 :host /deep/ .ui-dropdown{
 	width: 200px !important;
 }
-:host /deep/ .kLiveBitrate .ui-dropdown{
+:host /deep/ .vLiveBitrate .ui-dropdown{
 	width: 120px !important;
 }
 :host /deep/ .ui-dropdown-label.ui-inputtext{
@@ -145,6 +145,6 @@
 	margin-top: -.8em;
 }
 
-:host /deep/ span.ui-button-icon-left.kIconcalendar{
+:host /deep/ span.ui-button-icon-left.vIconcalendar{
 	padding-top: 2px !important;
 }

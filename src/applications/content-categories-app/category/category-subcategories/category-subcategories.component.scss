@@ -1,14 +1,14 @@
 @import 'app-theme/_variables.scss';
 
-.kSubcategoriesHolder {
+.vSubcategoriesHolder {
   width: 100%;
   height: 100%;
-  border: 1px solid $kGrayscale6;
+  border: 1px solid $vGrayscale6;
   position: relative;
   display: flex;
   flex-direction: column;
 
-  .kSubcategoriesTable {
+  .vSubcategoriesTable {
     border: none;
     position: relative;
     background-color: white;
@@ -16,7 +16,7 @@
   }
 }
 
-:host /deep/ .kIcondropdown_arrow_top,
-:host /deep/ .kIcondropdown_arrow_bottom {
+:host /deep/ .vIcondropdown_arrow_top,
+:host /deep/ .vIcondropdown_arrow_bottom {
   font-size: 12px;
 }

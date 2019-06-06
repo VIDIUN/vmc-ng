@@ -1,24 +1,24 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
 import { TranscodingProfileFlavorsWidget } from './transcoding-profile-flavors-widget.service';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kTranscodingProfilesFlavors',
+  selector: 'vTranscodingProfilesFlavors',
   templateUrl: './transcoding-profile-flavors.component.html',
   styleUrls: ['./transcoding-profile-flavors.component.scss'],
-  providers: [KalturaLogger.createLogger('TranscodingProfileFlavorsComponent')]
+  providers: [VidiunLogger.createLogger('TranscodingProfileFlavorsComponent')]
 })
 export class TranscodingProfileFlavorsComponent implements OnInit, OnDestroy {
   @ViewChild('editMediaProfileFlavor') _editMediaProfileFlavorPopup: PopupWidgetComponent;
   @ViewChild('editLiveProfileFlavor') _editLiveProfileFlavorPopup: PopupWidgetComponent;
 
-  public _selectedFlavor: KalturaFlavorParams;
+  public _selectedFlavor: VidiunFlavorParams;
 
   constructor(public _widgetService: TranscodingProfileFlavorsWidget,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -29,13 +29,13 @@ export class TranscodingProfileFlavorsComponent implements OnInit, OnDestroy {
     this._widgetService.detachForm();
   }
 
-  public _editFlavor(flavor: KalturaFlavorParams): void {
+  public _editFlavor(flavor: VidiunFlavorParams): void {
     this._logger.info(`handle edit flavor action by user`, { id: flavor.id, name: flavor.name });
     this._selectedFlavor = flavor;
 
-    if (this._widgetService.data.type === KalturaConversionProfileType.media) {
+    if (this._widgetService.data.type === VidiunConversionProfileType.media) {
       this._editMediaProfileFlavorPopup.open();
-    } else if (this._widgetService.data.type === KalturaConversionProfileType.liveStream) {
+    } else if (this._widgetService.data.type === VidiunConversionProfileType.liveStream) {
       this._editLiveProfileFlavorPopup.open();
     }
   }

@@ -26,11 +26,11 @@
                         dependsOnFeature="CONTENT_INGEST_DROP_FOLDER_MATCH">
                 <ui id="entryAssets" allowMatchFromDrop="false"/>
             </permission>
-            <!-- KCW: online services -->
+            <!-- VCW: online services -->
             <permission text="Import from Web" id="CONTENT_INGEST_EXTERNAL_SEARCH">
                 <ui id="addPanel.btnServices" visible="false" includeInLayout="false"/>
             </permission>
-            <!-- KCW: webcam -->
+            <!-- VCW: webcam -->
             <permission text="Record from Webcam" id="CONTENT_INGEST_WEBCAM">
                 <ui id="addPanel.btnWebcam" visible="false" includeInLayout="false"/>
             </permission>
@@ -289,8 +289,8 @@
             <permission text="Modify Players" id="STUDIO_UPDATE_UICONF">
                 <ui id="wizard_edit.stylePage.all" enabled="false"/>
                 <ui id="wizard_edit.templatePage.all" enabled="false"/>
-                <ui id="wizard_edit.previewPlayerPage.kdpWidth" enabled="false"/>
-                <ui id="wizard_edit.previewPlayerPage.kdpHeight" enabled="false"/>
+                <ui id="wizard_edit.previewPlayerPage.vdpWidth" enabled="false"/>
+                <ui id="wizard_edit.previewPlayerPage.vdpHeight" enabled="false"/>
                 <ui id="wizard_edit.contentPage.removeBtn" enabled="false"/>
                 <ui id="wizard_edit.contentPage.addBtn" enabled="false" buttonMode="false"/>
                 <ui id="wizard_edit.contentPage.upBtn" visible="false"/>
@@ -489,11 +489,11 @@
             <ui id="conversionProfileDrilldown_add" allowStorageProfiles="false" />
         </permissionGroup>
         <!-- disable thumb resize -->
-        <permissionGroup id="FEATURE_DISABLE_KMC_DRILL_DOWN_THUMB_RESIZE">
+        <permissionGroup id="FEATURE_DISABLE_VMC_DRILL_DOWN_THUMB_RESIZE">
             <ui id="content.generalPermissions" enableThumbResize="true"/>
         </permissionGroup>
         <!-- hide thumbnail list -->
-        <permissionGroup id="FEATURE_DISABLE_KMC_LIST_THUMBNAILS">
+        <permissionGroup id="FEATURE_DISABLE_VMC_LIST_THUMBNAILS">
             <ui id="content.manage.entryTable" showThumbnails="true"/>
             <ui id="content.moderation.entryTable" showThumbnails="true"/>
         </permissionGroup>
@@ -505,12 +505,12 @@
             <ui id="accessControl.accessControlProfilesTable" showIp2Loc="false"/>
         </permissionGroup-->
         <!-- Shows tags columns for entry flavors and thumbnails -->
-        <permissionGroup id="FEATURE_KMC_DRILLDOWN_TAGS_COLUMN">
+        <permissionGroup id="FEATURE_VMC_DRILLDOWN_TAGS_COLUMN">
             <ui id="entryAssets" showTagsColumn="false"/>
             <ui id="entryThumbnails" showTagsColumn="false"/>
         </permissionGroup>
         <!-- manage categories in small chunks (for partners with many categories) -->
-        <permissionGroup id="DYNAMIC_FLAG_KMC_CHUNKED_CATEGORY_LOAD">
+        <permissionGroup id="DYNAMIC_FLAG_VMC_CHUNKED_CATEGORY_LOAD">
             <ui id="content.generalPermissions" lotsOfCategoriesFlag="false"/>
         </permissionGroup>
         <!-- allow up to 200 categories per entry (instead of 32) -->
@@ -518,7 +518,7 @@
             <ui id="content.generalPermissions" setCategoriesLimit="true" />
         </permissionGroup>
         <!-- show moderation approval popup -->
-        <permissionGroup id="FEATURE_KMC_VERIFY_MODERATION">
+        <permissionGroup id="FEATURE_VMC_VERIFY_MODERATION">
             <ui id="content.generalPermissions" confirmModeration="false"/>
         </permissionGroup>
         <!-- content entitlements -->
@@ -538,11 +538,11 @@
         <permissionGroup id="FEATURE_END_USER_REPORTS">
             <ui id="analytics" entitlementEnabled="false"/>
         </permissionGroup>
-        <!-- don't show errors from KDP in entry drilldown -->
-        <permissionGroup id="FEATURE_DISABLE_KMC_KDP_ALERTS">
-            <ui id="entryMetaData" disableKDPAlerts="false" />
-            <ui id="ads" disableKDPAlerts="false" />
-            <ui id="content.moderation" disableKDPAlerts="false" />
+        <!-- don't show errors from VDP in entry drilldown -->
+        <permissionGroup id="FEATURE_DISABLE_VMC_VDP_ALERTS">
+            <ui id="entryMetaData" disableVDPAlerts="false" />
+            <ui id="ads" disableVDPAlerts="false" />
+            <ui id="content.moderation" disableVDPAlerts="false" />
         </permissionGroup>
         <!-- Aspera upgrade link -->
         <permissionGroup id="FEATURE_HIDE_ASPERA_LINK">
@@ -553,22 +553,22 @@
             <ui id="addPanel" showAsperaHomepage="false"/>
         </permissionGroup>
         <!-- live stream: HLS/HDS, manual (Akamai) -->
-        <permissionGroup id="FEATURE_KMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION">
+        <permissionGroup id="FEATURE_VMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION">
             <ui id="content.generalPermissions" enableAkamaiLive="false" />
         </permissionGroup>
-        <!-- live stream: Kaltura -->
-        <permissionGroup id="FEATURE_KALTURA_LIVE_STREAM">
-            <ui id="content.generalPermissions" enableKalturaLive="false" />
-            <ui id="liveStream" enableKalturaLive="false" />
+        <!-- live stream: Vidiun -->
+        <permissionGroup id="FEATURE_VIDIUN_LIVE_STREAM">
+            <ui id="content.generalPermissions" enableVidiunLive="false" />
+            <ui id="liveStream" enableVidiunLive="false" />
             <ui id="account.transcoding.advancedMode" showLiveBtn="false" />
         </permissionGroup>
-        <!-- live stream record default: Kaltura -->
+        <!-- live stream record default: Vidiun -->
         <permissionGroup id="FEATURE_LIVE_STREAM_RECORD">
-            <ui id="content.generalPermissions" enableKalturaRecording="false" />
+            <ui id="content.generalPermissions" enableVidiunRecording="false" />
         </permissionGroup>
-        <!-- live stream: Kaltura Multicast -->
+        <!-- live stream: Vidiun Multicast -->
         <permissionGroup id="FEATURE_PUSH_PUBLISH">
-            <ui id="content.generalPermissions" enableKalturaMulticast="false" />
+            <ui id="content.generalPermissions" enableVidiunMulticast="false" />
         </permissionGroup>
         <!-- DRM -->
         <permissionGroup id="WIDEVINE_PLUGIN_PERMISSION">

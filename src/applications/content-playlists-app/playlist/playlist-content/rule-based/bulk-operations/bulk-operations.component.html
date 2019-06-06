@@ -1,24 +1,24 @@
-<div class="kPlaylistRulesTableFilters">
-  <kSticky stickyId="playlistContentBulk"
+<div class="vPlaylistRulesTableFilters">
+  <vSticky stickyId="playlistContentBulk"
            sticksTo="playlistHeader"
-           stickyClass="kStickyHeader"
+           stickyClass="vStickyHeader"
            [scrollOffset]="120">
-    <div class="kHeader">
-      <div class="kBulkActionsContainer">
-        <div class="kBulkActions" *ngIf="selectedRules.length; else addRuleWrap">
+    <div class="vHeader">
+      <div class="vBulkActionsContainer">
+        <div class="vBulkActions" *ngIf="selectedRules.length; else addRuleWrap">
           <button pButton
-                  class="kButtonDefault kMoveBtn kMoveBtnTop"
-                  [disabled]="!isNewPlaylist && (_kmcPermissions.PLAYLIST_UPDATE | kDisabledIfNotPermitted)"
-                  icon="kIcondropdown_arrow_top"
+                  class="vButtonDefault vMoveBtn vMoveBtnTop"
+                  [disabled]="!isNewPlaylist && (_vmcPermissions.PLAYLIST_UPDATE | vDisabledIfNotPermitted)"
+                  icon="vIcondropdown_arrow_top"
                   (click)="_moveRules('up')"></button>
           <button pButton
-                  class="kButtonDefault kMoveBtn kMoveBtnBottom"
-                  [class.kMoveBtnBottomDisabled]="!isNewPlaylist && (_kmcPermissions.PLAYLIST_UPDATE | kDisabledIfNotPermitted)"
-                  [disabled]="!isNewPlaylist && (_kmcPermissions.PLAYLIST_UPDATE | kDisabledIfNotPermitted)"
-                  icon="kIcondropdown_arrow_bottom"
+                  class="vButtonDefault vMoveBtn vMoveBtnBottom"
+                  [class.vMoveBtnBottomDisabled]="!isNewPlaylist && (_vmcPermissions.PLAYLIST_UPDATE | vDisabledIfNotPermitted)"
+                  [disabled]="!isNewPlaylist && (_vmcPermissions.PLAYLIST_UPDATE | vDisabledIfNotPermitted)"
+                  icon="vIcondropdown_arrow_bottom"
                   (click)="_moveRules('down')"></button>
-          <button pButton class="kButtonDanger kBulkDeleteBtn"
-                  [disabled]="!isNewPlaylist && (_kmcPermissions.PLAYLIST_UPDATE | kDisabledIfNotPermitted)"
+          <button pButton class="vButtonDanger vBulkDeleteBtn"
+                  [disabled]="!isNewPlaylist && (_vmcPermissions.PLAYLIST_UPDATE | vDisabledIfNotPermitted)"
                   [label]="'applications.content.playlists.remove' | translate"
                   (click)="deleteRules.emit(selectedRules)"></button>
         </div>
@@ -26,30 +26,30 @@
           <button
             pButton
             type="button"
-            icon="kIconplus"
+            icon="vIconplus"
             iconPos="left"
-            [disabled]="!isNewPlaylist && (_kmcPermissions.PLAYLIST_UPDATE | kDisabledIfNotPermitted)"
+            [disabled]="!isNewPlaylist && (_vmcPermissions.PLAYLIST_UPDATE | vDisabledIfNotPermitted)"
             [label]="'applications.content.playlistDetails.content.addRule' | translate"
-            class="kButtonDefault kAddRuleBtn"
+            class="vButtonDefault vAddRuleBtn"
             (click)="addRule.emit()">
           </button>
         </ng-template>
-        <span class="kSelectedRulesNum" *ngIf="rulesTotalCount">
+        <span class="vSelectedRulesNum" *ngIf="rulesTotalCount">
           {{'applications.content.playlistDetails.content.entriesInRules'| translate: [entriesTotalCount, rulesTotalCount]}}
       </span>
-        <div *ngIf="selectedRules.length" class="kSelected">
-        <span class="kSelectedRulesLabel">
+        <div *ngIf="selectedRules.length" class="vSelected">
+        <span class="vSelectedRulesLabel">
           {{'applications.content.playlists.selected' | translate: [selectedRules.length]}}
         </span>
-          <a class="kBulkCancel" (click)="clearSelection.emit()">
+          <a class="vBulkCancel" (click)="clearSelection.emit()">
             {{'applications.content.playlists.cancel' | translate}}
           </a>
         </div>
       </div>
-      <div *ngIf="duration" class="kPlaylistRulesTableDuration">
-        {{'applications.content.playlistDetails.details.duration'| translate: [(duration | kTime)]}}
+      <div *ngIf="duration" class="vPlaylistRulesTableDuration">
+        {{'applications.content.playlistDetails.details.duration'| translate: [(duration | vTime)]}}
       </div>
     </div>
-  </kSticky>
+  </vSticky>
 </div>
 

@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DetailsBarModule} from '@kaltura-ng/kaltura-ui';
-import {TagsModule} from '@kaltura-ng/kaltura-ui';
+import {DetailsBarModule} from '@vidiun-ng/vidiun-ui';
+import {TagsModule} from '@vidiun-ng/vidiun-ui';
 import {
     AccordionModule,
     ButtonModule,
@@ -25,20 +25,20 @@ import {
     TieredMenuModule,
     TreeModule
 } from 'primeng/primeng';
-import {KMCShellModule} from 'app-shared/kmc-shell';
+import {VMCShellModule} from 'app-shared/vmc-shell';
 
 import {routing} from './content-entries-app.routes';
 import {ContentEntriesComponent} from './content-entries.component';
 
-import {DynamicMetadataFormModule} from 'app-shared/kmc-shared';
+import {DynamicMetadataFormModule} from 'app-shared/vmc-shared';
 
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import {KalturaPrimeNgUIModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
-import {AutoCompleteModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
-import {DynamicFormModule} from '@kaltura-ng/kaltura-ui';
-import {DynamicFormModule as PrimeDynamicFormModule} from '@kaltura-ng/kaltura-primeng-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import {VidiunPrimeNgUIModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
+import {AutoCompleteModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
+import {DynamicFormModule} from '@vidiun-ng/vidiun-ui';
+import {DynamicFormModule as PrimeDynamicFormModule} from '@vidiun-ng/vidiun-primeng-ui';
 import {EntryComponentsList} from './entry/entry-components-list';
 import {EntriesComponentsList} from './entries/entries-components-list';
 
@@ -46,16 +46,16 @@ import {EntryCanDeactivate} from './entry/entry-can-deactivate.service';
 import {EntriesModule} from 'app-shared/content-shared/entries/entries.module';
 import {ContentEntriesAppService} from './content-entries-app.service';
 import {CategoriesModule} from 'app-shared/content-shared/categories/categories.module';
-import {CopyToClipboardModule} from '@kaltura-ng/mc-shared';
-import {KEditHosterModule} from 'app-shared/kmc-shared/kedit-hoster/kedit-hoster.module';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import {CopyToClipboardModule} from '@vidiun-ng/mc-shared';
+import {VEditHosterModule} from 'app-shared/vmc-shared/vedit-hoster/vedit-hoster.module';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
 import { EntriesListService } from './entries/entries-list.service';
-import { InputHelperModule } from '@kaltura-ng/kaltura-ui';
-import { AnalyticsLiveModule } from 'app-shared/kmc-shared/analytics-live/analytics-live.module';
-import { KPTableModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { ClearableInputModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { InputHelperModule } from '@vidiun-ng/vidiun-ui';
+import { AnalyticsLiveModule } from 'app-shared/vmc-shared/analytics-live/analytics-live.module';
+import { VPTableModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { ClearableInputModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
@@ -75,9 +75,9 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     InputTextModule,
     LocalizationModule,
     DynamicMetadataFormModule,
-    KalturaPrimeNgUIModule,
-    KalturaUIModule,
-    KMCShellModule,
+    VidiunPrimeNgUIModule,
+    VidiunUIModule,
+    VMCShellModule,
     MenuModule,
     MultiSelectModule,
     PaginatorModule,
@@ -97,14 +97,14 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     StickyModule,
     CopyToClipboardModule,
     OverlayPanelModule,
-    KEditHosterModule,
+    VEditHosterModule,
     StickyModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
     TableModule,
     InputSwitchModule,
     InputHelperModule,
     AnalyticsLiveModule,
-    KPTableModule,
+    VPTableModule,
       ClearableInputModule,
       DateFormatModule,
   ],

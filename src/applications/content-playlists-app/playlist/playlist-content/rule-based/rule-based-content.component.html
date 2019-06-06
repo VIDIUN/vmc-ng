@@ -1,6 +1,6 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
-  <div class="kPlaylistEntriesHolder">
-    <kPlaylistRulesListBulkOperationsContent
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+  <div class="vPlaylistEntriesHolder">
+    <vPlaylistRulesListBulkOperationsContent
       [selectedRules]="_selectedRules"
       [isNewPlaylist]="_widgetService.isNewData"
       [entriesTotalCount]="_widgetService.entriesTotalCount"
@@ -10,20 +10,20 @@
       (deleteRules)="_deleteSelected($event)"
       (clearSelection)="_clearSelection()"
       (moveRules)="_widgetService.moveRules($event)">
-    </kPlaylistRulesListBulkOperationsContent>
-    <kPlaylistRulesTable
-      class="kPlaylistRulesTable"
+    </vPlaylistRulesListBulkOperationsContent>
+    <vPlaylistRulesTable
+      class="vPlaylistRulesTable"
       [isNewPlaylist]="_widgetService.isNewData"
       [rules]="_widgetService.rules"
       (onActionSelected)="_onActionSelected($event)"
-      [(selectedRules)]="_selectedRules"></kPlaylistRulesTable>
+      [(selectedRules)]="_selectedRules"></vPlaylistRulesTable>
   </div>
 
-  <kPopupWidget #playlistRule data-aid="playlistRule" [popupWidth]="995" [slider]="true">
+  <vPopupWidget #playlistRule data-aid="playlistRule" [popupWidth]="995" [slider]="true">
     <ng-template>
-      <kPlaylistRule [rule]="_selectedRule"
+      <vPlaylistRule [rule]="_selectedRule"
                      (onClosePopupWidget)="playlistRule.close()"
-                     (onSaveRule)="_saveRule($event)"></kPlaylistRule>
+                     (onSaveRule)="_saveRule($event)"></vPlaylistRule>
     </ng-template>
-  </kPopupWidget>
-</k-area-blocker>
+  </vPopupWidget>
+</v-area-blocker>

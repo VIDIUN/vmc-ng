@@ -1,0 +1,94 @@
+@import 'app-theme/_variables.scss';
+
+.vUploadFromYoutube {
+    color: $vGrayscale1;
+    height: 357px;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    .vHeader, .vFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vHeader {
+        text-align: center;
+        height: 77px;
+        border-bottom: 1px $vGrayscale4 solid;
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+
+    .vContent {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .vNote {
+            margin-left: 28px;
+            margin-top: 35px;
+        }
+
+        .vRow {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            margin-top: 60px;
+            padding: 0 28px;
+
+            label {
+                display: inline-block;
+                width: 120px;
+                font-weight: normal;
+                font-size: 15px;
+                line-height: 24px;
+            }
+
+            .vInput {
+                position: relative;
+
+                input {
+                    width: 500px;
+                    margin-left: 28px;
+
+                    &.vHasError {
+                        border-color: $vDandger;
+                    }
+                }
+
+                .vError {
+                    position: absolute;
+                    margin-left: 28px;
+                    color: $vDandger;
+                    font-size: 12px;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+
+    .vFooter {
+        z-index: 1;
+        height: 66px;
+        border-top: 1px $vGrayscale4 solid;
+        text-align: center;
+
+        .vUploadButton {
+            width: 140px;
+            height: 34px;
+            font-size: 14px;
+            margin-right: 16px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

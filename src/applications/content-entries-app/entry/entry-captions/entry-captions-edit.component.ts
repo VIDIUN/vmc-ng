@@ -3,27 +3,27 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 
 import { ISubscription } from 'rxjs/Subscription';
 
-import { KalturaCaptionAsset } from 'kaltura-ngx-client';
-import { KalturaCaptionType } from 'kaltura-ngx-client';
-import { UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { FileDialogComponent } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { VidiunCaptionAsset } from 'vidiun-ngx-client';
+import { VidiunCaptionType } from 'vidiun-ngx-client';
+import { UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { FileDialogComponent } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 import { NewEntryCaptionFile } from './new-entry-caption-file';
 import { globalConfig } from 'config/global';
-import { LanguageOptionsService } from 'app-shared/kmc-shared/language-options';
-import { KalturaValidators } from '@kaltura-ng/kaltura-ui';
+import { LanguageOptionsService } from 'app-shared/vmc-shared/language-options';
+import { VidiunValidators } from '@vidiun-ng/vidiun-ui';
 
 @Component({
-    selector: 'kEntryCaptionsEdit',
+    selector: 'vEntryCaptionsEdit',
     templateUrl: './entry-captions-edit.component.html',
     styleUrls: ['./entry-captions-edit.component.scss'],
     providers: [LanguageOptionsService]
 })
 export class EntryCaptionsEdit implements  OnInit, AfterContentInit, OnDestroy{
 
-	@Input() currentCaption: KalturaCaptionAsset;
+	@Input() currentCaption: VidiunCaptionAsset;
 	@Input() parentPopupWidget: PopupWidgetComponent;
 
 	@ViewChild('fileDialog') private fileDialog: FileDialogComponent;
@@ -54,15 +54,15 @@ export class EntryCaptionsEdit implements  OnInit, AfterContentInit, OnDestroy{
         this._captionFormats = [
             {
                 label: 'SRT',
-                value: KalturaCaptionType.srt
+                value: VidiunCaptionType.srt
             },
             {
                 label: 'DFXP',
-                value: KalturaCaptionType.dfxp
+                value: VidiunCaptionType.dfxp
             },
             {
                 label: 'VTT',
-                value: KalturaCaptionType.webvtt
+                value: VidiunCaptionType.webvtt
             }
         ];
 	    this._newCaption = this.currentCaption.id === null;
@@ -109,7 +109,7 @@ export class EntryCaptionsEdit implements  OnInit, AfterContentInit, OnDestroy{
 	}
 
   private _validateFileSize(file: File): boolean {
-    const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+    const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
     const fileSize = file.size / 1024 / 1024; // convert to Mb
 
     return this._uploadManagement.supportChunkUpload(new NewEntryCaptionFile(null)) || fileSize < maxFileSize;
@@ -182,7 +182,7 @@ export class EntryCaptionsEdit implements  OnInit, AfterContentInit, OnDestroy{
 		}
 	}
 
-	public _getCaptionFormatLabel(format: KalturaCaptionType): string{
+	public _getCaptionFormatLabel(format: VidiunCaptionType): string{
 		let label = "";
 		this._captionFormats.forEach( obj => {
 			if (format && obj.value.toString() === format.toString()){
@@ -207,7 +207,7 @@ export class EntryCaptionsEdit implements  OnInit, AfterContentInit, OnDestroy{
 			language: '',
 			format: '',
 			uploadMethod: 'upload',
-			captionUrl: ['', KalturaValidators.url]
+			captionUrl: ['', VidiunValidators.url]
 		});
 	}
 

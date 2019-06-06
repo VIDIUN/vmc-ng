@@ -1,36 +1,36 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { BrowserService } from 'shared/kmc-shell';
+import { BrowserService } from 'shared/vmc-shell';
 import { Observable } from 'rxjs';
-import { KalturaDropFolderFile } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileStatus } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { DropFolderListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFilter } from 'kaltura-ngx-client';
-import { KalturaDropFolderOrderBy } from 'kaltura-ngx-client';
-import { KalturaDropFolderStatus } from 'kaltura-ngx-client';
-import { KalturaDropFolder } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerConfig } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileHandlerType } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerMatchPolicy } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileFilter } from 'kaltura-ngx-client';
-import { KalturaUtils } from '@kaltura-ng/kaltura-common';
-import { DropFolderFileListAction } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { DatesRangeAdapter, DatesRangeType, ListTypeAdapter } from '@kaltura-ng/mc-shared';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunDropFolderFile } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileStatus } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { DropFolderListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFilter } from 'vidiun-ngx-client';
+import { VidiunDropFolderOrderBy } from 'vidiun-ngx-client';
+import { VidiunDropFolderStatus } from 'vidiun-ngx-client';
+import { VidiunDropFolder } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerConfig } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileHandlerType } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerMatchPolicy } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileFilter } from 'vidiun-ngx-client';
+import { VidiunUtils } from '@vidiun-ng/vidiun-common';
+import { DropFolderFileListAction } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { DatesRangeAdapter, DatesRangeType, ListTypeAdapter } from '@vidiun-ng/mc-shared';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { ISubscription } from 'rxjs/Subscription';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { StringTypeAdapter } from '@kaltura-ng/mc-shared';
-import { KalturaDropFolderFileListResponse } from 'kaltura-ngx-client';
-import { DropFolderFileDeleteAction } from 'kaltura-ngx-client';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { StringTypeAdapter } from '@vidiun-ng/mc-shared';
+import { VidiunDropFolderFileListResponse } from 'vidiun-ngx-client';
+import { DropFolderFileDeleteAction } from 'vidiun-ngx-client';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { serverConfig } from 'config/server';
-import { ContentDropFoldersMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContentDropFoldersMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 const localStoragePageSizeKey = 'dropFolders.list.pageSize';
 
@@ -52,25 +52,25 @@ export interface DropFoldersFilters {
 @Injectable()
 export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters> implements OnDestroy {
   private _dropFolders = {
-    data: new BehaviorSubject<{ items: KalturaDropFolderFile[], totalCount: number }>({
+    data: new BehaviorSubject<{ items: VidiunDropFolderFile[], totalCount: number }>({
       items: [],
       totalCount: 0
     }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
   private _allStatusesList = [
-    KalturaDropFolderFileStatus.downloading,
-    KalturaDropFolderFileStatus.errorDeleting,
-    KalturaDropFolderFileStatus.errorDownloading,
-    KalturaDropFolderFileStatus.errorHandling,
-    KalturaDropFolderFileStatus.handled,
-    KalturaDropFolderFileStatus.noMatch,
-    KalturaDropFolderFileStatus.pending,
-    KalturaDropFolderFileStatus.processing,
-    KalturaDropFolderFileStatus.parsed,
-    KalturaDropFolderFileStatus.uploading,
-    KalturaDropFolderFileStatus.detected,
-    KalturaDropFolderFileStatus.waiting
+    VidiunDropFolderFileStatus.downloading,
+    VidiunDropFolderFileStatus.errorDeleting,
+    VidiunDropFolderFileStatus.errorDownloading,
+    VidiunDropFolderFileStatus.errorHandling,
+    VidiunDropFolderFileStatus.handled,
+    VidiunDropFolderFileStatus.noMatch,
+    VidiunDropFolderFileStatus.pending,
+    VidiunDropFolderFileStatus.processing,
+    VidiunDropFolderFileStatus.parsed,
+    VidiunDropFolderFileStatus.uploading,
+    VidiunDropFolderFileStatus.detected,
+    VidiunDropFolderFileStatus.waiting
   ].join(',');
   private _isReady = false;
   private _querySubscription: ISubscription;
@@ -78,11 +78,11 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
 
   public readonly dropFolders = { data$: this._dropFolders.data.asObservable(), state$: this._dropFolders.state.asObservable() };
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
               contentDropFoldersMainView: ContentDropFoldersMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger);
     if (contentDropFoldersMainView.isAvailable()) {
         this._prepare();
@@ -165,7 +165,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
 
   }
 
-  private _buildQueryRequest(reloadFolders: boolean): Observable<KalturaDropFolderFileListResponse> {
+  private _buildQueryRequest(reloadFolders: boolean): Observable<VidiunDropFolderFileListResponse> {
     return this._loadDropFoldersList(reloadFolders)
       .switchMap(({ dropFoldersList, error }) => {
         if (!dropFoldersList.length || error) {
@@ -173,7 +173,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
               header: this._appLocalization.get('app.common.attention'),
             message: error || this._appLocalization.get(
                 'applications.content.dropFolders.errors.dropFoldersAlert',
-                [serverConfig.externalLinks.kaltura.contactUs, serverConfig.externalLinks.kaltura.dropFoldersManual]
+                [serverConfig.externalLinks.vidiun.contactUs, serverConfig.externalLinks.vidiun.dropFoldersManual]
             )
           });
 
@@ -184,13 +184,13 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
         }
 
         // create request items
-        const filter = new KalturaDropFolderFileFilter({});
-        let pager: KalturaFilterPager = null;
+        const filter = new VidiunDropFolderFileFilter({});
+        let pager: VidiunFilterPager = null;
 
         const data: DropFoldersFilters = this._getFiltersAsReadonly();
 
         // use selected folders - list of folders ids separated by comma
-        filter.dropFolderIdIn = dropFoldersList.reduce((ids, kdf) => `${ids}${kdf.id},`, '');
+        filter.dropFolderIdIn = dropFoldersList.reduce((ids, vdf) => `${ids}${vdf.id},`, '');
 
         // filter 'freeText'
         if (data.freeText) {
@@ -205,11 +205,11 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
         // filter 'createdAt'
         if (data.createdAt) {
           if (data.createdAt.fromDate) {
-            filter.createdAtGreaterThanOrEqual = KalturaUtils.getStartDateValue(data.createdAt.fromDate);
+            filter.createdAtGreaterThanOrEqual = VidiunUtils.getStartDateValue(data.createdAt.fromDate);
           }
 
           if (data.createdAt.toDate) {
-            filter.createdAtLessThanOrEqual = KalturaUtils.getEndDateValue(data.createdAt.toDate);
+            filter.createdAtLessThanOrEqual = VidiunUtils.getEndDateValue(data.createdAt.toDate);
           }
         }
 
@@ -223,7 +223,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
 
         // update pagination args
         if (data.pageIndex || data.pageSize) {
-          pager = new KalturaFilterPager(
+          pager = new VidiunFilterPager(
             {
               pageSize: data.pageSize,
               pageIndex: data.pageIndex + 1
@@ -232,7 +232,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
         }
 
         // build the request
-        return <any>this._kalturaServerClient
+        return <any>this._vidiunServerClient
           .request(new DropFolderFileListAction({ filter, pager }))
           .map(response => {
             response.objects.forEach(object => {
@@ -249,7 +249,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
 
   }
 
-  private _updateFilterWithJoinedList(list: string[], requestFilter: KalturaDropFolderFileFilter, requestFilterProperty: keyof KalturaDropFolderFileFilter): void {
+  private _updateFilterWithJoinedList(list: string[], requestFilter: VidiunDropFolderFileFilter, requestFilterProperty: keyof VidiunDropFolderFileFilter): void {
     const value = (list || []).map(item => item).join(',');
 
     if (value) {
@@ -257,45 +257,45 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
     }
   }
 
-  private _loadDropFoldersList(reloadFolders: boolean): Observable<{ dropFoldersList: KalturaDropFolder[], error?: string }> {
+  private _loadDropFoldersList(reloadFolders: boolean): Observable<{ dropFoldersList: VidiunDropFolder[], error?: string }> {
     if (!reloadFolders && this._dropFoldersList$) {
       return this._dropFoldersList$;
     }
 
     this._dropFolders.state.next({ loading: true, errorMessage: null });
 
-    this._dropFoldersList$ = this._kalturaServerClient
+    this._dropFoldersList$ = this._vidiunServerClient
       .request(new DropFolderListAction({
-        filter: new KalturaDropFolderFilter({
-          orderBy: KalturaDropFolderOrderBy.createdAtDesc.toString(),
-          statusEqual: KalturaDropFolderStatus.enabled
+        filter: new VidiunDropFolderFilter({
+          orderBy: VidiunDropFolderOrderBy.createdAtDesc.toString(),
+          statusEqual: VidiunDropFolderStatus.enabled
         })
       }).setRequestOptions({
-          acceptedTypes: [KalturaDropFolder, KalturaDropFolderContentFileHandlerConfig]
+          acceptedTypes: [VidiunDropFolder, VidiunDropFolderContentFileHandlerConfig]
       }))
       .map(response => {
         this._dropFolders.state.next({ loading: false, errorMessage: null });
         if (response.objects.length) {
-          let df: KalturaDropFolder;
+          let df: VidiunDropFolder;
 
           const dropFoldersList = [];
           response.objects.forEach(object => {
-            if (object instanceof KalturaDropFolder) {
+            if (object instanceof VidiunDropFolder) {
               df = object;
-              if (df.fileHandlerType === KalturaDropFolderFileHandlerType.content) {
-                const cfg: KalturaDropFolderContentFileHandlerConfig = df.fileHandlerConfig as KalturaDropFolderContentFileHandlerConfig;
-                if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.addAsNew) {
+              if (df.fileHandlerType === VidiunDropFolderFileHandlerType.content) {
+                const cfg: VidiunDropFolderContentFileHandlerConfig = df.fileHandlerConfig as VidiunDropFolderContentFileHandlerConfig;
+                if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.addAsNew) {
                   dropFoldersList.push(df);
-                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
+                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
                   dropFoldersList.push(df);
-                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
+                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
                   dropFoldersList.push(df);
                 }
-              } else if (df.fileHandlerType === KalturaDropFolderFileHandlerType.xml) {
+              } else if (df.fileHandlerType === VidiunDropFolderFileHandlerType.xml) {
                 dropFoldersList.push(df);
               }
             } else {
-              throw new Error(`invalid type provided, expected KalturaDropFolder, got ${typeof object}`);
+              throw new Error(`invalid type provided, expected VidiunDropFolder, got ${typeof object}`);
             }
           });
 
@@ -305,7 +305,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
               dropFoldersList: [],
               error: this._appLocalization.get(
                   'applications.content.dropFolders.errors.dropFoldersAlert',
-                  [serverConfig.externalLinks.kaltura.contactUs, serverConfig.externalLinks.kaltura.dropFoldersManual]
+                  [serverConfig.externalLinks.vidiun.contactUs, serverConfig.externalLinks.vidiun.dropFoldersManual]
               )
           };
         }
@@ -317,7 +317,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
   }
 
   public isEntryExist(entryId: string): Observable<boolean> {
-    return this._kalturaServerClient.request(new BaseEntryGetAction({ entryId }))
+    return this._vidiunServerClient.request(new BaseEntryGetAction({ entryId }))
       .map(Boolean);
   }
 
@@ -375,7 +375,7 @@ export class DropFoldersStoreService extends FiltersStoreBase<DropFoldersFilters
       start = end;
     }
     const multiRequests = splittedRequests
-      .map(reqChunk => this._kalturaServerClient.multiRequest(reqChunk));
+      .map(reqChunk => this._vidiunServerClient.multiRequest(reqChunk));
 
     return Observable.forkJoin(multiRequests)
       .map(responses => {

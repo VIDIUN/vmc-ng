@@ -1,35 +1,35 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaModerationFlagListResponse } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { MediaListFlagsAction } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { UserNotifyBanAction } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunModerationFlagListResponse } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { MediaListFlagsAction } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { UserNotifyBanAction } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Injectable()
 export class ModerationStore implements OnDestroy {
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization) {
   }
 
   ngOnDestroy() {
   }
 
-  public loadEntryModerationDetails(entryId: string): Observable<{ entry: KalturaMediaEntry, flag: KalturaModerationFlagListResponse }> {
-    return this._kalturaServerClient
+  public loadEntryModerationDetails(entryId: string): Observable<{ entry: VidiunMediaEntry, flag: VidiunModerationFlagListResponse }> {
+    return this._vidiunServerClient
       .multiRequest([
         new BaseEntryGetAction(
           {
             entryId: entryId,
           }
         ).setRequestOptions({
-            acceptedTypes: [KalturaMediaEntry]
+            acceptedTypes: [VidiunMediaEntry]
         }),
         new MediaListFlagsAction({
           entryId: entryId,
-          pager: new KalturaFilterPager({
+          pager: new VidiunFilterPager({
             pageSize: 500,
             pageIndex: 0
           })
@@ -45,7 +45,7 @@ export class ModerationStore implements OnDestroy {
   }
 
   public banCreator(userId: string): Observable<void> {
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new UserNotifyBanAction({ userId }))
       .catch(() => {
         return Observable.throw(new Error(this._appLocalization.get('applications.content.moderationDetails.errors.ban')));

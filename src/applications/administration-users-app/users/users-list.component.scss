@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kUsers {
+.vUsers {
   font-size: 15px;
   background-color: $appBkgColor;
   height: $contentArea;
@@ -12,7 +12,7 @@
   flex-flow: row wrap;
   margin: 0px;
 
-  .kUsersHolder {
+  .vUsersHolder {
     height: 100%;
     border: none;
     position: relative;
@@ -20,14 +20,14 @@
     flex-direction: column;
   }
 
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     right: 0;
     margin-left: auto;
     &:active {
@@ -36,13 +36,13 @@
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
 
-  .kUsersTableFilters {
-    color: $kGrayscale1;
-    border-bottom: 1px solid $kGrayscale5;
+  .vUsersTableFilters {
+    color: $vGrayscale1;
+    border-bottom: 1px solid $vGrayscale5;
     z-index: 500;
     height: 66px;
     background-color: white;
@@ -52,16 +52,16 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
-    .kSelectedUsersNum {
+    .vSelectedUsersNum {
       padding-left: 16px;
     }
   }
 
-  .kUsersTableFooter {
+  .vUsersTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
@@ -69,56 +69,56 @@
     display: block;
   }
 
-  .kUsersTable {
+  .vUsersTable {
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
   }
 
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
 
-  .kAddUserBtn {
+  .vAddUserBtn {
     height: 36px;
     margin-left: 14px;
     border: none;
 
     &:disabled {
-      border: 1px solid $kGrayscale4;
+      border: 1px solid $vGrayscale4;
     }
   }
 
-  .kUsersHeader {
-    color: $kGrayscale1;
+  .vUsersHeader {
+    color: $vGrayscale1;
   }
 
-  .kUsersTitle {
-    color: $kGrayscale1;
+  .vUsersTitle {
+    color: $vGrayscale1;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 14px;
   }
 
-  .kUsersExplanatory,
-  .kUsersStatus {
+  .vUsersExplanatory,
+  .vUsersStatus {
     font-size: 13px;
     color: #999;
   }
 
-  .kUsersExplanatory {
+  .vUsersExplanatory {
     margin-bottom: 10px;
   }
 
-  .kDivider {
+  .vDivider {
     margin: 0 5px;
   }
 
-  .kUsersNeedMore {
+  .vUsersNeedMore {
     height: 66px;
     border-radius: 3px;
     background-color: #D9D9D9;
@@ -129,18 +129,18 @@
     padding: 0 21px;
     font-size: 15px;
 
-    .kCurrentStatus,
-    .kMoreUsers {
+    .vCurrentStatus,
+    .vMoreUsers {
       font-weight: bold;
       margin-right: 5px;
     }
 
-    .kMoreUsers {
+    .vMoreUsers {
       font-weight: bold;
       margin-left: 5px;
     }
 
-    .kClickHere {
+    .vClickHere {
       color: #01accd;
       margin: 0 5px;
     }
@@ -150,7 +150,7 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kUsersTableFooter {
+:host /deep/ .vUsersTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

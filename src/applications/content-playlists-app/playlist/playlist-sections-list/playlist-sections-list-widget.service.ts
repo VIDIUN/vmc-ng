@@ -1,14 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { PlaylistWidget } from '../playlist-widget';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
 import { SectionsList } from './sections-list';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { ContentPlaylistViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-playlist-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { ContentPlaylistViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-playlist-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 export interface SectionWidgetItem {
   label: string;
   isValid: boolean;
@@ -23,7 +23,7 @@ export class PlaylistSectionsListWidget extends PlaylistWidget implements OnDest
 
   constructor(private _appLocalization: AppLocalization,
               private _contentPlaylistView: ContentPlaylistViewService,
-              logger: KalturaLogger
+              logger: VidiunLogger
               ) {
     super('sectionsList', logger);
   }
@@ -41,7 +41,7 @@ export class PlaylistSectionsListWidget extends PlaylistWidget implements OnDest
     }
   }
 
-  protected onDataLoaded(data: KalturaPlaylist): void {
+  protected onDataLoaded(data: VidiunPlaylist): void {
     this._reloadSections(data);
   }
 
@@ -76,7 +76,7 @@ export class PlaylistSectionsListWidget extends PlaylistWidget implements OnDest
 
   }
 
-  private _reloadSections(playlist: KalturaPlaylist): void {
+  private _reloadSections(playlist: VidiunPlaylist): void {
     const sections = [];
     const formWidgetsState = this.form.widgetsState;
 

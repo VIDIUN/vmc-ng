@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { CategoriesBulkActionBaseService } from "./categories-bulk-action-base.service";
-import { CategoryUpdateAction } from 'kaltura-ngx-client';
-import { KalturaCategory } from 'kaltura-ngx-client';
-import { KalturaAppearInListType } from 'kaltura-ngx-client';
+import { CategoryUpdateAction } from 'vidiun-ngx-client';
+import { VidiunCategory } from 'vidiun-ngx-client';
+import { VidiunAppearInListType } from 'vidiun-ngx-client';
 
 @Injectable()
-export class CategoriesBulkChangeCategoryListingService extends CategoriesBulkActionBaseService<KalturaAppearInListType> {
+export class CategoriesBulkChangeCategoryListingService extends CategoriesBulkActionBaseService<VidiunAppearInListType> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedCategories: KalturaCategory[], appearInListType : KalturaAppearInListType) : Observable<{}>{
+  public execute(selectedCategories: VidiunCategory[], appearInListType : VidiunAppearInListType) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: CategoryUpdateAction[] = [];
 
       selectedCategories.forEach(category => {
-        let updatedCategory: KalturaCategory = new KalturaCategory();
+        let updatedCategory: VidiunCategory = new VidiunCategory();
         updatedCategory.appearInList  = appearInListType;
         requests.push(new CategoryUpdateAction({
           id: category.id,

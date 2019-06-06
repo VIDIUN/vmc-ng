@@ -1,21 +1,21 @@
 @import 'app-theme/_variables.scss';
 
-.kAdvertisements {
-  .kTitle {
-    color: $kGrayscale1;
+.vAdvertisements {
+  .vTitle {
+    color: $vGrayscale1;
     font-size: 20px;
     font-weight: bold;
     padding-top: 28px;
     padding-left: 24px;
     padding-bottom: 24px;
   }
-  .kDescription {
-    color: $kGrayscale1;
+  .vDescription {
+    color: $vGrayscale1;
     font-size: 15px;
     padding-left: 24px;
     padding-bottom: 24px;
   }
-  .kButtons {
+  .vButtons {
     display: flex;
     padding-left: 24px;
     margin-bottom: 20px;

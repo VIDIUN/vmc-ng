@@ -1,11 +1,11 @@
 @import 'app-theme/_variables.scss';
-.kTagsWrapper{
+.vTagsWrapper{
   z-index: 500;
 }
-.kSticky{
-  border-bottom: 1px solid $kGrayscale5;
+.vSticky{
+  border-bottom: 1px solid $vGrayscale5;
 }
-.kCategories {
+.vCategories {
   font-size: 15px;
   background-color: $appBkgColor;
   padding-top: 24px;
@@ -15,10 +15,10 @@
   display: flex;
   flex-flow: row wrap;
   margin: 0px;
-  .kSeparator{
+  .vSeparator{
     margin-bottom: 24px !important;
   }
-  .kCategoriesHolder {
+  .vCategoriesHolder {
     height: 100%;
     min-height: $minTableHeight;
     border: none;
@@ -26,25 +26,25 @@
     display: flex;
     flex-direction: column;
   }
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     &:active {
       box-shadow: none;
       transform: rotate(45deg);
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
-  .kCategoriesTableFilters {
-    color: $kGrayscale1;
+  .vCategoriesTableFilters {
+    color: $vGrayscale1;
     z-index: 500;
     height: 66px;
     background-color: white;
@@ -55,86 +55,86 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
-    .kSelectedCategoriesNum {
+    .vSelectedCategoriesNum {
       padding-left: 16px;
     }
   }
-  .kCategoriesTableTags {
+  .vCategoriesTableTags {
     width: 100%;
     height: 50px;
     background-color: #f3f3f3;
     border: 1px solid grey;
     flex: 0 0 50px;
   }
-  .kCategoriesTableFooter {
+  .vCategoriesTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
     padding: 0 14px 28px;
     display: block;
   }
-  .kCategoriesTable {
+  .vCategoriesTable {
     width: 100%;
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
   }
-  .kSelectedCategoriesLabel {
+  .vSelectedCategoriesLabel {
     font-weight: bold;
     margin-right: 36px;
     margin-left: 5px;
   }
-  .kSearchInput {
-    background: $kMagnifyingGlassBkg;
+  .vSearchInput {
+    background: $vMagnifyingGlassBkg;
     padding-left: 38px;
     margin-right: 8px;
     width: 260px;
   }
-  .kBulkOperations {
+  .vBulkOperations {
     display: flex;
     align-items: center;
   }
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
-  .kAddCategoryBtn {
+  .vAddCategoryBtn {
     margin-left: 14px;
     height: 36px;
   }
-  .kBulkCancel {
+  .vBulkCancel {
     margin-left: 10px;
   }
-  .kBulkDeleteBtn {
+  .vBulkDeleteBtn {
     margin-right: 10px;
     width: 44px;
     font-size: 24px;
   }
-  .kBulkActionsBtn {
+  .vBulkActionsBtn {
     font-weight: 400;
     font-size: 15px;
   }
-  .kFilters {
+  .vFilters {
     display: flex;
     margin-left: auto;
   }
-  .kCategoriesFilter {
+  .vCategoriesFilter {
     display: flex;
     height: 32px;
     align-items: center;
     cursor: pointer;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     width: 190px;
     position: relative;
     margin-right: 8px;
-    .kSpinnerBkg{
+    .vSpinnerBkg{
       position: relative;
       width: 20px;
       height: 20px;
@@ -142,7 +142,7 @@
       padding-right: 8px;
       margin-top: 0px;
     }
-    .kSpinnerAnim{
+    .vSpinnerAnim{
       width: 12px;
       height: 12px;
     }
@@ -150,7 +150,7 @@
       margin-right: 12px;
       margin-left: 8px;
       font-size: 24px;
-      color: $kGrayscale4;
+      color: $vGrayscale4;
       &.dropdown {
         font-size: 10px;
       }
@@ -161,25 +161,25 @@
       top: 12px;
     }
   }
-  .kRefine {
-    @extend .kCategoriesFilter;
+  .vRefine {
+    @extend .vCategoriesFilter;
     width: 160px;
   }
-  .kHidden {
+  .vHidden {
     visibility: hidden;
     width: 0px;
     height: 0px;
   }
-  .kTagContent {
+  .vTagContent {
     display: flex;
     align-items: center;
   }
-  .kTagLabel {
+  .vTagLabel {
     flex: 0 0 auto;
     user-select: none;
     cursor: default;
   }
-  .kTagRemove {
+  .vTagRemove {
     flex: 0 0 auto;
     margin-top: 2px;
     margin-left: 8px;
@@ -198,7 +198,7 @@
   width: 100%;
 }
 
-:host /deep/ span.ui-button-icon-left.pi-kIcontrash {
+:host /deep/ span.ui-button-icon-left.pi-vIcontrash {
   margin-left: -.5em;
 }
 
@@ -206,7 +206,7 @@
   width: 380px;
 }
 
-:host /deep/ .ui-button-icon-right.kIcondropdown_arrow_bottom {
+:host /deep/ .ui-button-icon-right.vIcondropdown_arrow_bottom {
   font-size: 10px;
   margin-right: 2px;
   pointer-events: none;
@@ -224,11 +224,11 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kStickyClass{
-  border-bottom: 1px solid $kGrayscale5;
+:host /deep/ .vStickyClass{
+  border-bottom: 1px solid $vGrayscale5;
 }
 
-:host /deep/ .kCategoriesTableFooter {
+:host /deep/ .vCategoriesTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

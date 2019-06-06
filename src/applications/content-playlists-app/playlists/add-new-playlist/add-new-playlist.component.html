@@ -1,32 +1,32 @@
-<div class="kAddNewPlaylist">
+<div class="vAddNewPlaylist">
   <form [formGroup]="addNewPlaylistForm" novalidate>
-    <div class="kHeader">
-      <span class="kTitle">{{('applications.content.addNewPlaylist.addNewPlaylist') | translate}}</span>
+    <div class="vHeader">
+      <span class="vTitle">{{('applications.content.addNewPlaylist.addNewPlaylist') | translate}}</span>
     </div>
 
-    <div class="kContainer">
+    <div class="vContainer">
       <div class="selectPlaylistTypeCaption">
         {{('applications.content.addNewPlaylist.selectPlaylistType') | translate}}
       </div>
       <div class="selectPlaylistType">
-        <p-radioButton class="kRadioLeft" name="playlistType" [value]="_playlistTypes.staticList" formControlName="playlistType" label="{{'applications.content.addNewPlaylist.manualPlaylist' | translate}}"></p-radioButton>
-        <p-radioButton class="kRadioRight " name="playlistType" [value]="_playlistTypes.dynamic" formControlName="playlistType" label="{{'applications.content.addNewPlaylist.ruleBasedPlaylist' | translate}}"></p-radioButton>
+        <p-radioButton class="vRadioLeft" name="playlistType" [value]="_playlistTypes.staticList" formControlName="playlistType" label="{{'applications.content.addNewPlaylist.manualPlaylist' | translate}}"></p-radioButton>
+        <p-radioButton class="vRadioRight " name="playlistType" [value]="_playlistTypes.dynamic" formControlName="playlistType" label="{{'applications.content.addNewPlaylist.ruleBasedPlaylist' | translate}}"></p-radioButton>
       </div>
-      <div class="kRow">
-        <div class="kControl">
-          <input kAutofocus formControlName="name" type="text" placeholder="{{'applications.content.addNewPlaylist.playlistName' | translate}}" pInputText
-                 [ngClass]="{'kHasError':!addNewPlaylistForm.get('name').valid && addNewPlaylistForm.get('name').touched}"/>
+      <div class="vRow">
+        <div class="vControl">
+          <input vAutofocus formControlName="name" type="text" placeholder="{{'applications.content.addNewPlaylist.playlistName' | translate}}" pInputText
+                 [ngClass]="{'vHasError':!addNewPlaylistForm.get('name').valid && addNewPlaylistForm.get('name').touched}"/>
         </div>
       </div>
-      <div class="kRow">
-        <div class="kControl">
+      <div class="vRow">
+        <div class="vControl">
           <textarea formControlName="description" pInputTextarea placeholder="{{'applications.content.addNewPlaylist.description' | translate}}"></textarea>
         </div>
       </div>
     </div>
 
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded kNextBtn" [disabled]="addNewPlaylistForm.invalid" (click)="goNext()" pButton label="{{'applications.content.addNewPlaylist.next' | translate}}"></button>
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded vNextBtn" [disabled]="addNewPlaylistForm.invalid" (click)="goNext()" pButton label="{{'applications.content.addNewPlaylist.next' | translate}}"></button>
     </div>
   </form>
 </div>

@@ -1,0 +1,65 @@
+@import 'app-theme/_variables.scss';
+
+i.vUploadMonitorToggler.vDisabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+.vUploadMonitorToggler {
+    position: relative;
+    display: flex;
+    margin-left: 12px;
+    margin-right: 12px;
+    color: $headerTextColor;
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover, &.open {
+        opacity: 1;
+        color: $mainLinkHoverColor;
+        .vIconrefresh_smalli {
+            color: $mainLinkHoverColor;
+            opacity: 1;
+        }
+        .vIconerror {
+            color: $vDandger;
+            opacity: 1;
+        }
+    }
+
+    .vIconrefresh_small {
+        font-size: 12px;
+        position: absolute;
+        right: -8px;
+        background-color: $vAqua;
+        color: $vBlue;
+        border: 2px rgba(17, 45, 91, 0.3) solid;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 9px;
+    }
+
+    .vIconerror {
+        font-size: 16px;
+        color: $vDandger;
+        background-color: #FFFFFF;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: -8px;
+        top: 11px;
+    }
+}
+.uploadMonitorPopup /deep/ .vPopupWidget{
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .24);
+}

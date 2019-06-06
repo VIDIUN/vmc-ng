@@ -1,22 +1,22 @@
 @import 'app-theme/_variables.scss';
 
-.kAddNewPlaylist {
-  .kHeader {
+.vAddNewPlaylist {
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
+    border-bottom: 1px solid $vGrayscale4;
 
-    .kTitle {
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: bold;
     }
   }
 
-  .kContainer {
+  .vContainer {
     padding-bottom: 5px;
 
     .selectPlaylistTypeCaption,
@@ -36,16 +36,16 @@
       margin-bottom: 22px;
     }
 
-    .kRadioLeft,
-    .kRadioRight {
+    .vRadioLeft,
+    .vRadioRight {
       display: flex;
     }
 
-    .kRadioLeft {
+    .vRadioLeft {
       margin-right: 40px;
     }
 
-    .kControl {
+    .vControl {
       padding: 0 60px;
       margin-bottom: 19px;
 
@@ -54,8 +54,8 @@
         width: 100%;
       }
 
-      .kHasError {
-          border: 1px solid $kDandger;
+      .vHasError {
+          border: 1px solid $vDandger;
           background: initial;
       }
 
@@ -66,14 +66,14 @@
 
   }
 
-  .kFooter{
+  .vFooter{
     padding: 15px 0;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .kNextBtn {
+    .vNextBtn {
       min-width: 100px;
       height: 34px;
       border-width: 0;

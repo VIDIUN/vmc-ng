@@ -1,6 +1,6 @@
-import { KalturaFlavorAssetWithParams } from 'kaltura-ngx-client';
+import { VidiunFlavorAssetWithParams } from 'vidiun-ngx-client';
 
-export interface Flavor extends KalturaFlavorAssetWithParams{
+export interface Flavor extends VidiunFlavorAssetWithParams{
     name: string,
     id: string,
     paramsId: number,

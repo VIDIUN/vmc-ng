@@ -6,7 +6,7 @@ import {
 import { ModerationsListService } from './entries/moderations-list.service';
 
 @Component({
-  selector: 'kModeration',
+  selector: 'vModeration',
   templateUrl: './content-moderation.component.html',
   styleUrls: ['./content-moderation.component.scss'],
   providers: [

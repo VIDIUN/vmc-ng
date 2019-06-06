@@ -7,28 +7,28 @@ $app-styles-path: '../../../styles';
   width: 100%;
 }
 
-.kProfileIcon
+.vProfileIcon
 {
   margin-right:20px;
 }
 
-.kEditDistributionProfileWrap {
-  .kFloater {
+.vEditDistributionProfileWrap {
+  .vFloater {
     display: flex;
     flex-direction: column;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
 
-    .kHeader {
+    .vHeader {
       height: 78px;
       width: 100%;
       padding: 0 24px;
       box-sizing: border-box;
-      border-bottom: 1px solid $kGrayscale4;
+      border-bottom: 1px solid $vGrayscale4;
       flex: 0 0 auto;
       display: flex;
       align-items: center;
 
-      .kTitle {
+      .vTitle {
         display: flex;
         align-items: center;
 
@@ -37,18 +37,18 @@ $app-styles-path: '../../../styles';
           margin-right: 10px;
         }
 
-        .kTitleNames {
+        .vTitleNames {
           display: flex;
           flex-direction: column;
 
-          .kTitleProfileName {
-            color: $kGrayscale1;
+          .vTitleProfileName {
+            color: $vGrayscale1;
             font-size: 15px;
             font-weight: 700;
           }
 
-          .kTitleDistributionName {
-            color: $kGrayscale3;
+          .vTitleDistributionName {
+            color: $vGrayscale3;
             font-size: 14px;
             margin-top: 10px;
             text-transform: capitalize;
@@ -56,38 +56,38 @@ $app-styles-path: '../../../styles';
         }
       }
 
-      .kButtons {
+      .vButtons {
         display: flex;
         margin-left: auto;
 
-        .kCancel {
+        .vCancel {
           font-size: 15px;
           color: #333333;
           align-self: center;
           margin-right: 24px;
         }
 
-        .kButtonDefault {
+        .vButtonDefault {
           font-weight: normal;
         }
       }
     }
 
-    .kContainer {
+    .vContainer {
       flex: 1 1 auto;
       padding: 28px;
       height: calc(100vh - 213px);
       overflow-y: auto;
 
-      .kRow {
+      .vRow {
         display: flex;
         padding-top: 20px;
 
-        &.kFirstRow {
+        &.vFirstRow {
           padding-top: 0;
         }
 
-        .kDistributionLink {
+        .vDistributionLink {
           a {
             display: block;
             margin-bottom: 10px;
@@ -95,77 +95,77 @@ $app-styles-path: '../../../styles';
 
         }
 
-        .kError {
+        .vError {
           margin-top: 10px;
           font-size: 14px;
-          color: $kDandger;
+          color: $vDandger;
         }
 
-        .kLabel {
+        .vLabel {
           width: 172px;
           flex: 0 0 auto;
           height: 18px;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           font-size: 15px;
           line-height: 18px;
           padding: 8px 4px;
         }
 
-        .kReadonlyData {
+        .vReadonlyData {
           padding: 8px 0;
           font-size: 15px;
 
-          .kIconinactive {
-            color: $kGrayscale3;
+          .vIconinactive {
+            color: $vGrayscale3;
             margin-right: 8px;
             position: relative;
             top: 1px;
           }
 
-          .kStatus {
-            .kStatusIcon {
+          .vStatus {
+            .vStatusIcon {
               font-size: 16px;
               position: relative;
               top: 1px;
               margin-right: 5px;
             }
 
-            .kIconhelp_full,
-            .kIconupload2 {
-              color: $kOrange;
+            .vIconhelp_full,
+            .vIconupload2 {
+              color: $vOrange;
             }
 
-            .kIconcomplete {
-              color: $kSuccess;
+            .vIconcomplete {
+              color: $vSuccess;
             }
 
-            .kIconsync {
-              color: $kSecondary;
+            .vIconsync {
+              color: $vSecondary;
             }
 
-            .kIconerror {
-              color: $kDandger;
+            .vIconerror {
+              color: $vDandger;
             }
           }
         }
 
-        .kControl {
+        .vControl {
           height: 34px;
-          color: $kGrayscale2;
+          color: $vGrayscale2;
           width: 500px;
           border-radius: 3px;
 
-          &.kDateControl {
+          &.vDateControl {
             width: 176px;
           }
 
-          &.kControlInvalid {
-            border: 1px solid $kDandger;
+          &.vControlInvalid {
+            border: 1px solid $vDandger;
           }
         }
       }
 
-      .kFormHeader {
+      .vFormHeader {
         margin-top: 32px;
         margin-bottom: 24px;
       }
@@ -173,7 +173,7 @@ $app-styles-path: '../../../styles';
   }
 }
 
-:host /deep/ .kEditDistributionProfileWrap {
+:host /deep/ .vEditDistributionProfileWrap {
   p-checkbox {
     padding: 6px 0;
     .ui-chkbox-label {
@@ -182,17 +182,17 @@ $app-styles-path: '../../../styles';
     }
   }
 
-  .kDateControl .ui-inputtext {
+  .vDateControl .ui-inputtext {
     width: 176px;
   }
 
   .ui-inputtext:disabled {
-    border-color: $kGrayscale2;
-    color: $kGrayscale2;
+    border-color: $vGrayscale2;
+    color: $vGrayscale2;
   }
 
-  .kRemoveProfile {
-    .kIcontrash {
+  .vRemoveProfile {
+    .vIcontrash {
       font-size: 24px;
     }
 

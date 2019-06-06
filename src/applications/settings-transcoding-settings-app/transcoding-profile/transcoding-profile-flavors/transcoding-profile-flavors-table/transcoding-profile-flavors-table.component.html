@@ -1,9 +1,9 @@
-<div class="kTranscodingProfileFlavorsTable" [class.noResults]="!_flavors?.length">
+<div class="vTranscodingProfileFlavorsTable" [class.noResults]="!_flavors?.length">
     <p-table
         dataKey="id"
         scrollHeight="100%"
         [scrollable]="true"
-        [class.kDisabled]="!_isEditAllowed"
+        [class.vDisabled]="!_isEditAllowed"
         [value]="_flavors"
         (selectionChange)="_onSelectionChange($event)"
         [(selection)]="selectedFlavors">
@@ -40,7 +40,7 @@
                     <p-tableCheckbox [value]="flavor"></p-tableCheckbox>
                 </td>
                 <td [ngStyle]="{'padding-left': _isEditAllowed ? '6.5px' : '16px'}">
-                    <div class="kTitle kTableColumn" [kTooltip]="flavor.name"
+                    <div class="vTitle vTableColumn" [vTooltip]="flavor.name"
                          (click)="_editFlavor(flavor)">{{flavor.name}}
                     </div>
                 </td>
@@ -50,8 +50,8 @@
                 <td>{{flavor.bitrate}}</td>
                 <td>{{flavor.dimensions}}</td>
                 <td [ngStyle]="{'width': '60px'}" *ngIf="_isEditAllowed">
-                    <div class="kEditFlavorIconWrapper">
-                        <i class="kIconEdit kEditFlavorIcon" (click)="_editFlavor(flavor)"></i>
+                    <div class="vEditFlavorIconWrapper">
+                        <i class="vIconEdit vEditFlavorIcon" (click)="_editFlavor(flavor)"></i>
                     </div>
                 </td>
             </tr>

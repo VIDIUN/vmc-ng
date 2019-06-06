@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CategoryService} from '../category.service';
 import {CategorySectionsListWidget, SectionWidgetItem} from './category-sections-list-widget.service';
-import {StickyComponent} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from "app-shared/kmc-shell";
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {StickyComponent} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from "app-shared/vmc-shell";
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategorySectionsList',
+  selector: 'vCategorySectionsList',
   templateUrl: './category-sections-list.component.html',
   styleUrls: ['./category-sections-list.component.scss']
 })

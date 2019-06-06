@@ -1,0 +1,34 @@
+<div class="vEditWin vOverrideFAIcons" #captionsEdit>
+  <div class="vHeader">
+    <span class="vTitle">{{'applications.upload.prepareLive.createLiveStreamTitle' | translate}}</span>
+  </div>
+  <v-area-blocker [message]="_blockerMessage">
+
+  <div class="vContainer">
+
+    <div class="vRow">
+      <span class="vLabel">{{'applications.upload.prepareLive.streamTypeLabel' | translate}}</span>
+      <ng-container *ngIf="!_manualStreamOnly">
+        <div class="vRequired"></div>
+        <p-dropdown [options]="_availableStreamTypes" [(ngModel)]="_selectedStreamType" [autoWidth]="false"></p-dropdown>
+      </ng-container>
+      <ng-container *ngIf="_manualStreamOnly">
+        <span class="vManualType">{{'applications.upload.prepareLive.streamTypes.manual' | translate}}</span>
+      </ng-container>
+    </div>
+
+    <div [ngSwitch]="_selectedStreamType">
+      <vVidiunLiveStream #vidiunLiveStreamComponent *ngSwitchCase="_streamTypes.vidiun"
+                          [(data)]="vidiunLiveStreamData"></vVidiunLiveStream>
+      <vManualLive #manualLiveComponent *ngSwitchCase="_streamTypes.manual" [(data)]="manualLiveData"></vManualLive>
+      <vUniversalLive #universalLiveComponent *ngSwitchCase="_streamTypes.universal" [(data)]="universalLiveData"></vUniversalLive>
+
+    </div>
+  </div>
+  </v-area-blocker>
+
+  <div class="vFooter">
+    <button type="button" class="vButtonBranded" (click)="submitCurrentSelectedForm()" pButton
+            label="{{'applications.upload.prepareLive.create' | translate}}"></button>
+  </div>
+</div>

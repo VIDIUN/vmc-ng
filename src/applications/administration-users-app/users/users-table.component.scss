@@ -1,23 +1,23 @@
 @import 'app-theme/_variables.scss';
 
-.kUsersTable {
+.vUsersTable {
   background-color: white;
   overflow-y: hidden;
   position: absolute;
   padding: 0px;
 
-  .kFullName {
+  .vFullName {
     font-weight: bold;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
   }
 
-  .kIconOwner {
+  .vIconOwner {
     font-size: 25px;
     vertical-align: sub;
     margin-left: 12px;
   }
 
-  .kUsersTableActions {
+  .vUsersTableActions {
     width: 100%;
     text-align: center;
   }
@@ -45,6 +45,6 @@
 
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

@@ -1,25 +1,25 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { KalturaDistributionProfile } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunDistributionProfile } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kEntryUndistributedProfile',
+  selector: 'vEntryUndistributedProfile',
   templateUrl: './undistributed-profile.component.html',
   styleUrls: ['./undistributed-profile.component.scss']
 })
 export class UndistributedProfileComponent {
-  @Input() profile: KalturaDistributionProfile;
+  @Input() profile: VidiunDistributionProfile;
 
-  @Output() onExport = new EventEmitter<KalturaDistributionProfile>();
+  @Output() onExport = new EventEmitter<VidiunDistributionProfile>();
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
-  constructor(private _permissionsService: KMCPermissionsService) {
+  constructor(private _permissionsService: VMCPermissionsService) {
 
   }
 
-  public _exportProfile(profile: KalturaDistributionProfile): void {
-    if (this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE)) {
+  public _exportProfile(profile: VidiunDistributionProfile): void {
+    if (this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE)) {
       this.onExport.emit(profile);
     }
   }

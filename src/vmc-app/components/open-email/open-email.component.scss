@@ -1,0 +1,48 @@
+@import 'app-theme/_variables.scss';
+
+.vOpenEmailWin {
+  width: 100%;
+  height: 100%;
+
+  .vHeader {
+    height: 78px;
+    width: 100%;
+    text-align: center;
+    padding-top: 24px;
+    box-sizing: border-box;
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
+      color: #333333;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+  .vContainer {
+    margin: 28px;
+    min-height: 119px;
+    text-align: center;
+    line-height: 22px;
+      .emailLink{
+          display: flex;
+          margin-top: 12px;
+          justify-content: center;
+          a{
+              margin-right: 4px;
+              display: block;
+          }
+      }
+
+  }
+  .vFooter {
+    height: 66px;
+    border-top: 1px solid $vGrayscale4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+      height: 34px;
+    }
+  }
+
+
+}

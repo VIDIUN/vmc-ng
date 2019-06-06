@@ -1,54 +1,54 @@
 @import 'app-theme/_variables.scss';
 
-.kFlavorPreview{
-  .kHeader {
+.vFlavorPreview{
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer{
+  .vContainer{
 	  margin: 12px;
 	  padding-bottom: 4px;
   }
-	.kLoading{
+	.vLoading{
 		line-height: 252px;
 		padding-left: 130px;
 	}
-	.kLoadingError{
+	.vLoadingError{
 		display: flex;
 		flex-direction: column;
 		line-height: 24px;
-		color: $kDandger;
+		color: $vDandger;
 		height: 150px;
 		padding-top: 80px;
 		width: 100%;
 		text-align: center;
 		margin-bottom: 20px;
-		border: 1px solid $kGrayscale1;
+		border: 1px solid $vGrayscale1;
 	}
 	video{
-		border: 1px solid $kGrayscale1;
+		border: 1px solid $vGrayscale1;
 		padding: 5px;
 		margin-bottom: 20px;
 	}
-	.kRow{
+	.vRow{
 		display: flex;
 		margin-bottom: 12px;
 		flex-direction: row;
 		align-items: center;
-		.kLabel{
+		.vLabel{
 			width: 150px;
 		}
 	}
-	.kPreview{
+	.vPreview{
 		margin-bottom: 12px;
 	}
 }

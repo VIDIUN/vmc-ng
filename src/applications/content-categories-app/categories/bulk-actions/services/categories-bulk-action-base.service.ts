@@ -1,33 +1,33 @@
 import { Observable } from 'rxjs';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { KalturaClient, KalturaCategory, KalturaRequest, KalturaMultiRequest, KalturaMultiResponse } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunCategory, VidiunRequest, VidiunMultiRequest, VidiunMultiResponse } from 'vidiun-ngx-client';
 
 export abstract class CategoriesBulkActionBaseService<T> {
-  constructor(public _kalturaServerClient: KalturaClient) {
+  constructor(public _vidiunServerClient: VidiunClient) {
   }
 
-  public abstract execute(selectedCategories: KalturaCategory[], params: T): Observable<any>;
+  public abstract execute(selectedCategories: VidiunCategory[], params: T): Observable<any>;
 
-  transmit(requests: KalturaRequest<any>[], chunk: boolean): Observable<void> {
+  transmit(requests: VidiunRequest<any>[], chunk: boolean): Observable<void> {
     let maxRequestsPerMultiRequest = requests.length;
     if (chunk) {
       maxRequestsPerMultiRequest = subApplicationsConfig.shared.bulkActionsLimit;
     }
 
-    const multiRequests: Observable<KalturaMultiResponse>[] = [];
-    let mr: KalturaMultiRequest = new KalturaMultiRequest();
+    const multiRequests: Observable<VidiunMultiResponse>[] = [];
+    let mr: VidiunMultiRequest = new VidiunMultiRequest();
 
     let counter = 0;
     for (let i = 0; i < requests.length; i++){
       if (counter === maxRequestsPerMultiRequest){
-        multiRequests.push(this._kalturaServerClient.multiRequest(mr));
-        mr = new KalturaMultiRequest();
+        multiRequests.push(this._vidiunServerClient.multiRequest(mr));
+        mr = new VidiunMultiRequest();
         counter = 0;
       }
       mr.requests.push(requests[i]);
       counter++;
     }
-    multiRequests.push(this._kalturaServerClient.multiRequest(mr));
+    multiRequests.push(this._vidiunServerClient.multiRequest(mr));
 
     return Observable.forkJoin(multiRequests)
       .map(responses => {

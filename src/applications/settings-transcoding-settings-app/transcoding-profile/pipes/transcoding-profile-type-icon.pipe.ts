@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Pipe({
-  name: 'kTranscodingProfileType'
+  name: 'vTranscodingProfileType'
 })
 export class TranscodingProfileTypePipe implements PipeTransform {
   constructor(private _appLocalization: AppLocalization) {
   }
 
-  transform(value: KalturaConversionProfileType, icon: boolean): string {
+  transform(value: VidiunConversionProfileType, icon: boolean): string {
     if (!value) {
       return '';
     }
@@ -20,16 +20,16 @@ export class TranscodingProfileTypePipe implements PipeTransform {
     };
 
     switch (true) {
-      case value === KalturaConversionProfileType.media:
+      case value === VidiunConversionProfileType.media:
         result = {
-          icon: 'kIcontranscoding',
+          icon: 'vIcontranscoding',
           label: this._appLocalization.get('applications.settings.transcoding.type.media')
         };
         break;
 
-      case value === KalturaConversionProfileType.liveStream:
+      case value === VidiunConversionProfileType.liveStream:
         result = {
-          icon: 'kIconlive_transcoding',
+          icon: 'vIconlive_transcoding',
           label: this._appLocalization.get('applications.settings.transcoding.type.live')
         };
         break;

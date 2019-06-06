@@ -1,17 +1,17 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { DestinationComponentBase, FeedFormMode } from '../../feed-details.component';
-import {KalturaGenericXsltSyndicationFeed} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import {VidiunGenericXsltSyndicationFeed} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kFlexibleFormatDestinationForm',
+  selector: 'vFlexibleFormatDestinationForm',
   templateUrl: './flexible-format-destination-form.component.html',
   styleUrls: ['./flexible-format-destination-form.component.scss'],
   providers: [
       {provide: DestinationComponentBase, useExisting: FlexibleFormatDestinationFormComponent},
-      KalturaLogger.createLogger('FlexibleFormatDestinationFormComponent')
+      VidiunLogger.createLogger('FlexibleFormatDestinationFormComponent')
   ]
 })
 export class FlexibleFormatDestinationFormComponent extends DestinationComponentBase implements OnInit, OnDestroy {
@@ -20,7 +20,7 @@ export class FlexibleFormatDestinationFormComponent extends DestinationComponent
   onFormStateChanged = new EventEmitter<{ isValid: boolean, isDirty: boolean }>();
 
   @Input()
-  feed: KalturaGenericXsltSyndicationFeed = null;
+  feed: VidiunGenericXsltSyndicationFeed = null;
 
   @Input() mode: FeedFormMode;
 
@@ -30,18 +30,18 @@ export class FlexibleFormatDestinationFormComponent extends DestinationComponent
   private _fileReader: FileReader = new FileReader();
 
   public get _disableFileSelection(): boolean {
-    return this.mode === 'edit' && !this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE);
+    return this.mode === 'edit' && !this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE);
   }
 
   constructor(private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
-              private _logger: KalturaLogger) {
+              private _permissionsService: VMCPermissionsService,
+              private _logger: VidiunLogger) {
     super();
   }
 
   ngOnInit() {
       this._logger.debug(`prepare component`, { mode: this.mode });
-    if (this.mode !== 'edit' || this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE)) {
+    if (this.mode !== 'edit' || this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE)) {
         this._logger.debug(`user has entered new mode or has SYNDICATION_UPDATE permission`);
       this.onFormStateChanged.emit({
         isValid: false,
@@ -99,9 +99,9 @@ export class FlexibleFormatDestinationFormComponent extends DestinationComponent
     }
   }
 
-  public getData(): KalturaGenericXsltSyndicationFeed {
+  public getData(): VidiunGenericXsltSyndicationFeed {
       this._logger.debug(`handle get data action`);
-    const data = new KalturaGenericXsltSyndicationFeed({
+    const data = new VidiunGenericXsltSyndicationFeed({
       xslt: this._xslCode
     });
 

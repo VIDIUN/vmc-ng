@@ -1,26 +1,26 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kEditEmailAddress',
+  selector: 'vEditEmailAddress',
   templateUrl: './edit-email-address.component.html',
   styleUrls: ['./edit-email-address.component.scss'],
-  providers: [KalturaLogger.createLogger('EditEmailAddressComponent')]
+  providers: [VidiunLogger.createLogger('EditEmailAddressComponent')]
 })
 export class EditEmailAddressComponent implements OnInit, OnDestroy {
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() user: KalturaUser;
+  @Input() user: VidiunUser;
   @Input() blockerMessage: AreaBlockerMessage;
   @Output() updateEmail = new EventEmitter<string>();
 
   public _editEmailAddressForm: FormGroup;
 
   constructor(private _fb: FormBuilder,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {

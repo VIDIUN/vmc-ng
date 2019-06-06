@@ -1,0 +1,211 @@
+@import 'app-theme/_variables.scss';
+
+.vUploadSettings {
+  color: $vGrayscale1;
+  height: 607px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+
+  .vHeader, .vFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vHeader {
+    text-align: center;
+    height: 77px;
+    border-bottom: 1px $vGrayscale4 solid;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+  }
+
+  .vContent {
+      flex: 1 1 auto;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+    .vProfile {
+        padding: 0 28px 20px 28px;
+        border-bottom: 1px $vGrayscale6 solid;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+
+        span {
+            font-weight: bold;
+        }
+
+      .vTranscodingProfile {
+        margin-left: 7px;
+
+        .vTranscodingProfileItem {
+          white-space: nowrap;
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 190px;
+          font-weight: normal;
+        }
+      }
+
+      .vTranscodingProfileError {
+        margin-left: 7px;
+        color: $vDandger;
+      }
+    }
+
+      .vAddFileButton {
+          width: 110px;
+          height: 34px;
+          font-size: 14px;
+          color: $vGrayscale1;
+          margin-left: 24px;
+      }
+
+    .vTable {
+      .vFileNameInput {
+        width: 380px;
+
+          &.vHasError {
+              border-color: $vDandger;
+          }
+      }
+
+      .vFileNameCell {
+        display: flex;
+        align-items: center;
+
+        .vFileName {
+          color: $vGrayscale1;
+          font-weight: bold;
+          word-break: break-all;
+          max-width: 360px;
+        }
+
+        .vIconEditFileName {
+          font-size: 16px;
+          margin-left: 10px;
+          cursor: pointer;
+          color: $vGrayscale3;
+          font-weight: normal;
+          display: none;
+        }
+      }
+
+      .vIconError {
+        font-size: 24px;
+        color: $vDandger;
+      }
+
+      .vIconRemoveFile {
+        font-size: 24px;
+        display: none;
+        cursor: pointer;
+      }
+
+        .vImportUrl {
+            width: 620px;
+
+            &.vHasError {
+                border-color: $vDandger;
+            }
+        }
+    }
+
+    .vEmptyMessage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 280px;
+      color: $vGrayscale3;
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 14px;
+        font-weight: normal;
+      }
+
+      p {
+        font-size: 14px;
+        margin-top: 0;
+      }
+    }
+  }
+
+  .vFooter {
+    z-index: 1;
+    height: 66px;
+    border-top: 1px $vGrayscale4 solid;
+    text-align: center;
+
+    .vUploadButton {
+        width: 140px;
+        height: 34px;
+        font-size: 14px;
+        margin-right: 16px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+  }
+}
+
+:host /deep/ .vTranscodingProfile {
+  .ui-dropdown-panel {
+    width: 250px;
+  }
+
+  .ui-dropdown-label {
+    text-overflow: ellipsis;
+    font-weight: normal;
+    font-size: 15px;
+    color: $vGrayscale1;
+  }
+
+  .ui-dropdown.ui-widget {
+    width: 184px;
+  }
+}
+
+:host /deep/ .vFileType .ui-dropdown.ui-widget {
+  width: 127px;
+}
+
+:host /deep/ .vTable.empty .ui-widget-content {
+  display: none;
+}
+
+:host /deep/ .vTable .ui-table-scrollable-header,
+:host /deep/ .vTable .ui-table-scrollable-body {
+  border-top: 1px $vGrayscale6 solid;
+}
+
+:host /deep/ .vTable .ui-table-scrollable-body {
+  margin-bottom: -1px;
+    max-height: 348px !important;
+}
+
+:host /deep/ .vTable tr:hover .vIconRemoveFile, // show remove icon when hovering a row
+:host /deep/ .vTable td:nth-child(2):hover .vIconEditFileName { // show edit icon when hovering filename column
+  display: block !important;
+}
+
+:host /deep/ .vTable .ui-table-scrollable-table-wrapper {
+  height: 280px;
+}
+
+button.vAddFileButton /deep/ .ui-button-icon-left{
+  font-size: 18px;
+}

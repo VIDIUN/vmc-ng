@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RolesStoreService } from './roles-store/roles-store.service';
-import { KalturaLogger, KalturaLoggerName } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger, VidiunLoggerName } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kRoles',
+  selector: 'vRoles',
   templateUrl: './administration-roles.component.html',
   styleUrls: ['./administration-roles.component.scss'],
   providers: [
     RolesStoreService,
-    KalturaLogger.createLogger('AdministrationRoles')
+    VidiunLogger.createLogger('AdministrationRoles')
   ]
 })
 

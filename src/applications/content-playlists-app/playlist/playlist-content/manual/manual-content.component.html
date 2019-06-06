@@ -1,6 +1,6 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
-  <div class="kPlaylistEntriesHolder">
-      <kPlaylistEntryListBulkOperationsContent
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+  <div class="vPlaylistEntriesHolder">
+      <vPlaylistEntryListBulkOperationsContent
         [selectedEntries]="_selectedEntries"
         [isNewPlaylist]="_widgetService.isNewData"
         [duration]="_widgetService.entriesDuration"
@@ -9,21 +9,21 @@
         (deleteEntries)="_deleteSelected($event)"
         (clearSelection)="_clearSelection()"
         (moveEntries)="_widgetService.moveEntries($event)">
-      </kPlaylistEntryListBulkOperationsContent>
+      </vPlaylistEntryListBulkOperationsContent>
 
-    <kPlaylistEntriesTable
-      class="kPlaylistEntriesTable"
+    <vPlaylistEntriesTable
+      class="vPlaylistEntriesTable"
       [isNewPlaylist]="_widgetService.isNewData"
       [entries]="_widgetService.entries"
       (onActionSelected)="_onActionSelected($event)"
       (sortChanged)="_onSortChanged($event)"
       [(selectedEntries)]="_selectedEntries">
-    </kPlaylistEntriesTable>
+    </vPlaylistEntriesTable>
   </div>
 
-  <kPopupWidget #addEntry data-aid="addEntry" [popupWidth]="995" [slider]="true">
+  <vPopupWidget #addEntry data-aid="addEntry" [popupWidth]="995" [slider]="true">
     <ng-template>
-      <kAddEntry (onClosePopupWidget)="addEntry.close()" (onAddEntries)="_widgetService.addEntries($event)"></kAddEntry>
+      <vAddEntry (onClosePopupWidget)="addEntry.close()" (onAddEntries)="_widgetService.addEntries($event)"></vAddEntry>
     </ng-template>
-  </kPopupWidget>
-</k-area-blocker>
+  </vPopupWidget>
+</v-area-blocker>

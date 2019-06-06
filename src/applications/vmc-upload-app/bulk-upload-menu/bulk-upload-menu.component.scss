@@ -1,0 +1,81 @@
+@import 'app-theme/_variables.scss';
+
+.vBulkUploadMenu {
+  color: $vGrayscale1;
+  flex-direction: column;
+
+  .vBulkUploadMenuHeader {
+    height: 77px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px $vGrayscale4 solid;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 29px;
+    }
+  }
+
+  .vBulkUploadMenuBody {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .vBulkUploadMenuTypesTitle {
+      margin: 33px 0;
+      text-align: center;
+
+      p {
+        font-size: 15px;
+        line-height: 24px;
+      }
+    }
+
+    .vBulkUploadMenuTypes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      button {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        width: 200px;
+        height: 34px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+
+.vSuccessBulkUpload {
+  .vCenterContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .vSuccessBulkUploadMessage {
+    height: 170px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .vSuccessBulkUploadFooter {
+    border-top: 1px solid $vGrayscale4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 63px;
+    width: 100%;
+
+    .vSuccessBulkUploadButton {
+      width: 91px;
+      height: 27px;
+    }
+  }
+
+}

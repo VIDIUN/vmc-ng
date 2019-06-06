@@ -9,13 +9,13 @@ import {
     ViewChild
 } from '@angular/core';
 import { Menu, MenuItem } from 'primeng/primeng';
-import { KalturaConversionProfileWithAsset } from '../transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
+import { VidiunConversionProfileWithAsset } from '../transcoding-profiles-store/base-transcoding-profiles-store.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
 
 export abstract class TranscodingProfilesTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() set profiles(data: KalturaConversionProfileWithAsset[]) {
+  @Input() set profiles(data: VidiunConversionProfileWithAsset[]) {
     if (!this._deferredLoading) {
       this._profiles = [];
       this._cdRef.detectChanges();
@@ -27,11 +27,11 @@ export abstract class TranscodingProfilesTableComponent implements OnInit, After
   }
 
     @Input() singleTableMode: boolean;
-    @Input() profileType: KalturaConversionProfileType;
-  @Input() selectedProfiles: KalturaConversionProfileWithAsset[] = [];
+    @Input() profileType: VidiunConversionProfileType;
+  @Input() selectedProfiles: VidiunConversionProfileWithAsset[] = [];
 
-  @Output() selectedProfilesChange = new EventEmitter<KalturaConversionProfileWithAsset[]>();
-  @Output() actionSelected = new EventEmitter<{ action: string, profile: KalturaConversionProfileWithAsset }>();
+  @Output() selectedProfilesChange = new EventEmitter<VidiunConversionProfileWithAsset[]>();
+  @Output() actionSelected = new EventEmitter<{ action: string, profile: VidiunConversionProfileWithAsset }>();
 
   @ViewChild('actionsmenu') private _actionsMenu: Menu;
 
@@ -46,7 +46,7 @@ export abstract class TranscodingProfilesTableComponent implements OnInit, After
   public rowTrackBy: Function = (index: number, item: any) => item.id;
 
   constructor(protected _appLocalization: AppLocalization,
-              protected _permissionsService: KMCPermissionsService,
+              protected _permissionsService: VMCPermissionsService,
               protected _cdRef: ChangeDetectorRef) {
   }
 
@@ -70,7 +70,7 @@ export abstract class TranscodingProfilesTableComponent implements OnInit, After
     this._actionsMenu.hide();
   }
 
-  private _buildMenu(profile: KalturaConversionProfileWithAsset): void {
+  private _buildMenu(profile: VidiunConversionProfileWithAsset): void {
     if (profile.isDefault) {
       this._items = [
         {
@@ -94,22 +94,22 @@ export abstract class TranscodingProfilesTableComponent implements OnInit, After
         {
           id: 'delete',
           label: this._appLocalization.get('applications.settings.transcoding.delete'),
-          styleClass: 'kDanger',
+          styleClass: 'vDanger',
           command: () => this._onActionSelected('delete', profile)
         }
       ];
     }
 
-    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': KMCPermissions.TRANSCODING_DELETE });
+    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': VMCPermissions.TRANSCODING_DELETE });
   }
 
-  public _openActionsMenu(event: any, profile: KalturaConversionProfileWithAsset): void {
+  public _openActionsMenu(event: any, profile: VidiunConversionProfileWithAsset): void {
     if (this._actionsMenu) {
       this._buildMenu(profile);
       this._actionsMenu.toggle(event);
     }
   }
-  public _onActionSelected(action: string, profile: KalturaConversionProfileWithAsset): void {
+  public _onActionSelected(action: string, profile: VidiunConversionProfileWithAsset): void {
     this.actionSelected.emit({ action, profile });
   }
 

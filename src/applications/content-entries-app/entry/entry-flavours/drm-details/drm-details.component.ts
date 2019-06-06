@@ -3,7 +3,7 @@ import { Flavor } from '../flavor';
 
 
 @Component({
-    selector: 'kDRMDetails',
+    selector: 'vDRMDetails',
     templateUrl: './drm-details.component.html',
     styleUrls: ['./drm-details.component.scss']
 })

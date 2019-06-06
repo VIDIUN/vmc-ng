@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'kUploadControl',
+    selector: 'vUploadControl',
     templateUrl: './content-upload-control.component.html',
     styleUrls: ['./content-upload-control.component.scss'],
 })

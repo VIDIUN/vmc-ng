@@ -1,13 +1,13 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
-    <div #preview class="kPreviewAndEmbed">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+    <div #preview class="vPreviewAndEmbed">
         <form [formGroup]="_previewForm" novalidate>
 
-            <div class="kHeader">
+            <div class="vHeader">
                 <div>
-                    <i class="kIconclose_small kClose" (click)="close()"></i>
-                    <span class="kTitle">{{_title}}</span>
+                    <i class="vIconclose_small vClose" (click)="close()"></i>
+                    <span class="vTitle">{{_title}}</span>
                 </div>
-                <div class="kSelectPlayer">
+                <div class="vSelectPlayer">
                     <span>{{'applications.embed.selectPlayer' | translate}}</span>
                     <p-dropdown #playersDropdown [options]="_players" formControlName="selectedPlayer" [filter]="true" filterBy="label,value.uiConf.id">
                         <ng-template let-item pTemplate="selectedItem">
@@ -20,60 +20,60 @@
                             <div class="playerItem">
                                 <div [class]="'playerIcon v'+item.value.version"></div>
                                 <span>{{item.label}}</span>
-                                <i class="check kIconcheck_small"></i>
+                                <i class="check vIconcheck_small"></i>
                             </div>
                         </ng-template>
                     </p-dropdown>
-                    <i #settingsBtn class="kIcongear kPlayerSettings"></i>
+                    <i #settingsBtn class="vIcongear vPlayerSettings"></i>
                 </div>
-                <i class="kIconShare kToggleParamsIcon" [class.kHighlight]="!_showEmbedParams" (click)="toggleEmbedParams()"></i>
+                <i class="vIconShare vToggleParamsIcon" [class.vHighlight]="!_showEmbedParams" (click)="toggleEmbedParams()"></i>
             </div>
 
-            <div class="kPreview">
-                <div class="kPreviewContainer">
+            <div class="vPreview">
+                <div class="vPreviewContainer">
                     <iframe #previewIframe frameborder="0" marginheight="0" marginwidth="0" allowFullScreen webkitallowfullscreen mozallowfullscreen></iframe>
                 </div>
-                <div class="kPreviewParams" [style.maxWidth]="_showEmbedParams ? '450px' : '0px'">
-                    <div class="kParamsContainer">
-                        <span class="kTitle">{{media?.name}}</span>
+                <div class="vPreviewParams" [style.maxWidth]="_showEmbedParams ? '450px' : '0px'">
+                    <div class="vParamsContainer">
+                        <span class="vTitle">{{media?.name}}</span>
                         <ng-container *ngIf="_showEmberCode">
-                          <div class="kSection kAlignTop">
-                              <span class="kCol">{{'applications.embed.embedCode' | translate}}</span>
+                          <div class="vSection vIdignTop">
+                              <span class="vCol">{{'applications.embed.embedCode' | translate}}</span>
                               <textarea readonly #code pInputTextarea >{{_generatedCode}}</textarea>
                           </div>
-                          <div class="kSection kRow">
-                              <button pButton type="button" class="kButtonBranded kCopyCode" (click)="copyEmbedCode(code)" label="{{'applications.embed.copy' | translate}}"></button>
+                          <div class="vSection vRow">
+                              <button pButton type="button" class="vButtonBranded vCopyCode" (click)="copyEmbedCode(code)" label="{{'applications.embed.copy' | translate}}"></button>
                           </div>
                         </ng-container>
-                        <div class="kSection kAlignTop kRow">
-                            <span class="kCol">{{'applications.embed.view' | translate}}</span>
+                        <div class="vSection vIdignTop vRow">
+                            <span class="vCol">{{'applications.embed.view' | translate}}</span>
                             <a href="{{_shortLink}}" target="_blank">{{_shortLink}}</a>
                         </div>
-                        <div class="kSection kRow kAlignTop">
-                            <span class="kCol">{{'applications.embed.qr' | translate}}</span>
+                        <div class="vSection vRow vIdignTop">
+                            <span class="vCol">{{'applications.embed.qr' | translate}}</span>
                             <qrcode *ngIf="_shortLink"
                                     [qrdata]="_shortLink" [size]="80" [level]="'M'"></qrcode>
                         </div>
 
-                        <div class="kSection kRow">
+                        <div class="vSection vRow">
                             <a (click)="toggleAdvanced()">{{'applications.embed.advanced' | translate}}</a>
-                            <i class="kAdvancedArrow kIcondropdown_arrow_right" [class.kArrowDown]="_showAdvanced"></i>
+                            <i class="vAdvancedArrow vIcondropdown_arrow_right" [class.vArrowDown]="_showAdvanced"></i>
                         </div>
 
-                        <div class="kAdvanced" [style.maxHeight]="_showAdvanced ? '250px' : '0px'">
-                            <div class="kSection kRow">
-                                <div class="kCol">
+                        <div class="vAdvanced" [style.maxHeight]="_showAdvanced ? '250px' : '0px'">
+                            <div class="vSection vRow">
+                                <div class="vCol">
                                     <span>{{'applications.embed.embedType' | translate}}</span>
-                                    <i #helpTip class="kIconhelp_full kHelpTip"></i>
+                                    <i #helpTip class="vIconhelp_full vHelpTip"></i>
                                 </div>
                                 <p-dropdown [options]="_embedTypes" formControlName="selectedEmbedType"></p-dropdown>
                             </div>
-                            <div class="kSection kRow kAlignTop" [class.kHidden]="_selectedPlayerVersion === 3">
-                                <span class="kCol">{{'applications.embed.seo' | translate}}</span>
+                            <div class="vSection vRow vIdignTop" [class.vHidden]="_selectedPlayerVersion === 3">
+                                <span class="vCol">{{'applications.embed.seo' | translate}}</span>
                                 <p-inputSwitch formControlName="seo"></p-inputSwitch>
                             </div>
-                            <div class="kSection kRow kAlignTop">
-                                <span class="kCol">{{'applications.embed.https' | translate}}</span>
+                            <div class="vSection vRow vIdignTop">
+                                <span class="vCol">{{'applications.embed.https' | translate}}</span>
                                 <p-inputSwitch formControlName="secured"></p-inputSwitch>
                             </div>
                         </div>
@@ -83,34 +83,34 @@
             </div>
         </form>
     </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget data-aid="sortSettings" [closeOnResize]="true" [popupWidth]="360" [popupHeight]="254" [targetRef]="settingsBtn" [appendTo]="preview" [targetOffset]="{'x':-330, 'y': 30}" [closeBtnInside]="true">
-    <div class="kSettings">
+<vPopupWidget data-aid="sortSettings" [closeOnResize]="true" [popupWidth]="360" [popupHeight]="254" [targetRef]="settingsBtn" [appendTo]="preview" [targetOffset]="{'x':-330, 'y': 30}" [closeBtnInside]="true">
+    <div class="vSettings">
         <span>{{'applications.embed.settings' | translate | uppercase}}</span>
         <p-radioButton name="layersSortBy" value="name" label="{{'applications.embed.name' | translate}}" [(ngModel)]="_playersSortBy" (onClick)="updatePlayersSort('name')"></p-radioButton>
         <p-radioButton name="layersSortBy" value="version" label="{{'applications.embed.version' | translate}}" [(ngModel)]="_playersSortBy" (onClick)="updatePlayersSort('version')"></p-radioButton>
         <p-radioButton name="layersSortBy" value="createdAt" label="{{'applications.embed.added' | translate}}" [(ngModel)]="_playersSortBy" (onClick)="updatePlayersSort('createdAt')"></p-radioButton>
         <p-radioButton name="layersSortBy" value="updatedAt" label="{{'applications.embed.updated' | translate}}" [(ngModel)]="_playersSortBy" (onClick)="updatePlayersSort('updatedAt')"></p-radioButton>
     </div>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget data-aid="helpTip" [popupWidth]="500" [targetRef]="helpTip" [appendTo]="preview" [targetOffset]="{'x':-250, 'y': 20}" [closeBtn]="false">
-    <div class="kTooltip">
-        <div class="kHelpTitle">
-            <i class="kIconlife_donut"></i>
+<vPopupWidget data-aid="helpTip" [popupWidth]="500" [targetRef]="helpTip" [appendTo]="preview" [targetOffset]="{'x':-250, 'y': 20}" [closeBtn]="false">
+    <div class="vTooltip">
+        <div class="vHelpTitle">
+            <i class="vIconlife_donut"></i>
             <span>{{'applications.embed.embedType' | translate }}</span>
         </div>
-        <div class="kTooltipContent">
+        <div class="vTooltipContent">
             <span>{{'applications.embed.helpTip1' | translate }}</span>
             <a [hidden]="!_embedTypesHelpExists" (click)="openLink('embedTypes')"> {{'applications.embed.helpTip2' | translate }}</a>
             <span [hidden]="!_embedTypesHelpExists"> {{'applications.embed.helpTip3' | translate }}</span>
         </div>
-        <div class="kTooltipContent">
+        <div class="vTooltipContent">
             <span>{{'applications.embed.helpTip4' | translate }}</span>
             <span [hidden]="!_deliveryProtocolsHelpExists">{{'applications.embed.helpTip5' | translate }}</span>
             <a [hidden]="!_deliveryProtocolsHelpExists" (click)="openLink('deliveryProtocols')"> {{'applications.embed.helpTip6' | translate }}</a>
         </div>
 
     </div>
-</kPopupWidget>
+</vPopupWidget>

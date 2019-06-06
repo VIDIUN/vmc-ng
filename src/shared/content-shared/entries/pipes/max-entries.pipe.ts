@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { globalConfig } from 'config/global';
 
 
-@Pipe({ name: 'kMaxEntries' })
+@Pipe({ name: 'vMaxEntries' })
 export class MaxEntriesPipe implements PipeTransform {
   constructor() {
   }

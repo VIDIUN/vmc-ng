@@ -1,13 +1,13 @@
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {Injectable, OnDestroy} from '@angular/core';
 import { Observable } from 'rxjs';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {CategorySectionsList} from './category-sections-list';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import {CategoryWidget} from '../category-widget';
-import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 export interface SectionWidgetItem {
   label: string;
@@ -23,7 +23,7 @@ export class CategorySectionsListWidget extends CategoryWidget implements OnDest
 
   constructor(private _appLocalization: AppLocalization,
               private _contentCategoryView: ContentCategoryViewService,
-              logger: KalturaLogger
+              logger: VidiunLogger
               ) {
     super('categorySectionsList', logger);
   }
@@ -38,7 +38,7 @@ export class CategorySectionsListWidget extends CategoryWidget implements OnDest
     }
   }
 
-  protected onDataLoaded(data: KalturaCategory): void {
+  protected onDataLoaded(data: VidiunCategory): void {
     this._reloadSections(data);
   }
 
@@ -73,7 +73,7 @@ export class CategorySectionsListWidget extends CategoryWidget implements OnDest
 
 
 
-  private _reloadSections(category: KalturaCategory): void {
+  private _reloadSections(category: VidiunCategory): void {
       const sections = [];
       const formWidgetsState = this.form.widgetsState;
 

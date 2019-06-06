@@ -1,30 +1,30 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, Input, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
 import { subApplicationsConfig } from 'config/sub-applications';
 import { PreviewEmbedService, EmbedConfig } from './preview-and-embed.service';
 
-import { KalturaPlaylist, UiConfListAction } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaUiConfListResponse } from 'kaltura-ngx-client';
-import { KalturaUiConf } from 'kaltura-ngx-client';
-import { KalturaShortLink } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
+import { VidiunPlaylist, UiConfListAction } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunUiConfListResponse } from 'vidiun-ngx-client';
+import { VidiunUiConf } from 'vidiun-ngx-client';
+import { VidiunShortLink } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
 import { serverConfig, buildCDNUrl } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export type PlayerUIConf = {
     version: number,
-    uiConf: KalturaUiConf
+    uiConf: VidiunUiConf
 }
 
 @Component({
-  selector: 'kPreviewEmbedDetails',
+  selector: 'vPreviewEmbedDetails',
   templateUrl: './preview-embed.component.html',
   styleUrls: ['./preview-embed.component.scss'],
   providers: [ PreviewEmbedService ]
@@ -33,7 +33,7 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
 
   @Output() closePopup = new EventEmitter();
 
-  @Input() media: KalturaPlaylist | KalturaMediaEntry;
+  @Input() media: VidiunPlaylist | VidiunMediaEntry;
 
   @ViewChild('previewIframe') previewIframe: ElementRef;
 
@@ -60,8 +60,8 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
   private _previewLink = null;
 
   public get _showEmberCode(): boolean {
-    const showForPlaylist = this.media instanceof KalturaPlaylist && this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_EMBED_CODE);
-    const showForEntry = this.media instanceof KalturaMediaEntry && this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EMBED_CODE);
+    const showForPlaylist = this.media instanceof VidiunPlaylist && this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_EMBED_CODE);
+    const showForEntry = this.media instanceof VidiunMediaEntry && this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EMBED_CODE);
     return showForEntry || showForPlaylist;
   }
 
@@ -69,7 +69,7 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
               private _appAuthentication: AppAuthentication,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _fb: FormBuilder) {
 
   }
@@ -114,19 +114,19 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
 
   private listPlayers(){
 
-    const isPlaylist = this.media instanceof KalturaPlaylist;
+    const isPlaylist = this.media instanceof VidiunPlaylist;
     this._isBusy = true;
     this._blockerMessage = null;
 
     this._previewEmbedService.listPlayers(isPlaylist).pipe(cancelOnDestroy(this)).subscribe(
-        (res: KalturaUiConfListResponse) => {
+        (res: VidiunUiConfListResponse) => {
           // create players array from returned UICong list. Remove V1 players. Include V3 players (no html5Url, special tag)
           res.objects.filter( (uiConf) => {
               let showPlayer = true;
               if (uiConf.html5Url){
                   showPlayer = uiConf.html5Url.indexOf('html5lib/v1') === -1; // filter out V1 players
               } else {
-                  showPlayer = uiConf.tags.indexOf('kalturaPlayerJs') > -1 && this._permissionsService.hasPermission(KMCPermissions.FEATURE_V3_STUDIO_PERMISSION); // show V3 players if user has permissions
+                  showPlayer = uiConf.tags.indexOf('vidiunPlayerJs') > -1 && this._permissionsService.hasPermission(VMCPermissions.FEATURE_V3_STUDIO_PERMISSION); // show V3 players if user has permissions
               }
               // filter out by tags
               if (uiConf.tags && uiConf.tags.length){
@@ -137,7 +137,7 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
               }
               return showPlayer;
           }).forEach(uiConf => {
-              const version = uiConf.tags.indexOf('kalturaPlayerJs') > -1 ? 3 : 2;
+              const version = uiConf.tags.indexOf('vidiunPlayerJs') > -1 ? 3 : 2;
               const playerUIConf: PlayerUIConf = { uiConf, version }
             this._players.push({label: uiConf.name, value: playerUIConf});
           });
@@ -227,7 +227,7 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
     this._embedTypes.push({"label": this._appLocalization.get("applications.embed.embedDynamic"), "value": "dynamic"});
     this._embedTypes.push({"label": this._appLocalization.get("applications.embed.embedIframe"), "value": "iframe"});
     this._embedTypes.push({"label": this._appLocalization.get("applications.embed.embedAuto"), "value": "auto"});
-    if (this.media instanceof KalturaMediaEntry && this._selectedPlayerVersion === 2) {
+    if (this.media instanceof VidiunMediaEntry && this._selectedPlayerVersion === 2) {
       this._embedTypes.push({"label": this._appLocalization.get("applications.embed.embedThumb"), "value": "thumb"}); // no thumb embed for playlists and v3 players
     }
   }
@@ -237,10 +237,10 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
   private generateV3code(isPreview: boolean): string {
       const uiConf = this._previewForm.controls['selectedPlayer'].value.uiConf;
       const embedType = this._previewForm.get('selectedEmbedType').value;
-      const ks = this._appAuthentication.appUser.ks;
+      const vs = this._appAuthentication.appUser.vs;
       let embedConfig: EmbedConfig = {
           embedType,
-          ks,
+          vs,
           entryId: this.media.id,
           uiConfId: uiConf.id,
           width: uiConf.width,
@@ -254,11 +254,11 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
       if (isPreview){
           // build CDN URL according to current protocol
           serverUri = buildCDNUrl('');
-          // pass ks to player for preview only
+          // pass vs to player for preview only
           if (embedType === 'dynamic'){
-              config = `ks: '${ks}',`;
+              config = `vs: '${vs}',`;
           } else {
-              config = `&config[provider]={"ks":"${ks}"}`;
+              config = `&config[provider]={"vs":"${vs}"}`;
           }
       }
       embedConfig.serverUri = serverUri;
@@ -272,12 +272,12 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
   private getGenerator():any{
     const baseCdnUrl = serverConfig.cdnServers.serverUri.replace("http://","");
     const securedCdnUrl = serverConfig.cdnServers.securedServerUri.replace("https://","");
-    // 'kEmbedCodeGenerator' is bundled with the app. Location: assets/js/KalturaEmbedCodeGenerator.min.js
-    return new window['kEmbedCodeGenerator']({
+    // 'vEmbedCodeGenerator' is bundled with the app. Location: assets/js/VidiunEmbedCodeGenerator.min.js
+    return new window['vEmbedCodeGenerator']({
       host: baseCdnUrl,
       securedHost: securedCdnUrl,
       partnerId: this._appAuthentication.appUser.partnerId,
-      includeKalturaLinks: subApplicationsConfig.previewAndEmbedApp.includeKalturaLinks
+      includeVidiunLinks: subApplicationsConfig.previewAndEmbedApp.includeVidiunLinks
     });
   }
 
@@ -293,11 +293,11 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
       height: this._previewForm.controls['selectedPlayer'].value.uiConf.height,
       entryMeta: this.getMediaMetadata(),
       includeSeoMetadata: this._previewForm.controls['seo'].value,
-      playerId: 'kaltura_player_' + cacheStr,
+      playerId: 'vidiun_player_' + cacheStr,
       cacheSt: cacheStr,
       flashVars: this.getEmbedFlashVars(isPreview)
     };
-    if (this.media instanceof KalturaMediaEntry){
+    if (this.media instanceof VidiunMediaEntry){
       params['entryId'] = this.media.id;
     }
     return this.generator.getCode(params);
@@ -326,13 +326,13 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
     let flashVars =  {};
     try {
       if (isPreview) {
-        flashVars['ks'] = this._appAuthentication.appUser.ks;
-        if (this.media instanceof KalturaMediaEntry) {
+        flashVars['vs'] = this._appAuthentication.appUser.vs;
+        if (this.media instanceof VidiunMediaEntry) {
           const sourceType = this.media.sourceType.toString();
-          const isLive = (sourceType === KalturaSourceType.liveStream.toString() ||
-          sourceType === KalturaSourceType.akamaiLive.toString() ||
-          sourceType === KalturaSourceType.akamaiUniversalLive.toString() ||
-          sourceType === KalturaSourceType.manualLiveStream.toString());
+          const isLive = (sourceType === VidiunSourceType.liveStream.toString() ||
+          sourceType === VidiunSourceType.akamaiLive.toString() ||
+          sourceType === VidiunSourceType.akamaiUniversalLive.toString() ||
+          sourceType === VidiunSourceType.manualLiveStream.toString());
           if (isLive) {
             flashVars['disableEntryRedirect'] = true;
           }
@@ -344,8 +344,8 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
           "loadingPolicy": "onDemand"       // prevent v1 players from trying to load this plugin
         };
       }
-      if (this.media instanceof KalturaPlaylist) {
-        flashVars['playlistAPI.kpl0Id'] = this.media.id;
+      if (this.media instanceof VidiunPlaylist) {
+        flashVars['playlistAPI.vpl0Id'] = this.media.id;
       }
     } catch (e) {
       console.error("Preview & Embed::Error getting Flashvars: " + e.message);
@@ -366,10 +366,10 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
   private createPreviewLink(isPreview: boolean):void{
       let url = '';
       try {
-        url = this.getProtocol(isPreview) + '://' + serverConfig.kalturaServer.uri + '/index.php/extwidget/preview';
+        url = this.getProtocol(isPreview) + '://' + serverConfig.vidiunServer.uri + '/index.php/extwidget/preview';
         url += '/partner_id/' + this._appAuthentication.appUser.partnerId;
         url += '/uiconf_id/' + this._previewForm.controls['selectedPlayer'].value.uiConf.id;
-        if (this.media instanceof KalturaMediaEntry) {
+        if (this.media instanceof VidiunMediaEntry) {
           url += '/entry_id/' + this.media.id;
         }
         url += '/embed/' + this._previewForm.controls['selectedEmbedType'].value;
@@ -383,8 +383,8 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
 
       // create short link
       this._previewEmbedService.generateShortLink(url).pipe(cancelOnDestroy(this)).subscribe(
-          (res: KalturaShortLink) => {
-            this._shortLink = 'http://' + serverConfig.kalturaServer.uri + '/tiny/' + res.id;
+          (res: VidiunShortLink) => {
+            this._shortLink = 'http://' + serverConfig.vidiunServer.uri + '/tiny/' + res.id;
           },
           error => {
             console.log("could not generate short link for preview");

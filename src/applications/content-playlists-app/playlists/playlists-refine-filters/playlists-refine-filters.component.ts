@@ -1,15 +1,15 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { PlaylistsFilters, PlaylistsStore } from '../playlists-store/playlists-store.service';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 const listOfFilterNames: (keyof PlaylistsFilters)[] = ['createdAt'];
 
 @Component({
-  selector: 'k-playlists-refine-filters',
+  selector: 'v-playlists-refine-filters',
   templateUrl: './playlists-refine-filters.component.html',
   styleUrls: ['./playlists-refine-filters.component.scss']
 })

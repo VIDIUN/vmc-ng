@@ -1,15 +1,15 @@
 @import 'app-theme/_variables.scss';
 
-.kTitle {
+.vTitle {
   height: 24px;
   width: 100%;
-  color: $kGrayscale1;
+  color: $vGrayscale1;
   font-size: 20px;
   font-weight: bold;
   line-height: 24px;
 }
 
-.kAddToDefaultTranscodingProfile {
+.vAddToDefaultTranscodingProfile {
   padding-top: 11px;
   /deep/ {
     .ui-chkbox-label {
@@ -18,8 +18,8 @@
   }
 }
 
-.kLandingPageExplanation {
-  color: $kGrayscale1;
+.vLandingPageExplanation {
+  color: $vGrayscale1;
   width: 710px;
   padding-top: 12px;
   font-size: 15px;
@@ -27,30 +27,30 @@
   padding-bottom: 20px;
 }
 
-.kPlayback {
-  .kSelectPlayer {
+.vPlayback {
+  .vSelectPlayer {
     padding-top: 17px;
     display: flex;
     align-items: center;
 
-    .kSelectPlayerLabel {
+    .vSelectPlayerLabel {
       flex: 0 0 auto;
     }
-    .kSelectPlayerControl {
+    .vSelectPlayerControl {
       padding-left:23px;
     }
   }
 
-  .kPlaybackLinkback {
+  .vPlaybackLinkback {
     padding-left: 31px;
   }
 
-  .kSelectPlayerInfo {
+  .vSelectPlayerInfo {
     padding-top: 12px;
   }
 }
 
-:host /deep/ .kCategories {
+:host /deep/ .vCategories {
   .ui-multiselect {
     padding-left: 0;
   }
@@ -64,7 +64,7 @@
     border-radius: 0;
   }
 }
-:host /deep/ .kSelectPlayer p-dropdown{
+:host /deep/ .vSelectPlayer p-dropdown{
     .ui-dropdown{
         width: 380px !important;
     }

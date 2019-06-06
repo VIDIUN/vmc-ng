@@ -1,0 +1,58 @@
+@import 'app-theme/_variables.scss';
+
+.vEditWin{
+  .vHeader {
+    height: 78px;
+    width: 100%;
+    text-align: center;
+    padding-top: 24px;
+    box-sizing: border-box;
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
+      color: #333333;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+  .vContainer{
+    height: 144px;
+  }
+  .vFooter{
+    height: 66px;
+    border-top: 1px solid $vGrayscale4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button{
+      height: 34px;
+      width: 120px;
+      font-size: 14px;
+    }
+  }
+
+  .vRow{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 53px 60px;
+    font-size: 15px;
+    .vLabel{
+      width: 200px;
+      flex: 0 0 auto;
+    }
+    input{
+      width: 100%;
+    }
+  }
+}
+
+:host /deep/ {
+  .ui-widget.ui-dropdown {
+    width: 265px;
+    font-size: 14px;
+  }
+
+  .ui-dropdown-items-wrapper{
+    max-height: 115px;
+  }
+}

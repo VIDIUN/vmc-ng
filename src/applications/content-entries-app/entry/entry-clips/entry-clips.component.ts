@@ -2,19 +2,19 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {globalConfig} from 'config/global';
 import {EntryClipsWidget} from './entry-clips-widget.service';
-import {KalturaLogger} from "@kaltura-ng/kaltura-logger";
-import { ClipAndTrimAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
+import {VidiunLogger} from "@vidiun-ng/vidiun-logger";
+import { ClipAndTrimAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
 import { EntryStore } from '../entry-store.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/merge';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-    selector: 'kEntryClips',
+    selector: 'vEntryClips',
     templateUrl: './entry-clips.component.html',
     styleUrls: ['./entry-clips.component.scss'],
     providers: [
-      KalturaLogger.createLogger('EntryClipsComponent')
+      VidiunLogger.createLogger('EntryClipsComponent')
     ]
 })
 export class EntryClips implements OnInit, OnDestroy {
@@ -26,7 +26,7 @@ export class EntryClips implements OnInit, OnDestroy {
 
     constructor(public _widgetService: EntryClipsWidget,
                 private _clipAndTrimAppViewService: ClipAndTrimAppViewService,
-                logger: KalturaLogger,
+                logger: VidiunLogger,
                 private _store: EntryStore) {
     }
 

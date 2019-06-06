@@ -2,24 +2,24 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
     FlavorAssetGetFlavorAssetsWithParamsAction,
     FlavorAssetGetUrlAction,
-    KalturaClient,
-    KalturaFlavorAssetStatus,
-    KalturaMediaEntry,
-    KalturaNullableBoolean
-} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage, PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+    VidiunClient,
+    VidiunFlavorAssetStatus,
+    VidiunMediaEntry,
+    VidiunNullableBoolean
+} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage, PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { SelectItem } from 'primeng/primeng';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-    selector: 'kDownloadEntry',
+    selector: 'vDownloadEntry',
     templateUrl: './download-entry.component.html',
     styleUrls: ['./download-entry.component.scss']
 })
 export class DownloadEntryComponent implements OnInit, OnDestroy {
-    @Input() entry: KalturaMediaEntry;
+    @Input() entry: VidiunMediaEntry;
     @Input() parentPopupWidget: PopupWidgetComponent;
 
     public _loading = false;
@@ -29,7 +29,7 @@ export class DownloadEntryComponent implements OnInit, OnDestroy {
     public _selectedFlavor: string = null;
 
 
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
                 private _browserService: BrowserService,
                 private _appLocalization: AppLocalization) {
     }
@@ -37,18 +37,18 @@ export class DownloadEntryComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this._loading = true;
         this._sectionBlockerMessage = null;
-        this._kalturaServerClient.request(new FlavorAssetGetFlavorAssetsWithParamsAction({ entryId: this.entry.id }))
+        this._vidiunServerClient.request(new FlavorAssetGetFlavorAssetsWithParamsAction({ entryId: this.entry.id }))
             .pipe(cancelOnDestroy(this))
             .subscribe(
                 response => {
                     response.forEach(({ flavorAsset, flavorParams }) => {
-                        if (flavorAsset && flavorAsset.status === KalturaFlavorAssetStatus.ready) {
+                        if (flavorAsset && flavorAsset.status === VidiunFlavorAssetStatus.ready) {
                             this._flavors.push({
                                 label: flavorParams.name,
                                 value: flavorAsset.id
                             });
 
-                            if (flavorAsset.isDefault === KalturaNullableBoolean.trueValue) {
+                            if (flavorAsset.isDefault === VidiunNullableBoolean.trueValue) {
                                 this._selectedFlavor = flavorAsset.id;
                             }
                         }
@@ -82,7 +82,7 @@ export class DownloadEntryComponent implements OnInit, OnDestroy {
     }
 
     public _downloadFlavor(id: string): void {
-        this._kalturaServerClient.request(new FlavorAssetGetUrlAction({ id }))
+        this._vidiunServerClient.request(new FlavorAssetGetUrlAction({ id }))
             .pipe(
                 cancelOnDestroy(this),
                 tag('block-shell')

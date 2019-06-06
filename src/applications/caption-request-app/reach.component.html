@@ -1,12 +1,12 @@
-<div class="kReach">
-    <div class="kHeader">
+<div class="vReach">
+    <div class="vHeader">
         <div>
-            <i class="kIconclose_small kClose" (click)="parentPopup.close()"></i>
-            <span class="kTitle">{{_title}}</span>
+            <i class="vIconclose_small vClose" (click)="parentPopup.close()"></i>
+            <span class="vTitle">{{_title}}</span>
         </div>
     </div>
 
-    <div class="kContent">
-        <kReachFrame [page]="page" [data]="data" (closeApp)="parentPopup.close()"></kReachFrame>
+    <div class="vContent">
+        <vReachFrame [page]="page" [data]="data" (closeApp)="parentPopup.close()"></vReachFrame>
     </div>
 </div>

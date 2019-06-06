@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {GroupedListType} from '@kaltura-ng/mc-shared';
+import {GroupedListType} from '@vidiun-ng/mc-shared';
 import {EntriesFilters, EntriesStore} from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
   RefineGroup,
   RefineGroupList
 } from 'app-shared/content-shared/entries/entries-store/entries-refine-filters.service';
 import {CategoriesSearchService} from 'app-shared/content-shared/categories/categories-search.service';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
 import { Unsubscribable } from 'rxjs';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 export interface TagItem {
     type: string;
@@ -24,7 +24,7 @@ export interface TagItem {
 const refineListsType: Array<keyof EntriesFilters> = ['mediaTypes', 'timeScheduling', 'ingestionStatuses', 'durations', 'originalClippedEntries', 'moderationStatuses', 'replacementStatuses', 'accessControlProfiles', 'flavors', 'distributions' ];
 
 @Component({
-    selector: 'k-entries-list-tags',
+    selector: 'v-entries-list-tags',
     templateUrl: './entries-list-tags.component.html',
     styleUrls: ['./entries-list-tags.component.scss']
 

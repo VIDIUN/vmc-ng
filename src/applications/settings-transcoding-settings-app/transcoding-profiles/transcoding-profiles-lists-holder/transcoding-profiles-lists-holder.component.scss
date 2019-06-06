@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kTranscodingProfilesListsHolderWrapper {
+.vTranscodingProfilesListsHolderWrapper {
   font-size: 15px;
   background-color: $appBkgColor;
   padding-top: 24px;
@@ -12,13 +12,13 @@
   margin: 0;
   flex-direction: column;
 
-  .kTranscodingProfilesListsHolder {
+  .vTranscodingProfilesListsHolder {
     height: 450px;
     position: relative;
     display: flex;
     flex-direction: column;
     margin-bottom: 42px !important;
-    .kSingleTableMode {
+    .vSingleTableMode {
       height: auto !important;
     }
   }

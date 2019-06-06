@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
 export class CategoriesUtilsService {
 
   constructor(private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
       this._logger = _logger.subLogger('CategoriesUtilsService');
   }
 
-  public confirmDelete(categoryToDelete: KalturaCategory, categories?: KalturaCategory[]): Observable<{ confirmed: boolean, error?: Error, categoryIndex?: number }> {
+  public confirmDelete(categoryToDelete: VidiunCategory, categories?: VidiunCategory[]): Observable<{ confirmed: boolean, error?: Error, categoryIndex?: number }> {
       this._logger.info(
           `handle confirm delete action, show confirmation`,
           { categoryId: categoryToDelete ? categoryToDelete.id : null }
@@ -64,7 +64,7 @@ export class CategoriesUtilsService {
   }
 
   // bulk delete
-  public confirmDeleteMultiple(categoriesToDelete: KalturaCategory[], categories?: KalturaCategory[]): Observable<{ confirmed: boolean, error?: Error }> {
+  public confirmDeleteMultiple(categoriesToDelete: VidiunCategory[], categories?: VidiunCategory[]): Observable<{ confirmed: boolean, error?: Error }> {
       this._logger.info(`handle confirm delete multiple action, show confirmation`, { categoriesToDelete });
     return Observable.create(observer => {
       if (!categoriesToDelete || !categoriesToDelete.length || (categories && !categoriesToDelete.every(c => categories.indexOf(c) > -1))) {
@@ -104,11 +104,11 @@ export class CategoriesUtilsService {
     });
   }
 
-  public hasEditWarnings(categories: KalturaCategory | KalturaCategory[]): boolean {
+  public hasEditWarnings(categories: VidiunCategory | VidiunCategory[]): boolean {
     categories = categories && (!Array.isArray(categories)) ? [categories] : categories;
     const editWarningsExists: boolean =
       // Find one of the selected categories that has '__EditWarning' in its 'tags' property
-      !!(<KalturaCategory[]>categories).find(category => {
+      !!(<VidiunCategory[]>categories).find(category => {
         return (category.tags && category.tags.indexOf('__EditWarning') > -1);
       });
 

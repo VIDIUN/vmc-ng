@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
 
 
-.kFlavours{
+.vFlavours{
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -10,38 +10,38 @@
 		font-weight: 400;
 		height: 32px;
 	}
-	.kTitle{
+	.vTitle{
 		padding-left: 24px;
-		color: $kGrayscale1;
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 	}
-	.kEntryStatus{
+	.vEntryStatus{
 		padding-left: 24px;
 		margin-top: 12px;
 		margin-bottom: 24px;
 		span{
 			margin-left: 12px;
 		}
-		.kStatusNoContent{
-			color: $kGrayscale1;
+		.vStatusNoContent{
+			color: $vGrayscale1;
 		}
-		.kStatusReady{
-			color: $kPrimary;
+		.vStatusReady{
+			color: $vPrimary;
 		}
-		.kStatusError, .kStatusErrorProcessing{
-			color: $kDandger;
+		.vStatusError, .vStatusErrorProcessing{
+			color: $vDandger;
 		}
-        &.kAddingEntry {
+        &.vAddingEntry {
             width: calc(100% - 80px);
         }
 	}
-	.kFlavorStatusError{
-		color: $kDandger;
+	.vFlavorStatusError{
+		color: $vDandger;
 	}
-    .kFlavorReplacement {
+    .vFlavorReplacement {
         position: relative;
-        .kRefreshBtn {
+        .vRefreshBtn {
             position: absolute;
             right: 10px;
             bottom: 16px;
@@ -49,46 +49,46 @@
             border: none;
             min-width: inherit;
             outline: 0;
-            color: $kGrayscale3;
+            color: $vGrayscale3;
             &:active {
                 box-shadow: none;
                 transform: rotate(45deg);
             }
             &:hover {
                 background-color: #ffffff;
-                color: $kPrimary;
+                color: $vPrimary;
             }
         }
     }
-	.kTable{
-		.kFlavorName{
+	.vTable{
+		.vFlavorName{
 			font-weight: bold;
 		}
-		.kConvertedFlavor{
-			color: $kGrayscale1;
+		.vConvertedFlavor{
+			color: $vGrayscale1;
 		}
 	}
-	.kTooltipHolder{
+	.vTooltipHolder{
 		position: relative;
 	}
-	.kFlavorsTableActions {
+	.vFlavorsTableActions {
 		width: 100%;
 		text-align: center;
 	}
 }
-:host /deep/ .ui-button-icon-right.ui-c.pi-pi-fw.kIcondropdown_arrow_bottom{
+:host /deep/ .ui-button-icon-right.ui-c.pi-pi-fw.vIcondropdown_arrow_bottom{
 	font-size: 11px;
 	padding-right: 4px;
 }
 
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }
 
 @media screen and (max-width: 1310px) {
-    .kReplacementButtonsShown {
+    .vReplacementButtonsShown {
         bottom: 22px !important;
     }
 }

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { routing } from './content-upload-control-app.routes';
 
-import { AreaBlockerModule, StickyModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule, StickyModule } from '@vidiun-ng/vidiun-ui';
 import {
   PaginatorModule,
   ButtonModule,
@@ -17,31 +17,31 @@ import {
   SharedModule,
   ProgressBarModule,
 } from 'primeng/primeng';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
 import {
-  KalturaUIModule,
+  VidiunUIModule,
   TooltipModule
-} from '@kaltura-ng/kaltura-ui';
-import { AutoCompleteModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
+} from '@vidiun-ng/vidiun-ui';
+import { AutoCompleteModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
 
 import { ContentUploadControlComponent } from './content-upload-control.component';
 import { UploadListComponent } from './upload-list/upload-list.component';
 import { UploadListTableComponent } from './upload-list/upload-list-table.component';
 import { UploadProgressComponent } from './upload-list/upload-progress/upload-progress.component';
-import { KMCShellModule } from 'app-shared/kmc-shell';
+import { VMCShellModule } from 'app-shared/vmc-shell';
 import { UploadStatusPipe } from './upload-list/pipes/upload-status.pipe';
 import { TableModule } from 'primeng/table';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AreaBlockerModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     PaginatorModule,
     TooltipModule,
     ButtonModule,
@@ -54,11 +54,11 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     CalendarModule,
     MenuModule,
     TagsModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     AutoCompleteModule,
     SharedModule,
     ProgressBarModule,
-    KMCShellModule,
+    VMCShellModule,
     StickyModule,
     RouterModule.forChild(routing),
       TableModule,

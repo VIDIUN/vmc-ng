@@ -1,24 +1,24 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { FileDialogComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaFlavorAssetStatus } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { FileDialogComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunFlavorAssetStatus } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 import { Menu, MenuItem } from 'primeng/primeng';
 import { EntryFlavoursWidget, ReplacementData } from './entry-flavours-widget.service';
 import { Flavor } from './flavor';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { NewEntryFlavourFile } from 'app-shared/kmc-shell/new-entry-flavour-file';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { NewEntryFlavourFile } from 'app-shared/vmc-shell/new-entry-flavour-file';
 import { globalConfig } from 'config/global';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-    selector: 'kEntryFlavours',
+    selector: 'vEntryFlavours',
     templateUrl: './entry-flavours.component.html',
     styleUrls: ['./entry-flavours.component.scss'],
     providers: [
@@ -35,7 +35,7 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
     @ViewChild('actionsmenu') private actionsMenu: Menu;
     @ViewChild('fileDialog') private fileDialog: FileDialogComponent;
 	public _actions: MenuItem[] = [];
-	public _kmcPermissions = KMCPermissions;
+	public _vmcPermissions = VMCPermissions;
 
 	public _selectedFlavor: Flavor;
 	public _uploadFilter: string = "";
@@ -50,7 +50,7 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
                 private _el: ElementRef<HTMLElement>,
               private _uploadManagement: UploadManagement,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService) {
     }
 
@@ -66,12 +66,12 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
             .pipe(cancelOnDestroy(this))
             .filter(Boolean)
             .subscribe(entry => {
-                if (entry.status === KalturaEntryStatus.noContent) {
-                    this._replaceButtonsLabel = entry.mediaType === KalturaMediaType.audio
+                if (entry.status === VidiunEntryStatus.noContent) {
+                    this._replaceButtonsLabel = entry.mediaType === VidiunMediaType.audio
                         ? this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.addAudio')
                         : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.addVideo');
                 } else {
-                    this._replaceButtonsLabel = entry.mediaType === KalturaMediaType.audio
+                    this._replaceButtonsLabel = entry.mediaType === VidiunMediaType.audio
                         ? this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.replaceAudio')
                         : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.replaceVideo');
                 }
@@ -80,11 +80,11 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
 
     public _updateShowActionsView(replacementData: ReplacementData): void {
         const processingFlavorsStatuses = [
-            KalturaFlavorAssetStatus.converting.toString(),
-            KalturaFlavorAssetStatus.waitForConvert.toString(),
-            KalturaFlavorAssetStatus.importing.toString(),
-            KalturaFlavorAssetStatus.validating.toString(),
-            KalturaFlavorAssetStatus.queued.toString()
+            VidiunFlavorAssetStatus.converting.toString(),
+            VidiunFlavorAssetStatus.waitForConvert.toString(),
+            VidiunFlavorAssetStatus.importing.toString(),
+            VidiunFlavorAssetStatus.validating.toString(),
+            VidiunFlavorAssetStatus.queued.toString()
         ];
         const flavors = this._widgetService.selectedFlavors || [];
         const processingFlavors = flavors.some(flavor => processingFlavorsStatuses.indexOf(flavor.status) !== -1);
@@ -96,15 +96,15 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
 
         const entry = this._widgetService.data;
         const noCurrentlyReplacing = !replacementData.tempEntryId;
-        const hasReplacePermission = this._permissionsService.hasPermission(KMCPermissions.CONTENT_INGEST_INTO_READY);
+        const hasReplacePermission = this._permissionsService.hasPermission(VMCPermissions.CONTENT_INGEST_INTO_READY);
         let showActionsView = true;
         switch (entry.status) {
-            case KalturaEntryStatus.noContent:
-                showActionsView = this._permissionsService.hasPermission(KMCPermissions.CONTENT_INGEST_INTO_ORPHAN);
+            case VidiunEntryStatus.noContent:
+                showActionsView = this._permissionsService.hasPermission(VMCPermissions.CONTENT_INGEST_INTO_ORPHAN);
                 break;
-            case KalturaEntryStatus.ready:
-            case KalturaEntryStatus.errorConverting:
-            case KalturaEntryStatus.errorImporting:
+            case VidiunEntryStatus.ready:
+            case VidiunEntryStatus.errorConverting:
+            case VidiunEntryStatus.errorImporting:
                 showActionsView = noCurrentlyReplacing && hasReplacePermission;
                 break;
             default:
@@ -119,17 +119,17 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
 		if (this.actionsMenu){
 			this._actions = [];
 			this._uploadFilter = this._setUploadFilter(this._widgetService.data);
-			if (this._widgetService.sourceAvailable && (flavor.id === '' || (flavor.id !== '' && flavor.status === KalturaFlavorAssetStatus.deleted.toString()))){
+			if (this._widgetService.sourceAvailable && (flavor.id === '' || (flavor.id !== '' && flavor.status === VidiunFlavorAssetStatus.deleted.toString()))){
 				this._actions.push({id: 'convert', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.convert'), command: (event) => {this.actionSelected("convert");}});
 			}
 			if ((flavor.isSource && this.isSourceReady(flavor)) || ( !flavor.isSource && flavor.id !== '' &&
-					(flavor.status === KalturaFlavorAssetStatus.exporting.toString() || flavor.status === KalturaFlavorAssetStatus.ready.toString() ))){
+					(flavor.status === VidiunFlavorAssetStatus.exporting.toString() || flavor.status === VidiunFlavorAssetStatus.ready.toString() ))){
 				this._actions.push({id: 'download', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.download'), command: (event) => {this.actionSelected("download");}});
 			}
-			if ((flavor.isSource && (this.isSourceReady(flavor) || flavor.status === KalturaFlavorAssetStatus.deleted.toString()))||
-					flavor.id === "" || (flavor.id !== "" && (flavor.status === KalturaFlavorAssetStatus.deleted.toString() ||
-					flavor.status === KalturaFlavorAssetStatus.error.toString() || flavor.status === KalturaFlavorAssetStatus.notApplicable.toString() ||
-					flavor.status === KalturaFlavorAssetStatus.exporting.toString() || flavor.status === KalturaFlavorAssetStatus.ready.toString()))
+			if ((flavor.isSource && (this.isSourceReady(flavor) || flavor.status === VidiunFlavorAssetStatus.deleted.toString()))||
+					flavor.id === "" || (flavor.id !== "" && (flavor.status === VidiunFlavorAssetStatus.deleted.toString() ||
+					flavor.status === VidiunFlavorAssetStatus.error.toString() || flavor.status === VidiunFlavorAssetStatus.notApplicable.toString() ||
+					flavor.status === VidiunFlavorAssetStatus.exporting.toString() || flavor.status === VidiunFlavorAssetStatus.ready.toString()))
 			){
 				this._actions.push({id: 'upload', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.upload'), command: (event) => {this.actionSelected("upload");}});
 				this._actions.push({id: 'import', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.import'), command: (event) => {this.actionSelected("import");}});
@@ -145,27 +145,27 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
                 });
 			}
 			if ((flavor.isSource && this.isSourceReady(flavor) && flavor.isWeb) ||
-					(flavor.id !== "" && flavor.isWeb && (flavor.status === KalturaFlavorAssetStatus.exporting.toString() || flavor.status === KalturaFlavorAssetStatus.ready.toString()))){
+					(flavor.id !== "" && flavor.isWeb && (flavor.status === VidiunFlavorAssetStatus.exporting.toString() || flavor.status === VidiunFlavorAssetStatus.ready.toString()))){
 				this._actions.push({id: 'preview', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.preview'), command: (event) => {this.actionSelected("preview");}});
 			}
-			if (this._widgetService.sourceAvailable && !flavor.isSource && (flavor.status === KalturaFlavorAssetStatus.error.toString() || flavor.status === KalturaFlavorAssetStatus.exporting.toString() ||
-				flavor.status === KalturaFlavorAssetStatus.ready.toString() || flavor.status === KalturaFlavorAssetStatus.notApplicable.toString())){
+			if (this._widgetService.sourceAvailable && !flavor.isSource && (flavor.status === VidiunFlavorAssetStatus.error.toString() || flavor.status === VidiunFlavorAssetStatus.exporting.toString() ||
+				flavor.status === VidiunFlavorAssetStatus.ready.toString() || flavor.status === VidiunFlavorAssetStatus.notApplicable.toString())){
 				this._actions.push({id: 'reconvert', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.reconvert'), command: (event) => {this.actionSelected("reconvert");}});
 			}
-			if (flavor.isWidevine && flavor.status === KalturaFlavorAssetStatus.ready.toString()){
+			if (flavor.isWidevine && flavor.status === VidiunFlavorAssetStatus.ready.toString()){
 				this._actions.push({id: 'drm', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.drm'), command: (event) => {this.actionSelected("drm");}});
 			}
 
             if ((flavor.isSource && this.isSourceReady(flavor)) || ( !flavor.isSource && flavor.id !== '' &&
-                    (flavor.status === KalturaFlavorAssetStatus.exporting.toString() || flavor.status === KalturaFlavorAssetStatus.ready.toString() ))){
-                this._actions.push({id: 'delete', styleClass: 'kDanger', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.delete'), command: (event) => {this.actionSelected("delete");}});
+                    (flavor.status === VidiunFlavorAssetStatus.exporting.toString() || flavor.status === VidiunFlavorAssetStatus.ready.toString() ))){
+                this._actions.push({id: 'delete', styleClass: 'vDanger', label: this._appLocalization.get('applications.content.entryDetails.flavours.actions.delete'), command: (event) => {this.actionSelected("delete");}});
             }
 
             this._permissionsService.filterList(<{ id: string }[]>this._actions, {
-                'import': KMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
-                'upload': KMCPermissions.CONTENT_INGEST_UPLOAD,
-                'link': KMCPermissions.CONTENT_INGEST_REMOTE_STORAGE,
-                'match': KMCPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_MATCH
+                'import': VMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
+                'upload': VMCPermissions.CONTENT_INGEST_UPLOAD,
+                'link': VMCPermissions.CONTENT_INGEST_REMOTE_STORAGE,
+                'match': VMCPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_MATCH
             });
 
 			if (this._actions.length) {
@@ -176,9 +176,9 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
 	}
 
 	private isSourceReady(flavor: Flavor): boolean{
-		return (flavor.isSource && flavor.status !== KalturaFlavorAssetStatus.converting.toString() && flavor.status !== KalturaFlavorAssetStatus.waitForConvert.toString() &&
-			flavor.status !== KalturaFlavorAssetStatus.queued.toString() && flavor.status !== KalturaFlavorAssetStatus.importing.toString() &&
-			flavor.status !== KalturaFlavorAssetStatus.validating.toString());
+		return (flavor.isSource && flavor.status !== VidiunFlavorAssetStatus.converting.toString() && flavor.status !== VidiunFlavorAssetStatus.waitForConvert.toString() &&
+			flavor.status !== VidiunFlavorAssetStatus.queued.toString() && flavor.status !== VidiunFlavorAssetStatus.importing.toString() &&
+			flavor.status !== VidiunFlavorAssetStatus.validating.toString());
 	}
 
 	private actionSelected(action: string): void{
@@ -229,19 +229,19 @@ export class EntryFlavours implements AfterViewInit, OnInit, OnDestroy {
         }
     }
 
-	private _setUploadFilter(entry: KalturaMediaEntry): string{
+	private _setUploadFilter(entry: VidiunMediaEntry): string{
 		let filter = "";
-		if (entry.mediaType.toString() === KalturaMediaType.video.toString()){
+		if (entry.mediaType.toString() === VidiunMediaType.video.toString()){
 			filter = ".flv,.asf,.qt,.mov,.mpg,.avi,.wmv,.mp4,.3gp,.f4v,.m4v,.mpeg,.mxf,.rm,.rv,.rmvb,.ts,.ogg,.ogv,.vob,.webm,.mts,.arf,.mkv";
 		}
-		if (entry.mediaType.toString() === KalturaMediaType.audio.toString()){
+		if (entry.mediaType.toString() === VidiunMediaType.audio.toString()){
 			filter = ".flv,.asf,.qt,.mov,.mpg,.avi,.wmv,.mp3,.wav";
 		}
 		return filter;
 	}
 
   private _validateFileSize(file: File): boolean {
-    const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+    const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
     const fileSize = file.size / 1024 / 1024; // convert to Mb
 
     return this._uploadManagement.supportChunkUpload(new NewEntryFlavourFile(null)) || fileSize < maxFileSize;

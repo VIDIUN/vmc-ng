@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Pipe({name: 'entryType'})
 export class EntryTypePipe implements PipeTransform {
@@ -13,28 +13,28 @@ export class EntryTypePipe implements PipeTransform {
         let tooltip = "";
         if (typeof(value) !== 'undefined' && value !== null) {
             switch (value) {
-                case KalturaMediaType.video:
-                    className = 'kIconvideo-small';
+                case VidiunMediaType.video:
+                    className = 'vIconvideo-small';
                     tooltip = this.appLocalization.get("applications.content.entryType.video");
                     break;
-                case KalturaMediaType.image:
+                case VidiunMediaType.image:
                     tooltip = this.appLocalization.get("applications.content.entryType.image");
-                    className = 'kIconimage-small';
+                    className = 'vIconimage-small';
                     break;
-                case KalturaMediaType.audio:
+                case VidiunMediaType.audio:
                     tooltip = this.appLocalization.get("applications.content.entryType.audio");
-                    className = 'kIconsound-small';
+                    className = 'vIconsound-small';
                     break;
-                case KalturaMediaType.liveStreamFlash:
-                case KalturaMediaType.liveStreamQuicktime:
-                case KalturaMediaType.liveStreamRealMedia:
-                case KalturaMediaType.liveStreamWindowsMedia:
+                case VidiunMediaType.liveStreamFlash:
+                case VidiunMediaType.liveStreamQuicktime:
+                case VidiunMediaType.liveStreamRealMedia:
+                case VidiunMediaType.liveStreamWindowsMedia:
                     tooltip = this.appLocalization.get("applications.content.entryType.live");
-                    className = 'kIconlive_transcoding';
+                    className = 'vIconlive_transcoding';
                     break;
                 default:
                     tooltip = this.appLocalization.get("applications.content.entryType.unknown");
-                    className = 'kIconfile-small';
+                    className = 'vIconfile-small';
                     break;
             }
         }

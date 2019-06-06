@@ -1,21 +1,21 @@
-<div class="kScheduling">
-  <p class="kTitle">{{'applications.content.entryDetails.scheduling.scheduling' | translate}}</p>
+<div class="vScheduling">
+  <p class="vTitle">{{'applications.content.entryDetails.scheduling.scheduling' | translate}}</p>
   <form [formGroup]="_schedulingForm" novalidate>
-    <div class="kBlock">
+    <div class="vBlock">
       <p-radioButton name="scheduling" value="anytime" formControlName="scheduling"
                      label="{{'applications.content.entryDetails.scheduling.anytime' | translate}}"></p-radioButton>
     </div>
-    <div class="kBlock">
+    <div class="vBlock">
       <p-radioButton name="scheduling" value="scheduled" formControlName="scheduling"
                      label="{{'applications.content.entryDetails.scheduling.range' | translate}}"></p-radioButton>
-      <div class="kNote" [class.kDisabled]="_schedulingForm.get('scheduling').value === 'anytime'">
+      <div class="vNote" [class.vDisabled]="_schedulingForm.get('scheduling').value === 'anytime'">
         {{'applications.content.entryDetails.scheduling.note' | translate:_timeZone}}
       </div>
-      <div class="kSchedulingDetails" [class.kDisabled]="_schedulingForm.get('scheduling').value === 'anytime'">
-        <div class="kRow">
-          <span class="kLabels">{{'applications.content.entryDetails.scheduling.start' | translate}}</span>
+      <div class="vSchedulingDetails" [class.vDisabled]="_schedulingForm.get('scheduling').value === 'anytime'">
+        <div class="vRow">
+          <span class="vLabels">{{'applications.content.entryDetails.scheduling.start' | translate}}</span>
           <div>
-            <p-calendar class="startDate" formControlName="startDate" icon="kIconcalendar" [showIcon]="true"
+            <p-calendar class="startDate" formControlName="startDate" icon="vIconcalendar" [showIcon]="true"
                         [monthNavigator]="true" [yearNavigator]="true" [yearRange]="_createdAtDateRange"
                         [dateFormat]="_calendarFormat" showTime="true" readonlyInput="true" ></p-calendar>
             <div class="error" *ngIf="_schedulingForm.errors?.noStartDate">
@@ -24,14 +24,14 @@
 
           </div>
         </div>
-        <div class="kRow">
-          <div class="kLabels">
+        <div class="vRow">
+          <div class="vLabels">
             <p-checkbox formControlName="enableEndDate"
                         label="{{'applications.content.entryDetails.scheduling.end' | translate}}"
                         binary="true"></p-checkbox>
           </div>
           <div>
-            <p-calendar class="endDate" formControlName="endDate" icon="kIconcalendar" [showIcon]="true"
+            <p-calendar class="endDate" formControlName="endDate" icon="vIconcalendar" [showIcon]="true"
                         [monthNavigator]="true" [yearNavigator]="true" [yearRange]="_createdAtDateRange"
                         [dateFormat]="_calendarFormat" showTime="true" readonlyInput="true"></p-calendar>
             <div class="error" *ngIf="_schedulingForm.errors?.endDateBeforeStartDate">
@@ -42,7 +42,7 @@
             </div>
             <p>
               <a *ngIf="!hideClearDates"
-                 [class.kDisabled]="_schedulingForm.get('scheduling').value === 'anytime'"
+                 [class.vDisabled]="_schedulingForm.get('scheduling').value === 'anytime'"
                  (click)="_clearDates()">
                 {{'applications.content.entryDetails.scheduling.clear' | translate}}
               </a>

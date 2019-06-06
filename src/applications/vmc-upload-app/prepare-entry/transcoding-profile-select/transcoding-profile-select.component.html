@@ -1,0 +1,22 @@
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vEditWin vOverrideFAIcons" #captionsEdit>
+    <form [formGroup]="transcodingProfileSelectForm" novalidate>
+      <div class="vHeader">
+        <span class="vTitle">{{_title}}</span>
+      </div>
+
+      <div class="vContainer">
+        <div class="vRow">
+          <span class="vLabel">{{'applications.upload.transcodingProfilesSelect.selectTranscodingProfile' | translate}}</span>
+          <p-dropdown [options]="_profiles" [autoWidth]="false" formControlName="profile"></p-dropdown>
+        </div>
+      </div>
+
+
+      <div class="vFooter">
+        <button type="button" class="vButtonBranded" (click)="_saveAndClose()" pButton
+                label="{{'applications.upload.transcodingProfilesSelect.apply' | translate}}"></button>
+      </div>
+    </form>
+  </div>
+</v-area-blocker>

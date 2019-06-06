@@ -1,30 +1,30 @@
-<k-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kTranscodingProfilesListsHolderWrapper">
+<v-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vTranscodingProfilesListsHolderWrapper">
 
-    <div class="kTranscodingProfilesListsHolder kContent"
-         [class.kSingleTableMode]="!(_kmcPermissions.FEATURE_KALTURA_LIVE_STREAM | kNgIfPermitted)">
-      <k-transcoding-profiles-list [storeFor]="_kalturaConversionProfileType.media"
-                                   [singleTableMode]="!(_kmcPermissions.FEATURE_KALTURA_LIVE_STREAM | kNgIfPermitted)"
+    <div class="vTranscodingProfilesListsHolder vContent"
+         [class.vSingleTableMode]="!(_vmcPermissions.FEATURE_VIDIUN_LIVE_STREAM | vNgIfPermitted)">
+      <v-transcoding-profiles-list [storeFor]="_vidiunConversionProfileType.media"
+                                   [singleTableMode]="!(_vmcPermissions.FEATURE_VIDIUN_LIVE_STREAM | vNgIfPermitted)"
                                    [title]="'applications.settings.transcoding.transcodingProfiles'| translate"
                                    (addProfile)="_addProfile($event)"
                                    (setParentBlockerMessage)="_setBlockerMessage($event)">
-      </k-transcoding-profiles-list>
+      </v-transcoding-profiles-list>
     </div>
 
-    <div class="kTranscodingProfilesListsHolder kContent"
-         *ngIf="_kmcPermissions.FEATURE_KALTURA_LIVE_STREAM | kNgIfPermitted">
-      <k-transcoding-profiles-list [storeFor]="_kalturaConversionProfileType.liveStream"
+    <div class="vTranscodingProfilesListsHolder vContent"
+         *ngIf="_vmcPermissions.FEATURE_VIDIUN_LIVE_STREAM | vNgIfPermitted">
+      <v-transcoding-profiles-list [storeFor]="_vidiunConversionProfileType.liveStream"
                                    [title]="'applications.settings.transcoding.liveTranscodingProfiles'| translate"
                                    (addProfile)="_addProfile($event)"
                                    (setParentBlockerMessage)="_setBlockerMessage($event)">
-      </k-transcoding-profiles-list>
+      </v-transcoding-profiles-list>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #addNewProfile data-aid="addNewProfile" [popupWidth]="586" [popupHeight]="435" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #addNewProfile data-aid="addNewProfile" [popupWidth]="586" [popupHeight]="435" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kAddNewTranscodingProfile [parentPopupWidget]="addNewProfile"
-                               [profileType]="_newProfileType"></kAddNewTranscodingProfile>
+    <vAddNewTranscodingProfile [parentPopupWidget]="addNewProfile"
+                               [profileType]="_newProfileType"></vAddNewTranscodingProfile>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

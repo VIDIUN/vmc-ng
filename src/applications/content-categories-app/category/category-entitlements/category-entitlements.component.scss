@@ -1,32 +1,32 @@
 @import 'app-theme/_variables.scss';
 
-.kEntitlementsDetails {
+.vEntitlementsDetails {
   padding: 30px 24px;
   width: 100%;
 
-  .kSchemaTitle {
-    color: $kGrayscale1;
+  .vSchemaTitle {
+    color: $vGrayscale1;
     font-size: 20px;
     font-weight: 700;
     padding-top: 27px;
     padding-bottom: 12px;
   }
-  .kSchemaDescription {
+  .vSchemaDescription {
     padding-top: 24px;
     padding-bottom: 32px;
   }
 
-  .kRow {
+  .vRow {
     display: flex;
     padding-top: 60px;
 
-    .kLabel {
+    .vLabel {
       width: 180px;
       flex: 0 0 auto;
       word-wrap: break-word;
       display: flex;
 
-      .kLabelText{
+      .vLabelText{
         width: 110px;
         display: inline-block;
       }
@@ -37,91 +37,91 @@
       height: 34px;
     }
 
-    .kControl, k-prime-control {
+    .vControl, v-prime-control {
       width: 100%;
       flex: 1 1 auto;
       display: inline-block;
-      .kRadioOption {
+      .vRadioOption {
         padding-top: 20px;
 
-        .kExplanation {
+        .vExplanation {
           padding-left: 29px;
           padding-top: 10px;
         }
       }
 
-      .kRadioOption:first-child {
+      .vRadioOption:first-child {
         padding-top: 0;
       }
 
 
-      .kExplanation {
+      .vExplanation {
         padding-top: 7px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         font-size: 13px;
         line-height: 16px;
         padding-left: 54px;
       }
 
-      .kInputSwitch {
+      .vInputSwitch {
         padding-right: 10px;
       }
 
 
-      .kOwner{
+      .vOwner{
         display:inline-block;
         width: 330px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .kActionLink{
+      .vActionLink{
         padding-left: 20px;
         font-size: 15px;
       }
 
-      .kDisabled {
+      .vDisabled {
         cursor: none;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
       }
     }
   }
 
-  .kRow:first-child {
+  .vRow:first-child {
     padding-top: 0;
   }
 
-  .kRow:last-child {
+  .vRow:last-child {
     padding-bottom: 60px;
   }
 
-  .kChangeOwner {
-    .kControl {
+  .vChangeOwner {
+    .vControl {
       display: flex;
       max-width: 493px;
 
-      .kOwner {
+      .vOwner {
         flex: 1 1 auto;
       }
 
-      .kActionLink {
+      .vActionLink {
         flex: 0 0 auto;
       }
     }
   }
 
-  .kParentLink {
+  .vParentLink {
     padding-left: 4px;
   }
 
   a {
-    color: $kTertiary;
+    color: $vTertiary;
   }
 
   a.disabled {
     pointer-events: none;
     cursor: not-allowed;
-    color: $kGrayscale5;
+    color: $vGrayscale5;
     border: none;
   }
   /*********************/
@@ -132,7 +132,7 @@
     .ui-radiobutton-label {
       font-weight: normal;
       padding-left: 5px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
       line-height: 18px;
     }
@@ -140,7 +140,7 @@
     .ui-dropdown-label.ui-inputtext {
       background-color: #ffffff;
       width: 330px;
-      color: $kBlack;
+      color: $vBlack;
     }
   }
 }

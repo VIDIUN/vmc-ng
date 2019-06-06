@@ -9,38 +9,38 @@ import {
 } from './services';
 import {CategoriesBulkActionBaseService} from './services/categories-bulk-action-base.service';
 import {MenuItem} from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from 'app-shared/kmc-shell';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from 'app-shared/vmc-shell';
 import {subApplicationsConfig} from 'config/sub-applications';
-import {KalturaUser} from 'kaltura-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
 import {PrivacyMode} from './components/bulk-change-content-privacy/bulk-change-content-privacy.component';
-import {KalturaPrivacyType} from 'kaltura-ngx-client';
-import {KalturaAppearInListType} from 'kaltura-ngx-client';
+import {VidiunPrivacyType} from 'vidiun-ngx-client';
+import {VidiunAppearInListType} from 'vidiun-ngx-client';
 import {AppearInListType} from './components/bulk-change-category-listing/bulk-change-category-listing.component';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {KalturaContributionPolicyType} from 'kaltura-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {VidiunContributionPolicyType} from 'vidiun-ngx-client';
 import {CategoriesUtilsService} from "../../categories-utils.service";
 import {CategoriesStatusMonitorService} from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kCategoriesBulkActions',
+  selector: 'vCategoriesBulkActions',
   templateUrl: './categories-bulk-actions.component.html',
   styleUrls: ['./categories-bulk-actions.component.scss'],
-    providers: [KalturaLogger.createLogger('CategoriesBulkActionsComponent')]
+    providers: [VidiunLogger.createLogger('CategoriesBulkActionsComponent')]
 })
 export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
-  private _selectedCateogoriesWithPrivacyContext: KalturaCategory[] = [];
+  private _selectedCateogoriesWithPrivacyContext: VidiunCategory[] = [];
 
   public _bulkActionsMenu: MenuItem[] = [];
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _bulkAction = '';
 
-  @Input() selectedCategories: KalturaCategory[];
+  @Input() selectedCategories: VidiunCategory[];
 
   @Output() onBulkChange = new EventEmitter<{ reload: boolean}>();
 
@@ -48,7 +48,7 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
 
 
   constructor(private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService,
               private _bulkAddTagsService: CategoriesBulkAddTagsService,
               private _bulkRemoveTagsService: CategoriesBulkRemoveTagsService,
@@ -59,7 +59,7 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
               private _bulkChangeContributionPolicyService: CategoriesBulkChangeContributionPolicyService,
               private _categoriesUtilsService: CategoriesUtilsService,
               private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -109,10 +109,10 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
     this._permissionsService.filterList(
       <{ id: string }[]>items,
       {
-        'changeContentPrivacy': KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
-        'changeContributionPolicy': KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
-        'changeCategoryListing': KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
-        'changeCategoryOwner': KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS
+        'changeContentPrivacy': VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
+        'changeContributionPolicy': VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
+        'changeCategoryListing': VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS,
+        'changeCategoryOwner': VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS
       });
 
     return items;
@@ -168,7 +168,7 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // owner changed
-  onOwnerChanged(owners: KalturaUser[]): void {
+  onOwnerChanged(owners: VidiunUser[]): void {
 
     const executeAction = () => {
       if (this._selectedCateogoriesWithPrivacyContext.length && owners && owners.length) {
@@ -196,16 +196,16 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
   // change content privacy
   onChangeContentPrivacyChanged(privacyMode: PrivacyMode): void {
       this._logger.info(`handle change content privacy action`, { privacyMode });
-    let privacyType: KalturaPrivacyType;
+    let privacyType: VidiunPrivacyType;
     switch (true) {
       case privacyMode === PrivacyMode.NoRestriction:
-        privacyType = KalturaPrivacyType.all;
+        privacyType = VidiunPrivacyType.all;
         break;
       case privacyMode === PrivacyMode.Private:
-        privacyType = KalturaPrivacyType.membersOnly;
+        privacyType = VidiunPrivacyType.membersOnly;
         break;
       case privacyMode === PrivacyMode.RequiresAuthentication:
-        privacyType = KalturaPrivacyType.authenticatedUsers;
+        privacyType = VidiunPrivacyType.authenticatedUsers;
         break;
       default:
         break;
@@ -236,11 +236,11 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
   // change category listing
   onChangeCategoryListingChanged(appearInList: AppearInListType): void {
       this._logger.info(`handle change category listing action`, { appearInList });
-    let appearInListType: KalturaAppearInListType;
+    let appearInListType: VidiunAppearInListType;
     if (appearInList === AppearInListType.NoRestriction) {
-      appearInListType = KalturaAppearInListType.partnerOnly;
+      appearInListType = VidiunAppearInListType.partnerOnly;
     } else if (appearInList === AppearInListType.Private) {
-      appearInListType = KalturaAppearInListType.categoryMembersOnly;
+      appearInListType = VidiunAppearInListType.categoryMembersOnly;
     }
 
     const executeAction = () => {
@@ -266,7 +266,7 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // change contribution policy
-  onChangeContributionPolicyChanged(policyType: KalturaContributionPolicyType): void {
+  onChangeContributionPolicyChanged(policyType: VidiunContributionPolicyType): void {
       this._logger.info(`handle change contribution policy action`, { policyType });
     const executeAction = () => {
       if (this._selectedCateogoriesWithPrivacyContext.length) {
@@ -357,7 +357,7 @@ export class CategoriesBulkActionsComponent implements OnInit, OnDestroy {
   }
 
 
-  private executeService(selectedCategories: KalturaCategory[],
+  private executeService(selectedCategories: VidiunCategory[],
                          service: CategoriesBulkActionBaseService<any>,
                          data: any = {},
                          reloadCategories: boolean = true,

@@ -1,5 +1,5 @@
-  <div class="kDropFoldersTableWrapper">
-    <div class="kDropFoldersTable" [class.noResults]="!_dropFolders?.length">
+  <div class="vDropFoldersTableWrapper">
+    <div class="vDropFoldersTable" [class.noResults]="!_dropFolders?.length">
 
       <p-table
               [scrollable]="true"
@@ -12,7 +12,7 @@
               [(selection)]="selectedDropFolders"
               (selectionChange)="selectedDropFoldersChange.emit($event)"
               (onColResize)="_columnsResizeManager.onColumnResize($event)"
-              kStickyHeader [sticksTo]="'dropFoldersTags'" stickyClass="stickyHeader" [stickyId]="'dropFoldersTable'">
+              vStickyHeader [sticksTo]="'dropFoldersTags'" stickyClass="stickyHeader" [stickyId]="'dropFoldersTable'">
           <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                   <col [ngStyle]="{'width': '44px', 'padding-left': '13px'}">
@@ -56,7 +56,7 @@
             </th>
 
             <th [ngStyle]="{'width': '80px'}"
-                *ngIf="_kmcPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_DELETE | kNgIfPermitted"></th>
+                *ngIf="_vmcPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_DELETE | vNgIfPermitted"></th>
           </tr>
         </ng-template>
 
@@ -68,45 +68,45 @@
             </td>
 
             <td class="ui-resizable-column">
-              <span class="kTitle kTableColumn" [kTooltip]="folder.fileName">{{folder.fileName}}</span>
+              <span class="vTitle vTableColumn" [vTooltip]="folder.fileName">{{folder.fileName}}</span>
             </td>
 
             <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="folder.dropFolderId" [showOnEllipsis]="true">
+              <span class="vTableColumn" [vTooltip]="folder.dropFolderId" [showOnEllipsis]="true">
                   {{folder.dropFolderId}}
               </span>
             </td>
 
             <td>
-              <span [kTooltip]="_dateTooltip(folder)">{{ folder.createdAt | kmcDate }}</span>
+              <span [vTooltip]="_dateTooltip(folder)">{{ folder.createdAt | vmcDate }}</span>
             </td>
 
             <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="folder.fileSize | kFileSize" [showOnEllipsis]="true">
-                  {{folder.fileSize | kFileSize}}
+              <span class="vTableColumn" [vTooltip]="folder.fileSize | vFileSize" [showOnEllipsis]="true">
+                  {{folder.fileSize | vFileSize}}
               </span>
             </td>
 
             <td class="ui-resizable-column">
-              <a class="kTableColumn" [kTooltip]="folder.fileSize | kFileSize" [showOnEllipsis]="true"
+              <a class="vTableColumn" [vTooltip]="folder.fileSize | vFileSize" [showOnEllipsis]="true"
                  (click)="navigateToEntry.emit(folder.entryId)">
                   {{ folder.entryId }}
               </a>
             </td>
 
             <td class="ui-resizable-column">
-              <div class="kStatusWrap">
-                <div [ngClass]="folder.status | kFolderFileStatus: true: false" class="kDropFolderStatusIcon"></div>
-                <div class="kStatusLabel kTableColumn" [kTooltip]="folder.status | kFolderFileStatus: false: true">
-                  {{ folder.status | kFolderFileStatus: false: false }}
+              <div class="vStatusWrap">
+                <div [ngClass]="folder.status | vFolderFileStatus: true: false" class="vDropFolderStatusIcon"></div>
+                <div class="vStatusLabel vTableColumn" [vTooltip]="folder.status | vFolderFileStatus: false: true">
+                  {{ folder.status | vFolderFileStatus: false: false }}
                 </div>
               </div>
             </td>
 
             <td [ngStyle]="{'width': '80px'}"
-                *ngIf="_kmcPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_DELETE | kNgIfPermitted">
-              <div class="kDropFoldersTableActions">
-                <button class="kMoreActionsButton" type="button" pButton icon="kIconmore" (click)="_openActionsMenu($event, i, folder)"></button>
+                *ngIf="_vmcPermissions.DROPFOLDER_CONTENT_INGEST_DROP_FOLDER_DELETE | vNgIfPermitted">
+              <div class="vDropFoldersTableActions">
+                <button class="vMoreActionsButton" type="button" pButton icon="vIconmore" (click)="_openActionsMenu($event, i, folder)"></button>
               </div>
             </td>
 
@@ -115,12 +115,12 @@
 
         <ng-template pTemplate="emptymessage">
             <div class="emptymessage">
-                <div class="kEmptyMessage">{{_emptyMessage}}</div>
+                <div class="vEmptyMessage">{{_emptyMessage}}</div>
             </div>
         </ng-template>
       </p-table>
 
-      <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" styleClass="kActionsMenu"
-              kMenuCloseOnScroll></p-menu>
+      <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" styleClass="vActionsMenu"
+              vMenuCloseOnScroll></p-menu>
     </div>
   </div>

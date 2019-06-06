@@ -1,42 +1,42 @@
 {
-    "kalturaServer": {
-        "uri" : "www.kaltura.com",
+    "vidiunServer": {
+        "uri" : "www.vidiun.com",
         "previewUIConf": 38524931
     },
     "cdnServers": {
-        "serverUri": "http://cdnapi.kaltura.com",
-        "securedServerUri": "https://cdnapisec.kaltura.com"
+        "serverUri": "http://cdnapi.vidiun.com",
+        "securedServerUri": "https://cdnapisec.vidiun.com"
     },
     "externalApps": {
     },
     "externalLinks": {
         "previewAndEmbed": {
-            "embedTypes": "http://www.kaltura.com/content/docs/NetHelp/default.htm#!Documents/embedcodetypes.htm",
-            "deliveryProtocols": "https://knowledge.kaltura.com/how-enforce-delivery-type-each-player-using-ui-variables"
+            "embedTypes": "http://www.vidiun.com/content/docs/NetHelp/default.htm#!Documents/embedcodetypes.htm",
+            "deliveryProtocols": "https://knowledge.vidiun.com/how-enforce-delivery-type-each-player-using-ui-variables"
         },
-        "kaltura": {
-            "kmcOverview": "https://knowledge.kaltura.com/node/2023",
-            "mediaManagement": "https://knowledge.kaltura.com/node/2024",
-            "userManual": "http://knowledge.kaltura.com/node/1606/attachment/field_media",
-            "support": "customercare@kaltura.com",
-            "signUp": "https://corp.kaltura.com/free-trial",
-            "contactUs": "https://corp.kaltura.com/company/contact-us",
-            "upgradeAccount":"https://site.kaltura.com/Request-Users.html",
-            "contactSalesforce": "https://www.kaltura.com/index.php/partnerservices2/contactsalesforce",
-            "dropFoldersManual": "http://knowledge.kaltura.com/kaltura-drop-folders-service-content-ingestion-0",
-            "customerCare": "https://corp.kaltura.com/company/customer-care",
-            "customerPortal": "https://support.kaltura.com/login"
+        "vidiun": {
+            "vmcOverview": "https://knowledge.vidiun.com/node/2023",
+            "mediaManagement": "https://knowledge.vidiun.com/node/2024",
+            "userManual": "http://knowledge.vidiun.com/node/1606/attachment/field_media",
+            "support": "customercare@vidiun.com",
+            "signUp": "https://corp.vidiun.com/free-trial",
+            "contactUs": "https://corp.vidiun.com/company/contact-us",
+            "upgradeAccount":"https://site.vidiun.com/Request-Users.html",
+            "contactSalesforce": "https://www.vidiun.com/index.php/partnerservices2/contactsalesforce",
+            "dropFoldersManual": "http://knowledge.vidiun.com/vidiun-drop-folders-service-content-ingestion-0",
+            "customerCare": "https://corp.vidiun.com/company/customer-care",
+            "customerPortal": "https://support.vidiun.com/login"
         },
         "entitlements":{
-            "manage": "https://knowledge.kaltura.com/node/629#managing"
+            "manage": "https://knowledge.vidiun.com/node/629#managing"
         },
         "uploads": {
-            "needHighSpeedUpload": "http://site.kaltura.com/Upgrade_Request_High_Speed_Upload.html",
-            "highSpeedUpload": "https://aspera.kaltura.com/",
-            "bulkUploadSamples": "http://kmc.kaltura.com/content/docs/kaltura_batch_upload_sample.zip"
+            "needHighSpeedUpload": "http://site.vidiun.com/Upgrade_Request_High_Speed_Upload.html",
+            "highSpeedUpload": "https://aspera.vidiun.com/",
+            "bulkUploadSamples": "http://vmc.vidiun.com/content/docs/vidiun_batch_upload_sample.zip"
         },
         "live": {
-            "akamaiEdgeServerIpURL": "kalvodhds-i.akamaihd.net/serverIp"
+            "akamaiEdgeServerIpURL": "vidvodhds-i.akamaihd.net/serverIp"
         }
     }
 }

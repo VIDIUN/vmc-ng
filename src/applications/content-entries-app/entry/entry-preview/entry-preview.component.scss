@@ -1,11 +1,11 @@
 @import 'app-theme/_variables.scss';
 
-.kEntryPreview {
+.vEntryPreview {
 	iframe{
 		border-top-left-radius: 3px;
 		border-top-right-radius: 3px;
 	}
-	.kPreviewAndEmbedContainer{
+	.vPreviewAndEmbedContainer{
 		display: flex;
 		align-items: center;
 		height: 40px;
@@ -14,32 +14,32 @@
 		width: 268px;
 		i{
 			cursor: pointer;
-			color: $kGrayscale3;
+			color: $vGrayscale3;
 			margin-right: 8px;
 			font-size: 18px;
 		}
 		a{
 			cursor: pointer;
-			color: $kGrayscale1;
+			color: $vGrayscale1;
 			white-space: nowrap;
 			text-decoration: none;
 			&:hover:not(.disabled){
 				color: #000000;
 			}
 			&:active:not(.disabled){
-				color: $kGrayscale2;
+				color: $vGrayscale2;
 			}
 		}
 		.disabled{
-			color: $kGrayscale4;
+			color: $vGrayscale4;
 			border: 0px solid white;
 			cursor: default;
 		}
-        .kLink{
+        .vLink{
           display: flex;
           align-items: center;
         }
-        .kAlightRight{
+        .vIdightRight{
             margin-left: auto;
             padding-right: 12px;
         }

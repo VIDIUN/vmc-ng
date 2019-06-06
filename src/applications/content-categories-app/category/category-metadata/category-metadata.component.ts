@@ -1,16 +1,16 @@
 import {MenuItem} from 'primeng/primeng';
 import {ISubscription} from 'rxjs/Subscription';
-import {SuggestionsProviderData} from '@kaltura-ng/kaltura-primeng-ui';
+import {SuggestionsProviderData} from '@vidiun-ng/vidiun-primeng-ui';
 import {Subject} from 'rxjs/Subject';
 import {Component, ElementRef, Inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {JumpToSection} from './jump-to-section.component';
 import {DOCUMENT} from '@angular/common';
 import {PageScrollInstance, PageScrollService} from 'ngx-page-scroll';
 import {CategoryMetadataWidget} from './category-metadata-widget.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kmc-category-metadata',
+  selector: 'vmc-category-metadata',
   templateUrl: './category-metadata.component.html',
   styleUrls: ['./category-metadata.component.scss']
 })

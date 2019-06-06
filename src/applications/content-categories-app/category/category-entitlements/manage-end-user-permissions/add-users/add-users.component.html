@@ -1,24 +1,24 @@
-<k-area-blocker [showLoader]="_loading" [message]="_blockerMessage">
-  <div class="kContent kOverrideFAIcons">
-    <span class="kTitle">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.title' | translate}}</span>
-    <div class="kContainer">
-      <div class="kBlock" *ngIf="category.parentId > 0 && category.inheritanceType === _kalturaInheritanceType.manual">
-        <p-radioButton class="kRadio" [(ngModel)]="_selectedPermissionSettings" [value]="'setPermissions'"
+<v-area-blocker [showLoader]="_loading" [message]="_blockerMessage">
+  <div class="vContent vOverrideFAIcons">
+    <span class="vTitle">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.title' | translate}}</span>
+    <div class="vContainer">
+      <div class="vBlock" *ngIf="category.parentId > 0 && category.inheritanceType === _vidiunInheritanceType.manual">
+        <p-radioButton class="vRadio" [(ngModel)]="_selectedPermissionSettings" [value]="'setPermissions'"
                        name="permissionSettings"
                        label="{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.setUserPermissions' | translate}}"></p-radioButton>
-        <p-radioButton class="kRadio" [(ngModel)]="_selectedPermissionSettings" [value]="'inherit'"
+        <p-radioButton class="vRadio" [(ngModel)]="_selectedPermissionSettings" [value]="'inherit'"
                        name="permissionSettings"
-                       [disabled]="!(category.inheritanceType === _kalturaInheritanceType.manual &&
+                       [disabled]="!(category.inheritanceType === _vidiunInheritanceType.manual &&
                                      parentCategoryMembersCount > 0 && !usersCount)"
                        name="policy"
                        label="{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.inheritUser' | translate}}"
                        (onClick)="_clearUsers()"></p-radioButton>
       </div>
       <!--Select End- Users-->
-      <div class="kRow kMultipleRow">
-        <span class="kLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.selectEndUsers' | translate}}</span>
-        <div class="kControl">
-          <kAutoComplete [(ngModel)]="_users"
+      <div class="vRow vMultipleRow">
+        <span class="vLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.selectEndUsers' | translate}}</span>
+        <div class="vControl">
+          <vAutoComplete [(ngModel)]="_users"
                          suggestionItemField="item"
                          suggestionLabelField="name"
                          field="screenName"
@@ -32,14 +32,14 @@
                          [suggestionsProvider]="_usersProvider"
                          (completeMethod)="_searchUsers($event)"
                          [disabled]="_selectedPermissionSettings === 'inherit'">
-          </kAutoComplete>
+          </vAutoComplete>
         </div>
       </div>
 
       <!--Permission Level-->
-      <div class="kRow">
-        <span class="kLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionLevel' | translate}}</span>
-        <div class="kControl">
+      <div class="vRow">
+        <span class="vLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionLevel' | translate}}</span>
+        <div class="vControl">
           <p-dropdown [options]="_permissionLevelOptions"
                       [(ngModel)]="_selectedPermissionLevel"
                       appendTo="body"
@@ -48,9 +48,9 @@
       </div>
 
       <!--Update method-->
-      <div class="kRow">
-        <span class="kLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.updateMethod' | translate}}</span>
-        <div class="kControl">
+      <div class="vRow">
+        <span class="vLabel">{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.updateMethod' | translate}}</span>
+        <div class="vControl">
           <p-dropdown [options]="_updateMethodOptions"
                       [(ngModel)]="_selectedUpdateMethod"
                       appendTo="body"
@@ -58,17 +58,17 @@
         </div>
       </div>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonDefault" pButton
+    <div class="vFooter">
+      <button type="button" class="vButtonDefault" pButton
               label="{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.cancel' | translate}}"
               (click)="parentPopupWidget.close()"></button>
-      <button *ngIf="_selectedPermissionSettings === 'setPermissions'" type="button" class="kButtonBranded" pButton
+      <button *ngIf="_selectedPermissionSettings === 'setPermissions'" type="button" class="vButtonBranded" pButton
               label="{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.addUsers' | translate: {'0': _users?.length || 0} }}"
               (click)="_addUsers()"
               [disabled]="_selectedPermissionSettings === 'inherit' || !_users?.length"></button>
-      <button *ngIf="_selectedPermissionSettings === 'inherit'" type="button" class="kButtonBranded" pButton
+      <button *ngIf="_selectedPermissionSettings === 'inherit'" type="button" class="vButtonBranded" pButton
               label="{{'applications.content.categoryDetails.entitlements.usersPermissions.addUsers.save' | translate: {'0': _users?.length || 0} }}"
               (click)="_copyUsersFromParent()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

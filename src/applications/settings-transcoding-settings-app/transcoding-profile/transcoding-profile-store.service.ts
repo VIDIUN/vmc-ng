@@ -1,40 +1,40 @@
 import { Host, Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { ISubscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs';
-import { KalturaClient, KalturaMultiRequest, KalturaObjectBaseFactory } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunMultiRequest, VidiunObjectBaseFactory } from 'vidiun-ngx-client';
 import { TranscodingProfileWidgetsManager } from './transcoding-profile-widgets-manager';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { PageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaConversionProfileFilter } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParamsFilter } from 'kaltura-ngx-client';
-import { ConversionProfileAssetParamsListAction } from 'kaltura-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { PageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunConversionProfileFilter } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParamsFilter } from 'vidiun-ngx-client';
+import { ConversionProfileAssetParamsListAction } from 'vidiun-ngx-client';
 import {
   BaseTranscodingProfilesStore,
-  KalturaConversionProfileWithAsset
+  VidiunConversionProfileWithAsset
 } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { ConversionProfileGetAction } from 'kaltura-ngx-client';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
-import { TranscodingProfileCreationService } from 'app-shared/kmc-shared/events/transcoding-profile-creation';
-import { OnDataSavingReasons } from '@kaltura-ng/kaltura-ui';
-import { ConversionProfileAddAction } from 'kaltura-ngx-client';
-import { ConversionProfileUpdateAction } from 'kaltura-ngx-client';
+import { ConversionProfileGetAction } from 'vidiun-ngx-client';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
+import { TranscodingProfileCreationService } from 'app-shared/vmc-shared/events/transcoding-profile-creation';
+import { OnDataSavingReasons } from '@vidiun-ng/vidiun-ui';
+import { ConversionProfileAddAction } from 'vidiun-ngx-client';
+import { ConversionProfileUpdateAction } from 'vidiun-ngx-client';
 import { MediaTranscodingProfilesStore } from '../transcoding-profiles/transcoding-profiles-store/media-transcoding-profiles-store.service';
 import { LiveTranscodingProfilesStore } from '../transcoding-profiles/transcoding-profiles-store/live-transcoding-profiles-store.service';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
 import {
     SettingsTranscodingProfileViewSections,
     SettingsTranscodingProfileViewService
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { SettingsTranscodingMainViewService } from 'app-shared/kmc-shared/kmc-views/main-views/settings-transcoding-main-view.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { TranscodingProfilesUpdatedEvent } from 'app-shared/kmc-shared/events';
-import { AppEventsService } from 'app-shared/kmc-shared';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { SettingsTranscodingMainViewService } from 'app-shared/vmc-shared/vmc-views/main-views/settings-transcoding-main-view.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { TranscodingProfilesUpdatedEvent } from 'app-shared/vmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared';
 
 export enum ActionTypes {
   ProfileLoading,
@@ -63,7 +63,7 @@ export class TranscodingProfileStore implements OnDestroy {
   private _pageExitVerificationToken: string;
   private _saveProfileInvoked = false;
   private _profile = {
-    data: new BehaviorSubject<KalturaConversionProfileWithAsset>(null),
+    data: new BehaviorSubject<VidiunConversionProfileWithAsset>(null),
     state: new BehaviorSubject<StatusArgs>({ action: ActionTypes.ProfileLoading, error: null })
   };
   private _profileId: string;
@@ -84,7 +84,7 @@ export class TranscodingProfileStore implements OnDestroy {
   };
 
   constructor(@Host() private _widgetsManager: TranscodingProfileWidgetsManager,
-              private _kalturaServerClient: KalturaClient,
+              private _vidiunServerClient: VidiunClient,
               private _router: Router,
               private _appEvents: AppEventsService,
               private _browserService: BrowserService,
@@ -96,7 +96,7 @@ export class TranscodingProfileStore implements OnDestroy {
               private _liveTranscodingProfilesStore: LiveTranscodingProfilesStore,
               private _settingsTranscodingProfileViewService: SettingsTranscodingProfileViewService,
               private _settingsTranscodingMainViewService: SettingsTranscodingMainViewService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
 
 
     this._widgetsManager.profileStore = this;
@@ -153,13 +153,13 @@ export class TranscodingProfileStore implements OnDestroy {
     }
   }
 
-  private _setProfilesStoreServiceByType(serviceType: KalturaConversionProfileType): void {
-    if (serviceType === KalturaConversionProfileType.media) {
+  private _setProfilesStoreServiceByType(serviceType: VidiunConversionProfileType): void {
+    if (serviceType === VidiunConversionProfileType.media) {
       this._profilesStore = this._mediaTranscodingProfilesStore;
-    } else if (serviceType === KalturaConversionProfileType.liveStream) {
+    } else if (serviceType === VidiunConversionProfileType.liveStream) {
       this._profilesStore = this._liveTranscodingProfilesStore;
     } else {
-      throw Error('Incorrect serviceType provided. It can be either KalturaConversionProfileType.media or KalturaConversionProfileType.liveStream type');
+      throw Error('Incorrect serviceType provided. It can be either VidiunConversionProfileType.media or VidiunConversionProfileType.liveStream type');
     }
   }
 
@@ -213,7 +213,7 @@ export class TranscodingProfileStore implements OnDestroy {
       );
   }
 
-  private _checkFlavors(newProfile: KalturaConversionProfileWithAsset): Observable<{ proceedSave: boolean }> {
+  private _checkFlavors(newProfile: VidiunConversionProfileWithAsset): Observable<{ proceedSave: boolean }> {
     if (newProfile.flavorParamsIds && newProfile.flavorParamsIds.trim().length) {
       return Observable.of({ proceedSave: true });
     }
@@ -233,14 +233,14 @@ export class TranscodingProfileStore implements OnDestroy {
     });
   }
 
-  private _transmitSaveRequest(newProfile: KalturaConversionProfileWithAsset): void {
+  private _transmitSaveRequest(newProfile: VidiunConversionProfileWithAsset): void {
     this._profile.state.next({ action: ActionTypes.ProfileSaving });
 
     const id = this.profileId;
     const action = id === 'new'
       ? new ConversionProfileAddAction({ conversionProfile: newProfile })
       : new ConversionProfileUpdateAction({ id: Number(id), conversionProfile: newProfile });
-    const request = new KalturaMultiRequest(action);
+    const request = new VidiunMultiRequest(action);
 
     this._widgetsManager.notifyDataSaving(newProfile, request, this.profile.data())
       .pipe(cancelOnDestroy(this))
@@ -253,7 +253,7 @@ export class TranscodingProfileStore implements OnDestroy {
                 return Observable.empty();
               }
 
-              return this._kalturaServerClient.multiRequest(request)
+              return this._vidiunServerClient.multiRequest(request)
                 .pipe(tag('block-shell'))
                 .map(multiResponse => {
                   if (multiResponse.hasErrors()) {
@@ -310,8 +310,8 @@ export class TranscodingProfileStore implements OnDestroy {
 
   public saveProfile(): void {
       const profile = this.profile.data();
-      const newProfile = <KalturaConversionProfileWithAsset>KalturaObjectBaseFactory.createObject(profile);
-      if (newProfile && newProfile instanceof KalturaConversionProfile) {
+      const newProfile = <VidiunConversionProfileWithAsset>VidiunObjectBaseFactory.createObject(profile);
+      if (newProfile && newProfile instanceof VidiunConversionProfile) {
           if (this.profileId === 'new') {
               newProfile.type = profile.type;
           }
@@ -381,20 +381,20 @@ export class TranscodingProfileStore implements OnDestroy {
      this._settingsTranscodingProfileViewService.open({ section: sectionKey, profile: this.profile.data() });
   }
 
-  private _getProfile(profileId: string): Observable<KalturaConversionProfileWithAsset> {
+  private _getProfile(profileId: string): Observable<VidiunConversionProfileWithAsset> {
     if (profileId) {
       const id = Number(profileId);
       const conversionProfileAction = new ConversionProfileGetAction({ id });
       const conversionProfileAssetParamsAction = new ConversionProfileAssetParamsListAction({
-        filter: new KalturaConversionProfileAssetParamsFilter({
-          conversionProfileIdFilter: new KalturaConversionProfileFilter({ idEqual: id })
+        filter: new VidiunConversionProfileAssetParamsFilter({
+          conversionProfileIdFilter: new VidiunConversionProfileFilter({ idEqual: id })
         }),
-        pager: new KalturaFilterPager({ pageSize: 1000 })
+        pager: new VidiunFilterPager({ pageSize: 1000 })
       });
 
       // build the request
-      return this._kalturaServerClient
-        .multiRequest(new KalturaMultiRequest(conversionProfileAction, conversionProfileAssetParamsAction))
+      return this._vidiunServerClient
+        .multiRequest(new VidiunMultiRequest(conversionProfileAction, conversionProfileAssetParamsAction))
         .map(([profilesResponse, assetsResponse]) => {
           if (profilesResponse.error) {
             throw Error(profilesResponse.error.message);
@@ -415,7 +415,7 @@ export class TranscodingProfileStore implements OnDestroy {
     }
   }
 
-  public openProfile(profile: KalturaConversionProfileWithAsset): void {
+  public openProfile(profile: VidiunConversionProfileWithAsset): void {
     this.canLeave()
         .filter(({ allowed }) => allowed)
         .pipe(cancelOnDestroy(this))

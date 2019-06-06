@@ -1,0 +1,20 @@
+<div class="vOpenEmailWin" #changeAccount>
+
+  <div class="vHeader">
+    <span class="vTitle">{{emailConfig?.title}}</span>
+  </div>
+
+  <div class="vContainer">
+    <div>{{emailConfig?.message}}</div>
+      <div class="emailLink" *ngIf="emailConfig?.email">
+          <a (click)="openEmail()">{{emailConfig.email}}</a>
+          <vCopyToClipboard class="vIcon" [text]="emailConfig.email" [iconSwitchTimeout]="5000" [tooltips]="_copyToClipboardTooltips"></vCopyToClipboard>
+      </div>
+  </div>
+
+  <div class="vFooter">
+    <button type="button" class="vButtonBranded" (click)="close()" pButton label="{{'app.common.close'| translate}}"></button>
+  </div>
+
+</div>
+

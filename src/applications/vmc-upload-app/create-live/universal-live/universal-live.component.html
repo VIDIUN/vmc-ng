@@ -1,0 +1,110 @@
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+    <form [formGroup]="_form" novalidate class="vContent">
+      <section class="vFormContainer">
+        <div class="vFormSection">
+
+          <!--name-->
+          <div class="vRow">
+            <span class="vLabel">{{'applications.upload.prepareLive.universalStreamType.name' | translate}}</span>
+            <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                       _form.controls['name'].touched}">*
+            </div>
+            <div>
+              <input class="vControl" formControlName="name" pInputText
+                     [ngClass]="{'vHasError':!_form.controls['name'].valid &&
+                       _form.controls['name'].touched}">
+              <div *ngIf="_form.controls['name'].touched">
+                <div *ngIf="_form.controls['name'].hasError('required')"
+                     class="error">
+                  {{'applications.upload.prepareLive.universalStreamType.errors.required' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--description-->
+          <div class="vRow">
+            <span class="vLabel">{{'applications.upload.prepareLive.universalStreamType.description' | translate}}</span>
+            <div class="vRequired"></div>
+            <div>
+              <input class="vControl" formControlName="description" pInputText
+                     [ngClass]="{'vHasError':!_form.controls['description'].valid &&
+                       _form.controls['description'].touched}">
+            </div>
+          </div>
+
+          <!--primary encoder IP-->
+          <div class="vRow">
+            <span
+              class="vLabel">{{'applications.upload.prepareLive.universalStreamType.primaryEncoderIp' | translate}}</span>
+            <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['primaryEncoderIp'].valid &&
+                       _form.controls['primaryEncoderIp'].touched}">*
+            </div>
+            <div>
+              <input class="vControl" formControlName="primaryEncoderIp" pInputText
+                     [ngClass]="{'vHasError':!_form.controls['primaryEncoderIp'].valid &&
+                       _form.controls['primaryEncoderIp'].touched}">
+              <div *ngIf="_form.controls['primaryEncoderIp'].touched">
+                <div *ngIf="_form.controls['primaryEncoderIp'].hasError('required')"
+                     class="error">
+                  {{'applications.upload.prepareLive.universalStreamType.errors.required' | translate}}
+                </div>
+                <div *ngIf="_form.controls['primaryEncoderIp'].hasError('ip')"
+                     class="error">
+                  {{'applications.upload.prepareLive.universalStreamType.errors.invalidIp' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--secondary encoder IP-->
+          <div class="vRow">
+            <span
+              class="vLabel">{{'applications.upload.prepareLive.universalStreamType.secondaryEncoderIp' | translate}}</span>
+            <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['secondaryEncoderIp'].valid &&
+                       _form.controls['secondaryEncoderIp'].touched}">*
+            </div>
+            <div>
+              <input class="vControl" formControlName="secondaryEncoderIp" pInputText
+                     [ngClass]="{'vHasError':!_form.controls['secondaryEncoderIp'].valid &&
+                       _form.controls['secondaryEncoderIp'].touched}">
+              <div *ngIf="_form.controls['secondaryEncoderIp'].touched">
+                <div *ngIf="_form.controls['secondaryEncoderIp'].hasError('required')"
+                     class="error">
+                  {{'applications.upload.prepareLive.universalStreamType.errors.required' | translate}}
+                </div>
+                <div *ngIf="_form.controls['secondaryEncoderIp'].hasError('ip')"
+                     class="error">
+                  {{'applications.upload.prepareLive.universalStreamType.errors.invalidIp' | translate}}
+                </div>
+              </div>
+              <div class="vFieldMessage">{{'applications.upload.prepareLive.universalStreamType.secondaryEncoderIp_message' | translate}}</div>
+            </div>
+          </div>
+
+          <!--broadcast password-->
+          <div class="vRow">
+            <span class="vLabel">{{'applications.upload.prepareLive.universalStreamType.broadcastPassword' | translate}}</span>
+            <div class="vRequired"></div>
+            <div>
+              <input class="vControl" formControlName="broadcastPassword" pInputText
+                     [ngClass]="{'vHasError':!_form.controls['broadcastPassword'].valid &&
+                       _form.controls['broadcastPassword'].touched}">
+            </div>
+          </div>
+
+          <!--live DVR-->
+          <div class="vRow">
+            <span class="vLabel">{{'applications.upload.prepareLive.universalStreamType.liveDvr' | translate}}</span>
+            <div class="vRequired"></div>
+            <div>
+              <p-inputSwitch class="vControl vInputSwitch" formControlName="liveDvr"></p-inputSwitch>
+              <span>{{_form.controls['liveDvr'].value ? ( 'app.common.yes' | translate) : ( 'app.common.no' | translate)}}</span>
+              <div class="vFieldMessage">{{'applications.upload.prepareLive.universalStreamType.liveDVR_message' | translate}}</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </form>
+</v-area-blocker>

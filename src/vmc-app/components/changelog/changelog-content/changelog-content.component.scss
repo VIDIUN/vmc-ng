@@ -1,0 +1,22 @@
+@import 'app-theme/_variables.scss';
+
+:host {
+    line-height: 1.5em;
+
+    .vTitle {
+        font-size: 32px;
+        color: $vPrimary;
+        font-style: italic;
+        font-weight: 700;
+    }
+
+    h3 {
+        padding-bottom: 10px;
+        border-bottom: 1px solid gray;
+    }
+    .vDate {
+        font-size: 14px;
+        margin-left: 14px;
+        color: $vGrayscale1;
+    }
+}

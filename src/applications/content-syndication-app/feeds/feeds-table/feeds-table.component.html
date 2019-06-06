@@ -1,4 +1,4 @@
-  <div class="kFeedsTable" [class.noResults]="!_feeds?.length">
+  <div class="vFeedsTable" [class.noResults]="!_feeds?.length">
 
     <p-table
             [scrollable]="true"
@@ -14,7 +14,7 @@
             [(selection)]="selectedFeeds"
             (selectionChange)="_onSelectionChange($event)"
             (onColResize)="_columnsResizeManager.onColumnResize($event)"
-            kStickyHeader [sticksTo]="'feedsListFilters'" stickyClass="stickyHeader" [stickyId]="'feedsTable'">
+            vStickyHeader [sticksTo]="'feedsListFilters'" stickyClass="stickyHeader" [stickyId]="'feedsTable'">
         <ng-template pTemplate="colgroup" let-columns>
             <colgroup>
                 <col [ngStyle]="{'width': '44px', 'padding-left': '14px'}">
@@ -65,51 +65,51 @@
           </td>
 
           <td [ngStyle]="{'width': '44px'}" class="ui-resizable-column">
-            <div class="kColFeedIcon">
-              <i class="kIconfeed"></i>
+            <div class="vColFeedIcon">
+              <i class="vIconfeed"></i>
             </div>
           </td>
 
           <td class="ui-resizable-column">
-            <div class="ui-resizable-column kColName kElipsis" [kTooltip]="feed.name" (click)="_editFeed(feed)">
+            <div class="ui-resizable-column vColName vElipsis" [vTooltip]="feed.name" (click)="_editFeed(feed)">
               {{feed.name}}
             </div>
           </td>
 
           <td class="ui-resizable-column">
-            <div class="kColId" [kTooltip]="feed.id">
-                <span class="kTableColumn" [kTooltip]="feed.id" [showOnEllipsis]="true">{{feed.id}}</span>
+            <div class="vColId" [vTooltip]="feed.id">
+                <span class="vTableColumn" [vTooltip]="feed.id" [showOnEllipsis]="true">{{feed.id}}</span>
             </div>
           </td>
 
           <td class="ui-resizable-column">
-            <div class="kColDestination">
-              <div class="kColDestinationIcon" [ngClass]="feed.type | kDestinationIcon"></div>
-              <div class="kColDestinationText">{{feed.type | kDestinationLabel}}</div>
+            <div class="vColDestination">
+              <div class="vColDestinationIcon" [ngClass]="feed.type | vDestinationIcon"></div>
+              <div class="vColDestinationText">{{feed.type | vDestinationLabel}}</div>
             </div>
           </td>
 
           <td class="ui-resizable-column">
-            <div class="kColSource">
-              <span [ngClass]="feed.playlistId | kToPlaylistIcon: _idToPlaylistMap" class="kPlaylistIcon"></span>
-              <span class="kElipsis" [kTooltip]="feed.playlistId | kToPlaylistName: _idToPlaylistMap" [showOnEllipsis]="true">
-                {{feed.playlistId | kToPlaylistName: _idToPlaylistMap}}
+            <div class="vColSource">
+              <span [ngClass]="feed.playlistId | vToPlaylistIcon: _idToPlaylistMap" class="vPlaylistIcon"></span>
+              <span class="vElipsis" [vTooltip]="feed.playlistId | vToPlaylistName: _idToPlaylistMap" [showOnEllipsis]="true">
+                {{feed.playlistId | vToPlaylistName: _idToPlaylistMap}}
               </span>
             </div>
           </td>
 
           <td class="ui-resizable-column">
-            <div class="kColUrl">
-              <kCopyToClipboard class="kIcon" [text]="feed.feedUrl" [iconSwitchTimeout]="5000"
-                                [tooltips]="_copyToClipboardTooltips"></kCopyToClipboard>
-              <input readonly="true" class="kElipsis kUrl" type="text" [value]="feed.feedUrl" pInputText=""
-                     [kTooltip]="feed.feedUrl" [showOnEllipsis]="true"/>
+            <div class="vColUrl">
+              <vCopyToClipboard class="vIcon" [text]="feed.feedUrl" [iconSwitchTimeout]="5000"
+                                [tooltips]="_copyToClipboardTooltips"></vCopyToClipboard>
+              <input readonly="true" class="vElipsis vUrl" type="text" [value]="feed.feedUrl" pInputText=""
+                     [vTooltip]="feed.feedUrl" [showOnEllipsis]="true"/>
             </div>
           </td>
 
           <td [ngStyle]="{'width': '80px'}">
-            <div class="kColActions">
-              <button type="button" pButton icon="kIconmore" class="kMoreActionsButton" (click)="_openActionsMenu($event, feed)"></button>
+            <div class="vColActions">
+              <button type="button" pButton icon="vIconmore" class="vMoreActionsButton" (click)="_openActionsMenu($event, feed)"></button>
             </div>
           </td>
 
@@ -118,10 +118,10 @@
 
       <ng-template pTemplate="emptymessage">
         <div class="emptymessage">
-            <div class="kEmptyMessage">{{_emptyMessage}}</div>
+            <div class="vEmptyMessage">{{_emptyMessage}}</div>
         </div>
       </ng-template>
     </p-table>
 
-    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
   </div>

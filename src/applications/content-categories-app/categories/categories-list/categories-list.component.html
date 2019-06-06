@@ -1,82 +1,82 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kCategories kOverrideFAIcons">
-    <div class="kContent kNotification kSeparator" *ngIf="_categoriesLocked">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vCategories vOverrideFAIcons">
+    <div class="vContent vNotification vSeparator" *ngIf="_categoriesLocked">
       <span>{{'applications.content.categories.categoriesLockMsg' | translate}}</span>
     </div>
-    <div #categoriesTableHolder class="kCategoriesHolder kContent" [class.kLocked]="_categoriesLocked">
-      <kSticky stickyId="categoriesListFilters" [scrollOffset]="80"
+    <div #categoriesTableHolder class="vCategoriesHolder vContent" [class.vLocked]="_categoriesLocked">
+      <vSticky stickyId="categoriesListFilters" [scrollOffset]="80"
                [sticksTo]="'header'">
-        <div class="kCategoriesTableFilters kContent">
+        <div class="vCategoriesTableFilters vContent">
           <button pButton type="button" label="{{'applications.content.categories.addCategory' | translate}}"
-                  class="kButtonBranded kAddCategoryBtn" [class.kHidden]="_selectedCategories?.length"
-                  [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
+                  class="vButtonBranded vAddCategoryBtn" [class.vHidden]="_selectedCategories?.length"
+                  [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
                   (click)="addNewCategory.open()"></button>
-          <span class="kSelectedCategoriesNum" *ngIf="_categoriesTotalCount">
+          <span class="vSelectedCategoriesNum" *ngIf="_categoriesTotalCount">
              {{'applications.content.categories.categories' | translate: {'0': _categoriesTotalCount} }}
             </span>
-          <div [class.kHidden]="!_selectedCategories?.length" class="kBulkOperations">
-            <span class="kSelectedCategoriesLabel">• {{_selectedCategories?.length}} {{'applications.content.categories.selected' | translate}}</span>
-            <kCategoriesBulkActions [selectedCategories]="_selectedCategories"
-                                    (onBulkChange)="onBulkChange($event)"></kCategoriesBulkActions>
-            <a class="kBulkCancel" (click)="_clearSelection()">{{'applications.content.categories.cancel' |
+          <div [class.vHidden]="!_selectedCategories?.length" class="vBulkOperations">
+            <span class="vSelectedCategoriesLabel">• {{_selectedCategories?.length}} {{'applications.content.categories.selected' | translate}}</span>
+            <vCategoriesBulkActions [selectedCategories]="_selectedCategories"
+                                    (onBulkChange)="onBulkChange($event)"></vCategoriesBulkActions>
+            <a class="vBulkCancel" (click)="_clearSelection()">{{'applications.content.categories.cancel' |
               translate}}</a>
           </div>
-          <div [class.kHidden]="_selectedCategories?.length" class="kFilters">
+          <div [class.vHidden]="_selectedCategories?.length" class="vFilters">
             <input type="text"
-                   pInputText class="kSearchInput"
+                   pInputText class="vSearchInput"
                    [(ngModel)]="_query.freetext"
                    (keyup.enter)="onFreetextChanged()"
                    placeholder="{{'applications.content.categories.search' | translate}}">
-            <div #categoriesFilterBtn class="kCategoriesFilter kDropdown">
-              <i class="kIconfolder" *ngIf="!_categoriesUpdating"></i>
-              <div *ngIf="_categoriesUpdating" class="k-spinner-background kSpinnerBkg" kTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
-                <div class="k-spinner-animation kSpinnerAnim"></div>
+            <div #categoriesFilterBtn class="vCategoriesFilter vDropdown">
+              <i class="vIconfolder" *ngIf="!_categoriesUpdating"></i>
+              <div *ngIf="_categoriesUpdating" class="v-spinner-background vSpinnerBkg" vTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
+                <div class="v-spinner-animation vSpinnerAnim"></div>
               </div>
               <span>{{'applications.content.categories.filterCategories' | translate}}</span><i
-              class="kIcondropdown_arrow_bottom dropdown"></i>
+              class="vIcondropdown_arrow_bottom dropdown"></i>
             </div>
-            <div #refineBtn class="kRefine kDropdown">
-              <i class="kIconfilter"></i>
+            <div #refineBtn class="vRefine vDropdown">
+              <i class="vIconfilter"></i>
               <span>{{'applications.content.categories.refine' | translate}}</span>
-              <i class="kIcondropdown_arrow_bottom dropdown"></i>
+              <i class="vIcondropdown_arrow_bottom dropdown"></i>
             </div>
           </div>
-          <button pButton class="kButtonDefault kRefreshBtn small" (click)="_reload()" type="text" icon="kIconrefresh"
-                  [kTooltip]="'applications.content.categories.refresh' | translate"></button>
+          <button pButton class="vButtonDefault vRefreshBtn small" (click)="_reload()" type="text" icon="vIconrefresh"
+                  [vTooltip]="'applications.content.categories.refresh' | translate"></button>
         </div>
-      </kSticky>
-      <kSticky #tags [stickyClass]="'kStickyClass'" stickyId="categoriesTags" [sticksTo]="'categoriesListFilters'">
-        <div class="kContent">
-          <kCategoriesListTags
+      </vSticky>
+      <vSticky #tags [stickyClass]="'vStickyClass'" stickyId="categoriesTags" [sticksTo]="'categoriesListFilters'">
+        <div class="vContent">
+          <vCategoriesListTags
                   [refineFilters]="_refineFilters"
-            (onTagsChange)="onTagsChange()"></kCategoriesListTags>
+            (onTagsChange)="onTagsChange()"></vCategoriesListTags>
         </div>
-      </kSticky>
+      </vSticky>
 
-      <k-area-blocker [showLoader]="_tableIsBusy"
+      <v-area-blocker [showLoader]="_tableIsBusy"
                       [message]="_tableBlockerMessage"
                       [bodyScroll]="true">
-      <kCategoriesTable class="kCategoriesTable"
+      <vCategoriesTable class="vCategoriesTable"
                         [categories]="(_categoriesService.categories.data$ | async)?.items"
                         [sortField]="_query.sortBy"
                         [sortOrder]="_query.sortDirection"
                         (sortChanged)="_onSortChanged($event)"
                         (actionSelected)="_onActionSelected($event)"
                         [(selectedCategories)]="_selectedCategories">
-      </kCategoriesTable>
-      </k-area-blocker>
-      <div class="kCategoriesTableFooter kContent" #footer *ngIf="_categoriesTotalCount">
+      </vCategoriesTable>
+      </v-area-blocker>
+      <div class="vCategoriesTableFooter vContent" #footer *ngIf="_categoriesTotalCount">
         <p-paginator [rows]="_query.pageSize" (onPageChange)="_onPaginationChanged($event)"
                      [first]="_query.pageIndex * _query.pageSize"
                      [totalRecords]="_categoriesTotalCount"
                      [rowsPerPageOptions]="[25,50,100,250]"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #categoriesFilterPopup
+<vPopupWidget #categoriesFilterPopup
               data-aid="categoriesFilterPopup"
               [popupWidth]="400"
               [popupHeight]="500"
@@ -84,31 +84,31 @@
               [closeBtn]="false"
               [targetRef]="categoriesFilterBtn"
               [targetOffset]="{'x':-10, 'y': -21}"
-              kSticky [sticksTo]="'header'" [stickyClass]="'kForceFix'" [stickyId]="'categoriesFilterPopup'" [scrollOffset]="80" >
+              vSticky [sticksTo]="'header'" [stickyClass]="'vForceFix'" [stickyId]="'categoriesFilterPopup'" [scrollOffset]="80" >
   <ng-template>
-    <kCategoriesFilter  [parentPopupWidget]="categoriesFilterPopup" [selection]="_query.categories"
+    <vCategoriesFilter  [parentPopupWidget]="categoriesFilterPopup" [selection]="_query.categories"
                         [selectionMode]="_query.categoriesMode"
                         (onCategorySelected)="onCategorySelected($event)"
                         (onCategoriesUnselected)="onCategoriesUnselected($event)"
-                        (selectionModeChange)="onCategoriesModeChanged($event)"></kCategoriesFilter>
+                        (selectionModeChange)="onCategoriesModeChanged($event)"></vCategoriesFilter>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #addNewCategory data-aid="addNewCategory" [popupWidth]="600" [popupHeight]="658" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #addNewCategory data-aid="addNewCategory" [popupWidth]="600" [popupHeight]="658" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kNewCategory (onApply)="onCategoryAdded($event)" [parentPopupWidget]="addNewCategory" [linkedEntries]="_linkedEntries"></kNewCategory>
+    <vNewCategory (onApply)="onCategoryAdded($event)" [parentPopupWidget]="addNewCategory" [linkedEntries]="_linkedEntries"></vNewCategory>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 
-<kPopupWidget #moveCategory data-aid="moveCategory" [popupWidth]="600" [popupHeight]="600" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #moveCategory data-aid="moveCategory" [popupWidth]="600" [popupHeight]="600" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kMoveCategory [parentPopupWidget]="moveCategory" [selectedCategories]="[_selectedCategoryToMove]" ></kMoveCategory>
+    <vMoveCategory [parentPopupWidget]="moveCategory" [selectedCategories]="[_selectedCategoryToMove]" ></vMoveCategory>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 
-<kPopupWidget #refinePopup
+<vPopupWidget #refinePopup
               data-aid="categoriesRefinePopup"
               [popupWidth]="400"
               [popupHeight]="500"
@@ -116,8 +116,8 @@
               [closeBtn]="false"
               [targetRef]="refineBtn"
               [targetOffset]="{'x':-200, 'y': -15}"
-              kSticky [sticksTo]="'header'" [stickyClass]="'kForceFix'" [stickyId]="'refinePopup'" [scrollOffset]="80">
+              vSticky [sticksTo]="'header'" [stickyClass]="'vForceFix'" [stickyId]="'refinePopup'" [scrollOffset]="80">
   <ng-template>
-    <kCategoriesRefineFilters   [refineFilters]="_refineFilters" [parentPopupWidget]="refinePopup"></kCategoriesRefineFilters>
+    <vCategoriesRefineFilters   [refineFilters]="_refineFilters" [parentPopupWidget]="refinePopup"></vCategoriesRefineFilters>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

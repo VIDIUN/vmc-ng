@@ -1,4 +1,4 @@
-var projectData = require('../kaltura-ws.json');
+var projectData = require('../vidiun-ws.json');
 var exec = require('child_process').exec;
 
 console.log('(git) checkout latest standalone commit');
@@ -8,13 +8,13 @@ try {
   commitId = projectData.commands.bookmark.standalone[0];
 }catch(ex)
 {
-  console.warn('failed to extract commit id from file "kaltura-ws.json"');
+  console.warn('failed to extract commit id from file "vidiun-ws.json"');
   process.exit(1);
 }
 
 if (!commitId)
 {
-  console.warn('failed to extract commit id from file kaltura-ws.json');
+  console.warn('failed to extract commit id from file vidiun-ws.json');
   process.exit(1);
 }
 

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ServicesDashboardComponent } from './services-dashboard.component';
-import { KalturaUIModule } from '@kaltura-ng/kaltura-ui';
+import { VidiunUIModule } from '@vidiun-ng/vidiun-ui';
 import { routing } from './services-dashboard-app.routes';
 import { RouterModule } from '@angular/router';
-import { ReachFrameModule } from 'app-shared/kmc-shared';
+import { ReachFrameModule } from 'app-shared/vmc-shared';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routing),
-        KalturaUIModule,
+        VidiunUIModule,
         ReachFrameModule
     ],
     declarations: [

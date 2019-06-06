@@ -1,10 +1,10 @@
 import {Component, Input, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 
 import { RefineList } from '../manage-end-user-permissions-refine-filters.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {ManageEndUserPermissionsService, UsersFilters} from '../manage-end-user-permissions.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface TagItem {
   type: string,
@@ -16,10 +16,10 @@ export interface TagItem {
 const listTypes: Array<keyof UsersFilters> = ['status', 'permissionLevels', 'updateMethod'];
 
 @Component({
-  selector: 'kManageEndUserPermissionsFilterTags',
+  selector: 'vManageEndUserPermissionsFilterTags',
   templateUrl: './manage-end-user-permissions-filter-tags.component.html',
   styleUrls: ['./manage-end-user-permissions-filter-tags.component.scss'],
-    providers: [KalturaLogger.createLogger('ManageEndUserPermissionsFilterTagsComponent')]
+    providers: [VidiunLogger.createLogger('ManageEndUserPermissionsFilterTagsComponent')]
 
 })
 export class ManageEndUserPermissionsFilterTagsComponent implements OnInit, OnDestroy {
@@ -42,7 +42,7 @@ export class ManageEndUserPermissionsFilterTagsComponent implements OnInit, OnDe
 
   constructor(private _manageEndUserPermissionsService: ManageEndUserPermissionsService,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   removeTag(tag: any) {

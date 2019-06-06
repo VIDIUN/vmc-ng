@@ -1,25 +1,25 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import {KalturaClient} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
 import {CategoriesBulkActionBaseService} from './categories-bulk-action-base.service';
-import {CategoryUpdateAction} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {CategoryUpdateAction} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 
 @Injectable()
-export class CategoriesBulkChangeOwnerService extends CategoriesBulkActionBaseService<KalturaUser> {
+export class CategoriesBulkChangeOwnerService extends CategoriesBulkActionBaseService<VidiunUser> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedCategories: KalturaCategory[], owner: KalturaUser): Observable<{}>{
+  public execute(selectedCategories: VidiunCategory[], owner: VidiunUser): Observable<{}>{
     return Observable.create(observer => {
 
       const requests: CategoryUpdateAction[] = [];
 
       selectedCategories.forEach(category => {
-        const updatedCategory: KalturaCategory = new KalturaCategory();
+        const updatedCategory: VidiunCategory = new VidiunCategory();
         updatedCategory.owner = owner.id;
         requests.push(new CategoryUpdateAction({
           id: category.id,

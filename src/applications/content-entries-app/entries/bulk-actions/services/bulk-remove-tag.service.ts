@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { BaseEntryUpdateAction } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { BaseEntryUpdateAction } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
 
 @Injectable()
 export class BulkRemoveTagsService extends BulkActionBaseService<string[]> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedEntries: KalturaMediaEntry[], tags : string[]) : Observable<{}>{
+  public execute(selectedEntries: VidiunMediaEntry[], tags : string[]) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: BaseEntryUpdateAction[] = [];
 
       selectedEntries.forEach(entry => {
-        let updatedEntry: KalturaBaseEntry = new KalturaBaseEntry();
+        let updatedEntry: VidiunBaseEntry = new VidiunBaseEntry();
 
-        // update entry tags. trim tags due to legacy KMC bugs
+        // update entry tags. trim tags due to legacy VMC bugs
         let entryTags = [];
         if (entry.tags && entry.tags.length){
           entryTags = entry.tags.split(",").map(tag => {

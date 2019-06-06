@@ -1,12 +1,12 @@
-<k-area-blocker [showLoader]="_showLoader" [message]="_blockerMessage">
-	<div class="kRefineFilters">
-		<div class="kTreeContainer">
-			<div class="kFiltersGroupTitle">
+<v-area-blocker [showLoader]="_showLoader" [message]="_blockerMessage">
+	<div class="vRefineFilters">
+		<div class="vTreeContainer">
+			<div class="vFiltersGroupTitle">
 				{{'applications.content.filters.createdBetween' | translate | uppercase}}
 			</div>
-			<div class="kDateRange">
+			<div class="vDateRange">
 				<p-calendar
-					class="kDateRangeFirst"
+					class="vDateRangeFirst"
 					[(ngModel)]="createdAfter"
 					[readonlyInput]="true"
 					[showIcon]="true"
@@ -15,10 +15,10 @@
 					[maxDate]="createdBefore"
 					[yearRange]="_createdAtDateRange"
                     [dateFormat]="_calendarFormat"
-					icon="kIconcalendar"
+					icon="vIconcalendar"
 					(onSelect)="_onCreatedChanged()"></p-calendar>
 				<p-calendar
-					class="kDateRangeLast kPullLeft30"
+					class="vDateRangeLast vPullLeft30"
 					[(ngModel)]="createdBefore"
 					[readonlyInput]="true"
 					[showIcon]="true"
@@ -27,15 +27,15 @@
 					[minDate]="createdAfter"
                     [dateFormat]="_calendarFormat"
 					[yearRange]="_createdAtDateRange"
-					icon="kIconcalendar"
+					icon="vIconcalendar"
 					(onSelect)="_onCreatedChanged()"></p-calendar>
-				<div class="kClearDates">
+				<div class="vClearDates">
           <a (click)="_clearCreatedComponents()" [ngClass]="{disabledLink: !createdAfter && !createdBefore}">{{'applications.content.filters.clearDates' | translate}}</a>
         </div>
 			</div>
 		</div>
 		<div>
-			<a class="kClose" (click)="_close()">{{'applications.content.filters.close' | translate}}</a>
+			<a class="vClose" (click)="_close()">{{'applications.content.filters.close' | translate}}</a>
 		</div>
 	</div>
-</k-area-blocker>
+</v-area-blocker>

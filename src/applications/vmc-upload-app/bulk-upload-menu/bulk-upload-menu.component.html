@@ -1,0 +1,57 @@
+<v-area-blocker class="vBulkUploadMenu" [message]="_blockerMessage">
+  <div class="vBulkUploadMenuHeader">
+    <h1>{{ 'applications.content.bulkUpload.menu.header' | translate }}</h1>
+  </div>
+  <div class="vBulkUploadMenuBody">
+    <p class="vBulkUploadMenuTypesTitle">{{ 'applications.content.bulkUpload.menu.selectType' | translate }}</p>
+    <div class="vBulkUploadMenuTypes">
+      <button pButton class="vButtonDefault"
+              *ngIf="_vmcPermissions.CONTENT_INGEST_BULK_UPLOAD | vNgIfPermitted"
+              [label]="'applications.content.bulkUpload.menu.types.entries' | translate"
+              (click)="_invokeFileSelection(_bulkUploadTypes.entries)"></button>
+      <button pButton class="vButtonDefault"
+              *ngIf="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vNgIfPermitted"
+              [label]="'applications.content.bulkUpload.menu.types.categories' | translate"
+              (click)="_invokeFileSelection(_bulkUploadTypes.categories)">
+      </button>
+      <button pButton class="vButtonDefault"
+              *ngIf="(_vmcPermissions.ADMIN_USER_BULK | vNgIfPermitted) && (_vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vNgIfPermitted)"
+              [label]="'applications.content.bulkUpload.menu.types.endUsers' | translate"
+              (click)="_invokeFileSelection(_bulkUploadTypes.endUsers)">
+      </button>
+      <button pButton class="vButtonDefault"
+              *ngIf="_vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vNgIfPermitted"
+              [label]="'applications.content.bulkUpload.menu.types.endUsersEntitlement' | translate"
+              (click)="_invokeFileSelection(_bulkUploadTypes.endUsersEntitlement)">
+      </button>
+    </div>
+  </div>
+</v-area-blocker>
+
+<vFileDialog #fileDialog
+             *ngIf="_showFileDialog"
+             [filter]="_allowedExtensions"
+             [allowMultiple]="true"
+             (onFileSelected)="_selectFiles($event)"></vFileDialog>
+
+<vPopupWidget #uploadSucceed data-aid="uploadSucceed" [popupWidth]="440" [popupHeight]="233" [closeBtn]="false" [modal]="true" [closeOnClickOutside]="false">
+  <div class="vSuccessBulkUpload">
+    <div class="vSuccessBulkUploadMessage vCenterContent">
+      <p>
+        {{ 'applications.content.bulkUpload.menu.messages.uploadSuccess.body' | translate}}
+        <a (click)="_goToBulkUploadLog()">
+          {{ 'applications.content.bulkUpload.menu.messages.uploadSuccess.link' | translate}}
+        </a>
+      </p>
+    </div>
+
+    <div class="vSuccessBulkUploadFooter vCenterContent">
+      <button pButton
+              class="vButtonDefault vSuccessBulkUploadButton"
+              [label]="'app.common.ok' | translate"
+              (click)="uploadSucceed.close(); onClose.emit()"></button>
+    </div>
+
+  </div>
+</vPopupWidget>
+

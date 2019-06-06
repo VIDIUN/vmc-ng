@@ -1,25 +1,25 @@
 @import 'app-theme/_variables.scss';
 
-.kRelated{
+.vRelated{
 	position: relative;
 	height: 100%;
 	button{
 		margin-left: 24px;
 	}
-	.kTitle{
-		color: $kGrayscale1;
+	.vTitle{
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 		padding-left: 24px;
 	}
-	.kTable{
+	.vTable{
 		margin-top: 24px;
 	}
-	.kRelatedTableActions {
+	.vRelatedTableActions {
 		width: 100%;
 		text-align: center;
 	}
-	.kUploadMonitor{
+	.vUploadMonitor{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -27,8 +27,8 @@
 			margin-top: 8px;
 		}
 	}
-	.kError{
-		color: $kDandger;
+	.vError{
+		color: $vDandger;
 	}
 }
 
@@ -41,9 +41,9 @@
 	overflow: visible;
 }
 
-:host /deep/ .kFileName {
+:host /deep/ .vFileName {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 100%;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
 }

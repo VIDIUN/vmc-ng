@@ -1,4 +1,4 @@
-  <div class="kBulkLogTable" [class.noResults]="!_bulkLog?.length">
+  <div class="vBulkLogTable" [class.noResults]="!_bulkLog?.length">
 
     <p-table
             [scrollable]="true"
@@ -11,7 +11,7 @@
             [resizableColumns]="true"
             (selectionChange)="_onSelectionChange($event)"
             (onColResize)="_columnsResizeManager.onColumnResize($event)"
-            kStickyHeader [sticksTo]="'bulklogTags'" stickyClass="stickyHeader" [stickyId]="'bulklogTable'">
+            vStickyHeader [sticksTo]="'bulklogTags'" stickyClass="stickyHeader" [stickyId]="'bulklogTable'">
         <ng-template pTemplate="colgroup" let-columns>
             <colgroup>
                 <col [ngStyle]="{'width': '44px', 'padding-left': '13px'}">
@@ -59,44 +59,44 @@
           </td>
 
           <td class="ui-resizable-column">
-            <span class="kBulkLogFileName" [kTooltip]="bulkLogItem.fileName">{{ bulkLogItem.fileName }}</span>
+            <span class="vBulkLogFileName" [vTooltip]="bulkLogItem.fileName">{{ bulkLogItem.fileName }}</span>
           </td>
 
           <td class="ui-resizable-column">
-            <span [kTooltip]="bulkLogItem.bulkUploadObjectType | kBulkLogTableObjectType">
-              {{bulkLogItem.bulkUploadObjectType | kBulkLogTableObjectType}}
+            <span [vTooltip]="bulkLogItem.bulkUploadObjectType | vBulkLogTableObjectType">
+              {{bulkLogItem.bulkUploadObjectType | vBulkLogTableObjectType}}
             </span>
           </td>
 
           <td class="ui-resizable-column">
-            <span [kTooltip]="bulkLogItem.uploadedBy || bulkLogItem.uploadedByUserId">
+            <span [vTooltip]="bulkLogItem.uploadedBy || bulkLogItem.uploadedByUserId">
               {{bulkLogItem.uploadedBy || bulkLogItem.uploadedByUserId}}
             </span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="bulkLogItem.uploadedOn | kmcDate" [showOnEllipsis]="true">
-                  {{bulkLogItem.uploadedOn | kmcDate}}
+              <span class="vTableColumn" [vTooltip]="bulkLogItem.uploadedOn | vmcDate" [showOnEllipsis]="true">
+                  {{bulkLogItem.uploadedOn | vmcDate}}
               </span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn"
-                    [kTooltip]="!bulkLogItem.numOfObjects || bulkLogItem.numOfObjects < 0 ? 0 : bulkLogItem.numOfObjects"
+              <span class="vTableColumn"
+                    [vTooltip]="!bulkLogItem.numOfObjects || bulkLogItem.numOfObjects < 0 ? 0 : bulkLogItem.numOfObjects"
                     [showOnEllipsis]="true">
                   {{!bulkLogItem.numOfObjects || bulkLogItem.numOfObjects < 0 ? 0 : bulkLogItem.numOfObjects}}</span>
           </td>
 
           <td class="ui-resizable-column">
-            <i [class]="bulkLogItem.status | kBulkLogTableStatusIcon"></i>
-            <span class="kTableColumn" [kTooltip]="bulkLogItem.status | kBulkLogTableStatus" [showOnEllipsis]="true">
-              {{bulkLogItem.status | kBulkLogTableStatus}}
+            <i [class]="bulkLogItem.status | vBulkLogTableStatusIcon"></i>
+            <span class="vTableColumn" [vTooltip]="bulkLogItem.status | vBulkLogTableStatus" [showOnEllipsis]="true">
+              {{bulkLogItem.status | vBulkLogTableStatus}}
             </span>
           </td>
 
           <td [ngStyle]="{'width': '80px'}" *ngIf="_actionsAllowed">
-            <div class="kBulkLogTableActions">
-              <button class="kMoreActionsButton" type="button" pButton icon="kIconmore" (click)="_openActionsMenu($event, bulkLogItem)"></button>
+            <div class="vBulkLogTableActions">
+              <button class="vMoreActionsButton" type="button" pButton icon="vIconmore" (click)="_openActionsMenu($event, bulkLogItem)"></button>
             </div>
           </td>
 
@@ -105,10 +105,10 @@
 
       <ng-template pTemplate="emptymessage">
         <div class="emptymessage">
-            <div class="kEmptyMessage">{{_emptyMessage}}</div>
+            <div class="vEmptyMessage">{{_emptyMessage}}</div>
         </div>
       </ng-template>
     </p-table>
 
-    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
   </div>

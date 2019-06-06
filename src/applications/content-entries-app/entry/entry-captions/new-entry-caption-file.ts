@@ -1,6 +1,6 @@
-import { KalturaUploadFile } from 'app-shared/kmc-shared';
+import { VidiunUploadFile } from 'app-shared/vmc-shared';
 
-export class NewEntryCaptionFile extends KalturaUploadFile {
+export class NewEntryCaptionFile extends VidiunUploadFile {
   public captionId?: string;
   constructor(file: File) {
     super(file);

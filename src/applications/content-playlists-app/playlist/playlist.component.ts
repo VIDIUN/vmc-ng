@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage, AreaBlockerMessageButton } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage, AreaBlockerMessageButton } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
 import { NotificationTypes, ActionTypes, PlaylistStore } from './playlist-store.service';
 import { PlaylistsStore } from '../playlists/playlists-store/playlists-store.service';
@@ -12,13 +12,13 @@ import { ManualContentWidget } from './playlist-content/manual/manual-content-wi
 import { PlaylistMetadataWidget } from './playlist-metadata/playlist-metadata-widget.service';
 import { PlaylistDetailsWidget } from './playlist-details/playlist-details-widget.service';
 import { RuleBasedContentWidget } from './playlist-content/rule-based/rule-based-content-widget.service';
-import { KalturaPlaylistType } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentPlaylistViewSections, ContentPlaylistViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunPlaylistType } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentPlaylistViewSections, ContentPlaylistViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kPlaylist',
+  selector: 'vPlaylist',
   templateUrl: './playlist.component.html',
   styleUrls: ['./playlist.component.scss'],
   providers: [
@@ -43,7 +43,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   public _enableNextButton: boolean;
 
     public get _enableSaveBtn(): boolean {
-        const hasUpdatePermission = this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_UPDATE);
+        const hasUpdatePermission = this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_UPDATE);
         const isNewPlaylist = this._playlistWidgetsManager.isNewData;
         return  isNewPlaylist || (this._playlistStore.playlistIsDirty && !isNewPlaylist && hasUpdatePermission);
     }
@@ -52,7 +52,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
               public _playlistStore: PlaylistStore,
               private _appLocalization: AppLocalization,
               private _playlistsStore: PlaylistsStore,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _playlistWidgetsManager: PlaylistWidgetsManager,
               widget1: PlaylistSectionsListWidget,
               widget2: PlaylistDetailsWidget,
@@ -109,9 +109,9 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
               case ActionTypes.PlaylistLoaded:
                 this._playlistName = this._playlistStore.playlist.name;
-                this._playlistTypeIcon = this._playlistStore.playlist.playlistType === KalturaPlaylistType.staticList
-                  ? 'kIconPlaylist_Manual'
-                  : 'kIconPlaylist_RuleBased';
+                this._playlistTypeIcon = this._playlistStore.playlist.playlistType === VidiunPlaylistType.staticList
+                  ? 'vIconPlaylist_Manual'
+                  : 'vIconPlaylist_RuleBased';
                 break;
 
               case ActionTypes.PlaylistLoadingFailed:
@@ -202,7 +202,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   private _updateNavigationState(): void {
-    // TODO [kmcng] find a better way that doesn't need access to the playlist directly
+    // TODO [vmcng] find a better way that doesn't need access to the playlist directly
     const playlists = this._playlistsStore.playlists.data().items;
     if (playlists && this._currentPlaylistId) {
       const currentPlaylistIndex = playlists.findIndex(playlist => playlist.id === this._currentPlaylistId);
@@ -230,7 +230,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   public _navigateToPlaylist(direction: 'next' | 'prev'): void {
-    // TODO [kmcng] find a better way that doesn't need access to the playlist directly
+    // TODO [vmcng] find a better way that doesn't need access to the playlist directly
     const playlists = this._playlistsStore.playlists.data().items;
     if (playlists && this._currentPlaylistId) {
       const currentPlaylistIndex = playlists.findIndex(playlist => playlist.id === this._currentPlaylistId);

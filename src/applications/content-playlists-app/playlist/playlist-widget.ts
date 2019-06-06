@@ -1,16 +1,16 @@
-import { AreaBlockerMessage, AreaBlockerMessageButton, WidgetBase } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
+import { AreaBlockerMessage, AreaBlockerMessageButton, WidgetBase } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
 import { PlaylistWidgetsManager } from './playlist-widgets-manager';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 
-export abstract class PlaylistWidget extends WidgetBase<PlaylistWidgetsManager, KalturaPlaylist, KalturaMultiRequest> {
+export abstract class PlaylistWidget extends WidgetBase<PlaylistWidgetsManager, VidiunPlaylist, VidiunMultiRequest> {
   public sectionBlockerMessage: AreaBlockerMessage;
   public showSectionLoader: boolean;
 
-  constructor(private _widgetKey: string, logger: KalturaLogger) {
+  constructor(private _widgetKey: string, logger: VidiunLogger) {
     super(_widgetKey, logger);
   }
 

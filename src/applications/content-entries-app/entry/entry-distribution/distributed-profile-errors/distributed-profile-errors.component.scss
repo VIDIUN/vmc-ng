@@ -1,10 +1,10 @@
 @import 'app-theme/_variables.scss';
 
-.kValidationError {
+.vValidationError {
   display: block;
   margin-bottom: 6px;
 
-  .kValidationErrorMoreInfo {
-    color: $kDandger;
+  .vValidationErrorMoreInfo {
+    color: $vDandger;
   }
 }

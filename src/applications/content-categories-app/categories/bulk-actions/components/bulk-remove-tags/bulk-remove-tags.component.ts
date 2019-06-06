@@ -1,20 +1,20 @@
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
 
-import {KalturaClient} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
+import {VidiunClient} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
 
 @Component({
-  selector: 'kCategoriesBulkRemoveTags',
+  selector: 'vCategoriesBulkRemoveTags',
   templateUrl: './bulk-remove-tags.component.html',
   styleUrls: ['./bulk-remove-tags.component.scss']
 })
 export class CategoriesBulkRemoveTags implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedCategories: KalturaCategory[];
+  @Input() selectedCategories: VidiunCategory[];
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Output() removeTagsChanged = new EventEmitter<string[]>();
 
@@ -26,7 +26,7 @@ export class CategoriesBulkRemoveTags implements OnInit, OnDestroy, AfterViewIni
   private _parentPopupStateChangeSubscribe : ISubscription;
   private _confirmClose: boolean = true;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
   }
 
   ngOnInit() {

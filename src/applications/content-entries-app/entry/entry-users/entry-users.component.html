@@ -1,24 +1,24 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
 	<form [formGroup]="_widgetService.usersForm" novalidate>
-		<div class="kUsers">
-			<p class="kTitle">{{'applications.content.entryDetails.users.users' | translate}}</p>
-			<div class="kUsersDetails">
-				<div class="kRow">
-					<span class="kLabels">{{'applications.content.entryDetails.users.creator' | translate}}</span>
-					<span [kTooltip]="_widgetService._creator">{{_widgetService._creator}}</span>
+		<div class="vUsers">
+			<p class="vTitle">{{'applications.content.entryDetails.users.users' | translate}}</p>
+			<div class="vUsersDetails">
+				<div class="vRow">
+					<span class="vLabels">{{'applications.content.entryDetails.users.creator' | translate}}</span>
+					<span [vTooltip]="_widgetService._creator">{{_widgetService._creator}}</span>
 				</div>
-				<div class="kRow">
-					<span class="kLabels">{{'applications.content.entryDetails.users.owner' | translate}}</span>
-					<span [kTooltip]="_widgetService._owner?.screenName ? _widgetService._owner?.screenName : _widgetService._owner?.id">
+				<div class="vRow">
+					<span class="vLabels">{{'applications.content.entryDetails.users.owner' | translate}}</span>
+					<span [vTooltip]="_widgetService._owner?.screenName ? _widgetService._owner?.screenName : _widgetService._owner?.id">
             {{_widgetService._owner?.screenName ? _widgetService._owner?.screenName : _widgetService._owner?.id}}
           </span>
 					<a class="changeOwner"
-             *ngIf="_kmcPermissions.CONTENT_MANAGE_ENTRY_USERS | kNgIfPermitted"
+             *ngIf="_vmcPermissions.CONTENT_MANAGE_ENTRY_USERS | vNgIfPermitted"
              (click)="_openChangeOwner()">{{'applications.content.entryDetails.users.changeOwner' | translate}}</a>
 				</div>
-				<div class="kRow kSeparator">
-					<span class="kLabels">{{'applications.content.entryDetails.users.co-editors' | translate}}</span>
-					<kAutoComplete #editorsAutoComplete
+				<div class="vRow vSeparator">
+					<span class="vLabels">{{'applications.content.entryDetails.users.co-editors' | translate}}</span>
+					<vAutoComplete #editorsAutoComplete
 								   formControlName="editors"
 								   suggestionItemField="item"
 								   suggestionLabelField="name"
@@ -32,11 +32,11 @@
 								   suggestionSelectableField="isSelectable"
 								   [suggestionsProvider]="_usersProvider"
 								   (completeMethod)="_searchUsers($event, 'editors')">
-					</kAutoComplete>
+					</vAutoComplete>
 				</div>
-				<div class="kRow">
-					<span class="kLabels">{{'applications.content.entryDetails.users.co-publishers' | translate}}</span>
-					<kAutoComplete formControlName="publishers"
+				<div class="vRow">
+					<span class="vLabels">{{'applications.content.entryDetails.users.co-publishers' | translate}}</span>
+					<vAutoComplete formControlName="publishers"
 								   suggestionItemField="item"
 								   suggestionLabelField="name"
 								   field="screenName"
@@ -49,11 +49,11 @@
 								   suggestionSelectableField="isSelectable"
 								   [suggestionsProvider]="_usersProvider"
 								   (completeMethod)="_searchUsers($event, 'publishers')">
-					</kAutoComplete>
+					</vAutoComplete>
 				</div>
-                <div class="kRow">
-                    <span class="kLabels">{{'applications.content.entryDetails.users.co-viewers' | translate}}</span>
-                    <kAutoComplete formControlName="viewers"
+                <div class="vRow">
+                    <span class="vLabels">{{'applications.content.entryDetails.users.co-viewers' | translate}}</span>
+                    <vAutoComplete formControlName="viewers"
                                    suggestionItemField="item"
                                    suggestionLabelField="name"
                                    field="id"
@@ -66,20 +66,20 @@
                                    suggestionSelectableField="isSelectable"
                                    [suggestionsProvider]="_usersProvider"
                                    (completeMethod)="_searchUsers($event, 'viewers')">
-                    </kAutoComplete>
+                    </vAutoComplete>
                 </div>
 			</div>
 		</div>
 
-		<kPopupWidget #ownerPopup data-aid="ownerPopup" [popupWidth]="550" [popupHeight]="264" [modal]="true">
-        <div class="kFloater kOverrideFAIcons">
-          <div class="kHeader">
-            <span class="kTitle">{{'applications.content.entryDetails.users.changeOwner' | translate}}</span>
+		<vPopupWidget #ownerPopup data-aid="ownerPopup" [popupWidth]="550" [popupHeight]="264" [modal]="true">
+        <div class="vFloater vOverrideFAIcons">
+          <div class="vHeader">
+            <span class="vTitle">{{'applications.content.entryDetails.users.changeOwner' | translate}}</span>
           </div>
 
-          <div class="kContainer">
-            <span class="kLabel">{{'applications.content.entryDetails.users.changeOwnerText' | translate}}</span>
-            <kAutoComplete formControlName="owners"
+          <div class="vContainer">
+            <span class="vLabel">{{'applications.content.entryDetails.users.changeOwnerText' | translate}}</span>
+            <vAutoComplete formControlName="owners"
                            suggestionItemField="item"
                            suggestionLabelField="name"
                            field="screenName"
@@ -95,19 +95,19 @@
                            (onUnselect)="_updateApplyButtonState()"
                            (onSelect)="_updateApplyButtonState()"
                            (completeMethod)="_searchUsers($event)">
-            </kAutoComplete>
+            </vAutoComplete>
           </div>
 
-          <div class="kFooter">
-            <button type="button" class="kButtonDefault" [disabled]="false" (click)="ownerPopup.close()" pButton label="{{'app.common.cancel' | translate}}"></button>
-            <button pButton type="button" class="kButtonBranded"
+          <div class="vFooter">
+            <button type="button" class="vButtonDefault" [disabled]="false" (click)="ownerPopup.close()" pButton label="{{'app.common.cancel' | translate}}"></button>
+            <button pButton type="button" class="vButtonBranded"
                     [label]="'applications.content.entryDetails.users.save' | translate"
                     [disabled]="_disableSaveButton"
                     (click)="_saveAndClose()"></button>
           </div>
 			</div>
 
-		</kPopupWidget>
+		</vPopupWidget>
 	</form>
 
-</k-area-blocker>
+</v-area-blocker>

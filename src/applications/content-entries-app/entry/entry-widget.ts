@@ -1,17 +1,17 @@
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { WidgetBase } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { AreaBlockerMessage, AreaBlockerMessageButton } from '@kaltura-ng/kaltura-ui';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { WidgetBase } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { AreaBlockerMessage, AreaBlockerMessageButton } from '@vidiun-ng/vidiun-ui';
 import { EntryWidgetsManager } from './entry-widgets-manager';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
-export abstract class EntryWidget extends WidgetBase<EntryWidgetsManager, KalturaMediaEntry, KalturaMultiRequest>
+export abstract class EntryWidget extends WidgetBase<EntryWidgetsManager, VidiunMediaEntry, VidiunMultiRequest>
 {
     public sectionBlockerMessage: AreaBlockerMessage;
     public showSectionLoader: boolean;
 
-    constructor(private _widgetKey: string, logger: KalturaLogger)
+    constructor(private _widgetKey: string, logger: VidiunLogger)
     {
         super(_widgetKey, logger);
     }

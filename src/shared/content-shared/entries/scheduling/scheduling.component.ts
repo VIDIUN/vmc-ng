@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-  selector: 'kScheduling',
+  selector: 'vScheduling',
   templateUrl: './scheduling.component.html',
   styleUrls: ['./scheduling.component.scss']
 })

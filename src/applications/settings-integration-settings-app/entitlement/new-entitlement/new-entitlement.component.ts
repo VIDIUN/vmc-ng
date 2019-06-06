@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 import {EntitlementService} from '../entitlement.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 function privacyContextLabelValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -21,10 +21,10 @@ function privacyContextLabelValidator(): ValidatorFn {
 }
 
 @Component({
-  selector: 'kNewEntitlement',
+  selector: 'vNewEntitlement',
   templateUrl: './new-entitlement.component.html',
   styleUrls: ['./new-entitlement.component.scss'],
-  providers: [KalturaLogger.createLogger('NewEntitlementComponent')]
+  providers: [VidiunLogger.createLogger('NewEntitlementComponent')]
 })
 export class NewEntitlementComponent implements OnInit, OnDestroy {
 
@@ -37,7 +37,7 @@ export class NewEntitlementComponent implements OnInit, OnDestroy {
 
   constructor(private _appLocalization: AppLocalization,
               private _fb: FormBuilder,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService,
               private _entitlementService: EntitlementService) {
     this.addEntitlementForm = this._fb.group({

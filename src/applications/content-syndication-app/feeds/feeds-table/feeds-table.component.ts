@@ -10,15 +10,15 @@ import {
     ViewChild
 } from '@angular/core';
 import {Menu, MenuItem} from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaBaseSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaPlaylist} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunBaseSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunPlaylist} from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { KMCPermissionsService, KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { VMCPermissionsService, VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kFeedsTable',
+  selector: 'vFeedsTable',
   templateUrl: './feeds-table.component.html',
   styleUrls: ['./feeds-table.component.scss'],
     providers: [
@@ -28,10 +28,10 @@ import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shar
 })
 export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  public _feeds: KalturaBaseSyndicationFeed[] = [];
+  public _feeds: VidiunBaseSyndicationFeed[] = [];
   private _deferredFeeds: any[];
   public _deferredLoading = true;
-  public _idToPlaylistMap: Map<string, KalturaPlaylist> = null; // map between KalturaPlaylist id to KalturaPlaylist.name object
+  public _idToPlaylistMap: Map<string, VidiunPlaylist> = null; // map between VidiunPlaylist id to VidiunPlaylist.name object
   public _copyToClipboardTooltips: { success: string, failure: string, idle: string, notSupported: string } = null;
 
   @Input()
@@ -49,9 +49,9 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   @Input()
-  set playlists(data: KalturaPlaylist[]) {
+  set playlists(data: VidiunPlaylist[]) {
     if (data && data.length) {
-      this._idToPlaylistMap = new Map<string, KalturaPlaylist>();
+      this._idToPlaylistMap = new Map<string, VidiunPlaylist>();
       data.forEach(playlist => {
         this._idToPlaylistMap.set(playlist.id, playlist);
       });
@@ -60,12 +60,12 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @Input() sortField: string = null;
   @Input() sortOrder: number = null;
-  @Input() selectedFeeds: KalturaBaseSyndicationFeed[] = [];
+  @Input() selectedFeeds: VidiunBaseSyndicationFeed[] = [];
 
   @Output()
   sortChanged = new EventEmitter<{ field: string, order: number}>();
   @Output()
-  actionSelected = new EventEmitter<{ action: string, feed: KalturaBaseSyndicationFeed }>();
+  actionSelected = new EventEmitter<{ action: string, feed: VidiunBaseSyndicationFeed }>();
   @Output()
   selectedFeedsChange = new EventEmitter<any>();
 
@@ -78,7 +78,7 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _el: ElementRef<HTMLElement>,
               private _cdRef: ChangeDetectorRef) {
     this._fillCopyToClipboardTooltips();
@@ -107,13 +107,13 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public rowTrackBy: Function = (index: number, item: any) => item.id;
 
-  public _openActionsMenu(event: any, feed: KalturaBaseSyndicationFeed) {
+  public _openActionsMenu(event: any, feed: VidiunBaseSyndicationFeed) {
     if (this._actionsMenu) {
       this._buildMenu(feed);
       this._actionsMenu.toggle(event);
     }
   }
-  public _editFeed(feed: KalturaBaseSyndicationFeed) {
+  public _editFeed(feed: VidiunBaseSyndicationFeed) {
     this._onActionSelected('edit', feed);
   }
 
@@ -128,11 +128,11 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  private _onActionSelected(action: string, feed: KalturaBaseSyndicationFeed) {
+  private _onActionSelected(action: string, feed: VidiunBaseSyndicationFeed) {
     this.actionSelected.emit({'action': action, 'feed': feed});
   }
 
-  private _buildMenu(feed: KalturaBaseSyndicationFeed): void {
+  private _buildMenu(feed: VidiunBaseSyndicationFeed): void {
     this._items = [
       {
         id: 'edit',
@@ -142,12 +142,12 @@ export class FeedsTableComponent implements AfterViewInit, OnInit, OnDestroy {
       {
         id: 'delete',
         label: this._appLocalization.get('applications.content.syndication.table.actions.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this._onActionSelected('delete', feed)
       },
     ];
 
-    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': KMCPermissions.SYNDICATION_DELETE });
+    this._permissionsService.filterList(<{ id: string }[]>this._items, { 'delete': VMCPermissions.SYNDICATION_DELETE });
   }
 
   private _fillCopyToClipboardTooltips(): void {

@@ -1,25 +1,25 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { SettingsMyUserSettingsService } from './settings-my-user-settings.service';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaUserRole } from 'kaltura-ngx-client';
-import { UserUpdateLoginDataActionArgs } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsMyUserSettingsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunUserRole } from 'vidiun-ngx-client';
+import { UserUpdateLoginDataActionArgs } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsMyUserSettingsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
 
 export type UserSettingsPopup = 'editUserNamePopup' | 'editEmailAddressPopup' | 'changePasswordPopup'
 
 @Component({
-  selector: 'kmc-settings-my-user-settings',
+  selector: 'vmc-settings-my-user-settings',
   templateUrl: './settings-my-user-settings.component.html',
   styleUrls: ['./settings-my-user-settings.component.scss'],
   providers: [
     SettingsMyUserSettingsService,
-    KalturaLogger.createLogger('SettingsMyUserSettingsComponent')
+    VidiunLogger.createLogger('SettingsMyUserSettingsComponent')
   ]
 })
 export class SettingsMyUserSettingsComponent implements OnInit, OnDestroy {
@@ -31,12 +31,12 @@ export class SettingsMyUserSettingsComponent implements OnInit, OnDestroy {
 
   public _areaBlockerMessage: AreaBlockerMessage = null;
   public _updateBlockerMessage: AreaBlockerMessage = null;
-  public _user: KalturaUser = null;
-  public _role: KalturaUserRole = null;
+  public _user: VidiunUser = null;
+  public _role: VidiunUserRole = null;
   public _isBusy = false;
 
   constructor(private _myUserSettingsStore: SettingsMyUserSettingsService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsMyUserSettingsMainView: SettingsMyUserSettingsMainViewService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization) {
@@ -107,7 +107,7 @@ export class SettingsMyUserSettingsComponent implements OnInit, OnDestroy {
 
       this._updateBlockerMessage = null;
       this._myUserSettingsStore
-          .updateEmail(new KalturaUser({ id: this._user.id, email }))
+          .updateEmail(new VidiunUser({ id: this._user.id, email }))
           .pipe(cancelOnDestroy(this))
           .pipe(tag('block-shell'))
           .subscribe(

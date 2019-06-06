@@ -1,36 +1,36 @@
-<k-area-blocker [showLoader]="_showLoader">
-  <div class="kOverrideFAIcons kRefineFilters">
-    <kScrollToTopContainer #refine class="kTreeContainer">
-      <div class="kFiltersGroupTitle">
+<v-area-blocker [showLoader]="_showLoader">
+  <div class="vOverrideFAIcons vRefineFilters">
+    <vScrollToTopContainer #refine class="vTreeContainer">
+      <div class="vFiltersGroupTitle">
         <span>{{'applications.content.filters.additionalFilters' | translate | uppercase}}</span>
       </div>
       <p>{{'applications.content.filters.createdBetween' | translate}}</p>
-      <div class="kDateRange">
+      <div class="vDateRange">
 
-        <p-calendar class="kDateRangeFirst" [(ngModel)]="_createdAfter" [readonlyInput]="true" [showIcon]="true"
+        <p-calendar class="vDateRangeFirst" [(ngModel)]="_createdAfter" [readonlyInput]="true" [showIcon]="true"
                     [monthNavigator]="true" [yearNavigator]="true" [yearRange]="_createdAtDateRange" [dateFormat]="_calendarFormat"
-                    icon="kIconcalendar" (onSelect)="_onCreatedChanged()"></p-calendar>
-        <p-calendar class="kDateRangeLast kPullLeft100" [(ngModel)]="_createdBefore" [readonlyInput]="true" [dateFormat]="_calendarFormat"
+                    icon="vIconcalendar" (onSelect)="_onCreatedChanged()"></p-calendar>
+        <p-calendar class="vDateRangeLast vPullLeft100" [(ngModel)]="_createdBefore" [readonlyInput]="true" [dateFormat]="_calendarFormat"
                     [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" [yearRange]="_createdAtDateRange"
-                    icon="kIconcalendar" (onSelect)="_onCreatedChanged()"></p-calendar>
+                    icon="vIconcalendar" (onSelect)="_onCreatedChanged()"></p-calendar>
       </div>
-      <a class="kClearAll" (click)="_clearCreatedComponents()" [class.kDisabledLink]="!_createdAfter && !_createdBefore">
+      <a class="vClearAll" (click)="_clearCreatedComponents()" [class.vDisabledLink]="!_createdAfter && !_createdBefore">
         {{'applications.content.filters.clearDates' | translate}}
       </a>
-      <span *ngIf="_createdFilterError" class="kError">{{_createdFilterError}}</span>
+      <span *ngIf="_createdFilterError" class="vError">{{_createdFilterError}}</span>
       <div *ngFor="let group of _primeListsGroups">
-        <div *ngIf="group.label" class="kFiltersGroupTitle">
+        <div *ngIf="group.label" class="vFiltersGroupTitle">
           <span>{{group.label | uppercase}}</span>
         </div>
         <div *ngFor="let treeInstance of group.lists">
           <p-tree [value]="treeInstance.items"
                   [selectionMode]="'checkbox'"
-                  kRefinePrimeTree
+                  vRefinePrimeTree
                   [(selection)]="treeInstance.selections"
                   (onNodeSelect)="_onTreeNodeSelect($event, treeInstance)"
                   (onNodeUnselect)="_onTreeNodeUnselect($event, treeInstance)">
             <ng-template let-node pTemplate="default">
-              <span class="kTreeNodeLabel" [kTooltip]="node.label" [delay]="1000">
+              <span class="vTreeNodeLabel" [vTooltip]="node.label" [delay]="1000">
                 {{node.label}}
               </span>
             </ng-template>
@@ -38,12 +38,12 @@
         </div>
 
       </div>
-    </kScrollToTopContainer>
+    </vScrollToTopContainer>
 
     <p>
       <a class="clearAll" (click)="_clearAllComponents()">{{'applications.content.filters.clearAll' | translate}}</a>
-      <a class="kClose" (click)="_close()">{{'applications.content.filters.close' | translate}}</a>
+      <a class="vClose" (click)="_close()">{{'applications.content.filters.close' | translate}}</a>
     </p>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 

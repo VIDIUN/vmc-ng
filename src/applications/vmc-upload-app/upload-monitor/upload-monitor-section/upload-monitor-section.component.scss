@@ -1,0 +1,65 @@
+@import 'app-theme/_variables.scss';
+
+.vUploadMonitorSection {
+  height: 42px;
+  border-bottom: 1px solid $vGrayscale6;
+  padding: 24px;
+
+  .vUploadMonitorSectionHeading {
+    display: flex;
+    justify-content: space-between;
+
+    .vUploadMonitorSectionHeadingTitle {
+      text-transform: uppercase;
+      font-size: 12px;
+      color: $vGrayscale3;
+    }
+
+    .vUploadMonitorSectionHeadingDetails {
+      font-size: 13px;
+    }
+  }
+
+  .vUploadMonitorSectionContent {
+    margin-top: 16px;
+
+    .vUploadMonitorStatus {
+
+      margin-right: 30px;
+      font-size: 14px;
+
+      .vUploadMonitorStatusIcon {
+        color: #FFFFFF;
+        font-size: 11px;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        vertical-align: bottom;
+
+        &.uploading {
+          background-color: $vSecondary;
+        }
+
+        &.queued {
+          color: $vOrange;
+          font-size: 17px;
+          margin-bottom: 1px;
+        }
+
+        &.completed {
+          background-color: $vSuccess;
+        }
+
+        &.error {
+          color: $vDandger;
+          font-size: 17px;
+          margin-bottom: 1px;
+        }
+      }
+    }
+  }
+}

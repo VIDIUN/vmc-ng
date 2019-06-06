@@ -1,27 +1,27 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kBulkRemoveEditors',
+  selector: 'vBulkRemoveEditors',
   templateUrl: './bulk-remove-editors.component.html',
   styleUrls: ['./bulk-remove-editors.component.scss']
 })
 export class BulkRemoveEditorsComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Output() removeEditorsChanged = new EventEmitter<string[]>();
 
   public _loading = false;
   public _sectionBlockerMessage: AreaBlockerMessage;
 
-  public users: KalturaUser[] = [];
+  public users: VidiunUser[] = [];
   public usersToRemove: string[] = [];
 
   private _parentPopupStateChangeSubscribe: ISubscription;

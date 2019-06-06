@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "licenses": {
+    "ignoreList": [
+      "@vidiun-ng/vidiun-common",
+      "@vidiun-ng/vidiun-primeng-ui",
+      "@vidiun-ng/vidiun-ui",
+      "@vidiun-ng/mc-theme",
+      "@vidiun-ng/dev-workspace"
+    ]
+  },
+  "commands": {
+    "bookmark": {
+      "standalone": [
+        "ff77a3930df37250211f21c75710c5e60318f01f"
+      ]
+    },
+    "release": {
+      "appConfig": {
+        "path": "./src/configuration/global-config.ts",
+        "key": "appVersion"
+      },
+      "changeLog": {
+        "htmlPath": ""
+      }
+    }
+  }
+}

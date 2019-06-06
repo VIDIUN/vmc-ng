@@ -1,21 +1,21 @@
-<k-area-blocker [message]="_blockerMessage" style="height: 100%">
+<v-area-blocker [message]="_blockerMessage" style="height: 100%">
 
-  <div class="kTreeContainer kOverrideFAIcons kRadioButtonPOC">
+  <div class="vTreeContainer vOverrideFAIcons vRadioButtonPOC">
 
-    <div class="kHeader">
-    <span class="kTitle">
+    <div class="vHeader">
+    <span class="vTitle">
       <span *ngIf="newCategoryForm">{{('applications.content.addNewCategory.newSubcategory') | translate}}</span>
     </span>
     </div>
-    <div class="kContainer">
-      <form class="kRow" [formGroup]="newCategoryForm" novalidate>
-        <span class="kLabel">{{'applications.content.addNewCategory.name' | translate}}</span>
-        <div class="kRequired" [ngClass]="{'kHasError':!newCategoryForm.controls['name'].valid &&
+    <div class="vContainer">
+      <form class="vRow" [formGroup]="newCategoryForm" novalidate>
+        <span class="vLabel">{{'applications.content.addNewCategory.name' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!newCategoryForm.controls['name'].valid &&
                    newCategoryForm.controls['name'].touched}">*
         </div>
         <div>
-          <input class="kControl" formControlName="name" pInputText
-                 [ngClass]="{'kHasError':!newCategoryForm.controls['name'].valid &&
+          <input class="vControl" formControlName="name" pInputText
+                 [ngClass]="{'vHasError':!newCategoryForm.controls['name'].valid &&
                    newCategoryForm.controls['name'].touched}">
           <div *ngIf="newCategoryForm.controls['name'].touched &&
                  newCategoryForm.controls['name'].hasError('required')"
@@ -25,11 +25,11 @@
         </div>
       </form>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded" pButton
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded" pButton
               label="{{'applications.content.addNewCategory.apply' | translate}}"
               (click)="_apply()" [disabled]="!newCategoryForm.controls['name'].valid"></button>
-      <a class="kLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
+      <a class="vLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

@@ -1,34 +1,34 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
-  <div class="kDistribution">
-    <div class="kDistributionHeader">
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+  <div class="vDistribution">
+    <div class="vDistributionHeader">
       <span>{{'applications.content.entryDetails.distribution.distribution' | translate}}</span>
-      <button pButton class="kButtonDefault kRefreshBtn" icon="kIconrefresh"
-              [kTooltip]="'applications.content.entryDetails.distribution.refresh' | translate"
+      <button pButton class="vButtonDefault vRefreshBtn" icon="vIconrefresh"
+              [vTooltip]="'applications.content.entryDetails.distribution.refresh' | translate"
               (click)="_widgetService.refresh()"></button>
     </div>
-    <div class="kDistributionList">
-      <kEntryDistributedProfile
+    <div class="vDistributionList">
+      <vEntryDistributedProfile
         *ngFor="let profile of (_widgetService.distributionProfiles$.distributed | async).items"
         [profile]="profile"
-        (onActionSelected)="_onDistributedProfileActionSelected($event)"></kEntryDistributedProfile>
-      <kEntryUndistributedProfile
+        (onActionSelected)="_onDistributedProfileActionSelected($event)"></vEntryDistributedProfile>
+      <vEntryUndistributedProfile
         *ngFor="let profile of (_widgetService.distributionProfiles$.undistributed | async).items"
         [profile]="profile"
-        (onExport)="_openUndistributedProfile($event)"></kEntryUndistributedProfile>
+        (onExport)="_openUndistributedProfile($event)"></vEntryUndistributedProfile>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #editProfile data-aid="editDistributionProfile" [popupWidth]="995" [slider]="true">
+<vPopupWidget #editProfile data-aid="editDistributionProfile" [popupWidth]="995" [slider]="true">
   <ng-template>
-    <k-area-blocker [message]="_widgetService.popupMessage">
-      <kEditDistributionProfile [parentPopup]="editProfile"
+    <v-area-blocker [message]="_widgetService.popupMessage">
+      <vEditDistributionProfile [parentPopup]="editProfile"
                                 [entry]="_widgetService.data"
                                 [thumbnails]="(_widgetService.thumbnails$ | async)?.items"
                                 [flavors]="(_widgetService.flavors$ | async)?.items"
                                 [undistributedProfile]="_selectedUndistributedProfile"
                                 [distributedProfile]="_selectedDistributedProfile"
-                                (onActionSelected)="_onEditProfileActionSelected($event)"></kEditDistributionProfile>
-    </k-area-blocker>
+                                (onActionSelected)="_onEditProfileActionSelected($event)"></vEditDistributionProfile>
+    </v-area-blocker>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

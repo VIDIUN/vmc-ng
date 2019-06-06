@@ -1,33 +1,33 @@
-<k-area-blocker [showLoader]="_showLoader" [message]="_areaBlockerMessage" [bodyScroll]="true">
-	<div class="kmcDetailsLayout kOverrideFAIcons">
-		<div class="kContent kDetailsWrapper">
-			<kSticky  stickyId="profileHeader" [sticksTo]="'header'" stickyClass="stickyHeader">
-				<div class="kDetailsHeader">
-					<div class="kContent">
-						<button pButton class="kButtonDefault kBackBtn small" icon="kIconarrow_backward" (click)="_backToList()"></button>
-						<div class="kTitle">{{ _profileName }}</div>
-						<button pButton class="kButtonBranded kSaveBtn"
+<v-area-blocker [showLoader]="_showLoader" [message]="_areaBlockerMessage" [bodyScroll]="true">
+	<div class="vmcDetailsLayout vOverrideFAIcons">
+		<div class="vContent vDetailsWrapper">
+			<vSticky  stickyId="profileHeader" [sticksTo]="'header'" stickyClass="stickyHeader">
+				<div class="vDetailsHeader">
+					<div class="vContent">
+						<button pButton class="vButtonDefault vBackBtn small" icon="vIconarrow_backward" (click)="_backToList()"></button>
+						<div class="vTitle">{{ _profileName }}</div>
+						<button pButton class="vButtonBranded vSaveBtn"
                     [label]="'applications.settings.transcoding.profile.save' | translate"
                     [disabled]="_isSaveDisabled"
                     (click)="_save()"></button>
-						<button pButton class="kButtonDefault kNavigationBtnLeft" [disabled]="!_enablePrevButton" (click)="_navigateToPrevious()" icon="kIconarrow_backward"></button>
-						<button pButton class="kButtonDefault kNavigationBtnRight" [disabled]="!_enableNextButton" (click)="_navigateToNext()" icon="kIconarrow_forward"></button>
+						<button pButton class="vButtonDefault vNavigationBtnLeft" [disabled]="!_enablePrevButton" (click)="_navigateToPrevious()" icon="vIconarrow_backward"></button>
+						<button pButton class="vButtonDefault vNavigationBtnRight" [disabled]="!_enableNextButton" (click)="_navigateToNext()" icon="vIconarrow_forward"></button>
 					</div>
 				</div>
-			</kSticky>
-			<div class="kHeaderDetails">
-				<kTranscodingProfileDetails></kTranscodingProfileDetails>
+			</vSticky>
+			<div class="vHeaderDetails">
+				<vTranscodingProfileDetails></vTranscodingProfileDetails>
 			</div>
-			<div class="kDetailsMain">
-        <div class="kSections">
-          <kTranscodingProfileSectionsList></kTranscodingProfileSectionsList>
+			<div class="vDetailsMain">
+        <div class="vSections">
+          <vTranscodingProfileSectionsList></vTranscodingProfileSectionsList>
         </div>
-				<div class="kDetailsContent">
+				<div class="vDetailsContent">
 					<router-outlet></router-outlet>
 				</div>
 			</div>
-			<div class="kSpacer"></div>
+			<div class="vSpacer"></div>
 		</div>
 
 	</div>
-</k-area-blocker>
+</v-area-blocker>

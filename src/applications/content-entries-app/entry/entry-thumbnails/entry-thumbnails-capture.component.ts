@@ -1,10 +1,10 @@
 import { Component, AfterContentInit, Input } from '@angular/core';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { serverConfig, getKalturaServerUri } from 'config/server';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { serverConfig, getVidiunServerUri } from 'config/server';
 
 @Component({
-    selector: 'kThumbnailCapture',
+    selector: 'vThumbnailCapture',
     templateUrl: './entry-thumbnails-capture.component.html',
     styleUrls: ['./entry-thumbnails-capture.component.scss']
 })
@@ -13,33 +13,33 @@ export class EntryThumbnailCapture implements AfterContentInit{
 	@Input() entryId: string;
 	@Input() parentPopupWidget: PopupWidgetComponent;
 
-    serverUri = getKalturaServerUri();
+    serverUri = getVidiunServerUri();
     playerConfig: any;
-    kdp: any;
+    vdp: any;
 
     constructor(private _appAuthentication: AppAuthentication) {
     }
 
 	ngAfterContentInit(){
 		this.playerConfig = {
-			uiconfid: serverConfig.kalturaServer.previewUIConf,
+			uiconfid: serverConfig.vidiunServer.previewUIConf,
 			pid: this._appAuthentication.appUser.partnerId,
 			entryid: this.entryId,
             flashvars: {
-			    ks: this._appAuthentication.appUser.ks
+			    vs: this._appAuthentication.appUser.vs
             }
 		};
 
 	}
 
-	onPlayerReady(kdp){
-		this.kdp = kdp;
+	onPlayerReady(vdp){
+		this.vdp = vdp;
 	}
 
 	_capture(){
 		// pass current position
 		const context = {
-			currentPosition: this.kdp.evaluate('{video.player.currentTime}')
+			currentPosition: this.vdp.evaluate('{video.player.currentTime}')
 		};
 		this.parentPopupWidget.close(context);
 	}

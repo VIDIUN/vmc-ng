@@ -1,31 +1,31 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
-  <div class="kUploads kOverrideFAIcons">
-    <div class="kUploadsHolder kContent">
-      <kSticky [stickyClass]="'kStickyClass'" stickyId="uploadControlFilters" [scrollOffset]="80" [sticksTo]="'header'">
-        <div class="kUploadsTableFilters kContent">
-          <span class="kSelectedUploadsNum" *ngIf="_uploads.length">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vUploads vOverrideFAIcons">
+    <div class="vUploadsHolder vContent">
+      <vSticky [stickyClass]="'vStickyClass'" stickyId="uploadControlFilters" [scrollOffset]="80" [sticksTo]="'header'">
+        <div class="vUploadsTableFilters vContent">
+          <span class="vSelectedUploadsNum" *ngIf="_uploads.length">
             {{ 'applications.content.uploadControl.files' | translate: [_uploads.length] }}
           </span>
 
-          <div [class.kHidden]="!_selectedUploads.length" class="kBulkOperations">
-            <span class="kSelectedUploadsLabel">
+          <div [class.vHidden]="!_selectedUploads.length" class="vBulkOperations">
+            <span class="vSelectedUploadsLabel">
               • {{'applications.content.uploadControl.selected' | translate: [_selectedUploads.length]}}
             </span>
-            <button pButton icon="kIcontrash" class="kButtonDanger kBulkDeleteBtn" (click)="_bulkCancel()"></button>
-            <a class="kBulkCancel" (click)="_clearSelection()">
+            <button pButton icon="vIcontrash" class="vButtonDanger vBulkDeleteBtn" (click)="_bulkCancel()"></button>
+            <a class="vBulkCancel" (click)="_clearSelection()">
               {{'applications.content.uploadControl.cancel' | translate}}
             </a>
           </div>
         </div>
-      </kSticky>
+      </vSticky>
 
-      <kUploadListTable class="kUploadsTable"
+      <vUploadListTable class="vUploadsTable"
                         [uploads]="_uploads"
                         (onSelectedEntriesChange)="_selectedEntriesChange($event)"
                         (onCancelUpload)="_cancelUpload($event)"
                         (onRetryUpload)="_retryUpload($event)"
                         [selectedUploads]="_selectedUploads"
-      ></kUploadListTable>
+      ></vUploadListTable>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

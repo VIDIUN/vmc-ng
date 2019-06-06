@@ -11,14 +11,14 @@ import {
     ViewChild
 } from '@angular/core';
 import { Menu, MenuItem } from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaBulkUpload } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunBulkUpload } from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kBulkLogTable',
+  selector: 'vBulkLogTable',
   templateUrl: './bulk-log-table.component.html',
   styleUrls: ['./bulk-log-table.component.scss'],
     providers: [
@@ -45,7 +45,7 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() selectedBulkLogItems: any[] = [];
 
   @Output()
-  actionSelected = new EventEmitter<{ action: string, bulkLogItem: KalturaBulkUpload }>();
+  actionSelected = new EventEmitter<{ action: string, bulkLogItem: VidiunBulkUpload }>();
   @Output()
   selectedBulkLogItemsChange = new EventEmitter<any>();
 
@@ -64,7 +64,7 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _el: ElementRef<HTMLElement>,
               private _cdRef: ChangeDetectorRef) {
   }
@@ -72,8 +72,8 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnInit() {
     this._emptyMessage = this._appLocalization.get('applications.content.table.noResults');
     this._actionsAllowed = this._permissionsService.hasAnyPermissions([
-      KMCPermissions.BULK_LOG_DELETE,
-      KMCPermissions.BULK_LOG_DOWNLOAD
+      VMCPermissions.BULK_LOG_DELETE,
+      VMCPermissions.BULK_LOG_DOWNLOAD
     ]);
   }
 
@@ -95,7 +95,7 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
     this.actionsMenu.hide();
   }
 
-  private _buildMenu(bulkLogItem: KalturaBulkUpload): void {
+  private _buildMenu(bulkLogItem: VidiunBulkUpload): void {
     this._items = [
       {
         id: 'downloadLog',
@@ -110,7 +110,7 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
       {
         id: 'delete',
         label: this._appLocalization.get('applications.content.bulkUpload.table.actions.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this._onActionSelected('delete', bulkLogItem)
       }
     ];
@@ -118,18 +118,18 @@ export class BulkLogTableComponent implements AfterViewInit, OnInit, OnDestroy {
     this._permissionsService.filterList(
       <{ id: string }[]>this._items,
       {
-        'delete': KMCPermissions.BULK_LOG_DELETE,
-        'downloadLog': KMCPermissions.BULK_LOG_DOWNLOAD,
-        'downloadFile': KMCPermissions.BULK_LOG_DOWNLOAD,
+        'delete': VMCPermissions.BULK_LOG_DELETE,
+        'downloadLog': VMCPermissions.BULK_LOG_DOWNLOAD,
+        'downloadFile': VMCPermissions.BULK_LOG_DOWNLOAD,
       }
     );
   }
 
-  private _onActionSelected(action: string, bulkLogItem: KalturaBulkUpload): void {
+  private _onActionSelected(action: string, bulkLogItem: VidiunBulkUpload): void {
     this.actionSelected.emit({ action, bulkLogItem });
   }
 
-  public _openActionsMenu(event: any, bulkLogItem: KalturaBulkUpload): void {
+  public _openActionsMenu(event: any, bulkLogItem: VidiunBulkUpload): void {
     if (this.actionsMenu) {
       this._buildMenu(bulkLogItem);
       this.actionsMenu.toggle(event);

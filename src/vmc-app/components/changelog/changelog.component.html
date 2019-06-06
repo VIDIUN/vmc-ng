@@ -1,0 +1,23 @@
+<p class="vHelpLink vChangelogLink" (click)="_openChangelog()">
+  <span>{{'app.helpMenu.changelog' | translate}}</span>
+  <i class="vIconChangelog" [class.active]="changelogIsShown"></i>
+</p>
+
+<vPopupWidget #changelog data-aid="changelog" [popupWidth]="700" [popupHeight]="600" [closeBtn]="true" [modal]="true">
+  <ng-template>
+    <div class="vChangelogPopup">
+      <div class="vChangelogHeader">
+        <h1>{{ 'app.changelog.header' | translate }}</h1>
+      </div>
+      <div class="vChangelogContent">
+        <vChangelogContent></vChangelogContent>
+      </div>
+      <div class="vChangelogFooter">
+        <button pButton
+                class="vButtonDefault"
+                [label]="'app.common.ok' | translate"
+                (click)="changelog.close()"></button>
+      </div>
+    </div>
+  </ng-template>
+</vPopupWidget>

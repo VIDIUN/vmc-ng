@@ -1,17 +1,17 @@
-import { KalturaCategory } from 'kaltura-ngx-client';
+import { VidiunCategory } from 'vidiun-ngx-client';
 import { Injectable } from '@angular/core';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { WidgetsManagerBase } from '@kaltura-ng/kaltura-ui'
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { WidgetsManagerBase } from '@vidiun-ng/vidiun-ui'
 import { CategoryService } from './category.service';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class CategoryWidgetsManager extends WidgetsManagerBase<KalturaCategory, KalturaMultiRequest>
+export class CategoryWidgetsManager extends WidgetsManagerBase<VidiunCategory, VidiunMultiRequest>
 {
     private _categoryStore: CategoryService;
 
-    constructor(logger: KalturaLogger) {
+    constructor(logger: VidiunLogger) {
         super(logger.subLogger('CategoryWidgetsManager'));
     }
 

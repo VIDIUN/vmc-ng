@@ -1,96 +1,96 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaClient, KalturaRequestOptions } from 'kaltura-ngx-client';
-import { TranscodingProfileManagement } from 'app-shared/kmc-shared/transcoding-profile-management';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { DropFolderListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFilter } from 'kaltura-ngx-client';
-import { KalturaDropFolderOrderBy } from 'kaltura-ngx-client';
-import { KalturaDropFolderStatus } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerConfig } from 'kaltura-ngx-client';
-import { KalturaDropFolder } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerMatchPolicy } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileHandlerType } from 'kaltura-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunClient, VidiunRequestOptions } from 'vidiun-ngx-client';
+import { TranscodingProfileManagement } from 'app-shared/vmc-shared/transcoding-profile-management';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { DropFolderListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFilter } from 'vidiun-ngx-client';
+import { VidiunDropFolderOrderBy } from 'vidiun-ngx-client';
+import { VidiunDropFolderStatus } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerConfig } from 'vidiun-ngx-client';
+import { VidiunDropFolder } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerMatchPolicy } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileHandlerType } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'primeng/api';
-import { DropFolderFileListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileFilter } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileOrderBy } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileStatus } from 'kaltura-ngx-client';
-import { KalturaDropFolderFile } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { BaseEntryUpdateAction } from 'kaltura-ngx-client';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { KalturaAssetsParamsResourceContainers } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileResource } from 'kaltura-ngx-client';
-import { KalturaAssetParamsResourceContainer } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParamsFilter } from 'kaltura-ngx-client';
-import { ConversionProfileAssetParamsListAction } from 'kaltura-ngx-client';
-import { KalturaConversionProfileFilter } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaConversionProfileOrderBy } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { MediaUpdateContentAction } from 'kaltura-ngx-client';
+import { DropFolderFileListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileFilter } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileOrderBy } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileStatus } from 'vidiun-ngx-client';
+import { VidiunDropFolderFile } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { BaseEntryUpdateAction } from 'vidiun-ngx-client';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { VidiunAssetsParamsResourceContainers } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileResource } from 'vidiun-ngx-client';
+import { VidiunAssetParamsResourceContainer } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParamsFilter } from 'vidiun-ngx-client';
+import { ConversionProfileAssetParamsListAction } from 'vidiun-ngx-client';
+import { VidiunConversionProfileFilter } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunConversionProfileOrderBy } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { MediaUpdateContentAction } from 'vidiun-ngx-client';
 import { EntryFlavoursWidget } from '../../entry-flavours-widget.service';
-import { KalturaDropFolderFileListResponse } from 'kaltura-ngx-client';
+import { VidiunDropFolderFileListResponse } from 'vidiun-ngx-client';
 import { Flavor } from '../../flavor';
-import { FlavorAssetSetContentAction } from 'kaltura-ngx-client';
-import { FlavorAssetAddAction } from 'kaltura-ngx-client';
-import { KalturaFlavorAsset } from 'kaltura-ngx-client';
+import { FlavorAssetSetContentAction } from 'vidiun-ngx-client';
+import { FlavorAssetAddAction } from 'vidiun-ngx-client';
+import { VidiunFlavorAsset } from 'vidiun-ngx-client';
 import { map, switchMap } from 'rxjs/operators';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { of as ObservableOf} from 'rxjs';
 
 
 export interface ConversionProfileWithAssets {
     id: number;
-    assets: KalturaConversionProfileAssetParams[];
+    assets: VidiunConversionProfileAssetParams[];
 }
 
-export interface KalturaDropFolderFileGroup extends KalturaDropFolderFile {
-    files?: KalturaDropFolderFile[];
+export interface VidiunDropFolderFileGroup extends VidiunDropFolderFile {
+    files?: VidiunDropFolderFile[];
     name?: string;
     displayName?: string;
     error?: boolean;
 }
 
 @Component({
-    selector: 'kReplaceMatchDropFolder',
+    selector: 'vReplaceMatchDropFolder',
     templateUrl: './match-drop-folder.component.html',
     styleUrls: ['./match-drop-folder.component.scss'],
-    providers: [KalturaLogger.createLogger('MatchDropFolderComponent')]
+    providers: [VidiunLogger.createLogger('MatchDropFolderComponent')]
 })
 export class MatchDropFolderComponent implements OnInit, OnDestroy {
     @Input() parentPopupWidget: PopupWidgetComponent;
-    @Input() entry: KalturaMediaEntry;
+    @Input() entry: VidiunMediaEntry;
     @Input() flavor: Flavor;
 
-    private _dropFoldersList: KalturaDropFolder[] = [];
-    private _conversionProfilesList: { id: number, assets: KalturaConversionProfileAssetParams[] }[] = [];
+    private _dropFoldersList: VidiunDropFolder[] = [];
+    private _conversionProfilesList: { id: number, assets: VidiunConversionProfileAssetParams[] }[] = [];
 
     public _isLoading = false;
     public _blockerMessage: AreaBlockerMessage;
     public _dropFoldersListOptions: SelectItem[] = [];
     public _selectedDropFolder: number = null;
-    public _dropFolderFiles: KalturaDropFolderFileGroup[] = [];
-    public _selectedFile: KalturaDropFolderFileGroup;
+    public _dropFolderFiles: VidiunDropFolderFileGroup[] = [];
+    public _selectedFile: VidiunDropFolderFileGroup;
 
     public get _setReferenceIdEnabled(): boolean {
         return this._selectedFile
-            && this._selectedFile.status !== KalturaDropFolderFileStatus.waiting
-            && this._permissionsService.hasPermission(KMCPermissions.CONTENT_INGEST_REFERENCE_MODIFY)
+            && this._selectedFile.status !== VidiunDropFolderFileStatus.waiting
+            && this._permissionsService.hasPermission(VMCPermissions.CONTENT_INGEST_REFERENCE_MODIFY)
             && !!this._dropFoldersListOptions.length;
     }
 
     public get _addFilesEnabled(): boolean {
         return this._selectedFile
-            && this._selectedFile.status !== KalturaDropFolderFileStatus.waiting
+            && this._selectedFile.status !== VidiunDropFolderFileStatus.waiting
             && !!this._dropFoldersListOptions.length;
     }
 
@@ -100,10 +100,10 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
             : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.addFilesBtn');
     }
 
-    constructor(private _kalturaClient: KalturaClient,
+    constructor(private _vidiunClient: VidiunClient,
                 private _transcodingProfileManagement: TranscodingProfileManagement,
-                private _logger: KalturaLogger,
-                private _permissionsService: KMCPermissionsService,
+                private _logger: VidiunLogger,
+                private _permissionsService: VMCPermissionsService,
                 private _widgetService: EntryFlavoursWidget,
                 private _appLocalization: AppLocalization) {
 
@@ -117,11 +117,11 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
 
     }
 
-    private _getDisplayName(file: KalturaDropFolderFileGroup): string {
+    private _getDisplayName(file: VidiunDropFolderFileGroup): string {
         let displayName: string;
         if (file.files) {
             displayName = `${file.parsedSlug} (${file.files.length}`;
-            if (file.status === KalturaDropFolderFileStatus.waiting) {
+            if (file.status === VidiunDropFolderFileStatus.waiting) {
                 displayName += `, ${this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.waiting')}`;
             }
             displayName += ')';
@@ -134,17 +134,17 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
         return displayName;
     }
 
-    private _mapDropFolderFilesForFlavor(response: KalturaDropFolderFileListResponse): KalturaDropFolderFileGroup[] {
+    private _mapDropFolderFilesForFlavor(response: VidiunDropFolderFileListResponse): VidiunDropFolderFileGroup[] {
         const result = []; // results array
         const waiting = []; // waiting array
 
         response.objects.forEach(file => {
-            if (file instanceof KalturaDropFolderFile) {
-                (<KalturaDropFolderFileGroup>file).displayName = file.parsedSlug;
-                (<KalturaDropFolderFileGroup>file).error = file.status === KalturaDropFolderFileStatus.errorHandling;
+            if (file instanceof VidiunDropFolderFile) {
+                (<VidiunDropFolderFileGroup>file).displayName = file.parsedSlug;
+                (<VidiunDropFolderFileGroup>file).error = file.status === VidiunDropFolderFileStatus.errorHandling;
                 // for files in status waiting, we only want files with a matching slug
                 // selectedEntry is the currently selected entry
-                if (file.status === KalturaDropFolderFileStatus.waiting) {
+                if (file.status === VidiunDropFolderFileStatus.waiting) {
                     if (file.parsedSlug === this.entry.referenceId) {
                         waiting.push(file);
                     }
@@ -157,31 +157,31 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
         return [...waiting, ...result];
     }
 
-    private _mapDropFolderFiles(response: KalturaDropFolderFileListResponse): KalturaDropFolderFileGroup[] {
+    private _mapDropFolderFiles(response: VidiunDropFolderFileListResponse): VidiunDropFolderFileGroup[] {
         const result = []; // results array
         const dict = {}; // slugs dictionary
-        let group: KalturaDropFolderFile; // dffs group (by slug)
+        let group: VidiunDropFolderFile; // dffs group (by slug)
         const parseFailedStr = this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.error');
 
         response.objects.forEach(file => {
-            if (file instanceof KalturaDropFolderFile) {
+            if (file instanceof VidiunDropFolderFile) {
                 // for files in status waiting, we only want files with a matching slug
-                if (file.status === KalturaDropFolderFileStatus.waiting && file.parsedSlug !== this.entry.referenceId) {
+                if (file.status === VidiunDropFolderFileStatus.waiting && file.parsedSlug !== this.entry.referenceId) {
                     return;
                 }
 
                 // group all files where status == ERROR_HANDLING under same group
-                if (file.status === KalturaDropFolderFileStatus.errorHandling) {
+                if (file.status === VidiunDropFolderFileStatus.errorHandling) {
                     file.parsedSlug = parseFailedStr;
                 }
 
                 // get relevant group
                 if (!dict[file.parsedSlug]) {
                     // create group
-                    group = new KalturaDropFolderFile();
+                    group = new VidiunDropFolderFile();
                     group.parsedSlug = file.parsedSlug;
                     (<any>group).createdAt = file.createdAt;
-                    (<KalturaDropFolderFileGroup>group).files = [];
+                    (<VidiunDropFolderFileGroup>group).files = [];
                     dict[group.parsedSlug] = group;
                 } else {
                     group = dict[file.parsedSlug];
@@ -192,23 +192,23 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
                 }
 
                 // add dff to files list
-                (<KalturaDropFolderFileGroup>group).files.push(file);
+                (<VidiunDropFolderFileGroup>group).files.push(file);
 
                 // if any file in the group is in waiting status, set the group to waiting:
-                if (file.status === KalturaDropFolderFileStatus.waiting) {
-                    (<any>group).status = KalturaDropFolderFileStatus.waiting;
+                if (file.status === VidiunDropFolderFileStatus.waiting) {
+                    (<any>group).status = VidiunDropFolderFileStatus.waiting;
                 }
             }
         });
 
-        let wait: KalturaDropFolderFile;
+        let wait: VidiunDropFolderFile;
         for (const slug in dict) {
             if (dict.hasOwnProperty(slug) && slug !== parseFailedStr) {
-                if (dict[slug].status === KalturaDropFolderFileStatus.waiting) {
+                if (dict[slug].status === VidiunDropFolderFileStatus.waiting) {
                     // we assume there's only one...
                     wait = dict[slug];
                 } else {
-                    (<KalturaDropFolderFileGroup>dict[slug]).displayName = this._getDisplayName(dict[slug]);
+                    (<VidiunDropFolderFileGroup>dict[slug]).displayName = this._getDisplayName(dict[slug]);
                     result.push(dict[slug]);
                 }
             }
@@ -220,22 +220,22 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
 
         // put the parseFailed last
         if (dict[parseFailedStr]) {
-            (<KalturaDropFolderFileGroup>dict[parseFailedStr]).displayName = this._getDisplayName(dict[parseFailedStr]);
-            (<KalturaDropFolderFileGroup>dict[parseFailedStr]).error = true;
+            (<VidiunDropFolderFileGroup>dict[parseFailedStr]).displayName = this._getDisplayName(dict[parseFailedStr]);
+            (<VidiunDropFolderFileGroup>dict[parseFailedStr]).error = true;
             result.push(dict[parseFailedStr]);
         }
 
         return result;
     }
 
-    private _loadDropFolder(searchTerm: string = null): Observable<KalturaDropFolderFileGroup[]> {
-        const filter = new KalturaDropFolderFileFilter({
-            orderBy: KalturaDropFolderFileOrderBy.createdAtDesc,
+    private _loadDropFolder(searchTerm: string = null): Observable<VidiunDropFolderFileGroup[]> {
+        const filter = new VidiunDropFolderFileFilter({
+            orderBy: VidiunDropFolderFileOrderBy.createdAtDesc,
             dropFolderIdEqual: this._selectedDropFolder,
             statusIn: [
-                KalturaDropFolderFileStatus.noMatch,
-                KalturaDropFolderFileStatus.waiting,
-                KalturaDropFolderFileStatus.errorHandling,
+                VidiunDropFolderFileStatus.noMatch,
+                VidiunDropFolderFileStatus.waiting,
+                VidiunDropFolderFileStatus.errorHandling,
             ].join(',')
         });
 
@@ -244,40 +244,40 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
         }
 
         const dropFolderFilesListAction = new DropFolderFileListAction({ filter });
-        return this._kalturaClient
+        return this._vidiunClient
             .request(dropFolderFilesListAction)
             .map(response =>
                 this.flavor ? this._mapDropFolderFilesForFlavor(response) : this._mapDropFolderFiles(response)
             );
     }
 
-    private _loadDropFoldersList(): Observable<KalturaDropFolderFileGroup[]> {
+    private _loadDropFoldersList(): Observable<VidiunDropFolderFileGroup[]> {
         const dropFoldersListAction = new DropFolderListAction({
-            filter: new KalturaDropFolderFilter({
-                orderBy: KalturaDropFolderOrderBy.nameDesc,
-                statusEqual: KalturaDropFolderStatus.enabled
+            filter: new VidiunDropFolderFilter({
+                orderBy: VidiunDropFolderOrderBy.nameDesc,
+                statusEqual: VidiunDropFolderStatus.enabled
             })
         });
 
-        return this._kalturaClient.request(dropFoldersListAction)
+        return this._vidiunClient.request(dropFoldersListAction)
             .pipe(cancelOnDestroy(this))
             .map(response => {
                 if (response.objects.length) {
                     const dropFoldersList = [];
                     response.objects.forEach(dropFolder => {
-                        if (dropFolder instanceof KalturaDropFolder) {
-                            if (dropFolder.fileHandlerType === KalturaDropFolderFileHandlerType.content) {
-                                const cfg: KalturaDropFolderContentFileHandlerConfig = dropFolder.fileHandlerConfig as KalturaDropFolderContentFileHandlerConfig;
-                                if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.addAsNew) {
+                        if (dropFolder instanceof VidiunDropFolder) {
+                            if (dropFolder.fileHandlerType === VidiunDropFolderFileHandlerType.content) {
+                                const cfg: VidiunDropFolderContentFileHandlerConfig = dropFolder.fileHandlerConfig as VidiunDropFolderContentFileHandlerConfig;
+                                if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.addAsNew) {
                                     dropFoldersList.push(dropFolder);
-                                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
+                                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
                                     dropFoldersList.push(dropFolder);
-                                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
+                                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
                                     dropFoldersList.push(dropFolder);
                                 }
                             }
                         } else {
-                            throw new Error(`invalid type provided, expected KalturaDropFolder, got ${typeof dropFolder}`);
+                            throw new Error(`invalid type provided, expected VidiunDropFolder, got ${typeof dropFolder}`);
                         }
                     });
 
@@ -300,24 +300,24 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
             });
     }
 
-    private _loadConversionProfiles(): Observable<KalturaConversionProfileAssetParams[]> {
-        const filter = new KalturaConversionProfileFilter({
-            orderBy: KalturaConversionProfileOrderBy.createdAtDesc,
-            typeEqual: KalturaConversionProfileType.media
+    private _loadConversionProfiles(): Observable<VidiunConversionProfileAssetParams[]> {
+        const filter = new VidiunConversionProfileFilter({
+            orderBy: VidiunConversionProfileOrderBy.createdAtDesc,
+            typeEqual: VidiunConversionProfileType.media
         });
         const conversionProfileAssetParamsListAction = new ConversionProfileAssetParamsListAction({
-            filter: new KalturaConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
-            pager: new KalturaFilterPager({ pageSize: 1000 })
+            filter: new VidiunConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
+            pager: new VidiunFilterPager({ pageSize: 1000 })
         }).setRequestOptions(
-            new KalturaRequestOptions({
-                responseProfile: new KalturaDetachedResponseProfile({
-                    type: KalturaResponseProfileType.includeFields,
+            new VidiunRequestOptions({
+                responseProfile: new VidiunDetachedResponseProfile({
+                    type: VidiunResponseProfileType.includeFields,
                     fields: 'conversionProfileId,systemName,assetParamsId'
                 })
             })
         );
 
-        return this._kalturaClient
+        return this._vidiunClient
             .request(conversionProfileAssetParamsListAction)
             .map(res => res.objects);
     }
@@ -352,16 +352,16 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
     private _updateContent(): void {
         this._logger.info(`handle update content request`);
         const selectedFolder = this._dropFoldersList.find(({ id }) => id === this._selectedDropFolder);
-        const mediaResource = new KalturaAssetsParamsResourceContainers({
+        const mediaResource = new VidiunAssetsParamsResourceContainers({
             resources: this._selectedFile.files.map(file => {
-                return new KalturaAssetParamsResourceContainer({
-                    resource: new KalturaDropFolderFileResource({ dropFolderFileId: file.id }),
+                return new VidiunAssetParamsResourceContainer({
+                    resource: new VidiunDropFolderFileResource({ dropFolderFileId: file.id }),
                     assetParamsId: this._getAssetParamsId(selectedFolder.conversionProfileId, file.parsedFlavor)
                 });
             })
         });
 
-        this._kalturaClient
+        this._vidiunClient
             .request(new MediaUpdateContentAction({
                 entryId: this.entry.id,
                 resource: mediaResource,
@@ -462,12 +462,12 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
             this._logger.info(`flavor was not provided, abort action`);
         }
 
-        const contentResource = new KalturaDropFolderFileResource({ dropFolderFileId: this._selectedFile.id });
+        const contentResource = new VidiunDropFolderFileResource({ dropFolderFileId: this._selectedFile.id });
         let request$;
 
         if (this.flavor.flavorAsset && this.flavor.flavorAsset.id) {
             this._logger.info(`flavor asset exist, update flavor`);
-            request$ = this._kalturaClient.request(
+            request$ = this._vidiunClient.request(
                 new FlavorAssetSetContentAction({
                     id: this.flavor.flavorAsset.id,
                     contentResource: contentResource
@@ -477,13 +477,13 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
             this._logger.info(`flavor asset does not exist, create flavor and update content`);
             const flavorAssetAddAction = new FlavorAssetAddAction({
                 entryId: this.entry.id,
-                flavorAsset: new KalturaFlavorAsset({ flavorParamsId: this.flavor.flavorParams.id })
+                flavorAsset: new VidiunFlavorAsset({ flavorParamsId: this.flavor.flavorParams.id })
             });
 
-            request$ = this._kalturaClient
+            request$ = this._vidiunClient
                 .request(flavorAssetAddAction)
                 .pipe(switchMap(({ id }) =>
-                    this._kalturaClient.request(new FlavorAssetSetContentAction({ id, contentResource })))
+                    this._vidiunClient.request(new FlavorAssetSetContentAction({ id, contentResource })))
                 );
         }
 
@@ -547,10 +547,10 @@ export class MatchDropFolderComponent implements OnInit, OnDestroy {
 
         const updateEntryAction = new BaseEntryUpdateAction({
             entryId: this.entry.id,
-            baseEntry: new KalturaBaseEntry({ referenceId: this._selectedFile.parsedSlug })
+            baseEntry: new VidiunBaseEntry({ referenceId: this._selectedFile.parsedSlug })
         });
 
-        this._kalturaClient.request(updateEntryAction)
+        this._vidiunClient.request(updateEntryAction)
             .pipe(tag('block-shell'))
             .pipe(cancelOnDestroy(this))
             .subscribe(

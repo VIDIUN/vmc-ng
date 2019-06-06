@@ -1,5 +1,5 @@
-<div class="kAccessControlProfilesTable" [class.noResults]="!_profiles?.length">
-    <p-table kStickyHeader
+<div class="vAccessControlProfilesTable" [class.noResults]="!_profiles?.length">
+    <p-table vStickyHeader
              dataKey="id"
              scrollHeight="100%"
              sticksTo="profilesFilters"
@@ -26,7 +26,7 @@
                 <th [hidden]="_documentWidth < 1300">
                     {{'applications.settings.accessControl.table.id' | translate}}
                 </th>
-                <th [hidden]="_documentWidth < 1300" [kpSortableColumn]="'createdAt'">
+                <th [hidden]="_documentWidth < 1300" [vpSortableColumn]="'createdAt'">
                     {{'applications.settings.accessControl.table.createdOn' | translate}}
                     <p-sortIcon [field]="'createdAt'"></p-sortIcon>
                 </th>
@@ -61,54 +61,54 @@
                     </a>
                 </td>
                 <td>
-                    <span class="kAccessControlProfileTableName kTableColumn"
-                          [kTooltip]="profile.name"
+                    <span class="vAccessControlProfileTableName vTableColumn"
+                          [vTooltip]="profile.name"
                           (click)="_onActionSelected('edit', profile)">
                         {{profile.name}}
                     </span>
                 </td>
                 <td [hidden]="_documentWidth < 1300">{{profile.id}}</td>
-                <td [hidden]="_documentWidth < 1300">{{ profile.createdAt | kmcDate:'dateOnly' }}</td>
+                <td [hidden]="_documentWidth < 1300">{{ profile.createdAt | vmcDate:'dateOnly' }}</td>
                 <td>
-                    <span class="kAccessControlRestriction">
-                        <i class="kAccessControlRestrictionIcon" [ngClass]="{
-                        'kIconconfirmation authorized': profile.view.domain.isAuthorized === null || profile.view.domain.isAuthorized,
-                        'kIconerror blocked': profile.view.domain.isAuthorized !== null && !profile.view.domain.isAuthorized
+                    <span class="vAccessControlRestriction">
+                        <i class="vAccessControlRestrictionIcon" [ngClass]="{
+                        'vIconconfirmation authorized': profile.view.domain.isAuthorized === null || profile.view.domain.isAuthorized,
+                        'vIconerror blocked': profile.view.domain.isAuthorized !== null && !profile.view.domain.isAuthorized
                         }"></i>
                         <span>{{profile.view.domain.label || ('applications.settings.accessControl.table.allowAll' | translate)}}</span>
                     </span>
                 </td>
                 <td>
-                    <span class="kAccessControlRestriction">
-                        <i class="kAccessControlRestrictionIcon" [ngClass]="{
-                        'kIconconfirmation authorized': profile.view.countries.isAuthorized === null ||profile.view.countries.isAuthorized,
-                        'kIconerror blocked': profile.view.countries.isAuthorized !== null && !profile.view.countries.isAuthorized
+                    <span class="vAccessControlRestriction">
+                        <i class="vAccessControlRestrictionIcon" [ngClass]="{
+                        'vIconconfirmation authorized': profile.view.countries.isAuthorized === null ||profile.view.countries.isAuthorized,
+                        'vIconerror blocked': profile.view.countries.isAuthorized !== null && !profile.view.countries.isAuthorized
                         }"></i>
                         <span>{{profile.view.countries.label || ('applications.settings.accessControl.table.allowAll' | translate)}}</span>
                     </span>
                 </td>
                 <td>
-                    <span class="kAccessControlRestriction">
-                        <i class="kAccessControlRestrictionIcon" [ngClass]="{
-                        'kIconconfirmation authorized': profile.view.ips.isAuthorized === null ||profile.view.ips.isAuthorized,
-                        'kIconerror blocked': profile.view.ips.isAuthorized !== null && !profile.view.ips.isAuthorized
+                    <span class="vAccessControlRestriction">
+                        <i class="vAccessControlRestrictionIcon" [ngClass]="{
+                        'vIconconfirmation authorized': profile.view.ips.isAuthorized === null ||profile.view.ips.isAuthorized,
+                        'vIconerror blocked': profile.view.ips.isAuthorized !== null && !profile.view.ips.isAuthorized
                         }"></i>
                         <span>{{ profile.view.ips.label || ('applications.settings.accessControl.table.allowAll' | translate) }}</span>
                     </span>
                 </td>
                 <td>
-                    <span class="kAccessControlRestriction">
-                        <i class="kAccessControlRestrictionIcon" [ngClass]="{
-                        'kIconconfirmation authorized': profile.view.flavors.isAuthorized === null ||profile.view.flavors.isAuthorized,
-                        'kIconerror blocked': profile.view.flavors.isAuthorized !== null && !profile.view.flavors.isAuthorized
+                    <span class="vAccessControlRestriction">
+                        <i class="vAccessControlRestrictionIcon" [ngClass]="{
+                        'vIconconfirmation authorized': profile.view.flavors.isAuthorized === null ||profile.view.flavors.isAuthorized,
+                        'vIconerror blocked': profile.view.flavors.isAuthorized !== null && !profile.view.flavors.isAuthorized
                         }"></i>
                         <span>{{ profile.view.flavors.label || ('applications.settings.accessControl.table.allowAll' | translate) }}</span>
                     </span>
                 </td>
                 <td>{{profile.view.advancedSecurity.label}}</td>
                 <td [ngStyle]="{'overflow':'visible', 'width':'80px'}">
-                    <div class="kAccessControlProfilesTableActions">
-                        <button type="button" pButton icon="kIconmore" class="kMoreActionsButton"
+                    <div class="vAccessControlProfilesTableActions">
+                        <button type="button" pButton icon="vIconmore" class="vMoreActionsButton"
                                 (click)="_openActionsMenu($event, profile)"></button>
                     </div>
                 </td>
@@ -122,40 +122,40 @@
         <ng-template let-profile pTemplate="rowexpansion">
             <tr>
                 <td [attr.colspan]="_documentWidth < 1300 ? 9 : 11">
-                    <div class="kAccessControlProfilesDetailRow">
+                    <div class="vAccessControlProfilesDetailRow">
                         <table *ngIf="profile.view.hasAdditionalInfo">
                             <tr *ngIf="profile.view.hasAdditionalInfo">
-                                <td class="kStub1"></td>
-                                <td class="kStub1"></td>
+                                <td class="vStub1"></td>
+                                <td class="vStub1"></td>
                                 <td [attr.colspan]="_documentWidth < 1300 ? 1 : 3">
-                                    <span class="kDescription">{{profile.description}}</span>
+                                    <span class="vDescription">{{profile.description}}</span>
                                 </td>
                                 <td>
-                                    <div *ngFor="let domain of profile.view.domain.details" [kTooltip]="domain">
+                                    <div *ngFor="let domain of profile.view.domain.details" [vTooltip]="domain">
                                         {{domain}}
                                     </div>
                                 </td>
-                                <td class="kCountryList">
+                                <td class="vCountryList">
                                     <div *ngFor="let country of profile.view.countries.details"
-                                         [kTooltip]="country | kCountryFromCode:'label'">
-                                        <i class="kFlag" [ngClass]="country | kCountryFromCode:'icon'"></i>
-                                        {{country | kCountryFromCode:'label'}}
+                                         [vTooltip]="country | vCountryFromCode:'label'">
+                                        <i class="vFlag" [ngClass]="country | vCountryFromCode:'icon'"></i>
+                                        {{country | vCountryFromCode:'label'}}
                                     </div>
                                 </td>
                                 <td>
-                                    <div *ngFor="let ip of profile.view.ips.details" [kTooltip]="ip">{{ip}}</div>
+                                    <div *ngFor="let ip of profile.view.ips.details" [vTooltip]="ip">{{ip}}</div>
                                 </td>
                                 <td>
-                                    <div *ngFor="let flavor of profile.view.flavors.details" [kTooltip]="flavor.label">
+                                    <div *ngFor="let flavor of profile.view.flavors.details" [vTooltip]="flavor.label">
                                         {{flavor.label}}
                                     </div>
                                 </td>
                                 <td>{{profile.view.advancedSecurity.details.label}}</td>
-                                <td class="kStub2"></td>
+                                <td class="vStub2"></td>
                             </tr>
                         </table>
                         <div *ngIf="!profile.view.hasAdditionalInfo"
-                             class="kNoAdditionalInfo">
+                             class="vNoAdditionalInfo">
                             {{'applications.settings.accessControl.table.noAdditionalInfo' | translate}}
                         </div>
                     </div>
@@ -165,5 +165,5 @@
     </p-table>
 </div>
 
-<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 

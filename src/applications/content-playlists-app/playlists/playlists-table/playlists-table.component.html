@@ -1,4 +1,4 @@
-  <div class="kPlaylistsTable" [class.noResults]="!_playlists?.length">
+  <div class="vPlaylistsTable" [class.noResults]="!_playlists?.length">
 
     <p-table
             [scrollable]="true"
@@ -14,7 +14,7 @@
             (onColResize)="_columnsResizeManager.onColumnResize($event)"
             [(selection)]="selectedPlaylists"
             (selectionChange)="onSelectionChange($event)"
-            kStickyHeader [sticksTo]="'playlistsTags'" stickyClass="stickyHeader" [stickyId]="'playlistsTable'">
+            vStickyHeader [sticksTo]="'playlistsTags'" stickyClass="stickyHeader" [stickyId]="'playlistsTable'">
         <ng-template pTemplate="colgroup" let-columns>
             <colgroup>
                 <col [ngStyle]="{'width': '44px', 'padding-left': '13px'}">
@@ -58,13 +58,13 @@
           </td>
 
             <td [ngStyle]="{'width': '44px'}">
-                <div [ngClass]="playlist.playlistType | playlistType: true" class="kMediaTypeIcon"></div>
+                <div [ngClass]="playlist.playlistType | playlistType: true" class="vMediaTypeIcon"></div>
             </td>
 
           <td class="ui-resizable-column">
-            <div class="kPlaylistsNameWrap">
-              <div class="kTitle kTableColumn"
-                   [kTooltip]="playlist.tooltip"
+            <div class="vPlaylistsNameWrap">
+              <div class="vTitle vTableColumn"
+                   [vTooltip]="playlist.tooltip"
                    (click)="onActionSelected('view',playlist)">
                 {{playlist.name}}
               </div>
@@ -72,24 +72,24 @@
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="playlist.id" [showOnEllipsis]="true">{{playlist.id}}</span>
+              <span class="vTableColumn" [vTooltip]="playlist.id" [showOnEllipsis]="true">{{playlist.id}}</span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="playlist.playlistType | playlistType" [showOnEllipsis]="true">
+              <span class="vTableColumn" [vTooltip]="playlist.playlistType | playlistType" [showOnEllipsis]="true">
                   {{playlist.playlistType | playlistType}}
               </span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="playlist.createdAt | kmcDate" [showOnEllipsis]="true">
-                  {{playlist.createdAt | kmcDate}}
+              <span class="vTableColumn" [vTooltip]="playlist.createdAt | vmcDate" [showOnEllipsis]="true">
+                  {{playlist.createdAt | vmcDate}}
               </span>
           </td>
 
           <td [ngStyle]="{'width': '80px'}">
-            <div class="kPlaylistsTableActions">
-              <button class="kMoreActionsButton" type="button" pButton icon="kIconmore" (click)="openActionsMenu($event, playlist)"></button>
+            <div class="vPlaylistsTableActions">
+              <button class="vMoreActionsButton" type="button" pButton icon="vIconmore" (click)="openActionsMenu($event, playlist)"></button>
             </div>
           </td>
 
@@ -98,12 +98,12 @@
 
       <ng-template pTemplate="emptymessage">
           <div class="emptymessage">
-              <div class="kEmptyMessage">{{_emptyMessage}}</div>
+              <div class="vEmptyMessage">{{_emptyMessage}}</div>
           </div>
       </ng-template>
     </p-table>
 
   </div>
 
-  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 

@@ -1,6 +1,6 @@
-import {KalturaPrivacyType} from 'kaltura-ngx-client';
-import {KalturaAppearInListType} from 'kaltura-ngx-client';
-import {KalturaContributionPolicyType} from 'kaltura-ngx-client';
+import {VidiunPrivacyType} from 'vidiun-ngx-client';
+import {VidiunAppearInListType} from 'vidiun-ngx-client';
+import {VidiunContributionPolicyType} from 'vidiun-ngx-client';
 
 export interface DefaultFilterList {
   label: string;
@@ -12,23 +12,23 @@ export const EntitlementsFiltersList: DefaultFilterList[] = [
   {
     name: 'privacyTypes', label: 'All Content Privacy Options',
     items: [
-      {value: KalturaPrivacyType.all.toString(), label: 'No Restriction'},
-      {value: KalturaPrivacyType.authenticatedUsers.toString(), label: 'Requires Authentication'},
-      {value: KalturaPrivacyType.membersOnly.toString(), label: 'Private'}
+      {value: VidiunPrivacyType.all.toString(), label: 'No Restriction'},
+      {value: VidiunPrivacyType.authenticatedUsers.toString(), label: 'Requires Authentication'},
+      {value: VidiunPrivacyType.membersOnly.toString(), label: 'Private'}
     ]
   },
   {
     name: 'categoryListing', label: 'All Category Listing Options',
     items: [
-      {value: KalturaAppearInListType.partnerOnly.toString(), label: 'No Restriction'},
-      {value: KalturaAppearInListType.categoryMembersOnly.toString(), label: 'Private'}
+      {value: VidiunAppearInListType.partnerOnly.toString(), label: 'No Restriction'},
+      {value: VidiunAppearInListType.categoryMembersOnly.toString(), label: 'Private'}
     ]
   },
   {
     name: 'contributionPolicy', label: 'All Contribution Policy Options',
     items: [
-      {value: KalturaContributionPolicyType.all.toString(), label: 'No Restriction'},
-      {value: KalturaContributionPolicyType.membersWithContributionPermission.toString(), label: 'Private'}
+      {value: VidiunContributionPolicyType.all.toString(), label: 'No Restriction'},
+      {value: VidiunContributionPolicyType.membersWithContributionPermission.toString(), label: 'Private'}
     ]
   },
   {

@@ -1,0 +1,19 @@
+@import 'app-theme/_variables.scss';
+
+.vUploadBtn {
+  height: 34px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: $vGrayscale1;
+  margin-right: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border: none !important;
+  &:disabled{
+      color: $vGrayscale4;
+      background: transparent;
+      border: 1px solid $vGrayscale4 !important;
+      cursor: none;
+  }
+}

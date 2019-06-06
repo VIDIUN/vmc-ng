@@ -1,5 +1,5 @@
-<k-area-blocker [showLoader]="_deferredLoading">
-    <div class="kPlaylistRulesTable" [class.noResults]="!_rules.length">
+<v-area-blocker [showLoader]="_deferredLoading">
+    <div class="vPlaylistRulesTable" [class.noResults]="!_rules.length">
         <p-table
             dataKey="selectionId"
             scrollHeight="100%"
@@ -28,7 +28,7 @@
                         {{'applications.content.table.duration' | translate}}
                     </th>
                     <th [ngStyle]="{'width': '70px'}"
-                        *ngIf="_isNewPlaylist || (_kmcPermissions.PLAYLIST_UPDATE | kNgIfPermitted)">
+                        *ngIf="_isNewPlaylist || (_vmcPermissions.PLAYLIST_UPDATE | vNgIfPermitted)">
                     </th>
                 </tr>
             </ng-template>
@@ -39,18 +39,18 @@
                         <p-tableCheckbox [value]="rule"></p-tableCheckbox>
                     </td>
                     <td>
-                    <span class="kTitle kTableColumn" [kTooltip]="rule.name" (click)="_viewRule(rule)">
+                    <span class="vTitle vTableColumn" [vTooltip]="rule.name" (click)="_viewRule(rule)">
                         {{rule.name}}
                     </span>
                     </td>
                     <td [ngStyle]="{'width': '80px'}">{{rule.entriesCount}}</td>
                     <td [ngStyle]="{'width': '100px'}">{{rule.limit}}</td>
                     <td [ngStyle]="{'width': '120px'}">{{rule | playlistRuleOrderBy}}</td>
-                    <td [ngStyle]="{'width': '70px'}">{{rule.entriesDuration | kTime}}</td>
+                    <td [ngStyle]="{'width': '70px'}">{{rule.entriesDuration | vTime}}</td>
                     <td [ngStyle]="{'width': '70px'}"
-                        *ngIf="_isNewPlaylist || (_kmcPermissions.PLAYLIST_UPDATE | kNgIfPermitted)">
-                        <div class="kPlaylistRulesTableActions">
-                            <button type="button" pButton icon="kIconmore" class="kMoreActionsButton"
+                        *ngIf="_isNewPlaylist || (_vmcPermissions.PLAYLIST_UPDATE | vNgIfPermitted)">
+                        <div class="vPlaylistRulesTableActions">
+                            <button type="button" pButton icon="vIconmore" class="vMoreActionsButton"
                                     (click)="_openActionsMenu($event, index, rule)"></button>
                         </div>
                     </td>
@@ -61,6 +61,6 @@
                 <div class="emptymessage">{{_emptyMessage}}</div>
             </ng-template>
         </p-table>
-        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
     </div>
-</k-area-blocker>
+</v-area-blocker>

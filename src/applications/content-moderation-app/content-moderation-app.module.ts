@@ -7,7 +7,7 @@ import { ContentModerationComponent } from './content-moderation.component';
 import { EntriesComponentsList } from './entries-components-list';
 import { EntriesModule } from 'app-shared/content-shared/entries/entries.module';
 
-import { AreaBlockerModule, KalturaUIModule, TooltipModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule, VidiunUIModule, TooltipModule } from '@vidiun-ng/vidiun-ui';
 import {
   AccordionModule,
   ButtonModule,
@@ -26,31 +26,31 @@ import {
   TieredMenuModule,
   TreeModule
 } from 'primeng/primeng';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
-import { AutoCompleteModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { DynamicFormModule } from '@kaltura-ng/kaltura-ui';
-import { DynamicFormModule as PrimeDynamicFormModule } from '@kaltura-ng/kaltura-primeng-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
+import { AutoCompleteModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { DynamicFormModule } from '@vidiun-ng/vidiun-ui';
+import { DynamicFormModule as PrimeDynamicFormModule } from '@vidiun-ng/vidiun-primeng-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KMCShellModule } from 'app-shared/kmc-shell';
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
-import { DynamicMetadataFormModule } from 'app-shared/kmc-shared';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { VMCShellModule } from 'app-shared/vmc-shell';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
+import { DynamicMetadataFormModule } from 'app-shared/vmc-shared';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AreaBlockerModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     TooltipModule,
     PaginatorModule,
     ButtonModule,
     PopupWidgetModule,
     MenuModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     SharedModule,
       EntriesModule,
     AccordionModule,
@@ -70,11 +70,11 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     DynamicFormModule,
     FormsModule,
     DynamicMetadataFormModule,
-    KMCShellModule,
+    VMCShellModule,
     PrimeDynamicFormModule,
     ReactiveFormsModule,
     TagsModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       DateFormatModule,
   ],
   declarations: [

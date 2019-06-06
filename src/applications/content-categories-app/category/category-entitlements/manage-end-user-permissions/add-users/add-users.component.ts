@@ -1,32 +1,32 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
-import {SuggestionsProviderData} from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
-import {KalturaInheritanceType} from 'kaltura-ngx-client';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
+import {SuggestionsProviderData} from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
+import {VidiunInheritanceType} from 'vidiun-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
 import {AddUsersService} from './add-users.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kAddUsers',
+  selector: 'vAddUsers',
   templateUrl: './add-users.component.html',
   styleUrls: ['./add-users.component.scss'],
   providers: [
       AddUsersService,
-      KalturaLogger.createLogger('AddUsersComponent')
+      VidiunLogger.createLogger('AddUsersComponent')
   ]
 })
 export class AddUsersComponent implements OnInit, OnDestroy {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() category: KalturaCategory;
+  @Input() category: VidiunCategory;
   @Input() parentCategoryMembersCount: number;
   @Input() categoryInheritUserPermissions = false;
   @Input() usersCount: number;
@@ -36,12 +36,12 @@ export class AddUsersComponent implements OnInit, OnDestroy {
   public _blockerMessage: AreaBlockerMessage;
 
   public _usersProvider = new Subject<SuggestionsProviderData>();
-  public _users: KalturaUser[] = null;
-  public _selectedPermissionLevel = KalturaCategoryUserPermissionLevel.member;
-  public _selectedUpdateMethod = KalturaUpdateMethodType.automatic;
+  public _users: VidiunUser[] = null;
+  public _selectedPermissionLevel = VidiunCategoryUserPermissionLevel.member;
+  public _selectedUpdateMethod = VidiunUpdateMethodType.automatic;
   public _permissionLevelOptions: { value: number, label: string }[] = [];
   public _updateMethodOptions: { value: number, label: string }[] = [];
-  public _kalturaInheritanceType = KalturaInheritanceType;
+  public _vidiunInheritanceType = VidiunInheritanceType;
 
   public _selectedPermissionSettings: 'inherit' | 'setPermissions' = 'setPermissions';
 
@@ -50,7 +50,7 @@ export class AddUsersComponent implements OnInit, OnDestroy {
 
   constructor( private _appLocalization: AppLocalization,
                private _addUsersService: AddUsersService,
-               private _logger: KalturaLogger) {
+               private _logger: VidiunLogger) {
       this._convertUserInputToValidValue = this._convertUserInputToValidValue.bind(this);
   }
 
@@ -99,7 +99,7 @@ export class AddUsersComponent implements OnInit, OnDestroy {
         data => {
             this._logger.info(`handle successful search users action by user`);
           const suggestions = [];
-          (data.objects || []).forEach((suggestedUser: KalturaUser) => {
+          (data.objects || []).forEach((suggestedUser: VidiunUser) => {
               suggestedUser['__tooltip'] = suggestedUser.id;
             suggestions.push({
               name: suggestedUser.screenName + '(' + suggestedUser.id + ')',
@@ -116,7 +116,7 @@ export class AddUsersComponent implements OnInit, OnDestroy {
       );
   }
 
-  public _convertUserInputToValidValue(value: string): KalturaUser {
+  public _convertUserInputToValidValue(value: string): VidiunUser {
     let result = null;
     const tooltip = this._appLocalization.get('applications.content.bulkActions.userTooltip', {0: value});
 
@@ -259,19 +259,19 @@ export class AddUsersComponent implements OnInit, OnDestroy {
 
   private _fillPermissionLevelOptions() {
     this._permissionLevelOptions = [{
-      value: KalturaCategoryUserPermissionLevel.member,
+      value: VidiunCategoryUserPermissionLevel.member,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionsLevelOptions.member')
     }, {
-      value: KalturaCategoryUserPermissionLevel.contributor,
+      value: VidiunCategoryUserPermissionLevel.contributor,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionsLevelOptions.contributor')
     }, {
-      value: KalturaCategoryUserPermissionLevel.moderator,
+      value: VidiunCategoryUserPermissionLevel.moderator,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionsLevelOptions.moderator')
     }, {
-      value: KalturaCategoryUserPermissionLevel.manager,
+      value: VidiunCategoryUserPermissionLevel.manager,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.permissionsLevelOptions.manager')
     }];
@@ -279,11 +279,11 @@ export class AddUsersComponent implements OnInit, OnDestroy {
 
   private _fillUpdateMethodOptions() {
     this._updateMethodOptions = [{
-      value: KalturaUpdateMethodType.automatic,
+      value: VidiunUpdateMethodType.automatic,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.updateMethodOptions.automatic')
     }, {
-      value: KalturaUpdateMethodType.manual,
+      value: VidiunUpdateMethodType.manual,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.addUsers.updateMethodOptions.manual')
     }];

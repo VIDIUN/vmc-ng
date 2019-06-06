@@ -2,19 +2,19 @@ import { Component, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { KalturaAttachmentAsset } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { VidiunAttachmentAsset } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 
 @Component({
-    selector: 'kEntryRelatedEdit',
+    selector: 'vEntryRelatedEdit',
     templateUrl: './entry-related-edit.component.html',
     styleUrls: ['./entry-related-edit.component.scss']
 })
 export class EntryRelatedEdit implements  AfterViewInit, OnDestroy{
 
-	@Input() currentFile: KalturaAttachmentAsset;
+	@Input() currentFile: VidiunAttachmentAsset;
 	@Input() parentPopupWidget: PopupWidgetComponent;
 
 	public relatedEditForm: FormGroup;

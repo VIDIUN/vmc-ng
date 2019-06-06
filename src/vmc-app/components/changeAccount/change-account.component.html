@@ -1,0 +1,27 @@
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vChangeAccountWin" #changeAccount>
+    <form [formGroup]="changeAccountForm" novalidate>
+      <div class="vHeader">
+        <span class="vTitle">{{ 'app.changeAccount.title'| translate}}</span>
+      </div>
+
+      <div class="vContainer">
+        <div class="vRow">
+          <span class="vLabel">{{'app.changeAccount.choose'| translate}}</span>
+        </div>
+        <div class="vPartnersList">
+          <div class="vRow" *ngFor="let partner of partners">
+            <p-radioButton name="account" [value]="partner.id" formControlName="account"
+                           label="{{partner.name}}"></p-radioButton>
+          </div>
+        </div>
+      </div>
+
+      <div class="vFooter">
+        <button type="button" class="vButtonBranded" (click)="_saveAndClose()" pButton
+                label="{{'app.changeAccount.continue'| translate}}" [disabled]="changeAccountForm.get('account').value === _currentPartnerId"></button>
+      </div>
+
+    </form>
+  </div>
+</v-area-blocker>

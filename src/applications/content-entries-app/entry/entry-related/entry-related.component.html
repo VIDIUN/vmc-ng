@@ -1,14 +1,14 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <kFileDialog #fileDialog [allowMultiple]="true"
-                 (onFileSelected)="_widgetService._onFileSelected($event)"></kFileDialog>
-    <div class="kRelated">
-        <p class="kTitle">{{'applications.content.entryDetails.related.related' | translate}}</p>
-        <button type="button" class="kButtonDefault" pButton
-                *ngIf="_kmcPermissions.ATTACHMENT_MODIFY | kNgIfPermitted"
+    <vFileDialog #fileDialog [allowMultiple]="true"
+                 (onFileSelected)="_widgetService._onFileSelected($event)"></vFileDialog>
+    <div class="vRelated">
+        <p class="vTitle">{{'applications.content.entryDetails.related.related' | translate}}</p>
+        <button type="button" class="vButtonDefault" pButton
+                *ngIf="_vmcPermissions.ATTACHMENT_MODIFY | vNgIfPermitted"
                 [label]="'applications.content.entryDetails.related.add' | translate"
                 (click)="fileDialog.open($event)"></button>
-        <div class="kTable">
+        <div class="vTable">
             <p-table scrollHeight="100%"
                      [value]="(_widgetService._relatedFiles$ | async)?.items"
                      [scrollable]="true">
@@ -27,25 +27,25 @@
                             {{'applications.content.entryDetails.related.assetId' | translate}}
                         </th>
                         <th [ngStyle]="{'width':'80px'}"
-                            *ngIf="_kmcPermissions.ATTACHMENT_MODIFY | kNgIfPermitted"></th>
+                            *ngIf="_vmcPermissions.ATTACHMENT_MODIFY | vNgIfPermitted"></th>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="body" let-file let-index="rowIndex">
                     <tr [ngClass]="_relatedTableRowStyle(file, index)">
                         <td [ngStyle]="{'padding-left': '24px'}">
-                            <span class="kTableColumn kFileName" [kTooltip]="file.filename">{{file.filename}}</span>
+                            <span class="vTableColumn vFileName" [vTooltip]="file.filename">{{file.filename}}</span>
                         </td>
                         <td [ngStyle]="{'width':'140px', 'overflow':'visible'}">
                             <p-dropdown
-                                [disabled]="file.uploading || file.uploadFailure || (_kmcPermissions.ATTACHMENT_MODIFY | kDisabledIfNotPermitted)"
+                                [disabled]="file.uploading || file.uploadFailure || (_vmcPermissions.ATTACHMENT_MODIFY | vDisabledIfNotPermitted)"
                                 [options]="_fileTypes"
                                 [autoWidth]="false"
                                 [placeholder]="'applications.content.entryDetails.related.select' | translate"
                                 [(ngModel)]="file.format"
                                 (onChange)="_widgetService._setDirty()"></p-dropdown>
                         </td>
-                        <td [ngStyle]="{'width':'100px'}">{{file.size | kFileSize}}</td>
+                        <td [ngStyle]="{'width':'100px'}">{{file.size | vFileSize}}</td>
                         <td [ngStyle]="{'width':'100px'}">
                             <div *ngIf="!file.uploadFailure">
                                 <span *ngIf="!file.id && file.progress === 100">
@@ -53,17 +53,17 @@
                                 </span>
                                 <span *ngIf="file.id">{{file.id}}</span>
                             </div>
-                            <div *ngIf="file.uploadFailure" class="kError">
+                            <div *ngIf="file.uploadFailure" class="vError">
                                 <span>{{'applications.content.entryDetails.related.uploadError' | translate}}</span>
                             </div>
                         </td>
                         <td [ngStyle]="{'width':'80px'}"
-                            *ngIf="_kmcPermissions.ATTACHMENT_MODIFY | kNgIfPermitted">
-                            <div class="kRelatedTableActions" *ngIf="!file.uploading && !file.uploadFailure">
-                                <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
+                            *ngIf="_vmcPermissions.ATTACHMENT_MODIFY | vNgIfPermitted">
+                            <div class="vRelatedTableActions" *ngIf="!file.uploading && !file.uploadFailure">
+                                <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
                                         (click)="openActionsMenu($event, file)"></button>
                             </div>
-                            <div *ngIf="file.uploading" class="kUploadMonitor">
+                            <div *ngIf="file.uploading" class="vUploadMonitor">
                                 <span>{{file.progress && file.progress !== '0' ? file.progress + '%' : 'applications.content.entryDetails.related.pending' | translate }}</span>
                                 <a (click)="_widgetService._cancelUpload(file)">
                                     {{'applications.content.entryDetails.related.cancel' | translate}}
@@ -84,8 +84,8 @@
             </p-table>
         </div>
     </div>
-    <kPopupWidget #editPopup data-aid="editRelatedPopup" [popupWidth]="380" [popupHeight]="300" [modal]="true">
-        <kEntryRelatedEdit [currentFile]="_currentFile" [parentPopupWidget]="editPopup"></kEntryRelatedEdit>
-    </kPopupWidget>
-</k-area-blocker>
-<p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <vPopupWidget #editPopup data-aid="editRelatedPopup" [popupWidth]="380" [popupHeight]="300" [modal]="true">
+        <vEntryRelatedEdit [currentFile]="_currentFile" [parentPopupWidget]="editPopup"></vEntryRelatedEdit>
+    </vPopupWidget>
+</v-area-blocker>
+<p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>

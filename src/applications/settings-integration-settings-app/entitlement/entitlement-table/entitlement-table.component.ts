@@ -9,28 +9,28 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {Menu, MenuItem} from 'primeng/primeng';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kEntitlementsTable',
+  selector: 'vEntitlementsTable',
   templateUrl: './entitlement-table.component.html',
   styleUrls: ['./entitlement-table.component.scss']
 })
 export class EntitlementTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public _entitlements: KalturaCategory[] = [];
+  public _entitlements: VidiunCategory[] = [];
   public _emptyMessage: string = this._appLocalization.get('applications.content.table.noResults');
-  private _deferredEntitlements: KalturaCategory[];
+  private _deferredEntitlements: VidiunCategory[];
   public _items: MenuItem[];
   public _deferredLoading = true;
   public _blockerMessage: AreaBlockerMessage = null;
 
   @Input()
-  set entitlements(data: KalturaCategory[]) {
+  set entitlements(data: VidiunCategory[]) {
     if (!this._deferredLoading) {
       this._entitlements = [];
       this.cdRef.detectChanges();
@@ -41,18 +41,18 @@ export class EntitlementTableComponent implements OnInit, OnDestroy, AfterViewIn
     }
   }
 
-  @Output() onActionSelected = new EventEmitter<{ action: string, entitlement: KalturaCategory }>();
+  @Output() onActionSelected = new EventEmitter<{ action: string, entitlement: VidiunCategory }>();
   @ViewChild('actionsmenu') private actionsMenu: Menu;
 
 
   constructor(private cdRef: ChangeDetectorRef,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService) {
+              private _permissionsService: VMCPermissionsService) {
   }
 
   public rowTrackBy: Function = (index: number, item: any) => item;
 
-  public _openActionsMenu(event: any, category: KalturaCategory) {
+  public _openActionsMenu(event: any, category: VidiunCategory) {
     if (this.actionsMenu) {
       this._buildMenu(category);
       this.actionsMenu.toggle(event);
@@ -60,8 +60,8 @@ export class EntitlementTableComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
 
-  private _buildMenu(entitlement: KalturaCategory): void {
-    const hasEditPermission = this._permissionsService.hasPermission(KMCPermissions.INTEGRATION_UPDATE_SETTINGS);
+  private _buildMenu(entitlement: VidiunCategory): void {
+    const hasEditPermission = this._permissionsService.hasPermission(VMCPermissions.INTEGRATION_UPDATE_SETTINGS);
     this._items = [
       {
         label: this._appLocalization.get('applications.settings.integrationSettings.entitlement.table.actions.edit'),
@@ -73,7 +73,7 @@ export class EntitlementTableComponent implements OnInit, OnDestroy, AfterViewIn
       {
         label: this._appLocalization.get('applications.settings.integrationSettings.entitlement.table.actions.delete'),
         disabled: !hasEditPermission,
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => {
           this.onActionSelected.emit({action: 'delete', entitlement});
         }

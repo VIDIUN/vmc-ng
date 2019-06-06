@@ -1,30 +1,30 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
-  <div class="kTranscodingProfilesFlavorsHolder">
-    <div class="kTranscodingProfilesFlavorsTableHeader">
-      <span class="kTotalFlavorsCount" *ngIf="_widgetService.flavors.length">
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+  <div class="vTranscodingProfilesFlavorsHolder">
+    <div class="vTranscodingProfilesFlavorsTableHeader">
+      <span class="vTotalFlavorsCount" *ngIf="_widgetService.flavors.length">
        {{'applications.settings.transcoding.flavors.flavors' | translate: [_widgetService.flavors.length]}}
       </span>
 
-      <div class="kBulkOperations" [class.kHidden]="!_widgetService.selectedFlavors.length">
-        <span class="kSelectedFlavorsLabel">
+      <div class="vBulkOperations" [class.vHidden]="!_widgetService.selectedFlavors.length">
+        <span class="vSelectedFlavorsLabel">
           • {{ 'applications.settings.transcoding.flavors.selected' | translate: [_widgetService.selectedFlavors.length]}}
         </span>
       </div>
     </div>
 
-    <kTranscodingProfileFalvorsTable
-      class="kTranscodingProfilesFlavorsTable"
+    <vTranscodingProfileFalvorsTable
+      class="vTranscodingProfilesFlavorsTable"
       [flavors]="_widgetService.flavors"
       [isNewProfile]="_widgetService.isNewData"
       (selectedFlavorsChange)="_widgetService.updateSelectionState()"
       (editFlavor)="_editFlavor($event)"
       [(selectedFlavors)]="_widgetService.selectedFlavors">
-    </kTranscodingProfileFalvorsTable>
+    </vTranscodingProfileFalvorsTable>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
 
-<kPopupWidget #editMediaProfileFlavor
+<vPopupWidget #editMediaProfileFlavor
               data-aid="editMediaProfileFlavor"
               [popupWidth]="792"
               [popupHeight]="571"
@@ -32,14 +32,14 @@
               [closeOnClickOutside]="false"
               [preventPageScroll]="true">
   <ng-template>
-    <kEditMediaFlavor [parentPopupWidget]="editMediaProfileFlavor"
+    <vEditMediaFlavor [parentPopupWidget]="editMediaProfileFlavor"
                       [profile]="_widgetService.data"
                       [flavor]="_selectedFlavor"
-                      (saveFlavor)="_widgetService.updateFlavorAssetParams($event)"></kEditMediaFlavor>
+                      (saveFlavor)="_widgetService.updateFlavorAssetParams($event)"></vEditMediaFlavor>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #editLiveProfileFlavor
+<vPopupWidget #editLiveProfileFlavor
               data-aid="editLiveProfileFlavor"
               [popupWidth]="586"
               [popupHeight]="353"
@@ -47,9 +47,9 @@
               [closeOnClickOutside]="false"
               [preventPageScroll]="true">
   <ng-template>
-    <kEditLiveFlavor [parentPopupWidget]="editLiveProfileFlavor"
+    <vEditLiveFlavor [parentPopupWidget]="editLiveProfileFlavor"
                      [profile]="_widgetService.data"
                      [flavor]="_selectedFlavor"
-                     (saveFlavor)="_widgetService.updateFlavorAssetParams($event)"></kEditLiveFlavor>
+                     (saveFlavor)="_widgetService.updateFlavorAssetParams($event)"></vEditLiveFlavor>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

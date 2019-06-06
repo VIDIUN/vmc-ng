@@ -1,10 +1,10 @@
 @import 'app-theme/_variables.scss';
 
-.kContainer {
+.vContainer {
   width: 100%;
 
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     padding-bottom: 30px;
     width: 100%;
     font-family: Lato;
@@ -13,13 +13,13 @@
     line-height: 24px;
   }
 
-  .kRow {
+  .vRow {
     padding-bottom: 20px;
     display: flex;
     font-size: 15px;
-    .kLabel {
+    .vLabel {
       flex: 0 0 auto;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-weight: bold;
       width: 35%;
       word-wrap: break-word;
@@ -27,10 +27,10 @@
       max-width: 200px;
     }
 
-    .kControl {
+    .vControl {
       padding-left: 30px;
       flex: 1 1 auto;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

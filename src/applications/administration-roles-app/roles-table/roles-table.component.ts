@@ -10,13 +10,13 @@ import {
     ViewChild
 } from '@angular/core';
 import {Menu, MenuItem} from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaUserRole} from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunUserRole} from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kRolesTable',
+  selector: 'vRolesTable',
   templateUrl: './roles-table.component.html',
   styleUrls: ['./roles-table.component.scss'],
     providers: [
@@ -26,7 +26,7 @@ import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shar
 })
 export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input()
-  set roles(data: KalturaUserRole[]) {
+  set roles(data: VidiunUserRole[]) {
     if (!this._deferredLoading) {
       // the table uses 'rowTrackBy' to track changes by id. To be able to reflect changes of roles
       // (ie when returning from entry page) - we should force detect changes on an empty list
@@ -43,9 +43,9 @@ export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChild('actionsmenu') private _actionsMenu: Menu;
 
-  private _deferredRoles: KalturaUserRole[];
+  private _deferredRoles: VidiunUserRole[];
 
-  public _roles: KalturaUserRole[] = [];
+  public _roles: VidiunUserRole[] = [];
   public _deferredLoading = true;
   public _emptyMessage = '';
   public _items: MenuItem[];
@@ -54,7 +54,7 @@ export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
               private _cdRef: ChangeDetectorRef,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _elementRef: ElementRef<HTMLElement>) {
   }
 
@@ -79,11 +79,11 @@ export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
       this._columnsResizeManager.updateColumns(this._elementRef.nativeElement);
   }
 
-  private _onActionSelected(action: string, role: KalturaUserRole): void {
+  private _onActionSelected(action: string, role: VidiunUserRole): void {
     this.actionSelected.emit({ action, role });
   }
 
-  private _buildMenu(role: KalturaUserRole): void {
+  private _buildMenu(role: VidiunUserRole): void {
     this._items = [
       {
         id: 'edit',
@@ -98,7 +98,7 @@ export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
       {
         id: 'delete',
         label: this._appLocalization.get('applications.administration.roles.actions.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this._onActionSelected('delete', role)
       }
     ];
@@ -106,13 +106,13 @@ export class RolesTableComponent implements AfterViewInit, OnInit, OnDestroy {
     this._permissionsService.filterList(
       <{ id: string }[]>this._items,
       {
-        'duplicate': KMCPermissions.ADMIN_ROLE_ADD,
-        'delete': KMCPermissions.ADMIN_ROLE_DELETE
+        'duplicate': VMCPermissions.ADMIN_ROLE_ADD,
+        'delete': VMCPermissions.ADMIN_ROLE_DELETE
       }
     );
   }
 
-  public _openActionsMenu(event: any, role: KalturaUserRole): void {
+  public _openActionsMenu(event: any, role: VidiunUserRole): void {
     if (this._actionsMenu) {
       this._buildMenu(role);
       this._actionsMenu.toggle(event);

@@ -9,15 +9,15 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { UsersStore } from './users.service';
 import { Menu, MenuItem } from 'primeng/primeng';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 export interface PartnerInfo {
   adminLoginUsersQuota: number,
@@ -25,7 +25,7 @@ export interface PartnerInfo {
 }
 
 @Component({
-  selector: 'kUsersTable',
+  selector: 'vUsersTable',
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.scss'],
     providers: [
@@ -36,13 +36,13 @@ export interface PartnerInfo {
 export class UsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('actionsmenu') private _actionsMenu: Menu;
 
-  @Output() editUser = new EventEmitter<KalturaUser>();
-  @Output() toggleUserStatus = new EventEmitter<KalturaUser>();
-  @Output() deleteUser = new EventEmitter<KalturaUser>();
+  @Output() editUser = new EventEmitter<VidiunUser>();
+  @Output() toggleUserStatus = new EventEmitter<VidiunUser>();
+  @Output() deleteUser = new EventEmitter<VidiunUser>();
 
   private _partnerInfo: PartnerInfo = { adminLoginUsersQuota: 0, adminUserId: null };
 
-  public _users: KalturaUser[] = [];
+  public _users: VidiunUser[] = [];
   public _deferredUsers: any[];
   public _items: MenuItem[];
   public _deferredLoading = true;
@@ -73,7 +73,7 @@ export class UsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
               public _columnsResizeManager: ColumnsResizeManagerService,
               private _appAuthentication: AppAuthentication,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService,
               private _el: ElementRef<HTMLElement>,
               private _cdRef: ChangeDetectorRef) {
@@ -127,7 +127,7 @@ export class UsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {
   }
 
-  private _buildMenu(user: KalturaUser): void {
+  private _buildMenu(user: VidiunUser): void {
 
       this._items = [{
           id: 'edit', label: this._appLocalization.get('applications.content.table.edit'),
@@ -143,7 +143,7 @@ export class UsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
               },
               {
                   id: 'delete', label: this._appLocalization.get('applications.content.table.delete'),
-                  styleClass: 'kDanger', command: () => {
+                  styleClass: 'vDanger', command: () => {
                   this._browserService.confirm({
                       header: this._appLocalization.get('applications.administration.users.deleteUser'),
                       message: this._appLocalization.get('applications.administration.users.confirmDelete', {0: user.fullName}),
@@ -154,15 +154,15 @@ export class UsersTableComponent implements OnInit, OnDestroy, AfterViewInit {
           );
           this._permissionsService.filterList(<{ id: string }[]>this._items,
               {
-                  'delete': KMCPermissions.ADMIN_USER_DELETE,
-                  'blockUnblock': KMCPermissions.ADMIN_USER_UPDATE,
-                  'edit': KMCPermissions.ADMIN_USER_UPDATE,
+                  'delete': VMCPermissions.ADMIN_USER_DELETE,
+                  'blockUnblock': VMCPermissions.ADMIN_USER_UPDATE,
+                  'edit': VMCPermissions.ADMIN_USER_UPDATE,
               }
           );
       }
   }
 
-  public _openActionsMenu(event: any, user: KalturaUser): void {
+  public _openActionsMenu(event: any, user: VidiunUser): void {
     if (this._actionsMenu) {
       this._buildMenu(user);
       this._actionsMenu.toggle(event);

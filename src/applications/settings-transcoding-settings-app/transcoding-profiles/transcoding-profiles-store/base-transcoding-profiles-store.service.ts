@@ -2,33 +2,33 @@ import { OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient, KalturaMultiRequest, KalturaRequest } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaConversionProfileFilter } from 'kaltura-ngx-client';
-import { KalturaConversionProfileOrderBy } from 'kaltura-ngx-client';
-import { ConversionProfileListAction } from 'kaltura-ngx-client';
-import { ConversionProfileAssetParamsListAction } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParamsFilter } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
-import { ConversionProfileSetAsDefaultAction } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunMultiRequest, VidiunRequest } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunConversionProfileFilter } from 'vidiun-ngx-client';
+import { VidiunConversionProfileOrderBy } from 'vidiun-ngx-client';
+import { ConversionProfileListAction } from 'vidiun-ngx-client';
+import { ConversionProfileAssetParamsListAction } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParamsFilter } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
+import { ConversionProfileSetAsDefaultAction } from 'vidiun-ngx-client';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { ConversionProfileDeleteAction } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { SettingsTranscodingMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { ConversionProfileDeleteAction } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { SettingsTranscodingMainViewService } from 'app-shared/vmc-shared/vmc-views';
 import { globalConfig } from 'config/global';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
-export interface ExtendedKalturaConversionProfileAssetParams extends KalturaConversionProfileAssetParams {
+export interface ExtendedVidiunConversionProfileAssetParams extends VidiunConversionProfileAssetParams {
   updated?: boolean;
 }
 
-export interface KalturaConversionProfileWithAsset extends KalturaConversionProfile {
-  assets?: ExtendedKalturaConversionProfileAssetParams[];
+export interface VidiunConversionProfileWithAsset extends VidiunConversionProfile {
+  assets?: ExtendedVidiunConversionProfileAssetParams[];
   flavors?: number; // number of flavors in flavorParamsIds
 }
 
@@ -39,14 +39,14 @@ export interface TranscodingProfilesFilters {
 
 export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<TranscodingProfilesFilters> implements OnDestroy {
   private _profiles = {
-    data: new BehaviorSubject<{ items: KalturaConversionProfileWithAsset[], totalCount: number }>({ items: [], totalCount: 0 }),
+    data: new BehaviorSubject<{ items: VidiunConversionProfileWithAsset[], totalCount: number }>({ items: [], totalCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
   private _isReady = false;
   private _querySubscription: ISubscription;
 
   protected abstract localStoragePageSizeKey: string;
-  protected abstract transcodingProfilesListType: KalturaConversionProfileType;
+  protected abstract transcodingProfilesListType: VidiunConversionProfileType;
 
   public readonly profiles = {
     data$: this._profiles.data.asObservable(),
@@ -54,10 +54,10 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
     data: () => this._profiles.data.value
   };
 
-  protected constructor(private _kalturaServerClient: KalturaClient,
+  protected constructor(private _vidiunServerClient: VidiunClient,
                         private _browserService: BrowserService,
                         settingsTranscodingMainView: SettingsTranscodingMainViewService,
-                        _logger: KalturaLogger) {
+                        _logger: VidiunLogger) {
     super(_logger);
     if (settingsTranscodingMainView.isAvailable()) {
         setTimeout(() => {
@@ -114,20 +114,20 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
         });
   }
 
-  private _buildQueryRequest(): Observable<{ objects: KalturaConversionProfileWithAsset[], totalCount: number }> {
+  private _buildQueryRequest(): Observable<{ objects: VidiunConversionProfileWithAsset[], totalCount: number }> {
     try {
       // create request items
-      const filter = new KalturaConversionProfileFilter({
-        orderBy: KalturaConversionProfileOrderBy.createdAtDesc.toString(),
+      const filter = new VidiunConversionProfileFilter({
+        orderBy: VidiunConversionProfileOrderBy.createdAtDesc.toString(),
         typeEqual: this.transcodingProfilesListType
       });
-      let pager: KalturaFilterPager = null;
+      let pager: VidiunFilterPager = null;
 
       const data: TranscodingProfilesFilters = this._getFiltersAsReadonly();
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager(
+        pager = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -137,13 +137,13 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
 
       const conversionProfileAction = new ConversionProfileListAction({ filter, pager });
       const conversionProfileAssetParamsAction = new ConversionProfileAssetParamsListAction({
-        filter: new KalturaConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
-        pager: new KalturaFilterPager({ pageSize: 1000 })
+        filter: new VidiunConversionProfileAssetParamsFilter({ conversionProfileIdFilter: filter }),
+        pager: new VidiunFilterPager({ pageSize: 1000 })
       });
 
       // build the request
-      return this._kalturaServerClient
-        .multiRequest(new KalturaMultiRequest(conversionProfileAction, conversionProfileAssetParamsAction))
+      return this._vidiunServerClient
+        .multiRequest(new VidiunMultiRequest(conversionProfileAction, conversionProfileAssetParamsAction))
         .map(([profilesResponse, assetsResponse]) => {
           if (profilesResponse.error) {
             throw Error(profilesResponse.error.message);
@@ -177,7 +177,7 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
     }
   }
 
-  private _transmitChunkRequest(requests: KalturaRequest<any>[]): Observable<void> {
+  private _transmitChunkRequest(requests: VidiunRequest<any>[]): Observable<void> {
     const maxRequestsPerMultiRequest = subApplicationsConfig.shared.bulkActionsLimit || requests.length;
 
     // split request on chunks => [[], [], ...], each of inner arrays has length of maxRequestsPerMultiRequest
@@ -189,7 +189,7 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
       start = end;
     }
     const multiRequests = splitRequests
-      .map(reqChunk => this._kalturaServerClient.multiRequest(reqChunk));
+      .map(reqChunk => this._vidiunServerClient.multiRequest(reqChunk));
 
     return Observable.forkJoin(multiRequests)
       .map(responses => {
@@ -256,14 +256,14 @@ export abstract class BaseTranscodingProfilesStore extends FiltersStoreBase<Tran
     }
   }
 
-  public setAsDefault(profile: KalturaConversionProfileWithAsset): Observable<void> {
-    return this._kalturaServerClient
+  public setAsDefault(profile: VidiunConversionProfileWithAsset): Observable<void> {
+    return this._vidiunServerClient
       .request(new ConversionProfileSetAsDefaultAction({ id: profile.id }))
       .map(() => {
       });
   }
 
-  public deleteProfiles(profiles: KalturaConversionProfileWithAsset[]): Observable<void> {
+  public deleteProfiles(profiles: VidiunConversionProfileWithAsset[]): Observable<void> {
     return this._transmitChunkRequest(
       profiles.map(profile => new ConversionProfileDeleteAction({ id: profile.id }))
     );

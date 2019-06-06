@@ -1,19 +1,19 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaAPIException, KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
+import { VidiunAPIException, VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { async } from 'rxjs/scheduler/async';
 import { TranscodingProfileWidget } from '../transcoding-profile-widget';
-import { KalturaConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaStorageProfile } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { StorageProfilesStore } from 'app-shared/kmc-shared/storage-profiles';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { SettingsTranscodingProfileViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunStorageProfile } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { StorageProfilesStore } from 'app-shared/vmc-shared/storage-profiles';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { SettingsTranscodingProfileViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget implements OnDestroy {
@@ -29,10 +29,10 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
 
   constructor(private _formBuilder: FormBuilder,
               private _appLocalization: AppLocalization,
-              private _kalturaClient: KalturaClient,
-              private _permissionsService: KMCPermissionsService,
+              private _vidiunClient: VidiunClient,
+              private _permissionsService: VMCPermissionsService,
               private _storageProfilesStore: StorageProfilesStore,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(SettingsTranscodingProfileViewSections.Metadata, logger);
     this._buildForm();
   }
@@ -41,9 +41,9 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
 
   }
 
-  private _loadRemoteStorageProfiles(): Observable<KalturaStorageProfile[]> {
+  private _loadRemoteStorageProfiles(): Observable<VidiunStorageProfile[]> {
     const createEmptyRemoteStorageProfile = () => {
-      const emptyProfile = new KalturaStorageProfile({ name: this._appLocalization.get('applications.settings.transcoding.na') });
+      const emptyProfile = new VidiunStorageProfile({ name: this._appLocalization.get('applications.settings.transcoding.na') });
       (<any>emptyProfile).id = null;
       return emptyProfile;
     };
@@ -90,11 +90,11 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
     this.entryValidationGeneralError = false;
 
     if (entryId) { // if user entered entryId check if it exists
-      return this._kalturaClient.request(new BaseEntryGetAction({ entryId }))
+      return this._vidiunClient.request(new BaseEntryGetAction({ entryId }))
         .map(() => ({ isValid: hasValue }))
         .catch(
           error => {
-            if (error instanceof KalturaAPIException && error.code === 'ENTRY_ID_NOT_FOUND') {
+            if (error instanceof VidiunAPIException && error.code === 'ENTRY_ID_NOT_FOUND') {
               this.entryNotFoundErrorParams = entryId;
               return Observable.of({ isValid: false });
             } else {
@@ -110,7 +110,7 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
     });
   }
 
-  protected onDataSaving(newData: KalturaConversionProfileWithAsset, request: KalturaMultiRequest): void {
+  protected onDataSaving(newData: VidiunConversionProfileWithAsset, request: VidiunMultiRequest): void {
     const formData = this.wasActivated ? this.metadataForm.value : this.data;
     newData.name = formData.name;
     newData.description = formData.description || '';
@@ -130,7 +130,7 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
 
   protected onActivate(firstTimeActivating: boolean): Observable<{ failed: boolean }> | void {
     const prepare = () => {
-      if (firstTimeActivating && (this.isNewData || this._permissionsService.hasPermission(KMCPermissions.TRANSCODING_UPDATE))) {
+      if (firstTimeActivating && (this.isNewData || this._permissionsService.hasPermission(VMCPermissions.TRANSCODING_UPDATE))) {
         this._monitorFormChanges();
       }
 
@@ -141,7 +141,7 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
         storageProfileId: this.data.storageProfileId || null
       });
 
-      if (!this.isNewData && !this._permissionsService.hasPermission(KMCPermissions.TRANSCODING_UPDATE)) {
+      if (!this.isNewData && !this._permissionsService.hasPermission(VMCPermissions.TRANSCODING_UPDATE)) {
 
         this.metadataForm.disable();
         this.metadataForm.markAsUntouched();
@@ -149,8 +149,8 @@ export class TranscodingProfileMetadataWidget extends TranscodingProfileWidget i
     };
     super._showLoader();
 
-    const hasStorageProfilesPermission = this._permissionsService.hasPermission(KMCPermissions.FEATURE_REMOTE_STORAGE_INGEST);
-    this.hideStorageProfileIdField = (this.data.type && this.data.type === KalturaConversionProfileType.liveStream) || !hasStorageProfilesPermission;
+    const hasStorageProfilesPermission = this._permissionsService.hasPermission(VMCPermissions.FEATURE_REMOTE_STORAGE_INGEST);
+    this.hideStorageProfileIdField = (this.data.type && this.data.type === VidiunConversionProfileType.liveStream) || !hasStorageProfilesPermission;
     if (!this.hideStorageProfileIdField) {
       return this._loadRemoteStorageProfiles()
         .pipe(cancelOnDestroy(this))

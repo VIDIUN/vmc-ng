@@ -5,7 +5,7 @@ import {routing} from './settings-account-information-app.routes';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule, InputTextareaModule, InputTextModule} from 'primeng/primeng';
-import {AreaBlockerModule, KalturaUIModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, VidiunUIModule} from '@vidiun-ng/vidiun-ui';
 import {TranslateModule} from '@ngx-translate/core';
 import {AccountInfoComponent} from './account-info/account-info.component';
 
@@ -19,7 +19,7 @@ import {AccountInfoComponent} from './account-info/account-info.component';
     AreaBlockerModule,
     TranslateModule,
     InputTextareaModule,
-    KalturaUIModule
+    VidiunUIModule
   ],
   declarations: [SettingsAccountInformationComponent, AccountInfoComponent]
 })

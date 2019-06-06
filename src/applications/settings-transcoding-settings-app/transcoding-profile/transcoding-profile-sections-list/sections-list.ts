@@ -1,4 +1,4 @@
-import { SettingsTranscodingProfileViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/settings-transcoding-profile-view.service';
+import { SettingsTranscodingProfileViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/settings-transcoding-profile-view.service';
 
 export const SectionsList = [
   {

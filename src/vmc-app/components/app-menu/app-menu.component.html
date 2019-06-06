@@ -1,0 +1,114 @@
+<vSticky stickyId="header" [stickyClass]="'vStickyClass'">
+    <div class="vMainMenuWrapper">
+        <vLazyModuleLoadingProgressBar></vLazyModuleLoadingProgressBar>
+        <div #appmenu class="appMenu">
+
+            <div class="vIconvidiun_logo vLogo"></div>
+
+            <div #leftMenu class="vMenu-left">
+                <div *ngIf="menuID==='analytics'" class="vAnalytics">
+                    <div (click)="navigateToDefault()">
+                        <i class="vIcondropdown_arrow_left"></i>
+                    </div>
+                    <i class="v-analytics-logo" (click)="leftMenuConfig[0]?.open()"></i>
+                </div>
+                <div *ngFor="let item of leftMenuConfig">
+                    <a class="vMenuLink" *ngIf="item.menuTitle.length && !item.icon"
+                       [class.activeLink]="item === selectedMenuItem"
+                       (click)="item.open()">
+                            {{item.menuTitle | uppercase}}
+                    </a>
+                </div>
+            </div>
+
+            <div class="vMenu-right">
+                <v-logs-record mode="button"
+                               *ngIf="(_vmcLogs.logsRecordMode | async).enabled"
+                               [logLevel]="(_vmcLogs.logsRecordMode | async).logLevel"></v-logs-record>
+                <vUploadButton></vUploadButton>
+                <vUploadMonitor [appmenu]="appmenu"></vUploadMonitor>
+
+                <i *ngFor="let item of rightMenuConfig" (click)="item.open()" [ngClass]="item.icon" [class.open]="item === selectedMenuItem" [vTooltip]="item.menuTitle" [placement]="'bottom'"></i>
+
+                <i #help class="vIconhelp" [class.has-notification]="_showChangelog" [class.open]="_helpMenuOpened"></i>
+                <div #username class="vUserName">
+                    <span>{{_userAuthentication.appUser?.fullName}}</span>
+                    <i class="vIcondropdown_arrow_bottom"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</vSticky>
+
+
+<div class="appSubMenu" *ngIf="selectedMenuItem && showSubMenu && selectedMenuItem.children">
+    <div class="vContent vSubMenuHolder">
+        <vVMCAppContentMenu class="vSubMenu"
+                            position="left"
+                            [menuItems]="selectedMenuItem.children"></vVMCAppContentMenu>
+        <vVMCAppContentMenu class="vSubMenu"
+                            position="right"
+                            [menuItems]="selectedMenuItem.children"></vVMCAppContentMenu>
+    </div>
+</div>
+
+<vPopupWidget #usersettings [appendTo]="appmenu"
+              data-aid="usersettings"
+              [popupWidth]="240"
+              [closeBtn]="false"
+              [targetRef]="username"
+              [targetOffset]="{'x': 8, 'y': 30}"
+              (onOpen)="username.className='vUserName open'"
+              (onClose)="username.className='vUserName'">
+    <vVMCUserSettings [parentPopup]="usersettings"></vVMCUserSettings>
+</vPopupWidget>
+
+<vPopupWidget #helpmenu data-aid="helpmenu" [appendTo]="appmenu" [popupWidth]="240" [closeBtn]="false" [targetRef]="help" [targetOffset]="{'x':-109, 'y': 35}" (onOpen)="_helpMenuOpened = true" (onClose)="_helpMenuOpened = false">
+    <ng-template>
+        <div class="vHelpMenu">
+            <!--p *ngIf="_vmcOverviewLinkExists || _mediaManagementLinkExists" class="vHelpTitle">{{'app.helpMenu.gettingStarted' | translate | uppercase}}</p>
+            <p *ngIf="_vmcOverviewLinkExists" class="vHelpLink" (click)="openHelpLink('vmcOverview')">{{'app.helpMenu.vmcOverview' | translate}}</p>
+            <p *ngIf="_mediaManagementLinkExists" class="vHelpLink" (click)="openHelpLink('mediaManagement')">{{'app.helpMenu.mediaManagement' | translate}}</p>
+            <p class="vDisabled">{{'app.helpMenu.productTour' | translate}}</p>
+            <hr-->
+            <p *ngIf="_userManualLinkExists || _supportLinkExists" class="vHelpTitle">{{'app.helpMenu.support' | translate | uppercase}}</p>
+            <p *ngIf="_vmcOverviewLinkExists" class="vHelpLink" (click)="openHelpLink('vmcOverview')">{{'app.helpMenu.vmcOverview' | translate}}</p>
+            <p *ngIf="_userManualLinkExists" class="vHelpLink" (click)="openHelpLink('manual')">{{'app.helpMenu.userManual' | translate}}</p>
+            <p *ngIf="_supportLinkExists" class="vHelpLink" (click)="openSupport()">{{'app.helpMenu.contact' | translate}}</p>
+            <p *ngIf="_supportLegacyExists" class="vHelpLink" (click)="openHelpLink('legacy')">{{'app.helpMenu.legacy' | translate}}</p>
+            <v-logs-record mode="link"
+                           *ngIf="(_vmcLogs.logsRecordMode | async).enabled"
+                           [logLevel]="(_vmcLogs.logsRecordMode | async).logLevel"></v-logs-record>
+            <v-power-user-console *ngIf="_powerUser"></v-power-user-console>
+
+            <div class="vContexualHelp" *ngIf="_contextualHelp.length">
+                <hr>
+                <p class="vHelpTitle">{{'app.helpMenu.currentPage' | translate | uppercase}}</p>
+                <p *ngFor="let link of _contextualHelp">
+                    <a class="vHelpLink" [href]="link.value" target="_blank">{{link.label}}</a>
+                </p>
+            </div>
+            <hr>
+            <vChangelog [changelogIsShown]="_showChangelog" (showChangelog)="_changelogPopupOpened()"></vChangelog>
+        </div>
+    </ng-template>
+</vPopupWidget>
+
+<vPopupWidget #supportPopup data-aid="supportPopup" [modal]="true" [popupWidth]="500" [popupHeight]="370">
+    <ng-template>
+        <div class="vHeader">
+            <span class="vTitle">{{ 'app.openMail.supportMailTitle'| translate}}</span>
+        </div>
+
+        <div class="vContainer">
+            <div>{{ 'app.openMail.customerCare'| translate}}</div>
+            <a href="{{_customerCareLink}}" target="_blank">{{_customerCareLink}}</a>
+            <div class="spaceTop">{{ 'app.openMail.customerPortal'| translate}}</div>
+            <a href="{{_customerPortalLink}}" target="_blank">{{_customerPortalLink}}</a>
+        </div>
+
+        <div class="vFooter">
+            <button type="button" class="vButtonBranded" (click)="supportPopup.close()" pButton  label="{{'app.common.close'| translate}}"></button>
+        </div>
+    </ng-template>
+</vPopupWidget>

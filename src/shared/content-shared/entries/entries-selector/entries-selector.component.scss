@@ -1,28 +1,28 @@
 @import 'app-theme/_variables.scss';
 
-.kEntrySelector {
+.vEntrySelector {
   display: flex;
 
-  .kEntrySelectorBucket {
+  .vEntrySelectorBucket {
     height: calc(100vh - 158px);
     width: 250px;
-    border-left: 1px solid $kGrayscale6;
+    border-left: 1px solid $vGrayscale6;
     overflow-y: auto;
 
-    .KEntrySelectorSelectedItem {
+    .VEntrySelectorSelectedItem {
       height: 36px;
       padding: 8px;
       display: flex;
       align-items: center;
 
-        .kThumbnailHolder {
+        .vThumbnailHolder {
             flex: 1 0 auto;
             margin-right: 8px;
             overflow: hidden;
             position: relative;
             width: 64px;
             height: 36px;
-            background-color: $kGrayscale7;
+            background-color: $vGrayscale7;
             white-space: nowrap;
             text-align: center;
             border-radius: 5px;
@@ -41,27 +41,27 @@
                 height: auto;
                 border-radius: 5px;
             }
-            .kThumbnailTypeIcon {
+            .vThumbnailTypeIcon {
                 position: absolute;
                 color: #FFFFFF;
 
-                &.kIconquiz {
+                &.vIconquiz {
                     font-size: 20px;
                     top: 15px;
                     right: 1px;
                 }
-                &.kIconyoutube {
+                &.vIconyoutube {
                   font-size: 20px;
                   top: 15px;
                   right: 1px;
                   z-index: 2;
-                  color: $kDandger;
+                  color: $vDandger;
                 }
             }
         }
 
       &:hover {
-        background-color: $kGrayscale6;
+        background-color: $vGrayscale6;
       }
 
       img {
@@ -83,43 +83,43 @@
       }
 
       i {
-        color: $kDandger;
+        color: $vDandger;
         font-size: 24px;
         cursor: pointer;
       }
     }
   }
-  .kEntrySelectorTable {
+  .vEntrySelectorTable {
     width: 100%;
     flex: 1 1 auto;
   }
 }
 
-:host /deep/ .kEntrySelector {
-  .kContent {
+:host /deep/ .vEntrySelector {
+  .vContent {
     width: 100%;
     margin: 0 !important;
   }
 
-  .kEntries {
+  .vEntries {
     padding-top: 0;
     min-width: 0;
   }
 
-  div.kEntriesTable {
+  div.vEntriesTable {
     height: calc(100vh - 223px);
     overflow-y: auto;
 
-    &.kTagsVisible {
+    &.vTagsVisible {
       height: calc(100vh - 264px);
     }
   }
 
-  .kEntriesTableFooter {
+  .vEntriesTableFooter {
     width: 994px;
   }
 
-  .kEntriesSelectorBucketOpened .kEntriesTableFooter {
+  .vEntriesSelectorBucketOpened .vEntriesTableFooter {
     width: 746px;
     border-right: 1px solid #ebebeb;
   }

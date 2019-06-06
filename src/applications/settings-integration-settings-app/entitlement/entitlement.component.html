@@ -1,17 +1,17 @@
-<k-area-blocker [showLoader]="_isBusy"
+<v-area-blocker [showLoader]="_isBusy"
                 [message]="_blockerMessage">
-  <div class="kContainer">
-    <div class="kTitle">
+  <div class="vContainer">
+    <div class="vTitle">
       <span>{{'applications.settings.integrationSettings.entitlement.title' | translate}}</span>
-      <kInputHelper class="kHelp" trigger="click">
+      <vInputHelper class="vHelp" trigger="click">
         <span>{{'applications.settings.integrationSettings.accountInfo.helpText' | translate}}</span>
         <a *ngIf="_manageHelpLinkExists" (click)="openLink()">{{'applications.settings.integrationSettings.accountInfo.readMore' | translate}}</a>
-      </kInputHelper>
+      </vInputHelper>
     </div>
-    <div class="kExplanation">{{'applications.settings.integrationSettings.entitlement.explanation' | translate}}</div>
-    <div class="kEntitlementReforcement">
-      <div class="kApiDefault">{{'applications.settings.integrationSettings.entitlement.apiDefault' | translate}}</div>
-      <div class="kEntitlementEnforcement">
+    <div class="vExplanation">{{'applications.settings.integrationSettings.entitlement.explanation' | translate}}</div>
+    <div class="vEntitlementReforcement">
+      <div class="vApiDefault">{{'applications.settings.integrationSettings.entitlement.apiDefault' | translate}}</div>
+      <div class="vEntitlementEnforcement">
         <span *ngIf="_partnerDefaultEntitlementEnforcement">
           {{'applications.settings.integrationSettings.entitlement.entitlementEnforcementEnabled' | translate}}
         </span>
@@ -20,32 +20,32 @@
         </span>
       </div>
     </div>
-    <div class="kAddEntitlement">
-            <button type="button" class="kButtonDefault" (click)="_addEntitlement()" pButton
-                    [disabled]="_kmcPermissions.INTEGRATION_UPDATE_SETTINGS | kDisabledIfNotPermitted"
+    <div class="vAddEntitlement">
+            <button type="button" class="vButtonDefault" (click)="_addEntitlement()" pButton
+                    [disabled]="_vmcPermissions.INTEGRATION_UPDATE_SETTINGS | vDisabledIfNotPermitted"
                   label="{{'applications.settings.integrationSettings.entitlement.addEntitlement.buttonText' | translate}}"></button>
     </div>
-    <div class="kEntitlementsHolder">
-      <kEntitlementsTable
+    <div class="vEntitlementsHolder">
+      <vEntitlementsTable
         [entitlements]="_entitlements"
         (onActionSelected)="_onActionSelected($event)">
-      </kEntitlementsTable>
+      </vEntitlementsTable>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #addNewEntitlement data-aid="addNewEntitlement" [popupWidth]="586" [popupHeight]="680" [modal]="true" [preventPageScroll]="true" [closeOnClickOutside]="false">
+<vPopupWidget #addNewEntitlement data-aid="addNewEntitlement" [popupWidth]="586" [popupHeight]="680" [modal]="true" [preventPageScroll]="true" [closeOnClickOutside]="false">
 <ng-template>
-  <kNewEntitlement (onApply)="_loadEntitlementSectionData()" [parentPopupWidget]="addNewEntitlement"></kNewEntitlement>
+  <vNewEntitlement (onApply)="_loadEntitlementSectionData()" [parentPopupWidget]="addNewEntitlement"></vNewEntitlement>
 </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 
-<kPopupWidget #editEntitlementPopup data-aid="editEntitlement" [popupWidth]="586" [popupHeight]="323" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #editEntitlementPopup data-aid="editEntitlement" [popupWidth]="586" [popupHeight]="323" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kEditEntitlement (onEntitlementUpdated)="_loadEntitlementSectionData()"
+    <vEditEntitlement (onEntitlementUpdated)="_loadEntitlementSectionData()"
                       [entitlement]="_currentEditEntitlement"
                       [ownerPopup]="editEntitlementPopup">
-    </kEditEntitlement>
+    </vEditEntitlement>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

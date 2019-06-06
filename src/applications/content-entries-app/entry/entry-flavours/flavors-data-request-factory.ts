@@ -1,27 +1,27 @@
-import { RequestFactory } from '@kaltura-ng/kaltura-common';
-import { KalturaMultiRequest, KalturaMultiResponse, KalturaRequestOptions } from 'kaltura-ngx-client';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { FlavorAssetGetFlavorAssetsWithParamsAction } from 'kaltura-ngx-client';
+import { RequestFactory } from '@vidiun-ng/vidiun-common';
+import { VidiunMultiRequest, VidiunMultiResponse, VidiunRequestOptions } from 'vidiun-ngx-client';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { FlavorAssetGetFlavorAssetsWithParamsAction } from 'vidiun-ngx-client';
 
-export class FlavorsDataRequestFactory implements RequestFactory<KalturaMultiRequest, KalturaMultiResponse> {
+export class FlavorsDataRequestFactory implements RequestFactory<VidiunMultiRequest, VidiunMultiResponse> {
     constructor(private _entryId: string) {
 
     }
 
-    create(): KalturaMultiRequest {
+    create(): VidiunMultiRequest {
         const getReplacementDataAction = new BaseEntryGetAction({ entryId: this._entryId })
             .setRequestOptions(
-                new KalturaRequestOptions({
-                    responseProfile: new KalturaDetachedResponseProfile({
-                        type: KalturaResponseProfileType.includeFields,
+                new VidiunRequestOptions({
+                    responseProfile: new VidiunDetachedResponseProfile({
+                        type: VidiunResponseProfileType.includeFields,
                         fields: 'replacementStatus,replacingEntryId'
                     })
                 })
             );
         const getCurrentEntryFlavorsDataAction = new FlavorAssetGetFlavorAssetsWithParamsAction({ entryId: this._entryId });
 
-        return new KalturaMultiRequest(getReplacementDataAction, getCurrentEntryFlavorsDataAction);
+        return new VidiunMultiRequest(getReplacementDataAction, getCurrentEntryFlavorsDataAction);
     }
 }

@@ -5,18 +5,18 @@ import {
 import { Subject } from 'rxjs/Subject';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { AutoComplete, SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { AutoComplete, SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
 
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { CategoriesTreeComponent } from 'app-shared/content-shared/categories/categories-tree/categories-tree.component';
 import {CategoriesSearchService} from 'app-shared/content-shared/categories/categories-search.service';
-import { ScrollToTopContainerComponent } from '@kaltura-ng/kaltura-ui';
+import { ScrollToTopContainerComponent } from '@vidiun-ng/vidiun-ui';
 import { CategoriesModes } from 'app-shared/content-shared/categories/categories-mode-type';
 
 
 @Component({
-    selector: 'kCategoriesFilter',
+    selector: 'vCategoriesFilter',
     templateUrl: './categories-filter.component.html',
     styleUrls: ['./categories-filter.component.scss']
 })

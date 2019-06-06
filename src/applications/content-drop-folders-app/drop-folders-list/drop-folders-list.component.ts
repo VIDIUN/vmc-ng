@@ -2,18 +2,18 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DropFoldersFilters, DropFoldersStoreService, SortDirection } from '../drop-folders-store/drop-folders-store.service';
 import { Router } from '@angular/router';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { KalturaDropFolderFile } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { StickyComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunDropFolderFile } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { StickyComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { DropFoldersRefineFiltersService, RefineList } from '../drop-folders-store/drop-folders-refine-filters.service';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentDropFoldersMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentDropFoldersMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kDropFoldersList',
+  selector: 'vDropFoldersList',
   templateUrl: './drop-folders-list.component.html',
   styleUrls: ['./drop-folders-list.component.scss'],
     providers: [DropFoldersRefineFiltersService]
@@ -27,7 +27,7 @@ export class DropFoldersListComponent implements OnInit, OnDestroy {
     public _tableIsBusy = false;
     public _tableBlockerMessage: AreaBlockerMessage = null;
     public _refineFilters: RefineList[];
-  public _selectedDropFolders: KalturaDropFolderFile[] = [];
+  public _selectedDropFolders: VidiunDropFolderFile[] = [];
   public _query = {
     freeText: '',
     pageIndex: 0,
@@ -114,7 +114,7 @@ export class DropFoldersListComponent implements OnInit, OnDestroy {
                     }
                 },
                 error => {
-                    console.warn('[kmcng] -> could not load drop folders'); // navigate to error page
+                    console.warn('[vmcng] -> could not load drop folders'); // navigate to error page
                     throw error;
                 });
     }
@@ -207,7 +207,7 @@ export class DropFoldersListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _bulkDelete(_selectedDropFolders: KalturaDropFolderFile[]): void {
+  public _bulkDelete(_selectedDropFolders: VidiunDropFolderFile[]): void {
     const dropFolderFilesToDelete = _selectedDropFolders.map((file, index) => `${index + 1}: ${(file.fileName)}`);
     const dropFolderFiles = _selectedDropFolders.length <= 10 ? dropFolderFilesToDelete.join(',').replace(/,/gi, '\n') : '';
     this._browserService.confirm({

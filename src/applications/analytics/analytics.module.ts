@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnalyticsFrameComponent } from './analytics-frame.component';
 import { AnalyticsComponent } from './analytics.component';
-import { KalturaUIModule } from '@kaltura-ng/kaltura-ui';
+import { VidiunUIModule } from '@vidiun-ng/vidiun-ui';
 import {routing} from './analytics.routes';
 import {RouterModule} from '@angular/router';
 
@@ -10,7 +10,7 @@ import {RouterModule} from '@angular/router';
     imports: [
         CommonModule,
         RouterModule.forChild(routing),
-        KalturaUIModule
+        VidiunUIModule
     ],
     declarations: [
         AnalyticsFrameComponent,

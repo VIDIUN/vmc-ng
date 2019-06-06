@@ -1,17 +1,17 @@
-<k-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
-<kEntriesList [columns]="_columns"
+<v-area-blocker [message]="_blockerMessage" [bodyScroll]="true">
+<vEntriesList [columns]="_columns"
               [rowActions]="_rowActions"
               (onActionsSelected)="_onActionSelected($event)">
   <div class="bulk-actions">
-    <kBulkActions [selectedEntries]="_entriesList.selectedEntries"
+    <vBulkActions [selectedEntries]="_entriesList.selectedEntries"
                   (onBulkChange)="_entriesList.onBulkChange($event)"
-                  [(blockerMessage)]="_blockerMessage"></kBulkActions>
+                  [(blockerMessage)]="_blockerMessage"></vBulkActions>
   </div>
-</kEntriesList>
-</k-area-blocker>
+</vEntriesList>
+</v-area-blocker>
 
-<kPopupWidget #liveDashboard data-aid="liveDashboard" [fullScreen]="true">
+<vPopupWidget #liveDashboard data-aid="liveDashboard" [fullScreen]="true">
   <ng-template>
-    <kLiveDashboard [entryId]="_entryId" [parentPopupWidget]="liveDashboard"></kLiveDashboard>
+    <vLiveDashboard [entryId]="_entryId" [parentPopupWidget]="liveDashboard"></vLiveDashboard>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

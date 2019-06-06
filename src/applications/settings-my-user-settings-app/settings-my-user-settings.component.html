@@ -1,39 +1,39 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_areaBlockerMessage">
-  <div class="kMyUserSettingsWrapper kContent">
-    <section class="kFormContainer">
-      <div class="kTitle">
-        <i class="kIconUsers"></i>
+<v-area-blocker [showLoader]="_isBusy" [message]="_areaBlockerMessage">
+  <div class="vMyUserSettingsWrapper vContent">
+    <section class="vFormContainer">
+      <div class="vTitle">
+        <i class="vIconUsers"></i>
         {{'applications.settings.myUserSettings.userDetails' | translate}}
       </div>
-      <div class="kInformationSection">
-        <i class="kIconwarning"></i>
+      <div class="vInformationSection">
+        <i class="vIconwarning"></i>
         <span>{{'applications.settings.accountSettings.informationMessage' | translate}}</span>
       </div>
-      <div class="kUserDetailsSection">
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.userName' | translate}}</div>
+      <div class="vUserDetailsSection">
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.userName' | translate}}</div>
           <span>{{_user?.fullName}}</span>
-          <i class="kIconpen" (click)="_editUserName()"></i>
+          <i class="vIconpen" (click)="_editUserName()"></i>
         </div>
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.userId' | translate}}</div>
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.userId' | translate}}</div>
           <span>{{_user?.id}}</span>
         </div>
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.emailAddress' | translate}}</div>
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.emailAddress' | translate}}</div>
           <span>{{_user?.email}}</span>
-          <i class="kIconpen" (click)="_editEmailAddress()"></i>
+          <i class="vIconpen" (click)="_editEmailAddress()"></i>
         </div>
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.role' | translate}}</div>
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.role' | translate}}</div>
           <span>{{_role?.name}}</span>
         </div>
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.roleDescription' | translate}}</div>
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.roleDescription' | translate}}</div>
           <span>{{_role?.description}}</span>
         </div>
-        <div class="kRow">
-          <div class="kLabel">{{'applications.settings.myUserSettings.password' | translate}}</div>
+        <div class="vRow">
+          <div class="vLabel">{{'applications.settings.myUserSettings.password' | translate}}</div>
           <span>
             <a (click)="_changePassword()">{{'applications.settings.myUserSettings.editUser' | translate}}</a>
           </span>
@@ -42,30 +42,30 @@
     </section>
   </div>
 
-  <kPopupWidget #editUserNamePopup data-aid="editUserNamePopup" [popupWidth]="600" [popupHeight]="455" [modal]="true" [preventPageScroll]="true">
+  <vPopupWidget #editUserNamePopup data-aid="editUserNamePopup" [popupWidth]="600" [popupHeight]="455" [modal]="true" [preventPageScroll]="true">
     <ng-template>
-      <kEditUserName [parentPopupWidget]="editUserNamePopup"
+      <vEditUserName [parentPopupWidget]="editUserNamePopup"
                      [user]="_user"
                      [blockerMessage]="_updateBlockerMessage"
-                     (updateLoginData)="_updateLoginData($event, 'editUserNamePopup')"></kEditUserName>
+                     (updateLoginData)="_updateLoginData($event, 'editUserNamePopup')"></vEditUserName>
     </ng-template>
-  </kPopupWidget>
+  </vPopupWidget>
 
-  <kPopupWidget #editEmailAddressPopup data-aid="editEmailAddressPopup" [popupWidth]="600" [popupHeight]="245" [modal]="true" [preventPageScroll]="true">
+  <vPopupWidget #editEmailAddressPopup data-aid="editEmailAddressPopup" [popupWidth]="600" [popupHeight]="245" [modal]="true" [preventPageScroll]="true">
     <ng-template>
-      <kEditEmailAddress [parentPopupWidget]="editEmailAddressPopup"
+      <vEditEmailAddress [parentPopupWidget]="editEmailAddressPopup"
                          [user]="_user"
                          [blockerMessage]="_updateBlockerMessage"
-                         (updateEmail)="_updateEmail($event, 'editEmailAddressPopup')"></kEditEmailAddress>
+                         (updateEmail)="_updateEmail($event, 'editEmailAddressPopup')"></vEditEmailAddress>
     </ng-template>
-  </kPopupWidget>
+  </vPopupWidget>
 
-  <kPopupWidget #changePasswordPopup data-aid="changePasswordPopup" [popupWidth]="600" [popupHeight]="440" [modal]="true" [preventPageScroll]="true">
+  <vPopupWidget #changePasswordPopup data-aid="changePasswordPopup" [popupWidth]="600" [popupHeight]="440" [modal]="true" [preventPageScroll]="true">
     <ng-template>
-      <kChangePassword [parentPopupWidget]="changePasswordPopup"
+      <vChangePassword [parentPopupWidget]="changePasswordPopup"
                        [user]="_user"
                        [blockerMessage]="_updateBlockerMessage"
-                       (updateLoginData)="_updateLoginData($event, 'changePasswordPopup')"></kChangePassword>
+                       (updateLoginData)="_updateLoginData($event, 'changePasswordPopup')"></vChangePassword>
     </ng-template>
-  </kPopupWidget>
-</k-area-blocker>
+  </vPopupWidget>
+</v-area-blocker>

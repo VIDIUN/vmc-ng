@@ -16,26 +16,26 @@ import {
   TieredMenuModule,
   TreeModule
 } from 'primeng/primeng';
-import { AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule } from '@vidiun-ng/vidiun-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
-import { FiltersModule } from '@kaltura-ng/mc-shared';
-import { AutoCompleteModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { TimeSpinnerModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
+import { FiltersModule } from '@vidiun-ng/mc-shared';
+import { AutoCompleteModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { TimeSpinnerModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
-import { KPTableModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { VPTableModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AreaBlockerModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     PaginatorModule,
     TooltipModule,
     ButtonModule,
@@ -48,7 +48,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     CalendarModule,
     MenuModule,
     TagsModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     AutoCompleteModule,
     SharedModule,
     RouterModule.forChild(routing),
@@ -59,10 +59,10 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     MultiSelectModule,
     SpinnerModule,
     InputSwitchModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
     TimeSpinnerModule,
       TableModule,
-      KPTableModule,
+      VPTableModule,
       DateFormatModule,
   ],
   declarations: [

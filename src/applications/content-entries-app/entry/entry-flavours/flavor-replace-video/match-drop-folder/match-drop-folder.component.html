@@ -1,14 +1,14 @@
-<k-area-blocker [showLoader]="_isLoading" [message]="_blockerMessage">
-    <div class="kMatchDropFolder" [class.kMatchDropFolderFlavor]="flavor">
-        <div class="kHeader">
+<v-area-blocker [showLoader]="_isLoading" [message]="_blockerMessage">
+    <div class="vMatchDropFolder" [class.vMatchDropFolderFlavor]="flavor">
+        <div class="vHeader">
             <h1>{{'applications.content.entryDetails.flavours.replaceVideo.matchFromDropFolder' | translate}}</h1>
         </div>
-        <div class="kMatchDropFolderContent">
-            <div class="kMatchDropFolderControls">
-                <span class="kMatchDropFolderControlsLabel">
+        <div class="vMatchDropFolderContent">
+            <div class="vMatchDropFolderControls">
+                <span class="vMatchDropFolderControlsLabel">
                     {{'applications.content.entryDetails.flavours.replaceVideo.selectDropFolder' | translate}}
                 </span>
-                <p-dropdown class="kDropFoldersList"
+                <p-dropdown class="vDropFoldersList"
                             [options]="_dropFoldersListOptions"
                             [autoWidth]="false"
                             [disabled]="!_dropFoldersListOptions?.length"
@@ -16,29 +16,29 @@
                             (onChange)="_loadFolderData()"
                             [(ngModel)]="_selectedDropFolder">
                     <ng-template let-profile pTemplate="item">
-                        <span class="kDropFoldersListItem" [kTooltip]="profile.label">{{profile.label}}</span>
+                        <span class="vDropFoldersListItem" [vTooltip]="profile.label">{{profile.label}}</span>
                     </ng-template>
                 </p-dropdown>
 
-                <kClearableInput #dropFolderSearch
-                                 class="kDropFolderSearch"
+                <vClearableInput #dropFolderSearch
+                                 class="vDropFolderSearch"
                                  [disabled]="!_dropFoldersListOptions.length"
                                  [placeholder]="'applications.content.entryDetails.flavours.replaceVideo.searchFolder' | translate"
                                  (onEnterKeyup)="_searchFolder($event)"
-                                 (onClear)="_clearFolderSearch()"></kClearableInput>
+                                 (onClear)="_clearFolderSearch()"></vClearableInput>
 
-                <button pButton class="kButtonDefault kRefreshBtn small"
-                        type="text" icon="kIconrefresh"
+                <button pButton class="vButtonDefault vRefreshBtn small"
+                        type="text" icon="vIconrefresh"
                         [disabled]="!_dropFoldersListOptions.length"
                         (click)="dropFolderSearch.clearValue();_loadFolderData()"></button>
             </div>
-            <div *ngIf="!flavor" class="kMatchDropFolderReferenceId">
+            <div *ngIf="!flavor" class="vMatchDropFolderReferenceId">
                 <span>{{'applications.content.entryDetails.flavours.replaceVideo.referenceId' | translate}}</span>&nbsp;
                 {{entry?.referenceId
                 ? entry?.referenceId
                 : ('applications.content.entryDetails.flavours.replaceVideo.na' | translate)}}
             </div>
-            <div class="kMatchDropFolderTable">
+            <div class="vMatchDropFolderTable">
                 <p-table dataKey="displayName"
                          [scrollable]="true"
                          scrollHeight="208px"
@@ -65,29 +65,29 @@
                         <tr [pSelectableRow]="file">
                             <td style="width: 45px; padding-left: 28px">
                                 <p-tableRadioButton [value]="file"
-                                                    [class.kAvoidClick]="file.error"
+                                                    [class.vAvoidClick]="file.error"
                                                     [disabled]="file.error"></p-tableRadioButton>
                             </td>
                             <td *ngIf="!flavor" style="width: 45px; padding-left: 16px">
                                 <a [pRowToggler]="file">
-                                    <i [ngClass]="expanded ? 'k-arrow-down' : 'k-arrow-right'"></i>
+                                    <i [ngClass]="expanded ? 'v-arrow-down' : 'v-arrow-right'"></i>
                                 </a>
                             </td>
-                            <td class="kFileName">{{file?.displayName}}</td>
-                            <td class="kCreatedAt" style="width: 200px">{{file?.createdAt | kmcDate:'dateOnly'}}</td>
+                            <td class="vFileName">{{file?.displayName}}</td>
+                            <td class="vCreatedAt" style="width: 200px">{{file?.createdAt | vmcDate:'dateOnly'}}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="rowexpansion" let-file let-columns="columns">
-                        <div class="kDropFolderFiles">
+                        <div class="vDropFolderFiles">
                             <table>
                                 <tr *ngFor="let dff of file?.files">
                                     <td style="width: 45px; padding-left: 28px"></td>
                                     <td style="width: 45px; padding-left: 16px"></td>
                                     <td style="padding-left: 3px">
-                                        <span class="kTableColumn" [kTooltip]="dff?.fileName">{{dff?.fileName}}</span>
+                                        <span class="vTableColumn" [vTooltip]="dff?.fileName">{{dff?.fileName}}</span>
                                     </td>
                                     <td style="width: 200px; padding-left: 8px">
-                                        {{dff?.createdAt | kmcDate:'dateOnly'}}
+                                        {{dff?.createdAt | vmcDate:'dateOnly'}}
                                     </td>
                                 </tr>
                             </table>
@@ -99,18 +99,18 @@
                 </p-table>
             </div>
         </div>
-        <div class="kFooter">
-            <button class="kButtonDefault kUploadButton" pButton
+        <div class="vFooter">
+            <button class="vButtonDefault vUploadButton" pButton
                     [label]="'applications.content.entryDetails.flavours.replaceVideo.cancel' | translate"
                     (click)="parentPopupWidget?.close()"></button>
-            <button *ngIf="!flavor" class="kButtonBranded kUploadButton" pButton
+            <button *ngIf="!flavor" class="vButtonBranded vUploadButton" pButton
                     [disabled]="!_setReferenceIdEnabled"
                     [label]="'applications.content.entryDetails.flavours.replaceVideo.setReferenceId' | translate"
                     (click)="_setReferenceId()"></button>
-            <button class="kButtonBranded kUploadButton" pButton
+            <button class="vButtonBranded vUploadButton" pButton
                     [disabled]="!_addFilesEnabled"
                     [label]="_addFilesBtnLabel"
                     (click)="_addFiles()"></button>
         </div>
     </div>
-</k-area-blocker>
+</v-area-blocker>

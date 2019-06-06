@@ -1,14 +1,14 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {KalturaSyndicationFeedType} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {VidiunSyndicationFeedType} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({name: 'kDestinationLabel'})
+@Pipe({name: 'vDestinationLabel'})
 export class DestinationLabelPipe implements PipeTransform {
   constructor(private appLocalization: AppLocalization) {
   }
 
-  transform(value: KalturaSyndicationFeedType): string {
-    if (value === KalturaSyndicationFeedType.kalturaXslt) {
+  transform(value: VidiunSyndicationFeedType): string {
+    if (value === VidiunSyndicationFeedType.vidiunXslt) {
       return this.appLocalization.get('applications.content.syndication.table.flexibleFormatFeed');
     }
     return null;

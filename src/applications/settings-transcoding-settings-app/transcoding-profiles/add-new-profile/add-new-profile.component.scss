@@ -1,22 +1,22 @@
 @import 'app-theme/_variables.scss';
 
-.kAddNewProfile {
-  .kHeader {
+.vAddNewProfile {
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
+    border-bottom: 1px solid $vGrayscale4;
 
-    .kTitle {
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: bold;
     }
   }
 
-  .kContainer {
+  .vContainer {
     height: 290px;
     display: flex;
     flex-direction: column;
@@ -24,43 +24,43 @@
     align-items: center;
     padding: 0 28px;
 
-    .kRow {
+    .vRow {
       display: flex;
       margin-bottom: 35px;
       &:last-child {
         margin-bottom: 0;
       }
-      &.kHasError {
-        .kRequired {
-          color: $kDandger;
+      &.vHasError {
+        .vRequired {
+          color: $vDandger;
           font-weight: bold;
         }
-        .kControl input {
-          border-color: $kDandger;
+        .vControl input {
+          border-color: $vDandger;
           background: initial;
         }
       }
 
-      .kLabel {
+      .vLabel {
         width: 204px;
         flex: 0 0 auto;
         height: 18px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         font-size: 15px;
         line-height: 18px;
       }
 
-      .kRequired {
+      .vRequired {
         width: 20px;
         margin-left: -28px;
         font-size: 24px;
       }
-      .kRequired, .kLabel {
+      .vRequired, .vLabel {
         padding: 8px 4px;
         height: 18px;
       }
-      .kControl {
-        color: $kGrayscale2;
+      .vControl {
+        color: $vGrayscale2;
         height: 34px;
         border-radius: 3px;
 
@@ -68,16 +68,16 @@
           width: 300px;
         }
 
-        .kInputError {
-          color: $kDandger;
+        .vInputError {
+          color: $vDandger;
         }
       }
     }
   }
 
-  .kFooter {
+  .vFooter {
     padding: 15px 0;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -87,7 +87,7 @@
       height: 34px;
     }
 
-    .kNextBtn {
+    .vNextBtn {
       border-width: 0;
       font-size: 14px;
       margin-left: 16px;
@@ -99,7 +99,7 @@
   }
 }
 
-:host /deep/ .kAddNewProfile {
+:host /deep/ .vAddNewProfile {
   .ui-dropdown.ui-widget {
     width: 300px;
   }

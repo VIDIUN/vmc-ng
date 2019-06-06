@@ -1,15 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaFeatureStatusListResponse } from 'kaltura-ngx-client';
-import { KalturaFeatureStatusType } from 'kaltura-ngx-client';
-import { KmcServerPolls } from 'app-shared/kmc-shared/server-polls';
+import { VidiunFeatureStatusListResponse } from 'vidiun-ngx-client';
+import { VidiunFeatureStatusType } from 'vidiun-ngx-client';
+import { VmcServerPolls } from 'app-shared/vmc-shared/server-polls';
 import { modulesConfig } from 'config/modules';
 import { CategoriesStatusRequestFactory } from './categories-status-request-factory';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { KalturaFeatureStatus } from 'kaltura-ngx-client';
-import { PollInterval } from '@kaltura-ng/kaltura-common';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunFeatureStatus } from 'vidiun-ngx-client';
+import { PollInterval } from '@vidiun-ng/vidiun-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface CategoriesStatus {
     lock: boolean;
@@ -25,12 +25,12 @@ export class CategoriesStatusMonitorService implements OnDestroy {
 
     private _status = new ReplaySubject<CategoriesStatus>(1);
     public readonly status$ = this._status.asObservable();
-    private _logger: KalturaLogger;
+    private _logger: VidiunLogger;
 
     private _categoriesStatusRequestFactory = new CategoriesStatusRequestFactory();
 
 
-    constructor( private _kmcServerPolls: KmcServerPolls, private _kalturaClient: KalturaClient, _logger: KalturaLogger ) {
+    constructor( private _vmcServerPolls: VmcServerPolls, private _vidiunClient: VidiunClient, _logger: VidiunLogger ) {
         this._logger = _logger.subLogger('categoriesStatusMonitor');
         this._logger.debug('constructor()');
         this._startPolling();
@@ -47,7 +47,7 @@ export class CategoriesStatusMonitorService implements OnDestroy {
             this._pollingState = 'running';
             this._logger.info(`start server polling every ${this._pollingInterval} seconds to get categories status`);
 
-            this._kmcServerPolls.register<KalturaFeatureStatusListResponse>(this._pollingInterval , this._categoriesStatusRequestFactory)
+            this._vmcServerPolls.register<VidiunFeatureStatusListResponse>(this._pollingInterval , this._categoriesStatusRequestFactory)
                 .pipe(cancelOnDestroy(this))
                 .subscribe(response => {
                     this._handleResponse(response);
@@ -63,14 +63,14 @@ export class CategoriesStatusMonitorService implements OnDestroy {
         let lockFlagFound = false;
         let updateFlagFound = false;
 
-        const status: KalturaFeatureStatusListResponse = response.result;
+        const status: VidiunFeatureStatusListResponse = response.result;
         if (status && status.objects) {
-            status.objects.forEach((kfs: KalturaFeatureStatus) => {
-                switch (kfs.type) {
-                    case KalturaFeatureStatusType.lockCategory:
+            status.objects.forEach((vfs: VidiunFeatureStatus) => {
+                switch (vfs.type) {
+                    case VidiunFeatureStatusType.lockCategory:
                         lockFlagFound = true;
                         break;
-                    case KalturaFeatureStatusType.category:
+                    case VidiunFeatureStatusType.category:
                         updateFlagFound = true;
                         break;
                 }
@@ -86,7 +86,7 @@ export class CategoriesStatusMonitorService implements OnDestroy {
 
     // API to invoke immediate categories status update
     public updateCategoriesStatus():void{
-        this._kalturaClient.request(this._categoriesStatusRequestFactory.create()).pipe(cancelOnDestroy(this))
+        this._vidiunClient.request(this._categoriesStatusRequestFactory.create()).pipe(cancelOnDestroy(this))
 	        .subscribe(response => {
                 this._handleResponse(response);
             });

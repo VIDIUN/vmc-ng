@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'kSyndication',
+    selector: 'vSyndication',
     templateUrl: './content-syndication.component.html',
     styleUrls: ['./content-syndication.component.scss'],
     providers : []

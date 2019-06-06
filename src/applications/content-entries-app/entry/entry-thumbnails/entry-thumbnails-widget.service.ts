@@ -4,33 +4,33 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 
-import { ThumbAssetSetAsDefaultAction } from 'kaltura-ngx-client';
-import { ThumbAssetGetByEntryIdAction } from 'kaltura-ngx-client';
-import { KalturaThumbAsset } from 'kaltura-ngx-client';
-import { DistributionProfileListAction } from 'kaltura-ngx-client';
-import { KalturaDistributionProfileListResponse } from 'kaltura-ngx-client';
-import { KalturaDistributionProfile } from 'kaltura-ngx-client';
-import { KalturaThumbAssetStatus } from 'kaltura-ngx-client';
-import { KalturaDistributionThumbDimensions } from 'kaltura-ngx-client';
-import { ThumbAssetDeleteAction } from 'kaltura-ngx-client';
-import { ThumbAssetAddFromImageAction } from 'kaltura-ngx-client';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { ThumbAssetSetAsDefaultAction } from 'vidiun-ngx-client';
+import { ThumbAssetGetByEntryIdAction } from 'vidiun-ngx-client';
+import { VidiunThumbAsset } from 'vidiun-ngx-client';
+import { DistributionProfileListAction } from 'vidiun-ngx-client';
+import { VidiunDistributionProfileListResponse } from 'vidiun-ngx-client';
+import { VidiunDistributionProfile } from 'vidiun-ngx-client';
+import { VidiunThumbAssetStatus } from 'vidiun-ngx-client';
+import { VidiunDistributionThumbDimensions } from 'vidiun-ngx-client';
+import { ThumbAssetDeleteAction } from 'vidiun-ngx-client';
+import { ThumbAssetAddFromImageAction } from 'vidiun-ngx-client';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { PreviewMetadataChangedEvent } from '../../preview-metadata-changed-event';
-import { AppEventsService } from 'app-shared/kmc-shared';
+import { AppEventsService } from 'app-shared/vmc-shared';
 import { EntryWidget } from '../entry-widget';
-import { KalturaThumbParams } from 'kaltura-ngx-client';
-import { ThumbAssetGenerateAction } from 'kaltura-ngx-client';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
+import { VidiunThumbParams } from 'vidiun-ngx-client';
+import { ThumbAssetGenerateAction } from 'vidiun-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { serverConfig, getKalturaServerUri } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { serverConfig, getVidiunServerUri } from 'config/server';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface ThumbnailRow {
   id: string;
@@ -40,7 +40,7 @@ export interface ThumbnailRow {
   distributors: string;
   isDefault: boolean;
   url: string;
-  status: KalturaThumbAssetStatus;
+  status: VidiunThumbAssetStatus;
   uploadStatus: boolean;
   fileExt: string;
 }
@@ -53,12 +53,12 @@ export class EntryThumbnailsWidget extends EntryWidget {
     );
 
     public _thumbnails$ = this._thumbnails.asObservable();
-    private _distributionProfiles: KalturaDistributionProfile[]; // used to save the response profiles array as it is loaded only once
+    private _distributionProfiles: VidiunDistributionProfile[]; // used to save the response profiles array as it is loaded only once
 
-    constructor(private _kalturaServerClient: KalturaClient, private _appAuthentication: AppAuthentication,
-                private _permissionsService: KMCPermissionsService,
+    constructor(private _vidiunServerClient: VidiunClient, private _appAuthentication: AppAuthentication,
+                private _permissionsService: VMCPermissionsService,
                 private _appLocalization: AppLocalization, private _appEvents: AppEventsService, private _browserService: BrowserService,
-                logger: KalturaLogger) {
+                logger: VidiunLogger) {
         super(ContentEntryViewSections.Thumbnails, logger);
     }
 
@@ -75,14 +75,14 @@ export class EntryThumbnailsWidget extends EntryWidget {
 
         this._thumbnails.next({items: []});
 
-        const getThumbnails$ = this._kalturaServerClient.request(new ThumbAssetGetByEntryIdAction(
+        const getThumbnails$ = this._vidiunServerClient.request(new ThumbAssetGetByEntryIdAction(
             {
                 entryId: this.data.id
             }));
 
-        const canLoadProfiles = this._permissionsService.hasPermission(KMCPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION);
+        const canLoadProfiles = this._permissionsService.hasPermission(VMCPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION);
         const getProfiles$ = canLoadProfiles
-            ? this._kalturaServerClient.request(new DistributionProfileListAction({}))
+            ? this._vidiunServerClient.request(new DistributionProfileListAction({}))
             : Observable.of({});
 
         return Observable.forkJoin(getThumbnails$, getProfiles$)
@@ -96,11 +96,11 @@ export class EntryThumbnailsWidget extends EntryWidget {
             })
             .map(responses => {
                 const thumbnails = responses[0] || [];
-                this._distributionProfiles = (responses[1] as KalturaDistributionProfileListResponse).objects || [];
+                this._distributionProfiles = (responses[1] as VidiunDistributionProfileListResponse).objects || [];
                 this.buildThumbnailsData(thumbnails);
                 this.allowGrabFromVideo = (this.data.status
-                    && [KalturaEntryStatus.ready.toString(), KalturaEntryStatus.moderate.toString()].indexOf(this.data.status.toString()) !== -1
-                    && this.data.mediaType === KalturaMediaType.video);
+                    && [VidiunEntryStatus.ready.toString(), VidiunEntryStatus.moderate.toString()].indexOf(this.data.status.toString()) !== -1
+                    && this.data.mediaType === VidiunMediaType.video);
                 super._hideLoader();
 
                 return {failed: false};
@@ -109,11 +109,11 @@ export class EntryThumbnailsWidget extends EntryWidget {
     }
 
 
-    private buildThumbnailsData(thumbnails: KalturaThumbAsset[]): void {
+    private buildThumbnailsData(thumbnails: VidiunThumbAsset[]): void {
         let thumbs: ThumbnailRow[] = [];
         // create a ThumbnailRow data for each of the loaded thumbnails
-        thumbnails.forEach((thumbnail: KalturaThumbAsset) => {
-            if (thumbnail.status.toString() === KalturaThumbAssetStatus.ready.toString()) {
+        thumbnails.forEach((thumbnail: VidiunThumbAsset) => {
+            if (thumbnail.status.toString() === VidiunThumbAssetStatus.ready.toString()) {
                 let thumb: ThumbnailRow = {
                     id: thumbnail.id,
                     status: thumbnail.status,
@@ -127,14 +127,14 @@ export class EntryThumbnailsWidget extends EntryWidget {
                     fileExt: thumbnail.fileExt
                 };
                 thumb.isDefault = thumbnail.tags.indexOf("default_thumb") > -1;
-                thumb.url = getKalturaServerUri(`/api_v3/index.php/service/thumbasset/action/serve/ks/${this._appAuthentication.appUser.ks}/thumbAssetId/${thumb.id}`);
+                thumb.url = getVidiunServerUri(`/api_v3/index.php/service/thumbasset/action/serve/vs/${this._appAuthentication.appUser.vs}/thumbAssetId/${thumb.id}`);
                 thumbs.push(thumb);
             }
         });
         // create an empty ThumbnailRow data for each missing thumbnail dimension specified in any response profile
-        this._distributionProfiles.forEach((profile: KalturaDistributionProfile) => {
-            const requiredThumbDimensions: KalturaDistributionThumbDimensions[] = profile.requiredThumbDimensions;
-            requiredThumbDimensions.forEach((dimensions: KalturaDistributionThumbDimensions) => {
+        this._distributionProfiles.forEach((profile: VidiunDistributionProfile) => {
+            const requiredThumbDimensions: VidiunDistributionThumbDimensions[] = profile.requiredThumbDimensions;
+            requiredThumbDimensions.forEach((dimensions: VidiunDistributionThumbDimensions) => {
                 const requiredWidth = dimensions.width;
                 const requiredHeight = dimensions.height;
                 let foundCorrespondingThumbnail = false;
@@ -149,7 +149,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
                     // create a new missing thumb placeholder and append it to the thumbnails array
                     let missingThumb: ThumbnailRow = {
                         id: "",
-                        status: KalturaThumbAssetStatus.error,
+                        status: VidiunThumbAssetStatus.error,
                         width: requiredWidth,
                         height: requiredHeight,
                         size: NaN,
@@ -169,7 +169,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
     private reloadThumbnails() {
         super._showLoader();
         const thumbs = Array.from(this._thumbnails.getValue().items);
-        this._kalturaServerClient.request(new ThumbAssetGetByEntryIdAction(
+        this._vidiunServerClient.request(new ThumbAssetGetByEntryIdAction(
             {
                 entryId: this.data.id
             }))
@@ -209,7 +209,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
 
         const entryId = this.data ? this.data.id : null;
 
-        this._kalturaServerClient.request(new ThumbAssetSetAsDefaultAction({thumbAssetId: thumb.id}))
+        this._vidiunServerClient.request(new ThumbAssetSetAsDefaultAction({thumbAssetId: thumb.id}))
             .pipe(cancelOnDestroy(this, this.widgetReset$))
             .pipe(tag('block-shell'))
             .subscribe(
@@ -244,7 +244,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
     public deleteThumbnail(id: string): void {
         const thumbs = Array.from(this._thumbnails.getValue().items);
 
-        this._kalturaServerClient.request(new ThumbAssetDeleteAction({thumbAssetId: id}))
+        this._vidiunServerClient.request(new ThumbAssetDeleteAction({thumbAssetId: id}))
             .pipe(cancelOnDestroy(this, this.widgetReset$))
             .pipe(tag('block-shell'))
             .subscribe(
@@ -273,7 +273,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
     public _onFileSelected(selectedFiles: FileList) {
         if (selectedFiles && selectedFiles.length) {
             const fileData: File = selectedFiles[0];
-            const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+            const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
             const fileSize = fileData.size / 1024 / 1024; // convert to Mb
             if (fileSize > maxFileSize) {
                 this._browserService.alert({
@@ -281,7 +281,7 @@ export class EntryThumbnailsWidget extends EntryWidget {
                     message: this._appLocalization.get('applications.upload.validation.fileSizeExceeded')
                 });
             } else {
-                this._kalturaServerClient.request(new ThumbAssetAddFromImageAction({
+                this._vidiunServerClient.request(new ThumbAssetAddFromImageAction({
                     entryId: this.data.id,
                     fileData: fileData
                 }))
@@ -306,12 +306,12 @@ export class EntryThumbnailsWidget extends EntryWidget {
 
     public captureThumbnail(position: number): void {
         super._showLoader();
-        let params: KalturaThumbParams = new KalturaThumbParams();
+        let params: VidiunThumbParams = new VidiunThumbParams();
         params.videoOffset = position;
         params.quality = 75;
         params.stripProfiles = false;
 
-        this._kalturaServerClient.request(new ThumbAssetGenerateAction({entryId: this.data.id, thumbParams: params}))
+        this._vidiunServerClient.request(new ThumbAssetGenerateAction({entryId: this.data.id, thumbParams: params}))
             .pipe(cancelOnDestroy(this, this.widgetReset$))
             .subscribe(
                 () => {

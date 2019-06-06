@@ -1,31 +1,31 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <kFileDialog #fileDialog (onFileSelected)="_onFileSelected($event)" [filter]="_uploadFilter"></kFileDialog>
-    <div class="kFlavours kOverrideFAIcons" #flavors>
-        <p class="kTitle">{{'applications.content.entryDetails.flavours.flavours' | translate}}</p>
-        <div class="kEntryStatus"
-             [class.kAddingEntry]="!_showActionsView && !((_widgetService.replacementData$ | async)?.tempEntryId && (_kmcPermissions.FEATURE_ENTRY_REPLACEMENT | kNgIfPermitted))"
+    <vFileDialog #fileDialog (onFileSelected)="_onFileSelected($event)" [filter]="_uploadFilter"></vFileDialog>
+    <div class="vFlavours vOverrideFAIcons" #flavors>
+        <p class="vTitle">{{'applications.content.entryDetails.flavours.flavours' | translate}}</p>
+        <div class="vEntryStatus"
+             [class.vAddingEntry]="!_showActionsView && !((_widgetService.replacementData$ | async)?.tempEntryId && (_vmcPermissions.FEATURE_ENTRY_REPLACEMENT | vNgIfPermitted))"
              *ngIf="!(_widgetService.replacementData$ | async)?.tempEntryId">
             <i class="{{_widgetService.entryStatusClassName}}"></i><span>{{_widgetService.entryStatus}}</span>
         </div>
-        <div class="kFlavorReplacement">
-            <kFlavorReplaceMediaBtn *ngIf="_showActionsView"
+        <div class="vFlavorReplacement">
+            <vFlavorReplaceMediaBtn *ngIf="_showActionsView"
                                     [replaceButtonsLabel]="_replaceButtonsLabel"
                                     [flavors]="(_widgetService.flavors$ | async)"
-                                    [entry]="_widgetService.data"></kFlavorReplaceMediaBtn>
-            <kFlavorReplaceMediaStatus
-                *ngIf="(_widgetService.replacementData$ | async)?.tempEntryId && (_kmcPermissions.FEATURE_ENTRY_REPLACEMENT | kNgIfPermitted)"
+                                    [entry]="_widgetService.data"></vFlavorReplaceMediaBtn>
+            <vFlavorReplaceMediaStatus
+                *ngIf="(_widgetService.replacementData$ | async)?.tempEntryId && (_vmcPermissions.FEATURE_ENTRY_REPLACEMENT | vNgIfPermitted)"
                 [replaceButtonsLabel]="_replaceButtonsLabel"
                 [currentEntryId]="_widgetService.currentEntryId"
                 [replacementData]="_widgetService.replacementData$ | async"
                 [entry]="_widgetService.data">
-            </kFlavorReplaceMediaStatus>
-            <button pButton class="kButtonDefault kRefreshBtn small" type="text" icon="kIconrefresh"
-                    [class.kReplacementButtonsShown]="_showActionsView"
+            </vFlavorReplaceMediaStatus>
+            <button pButton class="vButtonDefault vRefreshBtn small" type="text" icon="vIconrefresh"
+                    [class.vReplacementButtonsShown]="_showActionsView"
                     (click)="_widgetService.refresh()"></button>
         </div>
 
-        <div class="kTable">
+        <div class="vTable">
             <p-table
                 scrollHeight="100%"
                 [value]="_widgetService.selectedFlavors"
@@ -42,8 +42,8 @@
                         <col data-cid="dimensions">
                         <col data-cid="size">
                         <col data-cid="stat">
-                        <col [hidden]="_documentWidth < 1400 || (_kmcPermissions.FEATURE_KMC_DRILLDOWN_TAGS_COLUMN | kHiddenIfNotPermitted)">
-                        <col *ngIf="_kmcPermissions.CONTENT_MANAGE_RECONVERT | kNgIfPermitted"  [ngStyle]="{'width':'80px'}">
+                        <col [hidden]="_documentWidth < 1400 || (_vmcPermissions.FEATURE_VMC_DRILLDOWN_TAGS_COLUMN | vHiddenIfNotPermitted)">
+                        <col *ngIf="_vmcPermissions.CONTENT_MANAGE_RECONVERT | vNgIfPermitted"  [ngStyle]="{'width':'80px'}">
                     </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
@@ -76,55 +76,55 @@
                             {{'applications.content.entryDetails.flavours.stat' | translate}}
                         </th>
                         <th data-cid="tags"
-                            [hidden]="_documentWidth < 1400 || (_kmcPermissions.FEATURE_KMC_DRILLDOWN_TAGS_COLUMN | kHiddenIfNotPermitted)">
+                            [hidden]="_documentWidth < 1400 || (_vmcPermissions.FEATURE_VMC_DRILLDOWN_TAGS_COLUMN | vHiddenIfNotPermitted)">
                             {{'applications.content.entryDetails.flavours.tags' | translate}}
                         </th>
-                        <th *ngIf="_kmcPermissions.CONTENT_MANAGE_RECONVERT | kNgIfPermitted" [ngStyle]="{'width':'80px'}"></th>
+                        <th *ngIf="_vmcPermissions.CONTENT_MANAGE_RECONVERT | vNgIfPermitted" [ngStyle]="{'width':'80px'}"></th>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="body" let-flavor>
                     <tr [pSelectableRow]="flavor">
                         <td [ngStyle]="{'padding-left': '24px'}"class="ui-resizable-column">
-                            <span class="kFlavorName kTableColumn"
-                                  [class.kConvertedFlavor]="flavor.status === '2'">{{flavor.name}}</span>
+                            <span class="vFlavorName vTableColumn"
+                                  [class.vConvertedFlavor]="flavor.status === '2'">{{flavor.name}}</span>
                         </td>
                         <td class="ui-resizable-column" [hidden]="_documentWidth < 1300">
-                            <span class="kTableColumn" [kTooltip]="flavor.id" [showOnEllipsis]="true">{{flavor.id}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.id" [showOnEllipsis]="true">{{flavor.id}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.format" [showOnEllipsis]="true">{{flavor.format}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.format" [showOnEllipsis]="true">{{flavor.format}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.codec" [showOnEllipsis]="true">{{flavor.codec}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.codec" [showOnEllipsis]="true">{{flavor.codec}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.bitrate" [showOnEllipsis]="true">{{flavor.bitrate}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.bitrate" [showOnEllipsis]="true">{{flavor.bitrate}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.dimensions" [showOnEllipsis]="true">{{flavor.dimensions}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.dimensions" [showOnEllipsis]="true">{{flavor.dimensions}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.size" [showOnEllipsis]="true">{{flavor.size}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.size" [showOnEllipsis]="true">{{flavor.size}}</span>
                         </td>
                         <td class="ui-resizable-column">
-                            <span class="kTableColumn" [kTooltip]="flavor.statusTooltip" [class.kFlavorStatusError]="flavor.status === '-1'">{{flavor.statusLabel}}</span>
+                            <span class="vTableColumn" [vTooltip]="flavor.statusTooltip" [class.vFlavorStatusError]="flavor.status === '-1'">{{flavor.statusLabel}}</span>
                         </td>
-                        <td [hidden]="_documentWidth < 1400 || (_kmcPermissions.FEATURE_KMC_DRILLDOWN_TAGS_COLUMN | kHiddenIfNotPermitted)">
-                            <span class="kTableColumn" [kTooltip]="flavor.tags | tags" [showOnEllipsis]="true">{{flavor.tags | tags}}</span>
+                        <td [hidden]="_documentWidth < 1400 || (_vmcPermissions.FEATURE_VMC_DRILLDOWN_TAGS_COLUMN | vHiddenIfNotPermitted)">
+                            <span class="vTableColumn" [vTooltip]="flavor.tags | tags" [showOnEllipsis]="true">{{flavor.tags | tags}}</span>
                         </td>
                         <td>
                             <div
                                 *ngIf="_widgetService.showFlavorActions && flavor.status !== '1' && flavor.status !== '6' && flavor.status !== '7' && flavor.status !== '8' && flavor.status !== '0'"
-                                class="kFlavorsTableActions">
-                                <button type="button" class="kMoreActionsButton" pButton icon="kIconmore"
+                                class="vFlavorsTableActions">
+                                <button type="button" class="vMoreActionsButton" pButton icon="vIconmore"
                                         (click)="openActionsMenu($event, flavor)"></button>
                             </div>
                             <div
                                 *ngIf="flavor.status === '1' || flavor.status === '6' || flavor.status === '7' || flavor.status === '8' || flavor.status === '0'"
                                 style="position: relative">
-                                <div class="k-spinner-background">
-                                    <div class="k-spinner-animation"></div>
+                                <div class="v-spinner-background">
+                                    <div class="v-spinner-animation"></div>
                                 </div>
                             </div>
                         </td>
@@ -134,35 +134,35 @@
         </div>
     </div>
 
-    <p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 
-    <kPopupWidget #drmPopup data-aid="drmPopup" [popupWidth]="550" [popupHeight]="440" [modal]="true">
-        <kDRMDetails [currentFlavor]="_selectedFlavor"></kDRMDetails>
-    </kPopupWidget>
+    <vPopupWidget #drmPopup data-aid="drmPopup" [popupWidth]="550" [popupHeight]="440" [modal]="true">
+        <vDRMDetails [currentFlavor]="_selectedFlavor"></vDRMDetails>
+    </vPopupWidget>
 
-    <kPopupWidget #previewPopup data-aid="previewPopup" [popupWidth]="500" [modal]="true" [preventPageScroll]="true">
-        <kFlavorPreview [currentFlavor]="_selectedFlavor" [parentPopupWidget]="previewPopup"
-                        [currentEntry]="_widgetService.data"></kFlavorPreview>
-    </kPopupWidget>
+    <vPopupWidget #previewPopup data-aid="previewPopup" [popupWidth]="500" [modal]="true" [preventPageScroll]="true">
+        <vFlavorPreview [currentFlavor]="_selectedFlavor" [parentPopupWidget]="previewPopup"
+                        [currentEntry]="_widgetService.data"></vFlavorPreview>
+    </vPopupWidget>
 
-    <kPopupWidget #importPopup data-aid="importPopup" [popupWidth]="500" [popupHeight]="260" [modal]="true" [preventPageScroll]="true">
-        <kFlavorImport [currentFlavor]="_selectedFlavor" [parentPopupWidget]="importPopup"></kFlavorImport>
-    </kPopupWidget>
+    <vPopupWidget #importPopup data-aid="importPopup" [popupWidth]="500" [popupHeight]="260" [modal]="true" [preventPageScroll]="true">
+        <vFlavorImport [currentFlavor]="_selectedFlavor" [parentPopupWidget]="importPopup"></vFlavorImport>
+    </vPopupWidget>
 
-    <kPopupWidget #linkPopup data-aid="linkPopup" [popupWidth]="791" [popupHeight]="460" [modal]="true" [preventPageScroll]="true">
+    <vPopupWidget #linkPopup data-aid="linkPopup" [popupWidth]="791" [popupHeight]="460" [modal]="true" [preventPageScroll]="true">
         <ng-template>
-            <kFlavorLink [flavor]="_selectedFlavor"
+            <vFlavorLink [flavor]="_selectedFlavor"
                          [storageProfile]="_widgetService.storageProfile"
                          [conversionProfileAsset]="_widgetService.conversionProfileAsset"
-                         [parentPopupWidget]="linkPopup"></kFlavorLink>
+                         [parentPopupWidget]="linkPopup"></vFlavorLink>
         </ng-template>
-    </kPopupWidget>
+    </vPopupWidget>
 
-    <kPopupWidget #matchDropFolder data-aid="matchDropFolder" [popupWidth]="791" [popupHeight]="486" [modal]="true" [preventPageScroll]="true">
+    <vPopupWidget #matchDropFolder data-aid="matchDropFolder" [popupWidth]="791" [popupHeight]="486" [modal]="true" [preventPageScroll]="true">
         <ng-template>
-            <kReplaceMatchDropFolder [entry]="_widgetService.data" [flavor]="_selectedFlavor"
-                                     [parentPopupWidget]="matchDropFolder"></kReplaceMatchDropFolder>
+            <vReplaceMatchDropFolder [entry]="_widgetService.data" [flavor]="_selectedFlavor"
+                                     [parentPopupWidget]="matchDropFolder"></vReplaceMatchDropFolder>
         </ng-template>
-    </kPopupWidget>
+    </vPopupWidget>
 
-</k-area-blocker>
+</v-area-blocker>

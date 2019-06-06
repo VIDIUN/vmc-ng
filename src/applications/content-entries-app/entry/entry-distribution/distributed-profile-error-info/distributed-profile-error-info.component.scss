@@ -1,20 +1,20 @@
 @import 'app-theme/_variables.scss';
 
-.kDistributedProfileErrorInfo {
+.vDistributedProfileErrorInfo {
   width: 338px;
   padding: 16px;
   font-size: 15px;
   line-height: 18px;
 
-  .kInfo {
+  .vInfo {
     white-space: pre-line;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .kGoToLink {
+  .vGoToLink {
     margin-top: 14px;
-    color: $kTertiary;
+    color: $vTertiary;
     display: block;
   }
 }

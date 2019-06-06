@@ -1,20 +1,20 @@
 @import 'app-theme/_variables.scss';
 
-.kMyUserSettingsWrapper {
+.vMyUserSettingsWrapper {
   height: 100%;
   border: none;
   position: relative;
   display: flex;
   flex-direction: column;
 
-  .kFormContainer {
+  .vFormContainer {
     margin-top: 24px;
     background: white;
     padding: 27px 29px 10px;
   }
 
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     height: 29px;
     font-size: 24px;
     font-weight: bold;
@@ -24,35 +24,35 @@
     display: flex;
   }
 
-  .kInformationSection {
+  .vInformationSection {
     font-size: 15px;
     align-items: center;
     display: flex;
     margin-bottom: 20px;
   }
 
-  .kIconwarning,
-  .kIconUsers,
-  .kIconpen {
+  .vIconwarning,
+  .vIconUsers,
+  .vIconpen {
     font-size: 18px;
     padding-right: 10px;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
   }
 
-  .kIconUsers {
+  .vIconUsers {
     font-size: 25px;
     padding-right: 13px;
   }
 
-  .kIconpen {
+  .vIconpen {
     font-size: 15px;
     padding-right: 0;
     margin-left: 10px;
     cursor: pointer;
   }
 
-  .kUserDetailsSection {
-    .kRow {
+  .vUserDetailsSection {
+    .vRow {
       display: flex;
       align-items: center;
       margin-bottom: 30px;
@@ -61,11 +61,11 @@
         padding-top: 10px;
       }
 
-      .kLabel {
+      .vLabel {
         width: 272px;
         flex: 0 0 auto;
         height: 18px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         font-size: 15px;
         line-height: 18px;
       }

@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
 
 
-.kPlaylistsTable {
+.vPlaylistsTable {
   background-color: white;
   height: auto;
   padding: 0;
@@ -11,20 +11,20 @@
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 
-  .kPlaylistsTableActions {
+  .vPlaylistsTableActions {
     width: 100%;
     text-align: center;
   }
-  .kTitle{
-    color: $kGrayscale1;
+  .vTitle{
+    color: $vGrayscale1;
     font-weight: 700;
     cursor: pointer;
     overflow: hidden;
@@ -34,12 +34,12 @@
     }
   }
 
-  .kPlaylistsNameWrap {
+  .vPlaylistsNameWrap {
     display: flex;
     align-items: center;
   }
 
-    .kMediaTypeIcon {
+    .vMediaTypeIcon {
         font-size: 24px;
         margin-right: 23px;
     }
@@ -61,6 +61,6 @@
 }
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

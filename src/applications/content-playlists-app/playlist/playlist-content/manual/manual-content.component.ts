@@ -1,16 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { PlaylistStore } from '../../playlist-store.service';
 import { ManualContentWidget } from './manual-content-widget.service';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kPlaylistContentManual',
+  selector: 'vPlaylistContentManual',
   templateUrl: './manual-content.component.html',
   styleUrls: ['./manual-content.component.scss'],
 })
 export class ManualContentComponent implements OnInit, OnDestroy {
-  public _selectedEntries: KalturaMediaEntry[] = [];
+  public _selectedEntries: VidiunMediaEntry[] = [];
 
   constructor(public _playlistStore: PlaylistStore,
               public _widgetService: ManualContentWidget) {
@@ -34,7 +34,7 @@ export class ManualContentComponent implements OnInit, OnDestroy {
     this._selectedEntries = [];
   }
 
-  public _onActionSelected(event: { action: string, entry: KalturaMediaEntry }): void {
+  public _onActionSelected(event: { action: string, entry: VidiunMediaEntry }): void {
     this._clearSelection();
     this._widgetService.onActionSelected(event);
   }
@@ -44,7 +44,7 @@ export class ManualContentComponent implements OnInit, OnDestroy {
     this._widgetService.onSortChanged(event);
   }
 
-  public _deleteSelected(selectedEntries: KalturaMediaEntry[]): void {
+  public _deleteSelected(selectedEntries: VidiunMediaEntry[]): void {
     this._clearSelection();
     this._widgetService.deleteSelectedEntries(selectedEntries);
   }

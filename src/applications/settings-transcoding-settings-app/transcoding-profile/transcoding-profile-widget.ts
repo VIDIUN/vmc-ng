@@ -1,14 +1,14 @@
-import { AreaBlockerMessage, AreaBlockerMessageButton, WidgetBase } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerMessage, AreaBlockerMessageButton, WidgetBase } from '@vidiun-ng/vidiun-ui';
 import { TranscodingProfileWidgetsManager } from './transcoding-profile-widgets-manager';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaConversionProfileWithAsset } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunConversionProfileWithAsset } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
-export abstract class TranscodingProfileWidget extends WidgetBase<TranscodingProfileWidgetsManager, KalturaConversionProfileWithAsset, KalturaMultiRequest> {
+export abstract class TranscodingProfileWidget extends WidgetBase<TranscodingProfileWidgetsManager, VidiunConversionProfileWithAsset, VidiunMultiRequest> {
   public sectionBlockerMessage: AreaBlockerMessage;
   public showSectionLoader: boolean;
 
-  constructor(private _widgetKey: string, logger: KalturaLogger) {
+  constructor(private _widgetKey: string, logger: VidiunLogger) {
     super(_widgetKey, logger);
   }
 

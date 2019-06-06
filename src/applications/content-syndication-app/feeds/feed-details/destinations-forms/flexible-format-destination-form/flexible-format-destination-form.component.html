@@ -1,18 +1,18 @@
-<kFileDialog #fileDialog [filter]="'.xslt,.xsl'" (onFileSelected)="_onFileSelected($event)"></kFileDialog>
+<vFileDialog #fileDialog [filter]="'.xslt,.xsl'" (onFileSelected)="_onFileSelected($event)"></vFileDialog>
 
-<div class="kRow kMultiLine" [class.kInputValidationError]="_error">
-  <span class="kLabel">{{'applications.content.syndication.details.destinationsForms.flexibleFormat.xslCode.label' | translate}}</span>
-  <div class="kAsterix"
-       [ngClass]="{'kHasError': _error }">*
+<div class="vRow vMultiLine" [class.vInputValidationError]="_error">
+  <span class="vLabel">{{'applications.content.syndication.details.destinationsForms.flexibleFormat.xslCode.label' | translate}}</span>
+  <div class="vAsterix"
+       [ngClass]="{'vHasError': _error }">*
   </div>
-  <div class="kControlContainer">
-    <button pButton class="kButtonDefault kBrowse"
+  <div class="vControlContainer">
+    <button pButton class="vButtonDefault vBrowse"
             [disabled]="_disableFileSelection"
             [label]="'applications.content.syndication.details.destinationsForms.flexibleFormat.xslCode.browse' | translate"
             (click)="fileDialog.open($event)"></button>
-    <k-area-blocker [showLoader]="_loading">
-      <textarea [ngClass]="{'kHasError': _error}" [(ngModel)]="_xslCode" class="kControl threeRows" [disabled]="true" pInputTextarea></textarea>
-    </k-area-blocker>
+    <v-area-blocker [showLoader]="_loading">
+      <textarea [ngClass]="{'vHasError': _error}" [(ngModel)]="_xslCode" class="vControl threeRows" [disabled]="true" pInputTextarea></textarea>
+    </v-area-blocker>
     <div *ngIf="_error" class="error">{{_error}}</div>
   </div>
 </div>

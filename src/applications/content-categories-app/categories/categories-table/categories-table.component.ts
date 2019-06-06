@@ -10,15 +10,15 @@ import {
     ViewChild
 } from '@angular/core';
 import {Menu, MenuItem} from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
-import { ReachAppViewService, ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
+import { ReachAppViewService, ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 @Component({
-  selector: 'kCategoriesTable',
+  selector: 'vCategoriesTable',
   templateUrl: './categories-table.component.html',
   styleUrls: ['./categories-table.component.scss'],
     providers: [
@@ -43,20 +43,20 @@ export class CategoriesTableComponent implements AfterViewInit, OnInit, OnDestro
 
   @Input() sortField: string = null;
   @Input() sortOrder: number = null;
-  @Input() selectedCategories: KalturaCategory[] = [];
+  @Input() selectedCategories: VidiunCategory[] = [];
 
   @Output()
   sortChanged = new EventEmitter<{ field: string, order: number}>();
   @Output()
-  actionSelected = new EventEmitter<{action: string, category: KalturaCategory}>();
+  actionSelected = new EventEmitter<{action: string, category: VidiunCategory}>();
   @Output()
   selectedCategoriesChange = new EventEmitter<any>();
 
   @ViewChild('actionsmenu') private _actionsMenu: Menu;
 
-  private _deferredCategories: KalturaCategory[];
+  private _deferredCategories: VidiunCategory[];
 
-  public _categories: KalturaCategory[] = [];
+  public _categories: VidiunCategory[] = [];
   public _deferredLoading = true;
   public _emptyMessage = '';
   public _items: MenuItem[];
@@ -69,7 +69,7 @@ export class CategoriesTableComponent implements AfterViewInit, OnInit, OnDestro
               private cdRef: ChangeDetectorRef,
               private _reachAppViewService: ReachAppViewService,
               private _el: ElementRef<HTMLElement>,
-              private _permissionsService: KMCPermissionsService) {
+              private _permissionsService: VMCPermissionsService) {
   }
 
   ngOnInit() {
@@ -94,17 +94,17 @@ export class CategoriesTableComponent implements AfterViewInit, OnInit, OnDestro
     this._columnsResizeManager.updateColumns(this._el.nativeElement);
   }
 
-  onActionSelected(action: string, category: KalturaCategory) {
+  onActionSelected(action: string, category: VidiunCategory) {
     this.actionSelected.emit({'action': action, 'category': category});
   }
 
-  openActionsMenu(event: any, category: KalturaCategory) {
+  openActionsMenu(event: any, category: VidiunCategory) {
     if (this._actionsMenu) {
       this.buildMenu(category);
       this._actionsMenu.toggle(event);
     }
   }
-  buildMenu(category: KalturaCategory): void {
+  buildMenu(category: VidiunCategory): void {
     this._items = [
       {
         id: 'edit',
@@ -129,7 +129,7 @@ export class CategoriesTableComponent implements AfterViewInit, OnInit, OnDestro
       {
         id: 'delete',
         label: this.appLocalization.get('applications.content.categories.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this.onActionSelected('delete', category)
       }
     ];
@@ -137,8 +137,8 @@ export class CategoriesTableComponent implements AfterViewInit, OnInit, OnDestro
     this._permissionsService.filterList(
       <{ id: string }[]>this._items,
       {
-        'moveCategory': KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
-        'delete': KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
+        'moveCategory': VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
+        'delete': VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
         'addServiceRule': this._reachAppViewService.isAvailable({ page: ReachPages.category, category })
       }
     );
