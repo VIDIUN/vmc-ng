@@ -1,25 +1,25 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { CategoriesStatus, CategoriesStatusMonitorService } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
 import { BulkAccessControlService, BulkAddCategoriesService, BulkAddTagsService, BulkChangeOwnerService, BulkDeleteService, BulkDownloadService, BulkRemoveCategoriesService, BulkRemoveTagsService, BulkSchedulingService, SchedulingParams } from './services';
-import { KalturaMediaEntry, KalturaMediaType, KalturaAccessControl, KalturaUser, KalturaPlaylistType, KalturaEntryStatus } from 'kaltura-ngx-client';
+import { VidiunMediaEntry, VidiunMediaType, VidiunAccessControl, VidiunUser, VidiunPlaylistType, VidiunEntryStatus } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './services/bulk-action-base.service';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import {CreateNewPlaylistEvent } from 'app-shared/kmc-shared/events/playlist-creation';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import {CreateNewPlaylistEvent } from 'app-shared/vmc-shared/events/playlist-creation';
 import { CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { BulkAddPublishersService } from './services/bulk-add-publishers.service';
 import { BulkAddEditorsService } from './services/bulk-add-editors.service';
 import { BulkRemoveEditorsService } from './services/bulk-remove-editors.service';
 import { BulkRemovePublishersService } from './services/bulk-remove-publishers.service';
-import { ContentNewCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views/content-new-category-view.service';
-import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { ContentNewCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views/content-new-category-view.service';
+import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
 import { BulkAddViewersService } from './services/bulk-add-viewers.service';
 import { BulkRemoveViewersService } from './services/bulk-remove-viewers.service';
 
@@ -60,7 +60,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
 
   private _categoriesLocked = false;
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() blockerMessage: AreaBlockerMessage;
 
   @Output() onBulkChange = new EventEmitter<{ reload: boolean }>();
@@ -231,7 +231,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
     // add publishers changed
-    onAddViewersChanged(viewers: KalturaUser[]): void {
+    onAddViewersChanged(viewers: VidiunUser[]): void {
         this.executeService(this._bulkAddViewersService, viewers.map(viewer => viewer.id));
     }
 
@@ -399,7 +399,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
         },
           {
               label: this._appLocalization.get('applications.content.bulkActions.addRemoveViewers'),
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
               items: [
                   {
                       label: this._appLocalization.get('applications.content.bulkActions.addViewers'),

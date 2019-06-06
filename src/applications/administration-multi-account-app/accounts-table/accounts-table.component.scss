@@ -1,12 +1,12 @@
 @import 'app-theme/_variables.scss';
 
-.kAccountsTable {
+.vAccountsTable {
     background-color: white;
     height: auto;
     padding: 0px;
     width: 100%;
 
-    .kAccountsTableActions {
+    .vAccountsTableActions {
         width: 100%;
         text-align: center;
     }
@@ -16,11 +16,11 @@
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 }
@@ -34,7 +34,7 @@
     /deep/ p-table {
         width: 100%;
         .ui-table .ui-table-thead > tr > th {
-            border-left: 1px solid $kGrayscale6;
+            border-left: 1px solid $vGrayscale6;
         }
 
         .ui-table-scrollable-body {

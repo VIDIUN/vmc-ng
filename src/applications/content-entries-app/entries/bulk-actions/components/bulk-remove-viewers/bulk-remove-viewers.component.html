@@ -1,11 +1,11 @@
-<k-area-blocker [message]="_sectionBlockerMessage" [showLoader]="_loading">
-    <div class="kContent kOverrideFAIcons">
-        <span class="kTitle">{{'applications.content.bulkActions.removeViewers' | translate}}</span>
-        <div class="kViewers">
-            <span class="kLabel">{{'applications.content.bulkActions.removeViewersLabel' | translate}}</span>
+<v-area-blocker [message]="_sectionBlockerMessage" [showLoader]="_loading">
+    <div class="vContent vOverrideFAIcons">
+        <span class="vTitle">{{'applications.content.bulkActions.removeViewers' | translate}}</span>
+        <div class="vViewers">
+            <span class="vLabel">{{'applications.content.bulkActions.removeViewersLabel' | translate}}</span>
             <span *ngIf="!users || !users.length"
-                  class="kNoItems">{{'applications.content.bulkActions.noViewersToRemove' | translate}}</span>
-            <kAutoComplete *ngIf="users && users.length"
+                  class="vNoItems">{{'applications.content.bulkActions.noViewersToRemove' | translate}}</span>
+            <vAutoComplete *ngIf="users && users.length"
                            readonly="true"
                            [classField]="'__class'"
                            [limitToSuggestions]="false"
@@ -13,13 +13,13 @@
                            [ngModel]="users"
                            [tooltipResolver]="'__tooltip'"
                            (onUnselect)="_removeUser($event)">
-            </kAutoComplete>
+            </vAutoComplete>
         </div>
-        <div class="kFooter">
-            <button class="kButtonBranded" pButton type="button"
+        <div class="vFooter">
+            <button class="vButtonBranded" pButton type="button"
                     [disabled]="usersToRemove.length === 0"
                     [label]="'applications.content.bulkActions.apply' | translate"
                     (click)="_apply()"></button>
         </div>
     </div>
-</k-area-blocker>
+</v-area-blocker>

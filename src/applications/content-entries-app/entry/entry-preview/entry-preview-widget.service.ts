@@ -60,7 +60,7 @@ export class EntryPreviewWidget extends EntryWidget implements OnDestroy {
             const vs = this.appAuthentication.appUser.vs || "";
             const serverUri = getVidiunServerUri();
 
-            let flashVars = `flashvars[kAnalony.plugin]=false&flashvars[closedCaptions.plugin]=true&flashvars[closedCaptions.hideWhenEmpty]=true&flashvars[ks]=${ks}`;
+            let flashVars = `flashvars[vAnalony.plugin]=false&flashvars[closedCaptions.plugin]=true&flashvars[closedCaptions.hideWhenEmpty]=true&flashvars[vs]=${vs}`;
             if (isLive) {
                 flashVars += '&flashvars[disableEntryRedirect]=true';
             }

@@ -29,7 +29,7 @@
                         <th [ngStyle]="{'width':'124px', 'padding-left': '24px'}">
                             {{'applications.content.entryDetails.thumbnails.thumbnail' | translate}}
                         </th>
-                        <th [kpSortableColumn]="'width'" [ngStyle]="{'width':'120px'}">
+                        <th [vpSortableColumn]="'width'" [ngStyle]="{'width':'120px'}">
                             {{'applications.content.entryDetails.thumbnails.dimensions' | translate}}
                             <p-sortIcon [field]="'width'"></p-sortIcon>
                         </th>
@@ -42,10 +42,10 @@
                         <th>
                             {{'applications.content.entryDetails.thumbnails.tags' | translate}}
                         </th>
-                        <th *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
+                        <th *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
                             {{'applications.content.entryDetails.thumbnails.defaultTitle' | translate}}
                         </th>
-                        <th  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted"></th>
+                        <th  [ngStyle]="{'width':'80px'}" *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted"></th>
                     </tr>
                 </ng-template>
 
@@ -58,23 +58,23 @@
                             </div>
                         </td>
                         <td [ngStyle]="{'width':'120px'}">
-                            <span class="kDimensions">{{thumb.width}}x{{thumb.height}}</span>
+                            <span class="vDimensions">{{thumb.width}}x{{thumb.height}}</span>
                         </td>
-                        <td [ngStyle]="{'width':'120px'}">{{thumb.size | kFileSize}}</td>
-                        <td *ngIf="_kmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | kNgIfPermitted">
+                        <td [ngStyle]="{'width':'120px'}">{{thumb.size | vFileSize}}</td>
+                        <td *ngIf="_vmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | vNgIfPermitted">
                             {{thumb.distributors}}
                         </td>
-                        <td [kTooltip]="thumb.tags" [showOnEllipsis]="true">{{thumb.tags}}</td>
-                        <td *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
+                        <td [vTooltip]="thumb.tags" [showOnEllipsis]="true">{{thumb.tags}}</td>
+                        <td *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
                             <span *ngIf="thumb.isDefault">{{'applications.content.entryDetails.thumbnails.default' | translate}}</span>
                             <a (click)="_widgetService._setAsDefault(thumb)"
                                *ngIf="!thumb.isDefault && thumb.status?.toString()==='2'">
                                 {{'applications.content.entryDetails.thumbnails.setDefault' | translate}}
                             </a>
                         </td>
-                        <td  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
-                            <div class="kThumbnailsTableActions" *ngIf="thumb.id !== ''">
-                                <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
+                        <td  [ngStyle]="{'width':'80px'}" *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
+                            <div class="vThumbnailsTableActions" *ngIf="thumb.id !== ''">
+                                <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
                                         (click)="openActionsMenu($event, thumb)"></button>
                             </div>
                         </td>

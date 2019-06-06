@@ -1,13 +1,13 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { RefineList } from '../multi-account-store/multi-account-refine-filters.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { ScrollToTopContainerComponent } from '@kaltura-ng/kaltura-ui';
-import { RefinePrimeTree } from '@kaltura-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { ScrollToTopContainerComponent } from '@vidiun-ng/vidiun-ui';
+import { RefinePrimeTree } from '@vidiun-ng/mc-shared';
 import { AccountFilters, MultiAccountStoreService } from '../multi-account-store/multi-account-store.service';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 
 const listOfFilterNames: (keyof AccountFilters)[] = [
@@ -30,7 +30,7 @@ export interface PrimeList {
 
 
 @Component({
-  selector: 'k-accounts-refine-filters',
+  selector: 'v-accounts-refine-filters',
   templateUrl: './accounts-refine-filters.component.html',
   styleUrls: ['./accounts-refine-filters.component.scss']
 })

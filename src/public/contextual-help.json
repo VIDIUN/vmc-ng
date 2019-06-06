@@ -49,11 +49,11 @@
         "viewKey": "admin-multi-account",
         "links": [
             {
-                "value": "https://knowledge.kaltura.com/node/2113#multi_account",
+                "value": "https://knowledge.vidiun.com/node/2113#multi_account",
                 "label": "Multi Account Management"
             },
             {
-                "value": "https://knowledge.kaltura.com/node/2113#getting_started",
+                "value": "https://knowledge.vidiun.com/node/2113#getting_started",
                 "label": "Getting Started"
             }
         ]

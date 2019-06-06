@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BaseEntryUpdateAction, KalturaBaseEntry, KalturaClient, KalturaMediaEntry } from 'kaltura-ngx-client';
+import { BaseEntryUpdateAction, VidiunBaseEntry, VidiunClient, VidiunMediaEntry } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
 
 @Injectable()
 export class BulkRemoveViewersService extends BulkActionBaseService<string[]> {
 
-    constructor(_kalturaServerClient: KalturaClient) {
-        super(_kalturaServerClient);
+    constructor(_vidiunServerClient: VidiunClient) {
+        super(_vidiunServerClient);
     }
 
-    public execute(selectedEntries: KalturaMediaEntry[], viewers: string[]): Observable<{}> {
+    public execute(selectedEntries: VidiunMediaEntry[], viewers: string[]): Observable<{}> {
         return Observable.create(observer => {
 
             const requests: BaseEntryUpdateAction[] = [];
 
             selectedEntries.forEach(entry => {
-                const updatedEntry: KalturaBaseEntry = new KalturaBaseEntry();
+                const updatedEntry: VidiunBaseEntry = new VidiunBaseEntry();
 
-                // update entry publishers. trim publishers due to legacy KMC bugs
+                // update entry publishers. trim publishers due to legacy VMC bugs
                 let entryViewers = [];
                 if (entry.entitledUsersView && entry.entitledUsersView.length) {
                     entryViewers = entry.entitledUsersView.split(',').map(viewer => viewer.trim());

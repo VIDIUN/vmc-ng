@@ -1356,7 +1356,7 @@
                 "removeViewers": "Remove Co-Viewers",
                 "removeViewersLabel": "Co-Viewers removed from this list will be removed from all selected entries",
                 "noViewersToRemove": "No Co-Viewers to remove",
-                "userTooltip": "User is not yet listed in Kaltura. {{0}} will be considered as user's identifier",
+                "userTooltip": "User is not yet listed in Vidiun. {{0}} will be considered as user's identifier",
                 "addRemoveEditors": "Add / Remove Co-Editors",
                 "addEditors": "Add Co-Editors",
                 "addEditorsLabel": "Enter Co-Editors to be appended to all selected entries",
@@ -1545,8 +1545,8 @@
                     "anyFlavour": "Any Flavor",
                     "allowFlavours": "Allow Flavors: {{0}}",
                     "blockFlavours": "Blocked: {{0}}",
-                    "ks": "KS",
-                    "freePreview": "KS, Preview ({{0}})",
+                    "vs": "VS",
+                    "freePreview": "VS, Preview ({{0}})",
                     "countries": "Countries",
                     "ips": "IPs",
                     "flavours": "Flavors",
@@ -2066,7 +2066,7 @@
                     "description": "Manage your entitlements settings and specific end-user permissions to content in your applications.",
                     "privacyContentLabel": {
                         "label" : "Privacy Context Label",
-                        "help": "To enable access to content in this category from the application and enforce its entitlement rules, the Privacy Context Label MUST be set as part of the application session (KS) privileges. \n\nThis label is set as part of the MediaSpace installation/upgrade process. For any other purposes set/edit the Privacy Context Label from the Integration Settings page under the Settings tab."
+                        "help": "To enable access to content in this category from the application and enforce its entitlement rules, the Privacy Context Label MUST be set as part of the application session (VS) privileges. \n\nThis label is set as part of the MediaSpace installation/upgrade process. For any other purposes set/edit the Privacy Context Label from the Integration Settings page under the Settings tab."
                     },
                     "manageUsersPermissionsEditMessage": {
                         "title": "Error",
@@ -2339,7 +2339,7 @@
                 "accountsInfo": "{{0}} accounts in use*, {{1}} additional remaining.",
                 "accountsExplain": "* active or blocked accounts which are not used as templates",
                 "moreAccounts": "Need more accounts?",
-                "contact": "Contact Kaltura",
+                "contact": "Contact Vidiun",
                 "usersUpgrade": "to request an upgrade.",
                 "create": "Create",
                 "note": "Account creation might take up to a minute",
@@ -2364,7 +2364,7 @@
                     "created": "Creation Date"
                 },
                 "actions": {
-                    "kmc": "KMC Login",
+                    "vmc": "VMC Login",
                     "block": "Block",
                     "unblock": "Unblock",
                     "remove": "Remove"
@@ -2637,7 +2637,7 @@
             "integrationSettings": {
                 "accountInfo": {
                     "title": "Account Info",
-                    "helpText": "The Privacy Context Label of each category defined here will automatically be applied to its sub categories.\nThe same label should be set as part of the application's session (KS) privileges.",
+                    "helpText": "The Privacy Context Label of each category defined here will automatically be applied to its sub categories.\nThe same label should be set as part of the application's session (VS) privileges.",
                     "readMore": "Read More.",
                     "partnerId": "Partner ID",
                     "subPartnerId": "Sub Partner ID",
@@ -2749,7 +2749,7 @@
                     "authorized": "{{0}} Authorized",
                     "blocked": "{{0}} Blocked",
                     "flavors": "{{0}} Flavors",
-                    "ks": "KS",
+                    "vs": "VS",
                     "freePreview": ", Free Preview",
                     "freePreviewDetails": "Free Preview\nFrom ({{0}}m:{{1}}s)"
                 },
@@ -3291,7 +3291,7 @@
         "KM": "Cambodian",
         "KN": "Kannada",
         "KO": "Korean",
-        "KS": "Kashmiri",
+        "VS": "Kashmiri",
         "KU": "Kurdish",
         "KY": "Kirghiz",
         "LA": "Latin",

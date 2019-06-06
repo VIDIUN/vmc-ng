@@ -1520,8 +1520,8 @@
                     "anyFlavour": "Cualquier sabor",
                     "allowFlavours": "Permitir sabores: {{0}}",
                     "blockFlavours": "Bloqueado: {{0}}",
-                    "ks": "KS",
-                    "freePreview": "KS, previsualización ({{0}})",
+                    "vs": "VS",
+                    "freePreview": "VS, previsualización ({{0}})",
                     "countries": "Países",
                     "ips": "IP",
                     "flavours": "Sabores",
@@ -2039,7 +2039,7 @@
                     "description": "Gestione las configuraciones de sus derechos y permisos específicos de usuario final para el contenido de sus aplicaciones.",
                     "privacyContentLabel": {
                         "label" : "Etiqueta de contexto de privacidad",
-                        "help": "Para habilitar el acceso a contenido en esta categoría desde la aplicación y hacer cumplir sus reglas de derechos, la etiqueta de contexto de privacidad DEBE estar configurada como parte de los privilegios de la sesión de aplicación (KS). Esta etiqueta se configura como parte del proceso de instalación/actualización de MediaSpace. Para cualquier otro propósito, se debe configurar/editar la etiqueta de contexto de privacidad desde la página Configuración de integración en la pestaña Configuración."
+                        "help": "Para habilitar el acceso a contenido en esta categoría desde la aplicación y hacer cumplir sus reglas de derechos, la etiqueta de contexto de privacidad DEBE estar configurada como parte de los privilegios de la sesión de aplicación (VS). Esta etiqueta se configura como parte del proceso de instalación/actualización de MediaSpace. Para cualquier otro propósito, se debe configurar/editar la etiqueta de contexto de privacidad desde la página Configuración de integración en la pestaña Configuración."
                     },
                     "manageUsersPermissionsEditMessage": {
                         "title": "Error",
@@ -2554,7 +2554,7 @@
             "integrationSettings": {
                 "accountInfo": {
                     "title": "Información de la cuenta",
-                    "helpText": "La etiqueta de contexto de privacidad de cada categoría definida aquí se aplicará automáticamente a sus subcategorías. Debe configurarse la misma etiqueta como parte de los privilegios de sesión (KS) de la aplicación.",
+                    "helpText": "La etiqueta de contexto de privacidad de cada categoría definida aquí se aplicará automáticamente a sus subcategorías. Debe configurarse la misma etiqueta como parte de los privilegios de sesión (VS) de la aplicación.",
                     "readMore": "Leer más",
                     "partnerId": "ID de socio",
                     "subPartnerId": "ID de subsocio",
@@ -2666,7 +2666,7 @@
                     "authorized": "{{0}} Autorizado",
                     "blocked": "{{0}} Bloqueado",
                     "flavors": "{{0}} Sabores",
-                    "ks": "KS",
+                    "vs": "VS",
                     "freePreview": ", previsualización gratis",
                     "freePreviewDetails": "Previsualización gratis desde ({{0}}m:{{1}}s)"
                 },
@@ -3207,7 +3207,7 @@
         "KM": "Camboyano",
         "KN": "Canarés",
         "KO": "Coreano",
-        "KS": "Cachemir",
+        "VS": "Cachemir",
         "KU": "Kurdo",
         "KY": "Kirguís",
         "LA": "Latín",

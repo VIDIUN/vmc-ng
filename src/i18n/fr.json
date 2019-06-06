@@ -1520,8 +1520,8 @@
                     "anyFlavour": "N'importe quel type",
                     "allowFlavours": "Types autorisés : {{0}}",
                     "blockFlavours": "Bloqués : {{0}}",
-                    "ks": "KS",
-                    "freePreview": "KS, aperçu ({{0}})",
+                    "vs": "VS",
+                    "freePreview": "VS, aperçu ({{0}})",
                     "countries": "Pays",
                     "ips": "IP",
                     "flavours": "Types",
@@ -2039,7 +2039,7 @@
                     "description": "Gérez vos paramètres de droits et les autorisations spécifiques des utilisateurs finaux sur le contenu de vos applications.",
                     "privacyContentLabel": {
                         "label" : "Étiquette de contexte de confidentialité",
-                        "help": "Pour autoriser l'accès au contenu de cette catégorie à partir de l'application et appliquer ses règles d'autorisation, l'étiquette de contexte de confidentialité DOIT être définie dans le cadre des privilèges de session d'application (KS). Cette étiquette est définie dans le cadre du processus d'installation/mise à niveau de MediaSpace. À d'autres fins, définissez/modifiez l'étiquette de contexte de confidentialité à partir de la page Paramètres d'intégration sous l'onglet Paramètres."
+                        "help": "Pour autoriser l'accès au contenu de cette catégorie à partir de l'application et appliquer ses règles d'autorisation, l'étiquette de contexte de confidentialité DOIT être définie dans le cadre des privilèges de session d'application (VS). Cette étiquette est définie dans le cadre du processus d'installation/mise à niveau de MediaSpace. À d'autres fins, définissez/modifiez l'étiquette de contexte de confidentialité à partir de la page Paramètres d'intégration sous l'onglet Paramètres."
                     },
                     "manageUsersPermissionsEditMessage": {
                         "title": "Erreur",
@@ -2554,7 +2554,7 @@
             "integrationSettings": {
                 "accountInfo": {
                     "title": "Informations de compte",
-                    "helpText": "L'étiquette de contexte de confidentialité de chaque catégorie définie ici sera automatiquement appliquée à ses sous-catégories. La même étiquette doit être définie dans le cadre des privilèges de session (KS) de l'application.",
+                    "helpText": "L'étiquette de contexte de confidentialité de chaque catégorie définie ici sera automatiquement appliquée à ses sous-catégories. La même étiquette doit être définie dans le cadre des privilèges de session (VS) de l'application.",
                     "readMore": "Lire la suite.",
                     "partnerId": "ID de partenaire",
                     "subPartnerId": "ID de partenaire secondaire",
@@ -2666,7 +2666,7 @@
                     "authorized": "{{0}} Autorisé",
                     "blocked": "{{0}} Bloqué",
                     "flavors": "{{0}} Types",
-                    "ks": "KS",
+                    "vs": "VS",
                     "freePreview": ", aperçu gratuit",
                     "freePreviewDetails": "Aperçu gratuit à partir de ({{0}}m:{{1}}s)"
                 },
@@ -3207,7 +3207,7 @@
         "KM": "Cambodgien",
         "KN": "Kannada",
         "KO": "Coréen",
-        "KS": "Kashmiri",
+        "VS": "Kashmiri",
         "KU": "Kurde",
         "KY": "Kirghiz",
         "LA": "Latin",

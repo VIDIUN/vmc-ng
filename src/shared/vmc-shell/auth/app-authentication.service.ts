@@ -174,7 +174,7 @@ export class AppAuthentication {
     }
 
     updatePassword(payload: UpdatePasswordPayload): Observable<{ email: string, password: string }> {
-        return this.kalturaServerClient.request(new AdminUserUpdatePasswordAction(payload))
+        return this.vidiunServerClient.request(new AdminUserUpdatePasswordAction(payload))
             .catch(error => Observable.throw(this._getLoginErrorMessage({error})));
     }
 

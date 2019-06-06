@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {AccountFilters, MultiAccountStoreService} from '../multi-account-store/multi-account-store.service';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 import {RefineList} from '../multi-account-store/multi-account-refine-filters.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 export interface TagItem {
   type: string,
@@ -16,7 +16,7 @@ export interface TagItem {
 const listTypes: (keyof AccountFilters)[] = ['status'];
 
 @Component({
-  selector: 'k-accounts-tags',
+  selector: 'v-accounts-tags',
   templateUrl: './accounts-tags.component.html',
   styleUrls: ['./accounts-tags.component.scss']
 

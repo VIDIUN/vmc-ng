@@ -343,8 +343,8 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
           "position": "after",              // required to prevent v1 players from getting stuck
           "loadingPolicy": "onDemand"       // prevent v1 players from trying to load this plugin
         };
-        flashVars['kAnalony'] = {
-            "plugin": "false",                // prevent loading the kAnalony plugin in v2 players
+        flashVars['vAnalony'] = {
+            "plugin": "false",                // prevent loading the vAnalony plugin in v2 players
         };
       }
       if (this.media instanceof VidiunPlaylist) {
@@ -378,7 +378,7 @@ export class PreviewEmbedDetailsComponent implements OnInit, AfterViewInit, OnDe
   private createPreviewLink():void{
       let url = '';
       try {
-        url = this.getProtocol(false) + '://' + serverConfig.kalturaServer.uri + '/index.php/extwidget/preview';
+        url = this.getProtocol(false) + '://' + serverConfig.vidiunServer.uri + '/index.php/extwidget/preview';
         url += '/partner_id/' + this._appAuthentication.appUser.partnerId;
         url += '/uiconf_id/' + this._previewForm.controls['selectedPlayer'].value.uiConf.id;
         if (this.media instanceof VidiunMediaEntry) {

@@ -1,21 +1,21 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AccountFilters, MultiAccountStoreService, SortDirection } from '../multi-account-store/multi-account-store.service';
-import { PopupWidgetComponent, StickyComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AdminMultiAccountMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaPartner, KalturaPartnerStatus } from "kaltura-ngx-client";
+import { PopupWidgetComponent, StickyComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AdminMultiAccountMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunPartner, VidiunPartnerStatus } from "vidiun-ngx-client";
 import { MultiAccountRefineFiltersService, RefineList } from '../multi-account-store/multi-account-refine-filters.service';
 import { serverConfig, buildBaseUri } from "config/server";
 
 @Component({
-  selector: 'kAccountsList',
+  selector: 'vAccountsList',
   templateUrl: './accounts-list.component.html',
   styleUrls: ['./accounts-list.component.scss'],
-  providers: [MultiAccountRefineFiltersService, KalturaLogger.createLogger('AccountsListComponent')]
+  providers: [MultiAccountRefineFiltersService, VidiunLogger.createLogger('AccountsListComponent')]
 })
 
 export class AccountsListComponent implements OnInit, OnDestroy {
@@ -27,7 +27,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   public _tableIsBusy = false;
   public _tableBlockerMessage: AreaBlockerMessage = null;
   public _refineFilters: RefineList[];
-  public _templateAccounts: KalturaPartner[] = [];
+  public _templateAccounts: VidiunPartner[] = [];
   public _usedAccounts = null;
   public _availableAccounts = null;
 
@@ -40,7 +40,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   };
 
   constructor(public _accountsStore: MultiAccountStoreService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService,
               private _refineFiltersService: MultiAccountRefineFiltersService,
               private _adminMultiAccountMainViewService: AdminMultiAccountMainViewService,
@@ -184,16 +184,16 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _onActionSelected(event: { action: string, account: KalturaPartner }): void {
+  public _onActionSelected(event: { action: string, account: VidiunPartner }): void {
     switch (event.action) {
-      case 'kmc':
-          this._openKmc(event.account.id);
+      case 'vmc':
+          this._openVmc(event.account.id);
         break;
       case 'block':
-          this._updateAccountStatus(event.account, KalturaPartnerStatus.blocked);
+          this._updateAccountStatus(event.account, VidiunPartnerStatus.blocked);
         break;
       case 'unblock':
-          this._updateAccountStatus(event.account, KalturaPartnerStatus.active);
+          this._updateAccountStatus(event.account, VidiunPartnerStatus.active);
         break;
       case 'remove':
         this._logger.info(`handle delete account action by user, show confirmation`, { id: event.account.id });
@@ -203,7 +203,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
             message: this._appLocalization.get('applications.administration.accounts.confirmDeleteBody', { 0: event.account.name }),
             accept: () => {
               this._logger.info(`user confirmed, proceed action`);
-                this._updateAccountStatus(event.account, KalturaPartnerStatus.fullBlock);
+                this._updateAccountStatus(event.account, VidiunPartnerStatus.fullBlock);
             },
             reject: () => {
               this._logger.info(`user didn't confirmed, abort action`);
@@ -216,7 +216,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
     }
   }
 
-    private _updateAccountStatus(account: KalturaPartner, status: KalturaPartnerStatus): void {
+    private _updateAccountStatus(account: VidiunPartner, status: VidiunPartnerStatus): void {
         this._logger.info(`handle delete role request by user`);
         this._blockerMessage = null;
         this._accountsStore.updateAccountStatus(account.id, status)
@@ -255,21 +255,21 @@ export class AccountsListComponent implements OnInit, OnDestroy {
             );
     }
 
-    private _openKmc(pId: number): void {
+    private _openVmc(pId: number): void {
         this._logger.info(`handle delete role request by user`);
         this._blockerMessage = null;
         this._accountsStore.getAdminSession(pId)
             .pipe(cancelOnDestroy(this))
             .pipe(tag('block-shell'))
             .subscribe(
-                ks => {
-                    this._logger.info(`handle successful open KMC request by user`);
+                vs => {
+                    this._logger.info(`handle successful open VMC request by user`);
                     this._blockerMessage = null;
-                    const redirectUrl = buildBaseUri('') + this._browserService.getDocumentBase() + '/actions/persist-login-by-ks/' + ks;
+                    const redirectUrl = buildBaseUri('') + this._browserService.getDocumentBase() + '/actions/persist-login-by-vs/' + vs;
                     this._browserService.openLink(redirectUrl);
                 },
                 error => {
-                    this._logger.warn(`handle failed open KMC request by user, show confirmation`, { errorMessage: error.message });
+                    this._logger.warn(`handle failed open VMC request by user, show confirmation`, { errorMessage: error.message });
                     this._blockerMessage = new AreaBlockerMessage(
                         {
                             message: error.message,
@@ -278,7 +278,7 @@ export class AccountsListComponent implements OnInit, OnDestroy {
                                     label: this._appLocalization.get('app.common.retry'),
                                     action: () => {
                                         this._logger.info(`user confirmed, retry action`);
-                                        this._openKmc(pId);
+                                        this._openVmc(pId);
                                     }
                                 },
                                 {
@@ -323,6 +323,6 @@ export class AccountsListComponent implements OnInit, OnDestroy {
   }
 
   public _upgradeAccount(): void {
-      this._browserService.openLink(serverConfig.externalLinks.kaltura.contactUs, {}, '_blank');
+      this._browserService.openLink(serverConfig.externalLinks.vidiun.contactUs, {}, '_blank');
   }
 }

@@ -1520,8 +1520,8 @@
                     "anyFlavour": "Jede Variante",
                     "allowFlavours": "Erlaubte Varianten: {{0}}",
                     "blockFlavours": "{{0}} Gesperrt",
-                    "ks": "KS",
-                    "freePreview": "KS, Vorschau ({{0}})",
+                    "vs": "VS",
+                    "freePreview": "VS, Vorschau ({{0}})",
                     "countries": "Länder",
                     "ips": "IPs",
                     "flavours": "Varianten",
@@ -2039,7 +2039,7 @@
                     "description": "Verwalten Sie die Einstellungen Ihrer Rechte und spezifische Endbenutzerzugriffsrechte für die Inhalte Ihrer Anwendungen.",
                     "privacyContentLabel": {
                         "label" : "Datenschutz-kontext-Beschriftung",
-                        "help": "Um von der Anwendung aus den Zugriff auf Inhalte in dieser Kategorie zu aktivieren und ihre Rechte festzulegen, MUSS die Datenschutzkontext-Beschriftung als Teil der Privilegien der Anwendungs-Sitzung (KS) festgelegt werden. Diese Beschriftung ist als Teil des MediaSpace Installations-/Aktualisierungsvorgangs festgelegt. Ändern Sie die Datenschutzkontext-Beschriftung für andere Zwecke in den „Integrationseinstellungen“ auf der Registerkarte „Einstellungen“."
+                        "help": "Um von der Anwendung aus den Zugriff auf Inhalte in dieser Kategorie zu aktivieren und ihre Rechte festzulegen, MUSS die Datenschutzkontext-Beschriftung als Teil der Privilegien der Anwendungs-Sitzung (VS) festgelegt werden. Diese Beschriftung ist als Teil des MediaSpace Installations-/Aktualisierungsvorgangs festgelegt. Ändern Sie die Datenschutzkontext-Beschriftung für andere Zwecke in den „Integrationseinstellungen“ auf der Registerkarte „Einstellungen“."
                     },
                     "manageUsersPermissionsEditMessage": {
                         "title": "Fehler",
@@ -2554,7 +2554,7 @@
             "integrationSettings": {
                 "accountInfo": {
                     "title": "Kontoinformationen",
-                    "helpText": "Die Datenschutzkontext-Beschriftung, die hier für jede Kategorie festgelegt wird, wird automatisch auf ihre Unterkategorien angewendet. Die gleiche Beschriftung sollte als Teil der Privilegien der Anwendungssitzung (KS) festgelegt werden.",
+                    "helpText": "Die Datenschutzkontext-Beschriftung, die hier für jede Kategorie festgelegt wird, wird automatisch auf ihre Unterkategorien angewendet. Die gleiche Beschriftung sollte als Teil der Privilegien der Anwendungssitzung (VS) festgelegt werden.",
                     "readMore": "Weitere Informationen.",
                     "partnerId": "Partner-ID",
                     "subPartnerId": "Sub-Partner-ID",
@@ -2666,7 +2666,7 @@
                     "authorized": "{{0}} Autorisiert",
                     "blocked": "{{0}} Gesperrt",
                     "flavors": "{{0}} Varianten",
-                    "ks": "KS",
+                    "vs": "VS",
                     "freePreview": ", Kostenlose Vorschau",
                     "freePreviewDetails": "Kostenlose Vorschau ab ({{0}}Min:{{1}}Sek)"
                 },
@@ -3207,7 +3207,7 @@
         "KM": "Kambodschanisch",
         "KN": "Kannada",
         "KO": "Koreanisch",
-        "KS": "Kaschmirisch",
+        "VS": "Kaschmirisch",
         "KU": "Kurdisch",
         "KY": "Kirgisisch",
         "LA": "Latein",

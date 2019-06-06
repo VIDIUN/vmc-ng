@@ -2,33 +2,33 @@ import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Outpu
 import { ISubscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 
-import { KalturaClient, KalturaFilterPager, KalturaUser, KalturaUserFilter, UserListAction } from 'kaltura-ngx-client';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage, PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
+import { VidiunClient, VidiunFilterPager, VidiunUser, VidiunUserFilter, UserListAction } from 'vidiun-ngx-client';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage, PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
 
 @Component({
-    selector: 'kBulkAddViewers',
+    selector: 'vBulkAddViewers',
     templateUrl: './bulk-add-viewers.component.html',
     styleUrls: ['./bulk-add-viewers.component.scss']
 })
 export class BulkAddViewersComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() parentPopupWidget: PopupWidgetComponent;
-    @Output() addViewersChanged = new EventEmitter<KalturaUser[]>();
+    @Output() addViewersChanged = new EventEmitter<VidiunUser[]>();
 
     public _loading = false;
     public _sectionBlockerMessage: AreaBlockerMessage;
 
     public _usersProvider = new Subject<SuggestionsProviderData>();
-    public users: KalturaUser[] = [];
+    public users: VidiunUser[] = [];
 
     private _searchViewersSubscription: ISubscription;
     private _parentPopupStateChangeSubscribe: ISubscription;
     private _confirmClose = true;
 
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
                 private _appLocalization: AppLocalization,
                 private _browserService: BrowserService) {
         this._convertUserInputToValidValue = this._convertUserInputToValidValue.bind(this); // fix scope issues when binding to a property
@@ -79,9 +79,9 @@ export class BulkAddViewersComponent implements OnInit, OnDestroy, AfterViewInit
             this._searchViewersSubscription = null;
         }
 
-        this._kalturaServerClient.request(new UserListAction({
-            filter: new KalturaUserFilter({ idOrScreenNameStartsWith: event.query }),
-            pager: new KalturaFilterPager({ pageIndex: 0, pageSize: 30 })
+        this._vidiunServerClient.request(new UserListAction({
+            filter: new VidiunUserFilter({ idOrScreenNameStartsWith: event.query }),
+            pager: new VidiunFilterPager({ pageIndex: 0, pageSize: 30 })
         }))
             .pipe(cancelOnDestroy(this))
             .subscribe(
