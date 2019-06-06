@@ -271,10 +271,10 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
   }
 
 
-  public executeQuery(data: EntriesFilters): Observable<{ entries: VidiunBaseEntry[], totalCount?: number }> {
-    const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
-      type: VidiunResponseProfileType.includeFields,
-      fields: 'id,name,thumbnailUrl,mediaType,plays,createdAt,duration,status,startDate,endDate,moderationStatus,moderationCount,tags,categoriesIds,downloadUrl,sourceType,entitledUsersPublish,entitledUsersEdit,externalSourceType,capabilities'
+  public executeQuery(data: EntriesFilters): Observable<{ entries: KalturaBaseEntry[], totalCount?: number }> {
+    const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
+      type: KalturaResponseProfileType.includeFields,
+      fields: 'id,name,thumbnailUrl,mediaType,plays,createdAt,duration,status,startDate,endDate,moderationStatus,moderationCount,tags,categoriesIds,downloadUrl,sourceType,entitledUsersPublish,entitledUsersView,entitledUsersEdit,externalSourceType,capabilities'
     });
     let pagination: VidiunFilterPager = null;
 

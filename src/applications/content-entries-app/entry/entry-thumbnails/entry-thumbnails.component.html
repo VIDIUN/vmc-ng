@@ -29,20 +29,23 @@
                         <th [ngStyle]="{'width':'124px', 'padding-left': '24px'}">
                             {{'applications.content.entryDetails.thumbnails.thumbnail' | translate}}
                         </th>
-                        <th [vpSortableColumn]="'width'">
+                        <th [kpSortableColumn]="'width'" [ngStyle]="{'width':'120px'}">
                             {{'applications.content.entryDetails.thumbnails.dimensions' | translate}}
                             <p-sortIcon [field]="'width'"></p-sortIcon>
                         </th>
-                        <th>
+                        <th [ngStyle]="{'width':'120px'}">
                             {{'applications.content.entryDetails.thumbnails.size' | translate}}
                         </th>
                         <th *ngIf="_vmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | vNgIfPermitted">
                             {{'applications.content.entryDetails.thumbnails.distributors' | translate}}
                         </th>
-                        <th *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
+                        <th>
+                            {{'applications.content.entryDetails.thumbnails.tags' | translate}}
+                        </th>
+                        <th *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
                             {{'applications.content.entryDetails.thumbnails.defaultTitle' | translate}}
                         </th>
-                        <th *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted"></th>
+                        <th  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted"></th>
                     </tr>
                 </ng-template>
 
@@ -54,23 +57,24 @@
                                 <i class="vIconimage"></i>
                             </div>
                         </td>
-                        <td>
-                            <span class="vDimensions">{{thumb.width}}x{{thumb.height}}</span>
+                        <td [ngStyle]="{'width':'120px'}">
+                            <span class="kDimensions">{{thumb.width}}x{{thumb.height}}</span>
                         </td>
-                        <td>{{thumb.size | vFileSize}}</td>
-                        <td *ngIf="_vmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | vNgIfPermitted">
+                        <td [ngStyle]="{'width':'120px'}">{{thumb.size | kFileSize}}</td>
+                        <td *ngIf="_kmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | kNgIfPermitted">
                             {{thumb.distributors}}
                         </td>
-                        <td *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
+                        <td [kTooltip]="thumb.tags" [showOnEllipsis]="true">{{thumb.tags}}</td>
+                        <td *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
                             <span *ngIf="thumb.isDefault">{{'applications.content.entryDetails.thumbnails.default' | translate}}</span>
                             <a (click)="_widgetService._setAsDefault(thumb)"
                                *ngIf="!thumb.isDefault && thumb.status?.toString()==='2'">
                                 {{'applications.content.entryDetails.thumbnails.setDefault' | translate}}
                             </a>
                         </td>
-                        <td *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
-                            <div class="vThumbnailsTableActions" *ngIf="thumb.id !== ''">
-                                <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
+                        <td  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
+                            <div class="kThumbnailsTableActions" *ngIf="thumb.id !== ''">
+                                <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
                                         (click)="openActionsMenu($event, thumb)"></button>
                             </div>
                         </td>

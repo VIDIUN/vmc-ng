@@ -1,45 +1,27 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {MenuItem} from 'primeng/primeng';
-import { AppLocalization } from '@vidiun-ng/mc-shared';
-import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
-import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
-import {
-  CategoriesStatus,
-  CategoriesStatusMonitorService
-} from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-
-import {
-  BulkAccessControlService,
-  BulkAddCategoriesService,
-  BulkAddTagsService,
-  BulkChangeOwnerService,
-  BulkDeleteService,
-  BulkDownloadService,
-  BulkRemoveCategoriesService,
-  BulkRemoveTagsService,
-  BulkSchedulingService,
-  SchedulingParams
-} from './services';
-import { VidiunExternalMediaEntry, VidiunMediaEntry } from 'vidiun-ngx-client';
-import {BulkActionBaseService} from './services/bulk-action-base.service';
-import {subApplicationsConfig} from 'config/sub-applications';
-import {VidiunUser} from 'vidiun-ngx-client';
-import {VidiunMediaType} from 'vidiun-ngx-client';
-import {VidiunAccessControl} from 'vidiun-ngx-client';
-import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
-import { AppEventsService } from 'app-shared/vmc-shared';
-import {CreateNewPlaylistEvent} from 'app-shared/vmc-shared/events/playlist-creation';
-import {VidiunPlaylistType} from 'vidiun-ngx-client';
-import {VidiunEntryStatus} from 'vidiun-ngx-client';
-import {CategoryData} from 'app-shared/content-shared/categories/categories-search.service';
-import {VMCPermissions, VMCPermissionsService} from 'app-shared/vmc-shared/vmc-permissions';
-import {BulkAddPublishersService} from './services/bulk-add-publishers.service';
-import {BulkAddEditorsService} from './services/bulk-add-editors.service';
-import {BulkRemoveEditorsService} from './services/bulk-remove-editors.service';
-import {BulkRemovePublishersService} from './services/bulk-remove-publishers.service';
-import { ContentNewCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views/content-new-category-view.service';
-import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
-import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { MenuItem } from 'primeng/primeng';
+import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { CategoriesStatus, CategoriesStatusMonitorService } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
+import { BulkAccessControlService, BulkAddCategoriesService, BulkAddTagsService, BulkChangeOwnerService, BulkDeleteService, BulkDownloadService, BulkRemoveCategoriesService, BulkRemoveTagsService, BulkSchedulingService, SchedulingParams } from './services';
+import { KalturaMediaEntry, KalturaMediaType, KalturaAccessControl, KalturaUser, KalturaPlaylistType, KalturaEntryStatus } from 'kaltura-ngx-client';
+import { BulkActionBaseService } from './services/bulk-action-base.service';
+import { subApplicationsConfig } from 'config/sub-applications';
+import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppEventsService } from 'app-shared/kmc-shared';
+import {CreateNewPlaylistEvent } from 'app-shared/kmc-shared/events/playlist-creation';
+import { CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
+import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { BulkAddPublishersService } from './services/bulk-add-publishers.service';
+import { BulkAddEditorsService } from './services/bulk-add-editors.service';
+import { BulkRemoveEditorsService } from './services/bulk-remove-editors.service';
+import { BulkRemovePublishersService } from './services/bulk-remove-publishers.service';
+import { ContentNewCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views/content-new-category-view.service';
+import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { BulkAddViewersService } from './services/bulk-add-viewers.service';
+import { BulkRemoveViewersService } from './services/bulk-remove-viewers.service';
 
 @Component({
   selector: 'vBulkActions',
@@ -59,6 +41,8 @@ import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
         BulkRemoveCategoriesService,
         BulkDeleteService,
         BulkDownloadService,
+        BulkAddViewersService,
+        BulkRemoveViewersService,
     ]
 })
 export class BulkActionsComponent implements OnInit, OnDestroy {
@@ -76,11 +60,11 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
 
   private _categoriesLocked = false;
 
-  @Input() selectedEntries: VidiunMediaEntry[];
-    @Input() blockerMessage: AreaBlockerMessage;
+  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() blockerMessage: AreaBlockerMessage;
 
   @Output() onBulkChange = new EventEmitter<{ reload: boolean }>();
-    @Output() blockerMessageChange = new EventEmitter<AreaBlockerMessage>();
+  @Output() blockerMessageChange = new EventEmitter<AreaBlockerMessage>();
 
   @ViewChild('bulkActionsPopup') public bulkActionsPopup: PopupWidgetComponent;
 
@@ -92,6 +76,8 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
     private _bulkRemoveEditorsService: BulkRemoveEditorsService,
     private _bulkAddPublishersService: BulkAddPublishersService,
     private _bulkRemovePublishersService: BulkRemovePublishersService,
+    private _bulkAddViewersService: BulkAddViewersService,
+    private _bulkRemoveViewersService: BulkRemoveViewersService,
     private _bulkRemoveTagsService: BulkRemoveTagsService,
     private _bulkAddCategoriesService: BulkAddCategoriesService,
     private _bulkChangeOwnerService: BulkChangeOwnerService,
@@ -242,6 +228,16 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   // remove publishers changed
   onRemovePublishersChanged(publishers: string[]): void {
     this.executeService(this._bulkRemovePublishersService, publishers);
+  }
+
+    // add publishers changed
+    onAddViewersChanged(viewers: KalturaUser[]): void {
+        this.executeService(this._bulkAddViewersService, viewers.map(viewer => viewer.id));
+    }
+
+  // remove publishers changed
+  onRemoveViewersChanged(viewers: string[]): void {
+    this.executeService(this._bulkRemoveViewersService, viewers);
   }
 
   // add to categories changed
@@ -401,6 +397,24 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
             }
           ]
         },
+          {
+              label: this._appLocalization.get('applications.content.bulkActions.addRemoveViewers'),
+              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+              items: [
+                  {
+                      label: this._appLocalization.get('applications.content.bulkActions.addViewers'),
+                      command: (event) => {
+                          this.openBulkActionWindow('addViewers', 500, 500);
+                      }
+                  },
+                  {
+                      label: this._appLocalization.get('applications.content.bulkActions.removeViewers'),
+                      command: (event) => {
+                          this.openBulkActionWindow('removeViewers', 500, 500);
+                      }
+                  }
+              ]
+          },
           {
               label: this._appLocalization.get('applications.content.bulkActions.addToNewCategoryPlaylist'), items: [
               {

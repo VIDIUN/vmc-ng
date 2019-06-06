@@ -3,6 +3,7 @@ import { VmcMainViewsService } from './vmc-main-views.service';
 import {
     AdminRolesMainViewService,
     AdminUsersMainViewService,
+    AdminMultiAccountMainViewService,
     ContentBulkUploadsMainViewService,
     ContentCategoriesMainViewService,
     ContentDropFoldersMainViewService,
@@ -71,6 +72,7 @@ export class VmcViewsModule {
                 LiveAnalyticsMainViewService,
                 AdminUsersMainViewService,
                 AdminRolesMainViewService,
+                AdminMultiAccountMainViewService,
                 SettingsAccountSettingsMainViewService,
                 SettingsIntegrationSettingsMainViewService,
                 SettingsAccessControlMainViewService,

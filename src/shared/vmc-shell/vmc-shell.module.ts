@@ -9,9 +9,9 @@ import { BrowserService } from './providers/browser.service';
 import { AppContainerComponent } from './components/app-container/app-container.component';
 import { ReleaseNotesComponent } from './components/release-notes/release-notes.component';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
-import { EntryTypePipe } from 'app-shared/vmc-shell/pipes/entry-type.pipe';
-import { PageExitVerificationService, UploadPageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification';
-import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { EntryTypePipe } from 'app-shared/kmc-shell/pipes/entry-type.pipe';
+import { PageExitVerificationService, UploadPageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification';
+import { PreventPasswordAutofillDirective } from 'app-shared/kmc-shell/directives/prevent-password-autofill.directive';
 
 @NgModule({
     imports: <any[]>[
@@ -25,12 +25,14 @@ import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
         ReleaseNotesComponent,
         ScrollToTopComponent,
         EntryTypePipe,
+        PreventPasswordAutofillDirective,
     ],
     exports: <any[]>[
         AppContainerComponent,
         ReleaseNotesComponent,
         ScrollToTopComponent,
         EntryTypePipe,
+        PreventPasswordAutofillDirective,
     ],
     providers: <any[]>[]
 })

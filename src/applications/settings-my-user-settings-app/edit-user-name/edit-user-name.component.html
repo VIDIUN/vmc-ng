@@ -32,7 +32,7 @@
         <div class="vRow">
           <span class="vLabel">{{'applications.settings.myUserSettings.password' | translate}}</span>
           <div>
-            <input type="password" pInputText class="vControl"
+            <input type="password" appPreventPasswordAutofill pInputText class="kControl"
                    [formControl]="_passwordField"
                    [ngClass]="{'vHasError': _passwordField.invalid && (_passwordField.touched || _showPasswordError)}">
             <div class="error"

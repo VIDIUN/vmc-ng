@@ -1,3 +1,51 @@
+<a name="5.10.0"></a>
+# [5.10.0](https://github.com/kaltura/kmc-ng/compare/v5.9.1...v5.10.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* **administration/multi-account:** allow only active accounts to be used as templates ([3107050](https://github.com/kaltura/kmc-ng/commit/3107050))
+* **administration/multi-account:** disable "Create" button until data loads ([24e9d2e](https://github.com/kaltura/kmc-ng/commit/24e9d2e))
+* **administration/multi-account:** disregard removed templates for new account creation ([542a01c](https://github.com/kaltura/kmc-ng/commit/542a01c))
+
+
+### Features
+
+* **content/entries:** bulk add/remove of co-viewers ([4e24b9b](https://github.com/kaltura/kmc-ng/commit/4e24b9b))
+
+
+
+<a name="5.9.1"></a>
+## [5.9.1](https://github.com/kaltura/kmc-ng/compare/v5.9.0...v5.9.1) (2019-05-21)
+
+
+### Bug Fixes
+
+* prevent passwords auto filling  ([#831](https://github.com/kaltura/kmc-ng/issues/831)) ([d853051](https://github.com/kaltura/kmc-ng/commit/d853051))
+* **administration/multi-account:** disable create button on error state ([462881c](https://github.com/kaltura/kmc-ng/commit/462881c))
+* **administration/multi-account:** fix adding website info when creating new account ([cfbb7d4](https://github.com/kaltura/kmc-ng/commit/cfbb7d4))
+* **administration/multi-account:** fix available accounts calculation ([f270218](https://github.com/kaltura/kmc-ng/commit/f270218))
+* **entry/captions:** support Luxembourgish captions ([9cae1a9](https://github.com/kaltura/kmc-ng/commit/9cae1a9))
+
+
+
+<a name="5.9.0"></a>
+# [5.9.0](https://github.com/kaltura/kmc-ng/compare/v5.8.0...v5.9.0) (2019-05-15)
+
+
+### Bug Fixes
+
+* **users/edit:** select the correct user role in the roles drop-down when editing an existing user ([30e532d](https://github.com/kaltura/kmc-ng/commit/30e532d))
+
+
+### Features
+
+* Multi account management ([#832](https://github.com/kaltura/kmc-ng/issues/832)) ([ea325e0](https://github.com/kaltura/kmc-ng/commit/ea325e0))
+* upgrade kea editor to version 2.28.12 which include hotspots ([#822](https://github.com/kaltura/kmc-ng/issues/822)) ([31bae91](https://github.com/kaltura/kmc-ng/commit/31bae91))
+* Display thumbnail tags in the entry thumbnails table
+
+
+
 <a name="5.8.0"></a>
 # [5.8.0](https://github.com/vidiun/vmc-ng/compare/v5.7.1...v5.8.0) (2019-04-18)
 
