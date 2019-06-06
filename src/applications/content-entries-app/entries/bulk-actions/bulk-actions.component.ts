@@ -1,30 +1,30 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/primeng';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { CategoriesStatus, CategoriesStatusMonitorService } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
 import { BulkAccessControlService, BulkAddCategoriesService, BulkAddTagsService, BulkChangeOwnerService, BulkDeleteService, BulkDownloadService, BulkRemoveCategoriesService, BulkRemoveTagsService, BulkSchedulingService, SchedulingParams } from './services';
-import { KalturaMediaEntry, KalturaMediaType, KalturaAccessControl, KalturaUser, KalturaPlaylistType, KalturaEntryStatus } from 'kaltura-ngx-client';
+import { VidiunMediaEntry, VidiunMediaType, VidiunAccessControl, VidiunUser, VidiunPlaylistType, VidiunEntryStatus } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './services/bulk-action-base.service';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import {CreateNewPlaylistEvent } from 'app-shared/kmc-shared/events/playlist-creation';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import {CreateNewPlaylistEvent } from 'app-shared/vmc-shared/events/playlist-creation';
 import { CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { BulkAddPublishersService } from './services/bulk-add-publishers.service';
 import { BulkAddEditorsService } from './services/bulk-add-editors.service';
 import { BulkRemoveEditorsService } from './services/bulk-remove-editors.service';
 import { BulkRemovePublishersService } from './services/bulk-remove-publishers.service';
-import { ContentNewCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views/content-new-category-view.service';
-import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { ContentNewCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views/content-new-category-view.service';
+import { ContentPlaylistViewSections, ReachAppViewService, ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
 import { BulkAddViewersService } from './services/bulk-add-viewers.service';
 import { BulkRemoveViewersService } from './services/bulk-remove-viewers.service';
 
 @Component({
-  selector: 'kBulkActions',
+  selector: 'vBulkActions',
   templateUrl: './bulk-actions.component.html',
   styleUrls: ['./bulk-actions.component.scss'],
     providers: [
@@ -47,12 +47,12 @@ import { BulkRemoveViewersService } from './services/bulk-remove-viewers.service
 })
 export class BulkActionsComponent implements OnInit, OnDestroy {
   private _allowedStatusesForPlaylist = [
-    KalturaEntryStatus.ready.toString(),
-    KalturaEntryStatus.moderate.toString(),
-    KalturaEntryStatus.blocked.toString()
+    VidiunEntryStatus.ready.toString(),
+    VidiunEntryStatus.moderate.toString(),
+    VidiunEntryStatus.blocked.toString()
   ];
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _bulkActionsMenu: MenuItem[] = [];
   public _bulkWindowWidth = 500;
   public _bulkWindowHeight = 500;
@@ -60,7 +60,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
 
   private _categoriesLocked = false;
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() blockerMessage: AreaBlockerMessage;
 
   @Output() onBulkChange = new EventEmitter<{ reload: boolean }>();
@@ -87,7 +87,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
     private _appEvents: AppEventsService,
               public _contentNewCategoryView: ContentNewCategoryViewService,
               private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _reachAppViewService: ReachAppViewService) {
 
   }
@@ -108,7 +108,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
 
   private _onAddToNewPlaylist(): void {
     const creationEvent = new CreateNewPlaylistEvent({
-      type: KalturaPlaylistType.staticList,
+      type: VidiunPlaylistType.staticList,
       name: this._appLocalization.get('applications.content.bulkActions.newPlaylist'),
     }, ContentPlaylistViewSections.Metadata);
     const invalidEntries = this.selectedEntries.filter(entry => {
@@ -123,7 +123,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _handlePlaylistCreationErrors(invalidEntries: KalturaMediaEntry[], creationEvent: CreateNewPlaylistEvent): void {
+  private _handlePlaylistCreationErrors(invalidEntries: VidiunMediaEntry[], creationEvent: CreateNewPlaylistEvent): void {
     const canCreate = this.selectedEntries.length !== invalidEntries.length;
 
     if (canCreate) {
@@ -196,7 +196,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // set access control changes
-  onAccessControlChanged(profile: KalturaAccessControl): void {
+  onAccessControlChanged(profile: VidiunAccessControl): void {
     this.executeService(this._bulkAccessControlService, profile);
   }
 
@@ -211,7 +211,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // add editors changed
-  onAddEditorsChanged(editors: KalturaUser[]): void {
+  onAddEditorsChanged(editors: VidiunUser[]): void {
     this.executeService(this._bulkAddEditorsService, editors.map(editor => editor.id));
   }
 
@@ -221,7 +221,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // add publishers changed
-  onAddPublishersChanged(publishers: KalturaUser[]): void {
+  onAddPublishersChanged(publishers: VidiunUser[]): void {
     this.executeService(this._bulkAddPublishersService, publishers.map(publisher => publisher.id));
   }
 
@@ -231,7 +231,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
     // add publishers changed
-    onAddViewersChanged(viewers: KalturaUser[]): void {
+    onAddViewersChanged(viewers: VidiunUser[]): void {
         this.executeService(this._bulkAddViewersService, viewers.map(viewer => viewer.id));
     }
 
@@ -251,7 +251,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   }
 
   // owner changed
-  onOwnerChanged(owner: KalturaUser): void {
+  onOwnerChanged(owner: VidiunUser): void {
     this.executeService(this._bulkChangeOwnerService, owner);
   }
   // download changed
@@ -290,7 +290,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
   // bulk download initial check
   private downloadEntries(): void {
     // check for single image selection - immediate download
-    if (this.selectedEntries.length === 1 && this.selectedEntries[0].mediaType === KalturaMediaType.image) {
+    if (this.selectedEntries.length === 1 && this.selectedEntries[0].mediaType === VidiunMediaType.image) {
       this._browserService.openLink(this.selectedEntries[0].downloadUrl + '/file_name/name');
     } else {
       this.openBulkActionWindow('download', 570, 500);
@@ -353,17 +353,17 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
               label: this._appLocalization.get('applications.content.bulkActions.download'), command: (event) => {
               this.downloadEntries();
           },
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DOWNLOAD)
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DOWNLOAD)
           },
           {
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
               label: this._appLocalization.get('applications.content.bulkActions.changeOwner'), command: (event) => {
               this.openBulkActionWindow('changeOwner', 500, 280);
           }
           },
         {
           label: this._appLocalization.get('applications.content.bulkActions.addRemovePublishers'),
-          disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+          disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
           items: [
             {
               label: this._appLocalization.get('applications.content.bulkActions.addPublishers'),
@@ -381,7 +381,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
         },
         {
           label: this._appLocalization.get('applications.content.bulkActions.addRemoveEditors'),
-          disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+          disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
           items: [
             {
               label: this._appLocalization.get('applications.content.bulkActions.addEditors'),
@@ -399,7 +399,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
         },
           {
               label: this._appLocalization.get('applications.content.bulkActions.addRemoveViewers'),
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ENTRY_USERS),
               items: [
                   {
                       label: this._appLocalization.get('applications.content.bulkActions.addViewers'),
@@ -428,7 +428,7 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
                   command: (event) => {
                       this.performBulkAction('addToNewPlaylist');
                   },
-                disabled: !this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_ADD)
+                disabled: !this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_ADD)
               }]
           },
           {
@@ -448,8 +448,8 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
           },
           {
               disabled: !this._permissionsService.hasAnyPermissions([
-                KMCPermissions.CONTENT_MANAGE_METADATA,
-                KMCPermissions.CONTENT_MODERATE_METADATA
+                VMCPermissions.CONTENT_MANAGE_METADATA,
+                VMCPermissions.CONTENT_MODERATE_METADATA
               ]),
               label: this._appLocalization.get('applications.content.bulkActions.addRemoveTags'), items: [
               {
@@ -474,10 +474,10 @@ export class BulkActionsComponent implements OnInit, OnDestroy {
               command: (event) => {
                   this.openBulkActionWindow('setAccessControl', 500, 550);
               },
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ACCESS_CONTROL)
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ACCESS_CONTROL)
           },
           {
-              disabled: !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_SCHEDULE),
+              disabled: !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_SCHEDULE),
               label: this._appLocalization.get('applications.content.bulkActions.setScheduling'), command: (event) => {
               this.openBulkActionWindow('setScheduling', 500, 500);
           }

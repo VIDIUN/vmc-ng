@@ -2,36 +2,36 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { FiltersStoreBase, NumberTypeAdapter, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { StringTypeAdapter } from '@kaltura-ng/mc-shared';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { FiltersStoreBase, NumberTypeAdapter, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { StringTypeAdapter } from '@vidiun-ng/mc-shared';
 import { SortDirection } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaAccessControlFilter } from 'kaltura-ngx-client';
-import { AccessControlListAction } from 'kaltura-ngx-client';
-import { KalturaLimitFlavorsRestriction } from 'kaltura-ngx-client';
-import { KalturaSiteRestriction } from 'kaltura-ngx-client';
-import { KalturaCountryRestriction } from 'kaltura-ngx-client';
-import { KalturaIpAddressRestriction } from 'kaltura-ngx-client';
-import { KalturaSessionRestriction } from 'kaltura-ngx-client';
-import { KalturaSiteRestrictionType } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaCountryRestrictionType } from 'kaltura-ngx-client';
-import { KalturaIpAddressRestrictionType } from 'kaltura-ngx-client';
-import { KalturaLimitFlavorsRestrictionType } from 'kaltura-ngx-client';
-import { KalturaPreviewRestriction } from 'kaltura-ngx-client';
-import { KalturaAccessControl } from 'kaltura-ngx-client';
-import { AccessControlDeleteAction } from 'kaltura-ngx-client';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { AccessControlUpdateAction } from 'kaltura-ngx-client';
-import { AccessControlAddAction } from 'kaltura-ngx-client';
-import { KalturaNullableBoolean } from 'kaltura-ngx-client';
-import { SettingsAccessControlMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { FlavoursStore } from 'app-shared/kmc-shared';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunAccessControlFilter } from 'vidiun-ngx-client';
+import { AccessControlListAction } from 'vidiun-ngx-client';
+import { VidiunLimitFlavorsRestriction } from 'vidiun-ngx-client';
+import { VidiunSiteRestriction } from 'vidiun-ngx-client';
+import { VidiunCountryRestriction } from 'vidiun-ngx-client';
+import { VidiunIpAddressRestriction } from 'vidiun-ngx-client';
+import { VidiunSessionRestriction } from 'vidiun-ngx-client';
+import { VidiunSiteRestrictionType } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunCountryRestrictionType } from 'vidiun-ngx-client';
+import { VidiunIpAddressRestrictionType } from 'vidiun-ngx-client';
+import { VidiunLimitFlavorsRestrictionType } from 'vidiun-ngx-client';
+import { VidiunPreviewRestriction } from 'vidiun-ngx-client';
+import { VidiunAccessControl } from 'vidiun-ngx-client';
+import { AccessControlDeleteAction } from 'vidiun-ngx-client';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { AccessControlUpdateAction } from 'vidiun-ngx-client';
+import { AccessControlAddAction } from 'vidiun-ngx-client';
+import { VidiunNullableBoolean } from 'vidiun-ngx-client';
+import { SettingsAccessControlMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { FlavoursStore } from 'app-shared/vmc-shared';
 import { switchMap, map } from 'rxjs/operators';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 const localStoragePageSizeKey = 'accessControlProfiles.list.pageSize';
 
@@ -48,7 +48,7 @@ export interface AccessControlProfileRestriction<T> {
   label: string;
 }
 
-export interface ExtendedKalturaAccessControl extends KalturaAccessControl {
+export interface ExtendedVidiunAccessControl extends VidiunAccessControl {
   view: {
     hasAdditionalInfo: boolean,
     domain: AccessControlProfileRestriction<string[]>;
@@ -62,7 +62,7 @@ export interface ExtendedKalturaAccessControl extends KalturaAccessControl {
 @Injectable()
 export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlProfilesFilters> implements OnDestroy {
   private _profiles = {
-    data: new BehaviorSubject<{ items: ExtendedKalturaAccessControl[], totalCount: number }>({ items: [], totalCount: 0 }),
+    data: new BehaviorSubject<{ items: ExtendedVidiunAccessControl[], totalCount: number }>({ items: [], totalCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
 
@@ -77,12 +77,12 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
   };
 
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               private _flavorsStore: FlavoursStore,
               settingsAccessControlMainView: SettingsAccessControlMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('AccessControlProfilesStore'));
     if (settingsAccessControlMainView.isAvailable()) {
         this._prepare();
@@ -159,12 +159,12 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
 
   }
 
-  private _buildQueryRequest(): Observable<{ accessControlList: { items: ExtendedKalturaAccessControl[], totalCount: number }, flavorsList: KalturaFlavorParams[] }> {
+  private _buildQueryRequest(): Observable<{ accessControlList: { items: ExtendedVidiunAccessControl[], totalCount: number }, flavorsList: VidiunFlavorParams[] }> {
     try {
       // create request items
-      const filter = new KalturaAccessControlFilter({});
+      const filter = new VidiunAccessControlFilter({});
       const data: AccessControlProfilesFilters = this._getFiltersAsReadonly();
-      let pager: KalturaFilterPager = null;
+      let pager: VidiunFilterPager = null;
 
       // update the sort by args
       if (data.sortBy) {
@@ -173,14 +173,14 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager({
+        pager = new VidiunFilterPager({
           pageSize: data.pageSize,
           pageIndex: data.pageIndex + 1
         });
       }
 
       // build the request
-      return this._kalturaServerClient.request(new AccessControlListAction({ filter, pager }))
+      return this._vidiunServerClient.request(new AccessControlListAction({ filter, pager }))
           .pipe(
              switchMap((accessControlList) => this._flavorsStore.get().pipe(map(flavors => ({ accessControlList, flavors })))  ),
               map(({ accessControlList: originalAccessControlList, flavors }) => {
@@ -200,7 +200,7 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
     }
   }
 
-  private _createExtendedAccessControl(item: KalturaAccessControl): ExtendedKalturaAccessControl {
+  private _createExtendedAccessControl(item: VidiunAccessControl): ExtendedVidiunAccessControl {
     return Object.assign(item, {
       view: {
         hasAdditionalInfo: false,
@@ -233,17 +233,17 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
     });
   }
 
-  private _mapProfilesResponse(accessControlList: KalturaAccessControl[], flavorsList): ExtendedKalturaAccessControl[] {
+  private _mapProfilesResponse(accessControlList: VidiunAccessControl[], flavorsList): ExtendedVidiunAccessControl[] {
     const result = accessControlList.map(item => this._createExtendedAccessControl(item));
 
     result.forEach((item) => {
       let hasAdditionalInfo = !!item.description; // default to has additional if has description
       if (item.restrictions && item.restrictions.length) {
         item.restrictions.forEach(restriction => {
-          if (restriction instanceof KalturaSiteRestriction) {
+          if (restriction instanceof VidiunSiteRestriction) {
             hasAdditionalInfo = true;
             const details = restriction.siteList.split(',');
-            const isAuthorized = restriction.siteRestrictionType === KalturaSiteRestrictionType.allowSiteList;
+            const isAuthorized = restriction.siteRestrictionType === VidiunSiteRestrictionType.allowSiteList;
             const label = isAuthorized
               ? this._appLocalization.get('applications.settings.accessControl.restrictions.authorized', [details.length])
               : this._appLocalization.get('applications.settings.accessControl.restrictions.blocked', [details.length]);
@@ -255,9 +255,9 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
             };
           }
 
-          if (restriction instanceof KalturaCountryRestriction) {
+          if (restriction instanceof VidiunCountryRestriction) {
             hasAdditionalInfo = true;
-            const isAuthorized = restriction.countryRestrictionType === KalturaCountryRestrictionType.allowCountryList;
+            const isAuthorized = restriction.countryRestrictionType === VidiunCountryRestrictionType.allowCountryList;
             const details = restriction.countryList.split(',').map(countryCode => countryCode.toLowerCase());
             const label = isAuthorized
               ? this._appLocalization.get('applications.settings.accessControl.restrictions.authorized', [details.length])
@@ -270,10 +270,10 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
             };
           }
 
-          if (restriction instanceof KalturaIpAddressRestriction) {
+          if (restriction instanceof VidiunIpAddressRestriction) {
             hasAdditionalInfo = true;
             const details = restriction.ipAddressList.split(',');
-            const isAuthorized = restriction.ipAddressRestrictionType === KalturaIpAddressRestrictionType.allowList;
+            const isAuthorized = restriction.ipAddressRestrictionType === VidiunIpAddressRestrictionType.allowList;
             const label = isAuthorized
               ? this._appLocalization.get('applications.settings.accessControl.restrictions.authorized', [details.length])
               : this._appLocalization.get('applications.settings.accessControl.restrictions.blocked', [details.length]);
@@ -285,10 +285,10 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
             };
           }
 
-          if (restriction instanceof KalturaLimitFlavorsRestriction) {
+          if (restriction instanceof VidiunLimitFlavorsRestriction) {
             hasAdditionalInfo = true;
             const flavorParamsIds = restriction.flavorParamsIds.split(',');
-            const isAuthorized = restriction.limitFlavorsRestrictionType === KalturaLimitFlavorsRestrictionType.allowList;
+            const isAuthorized = restriction.limitFlavorsRestrictionType === VidiunLimitFlavorsRestrictionType.allowList;
             const label = isAuthorized
               ? this._appLocalization.get('applications.settings.accessControl.restrictions.authorized', [flavorParamsIds.length])
               : this._appLocalization.get('applications.settings.accessControl.restrictions.blocked', [flavorParamsIds.length]);
@@ -306,13 +306,13 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
             };
           }
 
-          if (restriction instanceof KalturaSessionRestriction) {
+          if (restriction instanceof VidiunSessionRestriction) {
             // this restriction shouldn't set 'hasAdditionalInfo' because it has no impact on the details area
-            item.view.advancedSecurity.label = this._appLocalization.get('applications.settings.accessControl.restrictions.ks');
+            item.view.advancedSecurity.label = this._appLocalization.get('applications.settings.accessControl.restrictions.vs');
             item.view.advancedSecurity.details.secureVideo = true;
           }
 
-          if (restriction instanceof KalturaPreviewRestriction) {
+          if (restriction instanceof VidiunPreviewRestriction) {
             hasAdditionalInfo = true;
             item.view.advancedSecurity.label += this._appLocalization.get('applications.settings.accessControl.restrictions.freePreview');
             item.view.advancedSecurity.details.preview = restriction.previewLength;
@@ -332,7 +332,7 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
     });
 
     // put default profile on top of the table if there's default profile in the response
-    const defaultProfileIndex = result.findIndex(profile => profile.isDefault === KalturaNullableBoolean.trueValue);
+    const defaultProfileIndex = result.findIndex(profile => profile.isDefault === VidiunNullableBoolean.trueValue);
     if (defaultProfileIndex !== -1) {
       const defaultProfile = result.splice(defaultProfileIndex, 1);
       result.unshift(...defaultProfile);
@@ -374,10 +374,10 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
     }
   }
 
-  public deleteProfiles(profiles: KalturaAccessControl[]): Observable<void> {
+  public deleteProfiles(profiles: VidiunAccessControl[]): Observable<void> {
     const actions = profiles.map(({ id }) => new AccessControlDeleteAction({ id }));
-    return this._kalturaServerClient
-      .multiRequest(new KalturaMultiRequest(...actions))
+    return this._vidiunServerClient
+      .multiRequest(new VidiunMultiRequest(...actions))
       .map((response) => {
         if (response && response.length) {
           const failedResponse = response.find(res => !!res.error);
@@ -388,14 +388,14 @@ export class AccessControlProfilesStore extends FiltersStoreBase<AccessControlPr
       });
   }
 
-  public saveProfile(profile: KalturaAccessControl): Observable<void> {
+  public saveProfile(profile: VidiunAccessControl): Observable<void> {
     const saveAction = profile.id
       ? new AccessControlUpdateAction({ id: profile.id, accessControl: profile })
       : new AccessControlAddAction({ accessControl: profile });
 
     profile.allowEmptyArray('restrictions');
 
-    return this._kalturaServerClient.request(saveAction)
+    return this._vidiunServerClient.request(saveAction)
       .map(() => {
       });
   }

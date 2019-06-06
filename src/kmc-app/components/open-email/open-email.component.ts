@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 export interface EmailConfig {
     email: string;
@@ -10,7 +10,7 @@ export interface EmailConfig {
 }
 
 @Component({
-  selector: 'kOpenEmail',
+  selector: 'vOpenEmail',
   templateUrl: './open-email.component.html',
   styleUrls: ['./open-email.component.scss']
 })

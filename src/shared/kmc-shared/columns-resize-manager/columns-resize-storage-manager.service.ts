@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken, Renderer2 } from '@angular/core';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 export interface ResizableColumns {
     [columnName: string]: string | number;
@@ -20,7 +20,7 @@ export class ColumnsResizeStorageManagerService {
         return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     }
 
-    constructor(private _logger: KalturaLogger,
+    constructor(private _logger: VidiunLogger,
                 private _browserService: BrowserService) {
         this._logger = _logger.subLogger('ColumnsResizeStorageManagerService');
     }

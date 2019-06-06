@@ -7,24 +7,24 @@
     width: 100%;
 }
 
-.kProgressBar {
+.vProgressBar {
     height: 3px;
     position: relative;
     overflow: hidden;
     background: transparent;
 
-    .kProgress {
+    .vProgress {
         width: 0%;
         height: 100%;
-        background-color: $kPrimary;
+        background-color: $vPrimary;
         animation-fill-mode: forwards;
 
-        &.kProgressStep1 {
+        &.vProgressStep1 {
             width: 70%;
             animation: progressStep1 8s ease-in-out;
         }
 
-        &.kProgressStep2 {
+        &.vProgressStep2 {
             width: 100%;
             animation: progressStep2 1s ease-in-out;
         }

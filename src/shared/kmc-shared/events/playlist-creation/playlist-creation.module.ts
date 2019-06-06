@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule, Optional, Self } from '@angular/core';
-import { PlaylistCreationService } from 'shared/kmc-shared/events/playlist-creation/playlist-creation.service';
+import { PlaylistCreationService } from 'shared/vmc-shared/events/playlist-creation/playlist-creation.service';
 
 @NgModule({
   imports: <any[]>[],

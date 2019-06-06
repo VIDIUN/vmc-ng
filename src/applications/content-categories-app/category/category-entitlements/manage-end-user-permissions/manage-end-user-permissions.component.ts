@@ -4,48 +4,48 @@ import {
     EndUserPermissionsUser, ManageEndUserPermissionsService,
     UsersFilters
 } from './manage-end-user-permissions.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import {
     ManageEndUserPermissionsRefineFiltersService,
     RefineList
 } from './manage-end-user-permissions-refine-filters.service';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface UserActionData {
   action: 'activate' | 'deactivate' | 'permissionLevel'| 'updateMethod' | 'delete',
   users: EndUserPermissionsUser | EndUserPermissionsUser[],
   payload: {
-    level?: KalturaCategoryUserPermissionLevel, method?: KalturaUpdateMethodType
+    level?: VidiunCategoryUserPermissionLevel, method?: VidiunUpdateMethodType
   }
 }
 
 @Component({
-  selector: 'kManageEndUsers',
+  selector: 'vManageEndUsers',
   templateUrl: './manage-end-user-permissions.component.html',
   styleUrls: ['./manage-end-user-permissions.component.scss'],
   providers: [
       ManageEndUserPermissionsService,
       ManageEndUserPermissionsRefineFiltersService,
-      KalturaLogger.createLogger('ManageEndUserPermissionsComponent')
+      VidiunLogger.createLogger('ManageEndUserPermissionsComponent')
   ]
 })
 export class ManageEndUserPermissionsComponent implements OnInit, OnDestroy {
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _selectedUsers: EndUserPermissionsUser[] = [];
   public _users: EndUserPermissionsUser[];
   public _usersCount: number;
   public _actualUsersCount = { updated: false, total: 0};
-  @Input() category: KalturaCategory = null;
-  @Input() parentCategory: KalturaCategory = null;
+  @Input() category: VidiunCategory = null;
+  @Input() parentCategory: VidiunCategory = null;
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Input() categoryInheritUserPermissions = false;
 
@@ -68,7 +68,7 @@ export class ManageEndUserPermissionsComponent implements OnInit, OnDestroy {
               private _refineFiltersService: ManageEndUserPermissionsRefineFiltersService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -168,7 +168,7 @@ export class ManageEndUserPermissionsComponent implements OnInit, OnDestroy {
                     }
                 },
                 error => {
-                    console.warn('[kmcng] -> could not load users'); // navigate to error page
+                    console.warn('[vmcng] -> could not load users'); // navigate to error page
                     throw error;
                 });
     }

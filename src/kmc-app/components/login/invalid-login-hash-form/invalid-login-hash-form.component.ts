@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { LoginScreens } from '../login.component';
 
 @Component({
-  selector: 'kKMCInvalidLoginHash',
+  selector: 'vVMCInvalidLoginHash',
   templateUrl: './invalid-login-hash-form.component.html',
   styleUrls: ['./invalid-login-hash-form.component.scss']
 })

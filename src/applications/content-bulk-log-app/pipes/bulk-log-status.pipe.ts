@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaBatchJobStatus } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunBatchJobStatus } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kBulkLogTableStatus' })
+@Pipe({ name: 'vBulkLogTableStatus' })
 
 export class BulkLogStatusPipe implements PipeTransform {
 
@@ -11,37 +11,37 @@ export class BulkLogStatusPipe implements PipeTransform {
 
   transform(value: number): string {
     switch (value) {
-      case KalturaBatchJobStatus.pending:
+      case VidiunBatchJobStatus.pending:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.pending');
 
-      case KalturaBatchJobStatus.queued:
+      case VidiunBatchJobStatus.queued:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.queued');
 
-      case KalturaBatchJobStatus.processing:
+      case VidiunBatchJobStatus.processing:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.processing');
 
-      case KalturaBatchJobStatus.finished:
+      case VidiunBatchJobStatus.finished:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.finished');
 
-      case KalturaBatchJobStatus.aborted:
+      case VidiunBatchJobStatus.aborted:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.aborted');
 
-      case KalturaBatchJobStatus.failed:
+      case VidiunBatchJobStatus.failed:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.failed');
 
-      case KalturaBatchJobStatus.almostDone:
+      case VidiunBatchJobStatus.almostDone:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.almostDone');
 
-      case KalturaBatchJobStatus.fatal:
+      case VidiunBatchJobStatus.fatal:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.fatal');
 
-      case KalturaBatchJobStatus.retry:
+      case VidiunBatchJobStatus.retry:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.retry');
 
-      case KalturaBatchJobStatus.dontProcess:
+      case VidiunBatchJobStatus.dontProcess:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.dontProcess');
 
-      case KalturaBatchJobStatus.finishedPartially:
+      case VidiunBatchJobStatus.finishedPartially:
         return this._appLocalization.get('applications.content.bulkUpload.bulkStatus.finishedPartially');
 
       default:

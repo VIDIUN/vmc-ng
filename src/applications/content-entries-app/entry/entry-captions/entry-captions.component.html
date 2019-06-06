@@ -1,17 +1,17 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <div class="kCaptions" #captions>
-        <p class="kTitle">{{'applications.content.entryDetails.captions.captions' | translate}}</p>
-        <button type="button" class="kButtonDefault" pButton
-                icon="kIconplus"
+    <div class="vCaptions" #captions>
+        <p class="vTitle">{{'applications.content.entryDetails.captions.captions' | translate}}</p>
+        <button type="button" class="vButtonDefault" pButton
+                icon="vIconplus"
                 label="{{'applications.content.entryDetails.captions.add' | translate}}"
-                *ngIf="_kmcPermissions.CAPTION_MODIFY | kNgIfPermitted"
+                *ngIf="_vmcPermissions.CAPTION_MODIFY | vNgIfPermitted"
                 (click)="_addCaption()"></button>
-        <button type="button" class="kButtonDefault" pButton
+        <button type="button" class="vButtonDefault" pButton
                 label="{{'applications.content.entryDetails.captions.request' | translate}}"
                 *ngIf="_requestCaptionsAvailable"
                 (click)="_requestCaptions()"></button>
-        <div class="kTable">
+        <div class="vTable">
             <p-table scrollHeight="100%"
                      [value]="(_widgetService._captions$ | async)?.items"
                      [scrollable]="true">
@@ -43,7 +43,7 @@
                         <td>{{caption.language}}</td>
                         <td>
                             <span *ngIf="!caption.uploadFailure">{{_widgetService._getCaptionStatus(caption)}}</span>
-                            <div *ngIf="caption.uploadFailure" class="kError">
+                            <div *ngIf="caption.uploadFailure" class="vError">
                                 <span>{{'applications.content.entryDetails.captions.uploadError' | translate}}</span>
                             </div>
                         </td>
@@ -57,8 +57,8 @@
                             </a>
                         </td>
                         <td [ngStyle]="{'width':'80px'}">
-                            <div class="kCaptionsTableActions" *ngIf="caption.status === _captionStatusReady">
-                                <button type="button" class="kMoreActionsButton" pButton icon="kIconmore"
+                            <div class="vCaptionsTableActions" *ngIf="caption.status === _captionStatusReady">
+                                <button type="button" class="vMoreActionsButton" pButton icon="vIconmore"
                                         (click)="openActionsMenu($event, caption)"></button>
                             </div>
                             <div *ngIf="caption.uploading">
@@ -84,13 +84,13 @@
         </div>
     </div>
 
-    <p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+    <p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 
-    <kPopupWidget #editPopup data-aid="editCaptionPopup" [popupWidth]="380" [popupHeight]="472" [modal]="true">
+    <vPopupWidget #editPopup data-aid="editCaptionPopup" [popupWidth]="380" [popupHeight]="472" [modal]="true">
         <ng-template>
-            <kEntryCaptionsEdit [currentCaption]="_widgetService.currentCaption"
-                                [parentPopupWidget]="editPopup"></kEntryCaptionsEdit>
+            <vEntryCaptionsEdit [currentCaption]="_widgetService.currentCaption"
+                                [parentPopupWidget]="editPopup"></vEntryCaptionsEdit>
         </ng-template>
-    </kPopupWidget>
+    </vPopupWidget>
 
-</k-area-blocker>
+</v-area-blocker>

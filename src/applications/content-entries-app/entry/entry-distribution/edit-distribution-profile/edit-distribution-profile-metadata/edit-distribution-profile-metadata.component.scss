@@ -1,70 +1,70 @@
 @import 'app-theme/_variables.scss';
 
-.kEditDistributionProfileMetadata {
-  .kRow {
+.vEditDistributionProfileMetadata {
+  .vRow {
     display: flex;
     padding-top: 20px;
 
-    &.kFirstRow {
+    &.vFirstRow {
       padding-top: 0;
     }
 
-    .kLabel {
+    .vLabel {
       width: 172px;
       flex: 0 0 auto;
       height: 18px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
       line-height: 18px;
       padding: 8px 4px;
     }
 
-    .kReadonlyData {
+    .vReadonlyData {
       padding: 8px 0;
       font-size: 15px;
 
-      .kIconinactive {
-        color: $kGrayscale3;
+      .vIconinactive {
+        color: $vGrayscale3;
         margin-right: 8px;
         position: relative;
         top: 1px;
       }
     }
 
-    .kControl {
+    .vControl {
       height: 34px;
-      color: $kGrayscale2;
+      color: $vGrayscale2;
       width: 500px;
       border-radius: 3px;
 
-      &.kDateControl {
+      &.vDateControl {
         width: 176px;
       }
 
-      &.kControlInvalid {
-        border: 1px solid $kDandger;
+      &.vControlInvalid {
+        border: 1px solid $vDandger;
       }
 
-      &.kMetadataControl {
+      &.vMetadataControl {
         padding: 0 10px;
       }
     }
-    .KTextArea {
+    .VTextArea {
       height: 75px;
       padding: 10px;
     }
   }
 
-  .kFormHeader {
+  .vFormHeader {
     margin-top: 32px;
     margin-bottom: 24px;
   }
 }
 
-:host /deep/ .kEditDistributionProfileMetadata {
+:host /deep/ .vEditDistributionProfileMetadata {
   .ui-inputtext:disabled {
-    border-color: $kGrayscale2;
-    color: $kGrayscale2;
+    border-color: $vGrayscale2;
+    color: $vGrayscale2;
   }
 
   .ui-autocomplete-multiple-container {

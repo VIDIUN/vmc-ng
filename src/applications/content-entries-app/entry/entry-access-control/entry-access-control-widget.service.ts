@@ -3,30 +3,30 @@ import { Observable } from 'rxjs';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {SelectItem} from 'primeng/primeng';
 
-import {KalturaMultiRequest} from 'kaltura-ngx-client';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaAccessControl} from 'kaltura-ngx-client';
-import {KalturaSiteRestriction} from 'kaltura-ngx-client';
-import {KalturaSiteRestrictionType} from 'kaltura-ngx-client';
-import {KalturaCountryRestriction} from 'kaltura-ngx-client';
-import {KalturaCountryRestrictionType} from 'kaltura-ngx-client';
-import {KalturaIpAddressRestriction} from 'kaltura-ngx-client';
-import {KalturaIpAddressRestrictionType} from 'kaltura-ngx-client';
-import {KalturaLimitFlavorsRestriction} from 'kaltura-ngx-client';
-import {KalturaLimitFlavorsRestrictionType} from 'kaltura-ngx-client';
-import {KalturaSessionRestriction} from 'kaltura-ngx-client';
-import {KalturaPreviewRestriction} from 'kaltura-ngx-client';
-import {KalturaFlavorParams} from 'kaltura-ngx-client';
-import {AccessControlProfileStore, FlavoursStore} from 'app-shared/kmc-shared';
-import {KalturaUtils} from '@kaltura-ng/kaltura-common';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {VidiunMultiRequest} from 'vidiun-ngx-client';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunAccessControl} from 'vidiun-ngx-client';
+import {VidiunSiteRestriction} from 'vidiun-ngx-client';
+import {VidiunSiteRestrictionType} from 'vidiun-ngx-client';
+import {VidiunCountryRestriction} from 'vidiun-ngx-client';
+import {VidiunCountryRestrictionType} from 'vidiun-ngx-client';
+import {VidiunIpAddressRestriction} from 'vidiun-ngx-client';
+import {VidiunIpAddressRestrictionType} from 'vidiun-ngx-client';
+import {VidiunLimitFlavorsRestriction} from 'vidiun-ngx-client';
+import {VidiunLimitFlavorsRestrictionType} from 'vidiun-ngx-client';
+import {VidiunSessionRestriction} from 'vidiun-ngx-client';
+import {VidiunPreviewRestriction} from 'vidiun-ngx-client';
+import {VidiunFlavorParams} from 'vidiun-ngx-client';
+import {AccessControlProfileStore, FlavoursStore} from 'app-shared/vmc-shared';
+import {VidiunUtils} from '@vidiun-ng/vidiun-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 
 import 'rxjs/add/observable/forkJoin';
 import * as R from 'ramda';
 import {EntryWidget} from '../entry-widget';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
@@ -35,8 +35,8 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
 
   public _accessControlProfiles$ = this._accessControlProfiles.asObservable();
 
-  private _selectedProfile: KalturaAccessControl = null;
-  public set selectedProfile(profile: KalturaAccessControl) {
+  private _selectedProfile: VidiunAccessControl = null;
+  public set selectedProfile(profile: VidiunAccessControl) {
     this._selectedProfile = profile;
     this._setRestrictions();
   }
@@ -51,12 +51,12 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
   public _flavourRestriction: string = "";
   public _advancedRestriction: string = "";
 
-  private _flavourParams: KalturaFlavorParams[] = [];
+  private _flavourParams: VidiunFlavorParams[] = [];
 
   constructor(private _accessControlProfileStore: AccessControlProfileStore,
               private _appLocalization: AppLocalization,
               private _flavoursStore: FlavoursStore,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(ContentEntryViewSections.AccessControl, logger);
   }
 
@@ -84,11 +84,11 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
               const defaultIndex = R.findIndex(R.propEq('isDefault', 1))(ACProfiles);
               if (defaultIndex > -1) {
                 // put the default profile at the beginning of the profiles array
-                const defaultProfile: KalturaAccessControl[] = ACProfiles.splice(defaultIndex, 1);
+                const defaultProfile: VidiunAccessControl[] = ACProfiles.splice(defaultIndex, 1);
                 ACProfiles.splice(0, 0, defaultProfile[0]);
               }
               let profilesDataProvider: SelectItem[] = [];
-              ACProfiles.forEach((profile: KalturaAccessControl) => {
+              ACProfiles.forEach((profile: VidiunAccessControl) => {
                 profilesDataProvider.push({"label": profile.name, "value": profile});
               });
               this._flavourParams = response[1].items;
@@ -112,7 +112,7 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
     }
   }
 
-  protected onDataSaving(data: KalturaMediaEntry, request: KalturaMultiRequest) {
+  protected onDataSaving(data: VidiunMediaEntry, request: VidiunMultiRequest) {
     if (this.selectedProfile) {
       data.accessControlId = this.selectedProfile.id;
     }
@@ -126,7 +126,7 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
   private _setProfile() {
     // search for the current entry access profile and select it in the drop down if found
     let profilesDataProvider = this._accessControlProfiles.getValue().items;
-    let profilesArr: KalturaAccessControl[] = [];
+    let profilesArr: VidiunAccessControl[] = [];
     profilesDataProvider.forEach(profile => {
       profilesArr.push(profile.value)
     });
@@ -147,57 +147,57 @@ export class EntryAccessControlWidget extends EntryWidget implements OnDestroy {
     if (restrictions.length) {
       restrictions.forEach(restriction => {
         // domains restrictions
-        if (restriction instanceof KalturaSiteRestriction) {
-          if (restriction.siteRestrictionType === KalturaSiteRestrictionType.allowSiteList) {
+        if (restriction instanceof VidiunSiteRestriction) {
+          if (restriction.siteRestrictionType === VidiunSiteRestrictionType.allowSiteList) {
             this._domainsRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.allowDomains', {"0": restriction.siteList});
           }
-          if (restriction.siteRestrictionType === KalturaSiteRestrictionType.restrictSiteList) {
+          if (restriction.siteRestrictionType === VidiunSiteRestrictionType.restrictSiteList) {
             this._domainsRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.blockDomains', {"0": restriction.siteList});
           }
         }
         // countries restrictions
-        if (restriction instanceof KalturaCountryRestriction) {
-          if (restriction.countryRestrictionType === KalturaCountryRestrictionType.allowCountryList) {
+        if (restriction instanceof VidiunCountryRestriction) {
+          if (restriction.countryRestrictionType === VidiunCountryRestrictionType.allowCountryList) {
             this._countriesRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.allowCountries', {"0": this._getCountriesByCode(restriction.countryList)});
           }
-          if (restriction.countryRestrictionType === KalturaCountryRestrictionType.restrictCountryList) {
+          if (restriction.countryRestrictionType === VidiunCountryRestrictionType.restrictCountryList) {
             this._countriesRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.blockCountries', {"0": this._getCountriesByCode(restriction.countryList)});
           }
         }
         // IP restrictions
-        if (restriction instanceof KalturaIpAddressRestriction) {
-          if (restriction.ipAddressRestrictionType === KalturaIpAddressRestrictionType.allowList) {
+        if (restriction instanceof VidiunIpAddressRestriction) {
+          if (restriction.ipAddressRestrictionType === VidiunIpAddressRestrictionType.allowList) {
             this._ipRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.allowIPs', {"0": restriction.ipAddressList});
           }
-          if (restriction.ipAddressRestrictionType === KalturaIpAddressRestrictionType.restrictList) {
+          if (restriction.ipAddressRestrictionType === VidiunIpAddressRestrictionType.restrictList) {
             this._ipRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.blockIPs', {"0": restriction.ipAddressList});
           }
         }
         // Flavour restrictions
-        if (restriction instanceof KalturaLimitFlavorsRestriction && this._flavourParams.length) {
+        if (restriction instanceof VidiunLimitFlavorsRestriction && this._flavourParams.length) {
           // convert flavour IDs to flavour names
           let flavourIDs = restriction.flavorParamsIds.split(",");
           let flavourNames = [];
           flavourIDs.forEach(flavourId => {
-            let flavour: KalturaFlavorParams = R.find(R.propEq('id', parseInt(flavourId)))(this._flavourParams);
+            let flavour: VidiunFlavorParams = R.find(R.propEq('id', parseInt(flavourId)))(this._flavourParams);
             if (flavour !== undefined) {
               flavourNames.push(flavour.name);
             }
           });
 
-          if (restriction.limitFlavorsRestrictionType === KalturaLimitFlavorsRestrictionType.allowList) {
+          if (restriction.limitFlavorsRestrictionType === VidiunLimitFlavorsRestrictionType.allowList) {
             this._flavourRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.allowFlavours', {"0": flavourNames.join(", ")});
           }
-          if (restriction.limitFlavorsRestrictionType === KalturaLimitFlavorsRestrictionType.restrictList) {
+          if (restriction.limitFlavorsRestrictionType === VidiunLimitFlavorsRestrictionType.restrictList) {
             this._flavourRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.blockFlavours', {"0": flavourNames.join(", ")});
           }
         }
         // Advanced restrictions
-        if (restriction instanceof KalturaSessionRestriction) {
-          this._advancedRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.ks');
+        if (restriction instanceof VidiunSessionRestriction) {
+          this._advancedRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.vs');
         }
-        if (restriction instanceof KalturaPreviewRestriction) {
-          this._advancedRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.freePreview', {"0": KalturaUtils.formatTime(restriction.previewLength, true)});
+        if (restriction instanceof VidiunPreviewRestriction) {
+          this._advancedRestriction = this._appLocalization.get('applications.content.entryDetails.accessControl.freePreview', {"0": VidiunUtils.formatTime(restriction.previewLength, true)});
         }
       });
     }

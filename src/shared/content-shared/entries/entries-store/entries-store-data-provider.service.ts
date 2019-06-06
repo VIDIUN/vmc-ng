@@ -1,32 +1,32 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {EntriesDataProvider, EntriesFilters, MetadataProfileData, SortDirection} from './entries-store.service';
-import {KalturaBaseEntry} from 'kaltura-ngx-client';
+import {VidiunBaseEntry} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaMetadataSearchItem} from 'kaltura-ngx-client';
-import {KalturaNullableBoolean} from 'kaltura-ngx-client';
-import {KalturaSearchOperatorType} from 'kaltura-ngx-client';
-import {KalturaSearchOperator} from 'kaltura-ngx-client';
-import {KalturaSearchCondition} from 'kaltura-ngx-client';
-import {KalturaContentDistributionSearchItem} from 'kaltura-ngx-client';
-import {KalturaLiveStreamEntry} from 'kaltura-ngx-client';
-import {KalturaExternalMediaEntry} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {BaseEntryListAction} from 'kaltura-ngx-client';
-import {KalturaMediaEntryFilter} from 'kaltura-ngx-client';
-import {KalturaLiveStreamAdminEntry} from 'kaltura-ngx-client';
-import {KalturaUtils} from '@kaltura-ng/kaltura-common';
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunMetadataSearchItem} from 'vidiun-ngx-client';
+import {VidiunNullableBoolean} from 'vidiun-ngx-client';
+import {VidiunSearchOperatorType} from 'vidiun-ngx-client';
+import {VidiunSearchOperator} from 'vidiun-ngx-client';
+import {VidiunSearchCondition} from 'vidiun-ngx-client';
+import {VidiunContentDistributionSearchItem} from 'vidiun-ngx-client';
+import {VidiunLiveStreamEntry} from 'vidiun-ngx-client';
+import {VidiunExternalMediaEntry} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {BaseEntryListAction} from 'vidiun-ngx-client';
+import {VidiunMediaEntryFilter} from 'vidiun-ngx-client';
+import {VidiunLiveStreamAdminEntry} from 'vidiun-ngx-client';
+import {VidiunUtils} from '@vidiun-ng/vidiun-common';
+import {VidiunClient} from 'vidiun-ngx-client';
 import {CategoriesModes} from 'app-shared/content-shared/categories/categories-mode-type';
-import {MetadataProfileCreateModes, MetadataProfileStore, MetadataProfileTypes} from 'app-shared/kmc-shared';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {MetadataProfileCreateModes, MetadataProfileStore, MetadataProfileTypes} from 'app-shared/vmc-shared';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy {
-  constructor(private _kalturaServerClient: KalturaClient,
-              private _appPermissions: KMCPermissionsService,
+  constructor(private _vidiunServerClient: VidiunClient,
+              private _appPermissions: VMCPermissionsService,
               private _metadataProfileService: MetadataProfileStore) {
   }
 
@@ -35,8 +35,8 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
   }
 
   private _updateFilterWithJoinedList(list: any[],
-                                      requestFilter: KalturaMediaEntryFilter,
-                                      requestFilterProperty: keyof KalturaMediaEntryFilter): void {
+                                      requestFilter: VidiunMediaEntryFilter,
+                                      requestFilterProperty: keyof VidiunMediaEntryFilter): void {
     const value = (list || []).map(item => item).join(',');
 
     if (value) {
@@ -60,14 +60,14 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
       });
   }
 
-  public getServerFilter(data: EntriesFilters): Observable<KalturaMediaEntryFilter> {
+  public getServerFilter(data: EntriesFilters): Observable<VidiunMediaEntryFilter> {
     try {
       return this._getMetadataProfiles()
         .map(metadataProfiles => {
           // create request items
-          const filter: KalturaMediaEntryFilter = new KalturaMediaEntryFilter({});
-          const advancedSearch = filter.advancedSearch = new KalturaSearchOperator({});
-          advancedSearch.type = KalturaSearchOperatorType.searchAnd;
+          const filter: VidiunMediaEntryFilter = new VidiunMediaEntryFilter({});
+          const advancedSearch = filter.advancedSearch = new VidiunSearchOperator({});
+          advancedSearch.type = VidiunSearchOperatorType.searchAnd;
 
           // filter 'freeText'
           if (data.freetext) {
@@ -77,11 +77,11 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
           // filter 'createdAt'
           if (data.createdAt) {
             if (data.createdAt.fromDate) {
-              filter.createdAtGreaterThanOrEqual = KalturaUtils.getStartDateValue(data.createdAt.fromDate);
+              filter.createdAtGreaterThanOrEqual = VidiunUtils.getStartDateValue(data.createdAt.fromDate);
             }
 
             if (data.createdAt.toDate) {
-              filter.createdAtLessThanOrEqual = KalturaUtils.getEndDateValue(data.createdAt.toDate);
+              filter.createdAtLessThanOrEqual = VidiunUtils.getEndDateValue(data.createdAt.toDate);
             }
           }
 
@@ -96,8 +96,8 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
 
           // filter 'distribution'
           if (data.distributions && data.distributions.length > 0) {
-            const distributionItem = new KalturaSearchOperator({
-              type: KalturaSearchOperatorType.searchOr
+            const distributionItem = new VidiunSearchOperator({
+              type: VidiunSearchOperatorType.searchOr
             });
 
             advancedSearch.items.push(distributionItem);
@@ -105,7 +105,7 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
             data.distributions.forEach(item => {
               // very complex way to make sure the value is number (an also bypass both typescript and tslink checks)
               if (isFinite(+item) && parseInt(item) == <any>item) { // tslint:disable-line
-                const newItem = new KalturaContentDistributionSearchItem(
+                const newItem = new VidiunContentDistributionSearchItem(
                   {
                     distributionProfileId: +item,
                     hasEntryDistributionValidationErrors: false,
@@ -120,22 +120,22 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
 
           // filter 'originalClippedEntries'
           if (data.originalClippedEntries && data.originalClippedEntries.length > 0) {
-            let originalClippedEntriesValue: KalturaNullableBoolean = null;
+            let originalClippedEntriesValue: VidiunNullableBoolean = null;
 
             data.originalClippedEntries.forEach(item => {
               switch (item) {
                 case '0':
                   if (originalClippedEntriesValue == null) {
-                    originalClippedEntriesValue = KalturaNullableBoolean.falseValue;
-                  } else if (originalClippedEntriesValue === KalturaNullableBoolean.trueValue) {
-                    originalClippedEntriesValue = KalturaNullableBoolean.nullValue;
+                    originalClippedEntriesValue = VidiunNullableBoolean.falseValue;
+                  } else if (originalClippedEntriesValue === VidiunNullableBoolean.trueValue) {
+                    originalClippedEntriesValue = VidiunNullableBoolean.nullValue;
                   }
                   break;
                 case '1':
                   if (originalClippedEntriesValue == null) {
-                    originalClippedEntriesValue = KalturaNullableBoolean.trueValue;
-                  } else if (originalClippedEntriesValue === KalturaNullableBoolean.falseValue) {
-                    originalClippedEntriesValue = KalturaNullableBoolean.nullValue;
+                    originalClippedEntriesValue = VidiunNullableBoolean.trueValue;
+                  } else if (originalClippedEntriesValue === VidiunNullableBoolean.falseValue) {
+                    originalClippedEntriesValue = VidiunNullableBoolean.nullValue;
                   }
                   break;
               }
@@ -171,17 +171,17 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
                 case 'scheduled':
                   if (data.scheduledAt.fromDate) {
                     if (filter.startDateGreaterThanOrEqual === undefined
-                      || filter.startDateGreaterThanOrEqual > (KalturaUtils.getStartDateValue(data.scheduledAt.fromDate))
+                      || filter.startDateGreaterThanOrEqual > (VidiunUtils.getStartDateValue(data.scheduledAt.fromDate))
                     ) {
-                      filter.startDateGreaterThanOrEqual = (KalturaUtils.getStartDateValue(data.scheduledAt.fromDate));
+                      filter.startDateGreaterThanOrEqual = (VidiunUtils.getStartDateValue(data.scheduledAt.fromDate));
                     }
                   }
 
                   if (data.scheduledAt.toDate) {
                     if (filter.endDateLessThanOrEqual === undefined
-                      || filter.endDateLessThanOrEqual < (KalturaUtils.getEndDateValue(data.scheduledAt.toDate))
+                      || filter.endDateLessThanOrEqual < (VidiunUtils.getEndDateValue(data.scheduledAt.toDate))
                     ) {
-                      filter.endDateLessThanOrEqual = (KalturaUtils.getEndDateValue(data.scheduledAt.toDate));
+                      filter.endDateLessThanOrEqual = (VidiunUtils.getEndDateValue(data.scheduledAt.toDate));
                     }
                   }
 
@@ -198,10 +198,10 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
             metadataProfiles.forEach(metadataProfile => {
               // create advanced item for all metadata profiles regardless if the user filtered by them or not.
               // this is needed so freetext will include all metadata profiles while searching.
-              const metadataItem: KalturaMetadataSearchItem = new KalturaMetadataSearchItem(
+              const metadataItem: VidiunMetadataSearchItem = new VidiunMetadataSearchItem(
                 {
                   metadataProfileId: metadataProfile.id,
-                  type: KalturaSearchOperatorType.searchAnd,
+                  type: VidiunSearchOperatorType.searchAnd,
                   items: []
                 }
               );
@@ -210,15 +210,15 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
               metadataProfile.lists.forEach(list => {
                 const metadataProfileFilters = data.customMetadata[list.id];
                 if (metadataProfileFilters && metadataProfileFilters.length > 0) {
-                  const innerMetadataItem: KalturaMetadataSearchItem = new KalturaMetadataSearchItem({
+                  const innerMetadataItem: VidiunMetadataSearchItem = new VidiunMetadataSearchItem({
                     metadataProfileId: metadataProfile.id,
-                    type: KalturaSearchOperatorType.searchOr,
+                    type: VidiunSearchOperatorType.searchOr,
                     items: []
                   });
                   metadataItem.items.push(innerMetadataItem);
 
                   metadataProfileFilters.forEach(filterItem => {
-                    const searchItem = new KalturaSearchCondition({
+                    const searchItem = new VidiunSearchCondition({
                       field: `/*[local-name()='metadata']/*[local-name()='${list.name}']`,
                       value: filterItem
                     });
@@ -247,7 +247,7 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
           // handle default value for media types
           if (!filter.mediaTypeIn) {
 	          filter.mediaTypeIn = '1,2,5,6';
-	          if (this._appPermissions.hasPermission(KMCPermissions.FEATURE_LIVE_STREAM)) {
+	          if (this._appPermissions.hasPermission(VMCPermissions.FEATURE_LIVE_STREAM)) {
 		          filter.mediaTypeIn += ',201';
 	          }
           }
@@ -271,16 +271,16 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
   }
 
 
-  public executeQuery(data: EntriesFilters): Observable<{ entries: KalturaBaseEntry[], totalCount?: number }> {
-    const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-      type: KalturaResponseProfileType.includeFields,
+  public executeQuery(data: EntriesFilters): Observable<{ entries: VidiunBaseEntry[], totalCount?: number }> {
+    const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+      type: VidiunResponseProfileType.includeFields,
       fields: 'id,name,thumbnailUrl,mediaType,plays,createdAt,duration,status,startDate,endDate,moderationStatus,moderationCount,tags,categoriesIds,downloadUrl,sourceType,entitledUsersPublish,entitledUsersView,entitledUsersEdit,externalSourceType,capabilities'
     });
-    let pagination: KalturaFilterPager = null;
+    let pagination: VidiunFilterPager = null;
 
     // update pagination args
     if (data.pageIndex || data.pageSize) {
-      pagination = new KalturaFilterPager(
+      pagination = new VidiunFilterPager(
         {
           pageSize: data.pageSize,
           pageIndex: data.pageIndex + 1
@@ -291,13 +291,13 @@ export class EntriesStoreDataProvider implements EntriesDataProvider, OnDestroy 
     // build the request
     return <any>
       this.getServerFilter(data)
-        .switchMap(filter => this._kalturaServerClient.request(
+        .switchMap(filter => this._vidiunServerClient.request(
           new BaseEntryListAction({
             filter,
             pager: pagination,
           }).setRequestOptions({
                   responseProfile,
-                  acceptedTypes: [KalturaLiveStreamAdminEntry, KalturaLiveStreamEntry, KalturaExternalMediaEntry]
+                  acceptedTypes: [VidiunLiveStreamAdminEntry, VidiunLiveStreamEntry, VidiunExternalMediaEntry]
               })
         )).map(response => ({ entries: response.objects, totalCount: response.totalCount })
       );

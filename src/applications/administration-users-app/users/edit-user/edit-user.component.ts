@@ -1,16 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
 import { UsersStore } from '../users.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
 import { IsUserExistsStatuses } from '../user-exists-statuses';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaUserRole } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunUserRole } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface PartnerInfo {
   adminLoginUsersQuota: number;
@@ -18,20 +18,20 @@ export interface PartnerInfo {
 }
 
 @Component({
-  selector: 'kEditUser',
+  selector: 'vEditUser',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
 
 export class EditUserComponent implements OnInit, OnDestroy {
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() user: KalturaUser;
+  @Input() user: VidiunUser;
 
   private _partnerInfo: PartnerInfo = { adminLoginUsersQuota: 0, adminUserId: null };
-  private _roles: KalturaUserRole[] = [];
-  private _users: KalturaUser[];
+  private _roles: VidiunUserRole[] = [];
+  private _users: VidiunUser[];
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _rolesList: SelectItem[] = [];
   public _selectedRoleDescription = '';
   public _userForm: FormGroup;
@@ -49,7 +49,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   constructor(public _usersStore: UsersStore,
               private _formBuilder: FormBuilder,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization) {
     // build FormControl group
@@ -86,7 +86,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this._isNewUser = !relevantUser;
 
         if (this._isNewUser) {
-            this._saveBtnShown = this._permissionsService.hasPermission(KMCPermissions.ADMIN_USER_ADD);
+            this._saveBtnShown = this._permissionsService.hasPermission(VMCPermissions.ADMIN_USER_ADD);
           this._userForm.reset({
             email: '',
             firstName: '',
@@ -100,7 +100,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
           this._userForm.get('roleIds').enable();
           this._setRoleDescription();
         } else {
-            this._saveBtnShown = this._permissionsService.hasPermission(KMCPermissions.ADMIN_USER_UPDATE);
+            this._saveBtnShown = this._permissionsService.hasPermission(VMCPermissions.ADMIN_USER_UPDATE);
           this._userForm.reset({
             email: this.user.email,
             firstName: this.user.firstName,
@@ -122,7 +122,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
           this._setRoleDescription(relevantUser.roleIds);
 
-          if (!this._permissionsService.hasPermission(KMCPermissions.ADMIN_USER_UPDATE)) {
+          if (!this._permissionsService.hasPermission(VMCPermissions.ADMIN_USER_UPDATE)) {
             this._userForm.disable({ emitEvent: false });
           }
         }
@@ -166,13 +166,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
         if (status !== null) {
             switch (status) {
-                case IsUserExistsStatuses.kmcUser:
+                case IsUserExistsStatuses.vmcUser:
                     this._browserService.alert({
                         header: this._appLocalization.get('app.common.attention'),
                         message: this._appLocalization.get('applications.administration.users.alreadyExistError', {0: email})
                     });
                     break;
-                case IsUserExistsStatuses.otherKMCUser:
+                case IsUserExistsStatuses.otherVMCUser:
                     this._browserService.confirm({
                             header: this._appLocalization.get('applications.administration.users.alreadyExist'),
                             message: this._appLocalization.get('applications.administration.users.userAlreadyExist', {0: email}),
@@ -311,7 +311,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       );
   }
 
-  private _associateUserToAccount(userProvidedEmail: string, user: KalturaUser): void {
+  private _associateUserToAccount(userProvidedEmail: string, user: VidiunUser): void {
       const { roleIds } = this._userForm.value;
     this._usersStore.associateUserToAccount(userProvidedEmail, user, roleIds)
       .pipe(cancelOnDestroy(this))

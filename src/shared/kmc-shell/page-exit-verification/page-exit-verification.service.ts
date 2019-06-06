@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { FriendlyHashId } from '@kaltura-ng/kaltura-common';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { FriendlyHashId } from '@vidiun-ng/vidiun-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
 export class PageExitVerificationService implements OnDestroy{
@@ -10,7 +10,7 @@ export class PageExitVerificationService implements OnDestroy{
   private _defaultVerificationMessage = this._appLocalizations.get('app.pageExitVerification.defaultMessage');
 
   constructor(private _appLocalizations: AppLocalization,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
       this._logger = _logger.subLogger('PageExitVerificationService');
     window.onbeforeunload = (e) => {
       if (this._tokens.length) {

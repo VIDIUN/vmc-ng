@@ -1,14 +1,14 @@
 @import 'app-theme/_variables.scss';
 
-.kTable {
+.vTable {
     background-color: white;
     position: relative;
     padding: 0px;
     height: 100%;
-    k-area-blocker {
+    v-area-blocker {
         min-height: 250px;
     }
-    .kTableActions {
+    .vTableActions {
         width: 100%;
         text-align: center;
         button {
@@ -20,12 +20,12 @@
         }
     }
 
-    .kTitle {
-        color: $kGrayscale1;
+    .vTitle {
+        color: $vGrayscale1;
         font-weight: 700;
     }
 
-    &.kTagsVisible /deep/ .ui-table-scrollable-body {
+    &.vTagsVisible /deep/ .ui-table-scrollable-body {
         height: calc(100vh - 320px) !important;
     }
 
@@ -37,11 +37,11 @@
 
 :host /deep/ {
 
-    .kDisabled {
+    .vDisabled {
         .selectionColumn, .ui-chkbox-box {
             pointer-events: none;
             .ui-chkbox-box {
-                background-color: $kGrayscale6;
+                background-color: $vGrayscale6;
             }
         }
     }
@@ -91,13 +91,13 @@
         width: 170px;
         text-align: left;
         padding-left: 20px;
-        .kCategoryUserStatus {
+        .vCategoryUserStatus {
             padding-left: 10px;
         }
     }
 }
 
-:host /deep/ tr:hover .removeColumn .kIconremove.kEnabled {
+:host /deep/ tr:hover .removeColumn .vIconremove.vEnabled {
     visibility: visible;
 }
 
@@ -106,9 +106,9 @@
     width: 55px;
     text-align: center;
 
-    .kIconremove {
+    .vIconremove {
         font-size: 22px;
-        color: $kDandger;
+        color: $vDandger;
         cursor: pointer;
         visibility: hidden;
     }

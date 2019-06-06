@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissionsService } from '../../vmc-permissions';
 import { Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KmcComponentViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-component-view-base.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VmcComponentViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-component-view-base.service';
 import { serverConfig } from 'config/server';
 
 @Injectable()
-export class LiveDashboardAppViewService extends KmcComponentViewBaseService<void> {
+export class LiveDashboardAppViewService extends VmcComponentViewBaseService<void> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger) {
+                _logger: VidiunLogger) {
         super(_logger.subLogger('LiveDashboardAppViewService'));
     }
 

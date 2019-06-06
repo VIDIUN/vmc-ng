@@ -4,10 +4,10 @@ import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/forkJoin';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaMultiRequest, KalturaMultiResponse } from 'kaltura-ngx-client';
-import { DistributionProfileListAction } from 'kaltura-ngx-client';
-import { AccessControlListAction } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunMultiRequest, VidiunMultiResponse } from 'vidiun-ngx-client';
+import { DistributionProfileListAction } from 'vidiun-ngx-client';
+import { AccessControlListAction } from 'vidiun-ngx-client';
 import {
     FlavoursStore,
     MetadataItemTypes,
@@ -15,21 +15,21 @@ import {
     MetadataProfileCreateModes,
     MetadataProfileStore,
     MetadataProfileTypes
-} from 'app-shared/kmc-shared';
+} from 'app-shared/vmc-shared';
 
-import { KalturaAccessControlFilter } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
+import { VidiunAccessControlFilter } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
 
 import { DefaultFiltersList } from './default-filters-list';
 
 import * as R from 'ramda';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaAccessControlListResponse } from 'kaltura-ngx-client';
-import { KalturaDistributionProfileListResponse } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunAccessControlListResponse } from 'vidiun-ngx-client';
+import { VidiunDistributionProfileListResponse } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 export interface RefineGroupListItem {
     value: string;
@@ -57,11 +57,11 @@ export class EntriesRefineFiltersService {
 
     private _getRefineFilters$: Observable<RefineGroup[]>;
 
-    constructor(private kalturaServerClient: KalturaClient,
-                private _permissionsService: KMCPermissionsService,
+    constructor(private vidiunServerClient: VidiunClient,
+                private _permissionsService: VMCPermissionsService,
                 private _metadataProfileStore: MetadataProfileStore,
                 private _flavoursStore: FlavoursStore,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
         this._logger = _logger.subLogger('EntriesRefineFiltersService');
     }
 
@@ -103,7 +103,7 @@ export class EntriesRefineFiltersService {
     }
 
     private _getMetadataFilters(): Observable<{ items: MetadataProfile[] }> {
-        if (this._permissionsService.hasPermission(KMCPermissions.METADATA_PLUGIN_PERMISSION)) {
+        if (this._permissionsService.hasPermission(VMCPermissions.METADATA_PLUGIN_PERMISSION)) {
             return this._metadataProfileStore.get({
                 type: MetadataProfileTypes.Entry,
                 ignoredCreateMode: MetadataProfileCreateModes.App
@@ -153,7 +153,7 @@ export class EntriesRefineFiltersService {
         return result;
     }
 
-    private _buildDefaultFiltersGroup(responses: KalturaMultiResponse, flavours: KalturaFlavorParams[]): RefineGroup {
+    private _buildDefaultFiltersGroup(responses: VidiunMultiResponse, flavours: VidiunFlavorParams[]): RefineGroup {
         const result: RefineGroup = { label: '', lists: [] };
 
         // build constant filters
@@ -164,7 +164,7 @@ export class EntriesRefineFiltersService {
             );
             result.lists.push(newRefineFilter);
             defaultFilterList.items.forEach((item: any) => {
-              if (item.value !== '201' || this._permissionsService.hasPermission(KMCPermissions.FEATURE_LIVE_STREAM)) {
+              if (item.value !== '201' || this._permissionsService.hasPermission(VMCPermissions.FEATURE_LIVE_STREAM)) {
                 newRefineFilter.items.push({ value: item.value, label: item.label });
               }
             });
@@ -177,7 +177,7 @@ export class EntriesRefineFiltersService {
             'flavors',
             'Flavors');
           result.lists.push(group);
-          flavours.forEach((flavor: KalturaFlavorParams) => {
+          flavours.forEach((flavor: VidiunFlavorParams) => {
             group.items.push({ value: flavor.id + '', label: flavor.name });
           });
         }
@@ -187,7 +187,7 @@ export class EntriesRefineFiltersService {
             return;
           }
 
-          if (response.result instanceof KalturaAccessControlListResponse) { // build access control profile filters
+          if (response.result instanceof VidiunAccessControlListResponse) { // build access control profile filters
             const group = new RefineGroupList(
               'accessControlProfiles',
               'Access Control Profiles'
@@ -199,7 +199,7 @@ export class EntriesRefineFiltersService {
                 label: accessControlProfile.name
               });
             });
-          } else if (response.result instanceof KalturaDistributionProfileListResponse) { // build distributions filters
+          } else if (response.result instanceof VidiunDistributionProfileListResponse) { // build distributions filters
             const group = new RefineGroupList(
               'distributions',
               'Destinations');
@@ -214,21 +214,21 @@ export class EntriesRefineFiltersService {
     }
 
 
-    private _buildQueryRequest(): Observable<KalturaMultiResponse> {
+    private _buildQueryRequest(): Observable<VidiunMultiResponse> {
 
         try {
-            const accessControlFilter = new KalturaAccessControlFilter({});
+            const accessControlFilter = new VidiunAccessControlFilter({});
             accessControlFilter.orderBy = '-createdAt';
 
-            const accessControlPager = new KalturaFilterPager({});
+            const accessControlPager = new VidiunFilterPager({});
             accessControlPager.pageSize = 1000;
 
-            const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
+            const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
                 fields: 'id,name',
-                type: KalturaResponseProfileType.includeFields
+                type: VidiunResponseProfileType.includeFields
             });
 
-            const request = new KalturaMultiRequest(
+            const request = new VidiunMultiRequest(
                 new AccessControlListAction({
                     pager: accessControlPager,
                     filter: accessControlFilter
@@ -237,15 +237,15 @@ export class EntriesRefineFiltersService {
                 }),
             );
 
-            if (this._permissionsService.hasPermission(KMCPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION)) {
-              const distributionProfilePager = new KalturaFilterPager({});
+            if (this._permissionsService.hasPermission(VMCPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION)) {
+              const distributionProfilePager = new VidiunFilterPager({});
               distributionProfilePager.pageSize = 500;
               const distributionProfileListAction = new DistributionProfileListAction({ pager: distributionProfilePager });
 
               request.requests.push(distributionProfileListAction);
             }
 
-            return <any>this.kalturaServerClient.multiRequest(request);
+            return <any>this.vidiunServerClient.multiRequest(request);
         } catch (error) {
             return Observable.throw(error);
         }

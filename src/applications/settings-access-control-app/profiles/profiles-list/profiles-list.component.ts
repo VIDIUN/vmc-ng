@@ -1,32 +1,32 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { AccessControlProfilesFilters, AccessControlProfilesStore } from '../profiles-store/profiles-store.service';
 import { SortDirection } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { KalturaAccessControl } from 'kaltura-ngx-client';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AccessControlProfileUpdatedEvent } from 'app-shared/kmc-shared/events/access-control-profile-updated.event';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsAccessControlMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunAccessControl } from 'vidiun-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AccessControlProfileUpdatedEvent } from 'app-shared/vmc-shared/events/access-control-profile-updated.event';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsAccessControlMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kAccessControlProfilesList',
+  selector: 'vAccessControlProfilesList',
   templateUrl: './profiles-list.component.html',
   styleUrls: ['./profiles-list.component.scss'],
-  providers: [KalturaLogger.createLogger('ProfilesListComponent')]
+  providers: [VidiunLogger.createLogger('ProfilesListComponent')]
 })
 export class ProfilesListComponent implements OnInit, OnDestroy {
   @ViewChild('editProfile') _editProfilePopup: PopupWidgetComponent;
   public _blockerMessage: AreaBlockerMessage = null;
-  public _selectedProfiles: KalturaAccessControl[] = [];
-  public _selectedProfile: KalturaAccessControl;
+  public _selectedProfiles: VidiunAccessControl[] = [];
+  public _selectedProfile: VidiunAccessControl;
   public _tableIsBusy = false;
   public _tableBlockerMessage: AreaBlockerMessage;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _query = {
     pageIndex: 0,
@@ -36,7 +36,7 @@ export class ProfilesListComponent implements OnInit, OnDestroy {
   constructor(private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               private _appEvents: AppEventsService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsAccessControlMainViewService: SettingsAccessControlMainViewService,
               public _store: AccessControlProfilesStore) {
   }
@@ -116,7 +116,7 @@ export class ProfilesListComponent implements OnInit, OnDestroy {
       });
   }
 
-  private _executeDeleteProfiles(profiles: KalturaAccessControl[]): void {
+  private _executeDeleteProfiles(profiles: VidiunAccessControl[]): void {
     this._blockerMessage = null;
 
     this._logger.info(`handle delete request by the user`);
@@ -158,7 +158,7 @@ export class ProfilesListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _onActionSelected(event: { action: string, profile: KalturaAccessControl }): void {
+  public _onActionSelected(event: { action: string, profile: VidiunAccessControl }): void {
     switch (event.action) {
       case 'delete':
         this._deleteProfiles([event.profile]);
@@ -213,7 +213,7 @@ export class ProfilesListComponent implements OnInit, OnDestroy {
     this._editProfilePopup.open();
   }
 
-  public _saveProfile(profile: KalturaAccessControl): void {
+  public _saveProfile(profile: VidiunAccessControl): void {
     this._logger.info(`handle 'save' updated profile action by the user`, { id: profile.id, name: profile.name });
     this._store.saveProfile(profile)
       .pipe(cancelOnDestroy(this))

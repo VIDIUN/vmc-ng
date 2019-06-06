@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { routing } from './settings-my-user-settings-app.routes';
 import { RouterModule } from '@angular/router';
-import { AreaBlockerModule, KalturaUIModule } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule, VidiunUIModule } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
 import { SettingsMyUserSettingsComponent } from './settings-my-user-settings.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { EditUserNameComponent } from './edit-user-name/edit-user-name.component';
@@ -16,7 +16,7 @@ import { ButtonModule, InputTextModule, } from 'primeng/primeng';
   imports: [
     CommonModule,
     AreaBlockerModule,
-    KalturaUIModule,
+    VidiunUIModule,
     TranslateModule,
     PopupWidgetModule,
     FormsModule,

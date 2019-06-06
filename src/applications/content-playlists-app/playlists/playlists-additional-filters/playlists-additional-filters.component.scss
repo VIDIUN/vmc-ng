@@ -1,19 +1,19 @@
 @import 'app-theme/_variables.scss';
 
-.kRefineFilters{
+.vRefineFilters{
   margin: 12px;
 }
-.kTreeContainer{
+.vTreeContainer{
 	float: left;
 	width: 100%;
-	border-bottom: 1px solid $kGrayscale6;
+	border-bottom: 1px solid $vGrayscale6;
 	margin: 0 -20px 10px -20px;
 	padding: 0 0 10px 20px;
 	width: 387px;
 	position: relative;
 }
 
-.kFiltersGroupTitle {
+.vFiltersGroupTitle {
 	color: $subLinkColor;
 	font-size: 12px;
 	letter-spacing: .5px;
@@ -22,46 +22,46 @@
 	margin: 5px 0 15px;
 }
 
-.kDateRange{
+.vDateRange{
 	margin-bottom: 5px;
 }
 
-.kClearDates{
+.vClearDates{
 	margin: 5px 0 0;
 }
 
-.kClose{
+.vClose{
 	float: right;
 }
 
 .disabledLink {
-  color: $kGrayscale4;
+  color: $vGrayscale4;
   cursor: default;
   text-decoration: none;
 }
 
-:host /deep/ .kDateRange .ui-calendar.ui-calendar-w-btn {
+:host /deep/ .vDateRange .ui-calendar.ui-calendar-w-btn {
 	width: 158px;
 }
 
-:host /deep/ .kDateRange .ui-calendar .ui-inputtext {
+:host /deep/ .vDateRange .ui-calendar .ui-inputtext {
 	margin: 0;
 	padding-left: 33px;
 	width: 100%;
 }
 
-:host /deep/ .kDateRange .kDateRangeFirst .ui-calendar.ui-calendar-w-btn {
+:host /deep/ .vDateRange .vDateRangeFirst .ui-calendar.ui-calendar-w-btn {
 	border-bottom-left-radius: 3px;
 	border-top-left-radius: 3px;
 }
 
-:host /deep/ .kDateRange .kDateRangeLast .ui-calendar.ui-calendar-w-btn {
-	border-left: 0 solid $kGrayscale4;
+:host /deep/ .vDateRange .vDateRangeLast .ui-calendar.ui-calendar-w-btn {
+	border-left: 0 solid $vGrayscale4;
 	border-bottom-right-radius: 3px;
 	border-top-right-radius: 3px;
 	margin-left: -3px;
 }
 
-/deep/ kPopupWidget .kPopupWidget {
+/deep/ vPopupWidget .vPopupWidget {
 	overflow: visible !important;
 }

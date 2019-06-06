@@ -1,15 +1,15 @@
-import {MetadataAddAction} from 'kaltura-ngx-client';
-import {MetadataUpdateAction} from 'kaltura-ngx-client';
-import {KalturaTagFilter} from 'kaltura-ngx-client';
-import {TagSearchAction} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaTaggedObjectType} from 'kaltura-ngx-client';
-import {MetadataListAction} from 'kaltura-ngx-client';
-import {KalturaMetadataObjectType} from 'kaltura-ngx-client';
-import {KalturaClient, KalturaMultiRequest} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {KalturaMetadataFilter} from 'kaltura-ngx-client';
-import {KalturaMetadata} from 'kaltura-ngx-client';
+import {MetadataAddAction} from 'vidiun-ngx-client';
+import {MetadataUpdateAction} from 'vidiun-ngx-client';
+import {VidiunTagFilter} from 'vidiun-ngx-client';
+import {TagSearchAction} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunTaggedObjectType} from 'vidiun-ngx-client';
+import {MetadataListAction} from 'vidiun-ngx-client';
+import {VidiunMetadataObjectType} from 'vidiun-ngx-client';
+import {VidiunClient, VidiunMultiRequest} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {VidiunMetadataFilter} from 'vidiun-ngx-client';
+import {VidiunMetadata} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import {
   DynamicMetadataForm,
@@ -17,28 +17,28 @@ import {
   MetadataProfileCreateModes,
   MetadataProfileStore,
   MetadataProfileTypes
-} from 'app-shared/kmc-shared';
+} from 'app-shared/vmc-shared';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Injectable, OnDestroy} from '@angular/core';
 import {CategoryWidget} from '../category-widget';
 import {async} from 'rxjs/scheduler/async';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentCategoryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentCategoryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy {
 
     public metadataForm: FormGroup;
     public customDataForms: DynamicMetadataForm[] = [];
-    private _categoryMetadata: KalturaMetadata[] = [];
+    private _categoryMetadata: VidiunMetadata[] = [];
 
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
         private _formBuilder: FormBuilder,
         private _metadataProfileStore: MetadataProfileStore,
-        private _permissionsService: KMCPermissionsService,
-        logger: KalturaLogger,
+        private _permissionsService: VMCPermissionsService,
+        logger: VidiunLogger,
         private _dynamicMetadataFormFactory: DynamicMetadataFormFactory) {
         super(ContentCategoryViewSections.Metadata, logger);
         this._buildForm();
@@ -113,14 +113,14 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
 
         const actions: Observable<boolean>[] = [];
 
-        if (this._permissionsService.hasPermission(KMCPermissions.METADATA_PLUGIN_PERMISSION)) {
+        if (this._permissionsService.hasPermission(VMCPermissions.METADATA_PLUGIN_PERMISSION)) {
             actions.push(this._loadCategoryMetadata(this.data));
             if (firstTimeActivating) {
                 actions.push(this._loadProfileMetadata());
             }
         }
 
-        if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
+        if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
           this.metadataForm.disable({ emitEvent: false });
         }
 
@@ -167,7 +167,7 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
         // map category metadata to profile metadata
         if (this.customDataForms) {
             this.customDataForms.forEach(customDataForm => {
-                if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
+                if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
                   customDataForm.disable();
                 }
                 const categoryMetadata = this._categoryMetadata.find(item => item.metadataProfileId === customDataForm.metadataProfile.id);
@@ -177,21 +177,21 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
             });
         }
 
-        if (this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
+        if (this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES)) {
           this._monitorFormChanges();
         }
     }
 
-    private _loadCategoryMetadata(category: KalturaCategory): Observable<boolean> {
+    private _loadCategoryMetadata(category: VidiunCategory): Observable<boolean> {
 
         this._categoryMetadata = [];
 
-        return this._kalturaServerClient.request(new MetadataListAction(
+        return this._vidiunServerClient.request(new MetadataListAction(
             {
-                filter: new KalturaMetadataFilter(
+                filter: new VidiunMetadataFilter(
                     {
                         objectIdEqual: category.id.toString(),
-                        metadataObjectTypeEqual: KalturaMetadataObjectType.category
+                        metadataObjectTypeEqual: VidiunMetadataObjectType.category
                     }
                 )
             }
@@ -230,7 +230,7 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
             });
     }
 
-    protected onDataSaving(newData: KalturaCategory, request: KalturaMultiRequest): void {
+    protected onDataSaving(newData: VidiunCategory, request: VidiunMultiRequest): void {
 
         const metadataFormValue = this.metadataForm.value;
 
@@ -259,7 +259,7 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
                             }));
                         } else {
                             request.requests.push(new MetadataAddAction({
-                                objectType: KalturaMetadataObjectType.category,
+                                objectType: VidiunMetadataObjectType.category,
                                 objectId: this.data.id.toString(),
                                 metadataProfileId: customDataForm.metadataProfile.id,
                                 xmlData: customDataValue.xml
@@ -274,16 +274,16 @@ export class CategoryMetadataWidget extends CategoryWidget implements OnDestroy 
     public searchTags(text: string): Observable<string[]> {
         return Observable.create(
             observer => {
-                const requestSubscription = this._kalturaServerClient.request(
+                const requestSubscription = this._vidiunServerClient.request(
                     new TagSearchAction(
                         {
-                            tagFilter: new KalturaTagFilter(
+                            tagFilter: new VidiunTagFilter(
                                 {
                                     tagStartsWith: text,
-                                    objectTypeEqual: KalturaTaggedObjectType.category
+                                    objectTypeEqual: VidiunTaggedObjectType.category
                                 }
                             ),
-                            pager: new KalturaFilterPager({
+                            pager: new VidiunFilterPager({
                                 pageIndex: 0,
                                 pageSize: 30
                             })

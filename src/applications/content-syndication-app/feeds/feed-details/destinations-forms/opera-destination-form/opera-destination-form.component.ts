@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import {KalturaOperaSyndicationFeed} from 'kaltura-ngx-client';
+import {VidiunOperaSyndicationFeed} from 'vidiun-ngx-client';
 import { DestinationComponentBase, FeedFormMode } from '../../feed-details.component';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kOperaDestinationForm',
+  selector: 'vOperaDestinationForm',
   templateUrl: './opera-destination-form.component.html',
   styleUrls: ['./opera-destination-form.component.scss'],
   providers: [{provide: DestinationComponentBase, useExisting: OperaDestinationFormComponent}]
@@ -15,12 +15,12 @@ export class OperaDestinationFormComponent extends DestinationComponentBase impl
   @Output()
   onFormStateChanged = new EventEmitter<{ isValid: boolean, isDirty: boolean }>();
 
-  constructor(private _permissionsService: KMCPermissionsService) {
+  constructor(private _permissionsService: VMCPermissionsService) {
     super();
   }
 
   ngOnInit() {
-    if (this.mode !== 'edit' || this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE)) {
+    if (this.mode !== 'edit' || this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE)) {
       this.onFormStateChanged.emit({
         isValid: true,
         isDirty: false
@@ -31,7 +31,7 @@ export class OperaDestinationFormComponent extends DestinationComponentBase impl
   ngOnDestroy() {
   }
 
-  public getData(): KalturaOperaSyndicationFeed {
-    return new KalturaOperaSyndicationFeed();
+  public getData(): VidiunOperaSyndicationFeed {
+    return new VidiunOperaSyndicationFeed();
   }
 }

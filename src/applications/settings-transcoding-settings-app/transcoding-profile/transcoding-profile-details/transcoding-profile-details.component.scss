@@ -1,20 +1,20 @@
 @import 'app-theme/_variables.scss';
 
-.kPreviewDetails{
+.vPreviewDetails{
 	display: flex;
-	color: $kGrayscale3;
+	color: $vGrayscale3;
 	font-size: 13px;
 	overflow: hidden;
-	.kRow{
+	.vRow{
 		display: flex;
 		flex: 0 0 auto;
 		a{
 			font-size: 13px;
 		}
-		.kLabels{
+		.vLabels{
 			margin-right: 4px;
 		}
-		.kSeparator{
+		.vSeparator{
 			margin-right: 8px;
 			margin-left: 8px;
 		}
@@ -22,8 +22,8 @@
 
 }
 
-:host /deep/ .kDetails {
-  .kIcontranscoding {
+:host /deep/ .vDetails {
+  .vIcontranscoding {
     margin-left: 1px;
   }
 }

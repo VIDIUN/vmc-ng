@@ -1,23 +1,23 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd, Params } from '@angular/router';
-import { AppAuthentication } from 'shared/kmc-shell/index';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
+import { AppAuthentication } from 'shared/vmc-shell/index';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
 import { serverConfig } from 'config/server';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { Location } from '@angular/common';
-import { KmcLoggerConfigurator } from 'app-shared/kmc-shell/kmc-logs/kmc-logger-configurator';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VmcLoggerConfigurator } from 'app-shared/vmc-shell/vmc-logs/vmc-logger-configurator';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-    selector: 'kAnalyticsFrame',
-    template: '<span *ngIf="!_initialized" class="kLoading">Loading...</span><iframe #analyticsFrame frameborder="0px" [src]="_url | safe"></iframe>',
+    selector: 'vAnalyticsFrame',
+    template: '<span *ngIf="!_initialized" class="vLoading">Loading...</span><iframe #analyticsFrame frameborder="0px" [src]="_url | safe"></iframe>',
     styles: [
         ':host { display: block; width: 100%; height: 100%; }',
         'iframe { width: 100%; height: 100%; border: 0px; transition: height 0.3s; }',
-        '.kLoading { display: block; padding: 12px; font-size: 16px; }'
+        '.vLoading { display: block; padding: 12px; font-size: 16px; }'
     ],
-    providers: [KalturaLogger.createLogger('AnalyticsFrameComponent')]
+    providers: [VidiunLogger.createLogger('AnalyticsFrameComponent')]
 })
 export class AnalyticsFrameComponent implements OnInit, OnDestroy {
 
@@ -31,12 +31,12 @@ export class AnalyticsFrameComponent implements OnInit, OnDestroy {
     private _analyticsDefaultPage = '/analytics/engagement';
 
     constructor(private appAuthentication: AppAuthentication,
-                private logger: KalturaLogger,
+                private logger: VidiunLogger,
                 private router: Router,
                 private _browserService: BrowserService,
                 private renderer: Renderer2,
-                private _permissions: KMCPermissionsService,
-                private _loggerConfigurator: KmcLoggerConfigurator,
+                private _permissions: VMCPermissionsService,
+                private _loggerConfigurator: VmcLoggerConfigurator,
     ) {
         router.events
             .pipe(cancelOnDestroy(this))
@@ -75,23 +75,23 @@ export class AnalyticsFrameComponent implements OnInit, OnDestroy {
     }
 
     private _updateUrl(): void {
-        this._url = serverConfig.externalApps.kmcAnalytics.uri;
+        this._url = serverConfig.externalApps.vmcAnalytics.uri;
     }
 
     ngOnInit() {
         // set analytics config
         const config = {
-            kalturaServer: {
-                uri : serverConfig.kalturaServer.uri,
-                previewUIConf: serverConfig.kalturaServer.previewUIConf
+            vidiunServer: {
+                uri : serverConfig.vidiunServer.uri,
+                previewUIConf: serverConfig.vidiunServer.previewUIConf
             },
             cdnServers: serverConfig.cdnServers,
             liveAnalytics: serverConfig.externalApps.liveAnalytics,
-            ks: this.appAuthentication.appUser.ks,
+            vs: this.appAuthentication.appUser.vs,
             pid: this.appAuthentication.appUser.partnerId,
             locale: 'en',
             permissions: {
-                lazyLoadCategories: this._permissions.hasPermission(KMCPermissions.DYNAMIC_FLAG_KMC_CHUNKED_CATEGORY_LOAD)
+                lazyLoadCategories: this._permissions.hasPermission(VMCPermissions.DYNAMIC_FLAG_VMC_CHUNKED_CATEGORY_LOAD)
             }
         };
 
@@ -156,17 +156,17 @@ export class AnalyticsFrameComponent implements OnInit, OnDestroy {
 
     private _modalToggle(opened: boolean): void {
         const appMenu = document.querySelector('#appMenu') as HTMLElement;
-        const menuCover = document.querySelector('.kMenuCover') as HTMLElement;
+        const menuCover = document.querySelector('.vMenuCover') as HTMLElement;
         if (!appMenu || !menuCover) {
             return;
         }
 
         if (opened) {
-            document.body.classList.add('kModal');
+            document.body.classList.add('vModal');
             menuCover.style.display = 'block';
             menuCover.style.height = `${appMenu.offsetHeight}px`;
         } else {
-            document.body.classList.remove('kModal');
+            document.body.classList.remove('vModal');
             menuCover.style.display = 'none';
         }
     }

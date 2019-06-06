@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kSchemasTable {
+.vSchemasTable {
   background-color: white;
   height: auto;
   padding: 0;
@@ -10,38 +10,38 @@
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 
-  .kSchemasTableActions {
+  .vSchemasTableActions {
     width: 100%;
     text-align: center;
   }
 
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     font-weight: 700;
     cursor: pointer;
     max-height: 45px;
     &:hover {
       color: #000000;
     }
-    &.kProfileDisabled {
-      color: $kGrayscale4;
+    &.vProfileDisabled {
+      color: $vGrayscale4;
       cursor: text;
     }
   }
 
-  .kSchemasNameWrap {
+  .vSchemasNameWrap {
     display: flex;
     align-items: center;
 
-    .kMediaTypeIcon {
+    .vMediaTypeIcon {
       font-size: 26px;
       margin-right: 23px;
     }
@@ -64,12 +64,12 @@
   display: table;
 }
 
-:host /deep/ .kSchemasTable tr.kProfileDisabled .ui-cell-data {
-  color: $kGrayscale4;
+:host /deep/ .vSchemasTable tr.vProfileDisabled .ui-cell-data {
+  color: $vGrayscale4;
 }
 
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

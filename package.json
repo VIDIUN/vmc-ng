@@ -1,22 +1,22 @@
 {
-  "name": "kmc-ng",
+  "name": "vmc-ng",
   "version": "5.10.0",
   "license": "AGPL-3.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/kaltura/kmc-ng.git"
+    "url": "https://github.com/vidiun/vmc-ng.git"
   },
   "description": "",
   "keywords": [
-    "kaltura"
+    "vidiun"
   ],
   "author": {
-    "name": "Kaltura Community",
-    "email": "community@kaltura.com"
+    "name": "Vidiun Community",
+    "email": "community@vidiun.com"
   },
   "bugs": {
-    "url": "https://github.com/kaltura/kmc-ng/issues"
+    "url": "https://github.com/vidiun/vmc-ng/issues"
   },
   "contributors": [
     {
@@ -28,23 +28,23 @@
       "email": "amir.chr@gmail.com"
     }
   ],
-  "homepage": "https://github.com/kaltura/kmc-ng#readme",
+  "homepage": "https://github.com/vidiun/vmc-ng#readme",
   "scripts": {
     "setup": "node ./scripts/setup.js",
     "build": "ng build",
     "build:prod": "node --max_old_space_size=8092 ./node_modules/@angular/cli/bin/ng build --prod",
     "build:analyze": "node --max_old_space_size=8092 ./node_modules/@angular/cli/bin/ng build --prod--preserve-symlinks --aot --extract-licenses --named-chunks --stats-json && webpack-bundle-analyzer dist/stats.json",
-    "kws": "kws",
+    "vws": "vws",
     "lint": "ng lint",
     "ng": "ng",
     "prebuild": "node ./scripts/pre-build.js",
     "prestart": "node ./scripts/pre-build.js",
     "prebuild:prod": "node ./scripts/pre-build.js",
     "postbuild:prod": "node ./scripts/post-build-prod.js",
-    "release:prepare": "kws release --publish=false",
-    "release:publish": "kws release --prepare=false",
+    "release:prepare": "vws release --publish=false",
+    "release:publish": "vws release --prepare=false",
     "standalone": "node ./scripts/checkout-standalone.js",
-    "standalone:update": "npm run kws -- bookmark standalone --update && git commit -am 'chore: update standalone commit' && git push",
+    "standalone:update": "npm run vws -- bookmark standalone --update && git commit -am 'chore: update standalone commit' && git push",
     "start": "ng serve",
     "test": "ng test",
     "generate:ch": "node ./dev/tools/contextual-help-generator/generate.js"
@@ -60,12 +60,12 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "@kaltura-ng/kaltura-common": "~7.0.3",
-    "@kaltura-ng/kaltura-logger": "~3.0.2",
-    "@kaltura-ng/kaltura-primeng-ui": "~3.1.2",
-    "@kaltura-ng/kaltura-ui": "~7.1.0",
-    "@kaltura-ng/mc-shared": "~5.1.6",
-    "@kaltura-ng/mc-theme": "~3.0.11",
+    "@vidiun-ng/vidiun-common": "~7.0.3",
+    "@vidiun-ng/vidiun-logger": "~3.0.2",
+    "@vidiun-ng/vidiun-primeng-ui": "~3.1.2",
+    "@vidiun-ng/vidiun-ui": "~7.1.0",
+    "@vidiun-ng/mc-shared": "~5.1.6",
+    "@vidiun-ng/mc-theme": "~3.0.11",
     "@ngx-translate/core": "~10.0.2",
     "@ngx-translate/http-loader": "~3.0.1",
     "ajv": "~6.1.1",
@@ -74,7 +74,7 @@
     "intl": "^1.2.5",
     "jquery": "~3.3.1",
     "jsnlog": "~2.26.1",
-    "kaltura-ngx-client": "file:libs/kaltura-ngx-client-11.3.0-v20190515-142451.tgz",
+    "vidiun-ngx-client": "file:libs/vidiun-ngx-client-11.3.0-v20190515-142451.tgz",
     "moment": "~2.22.2",
     "ngx-page-scroll": "~5.0.0",
     "ngx-webstorage": "~3.0.0-beta.13",
@@ -95,7 +95,7 @@
     "@angular/cli": "~7.2.1",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@kaltura-ng/dev-workspace": "~2.4.1",
+    "@vidiun-ng/dev-workspace": "~2.4.1",
     "@types/core-js": "0.9.28",
     "@types/jquery": "^2.0.40",
     "@types/node": "~6.0.60",

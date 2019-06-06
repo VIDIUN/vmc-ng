@@ -1,16 +1,16 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { SectionsList } from './sections-list';
 import { TranscodingProfileWidget } from '../transcoding-profile-widget';
-import { KalturaConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
+import { VidiunConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
 import {
     SettingsTranscodingProfileViewSections,
     SettingsTranscodingProfileViewService
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface SectionWidgetItem {
   label: string;
@@ -26,7 +26,7 @@ export class TranscodingProfileSectionsListWidget extends TranscodingProfileWidg
 
   constructor(private _appLocalization: AppLocalization,
               private _settingsTranscodingProfileViewService: SettingsTranscodingProfileViewService,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super('sectionsList', logger);
   }
 
@@ -63,7 +63,7 @@ export class TranscodingProfileSectionsListWidget extends TranscodingProfileWidg
     }
   }
 
-  protected onDataLoaded(data: KalturaConversionProfileWithAsset): void {
+  protected onDataLoaded(data: VidiunConversionProfileWithAsset): void {
     this._reloadSections(data);
   }
 
@@ -79,7 +79,7 @@ export class TranscodingProfileSectionsListWidget extends TranscodingProfileWidg
 
   }
 
-  private _reloadSections(profile: KalturaConversionProfileWithAsset): void {
+  private _reloadSections(profile: VidiunConversionProfileWithAsset): void {
     const sections = [];
     const formWidgetsState = this.form.widgetsState;
 

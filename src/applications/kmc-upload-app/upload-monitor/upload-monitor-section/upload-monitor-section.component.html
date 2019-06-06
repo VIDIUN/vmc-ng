@@ -1,38 +1,38 @@
-<div class="kUploadMonitorSection">
-  <div class="kUploadMonitorSectionHeading">
-    <span class="kUploadMonitorSectionHeadingTitle">{{ title }}</span>
+<div class="vUploadMonitorSection">
+  <div class="vUploadMonitorSectionHeading">
+    <span class="vUploadMonitorSectionHeadingTitle">{{ title }}</span>
 
-    <a class="kUploadMonitorSectionHeadingDetails"
+    <a class="vUploadMonitorSectionHeadingDetails"
        (click)="_openDetails()">
       {{ 'applications.upload.uploadMonitor.viewDetails' | translate }}
     </a>
   </div>
-  <div class="kUploadMonitorSectionContent">
+  <div class="vUploadMonitorSectionContent">
 
     <ng-container [ngSwitch]="layout">
 
       <div *ngSwitchCase="'totals'">
       <span *ngIf="!_isUpToDate">
-        <span class="kUploadMonitorStatus" *ngIf="uploading !== 0">
-          <i class="kIconrefresh_small kUploadMonitorStatusIcon uploading"></i>
+        <span class="vUploadMonitorStatus" *ngIf="uploading !== 0">
+          <i class="vIconrefresh_small vUploadMonitorStatusIcon uploading"></i>
           {{ _uploadingTitle | translate:{'0': uploading} }}
         </span>
-        <span class="kUploadMonitorStatus" *ngIf="queued !== 0">
-          <i class="kIconupload2 kUploadMonitorStatusIcon queued"></i>
+        <span class="vUploadMonitorStatus" *ngIf="queued !== 0">
+          <i class="vIconupload2 vUploadMonitorStatusIcon queued"></i>
           {{ 'applications.upload.uploadMonitor.queued' | translate:{'0': queued} }}
         </span>
-        <span class="kUploadMonitorStatus" *ngIf="completed !== 0">
-          <i class="kIconcheck_small kUploadMonitorStatusIcon completed"></i>
+        <span class="vUploadMonitorStatus" *ngIf="completed !== 0">
+          <i class="vIconcheck_small vUploadMonitorStatusIcon completed"></i>
           {{ 'applications.upload.uploadMonitor.completed' | translate:{'0': completed} }}
         </span>
-        <span class="kUploadMonitorStatus" *ngIf="errors !== 0">
-          <i class="kIconerror kUploadMonitorStatusIcon error"></i>
+        <span class="vUploadMonitorStatus" *ngIf="errors !== 0">
+          <i class="vIconerror vUploadMonitorStatusIcon error"></i>
           {{ 'applications.upload.uploadMonitor.error' | translate:{'0': errors} }}
         </span>
       </span>
         <span *ngIf="_isUpToDate">
-        <span class="kUploadMonitorStatus">
-          <i class="kIconcheck_small kUploadMonitorStatusIcon completed"></i>
+        <span class="vUploadMonitorStatus">
+          <i class="vIconcheck_small vUploadMonitorStatusIcon completed"></i>
           {{ 'applications.upload.uploadMonitor.upToDate' | translate }}
         </span>
       </span>

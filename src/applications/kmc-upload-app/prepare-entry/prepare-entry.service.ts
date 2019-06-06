@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {MediaAddAction} from 'kaltura-ngx-client';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaMediaType} from 'kaltura-ngx-client';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {MediaAddAction} from 'vidiun-ngx-client';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunMediaType} from 'vidiun-ngx-client';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 
 
 export interface DraftEntry {
@@ -15,13 +15,13 @@ export interface DraftEntry {
 @Injectable()
 export class PrepareEntryService {
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization) {
   }
 
-  public createDraftEntry(mediaType: KalturaMediaType, conversionProfileId?: number): Observable<DraftEntry> {
+  public createDraftEntry(mediaType: VidiunMediaType, conversionProfileId?: number): Observable<DraftEntry> {
 
-    const entry: KalturaMediaEntry = new KalturaMediaEntry({
+    const entry: VidiunMediaEntry = new VidiunMediaEntry({
       name: this._appLocalization.get('applications.upload.uploadMenu.createDraft.draftEntry'),
       mediaType
     });
@@ -30,7 +30,7 @@ export class PrepareEntryService {
       entry.conversionProfileId = conversionProfileId;
     }
 
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new MediaAddAction({entry}))
       .map(media => ({id: media.id}))
       .catch(error => {

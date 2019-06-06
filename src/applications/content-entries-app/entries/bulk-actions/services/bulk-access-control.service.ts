@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { BaseEntryUpdateAction } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { BaseEntryUpdateAction } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
-import { KalturaAccessControl } from 'kaltura-ngx-client';
+import { VidiunAccessControl } from 'vidiun-ngx-client';
 
 @Injectable()
-export class BulkAccessControlService extends BulkActionBaseService<KalturaAccessControl> {
+export class BulkAccessControlService extends BulkActionBaseService<VidiunAccessControl> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedEntries: KalturaMediaEntry[], profile : KalturaAccessControl) : Observable<{}>{
+  public execute(selectedEntries: VidiunMediaEntry[], profile : VidiunAccessControl) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: BaseEntryUpdateAction[] = [];
 
       selectedEntries.forEach(entry => {
-        let updatedEntry: KalturaBaseEntry = new KalturaBaseEntry();
+        let updatedEntry: VidiunBaseEntry = new VidiunBaseEntry();
         updatedEntry.accessControlId = profile.id;
         requests.push(new BaseEntryUpdateAction({
           entryId: entry.id,

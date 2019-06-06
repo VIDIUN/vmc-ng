@@ -7,14 +7,14 @@ import {CommonModule} from '@angular/common';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {KalturaLogger, KalturaLoggerName} from '@kaltura-ng/kaltura-logger';
+import {VidiunLogger, VidiunLoggerName} from '@vidiun-ng/vidiun-logger';
 import {PreviewAndEmbedModule} from '../applications/preview-and-embed/preview-and-embed.module';
 import {EntriesModule} from 'app-shared/content-shared/entries/entries.module';
 import {CategoriesModule} from 'app-shared/content-shared/categories/categories.module';
 import {CategoriesStatusModule} from 'app-shared/content-shared/categories-status/categories-status.module';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { LocalizationModule } from '@kaltura-ng/mc-shared';
-import { KalturaLoggerInjectionToken } from '@kaltura-ng/kaltura-common';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { LocalizationModule } from '@vidiun-ng/mc-shared';
+import { VidiunLoggerInjectionToken } from '@vidiun-ng/vidiun-common';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './i18n/', '.json');
@@ -24,25 +24,25 @@ import {
     AppBootstrap,
     AuthModule,
     BrowserService,
-    KMCShellModule,
+    VMCShellModule,
     NewEntryUploadModule
-} from 'app-shared/kmc-shell';
+} from 'app-shared/vmc-shell';
 import {
   AppStorage,
-    KalturaCommonModule,
+    VidiunCommonModule,
   OperationTagModule,
   UploadManagement
-} from '@kaltura-ng/kaltura-common';
-import {AreaBlockerModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
-import {KalturaClientModule, KalturaClientOptions} from 'kaltura-ngx-client';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+} from '@vidiun-ng/vidiun-common';
+import {AreaBlockerModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
+import {VidiunClientModule, VidiunClientOptions} from 'vidiun-ngx-client';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 import {
   AccessControlProfileStore,
   AppEventsModule,
   FlavoursStore,
-  KalturaServerModule,
+  VidiunServerModule,
   MetadataProfileModule, PartnerProfileStore,
-} from 'app-shared/kmc-shared';
+} from 'app-shared/vmc-shared';
 
 import {AppComponent} from './app.component';
 import {routing} from './app.routes';
@@ -65,7 +65,7 @@ import {
 } from 'primeng/primeng';
 
 
-import { UploadManagementModule } from '@kaltura-ng/kaltura-common';
+import { UploadManagementModule } from '@vidiun-ng/vidiun-common';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordFormComponent } from './components/login/forgot-password-form/forgot-password-form.component';
@@ -73,49 +73,49 @@ import { LoginFormComponent } from './components/login/login-form/login-form.com
 import { PasswordExpiredFormComponent } from './components/login/password-expired-form/password-expired-form.component';
 import { InvalidLoginHashFormComponent } from './components/login/invalid-login-hash-form/invalid-login-hash-form.component';
 import { AppMenuContentComponent } from './components/app-menu/app-menu-content.component';
-import { KmcUploadAppModule } from '../applications/kmc-upload-app/kmc-upload-app.module';
-import { TranscodingProfileManagementModule } from 'app-shared/kmc-shared/transcoding-profile-management';
+import { VmcUploadAppModule } from '../applications/vmc-upload-app/vmc-upload-app.module';
+import { TranscodingProfileManagementModule } from 'app-shared/vmc-shared/transcoding-profile-management';
 import { ChangeAccountComponent } from './components/changeAccount/change-account.component';
 import { OpenEmailComponent } from './components/open-email/open-email.component';
-import { BulkUploadModule } from 'app-shared/kmc-shell/bulk-upload';
+import { BulkUploadModule } from 'app-shared/vmc-shell/bulk-upload';
 import { ChangelogComponent } from './components/changelog/changelog.component';
 import { ChangelogContentComponent } from './components/changelog/changelog-content/changelog-content.component';
-import { PlaylistCreationModule } from 'app-shared/kmc-shared/events/playlist-creation';
-import { KMCServerPollsModule } from 'app-shared/kmc-shared/server-polls';
-import { ViewCategoryEntriesModule } from 'app-shared/kmc-shared/events/view-category-entries/view-category-entries.module';
-import { AccessControlProfileModule } from 'app-shared/kmc-shared/access-control/access-control-profile.module';
-import {PlayersStore} from "app-shared/kmc-shared/players";
+import { PlaylistCreationModule } from 'app-shared/vmc-shared/events/playlist-creation';
+import { VMCServerPollsModule } from 'app-shared/vmc-shared/server-polls';
+import { ViewCategoryEntriesModule } from 'app-shared/vmc-shared/events/view-category-entries/view-category-entries.module';
+import { AccessControlProfileModule } from 'app-shared/vmc-shared/access-control/access-control-profile.module';
+import {PlayersStore} from "app-shared/vmc-shared/players";
 import { globalConfig } from 'config/global';
-import { getKalturaServerUri } from 'config/server';
-import { StorageProfilesStore } from 'app-shared/kmc-shared/storage-profiles';
-import { TranscodingProfileCreationModule } from 'app-shared/kmc-shared/events/transcoding-profile-creation/transcoding-profile-creation.module';
-import { APP_STORAGE_TOKEN } from '@kaltura-ng/kaltura-common';
-import { KmcLogsModule } from 'app-shared/kmc-shell/kmc-logs/kmc-logs.module';
-import { KalturaLoggerModule } from '@kaltura-ng/kaltura-logger';
-import { KmcViewsModule } from 'app-shared/kmc-shared/kmc-views/kmc-views.module';
+import { getVidiunServerUri } from 'config/server';
+import { StorageProfilesStore } from 'app-shared/vmc-shared/storage-profiles';
+import { TranscodingProfileCreationModule } from 'app-shared/vmc-shared/events/transcoding-profile-creation/transcoding-profile-creation.module';
+import { APP_STORAGE_TOKEN } from '@vidiun-ng/vidiun-common';
+import { VmcLogsModule } from 'app-shared/vmc-shell/vmc-logs/vmc-logs.module';
+import { VidiunLoggerModule } from '@vidiun-ng/vidiun-logger';
+import { VmcViewsModule } from 'app-shared/vmc-shared/vmc-views/vmc-views.module';
 import { AppDefaultViewComponent } from './components/app-default-view/app-default-view.component';
-import { LoginByKSComponent } from './components/app-actions/login-by-ks.component';
-import { NewReplaceVideoUploadModule } from 'app-shared/kmc-shell/new-replace-video-upload/new-replace-video-upload.module';
+import { LoginByVSComponent } from './components/app-actions/login-by-vs.component';
+import { NewReplaceVideoUploadModule } from 'app-shared/vmc-shell/new-replace-video-upload/new-replace-video-upload.module';
 import { RestorePasswordComponent } from './components/app-actions/restore-password.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { RestorePasswordFormComponent } from './components/login/restore-password-form/restore-password-form.component';
 import { InvalidRestorePasswordHashFormComponent } from './components/login/invalid-restore-password-hash-form/invalid-restore-password-hash-form.component';
 
-import { CopyToClipboardModule } from '@kaltura-ng/mc-shared';
-import { ContextualHelpModule } from 'app-shared/kmc-shared/contextual-help/contextual-help.module';
-import { PersistLoginByKsComponent } from './components/app-actions/persist-login-by-ks.component';
-import { ColumnsResizeManagerModule } from 'app-shared/kmc-shared/columns-resize-manager';
+import { CopyToClipboardModule } from '@vidiun-ng/mc-shared';
+import { ContextualHelpModule } from 'app-shared/vmc-shared/contextual-help/contextual-help.module';
+import { PersistLoginByVsComponent } from './components/app-actions/persist-login-by-vs.component';
+import { ColumnsResizeManagerModule } from 'app-shared/vmc-shared/columns-resize-manager';
 import { CaptionRequestAppModule } from '../applications/caption-request-app/caption-request-app.module';
-import { NewEntryCreateFromUrlModule } from 'app-shared/kmc-shell/new-entry-create-from-url/new-entry-create-from-url.module';
+import { NewEntryCreateFromUrlModule } from 'app-shared/vmc-shell/new-entry-create-from-url/new-entry-create-from-url.module';
 
 const partnerProviders: PartnerProfileStore[] = [AccessControlProfileStore, FlavoursStore, PlayersStore, StorageProfilesStore];
 
-export function kalturaClientOptionsFactory(): KalturaClientOptions {
+export function vidiunClientOptionsFactory(): VidiunClientOptions {
 
     return  {
-        endpointUrl: getKalturaServerUri(),
-        clientTag: 'kmcng'
+        endpointUrl: getVidiunServerUri(),
+        clientTag: 'vmcng'
     };
 }
 
@@ -134,8 +134,8 @@ export function kalturaClientOptionsFactory(): KalturaClientOptions {
     MetadataProfileModule.forRoot(),
     NgxPageScrollModule,
     AppEventsModule.forRoot(),
-    KMCShellModule.forRoot(),
-    KalturaCommonModule.forRoot(),
+    VMCShellModule.forRoot(),
+    VidiunCommonModule.forRoot(),
   TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -151,14 +151,14 @@ export function kalturaClientOptionsFactory(): KalturaClientOptions {
     PreviewAndEmbedModule,
     TieredMenuModule,
     UploadManagementModule,
-    KalturaServerModule,
+    VidiunServerModule,
     AreaBlockerModule,
     CheckboxModule,
     ReactiveFormsModule,
     TooltipModule,
     GrowlModule,
     CopyToClipboardModule,
-    KmcUploadAppModule.forRoot(),
+    VmcUploadAppModule.forRoot(),
     NewEntryUploadModule.forRoot(),
       NewReplaceVideoUploadModule.forRoot(),
     BulkUploadModule.forRoot(),
@@ -167,17 +167,17 @@ export function kalturaClientOptionsFactory(): KalturaClientOptions {
     StickyModule.forRoot(),
     OperationTagModule.forRoot(),
     PlaylistCreationModule.forRoot(),
-    KMCServerPollsModule.forRoot(),
+    VMCServerPollsModule.forRoot(),
     CategoriesStatusModule.forRoot(),
     ViewCategoryEntriesModule.forRoot(),
     AccessControlProfileModule.forRoot(),
-    KMCPermissionsModule.forRoot(),
+    VMCPermissionsModule.forRoot(),
     TranscodingProfileCreationModule.forRoot(),
-    KalturaClientModule.forRoot(kalturaClientOptionsFactory),
-      KmcLogsModule.forRoot(),
-      KalturaLoggerModule.forRoot('kmc'),
+    VidiunClientModule.forRoot(vidiunClientOptionsFactory),
+      VmcLogsModule.forRoot(),
+      VidiunLoggerModule.forRoot('vmc'),
       ContextualHelpModule.forRoot(),
-      KmcViewsModule.forRoot(),
+      VmcViewsModule.forRoot(),
       LocalizationModule.forRoot(),
       NewEntryCreateFromUrlModule.forRoot(),
       CaptionRequestAppModule,
@@ -200,13 +200,13 @@ export function kalturaClientOptionsFactory(): KalturaClientOptions {
     OpenEmailComponent,
     ChangelogComponent,
     ChangelogContentComponent,
-    LoginByKSComponent,
+    LoginByVSComponent,
       RestorePasswordComponent,
       NotFoundPageComponent,
       RestorePasswordFormComponent,
       InvalidRestorePasswordHashFormComponent,
       ProgressBarComponent,
-      PersistLoginByKsComponent,
+      PersistLoginByVsComponent,
   ],
   bootstrap: <any>[
     AppComponent
@@ -217,19 +217,19 @@ export function kalturaClientOptionsFactory(): KalturaClientOptions {
       {
            provide: APP_STORAGE_TOKEN, useExisting: BrowserService },
     ConfirmationService,
-      { provide: KalturaLoggerInjectionToken, useClass: KalturaLogger }
+      { provide: VidiunLoggerInjectionToken, useClass: VidiunLogger }
   ]
 })
 export class AppModule {
-    constructor(kalturaLogger: KalturaLogger,
+    constructor(vidiunLogger: VidiunLogger,
                 uploadManagement: UploadManagement) {
         if (globalConfig.client.production) {
-            kalturaLogger.setOptions({level: 'Error'});
+            vidiunLogger.setOptions({level: 'Error'});
         } else {
-            kalturaLogger.setOptions({level: 'All'});
+            vidiunLogger.setOptions({level: 'All'});
         }
 
-        // TODO [kmcng] move to a relevant location
-        uploadManagement.setMaxUploadRequests(globalConfig.kalturaServer.maxConcurrentUploads);
+        // TODO [vmcng] move to a relevant location
+        uploadManagement.setMaxUploadRequests(globalConfig.vidiunServer.maxConcurrentUploads);
     }
 }

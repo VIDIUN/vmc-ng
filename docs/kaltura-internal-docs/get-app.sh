@@ -3,9 +3,9 @@
 
 
 PRODUCT_PATH=/var/www/html
-GITHUB_REPO_DOWNLOADS=https://github.com/kaltura/kmc-ng/releases/download/
-GITHUB_FILE_PREFIX=kmc-ng-
-USAGE="Usage: script for changing kmc-ng version; to run execute: ./get-app v<version>"
+GITHUB_REPO_DOWNLOADS=https://github.com/vidiun/vmc-ng/releases/download/
+GITHUB_FILE_PREFIX=vmc-ng-
+USAGE="Usage: script for changing vmc-ng version; to run execute: ./get-app v<version>"
 VERSION=
 
 PARAM=install

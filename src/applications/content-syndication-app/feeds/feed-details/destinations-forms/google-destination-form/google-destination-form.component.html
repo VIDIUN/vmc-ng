@@ -1,20 +1,20 @@
 <form [formGroup]="_form" novalidate>
-  <div class="kRow kTitle">
+  <div class="vRow vTitle">
     {{'applications.content.syndication.details.destinationsForms.google.title' | translate}}
   </div>
-  <div class="kContentFlavor">
+  <div class="vContentFlavor">
 
     <!--Content Flavor-->
-    <div class="kRow kMultiLine">
-      <span class="kLabel">{{'applications.content.syndication.details.destinationsForms.google.contentFlavor.label' | translate}}</span>
-      <div class="kControlContainer">
-        <span class="kControl">
-          <p-dropdown class="kControl" [options]="_availableContentFlavors" formControlName="contentFlavor"
+    <div class="vRow vMultiLine">
+      <span class="vLabel">{{'applications.content.syndication.details.destinationsForms.google.contentFlavor.label' | translate}}</span>
+      <div class="vControlContainer">
+        <span class="vControl">
+          <p-dropdown class="vControl" [options]="_availableContentFlavors" formControlName="contentFlavor"
                       [autoWidth]="false" [filter]="true">
           </p-dropdown>
         </span>
         <!--Add to default transcoding profile-->
-        <div class="kAddToDefaultTranscodingProfile">
+        <div class="vAddToDefaultTranscodingProfile">
           <p-checkbox formControlName="addToDefaultTranscodingProfile"
                       label="{{'applications.content.syndication.details.destinationsForms.google.contentFlavor.checkbox' | translate}}"
                       binary="true"></p-checkbox>
@@ -23,14 +23,14 @@
     </div>
 
     <!--Landing Page-->
-    <div class="kRow" [class.kInputValidationError]="_form.get('landingPage').touched && _form.get('landingPage').invalid">
-      <span class="kLabel">{{'applications.content.syndication.details.destinationsForms.google.landingPage.label' | translate}}</span>
-      <div class="kAsterix"
-           [ngClass]="{'kHasError':!_form.get('landingPage').valid && _form.get('landingPage').touched}">*
+    <div class="vRow" [class.vInputValidationError]="_form.get('landingPage').touched && _form.get('landingPage').invalid">
+      <span class="vLabel">{{'applications.content.syndication.details.destinationsForms.google.landingPage.label' | translate}}</span>
+      <div class="vAsterix"
+           [ngClass]="{'vHasError':!_form.get('landingPage').valid && _form.get('landingPage').touched}">*
       </div>
-      <div class="kControlContainer">
-        <input class="kControl" formControlName="landingPage" pInputText placeholder="http://"
-               [ngClass]="{'kHasError':!_form.get('landingPage').valid && _form.get('landingPage').touched}">
+      <div class="vControlContainer">
+        <input class="vControl" formControlName="landingPage" pInputText placeholder="http://"
+               [ngClass]="{'vHasError':!_form.get('landingPage').valid && _form.get('landingPage').touched}">
         <div *ngIf="_form.get('landingPage').touched && _form.get('landingPage').hasError('required')"
              class="error">
           {{'applications.content.syndication.details.destinationsForms.google.errors.requiredLandingPage' | translate}}
@@ -43,31 +43,31 @@
     </div>
 
     <!--Landing Page Explanation-->
-    <div class="kLandingPageExplanation">
+    <div class="vLandingPageExplanation">
       {{'applications.content.syndication.details.destinationsForms.google.landingPage.explanation' | translate}}
     </div>
 
 
     <!--Playback-->
-    <div class="kRow kPlayback kMultiLine">
-      <span class="kLabel">{{'applications.content.syndication.details.destinationsForms.google.playback.label' | translate}}</span>
-      <div class="kControlContainer">
-            <span class="kControl">
-              <p-radioButton class="kFromGoogle" name="playback" (click)="_clearPlayer()"
+    <div class="vRow vPlayback vMultiLine">
+      <span class="vLabel">{{'applications.content.syndication.details.destinationsForms.google.playback.label' | translate}}</span>
+      <div class="vControlContainer">
+            <span class="vControl">
+              <p-radioButton class="vFromGoogle" name="playback" (click)="_clearPlayer()"
                              [value]="'fromGoogle'"
                              formControlName="playback"
                              label="{{'applications.content.syndication.details.destinationsForms.google.playback.fromGoogle' | translate}}">
               </p-radioButton>
-              <p-radioButton class="kPlaybackLinkback" name="playback"
+              <p-radioButton class="vPlaybackLinkback" name="playback"
                              [value]="'linkback'"
                              formControlName="playback"
                              label="{{'applications.content.syndication.details.destinationsForms.google.playback.linkback' | translate}}">
               </p-radioButton>
             </span>
         <!--Select Player-->
-        <div class="kSelectPlayer" *ngIf="_form.get('playback').value === 'fromGoogle'">
-          <div class="kSelectPlayerLabel">{{'applications.content.syndication.details.destinationsForms.google.playback.player' | translate}}</div>
-          <p-dropdown class="kSelectPlayerControl" [options]="_availablePlayers" formControlName="selectedPlayer"
+        <div class="vSelectPlayer" *ngIf="_form.get('playback').value === 'fromGoogle'">
+          <div class="vSelectPlayerLabel">{{'applications.content.syndication.details.destinationsForms.google.playback.player' | translate}}</div>
+          <p-dropdown class="vSelectPlayerControl" [options]="_availablePlayers" formControlName="selectedPlayer"
                       [autoWidth]="false" [filter]="true">
               <ng-template let-item pTemplate="selectedItem">
                   <div class="playerItem selectedPlayer">
@@ -79,22 +79,22 @@
                   <div class="playerItem">
                       <div [class]="'playerIcon v'+item.version"></div>
                       <span>{{item.label}}</span>
-                      <i class="check kIconcheck_small"></i>
+                      <i class="check vIconcheck_small"></i>
                   </div>
               </ng-template>
           </p-dropdown>
         </div>
-        <div class="kSelectPlayerInfo">
+        <div class="vSelectPlayerInfo">
           {{'applications.content.syndication.details.destinationsForms.google.playback.playerMessage' | translate}}
         </div>
       </div>
     </div>
 
     <!--Adult Content-->
-    <div class="kRow kMultiLine">
-      <span class="kLabel">{{'applications.content.syndication.details.destinationsForms.google.adultContent.label' | translate}}</span>
-      <div class="kControlContainer">
-        <span class="kControl">
+    <div class="vRow vMultiLine">
+      <span class="vLabel">{{'applications.content.syndication.details.destinationsForms.google.adultContent.label' | translate}}</span>
+      <div class="vControlContainer">
+        <span class="vControl">
           <p-checkbox formControlName="adultContent"
                       label="{{'applications.content.syndication.details.destinationsForms.google.adultContent.checkbox' | translate}}"
                       binary="true"></p-checkbox>

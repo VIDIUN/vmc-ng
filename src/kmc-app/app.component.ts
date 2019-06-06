@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ConfirmationService, ConfirmDialog } from 'primeng/primeng';
-import { BrowserService, GrowlMessage } from 'app-shared/kmc-shell/providers/browser.service';
-import { OperationTagManagerService} from '@kaltura-ng/kaltura-common';
+import { BrowserService, GrowlMessage } from 'app-shared/vmc-shell/providers/browser.service';
+import { OperationTagManagerService} from '@vidiun-ng/vidiun-common';
 import { NavigationEnd, Router } from '@angular/router';
-import { KmcLoggerConfigurator } from 'app-shared/kmc-shell/kmc-logs/kmc-logger-configurator';
+import { VmcLoggerConfigurator } from 'app-shared/vmc-shell/vmc-logs/vmc-logger-configurator';
 import { async } from 'rxjs/scheduler/async';
 
-import { OpenEmailEvent } from 'app-shared/kmc-shared/events';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { OpenEmailEvent } from 'app-shared/vmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { EmailConfig } from './components/open-email/open-email.component';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BoostrappingStatus, AppBootstrap } from 'app-shared/kmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BoostrappingStatus, AppBootstrap } from 'app-shared/vmc-shell';
 /*
  * App Component
  * Top Level Component
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   constructor(private _confirmationService: ConfirmationService,
               private _browserService : BrowserService,
               private router: Router,
-              private _loggerConfigurator: KmcLoggerConfigurator,
+              private _loggerConfigurator: VmcLoggerConfigurator,
               private _oprationsTagManager: OperationTagManagerService,
               private _appEvents: AppEventsService,
               private _appLocalization: AppLocalization,

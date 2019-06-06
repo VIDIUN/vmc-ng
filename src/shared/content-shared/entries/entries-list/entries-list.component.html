@@ -1,16 +1,16 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kEntries kOverrideFAIcons">
-    <div #entriesTableHolder class="kEntriesHolder kContent">
-      <kSticky stickyId="entriesFilters" [scrollOffset]="80" [sticksTo]="'header'">
-        <div class="kEntriesTableFilters kContent" [class.kAdditionalFilters]="additionalFilters.children.length !== 0">
-          <span class="kSelectedEntriesNum"
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vEntries vOverrideFAIcons">
+    <div #entriesTableHolder class="vEntriesHolder vContent">
+      <vSticky stickyId="entriesFilters" [scrollOffset]="80" [sticksTo]="'header'">
+        <div class="vEntriesTableFilters vContent" [class.vAdditionalFilters]="additionalFilters.children.length !== 0">
+          <span class="vSelectedEntriesNum"
                 *ngIf="(_entriesStore.entries.data$ | async)?.totalCount && additionalFilters.children.length === 0">
             {{'applications.content.entries.entries' | translate: [(_entriesStore.entries.data$ | async)?.totalCount]}}
           </span>
 
-          <div [class.kHidden]="!selectedEntries.length" class="kBulkOperations">
+          <div [class.vHidden]="!selectedEntries.length" class="vBulkOperations">
             <span *ngIf="bulkWrapper.children.length !== 0"
-                  class="kSelectedEntriesLabel">
+                  class="vSelectedEntriesLabel">
               • {{selectedEntries.length}} {{'applications.content.entries.selected' | translate}}
             </span>
             <div #bulkWrapper>
@@ -18,71 +18,71 @@
             </div>
 
             <a *ngIf="bulkWrapper.children.length !== 0"
-               class="kBulkCancel"
+               class="vBulkCancel"
                (click)="clearSelection()">{{'applications.content.entries.cancel' | translate}}</a>
           </div>
-          <div class="kFiltersWrapper" [class.kHidden]="additionalFilters.children.length === 0 && selectedEntries.length">
+          <div class="vFiltersWrapper" [class.vHidden]="additionalFilters.children.length === 0 && selectedEntries.length">
             <div #additionalFilters>
               <ng-content select=".additional-filters"></ng-content>
             </div>
 
-            <div class="kFilters">
+            <div class="vFilters">
               <input type="text"
                      pInputText
-                     class="kSearchInput"
+                     class="vSearchInput"
                      [(ngModel)]="_query.freetext"
                      (keyup.enter)="onFreetextChanged()"
                      placeholder="{{'applications.content.entries.searchEntries' | translate}}">
-              <div #categoriesFilterBtn class="kCategoriesFilter kDropdown">
-                <i class="kIconfolder" *ngIf="!_categoriesUpdating"></i>
-              <div *ngIf="_categoriesUpdating" class="k-spinner-background kSpinnerBkg" kTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
-                <div class="k-spinner-animation kSpinnerAnim"></div>
+              <div #categoriesFilterBtn class="vCategoriesFilter vDropdown">
+                <i class="vIconfolder" *ngIf="!_categoriesUpdating"></i>
+              <div *ngIf="_categoriesUpdating" class="v-spinner-background vSpinnerBkg" vTooltip="{{'applications.content.categories.categoriesUpdateMsg' | translate}}">
+                <div class="v-spinner-animation vSpinnerAnim"></div>
               </div>
                 <span>{{'applications.content.entries.filterCategories' | translate}}</span>
-                <i class="kIcondropdown_arrow_bottom dropdown"></i>
+                <i class="vIcondropdown_arrow_bottom dropdown"></i>
               </div>
-              <div #refineBtn class="kRefine kDropdown">
-                <i class="kIconfilter"></i>
+              <div #refineBtn class="vRefine vDropdown">
+                <i class="vIconfilter"></i>
                 <span>{{'applications.content.entries.refine' | translate}}</span>
-                <i class="kIcondropdown_arrow_bottom dropdown"></i>
+                <i class="vIcondropdown_arrow_bottom dropdown"></i>
               </div>
             </div>
           </div>
           <button *ngIf="showReload"
                   pButton
-                  class="kButtonDefault kRefreshBtn small"
+                  class="vButtonDefault vRefreshBtn small"
                   type="text"
-                  icon="kIconrefresh"
-                  [kTooltip]="'applications.content.entries.refresh' | translate"
+                  icon="vIconrefresh"
+                  [vTooltip]="'applications.content.entries.refresh' | translate"
                   (click)="_reload()"></button>
         </div>
-        <span class="kEntriesInfo"
+        <span class="vEntriesInfo"
               *ngIf="additionalFilters.children.length !== 0 && !(_entriesStore.entries.state$ | async)?.loading">
           <span *ngIf="(_entriesStore.entries.data$ | async)?.totalCount">
             {{'applications.content.entries.entries' | translate: [(_entriesStore.entries.data$ | async)?.totalCount]}},
-            {{'applications.content.entries.totalDuration' | translate: [(_entriesDuration | kTime)]}}
+            {{'applications.content.entries.totalDuration' | translate: [(_entriesDuration | vTime)]}}
           </span>
           <span *ngIf="!(_entriesStore.entries.data$ | async)?.totalCount">
             {{'applications.content.entries.noEntries' | translate }}
           </span>
         </span>
-      </kSticky>
-      <kSticky #tags [stickyClass]="'kStickyClass'" stickyId="entriesTags" [sticksTo]="'entriesFilters'">
-        <div class="kContent">
-            <k-entries-list-tags
+      </vSticky>
+      <vSticky #tags [stickyClass]="'vStickyClass'" stickyId="entriesTags" [sticksTo]="'entriesFilters'">
+        <div class="vContent">
+            <v-entries-list-tags
                 [showEnforcedFilters]="showEnforcedFilters"
               [refineFilters]="_refineFilters"
               [enforcedFilters] = "enforcedFilters"
               (onTagsBarVisible)="_isTagsBarVisible = $event"
-              (onTagsChange)="onTagsChange()"></k-entries-list-tags>
+              (onTagsChange)="onTagsChange()"></v-entries-list-tags>
         </div>
-      </kSticky>
+      </vSticky>
 
 
-        <k-area-blocker [showLoader]="_tableIsBusy"
+        <v-area-blocker [showLoader]="_tableIsBusy"
                         [message]="_tableBlockerMessage"
                         [bodyScroll]="true">
-      <kEntriesTable class="kEntriesTable"
+      <vEntriesTable class="vEntriesTable"
                      scrollHeight="100%"
                      [isTagsBarVisible]="_isTagsBarVisible"
                      [entries]="(_entriesStore.entries.data$ | async)?.items"
@@ -95,28 +95,28 @@
                      (openActionsMenu)="_openActionsMenu($event)"
                      (sortChanged)="onSortChanged($event)"
                      [(selectedEntries)]="selectedEntries"
-      ></kEntriesTable>
-        </k-area-blocker>
+      ></vEntriesTable>
+        </v-area-blocker>
 
 
 
-      <div class="kEntriesTableFooter kContent" #footer *ngIf="(_entriesStore.entries.data$ | async)?.totalCount">
+      <div class="vEntriesTableFooter vContent" #footer *ngIf="(_entriesStore.entries.data$ | async)?.totalCount">
         <p-paginator
           [rows]="_query.pageSize"
           [first]="_query.pageIndex * _query.pageSize"
-          [totalRecords]="(_entriesStore.entries.data$ | async)?.totalCount | kMaxEntries"
+          [totalRecords]="(_entriesStore.entries.data$ | async)?.totalCount | vMaxEntries"
           [rowsPerPageOptions]="[25,50,100,250]"
           (onPageChange)="onPaginationChanged($event)"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+<p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 
 <!-- popup widgets section -->
-<kPopupWidget #categoriesFilterPopup
+<vPopupWidget #categoriesFilterPopup
               data-aid="categoriesFilterPopup"
               [popupWidth]="400"
               [popupHeight]="500"
@@ -124,18 +124,18 @@
               [closeBtn]="false"
               [targetRef]="categoriesFilterBtn"
               [targetOffset]="{'x':-10, 'y': -21}"
-              kSticky [sticksTo]="'header'" [stickyClass]="'kForceFix'" [stickyId]="'categoriesFilterPopup'"
+              vSticky [sticksTo]="'header'" [stickyClass]="'vForceFix'" [stickyId]="'categoriesFilterPopup'"
               [scrollOffset]="80">
   <ng-template>
-  <kCategoriesFilter  [parentPopupWidget]="categoriesFilterPopup" [selection]="_query.categories"
+  <vCategoriesFilter  [parentPopupWidget]="categoriesFilterPopup" [selection]="_query.categories"
                       [selectionMode]="_query.categoriesMode"
                       (onCategorySelected)="onCategorySelected($event)"
                       (onCategoriesUnselected)="onCategoriesUnselected($event)"
-                     (selectionModeChange)="onCategoriesModeChanged($event)"></kCategoriesFilter>
+                     (selectionModeChange)="onCategoriesModeChanged($event)"></vCategoriesFilter>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #refinePopup
+<vPopupWidget #refinePopup
               data-aid="entriesRefinePopup"
               [popupWidth]="400"
               [popupHeight]="500"
@@ -143,11 +143,11 @@
               [closeBtn]="false"
               [targetRef]="refineBtn"
               [targetOffset]="{'x':-200, 'y': -15}"
-              kSticky [sticksTo]="'header'" [stickyClass]="'kForceFix'" [stickyId]="'refinePopup'" [scrollOffset]="80">
+              vSticky [sticksTo]="'header'" [stickyClass]="'vForceFix'" [stickyId]="'refinePopup'" [scrollOffset]="80">
   <ng-template>
-    <k-entries-refine-filters [refineFilters]="_refineFilters"
+    <v-entries-refine-filters [refineFilters]="_refineFilters"
                               [showEnforcedFilters]="showEnforcedFilters"
                               [enforcedFilters] = "enforcedFilters"
-                              [parentPopupWidget]="refinePopup"></k-entries-refine-filters>
+                              [parentPopupWidget]="refinePopup"></v-entries-refine-filters>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

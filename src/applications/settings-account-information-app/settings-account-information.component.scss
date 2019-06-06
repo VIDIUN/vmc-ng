@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kAccountInformationWrapper {
+.vAccountInformationWrapper {
   height: 100%;
   border: none;
   position: relative;
@@ -12,87 +12,87 @@
   -ms-flex-direction: column;
   flex-direction: column;
 
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     font-weight: 700;
     height: 29px;
     font-size: 24px;
     font-weight: bold;
     line-height: 29px;
-    .kTitleIcon:before {
+    .vTitleIcon:before {
       font-size: 32px;
       vertical-align: middle;
       padding-right: 9px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
     }
   }
-  .kAccountInfoContainer{
+  .vAccountInfoContainer{
     margin-top: 22px;
   }
 
-  .kFormContainer {
+  .vFormContainer {
     background: #FFFFFF;
     margin-top: 24px;
 
-    .kFormSection {
+    .vFormSection {
       font-size: 15px;
       padding: 27px 29px;
       width: 615px;
 
-      .kTitle {
+      .vTitle {
         padding-bottom: 20px;
       }
-      .kRow {
+      .vRow {
 
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         padding-top: 20px;
 
-        .kLabel {
+        .vLabel {
           width: 179px;
           -webkit-box-flex: 0;
           -ms-flex: 0 0 auto;
           flex: 0 0 auto;
           height: 18px;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           font-size: 15px;
           line-height: 18px;
         }
 
-        .kRequired {
+        .vRequired {
           width: 20px;
           font-size: 24px;
-          color: $kGrayscale3;
-          &.kHasError {
-            color: $kDandger;
+          color: $vGrayscale3;
+          &.vHasError {
+            color: $vDandger;
             font-weight: bold;
           }
         }
-        .kRequired, .kLabel {
+        .vRequired, .vLabel {
           padding: 8px 4px;
           height: 18px;
         }
-        .kControl {
-          color: $kGrayscale2;
+        .vControl {
+          color: $vGrayscale2;
           height: 34px;
           width: 400px;
           border-radius: 3px;
-          &.kHasError {
-            border: 1px solid $kDandger;
+          &.vHasError {
+            border: 1px solid $vDandger;
             background: initial;
           }
         }
-        textarea.kControl {
+        textarea.vControl {
           height: 76px;
         }
         .error {
           padding-top: 8px;
         }
 
-        &.kSaveBtnContainer {
+        &.vSaveBtnContainer {
           padding-top: 60px;
-          .kSaveBtn {
+          .vSaveBtn {
             margin-left: auto;
             width: 125px;
             height: 34px;

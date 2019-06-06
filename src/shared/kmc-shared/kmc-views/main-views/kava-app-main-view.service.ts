@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
 import { serverConfig } from 'config/server';
-import { KmcMainViewBaseService, ViewMetadata } from 'app-shared/kmc-shared/kmc-views/kmc-main-view-base.service';
+import { VmcMainViewBaseService, ViewMetadata } from 'app-shared/vmc-shared/vmc-views/vmc-main-view-base.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class KavaAppMainViewService extends KmcMainViewBaseService {
+export class KavaAppMainViewService extends VmcMainViewBaseService {
 
     constructor(private _appLocalization: AppLocalization,
                 router: Router,
                 browserService: BrowserService,
                 titleService: Title,
-                logger: KalturaLogger,
+                logger: VidiunLogger,
                 contextualHelpService: ContextualHelpService) {
         super(logger.subLogger('KavaAppMainViewService'), browserService, router, titleService, contextualHelpService);
     }

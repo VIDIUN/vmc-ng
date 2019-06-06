@@ -1,23 +1,23 @@
 @import 'app-theme/_variables.scss';
 
-.kContainer {
+.vContainer {
   display: flex;
   padding-top: 32px;
   height: $minTableHeight;
   box-sizing: border-box;
-  .kRightColumn{
+  .vRightColumn{
     margin-left: 30px;
   }
-  .kRightColumnShown {
+  .vRightColumnShown {
     max-width: 586px;
   }
-  .kColumn {
+  .vColumn {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     width: 50%;
 
-    .kAccountInfoContainer {
+    .vAccountInfoContainer {
       background-color: white;
       flex: 0 0 auto;
       margin-bottom: 30px;
@@ -27,14 +27,14 @@
       max-height: 279px;
     }
 
-    .kNotifications {
+    .vNotifications {
       background-color: white;
       flex: 1 1 auto;
       padding-left: 30px;
       padding-top: 28px;
       padding-bottom: 28px;
-      .kTitle {
-        color: $kGrayscale1;
+      .vTitle {
+        color: $vGrayscale1;
         padding-bottom: 30px;
         width: 100%;
         font-family: Lato;

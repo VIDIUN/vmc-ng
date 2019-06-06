@@ -15,7 +15,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {TagsModule} from '@kaltura-ng/kaltura-ui';
+import {TagsModule} from '@vidiun-ng/vidiun-ui';
 import {
   AccordionModule,
   ButtonModule,
@@ -36,39 +36,39 @@ import {
   TreeModule,
 } from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
-import {KMCShellModule} from 'app-shared/kmc-shell';
+import {VMCShellModule} from 'app-shared/vmc-shell';
 
 import {routing} from './content-categories-app.routes';
 import {ContentCategoriesComponent} from './content-categories.component';
 
-import {DynamicMetadataFormModule} from 'app-shared/kmc-shared';
+import {DynamicMetadataFormModule} from 'app-shared/vmc-shared';
 
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
 
-import {KalturaPrimeNgUIModule} from '@kaltura-ng/kaltura-primeng-ui';
+import {VidiunPrimeNgUIModule} from '@vidiun-ng/vidiun-primeng-ui';
 import {
   AreaBlockerModule,
   InputHelperModule,
-  KalturaUIModule,
+  VidiunUIModule,
   StickyModule,
   TooltipModule
-} from '@kaltura-ng/kaltura-ui';
-import {AutoCompleteModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
-import {DynamicFormModule} from '@kaltura-ng/kaltura-ui';
-import {DynamicFormModule as PrimeDynamicFormModule} from '@kaltura-ng/kaltura-primeng-ui';
+} from '@vidiun-ng/vidiun-ui';
+import {AutoCompleteModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
+import {DynamicFormModule} from '@vidiun-ng/vidiun-ui';
+import {DynamicFormModule as PrimeDynamicFormModule} from '@vidiun-ng/vidiun-primeng-ui';
 import {CategoryComponentsList} from './category/category-components-list';
 import {CategoriesComponentsList} from './categories/categories-components-list';
 import {CategoryCanDeactivate} from './category/category-can-deactivate.service';
-import {DetailsBarModule} from '@kaltura-ng/kaltura-ui';
+import {DetailsBarModule} from '@vidiun-ng/vidiun-ui';
 import {CategoriesUtilsService} from './categories-utils.service';
 import {NewCategoryComponent} from './categories/new-category/new-category.component';
 import {MoveCategoryComponent} from './categories/move-category/move-category.component';
 import {CategoriesRefineFiltersService} from './categories/categories-refine-filters.service';
-import { FiltersModule } from '@kaltura-ng/mc-shared';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { FiltersModule } from '@vidiun-ng/mc-shared';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { EntriesModule } from 'app-shared/content-shared/entries/entries.module';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
     imports: [
@@ -89,9 +89,9 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
         InputTextModule,
         LocalizationModule,
         DynamicMetadataFormModule,
-        KalturaPrimeNgUIModule,
-        KalturaUIModule,
-        KMCShellModule,
+        VidiunPrimeNgUIModule,
+        VidiunUIModule,
+        VMCShellModule,
         MenuModule,
         MultiSelectModule,
         PaginatorModule,
@@ -111,7 +111,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
         InputHelperModule,
         InputSwitchModule,
         TableModule,
-        KMCPermissionsModule,
+        VMCPermissionsModule,
 	    EntriesModule,
         DateFormatModule,
     ],

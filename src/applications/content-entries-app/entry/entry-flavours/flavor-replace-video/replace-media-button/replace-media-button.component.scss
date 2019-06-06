@@ -5,22 +5,22 @@
     margin-left: 24px;
 }
 
-.kReplaceMediaButtonsLabel {
-    color: $kGrayscale1;
+.vReplaceMediaButtonsLabel {
+    color: $vGrayscale1;
     font-size: 15px;
     font-weight: bold;
     line-height: 18px;
     margin-bottom: 20px;
 }
 
-.kFlavorReplaceButton {
+.vFlavorReplaceButton {
     margin-right: 20px;
     margin-bottom: 16px;
     font-size: 14px;
     font-weight: bold;
 }
 
-.kReplaceVideoPopup {
+.vReplaceVideoPopup {
     padding-bottom: 17px;
 
     p {
@@ -28,12 +28,12 @@
         padding: 17px 17px 0 17px;
         font-size: 15px;
         cursor: pointer;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         &:hover {
             color: #000000;
         }
     }
-    .kHidden {
+    .vHidden {
         display: none;
         margin: 0;
         padding: 0;
@@ -43,7 +43,7 @@
 }
 
 @media screen and (max-width: 1310px) {
-    .kFlavorReplaceButton {
+    .vFlavorReplaceButton {
         width: 130px;
         height: 48px;
         margin-right: 10px;

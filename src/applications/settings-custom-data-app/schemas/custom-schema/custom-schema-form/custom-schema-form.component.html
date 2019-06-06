@@ -1,16 +1,16 @@
-<form class="kCustomSchemaForm" [formGroup]="_schemaForm" novalidate>
-  <div class="kRow">
-    <div class="kLabel">
+<form class="vCustomSchemaForm" [formGroup]="_schemaForm" novalidate>
+  <div class="vRow">
+    <div class="vLabel">
         {{'applications.settings.metadata.form.customSchemaTitle' | translate}}
-        <div class="kRequired" [class.kControlInvalid]="_nameField.touched && _nameField.invalid">*</div>
+        <div class="vRequired" [class.vControlInvalid]="_nameField.touched && _nameField.invalid">*</div>
     </div>
 
     <div>
-      <input class="kControl" pInputText
-             [class.kControlInvalid]="_nameField.touched && _nameField.invalid"
+      <input class="vControl" pInputText
+             [class.vControlInvalid]="_nameField.touched && _nameField.invalid"
              [formControl]="_nameField"
              (blur)="_nameField.setValue((_nameField.value || '').trim())">
-        <div class="kErrorMessage" *ngIf="_nameField.touched && _nameField.invalid">
+        <div class="vErrorMessage" *ngIf="_nameField.touched && _nameField.invalid">
           <span *ngIf="_nameField.hasError('required')">
                 {{'applications.settings.metadata.form.schemaNameRequired' | translate}}
             </span>
@@ -21,32 +21,32 @@
     </div>
   </div>
 
-  <div class="kRow">
-    <span class="kLabel">{{'applications.settings.metadata.form.description' | translate}}</span>
+  <div class="vRow">
+    <span class="vLabel">{{'applications.settings.metadata.form.description' | translate}}</span>
     <div>
-      <textarea class="kControl KTextArea"
+      <textarea class="vControl VTextArea"
                 pInputText [formControl]="_descriptionField"></textarea>
     </div>
   </div>
 
-  <div class="kRow">
-    <span class="kLabel">{{'applications.settings.metadata.form.systemName' | translate}}</span>
+  <div class="vRow">
+    <span class="vLabel">{{'applications.settings.metadata.form.systemName' | translate}}</span>
     <div>
-      <input class="kControl" pInputText
-             [class.kControlInvalid]="_systemNameField.invalid"
+      <input class="vControl" pInputText
+             [class.vControlInvalid]="_systemNameField.invalid"
              [formControl]="_systemNameField">
     </div>
   </div>
 
-  <div class="kRow applyTo">
-    <span class="kLabel">{{'applications.settings.metadata.form.applyTo' | translate}}</span>
-    <div class="kSelectApplyTo">
-      <p-radioButton class="kRadioLeft"
+  <div class="vRow applyTo">
+    <span class="vLabel">{{'applications.settings.metadata.form.applyTo' | translate}}</span>
+    <div class="vSelectApplyTo">
+      <p-radioButton class="vRadioLeft"
                      name="applyTo"
                      [value]="_applyToValues.entry"
                      [formControl]="_applyToField"
                      [label]="'applications.settings.metadata.form.entries' | translate"></p-radioButton>
-      <p-radioButton class="kRadioRight"
+      <p-radioButton class="vRadioRight"
                      name="applyTo"
                      [value]="_applyToValues.category"
                      [formControl]="_applyToField"

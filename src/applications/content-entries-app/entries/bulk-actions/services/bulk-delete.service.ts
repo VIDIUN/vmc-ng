@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { BaseEntryDeleteAction } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { BaseEntryDeleteAction } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
 
 export class BulkDeleteError extends Error {
@@ -17,11 +17,11 @@ export class BulkDeleteError extends Error {
 @Injectable()
 export class BulkDeleteService extends BulkActionBaseService<{}> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedEntries: KalturaMediaEntry[]) : Observable<{}>{
+  public execute(selectedEntries: VidiunMediaEntry[]) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: BaseEntryDeleteAction[] = [];

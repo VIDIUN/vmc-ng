@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { EntryFlavoursWidget, ReplacementData } from '../../entry-flavours-widget.service';
-import { KalturaEntryReplacementStatus } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { NewReplaceVideoUploadService } from 'app-shared/kmc-shell/new-replace-video-upload';
-import { UploadManagement } from '@kaltura-ng/kaltura-common';
-import { NewReplaceVideoUploadFile } from 'app-shared/kmc-shell/new-replace-video-upload/new-replace-video-upload-file';
-import { TrackedFileStatuses } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunEntryReplacementStatus } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { NewReplaceVideoUploadService } from 'app-shared/vmc-shell/new-replace-video-upload';
+import { UploadManagement } from '@vidiun-ng/vidiun-common';
+import { NewReplaceVideoUploadFile } from 'app-shared/vmc-shell/new-replace-video-upload/new-replace-video-upload-file';
+import { TrackedFileStatuses } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum FlavorsTabs {
     current = 'current',
@@ -16,13 +16,13 @@ export enum FlavorsTabs {
 }
 
 @Component({
-    selector: 'kFlavorReplaceMediaStatus',
+    selector: 'vFlavorReplaceMediaStatus',
     templateUrl: './replacement-status.component.html',
     styleUrls: ['./replacement-status.component.scss'],
-    providers: [KalturaLogger.createLogger('ReplacementStatusComponent')]
+    providers: [VidiunLogger.createLogger('ReplacementStatusComponent')]
 })
 export class ReplacementStatusComponent implements OnInit, OnDestroy {
-    @Input() entry: KalturaMediaEntry;
+    @Input() entry: VidiunMediaEntry;
     @Input() currentEntryId: string;
     @Input() replacementData: ReplacementData;
     @Input() replaceButtonsLabel: string;
@@ -40,19 +40,19 @@ export class ReplacementStatusComponent implements OnInit, OnDestroy {
     }
 
     public get _approveBtnDisabled(): boolean {
-        return this.replacementData.status === KalturaEntryReplacementStatus.approvedButNotReady
-            || this.replacementData.status === KalturaEntryReplacementStatus.failed;
+        return this.replacementData.status === VidiunEntryReplacementStatus.approvedButNotReady
+            || this.replacementData.status === VidiunEntryReplacementStatus.failed;
     }
 
     public get _approveBtnLabel(): string {
-        return this.replacementData.status === KalturaEntryReplacementStatus.approvedButNotReady
+        return this.replacementData.status === VidiunEntryReplacementStatus.approvedButNotReady
             ? this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.autoReplacement')
             : this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.approveReplacement');
     }
 
     constructor(private _widgetService: EntryFlavoursWidget,
                 private _appLocalization: AppLocalization,
-                private _logger: KalturaLogger,
+                private _logger: VidiunLogger,
                 private _uploadManagement: UploadManagement,
                 private _newReplaceVideoUpload: NewReplaceVideoUploadService) {
         this._monitorTrackedFilesChanges();

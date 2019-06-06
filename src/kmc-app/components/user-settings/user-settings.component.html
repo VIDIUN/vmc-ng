@@ -1,41 +1,41 @@
-<div class="kUserSettings">
+<div class="vUserSettings">
     <ul>
-        <!--li class="kMenuItemLabel"><span class="kIcon kIconuser_small"></span>
-            <div class="kMenuItem">
+        <!--li class="vMenuItemLabel"><span class="vIcon vIconuser_small"></span>
+            <div class="vMenuItem">
                 <div>{{_userAuthentication.appUser?.fullName}}</div>
             </div>
         </li-->
-        <li class="kMenuItemLabel"><span (dblclick)="egg()" class="kIcon kIconhouse"></span>
-            <div class="kMenuItem">
+        <li class="vMenuItemLabel"><span (dblclick)="egg()" class="vIcon vIconhouse"></span>
+            <div class="vMenuItem">
                 <div>{{_userAuthentication.appUser?.partnerInfo?.name}}</div>
             </div>
         </li>
     </ul>
 
     <hr>
-    <!--div class="kMenuItemLabel">
+    <!--div class="vMenuItemLabel">
         <span>{{'app.languageMenu.selectLang' | translate}}</span>
     </div-->
 
-    <ul class="kLanguages kOverrideFAIcons">
+    <ul class="vLanguages vOverrideFAIcons">
         <p-dropdown [options]="_languages" [(ngModel)]="_selectedLanguage"
                     (onChange)="onLangSelected($event)"></p-dropdown>
     </ul>
 
-    <ul class="kLanguages kOverrideFAIcons">
+    <ul class="vLanguages vOverrideFAIcons">
         <p-dropdown [options]="_dateFormats" [(ngModel)]="_selectedDateFormat"
                     (onChange)="onDateFormatSelected($event)"></p-dropdown>
     </ul>
 
     <hr>
-    <div class="kLinks">
+    <div class="vLinks">
         <a (click)="changeAccountPopup.open();parentPopup.close()">{{'app.userSettings.changeAccount' | translate}}</a>
         <a (click)="logout()">{{'app.userSettings.logout' | translate}}</a>
     </div>
 
 </div>
-<kPopupWidget #changeAccountPopup data-aid="changeAccountPopup" [popupWidth]="500" [popupHeight]="370" [modal]="true">
+<vPopupWidget #changeAccountPopup data-aid="changeAccountPopup" [popupWidth]="500" [popupHeight]="370" [modal]="true">
     <ng-template>
-        <kChangeAccount></kChangeAccount>
+        <vChangeAccount></vChangeAccount>
     </ng-template>
-</kPopupWidget>
+</vPopupWidget>

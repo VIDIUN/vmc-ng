@@ -1,23 +1,23 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kSubcategoriesListBulkOperationsContent',
+  selector: 'vSubcategoriesListBulkOperationsContent',
   templateUrl: './bulk-operations.component.html',
   styleUrls: ['./bulk-operations.component.scss'],
 })
 export class BulkOperationsComponent {
-  @Input() selectedItems: KalturaCategory[] = [];
+  @Input() selectedItems: VidiunCategory[] = [];
   @Input() itemsTotalCount = 0;
 
   @Output() addItem = new EventEmitter<void>();
   @Output() clearSelection = new EventEmitter<void>();
-  @Output() deleteItems = new EventEmitter<KalturaCategory[]>();
-  @Output() moveItems = new EventEmitter<{ items: KalturaCategory[], direction: 'up' | 'down' }>();
+  @Output() deleteItems = new EventEmitter<VidiunCategory[]>();
+  @Output() moveItems = new EventEmitter<{ items: VidiunCategory[], direction: 'up' | 'down' }>();
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor(private _appLocalization: AppLocalization) {
   }

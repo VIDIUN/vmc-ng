@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { BulkUploadAddAction } from 'kaltura-ngx-client';
-import { KalturaBulkUploadType } from 'kaltura-ngx-client';
-import { KalturaBulkUploadCsvJobData } from 'kaltura-ngx-client';
-import { CategoryAddFromBulkUploadAction } from 'kaltura-ngx-client';
-import { KalturaBulkUploadCategoryData } from 'kaltura-ngx-client';
-import { KalturaBulkUploadUserData } from 'kaltura-ngx-client';
-import { KalturaBulkUploadCategoryUserData } from 'kaltura-ngx-client';
-import { UserAddFromBulkUploadAction } from 'kaltura-ngx-client';
-import { CategoryUserAddFromBulkUploadAction } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { BulkUploadAddAction } from 'vidiun-ngx-client';
+import { VidiunBulkUploadType } from 'vidiun-ngx-client';
+import { VidiunBulkUploadCsvJobData } from 'vidiun-ngx-client';
+import { CategoryAddFromBulkUploadAction } from 'vidiun-ngx-client';
+import { VidiunBulkUploadCategoryData } from 'vidiun-ngx-client';
+import { VidiunBulkUploadUserData } from 'vidiun-ngx-client';
+import { VidiunBulkUploadCategoryUserData } from 'vidiun-ngx-client';
+import { UserAddFromBulkUploadAction } from 'vidiun-ngx-client';
+import { CategoryUserAddFromBulkUploadAction } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { KalturaBulkUpload } from 'kaltura-ngx-client';
+import { VidiunBulkUpload } from 'vidiun-ngx-client';
 
 export enum BulkUploadTypes {
   entries,
@@ -21,20 +21,20 @@ export enum BulkUploadTypes {
 
 @Injectable()
 export class BulkUploadService {
-  constructor(private _kalturaServerClient: KalturaClient) {
+  constructor(private _vidiunServerClient: VidiunClient) {
   }
 
-  private _getKalturaBulkUploadType(file: File): KalturaBulkUploadType {
+  private _getVidiunBulkUploadType(file: File): VidiunBulkUploadType {
     const extension = /(?:\.([^.]+))?$/.exec(file.name)[1];
-    return 'csv' === extension ? KalturaBulkUploadType.csv : KalturaBulkUploadType.xml;
+    return 'csv' === extension ? VidiunBulkUploadType.csv : VidiunBulkUploadType.xml;
   }
 
-  private _getKalturaActionByType(fileData: File, type: BulkUploadTypes): BulkUploadAddAction
+  private _getVidiunActionByType(fileData: File, type: BulkUploadTypes): BulkUploadAddAction
     | CategoryAddFromBulkUploadAction
     | UserAddFromBulkUploadAction
     | CategoryUserAddFromBulkUploadAction {
 
-    const bulkUploadData = new KalturaBulkUploadCsvJobData();
+    const bulkUploadData = new VidiunBulkUploadCsvJobData();
     bulkUploadData.fileName = fileData.name;
 
     switch (type) {
@@ -42,25 +42,25 @@ export class BulkUploadService {
         return new BulkUploadAddAction({
           conversionProfileId: -1,
           csvFileData: fileData,
-          bulkUploadType: this._getKalturaBulkUploadType(fileData)
+          bulkUploadType: this._getVidiunBulkUploadType(fileData)
         });
       case BulkUploadTypes.categories:
         return new CategoryAddFromBulkUploadAction({
           fileData,
           bulkUploadData,
-          bulkUploadCategoryData: new KalturaBulkUploadCategoryData()
+          bulkUploadCategoryData: new VidiunBulkUploadCategoryData()
         });
       case BulkUploadTypes.endUsers:
         return new UserAddFromBulkUploadAction({
           fileData,
           bulkUploadData,
-          bulkUploadUserData: new KalturaBulkUploadUserData()
+          bulkUploadUserData: new VidiunBulkUploadUserData()
         });
       case BulkUploadTypes.endUsersEntitlement:
         return new CategoryUserAddFromBulkUploadAction({
           fileData,
           bulkUploadData,
-          bulkUploadCategoryUserData: new KalturaBulkUploadCategoryUserData()
+          bulkUploadCategoryUserData: new VidiunBulkUploadCategoryUserData()
         });
       default:
         return null;
@@ -72,14 +72,14 @@ export class BulkUploadService {
     | UserAddFromBulkUploadAction
     | CategoryUserAddFromBulkUploadAction)[] {
     return files
-      .map(file => this._getKalturaActionByType(file, type))
+      .map(file => this._getVidiunActionByType(file, type))
       .filter(Boolean);
   }
 
-  public upload(files: FileList, type: BulkUploadTypes): Observable<KalturaBulkUpload> {
+  public upload(files: FileList, type: BulkUploadTypes): Observable<VidiunBulkUpload> {
     const actions = this._getAction(Array.from(files), type);
 
     return Observable.from(actions)
-      .flatMap(action => this._kalturaServerClient.request(action));
+      .flatMap(action => this._vidiunServerClient.request(action));
   }
 }

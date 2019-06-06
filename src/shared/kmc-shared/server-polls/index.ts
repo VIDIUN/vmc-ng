@@ -1,2 +1,2 @@
-export * from './kmc-server-polls.service';
-export * from './kmc-server-polls.module';
+export * from './vmc-server-polls.service';
+export * from './vmc-server-polls.module';

@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranscodingProfileStore } from '../transcoding-profile-store.service';
 import { TranscodingProfileDetailsWidget } from './transcoding-profile-details-widget.service';
-import { KalturaConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunConversionProfileWithAsset } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kTranscodingProfileDetails',
+  selector: 'vTranscodingProfileDetails',
   templateUrl: './transcoding-profile-details.component.html',
   styleUrls: ['./transcoding-profile-details.component.scss']
 })
 export class TranscodingProfileDetailsComponent implements OnInit, OnDestroy {
-  public _currentProfile: KalturaConversionProfileWithAsset;
+  public _currentProfile: VidiunConversionProfileWithAsset;
   public _isNew = false;
 
   constructor(public _widgetService: TranscodingProfileDetailsWidget,

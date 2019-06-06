@@ -1,30 +1,30 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RolesFilters, RolesStoreService } from '../roles-store/roles-store.service';
-import { KalturaUserRole } from 'kaltura-ngx-client';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { AdminRolesMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunUserRole } from 'vidiun-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { AdminRolesMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kRolesList',
+  selector: 'vRolesList',
   templateUrl: './roles-list.component.html',
   styleUrls: ['./roles-list.component.scss'],
-  providers: [KalturaLogger.createLogger('RolesListComponent')]
+  providers: [VidiunLogger.createLogger('RolesListComponent')]
 })
 
 export class RolesListComponent implements OnInit, OnDestroy {
   @ViewChild('editPopup') public editPopup: PopupWidgetComponent;
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _blockerMessage: AreaBlockerMessage = null;
   public _tableIsBusy = false;
   public _tableBlockerMessage: AreaBlockerMessage = null;
-  public _currentEditRole: KalturaUserRole = null;
+  public _currentEditRole: VidiunUserRole = null;
   public _query = {
     createdBefore: null,
     pageIndex: 0,
@@ -32,7 +32,7 @@ export class RolesListComponent implements OnInit, OnDestroy {
   };
 
   constructor(public _rolesStore: RolesStoreService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService,
               private _adminRolesMainViewService: AdminRolesMainViewService,
               private _appLocalization: AppLocalization) {
@@ -108,13 +108,13 @@ export class RolesListComponent implements OnInit, OnDestroy {
         });
   }
 
-  private _editRole(role: KalturaUserRole): void {
+  private _editRole(role: VidiunUserRole): void {
     this._logger.info(`handle edit role action by user`, { id: role.id, name: role.name });
     this._currentEditRole = role;
     this.editPopup.open();
   }
 
-  private _deleteRole(role: KalturaUserRole): void {
+  private _deleteRole(role: VidiunUserRole): void {
     this._logger.info(`handle delete role request by user`);
     this._blockerMessage = null;
     this._rolesStore.deleteRole(role)
@@ -153,7 +153,7 @@ export class RolesListComponent implements OnInit, OnDestroy {
       );
   }
 
-  private _duplicateRole(role: KalturaUserRole): void {
+  private _duplicateRole(role: VidiunUserRole): void {
     this._logger.info(`handle duplicate role request by user`, { id: role.id, name: role.name });
     this._blockerMessage = null;
     this._rolesStore.duplicateRole(role)
@@ -206,7 +206,7 @@ export class RolesListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _onActionSelected({ action, role }: { action: string, role: KalturaUserRole }): void {
+  public _onActionSelected({ action, role }: { action: string, role: VidiunUserRole }): void {
     switch (action) {
       case 'edit':
         this._editRole(role);

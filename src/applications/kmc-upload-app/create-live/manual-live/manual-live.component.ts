@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {KalturaValidators} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {VidiunValidators} from '@vidiun-ng/vidiun-ui';
 import {ManualLive} from './manual-live.interface';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 @Component({
-  selector: 'kManualLive',
+  selector: 'vManualLive',
   templateUrl: './manual-live.component.html',
   styleUrls: ['./manual-live.component.scss'],
 })
@@ -61,8 +61,8 @@ export class ManualLiveComponent implements OnInit, OnDestroy {
   // Create empty structured form on loading
   private _createForm(): void {
     this._streamUrlForm = this._fb.group({
-        flashHDSURL: ['', KalturaValidators.url],
-        hlsStreamUrl: ['', KalturaValidators.url]
+        flashHDSURL: ['', VidiunValidators.url],
+        hlsStreamUrl: ['', VidiunValidators.url]
       },
       {
         validator: (formGroup: FormGroup) => {

@@ -1,13 +1,13 @@
 @import 'app-theme/_variables.scss';
 
-.kBulkLogTable {
+.vBulkLogTable {
   background-color: white;
   overflow-y: hidden;
   position: absolute;
   padding: 0;
-  .kBulkLogFileName {
+  .vBulkLogFileName {
     font-weight: bold;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
   }
 
     .emptymessage {
@@ -15,20 +15,20 @@
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 
-  .kThumbnailHolder {
+  .vThumbnailHolder {
     overflow: hidden;
     position: relative;
     width: 80px;
     height: 46px;
-    background-color: $kGrayscale6;
+    background-color: $vGrayscale6;
     white-space: nowrap;
     text-align: center;
     border-radius: 3px;
@@ -48,37 +48,37 @@
       border-radius: 3px;
     }
   }
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     font-weight: 700;
     cursor: pointer;
     &:hover {
       color: #000000;
     }
     &.disable {
-      color: $kGrayscale4;
+      color: $vGrayscale4;
       cursor: auto;
     }
   }
-  .kBulkLogTableActions {
+  .vBulkLogTableActions {
     width: 100%;
     text-align: center;
   }
 
-  .kBulkLogTableSuccess {
-    color: $kSuccess;
+  .vBulkLogTableSuccess {
+    color: $vSuccess;
   }
 
-  .kBulkLogTablePending {
-    color: $kOrange;
+  .vBulkLogTablePending {
+    color: $vOrange;
   }
 
-  .kBulkLogTableProgress {
-    color: $kSecondary;
+  .vBulkLogTableProgress {
+    color: $vSecondary;
   }
 
-  .kBulkLogTableFailed {
-    color: $kDandger;
+  .vBulkLogTableFailed {
+    color: $vDandger;
   }
 }
 
@@ -97,6 +97,6 @@
 }
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

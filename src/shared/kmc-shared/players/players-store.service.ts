@@ -2,20 +2,20 @@ import {Injectable, OnDestroy} from '@angular/core';
 import { Observable } from 'rxjs';
 import {ISubscription} from 'rxjs/Subscription';
 import 'rxjs/add/observable/throw';
-import {KalturaClient} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {UiConfListAction} from 'kaltura-ngx-client';
-import {KalturaUiConfListResponse} from 'kaltura-ngx-client';
-import {KalturaUiConfFilter} from 'kaltura-ngx-client';
-import {KalturaUiConfObjType} from 'kaltura-ngx-client';
-import {KalturaUiConf} from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {AppEventsService} from "app-shared/kmc-shared";
-import {PlayersUpdatedEvent} from "app-shared/kmc-shared/events";
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {UiConfListAction} from 'vidiun-ngx-client';
+import {VidiunUiConfListResponse} from 'vidiun-ngx-client';
+import {VidiunUiConfFilter} from 'vidiun-ngx-client';
+import {VidiunUiConfObjType} from 'vidiun-ngx-client';
+import {VidiunUiConf} from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {AppEventsService} from "app-shared/vmc-shared";
+import {PlayersUpdatedEvent} from "app-shared/vmc-shared/events";
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 export enum PlayerTypes {
   Entry = 1,
@@ -29,10 +29,10 @@ export interface GetFilters {
 
 @Injectable()
 export class PlayersStore implements OnDestroy {
-  private _cachedPlayers: { [key: string]: Observable<KalturaUiConf[]> } = {};
-  private _logger: KalturaLogger;
+  private _cachedPlayers: { [key: string]: Observable<VidiunUiConf[]> } = {};
+  private _logger: VidiunLogger;
 
-  constructor(private _kalturaServerClient: KalturaClient, logger: KalturaLogger, private _appEvents: AppEventsService, private _permissionsService: KMCPermissionsService) {
+  constructor(private _vidiunServerClient: VidiunClient, logger: VidiunLogger, private _appEvents: AppEventsService, private _permissionsService: VMCPermissionsService) {
     this._logger = logger.subLogger('PlayersStore');
 
     this._appEvents.event(PlayersUpdatedEvent)
@@ -48,7 +48,7 @@ export class PlayersStore implements OnDestroy {
 
   }
 
-  public get(filters: GetFilters): Observable<KalturaUiConf[]> {
+  public get(filters: GetFilters): Observable<VidiunUiConf[]> {
     const cacheToken = this._createCacheKey(filters);
     let cachedResponse = this._cachedPlayers[cacheToken];
 
@@ -71,7 +71,7 @@ export class PlayersStore implements OnDestroy {
                       if (uiConf.html5Url){
                           showPlayer = uiConf.html5Url.indexOf('html5lib/v1') === -1; // filter out V1 players
                       } else {
-                          showPlayer = uiConf.tags.indexOf('kalturaPlayerJs') > -1 && this._permissionsService.hasPermission(KMCPermissions.FEATURE_V3_STUDIO_PERMISSION); // show V3 players if user has permissions
+                          showPlayer = uiConf.tags.indexOf('vidiunPlayerJs') > -1 && this._permissionsService.hasPermission(VMCPermissions.FEATURE_V3_STUDIO_PERMISSION); // show V3 players if user has permissions
                       }
                       // filter out by tags
                       if (uiConf.tags && uiConf.tags.length){
@@ -117,25 +117,25 @@ export class PlayersStore implements OnDestroy {
     }
   }
 
-  private _buildRequest(filters: GetFilters, pageIndex: number): Observable<KalturaUiConfListResponse> {
+  private _buildRequest(filters: GetFilters, pageIndex: number): Observable<VidiunUiConfListResponse> {
     const tags = filters && filters.type === PlayerTypes.Playlist ? 'playlist' : 'player';
 
-    const filter: KalturaUiConfFilter = new KalturaUiConfFilter({
-      objTypeEqual: KalturaUiConfObjType.player,
+    const filter: VidiunUiConfFilter = new VidiunUiConfFilter({
+      objTypeEqual: VidiunUiConfObjType.player,
       tagsMultiLikeAnd: tags,
       'orderBy': '-updatedAt',
       'objTypeIn': '1,8',
       'creationModeEqual': 2
     });
 
-    const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-      type: KalturaResponseProfileType.includeFields,
+    const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+      type: VidiunResponseProfileType.includeFields,
       fields: 'id,name,html5Url,createdAt,updatedAt,width,height,tags'
     });
 
-    const pager = new KalturaFilterPager({pageSize: 500, pageIndex});
+    const pager = new VidiunFilterPager({pageSize: 500, pageIndex});
 
-    return this._kalturaServerClient.request(new UiConfListAction({filter, pager}).setRequestOptions({
+    return this._vidiunServerClient.request(new UiConfListAction({filter, pager}).setRequestOptions({
         responseProfile
     }));
   }

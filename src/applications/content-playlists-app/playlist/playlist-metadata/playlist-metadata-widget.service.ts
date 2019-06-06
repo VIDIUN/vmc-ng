@@ -1,28 +1,28 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
 import { PlaylistWidget } from '../playlist-widget';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TagSearchAction } from 'kaltura-ngx-client';
-import { KalturaTagFilter } from 'kaltura-ngx-client';
-import { KalturaTaggedObjectType } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { TagSearchAction } from 'vidiun-ngx-client';
+import { VidiunTagFilter } from 'vidiun-ngx-client';
+import { VidiunTaggedObjectType } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { async } from 'rxjs/scheduler/async';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class PlaylistMetadataWidget extends PlaylistWidget implements OnDestroy {
   public metadataForm: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
-              private _permissionsService: KMCPermissionsService,
-              private _kalturaServerClient: KalturaClient,
-              logger: KalturaLogger) {
+              private _permissionsService: VMCPermissionsService,
+              private _vidiunServerClient: VidiunClient,
+              logger: VidiunLogger) {
     super(ContentPlaylistViewSections.Metadata, logger);
     this._buildForm();
   }
@@ -60,7 +60,7 @@ export class PlaylistMetadataWidget extends PlaylistWidget implements OnDestroy 
       });
   }
 
-  protected onDataSaving(newData: KalturaPlaylist, request: KalturaMultiRequest): void {
+  protected onDataSaving(newData: VidiunPlaylist, request: VidiunMultiRequest): void {
     if (this.wasActivated) {
       const metadataFormValue = this.metadataForm.value;
       newData.name = metadataFormValue.name;
@@ -91,7 +91,7 @@ export class PlaylistMetadataWidget extends PlaylistWidget implements OnDestroy 
       this._monitorFormChanges();
     }
 
-    if (!this.isNewData && !this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_UPDATE)) {
+    if (!this.isNewData && !this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_UPDATE)) {
       this.metadataForm.disable({ emitEvent: false, onlySelf: true });
     }
   }
@@ -99,16 +99,16 @@ export class PlaylistMetadataWidget extends PlaylistWidget implements OnDestroy 
   public searchTags(text: string): Observable<string[]> {
     return Observable.create(
       observer => {
-        const requestSubscription = this._kalturaServerClient.request(
+        const requestSubscription = this._vidiunServerClient.request(
           new TagSearchAction(
             {
-              tagFilter: new KalturaTagFilter(
+              tagFilter: new VidiunTagFilter(
                 {
                   tagStartsWith: text,
-                  objectTypeEqual: KalturaTaggedObjectType.entry
+                  objectTypeEqual: VidiunTaggedObjectType.entry
                 }
               ),
-              pager: new KalturaFilterPager({
+              pager: new VidiunFilterPager({
                 pageIndex: 0,
                 pageSize: 30
               })

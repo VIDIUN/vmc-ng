@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
 
-.kLinkedEntriesTable {
-  .kTableColumn {
+.vLinkedEntriesTable {
+  .vTableColumn {
     display: inline-block;
     overflow: hidden;
     max-width: 100%;
@@ -9,28 +9,28 @@
     white-space: nowrap;
   }
 
-  .kDeletehBtn {
+  .vDeletehBtn {
     float: right;
     font-size: 22px;
     border: none;
     min-width: inherit;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     &:active {
       box-shadow: none;
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
 
-  .kThumbnailHolder {
+  .vThumbnailHolder {
     overflow: hidden;
     position: relative;
     width: 80px;
     height: 46px;
-    background-color: $kGrayscale6;
+    background-color: $vGrayscale6;
     white-space: nowrap;
     text-align: center;
     border-radius: 3px;
@@ -50,7 +50,7 @@
     }
   }
 
-  .kHelper {
+  .vHelper {
     display: inline-block;
     height: 100%;
     vertical-align: middle;
@@ -62,7 +62,7 @@
   }
 }
 
-:host /deep/ .kLinkedEntriesTable {
+:host /deep/ .vLinkedEntriesTable {
   .ui-table .ui-table-scrollable-body {
     max-height: 284px !important;
   }

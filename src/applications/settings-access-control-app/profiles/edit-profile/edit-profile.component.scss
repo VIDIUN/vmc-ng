@@ -1,156 +1,156 @@
-$kmc-flags-path: '../../styles/flags/';
+$vmc-flags-path: '../../styles/flags/';
 @import "../../styles/flags/flags.scss";
 @import 'app-theme/_variables.scss';
 
-.kEditAccessControlProfile {
-  .kHeader {
+.vEditAccessControlProfile {
+  .vHeader {
     height: 72px;
     width: 100%;
     padding: 0 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
+    border-bottom: 1px solid $vGrayscale4;
     flex: 0 0 auto;
     display: flex;
     align-items: center;
 
-    .kTitle {
-      color: $kGrayscale1;
+    .vTitle {
+      color: $vGrayscale1;
       font-size: 15px;
     }
 
-    .kButtons {
+    .vButtons {
       display: flex;
       margin-left: auto;
 
-      .kCancel {
+      .vCancel {
         font-size: 15px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         align-self: center;
         margin-right: 24px;
       }
 
-      .kSaveButton {
+      .vSaveButton {
         width: 100px;
         height: 34px;
       }
     }
   }
 
-  .kContainer {
+  .vContainer {
     flex: 1 1 auto;
     height: calc(100vh - 152px);
     overflow: auto;
 
-    .kFormSection {
+    .vFormSection {
       font-size: 15px;
       padding: 32px 28px;
 
-      &.kMainInfo {
-        border-bottom: 1px solid $kGrayscale4;
+      &.vMainInfo {
+        border-bottom: 1px solid $vGrayscale4;
       }
 
-      .kTitle {
+      .vTitle {
         margin-bottom: 24px;
         font-size: 20px;
         font-weight: bold;
         padding: 0 4px;
 
-        .kAdvancedSecurityIcon {
-          color: $kGrayscale3;
+        .vAdvancedSecurityIcon {
+          color: $vGrayscale3;
           font-size: 16px;
           margin-left: .125em;
         }
       }
-      .kRow {
+      .vRow {
         display: flex;
         margin-bottom: 35px;
         &:last-child {
           margin-bottom: 0;
         }
-        &.kHasError {
-          .kRequired {
-            color: $kDandger;
+        &.vHasError {
+          .vRequired {
+            color: $vDandger;
             font-weight: bold;
           }
-          .kControl {
-            border: 1px solid $kDandger;
+          .vControl {
+            border: 1px solid $vDandger;
             background: initial;
           }
         }
 
-        span.kHasError {
-          color: $kDandger;
+        span.vHasError {
+          color: $vDandger;
           margin-top: 10px;
           margin-bottom: -25px;
         }
 
-        .kLabel {
+        .vLabel {
           width: 269px;
           flex: 0 0 auto;
           height: 18px;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           font-size: 15px;
           line-height: 18px;
 
-          .kSecureVideoLabel {
+          .vSecureVideoLabel {
             max-width: 200px;
             display: block;
           }
         }
 
-        .kRequired {
+        .vRequired {
           width: 20px;
           margin-left: -28px;
           font-size: 24px;
         }
-        .kRequired, .kLabel {
+        .vRequired, .vLabel {
           padding: 8px 4px;
           height: 18px;
         }
-        .kControlWrapper {
+        .vControlWrapper {
           display: flex;
           flex-direction: column;
         }
-        .kControl {
-          color: $kGrayscale2;
+        .vControl {
+          color: $vGrayscale2;
           height: 34px;
           width: 500px;
           border-radius: 3px;
-          &.kAutoComplete {
+          &.vAutoComplete {
             height: 60px;
           }
-          kAutoComplete {
+          vAutoComplete {
             height: 60px;
           }
-          .kInputError {
-            color: $kDandger;
+          .vInputError {
+            color: $vDandger;
           }
         }
-        .kCountryList, .kFlavorList {
+        .vCountryList, .vFlavorList {
           vertical-align: middle;
           display: inline-block;
           max-width: 275px;
           overflow: hidden;
           text-overflow: ellipsis;
 
-          .kCountryListFlag {
+          .vCountryListFlag {
             margin: 0 .125em 0 .5em;
           }
         }
-        p-inputSwitch.kControl {
+        p-inputSwitch.vControl {
           padding: .5em 0;
           width: 42px;
         }
-        textarea.kControl {
+        textarea.vControl {
           height: 60px;
         }
-        .kSwitchValue {
+        .vSwitchValue {
           padding: .5em;
           margin-left: .5em;
           vertical-align: middle;
           line-height: 23px;
         }
-        .kFollowedByPrompt {
+        .vFollowedByPrompt {
           line-height: 34px;
           vertical-align: middle;
           margin-left: 16px;
@@ -160,7 +160,7 @@ $kmc-flags-path: '../../styles/flags/';
   }
 }
 
-:host /deep/ .kEditAccessControlProfile {
+:host /deep/ .vEditAccessControlProfile {
   .ui-multiselect-panel {
     width: 320px;
     height: 262px;
@@ -189,10 +189,10 @@ $kmc-flags-path: '../../styles/flags/';
     overflow-x: hidden;
   }
 
-  kautocomplete {
+  vautocomplete {
     &.hasError {
       .ui-autocomplete-multiple-container {
-        border-color: $kDandger;
+        border-color: $vDandger;
       }
     }
     input {

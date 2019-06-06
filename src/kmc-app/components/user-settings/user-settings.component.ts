@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {AppAuthentication, AppUser} from 'app-shared/kmc-shell';
-import { kmcAppConfig } from '../../kmc-app-config';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {AppAuthentication, AppUser} from 'app-shared/vmc-shell';
+import { vmcAppConfig } from '../../vmc-app-config';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'kKMCUserSettings',
+  selector: 'vVMCUserSettings',
   templateUrl: './user-settings.component.html',
   styleUrls: ['./user-settings.component.scss']
 })
@@ -18,14 +18,14 @@ export class UserSettingsComponent {
       { value: 'day-month-year', label: 'DD/MM/YYYY' },
   ];
   public _selectedLanguage = 'en';
-  public _selectedDateFormat = this.browserService.getFromLocalStorage('kmc_date_format') || 'month-day-year';
+  public _selectedDateFormat = this.browserService.getFromLocalStorage('vmc_date_format') || 'month-day-year';
 
   constructor(public _userAuthentication: AppAuthentication, private browserService: BrowserService, private _router: Router) {
-      kmcAppConfig.locales.forEach(locale => {
+      vmcAppConfig.locales.forEach(locale => {
       this._languages.push({label: locale.label, value: locale.id});
     });
 
-    const currentLang = this.browserService.getFromLocalStorage('kmc_lang');
+    const currentLang = this.browserService.getFromLocalStorage('vmc_lang');
     if (currentLang && currentLang.length) {
       const lang = this._languages.find((lang) => {
         return lang.value === currentLang
@@ -41,17 +41,17 @@ export class UserSettingsComponent {
   }
 
   onLangSelected(event) {
-    this.browserService.setInLocalStorage('kmc_lang', event.value);
+    this.browserService.setInLocalStorage('vmc_lang', event.value);
     this._userAuthentication.reload();
   }
 
   onDateFormatSelected(event: { value: string }): void {
-      this.browserService.setInLocalStorage('kmc_date_format', event.value);
+      this.browserService.setInLocalStorage('vmc_date_format', event.value);
       this._userAuthentication.reload();
   }
 
     egg(){
-        this._router.navigateByUrl(kmcAppConfig.routing.errorRoute, { replaceUrl: true });
+        this._router.navigateByUrl(vmcAppConfig.routing.errorRoute, { replaceUrl: true });
     }
 
 }

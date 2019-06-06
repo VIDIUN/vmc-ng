@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissionsService } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
-export interface KalturaConversionProfileWithAsset extends KalturaConversionProfile {
-    assets?: KalturaConversionProfileAssetParams[];
+export interface VidiunConversionProfileWithAsset extends VidiunConversionProfile {
+    assets?: VidiunConversionProfileAssetParams[];
 }
 
 export enum SettingsTranscodingProfileViewSections {
@@ -22,20 +22,20 @@ export enum SettingsTranscodingProfileViewSections {
 }
 
 export interface SettingsTranscodingProfileViewArgs {
-    profile: KalturaConversionProfileWithAsset;
+    profile: VidiunConversionProfileWithAsset;
     section: SettingsTranscodingProfileViewSections;
     activatedRoute?: ActivatedRoute;
 }
 
 
 @Injectable()
-export class SettingsTranscodingProfileViewService extends KmcDetailsViewBaseService<SettingsTranscodingProfileViewArgs> {
+export class SettingsTranscodingProfileViewService extends VmcDetailsViewBaseService<SettingsTranscodingProfileViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('SettingsTranscodingProfileViewService'), _browserService, _titleService, _contextualHelpService);
@@ -102,7 +102,7 @@ export class SettingsTranscodingProfileViewService extends KmcDetailsViewBaseSer
         return result;
     }
 
-    private _isSectionEnabled(section: SettingsTranscodingProfileViewSections, profile: KalturaConversionProfileWithAsset): boolean {
+    private _isSectionEnabled(section: SettingsTranscodingProfileViewSections, profile: VidiunConversionProfileWithAsset): boolean {
         let result = false;
         switch (section) {
             case SettingsTranscodingProfileViewSections.Flavors:

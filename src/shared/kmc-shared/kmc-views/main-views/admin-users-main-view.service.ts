@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KmcMainViewBaseService } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VmcMainViewBaseService } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { ViewMetadata } from 'app-shared/kmc-shared/kmc-views/kmc-main-view-base.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { ViewMetadata } from 'app-shared/vmc-shared/vmc-views/vmc-main-view-base.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class AdminUsersMainViewService extends KmcMainViewBaseService {
+export class AdminUsersMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -25,10 +25,10 @@ export class AdminUsersMainViewService extends KmcMainViewBaseService {
     }
 
     isAvailable(): boolean {
-        return this._appPermissions.hasPermission(KMCPermissions.ADMIN_BASE) && this._appPermissions.hasAnyPermissions([
-            KMCPermissions.ADMIN_USER_ADD,
-            KMCPermissions.ADMIN_USER_UPDATE,
-            KMCPermissions.ADMIN_USER_DELETE
+        return this._appPermissions.hasPermission(VMCPermissions.ADMIN_BASE) && this._appPermissions.hasAnyPermissions([
+            VMCPermissions.ADMIN_USER_ADD,
+            VMCPermissions.ADMIN_USER_UPDATE,
+            VMCPermissions.ADMIN_USER_DELETE
         ]);
     }
 

@@ -1,10 +1,10 @@
 @import 'app-theme/_variables.scss';
 
-.kTagsWrapper {
+.vTagsWrapper {
   z-index: 500;
 }
 
-.kAccounts {
+.vAccounts {
   font-size: 15px;
   background-color: $appBkgColor;
   padding-top: 24px;
@@ -14,7 +14,7 @@
   display: flex;
   flex-flow: row wrap;
   margin: 0px;
-  .kAccountsHolder {
+  .vAccountsHolder {
     height: 100%;
     min-height: $minTableHeight;
     border: none;
@@ -22,13 +22,13 @@
     display: flex;
     flex-direction: column;
   }
-  .kFilters {
+  .vFilters {
       display: flex;
       margin-left: auto;
-      .kSearchInput {
+      .vSearchInput {
           width: 280px;
           height: 34px;
-          background: $kMagnifyingGlassBkg;
+          background: $vMagnifyingGlassBkg;
           margin-right: 8px;
           padding: 9px 4px 8px 38px;
 
@@ -36,12 +36,12 @@
               background-color: white;
           }
       }
-      .kStatusesFilter {
+      .vStatusesFilter {
           display: flex;
           height: 32px;
           align-items: center;
           cursor: pointer;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           width: 178px;
           position: relative;
           margin-right: 8px;
@@ -49,7 +49,7 @@
           i {
               margin-right: 12px;
               margin-left: 8px;
-              color: $kGrayscale4;
+              color: $vGrayscale4;
               &.dropdown {
                   font-size: 10px;
               }
@@ -62,25 +62,25 @@
           }
       }
   }
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     &:active {
       box-shadow: none;
       transform: rotate(45deg);
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
-  .kAccountsTableFilters {
-    color: $kGrayscale1;
+  .vAccountsTableFilters {
+    color: $vGrayscale1;
     z-index: 500;
     height: 66px;
     background-color: white;
@@ -90,43 +90,43 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
-    .kSelectedAccountsNum {
+    .vSelectedAccountsNum {
       padding-left: 16px;
     }
   }
-  .kAccountsTableFooter {
+  .vAccountsTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
     padding: 0 14px 28px;
     display: block;
   }
-  .kAccountsTable {
+  .vAccountsTable {
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
     width: 100%;
   }
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
-  .kAddAccountBtn {
+  .vAddAccountBtn {
     margin-left: 14px;
     height: 36px;
   }
 
-    .kUsersHeader {
-        color: $kGrayscale1;
+    .vUsersHeader {
+        color: $vGrayscale1;
     }
-    .kUsersNeedMore {
+    .vUsersNeedMore {
         height: 66px;
         border-radius: 3px;
         background-color: #D9D9D9;
@@ -141,18 +141,18 @@
             font-size: 15px;
             margin-bottom: 4px;
         }
-        .kCurrentStatus,
-        .kMoreUsers {
+        .vCurrentStatus,
+        .vMoreUsers {
             font-weight: bold;
             margin-right: 5px;
         }
 
-        .kMoreUsers {
+        .vMoreUsers {
             font-weight: bold;
             margin-left: 5px;
         }
 
-        .kClickHere {
+        .vClickHere {
             color: #01accd;
             margin: 0 5px;
         }
@@ -161,7 +161,7 @@
 
 
 
-:host /deep/ span.ui-button-icon-left.pi-kIcontrash {
+:host /deep/ span.ui-button-icon-left.pi-vIcontrash {
   margin-left: -.5em;
 }
 
@@ -169,7 +169,7 @@
   width: 380px;
 }
 
-:host /deep/ .ui-button-icon-right.kIcondropdown_arrow_bottom {
+:host /deep/ .ui-button-icon-right.vIcondropdown_arrow_bottom {
   font-size: 10px;
   margin-right: 2px;
   pointer-events: none;
@@ -187,11 +187,11 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kStickyClass {
-    border-bottom: 1px solid $kGrayscale5;
+:host /deep/ .vStickyClass {
+    border-bottom: 1px solid $vGrayscale5;
 }
 
-:host /deep/ .kAccountsTableFooter {
+:host /deep/ .vAccountsTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-%kDestinationIcon {
+%vDestinationIcon {
   width: 64px;
   height: 32px;
   background-position-x: 0;
@@ -8,7 +8,7 @@
   text-indent: -9999px;
 }
 
-.kFeedsTable {
+.vFeedsTable {
   background-color: white;
   height: auto;
   padding: 0px;
@@ -19,100 +19,100 @@
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 
   /deep/ {
-    .kElipsis {
+    .vElipsis {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       display: inline-block;
     }
 
-    .kColFeedIcon {
-      .kIconfeed {
+    .vColFeedIcon {
+      .vIconfeed {
         font-size: 24px;
       }
     }
 
-    .kColName {
+    .vColName {
       cursor: pointer;
       font-weight: bold;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       max-width: 100%;
     }
 
-    .kColDestination {
-      .kColDestinationIcon {
+    .vColDestination {
+      .vColDestinationIcon {
 
-        &.kIconYahoo {
-          @extend %kDestinationIcon;
+        &.vIconYahoo {
+          @extend %vDestinationIcon;
           background-position-y: 0;
         }
 
-        &.kIconGoogle {
-          @extend %kDestinationIcon;
+        &.vIconGoogle {
+          @extend %vDestinationIcon;
           background-position-y: 32px;
         }
 
-        &.kIconITunes {
-          @extend %kDestinationIcon;
+        &.vIconITunes {
+          @extend %vDestinationIcon;
           background-position-y: 64px;
         }
 
-        &.kIconOpera {
-          @extend %kDestinationIcon;
+        &.vIconOpera {
+          @extend %vDestinationIcon;
           background-position-y: 96px;
         }
 
-        &.kIconRoku {
-          @extend %kDestinationIcon;
+        &.vIconRoku {
+          @extend %vDestinationIcon;
           background-position-y: 128px;
         }
       }
 
-      .kColDestinationText {
+      .vColDestinationText {
       }
     }
 
-    .kColSource {
+    .vColSource {
       display: flex;
       line-height: 18px;
       align-items: center;
-      .kPlaylistIcon {
+      .vPlaylistIcon {
         flex: 0 0 auto;
         font-size: 18px;
         vertical-align: top;
       }
-      .kIconPlaylist_RuleBased, .kIconPlaylist_Manual {
+      .vIconPlaylist_RuleBased, .vIconPlaylist_Manual {
         padding-right: 5px;
       }
-      .kElipsis {
+      .vElipsis {
         flex: 1 1 auto;
       }
     }
 
-    .kColUrl {
+    .vColUrl {
       line-height: 18px;
       display: flex;
       align-items: center;
-      .kIcon {
+      .vIcon {
         flex: 0 0 auto;
         vertical-align: middle;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         height: 24px;
         width: 24px;
         display: inline-block;
       }
-      .kUrl {
+      .vUrl {
         border: none;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         flex: 1 1 auto;
         &:hover {
           cursor: text;
@@ -139,6 +139,6 @@
 }
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

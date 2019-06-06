@@ -1,39 +1,39 @@
 import { Observable } from 'rxjs';
 import { subApplicationsConfig } from 'config/sub-applications';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaRequest, KalturaMultiRequest, KalturaMultiResponse } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunRequest, VidiunMultiRequest, VidiunMultiResponse } from 'vidiun-ngx-client';
 
 
 export abstract class BulkActionBaseService<T> {
 
-  constructor(public _kalturaServerClient: KalturaClient) {
+  constructor(public _vidiunServerClient: VidiunClient) {
   }
 
-  public abstract execute(selectedEntries: KalturaMediaEntry[] , params : T) : Observable<any>;
+  public abstract execute(selectedEntries: VidiunMediaEntry[] , params : T) : Observable<any>;
 
-  transmit(requests : KalturaRequest<any>[], chunk : boolean) : Observable<{}>
+  transmit(requests : VidiunRequest<any>[], chunk : boolean) : Observable<{}>
   {
     let maxRequestsPerMultiRequest = requests.length;
     if (chunk){
       maxRequestsPerMultiRequest = subApplicationsConfig.shared.bulkActionsLimit;
     }
 
-    let multiRequests: Observable<KalturaMultiResponse>[] = [];
-    let mr :KalturaMultiRequest = new KalturaMultiRequest();
+    let multiRequests: Observable<VidiunMultiResponse>[] = [];
+    let mr :VidiunMultiRequest = new VidiunMultiRequest();
 
     let counter = 0;
     for (let i = 0; i < requests.length; i++){
       if (counter === maxRequestsPerMultiRequest){
-        multiRequests.push(this._kalturaServerClient.multiRequest(mr));
-        mr = new KalturaMultiRequest();
+        multiRequests.push(this._vidiunServerClient.multiRequest(mr));
+        mr = new VidiunMultiRequest();
         counter = 0;
       }
       mr.requests.push(requests[i]);
       counter++;
     }
-    multiRequests.push(this._kalturaServerClient.multiRequest(mr));
+    multiRequests.push(this._vidiunServerClient.multiRequest(mr));
 
     return Observable.forkJoin(multiRequests)
       .map(responses => {

@@ -1,20 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
 import 'rxjs/add/operator/first';
 
 @Component({
-    selector: 'kRestorePassword',
-    template: '<k-area-blocker classes="kAreaBlockerCoverAll" [showLoader]="true"></k-area-blocker>',
-    providers: [KalturaLogger.createLogger('RestorePasswordComponent')]
+    selector: 'vRestorePassword',
+    template: '<v-area-blocker classes="vAreaBlockerCoverAll" [showLoader]="true"></v-area-blocker>',
+    providers: [VidiunLogger.createLogger('RestorePasswordComponent')]
 })
 export class RestorePasswordComponent implements OnInit, OnDestroy {
     constructor(private _route: ActivatedRoute,
                 private _router: Router,
                 private _appAuth: AppAuthentication,
                 private _browserService: BrowserService,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
 
     }
 

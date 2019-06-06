@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaDropFolderFileStatus } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunDropFolderFileStatus } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kFolderFileStatus' })
+@Pipe({ name: 'vFolderFileStatus' })
 export class FolderFileStatusPipe implements PipeTransform {
   constructor(private _appLocalization: AppLocalization) {
   }
@@ -13,63 +13,63 @@ export class FolderFileStatusPipe implements PipeTransform {
     let tooltip = '';
     if (typeof(value) !== 'undefined' && value !== null) {
       switch (parseInt(value, 10)) {
-        case KalturaDropFolderFileStatus.uploading:
-          className = 'kIconsync kIconBlue';
+        case VidiunDropFolderFileStatus.uploading:
+          className = 'vIconsync vIconBlue';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.uploading');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.uploading');
           break;
-        case KalturaDropFolderFileStatus.downloading:
-          className = 'kIconsync kIconBlue';
+        case VidiunDropFolderFileStatus.downloading:
+          className = 'vIconsync vIconBlue';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.downloading');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.downloading');
           break;
-        case KalturaDropFolderFileStatus.pending:
-          className = 'kIconupload2 kIconOrange';
+        case VidiunDropFolderFileStatus.pending:
+          className = 'vIconupload2 vIconOrange';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.pending');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.pending');
           break;
-        case KalturaDropFolderFileStatus.processing:
-          className = 'kIconsync kIconBlue';
+        case VidiunDropFolderFileStatus.processing:
+          className = 'vIconsync vIconBlue';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.processing');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.processing');
           break;
-        case KalturaDropFolderFileStatus.parsed:
-          className = 'kIconupload2 kIconOrange';
+        case VidiunDropFolderFileStatus.parsed:
+          className = 'vIconupload2 vIconOrange';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.parsedFromXml');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.parsedFromXml');
           break;
-        case KalturaDropFolderFileStatus.waiting:
-          className = 'kIconupload2 kIconOrange';
+        case VidiunDropFolderFileStatus.waiting:
+          className = 'vIconupload2 vIconOrange';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.waitingForRelatedFiles');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.waitingForRelatedFiles');
           break;
-        case KalturaDropFolderFileStatus.noMatch:
-          className = 'kIconupload2 kIconOrange';
+        case VidiunDropFolderFileStatus.noMatch:
+          className = 'vIconupload2 vIconOrange';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.waitingForMatchedEntry');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.waitingForMatchedEntry');
           break;
-        case KalturaDropFolderFileStatus.errorHandling:
-          className = 'kIconerror kIconRed';
+        case VidiunDropFolderFileStatus.errorHandling:
+          className = 'vIconerror vIconRed';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.error');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.error');
           break;
-        case KalturaDropFolderFileStatus.errorDeleting:
-          className = 'kIconerror kIconRed';
+        case VidiunDropFolderFileStatus.errorDeleting:
+          className = 'vIconerror vIconRed';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.deleteFailed');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.deleteFailed');
           break;
-        case KalturaDropFolderFileStatus.handled:
-          className = 'kIconcomplete kIconGreen';
+        case VidiunDropFolderFileStatus.handled:
+          className = 'vIconcomplete vIconGreen';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.done');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.done');
           break;
-        case KalturaDropFolderFileStatus.errorDownloading:
-          className = 'kIconerror kIconRed';
+        case VidiunDropFolderFileStatus.errorDownloading:
+          className = 'vIconerror vIconRed';
           label = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusLabels.downloadFailed');
           tooltip = this._appLocalization.get('applications.content.dropFolders.dropFolderStatusTooltips.downloadFailed');
           break;
         default:
-          className = 'kIconUnknown kIconRed';
+          className = 'vIconUnknown vIconRed';
           label = this._appLocalization.get('applications.content.dropFolders.table.unknown');
           tooltip = this._appLocalization.get('applications.content.dropFolders.table.unknown');
           break;

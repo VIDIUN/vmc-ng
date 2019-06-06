@@ -3,26 +3,26 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient, KalturaMultiResponse } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaBulkUploadFilter } from 'kaltura-ngx-client';
-import { KalturaBulkUpload } from 'kaltura-ngx-client';
-import { BulkUploadAbortAction } from 'kaltura-ngx-client';
-import { BulkListAction } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { DatesRangeAdapter, DatesRangeType } from '@kaltura-ng/mc-shared';
-import { ListTypeAdapter } from '@kaltura-ng/mc-shared';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaSearchOperator } from 'kaltura-ngx-client';
-import { KalturaSearchOperatorType } from 'kaltura-ngx-client';
-import { KalturaBaseEntryListResponse } from 'kaltura-ngx-client';
-import { KalturaUtils } from '@kaltura-ng/kaltura-common';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { ContentBulkUploadsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunClient, VidiunMultiResponse } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunBulkUploadFilter } from 'vidiun-ngx-client';
+import { VidiunBulkUpload } from 'vidiun-ngx-client';
+import { BulkUploadAbortAction } from 'vidiun-ngx-client';
+import { BulkListAction } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { DatesRangeAdapter, DatesRangeType } from '@vidiun-ng/mc-shared';
+import { ListTypeAdapter } from '@vidiun-ng/mc-shared';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunSearchOperator } from 'vidiun-ngx-client';
+import { VidiunSearchOperatorType } from 'vidiun-ngx-client';
+import { VidiunBaseEntryListResponse } from 'vidiun-ngx-client';
+import { VidiunUtils } from '@vidiun-ng/vidiun-common';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { ContentBulkUploadsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 const localStoragePageSizeKey = 'bulklog.list.pageSize';
 
@@ -37,7 +37,7 @@ export interface BulkLogFilters {
 @Injectable()
 export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implements OnDestroy {
   private _bulkLog = {
-    data: new BehaviorSubject<{ items: KalturaBulkUpload[], totalCount: number }>({ items: [], totalCount: 0 }),
+    data: new BehaviorSubject<{ items: VidiunBulkUpload[], totalCount: number }>({ items: [], totalCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
 
@@ -54,10 +54,10 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
     };
 
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _browserService: BrowserService,
               contentBulkUploadsMainView: ContentBulkUploadsMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('BulkLogStoreService'));
     if (contentBulkUploadsMainView.isAvailable()) {
         this._prepare();
@@ -146,24 +146,24 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
 
   }
 
-  private _buildQueryRequest(): Observable<KalturaBaseEntryListResponse> {
+  private _buildQueryRequest(): Observable<VidiunBaseEntryListResponse> {
     try {
 
       // create request items
-      const filter = new KalturaBulkUploadFilter({});
-      let responseProfile: KalturaDetachedResponseProfile = null;
-      let pagination: KalturaFilterPager = null;
+      const filter = new VidiunBulkUploadFilter({});
+      let responseProfile: VidiunDetachedResponseProfile = null;
+      let pagination: VidiunFilterPager = null;
 
       const data: BulkLogFilters = this._getFiltersAsReadonly();
 
       // filter 'createdAt'
       if (data.createdAt) {
         if (data.createdAt.fromDate) {
-          filter.uploadedOnGreaterThanOrEqual = KalturaUtils.getStartDateValue(data.createdAt.fromDate);
+          filter.uploadedOnGreaterThanOrEqual = VidiunUtils.getStartDateValue(data.createdAt.fromDate);
         }
 
         if (data.createdAt.toDate) {
-          filter.uploadedOnLessThanOrEqual = KalturaUtils.getEndDateValue(data.createdAt.toDate);
+          filter.uploadedOnLessThanOrEqual = VidiunUtils.getEndDateValue(data.createdAt.toDate);
         }
       }
 
@@ -171,14 +171,14 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
       this._updateFilterWithJoinedList(data.uploadedItem, filter, 'bulkUploadObjectTypeIn');
       this._updateFilterWithJoinedList(data.status, filter, 'statusIn');
 
-      responseProfile = new KalturaDetachedResponseProfile({
-        type: KalturaResponseProfileType.includeFields,
+      responseProfile = new VidiunDetachedResponseProfile({
+        type: VidiunResponseProfileType.includeFields,
         fields: 'id,fileName,bulkUploadType,bulkUploadObjectType,uploadedBy,uploadedByUserId,uploadedOn,numOfObjects,status,error'
       });
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pagination = new KalturaFilterPager(
+        pagination = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -187,7 +187,7 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
       }
 
       // build the request
-      return <any>this._kalturaServerClient.request(
+      return <any>this._vidiunServerClient.request(
         new BulkListAction({
           bulkUploadFilter: filter,
           pager: pagination,
@@ -201,7 +201,7 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
 
   }
 
-  private _updateFilterWithJoinedList(list: string[], requestFilter: KalturaBulkUploadFilter, requestFilterProperty: keyof KalturaBulkUploadFilter): void {
+  private _updateFilterWithJoinedList(list: string[], requestFilter: VidiunBulkUploadFilter, requestFilterProperty: keyof VidiunBulkUploadFilter): void {
     const value = (list || []).map(item => item).join(',');
 
     if (value) {
@@ -243,13 +243,13 @@ export class BulkLogStoreService extends FiltersStoreBase<BulkLogFilters> implem
     }
   }
 
-  public deleteBulkLog(id: number): Observable<KalturaBulkUpload> {
-    return this._kalturaServerClient
+  public deleteBulkLog(id: number): Observable<VidiunBulkUpload> {
+    return this._vidiunServerClient
       .request(new BulkUploadAbortAction({ id }));
   }
 
-  public deleteBulkLogs(files: Array<KalturaBulkUpload>): Observable<KalturaMultiResponse> {
-    return this._kalturaServerClient.multiRequest(files.map(({ id }) => new BulkUploadAbortAction({ id })));
+  public deleteBulkLogs(files: Array<VidiunBulkUpload>): Observable<VidiunMultiResponse> {
+    return this._vidiunServerClient.multiRequest(files.map(({ id }) => new BulkUploadAbortAction({ id })));
   }
 }
 

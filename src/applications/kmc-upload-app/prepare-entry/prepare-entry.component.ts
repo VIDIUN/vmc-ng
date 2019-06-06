@@ -1,26 +1,26 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import {KalturaMediaType} from 'kaltura-ngx-client';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {VidiunMediaType} from 'vidiun-ngx-client';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 import {DraftEntry, PrepareEntryService} from './prepare-entry.service';
-import {BrowserService} from 'app-shared/kmc-shell';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions/kmc-permissions.service';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions/vmc-permissions.service';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 
 @Component({
-  selector: 'kPrepareEntry',
+  selector: 'vPrepareEntry',
   templateUrl: './prepare-entry.component.html',
   styleUrls: ['./prepare-entry.component.scss'],
   providers: [PrepareEntryService]
 })
 export class PrepareEntryComponent implements OnDestroy {
-  public _selectedMediaType: KalturaMediaType;
+  public _selectedMediaType: VidiunMediaType;
   @ViewChild('transcodingProfileSelectMenu') transcodingProfileSelectMenu: PopupWidgetComponent;
 
   constructor(private _prepareEntryService: PrepareEntryService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _contentEntryViewService: ContentEntryViewService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization) {
@@ -29,9 +29,9 @@ export class PrepareEntryComponent implements OnDestroy {
   ngOnDestroy() {
   }
 
-  public prepareEntry(kalturaMediaType: KalturaMediaType) {
-    this._selectedMediaType = kalturaMediaType;
-    const transcodingProfileSettingPermission = this._permissionsService.hasPermission(KMCPermissions.FEATURE_DRAFT_ENTRY_CONV_PROF_SELECTION);
+  public prepareEntry(vidiunMediaType: VidiunMediaType) {
+    this._selectedMediaType = vidiunMediaType;
+    const transcodingProfileSettingPermission = this._permissionsService.hasPermission(VMCPermissions.FEATURE_DRAFT_ENTRY_CONV_PROF_SELECTION);
     if (transcodingProfileSettingPermission) {
       this.transcodingProfileSelectMenu.open();
     } else {

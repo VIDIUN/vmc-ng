@@ -16,7 +16,7 @@ export interface GlobalConfig {
           }
         }
     };
-    kalturaServer: {
+    vidiunServer: {
         maxUploadFileSize: number,
         maxConcurrentUploads: number,
         limitToPartnerId: number | null
@@ -37,7 +37,7 @@ export const globalConfig: GlobalConfig = {
           }
         }
     },
-    kalturaServer: {
+    vidiunServer: {
         maxUploadFileSize: 2047, // Mb
         maxConcurrentUploads: 4,
         limitToPartnerId: null

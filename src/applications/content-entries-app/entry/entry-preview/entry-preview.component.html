@@ -1,24 +1,24 @@
-<div class="kEntryPreview">
+<div class="vEntryPreview">
   <iframe *ngIf="_widgetService._iframeSrc" [src]="_widgetService._iframeSrc | safe" width="280" height="158"
           allowfullscreen webkitallowfullscreen mozAllowFullScreen frameborder="0" allow="autoplay *; fullscreen *; encrypted-media *"></iframe>
-  <div class="kPreviewAndEmbedContainer">
-    <div class="kLink" (click)="!_previewDisabled && openPreviewAndEmbed()">
-      <i [class.disabled]="_previewDisabled" class="kIconShare"></i>
+  <div class="vPreviewAndEmbedContainer">
+    <div class="vLink" (click)="!_previewDisabled && openPreviewAndEmbed()">
+      <i [class.disabled]="_previewDisabled" class="vIconShare"></i>
       <a [class.disabled]="_previewDisabled">{{_actionLabel}}</a>
     </div>
-    <div class="kLink kAlightRight" (click)="_clipAndTrimEnabled && clipAndTrim.open()">
-      <i [class.disabled]="!_clipAndTrimEnabled" class="kIconmovies"></i>
+    <div class="vLink vIdightRight" (click)="_clipAndTrimEnabled && clipAndTrim.open()">
+      <i [class.disabled]="!_clipAndTrimEnabled" class="vIconmovies"></i>
       <a [class.disabled]="!_clipAndTrimEnabled">{{'applications.content.entryDetails.preview.clipAndTrim' | translate}}</a>
     </div>
   </div>
 </div>
 
 
-<kPopupWidget #clipAndTrim data-aid="clipAndTrim" [fullScreen]="true">
+<vPopupWidget #clipAndTrim data-aid="clipAndTrim" [fullScreen]="true">
   <ng-template>
-      <kEntryEditor [entry]="_widgetService.data"
+      <vEntryEditor [entry]="_widgetService.data"
                     [entryHasSource]="true"
                     [tab]="'editor'"
-                    [parentPopupWidget]="clipAndTrim"></kEntryEditor>
+                    [parentPopupWidget]="clipAndTrim"></vEntryEditor>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

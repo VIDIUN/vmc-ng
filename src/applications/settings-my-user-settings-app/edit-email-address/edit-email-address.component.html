@@ -1,16 +1,16 @@
-<k-area-blocker [message]="blockerMessage">
-  <div class="kEditWin">
+<v-area-blocker [message]="blockerMessage">
+  <div class="vEditWin">
     <form [formGroup]="_editEmailAddressForm" novalidate>
-      <div class="kHeader">
-        <span class="kTitle">{{'applications.settings.myUserSettings.editEmailAddress' | translate}}</span>
+      <div class="vHeader">
+        <span class="vTitle">{{'applications.settings.myUserSettings.editEmailAddress' | translate}}</span>
       </div>
 
-      <div class="kContainer">
-        <div class="kRow">
-          <span class="kLabel">{{'applications.settings.myUserSettings.email' | translate}}</span>
+      <div class="vContainer">
+        <div class="vRow">
+          <span class="vLabel">{{'applications.settings.myUserSettings.email' | translate}}</span>
           <div>
-            <input class="kControl" formControlName="email" pInputText
-                   [ngClass]="{'kHasError':!_editEmailAddressForm.controls['email'].valid && _editEmailAddressForm.controls['email'].touched}">
+            <input class="vControl" formControlName="email" pInputText
+                   [ngClass]="{'vHasError':!_editEmailAddressForm.controls['email'].valid && _editEmailAddressForm.controls['email'].touched}">
             <div *ngIf="_editEmailAddressForm.controls['email'].touched && _editEmailAddressForm.controls['email'].hasError('required')"
               class="error">
               {{'applications.settings.myUserSettings.errors.required' | translate}}
@@ -20,15 +20,15 @@
       </div>
     </form>
 
-    <div class="kFooter">
-      <button pButton class="kButtonDefault kButton" (click)="parentPopupWidget.close()"
+    <div class="vFooter">
+      <button pButton class="vButtonDefault vButton" (click)="parentPopupWidget.close()"
               [label]="'applications.settings.myUserSettings.cancel' | translate"></button>
       <button
-              pButton class="kButtonBranded kButton"
+              pButton class="vButtonBranded vButton"
               label="{{'applications.settings.myUserSettings.save' | translate}}"
               [disabled]="_editEmailAddressForm.pristine"
               (click)="_updateLoginData()"></button>
     </div>
   </div>
 
-</k-area-blocker>
+</v-area-blocker>

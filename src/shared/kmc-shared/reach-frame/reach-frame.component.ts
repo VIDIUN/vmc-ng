@@ -1,32 +1,32 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { AppAuthentication, BrowserService } from 'shared/kmc-shell';
-import { getKalturaServerUri, serverConfig, buildCDNUrl } from 'config/server';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppAuthentication, BrowserService } from 'shared/vmc-shell';
+import { getVidiunServerUri, serverConfig, buildCDNUrl } from 'config/server';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
     ContentEntryViewSections,
     ContentEntryViewService,
     ReachAppViewService,
     ReachPages
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ClearEntriesSelectionEvent } from 'app-shared/kmc-shared/events/clear-entries-selection-event';
-import { AppEventsService } from 'app-shared/kmc-shared/app-events';
-import { KalturaCategory, KalturaMediaEntry } from 'kaltura-ngx-client';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ClearEntriesSelectionEvent } from 'app-shared/vmc-shared/events/clear-entries-selection-event';
+import { AppEventsService } from 'app-shared/vmc-shared/app-events';
+import { VidiunCategory, VidiunMediaEntry } from 'vidiun-ngx-client';
 
 export interface ReachData {
-    entry?: KalturaMediaEntry;
-    entries?: KalturaMediaEntry[];
-    category?: KalturaCategory;
+    entry?: VidiunMediaEntry;
+    entries?: VidiunMediaEntry[];
+    category?: VidiunCategory;
 }
 
 @Component({
-    selector: 'kReachFrame',
+    selector: 'vReachFrame',
     template: '<iframe frameborder="0" [src]="_url | safe"></iframe>',
     styles: [
         ':host { display: block; width: 100%; height: 100%; }',
         'iframe { width: 100%; height: 100% }'
     ],
-    providers: [KalturaLogger.createLogger('ReachFrameComponent')]
+    providers: [VidiunLogger.createLogger('ReachFrameComponent')]
 })
 export class ReachFrameComponent implements OnInit, OnDestroy, OnChanges {
     @Input() page: ReachPages;
@@ -40,7 +40,7 @@ export class ReachFrameComponent implements OnInit, OnDestroy, OnChanges {
 
     constructor(private _appAuthentication: AppAuthentication,
                 private _appLocalization: AppLocalization,
-                private _logger: KalturaLogger,
+                private _logger: VidiunLogger,
                 private _appEvents: AppEventsService,
                 private _browserService: BrowserService,
                 private _contentEntryViewService: ContentEntryViewService,
@@ -111,8 +111,8 @@ export class ReachFrameComponent implements OnInit, OnDestroy, OnChanges {
             }
 
             this._reachConfig = {
-                'ks': this._appAuthentication.appUser.ks,
-                'service_url': getKalturaServerUri(),
+                'vs': this._appAuthentication.appUser.vs,
+                'service_url': getVidiunServerUri(),
                 'partner_id': this._appAuthentication.appUser.partnerId,
                 'cdn_host': buildCDNUrl(""),
                 'language': this._appLocalization.selectedLanguage

@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BulkLogFilters, BulkLogStoreService} from '../bulk-log-store/bulk-log-store.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {RefineList} from '../bulk-log-store/bulk-log-refine-filters.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 export interface TagItem {
   type: string,
@@ -16,7 +16,7 @@ export interface TagItem {
 const listTypes: (keyof BulkLogFilters)[] = ['uploadedItem', 'status'];
 
 @Component({
-  selector: 'k-bulk-log-tags',
+  selector: 'v-bulk-log-tags',
   templateUrl: './bulk-log-tags.component.html',
   styleUrls: ['./bulk-log-tags.component.scss']
 

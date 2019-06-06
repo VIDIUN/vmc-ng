@@ -1,4 +1,4 @@
-<div class="kLinkedEntriesTable" [class.noResults]="!_entries?.length">
+<div class="vLinkedEntriesTable" [class.noResults]="!_entries?.length">
   <p-table
     dataKey="selectionId"
     scrollHeight="142px"
@@ -14,7 +14,7 @@
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
         <th [ngStyle]="{'padding-left': allowMultiple && !disabled ? '0' : '14px', 'width': allowMultiple && !disabled ? '100px' : '114px'}"
-            *ngIf="!(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
+            *ngIf="!(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
           {{'applications.content.entryDetails.metadata.thumbnail' | translate}}
         </th>
         <th style="width: 100%">{{'applications.content.entryDetails.metadata.entryName' | translate}}</th>
@@ -31,19 +31,19 @@
         </td>
 
         <td [ngStyle]="{'padding-left': allowMultiple && !disabled ? '0' : '14px', 'width': allowMultiple && !disabled ? '100px' : '114px'}"
-        *ngIf="!(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
-          <div class="kThumbnailHolder"><span class="kHelper"></span>
+        *ngIf="!(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
+          <div class="vThumbnailHolder"><span class="vHelper"></span>
             <img [src]="entry.thumbnailUrl" onError="this.onerror=null;this.style.display='none'">
           </div>
         </td>
 
         <td style="width: 100%">
-          <span [kTooltip]="entry.name" class="kTableColumn">{{entry.name}}</span>
+          <span [vTooltip]="entry.name" class="vTableColumn">{{entry.name}}</span>
         </td>
         <td style="width: 100px" [hidden]="_documentWidth < 1320">{{entry.id}}</td>
         <td *ngIf="!disabled" style="width: 50px">
-          <button pButton class="kButtonDefault kDeletehBtn small" type="button" icon="kIcontrash"
-                  [kTooltip]="'applications.content.entryDetails.metadata.removeEntry' | translate"
+          <button pButton class="vButtonDefault vDeletehBtn small" type="button" icon="vIcontrash"
+                  [vTooltip]="'applications.content.entryDetails.metadata.removeEntry' | translate"
                   (click)="deleteEntry.emit(entry)"></button>
         </td>
       </tr>

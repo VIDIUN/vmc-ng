@@ -1,22 +1,22 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { SchemasFilters, SchemasStore } from '../schemas-store/schemas-store.service';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { SettingsMetadataProfile } from '../schemas-store/settings-metadata-profile.interface';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { MetadataProfileUpdatedEvent } from 'app-shared/kmc-shared/events/metadata-profile-updated.event';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsMetadataMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { MetadataProfileUpdatedEvent } from 'app-shared/vmc-shared/events/metadata-profile-updated.event';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsMetadataMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kSchemasList',
+  selector: 'vSchemasList',
   templateUrl: './schemas-list.component.html',
   styleUrls: ['./schemas-list.component.scss'],
-  providers: [KalturaLogger.createLogger('SchemasListComponent')]
+  providers: [VidiunLogger.createLogger('SchemasListComponent')]
 })
 export class SchemasListComponent implements OnInit, OnDestroy {
   @ViewChild('customSchema') _customSchemaPopup: PopupWidgetComponent;
@@ -26,7 +26,7 @@ export class SchemasListComponent implements OnInit, OnDestroy {
   public _tableIsBusy = false;
   public _blockerMessage: AreaBlockerMessage = null;
   public _serverValidationError = null;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _query = {
     pageIndex: 0,
@@ -36,7 +36,7 @@ export class SchemasListComponent implements OnInit, OnDestroy {
   constructor(public _schemasStore: SchemasStore,
               private _appEvents: AppEventsService,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsCustomDataMainViewService: SettingsMetadataMainViewService,
               private _browserService: BrowserService) {
   }

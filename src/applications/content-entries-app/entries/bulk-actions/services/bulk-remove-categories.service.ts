@@ -1,45 +1,45 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaCategoryEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunCategoryEntry } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
-import { CategoryEntryListAction } from 'kaltura-ngx-client';
+import { CategoryEntryListAction } from 'vidiun-ngx-client';
 
-import { KalturaCategoryEntryFilter } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { CategoryEntryDeleteAction } from 'kaltura-ngx-client';
+import { VidiunCategoryEntryFilter } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { CategoryEntryDeleteAction } from 'vidiun-ngx-client';
 import { CategoriesSearchService, CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class BulkRemoveCategoriesService extends BulkActionBaseService<number[]> implements OnDestroy {
 
-    constructor(public _kalturaServerClient: KalturaClient,
+    constructor(public _vidiunServerClient: VidiunClient,
                 private _categoriesSearch: CategoriesSearchService,
                 private _appLocalization: AppLocalization) {
-        super(_kalturaServerClient);
+        super(_vidiunServerClient);
     }
 
-    private _getCategoryEntryMapping(entries: string[]): Observable<KalturaCategoryEntry[]> {
+    private _getCategoryEntryMapping(entries: string[]): Observable<VidiunCategoryEntry[]> {
 
         if (entries.length === 0) {
             return Observable.throw(new Error('no entries were selected'));
         }
         // load all category entries
-        const filter: KalturaCategoryEntryFilter = new KalturaCategoryEntryFilter(
+        const filter: VidiunCategoryEntryFilter = new VidiunCategoryEntryFilter(
             {
                 entryIdIn: entries.join(',')
             }
         );
 
-        const pager: KalturaFilterPager = new KalturaFilterPager();
+        const pager: VidiunFilterPager = new VidiunFilterPager();
         pager.pageIndex = 1;
         pager.pageSize = 1000;
 
-        return this._kalturaServerClient.request(new CategoryEntryListAction({
+        return this._vidiunServerClient.request(new CategoryEntryListAction({
             filter: filter,
             pager: pager
         }))
@@ -66,7 +66,7 @@ export class BulkRemoveCategoriesService extends BulkActionBaseService<number[]>
             })
     }
 
-    public execute(entries: KalturaMediaEntry[], categoriesId: number[]): Observable<{}> {
+    public execute(entries: VidiunMediaEntry[], categoriesId: number[]): Observable<{}> {
         return Observable.create(observer => {
 
             const entriesId = entries ? entries.map(entry => entry.id) : [];
@@ -116,7 +116,7 @@ export class BulkRemoveCategoriesService extends BulkActionBaseService<number[]>
         });
     }
 
-    private categoryEntryExists(entryId: string, categoryId: number, entryCategories: KalturaCategoryEntry[]): boolean {
+    private categoryEntryExists(entryId: string, categoryId: number, entryCategories: VidiunCategoryEntry[]): boolean {
         let found = false;
         for (let i = 0; i < entryCategories.length; i++) {
             if (entryCategories[i].categoryId === categoryId && entryCategories[i].entryId === entryId) {

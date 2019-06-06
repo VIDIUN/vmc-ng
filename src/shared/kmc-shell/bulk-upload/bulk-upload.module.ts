@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { BulkUploadService } from 'app-shared/kmc-shell/bulk-upload/bulk-upload.service';
+import { BulkUploadService } from 'app-shared/vmc-shell/bulk-upload/bulk-upload.service';
 
 @NgModule({
   imports: <any[]>[],

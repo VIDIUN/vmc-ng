@@ -1,4 +1,4 @@
-<div class="kTable" [class.kTagsVisible]="isTagsBarVisible">
+<div class="vTable" [class.vTagsVisible]="isTagsBarVisible">
     <p-table dataKey="id"
              scrollHeight="100%"
              [scrollable]="true"
@@ -7,7 +7,7 @@
              (selectionChange)="_onSelectionChange($event)"
              [rowTrackBy]="rowTrackBy"
              [(selection)]="selectedUsers"
-             [class.kDisabled]="categoryInheritUserPermissions || _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kDisabledIfNotPermitted">
+             [class.vDisabled]="categoryInheritUserPermissions || _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vDisabledIfNotPermitted">
 
         <ng-template pTemplate="header">
             <tr>
@@ -29,7 +29,7 @@
                 <th class="statusColumn">
                     {{'applications.content.categoryDetails.entitlements.usersPermissions.table.active' | translate}}
                 </th>
-                <th class="removeColumn" *ngIf="_kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kNgIfPermitted"></th>
+                <th class="removeColumn" *ngIf="_vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vNgIfPermitted"></th>
             </tr>
         </ng-template>
 
@@ -39,37 +39,37 @@
                     <p-tableCheckbox [value]="user"></p-tableCheckbox>
                 </td>
                 <td class="nameColumn">
-                    <div class="kTitle kTableColumn" [kTooltip]="user.name">
+                    <div class="vTitle vTableColumn" [vTooltip]="user.name">
                         {{user.name}}
                     </div>
                 </td>
                 <td class="permissionLevelColumn">
                     <p-dropdown [options]="_permissionLevelOptions"
-                                [disabled]="user['status'] !== _kalturaCategoryUserStatus.active || categoryInheritUserPermissions || _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kDisabledIfNotPermitted"
+                                [disabled]="user['status'] !== _vidiunCategoryUserStatus.active || categoryInheritUserPermissions || _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vDisabledIfNotPermitted"
                                 [(ngModel)]="user.permissionLevel"
                                 (onChange)="_onActionSelected({action: 'permissionLevel', users: user, payload: { level: user.permissionLevel}})"></p-dropdown>
                 </td>
                 <td class="updateMethodColumn">
                     <p-dropdown [options]="_updateMethodOptions"
-                                [disabled]="user['status'] !== _kalturaCategoryUserStatus.active || categoryInheritUserPermissions || _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kDisabledIfNotPermitted"
+                                [disabled]="user['status'] !== _vidiunCategoryUserStatus.active || categoryInheritUserPermissions || _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vDisabledIfNotPermitted"
                                 [(ngModel)]="user.updateMethod"
                                 (onChange)="_onActionSelected({action: 'updateMethod', users: user, payload: { method: user.updateMethod} })"></p-dropdown>
                 </td>
                 <td class="updatedAtColumn">
-                    {{user.updatedAt | kmcDate:'dateOnly'}}
+                    {{user.updatedAt | vmcDate:'dateOnly'}}
                 </td>
                 <td class="statusColumn">
                     <p-inputSwitch
-                        *ngIf="user.status === _kalturaCategoryUserStatus.active || user.status === _kalturaCategoryUserStatus.notActive || user.status === _kalturaCategoryUserStatus.pending"
-                        class="kInputSwitch"
-                        [ngModel]="user.status === _kalturaCategoryUserStatus.active"
+                        *ngIf="user.status === _vidiunCategoryUserStatus.active || user.status === _vidiunCategoryUserStatus.notActive || user.status === _vidiunCategoryUserStatus.pending"
+                        class="vInputSwitch"
+                        [ngModel]="user.status === _vidiunCategoryUserStatus.active"
                         (onChange)="_onActionSelected({action: $event.checked ? 'activate': 'deactivate', users: user, payload: {} })"
-                        [disabled]="categoryInheritUserPermissions || _kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kDisabledIfNotPermitted"></p-inputSwitch>
-                    <span class="kCategoryUserStatus">{{user.status | kCategoryUserStatus}}</span>
+                        [disabled]="categoryInheritUserPermissions || _vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vDisabledIfNotPermitted"></p-inputSwitch>
+                    <span class="vCategoryUserStatus">{{user.status | vCategoryUserStatus}}</span>
                 </td>
-                <td class="removeColumn" *ngIf="_kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kNgIfPermitted">
-                    <i class="kIconremove"
-                       [class.kEnabled]="!categoryInheritUserPermissions"
+                <td class="removeColumn" *ngIf="_vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vNgIfPermitted">
+                    <i class="vIconremove"
+                       [class.vEnabled]="!categoryInheritUserPermissions"
                        (click)="_onActionSelected({action: 'delete', users: user, payload: {} })"></i>
                 </td>
             </tr>

@@ -1,37 +1,37 @@
 <button pButton [disabled]="_disabled"
         label="{{'app.titles.create' | translate | uppercase}}"
-        class="kButtonDefault kUploadBtn"
+        class="vButtonDefault vUploadBtn"
         (click)="uploadmenu.open()"></button>
 
-<kPopupWidget #uploadmenu data-aid="uploadmenu" [popupWidth]="360" [popupHeight]="385" [closeBtn]="true"
+<vPopupWidget #uploadmenu data-aid="uploadmenu" [popupWidth]="360" [popupHeight]="385" [closeBtn]="true"
               [modal]="true" [transparent]="true" [preventPageScroll]="true">
   <ng-template>
-    <kKMCUploadMenu (onItemSelected)="_onMenuItemSelected($event)"></kKMCUploadMenu>
+    <vVMCUploadMenu (onItemSelected)="_onMenuItemSelected($event)"></vVMCUploadMenu>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #uploadsettings data-aid="uploadsettings" [popupWidth]="791" [popupHeight]="607" [closeBtn]="true" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #uploadsettings data-aid="uploadsettings" [popupWidth]="791" [popupHeight]="607" [closeBtn]="true" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kKMCUploadSettings [parentPopupWidget]="uploadsettings" [creationType]="_creationType"></kKMCUploadSettings>
+    <vVMCUploadSettings [parentPopupWidget]="uploadsettings" [creationType]="_creationType"></vVMCUploadSettings>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #bulkuploadmenu data-aid="bulkuploadmenu" [popupWidth]="382" [popupHeight]="436" [closeBtn]="true" [modal]="true">
+<vPopupWidget #bulkuploadmenu data-aid="bulkuploadmenu" [popupWidth]="382" [popupHeight]="436" [closeBtn]="true" [modal]="true">
   <ng-template>
-    <kKMCBulkUploadMenu (onClose)="bulkuploadmenu.close()"></kKMCBulkUploadMenu>
+    <vVMCBulkUploadMenu (onClose)="bulkuploadmenu.close()"></vVMCBulkUploadMenu>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPrepareEntry #prepareEntry></kPrepareEntry>
+<vPrepareEntry #prepareEntry></vPrepareEntry>
 
-<kPopupWidget #createLive data-aid="createLive" [popupWidth]="791" [popupHeight]="675" [closeBtn]="true" [modal]="true">
+<vPopupWidget #createLive data-aid="createLive" [popupWidth]="791" [popupHeight]="675" [closeBtn]="true" [modal]="true">
   <ng-template>
-    <kCreateLive [parentPopupWidget]="createLive"></kCreateLive>
+    <vCreateLive [parentPopupWidget]="createLive"></vCreateLive>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #createFromYoutube data-aid="createFromYoutube" [popupWidth]="791" [popupHeight]="357" [closeBtn]="true" [modal]="true">
+<vPopupWidget #createFromYoutube data-aid="createFromYoutube" [popupWidth]="791" [popupHeight]="357" [closeBtn]="true" [modal]="true">
   <ng-template>
-    <kKMCUploadFromYoutube [parentPopupWidget]="createFromYoutube"></kKMCUploadFromYoutube>
+    <vVMCUploadFromYoutube [parentPopupWidget]="createFromYoutube"></vVMCUploadFromYoutube>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

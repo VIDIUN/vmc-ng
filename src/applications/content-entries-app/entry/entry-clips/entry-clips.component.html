@@ -1,15 +1,15 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <div class="kClips">
-        <p class="kTitle">{{'applications.content.entryDetails.clips.clips' | translate}}</p>
-        <div class="kButtons">
+    <div class="vClips">
+        <p class="vTitle">{{'applications.content.entryDetails.clips.clips' | translate}}</p>
+        <div class="vButtons">
             <div>
-                <button [disabled]="!_clipAndTrimEnabled" pButton class="kButtonDefault"
-                        (click)="_clipAndTrimEnabled && clipAndTrim.open()" icon="kIconmovies"
+                <button [disabled]="!_clipAndTrimEnabled" pButton class="vButtonDefault"
+                        (click)="_clipAndTrimEnabled && clipAndTrim.open()" icon="vIconmovies"
                         label="{{'applications.content.entryDetails.clips.clipTrim' | translate}}"></button>
             </div>
         </div>
-        <div class="kTable">
+        <div class="vTable">
             <p-table dataKey="id"
                      [value]="(_widgetService.entries$ | async)?.items"
                      [scrollable]="true"
@@ -24,22 +24,22 @@
                         <th [ngStyle]="{'width':'120px','padding-left': '24px'}">
                             {{'applications.content.entryDetails.clips.id' | translate}}
                         </th>
-                        <th [kpSortableColumn]="'name'">
+                        <th [vpSortableColumn]="'name'">
                             {{'applications.content.entryDetails.clips.name' | translate}}
                             <p-sortIcon [field]="'name'"></p-sortIcon>
                         </th>
-                        <th [ngStyle]="{'width':'80px'}" [kpSortableColumn]="'plays'">
+                        <th [ngStyle]="{'width':'80px'}" [vpSortableColumn]="'plays'">
                             {{'applications.content.entryDetails.clips.plays' | translate}}
                             <p-sortIcon [field]="'plays'"></p-sortIcon>
                         </th>
-                        <th [ngStyle]="{'width':'110px'}" [kpSortableColumn]="'createdAt'">
+                        <th [ngStyle]="{'width':'110px'}" [vpSortableColumn]="'createdAt'">
                             {{'applications.content.entryDetails.clips.created' | translate}}
                             <p-sortIcon [field]="'createdAt'"></p-sortIcon>
                         </th>
                         <th [ngStyle]="{'width':'80px'}">
                             {{'applications.content.entryDetails.clips.offset' | translate}}
                         </th>
-                        <th [ngStyle]="{'width':'80px'}" [kpSortableColumn]="'duration'">
+                        <th [ngStyle]="{'width':'80px'}" [vpSortableColumn]="'duration'">
                             {{'applications.content.entryDetails.clips.duration' | translate}}
                             <p-sortIcon [field]="'duration'"></p-sortIcon>
                         </th>
@@ -55,10 +55,10 @@
                             <a (click)="_widgetService.navigateToEntry(entry)">{{entry.id}}</a>
                         </td>
                         <td>
-                            <span class="kTableColumn" [kTooltip]="entry.name">{{entry.name}}</span>
+                            <span class="vTableColumn" [vTooltip]="entry.name">{{entry.name}}</span>
                         </td>
                         <td [ngStyle]="{'width':'80px'}">{{entry.plays}}</td>
-                        <td [ngStyle]="{'width':'110px'}">{{entry.createdAt | kmcDate}}</td>
+                        <td [ngStyle]="{'width':'110px'}">{{entry.createdAt | vmcDate}}</td>
                         <td [ngStyle]="{'width':'80px'}">{{entry.offset}}</td>
                         <td [ngStyle]="{'width':'80px'}">{{entry.duration}}</td>
                         <td [ngStyle]="{'width':'70px'}">{{entry | entryStatus}}</td>
@@ -71,17 +71,17 @@
             </p-table>
         </div>
 
-        <p-paginator class="kTableFooter" [rows]="_widgetService.pageSize" (onPageChange)="_onPaginationChanged($event)"
+        <p-paginator class="vTableFooter" [rows]="_widgetService.pageSize" (onPageChange)="_onPaginationChanged($event)"
                      [totalRecords]="(_widgetService.entries$ | async)?.totalItems"
                      [rowsPerPageOptions]="_widgetService.pageSizesAvailable"></p-paginator>
     </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #clipAndTrim data-aid="clipAndTrim" [fullScreen]="true">
+<vPopupWidget #clipAndTrim data-aid="clipAndTrim" [fullScreen]="true">
     <ng-template>
-        <kEntryEditor [entry]="_widgetService.data"
+        <vEntryEditor [entry]="_widgetService.data"
                       [entryHasSource]="true"
                       [tab]="'editor'"
-                      [parentPopupWidget]="clipAndTrim"></kEntryEditor>
+                      [parentPopupWidget]="clipAndTrim"></vEntryEditor>
     </ng-template>
-</kPopupWidget>
+</vPopupWidget>

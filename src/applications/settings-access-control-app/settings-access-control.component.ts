@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { AccessControlProfilesStore } from './profiles/profiles-store/profiles-store.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kmc-settings-access-control',
-  template: '<kAccessControlProfilesList></kAccessControlProfilesList>',
+  selector: 'vmc-settings-access-control',
+  template: '<vAccessControlProfilesList></vAccessControlProfilesList>',
   providers: [
     AccessControlProfilesStore,
-    KalturaLogger.createLogger('SettingsAccessControl')
+    VidiunLogger.createLogger('SettingsAccessControl')
   ]
 })
 export class SettingsAccessControlComponent {

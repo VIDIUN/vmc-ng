@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-    selector: 'kKMCError',
+    selector: 'vVMCError',
     templateUrl: './error.component.html',
     styleUrls: ['./error.component.scss']
 })

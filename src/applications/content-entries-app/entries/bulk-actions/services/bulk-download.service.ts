@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
 import { XInternalXAddBulkDownloadAction } from './XInternalXAddBulkDownloadAction';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 export class BulkDownloadError extends Error {
   type = 'bulkDownload';
@@ -18,11 +18,11 @@ export class BulkDownloadError extends Error {
 @Injectable()
 export class BulkDownloadService extends BulkActionBaseService<number> {
 
-  constructor(_kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedEntries: KalturaMediaEntry[], flavorId: number) : Observable<{}>{
+  public execute(selectedEntries: VidiunMediaEntry[], flavorId: number) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: XInternalXAddBulkDownloadAction[] = [];
@@ -35,7 +35,7 @@ export class BulkDownloadService extends BulkActionBaseService<number> {
         entryIds = entryIds.substr(0, entryIds.length - 1); // remove last comma
       }
 
-      this._kalturaServerClient.request(new XInternalXAddBulkDownloadAction({
+      this._vidiunServerClient.request(new XInternalXAddBulkDownloadAction({
         entryIds: entryIds,
         flavorParamsId: flavorId.toString()
       })).subscribe(

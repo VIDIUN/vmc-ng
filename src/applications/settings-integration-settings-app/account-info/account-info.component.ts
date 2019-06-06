@@ -1,21 +1,21 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import {
   AccountInfo,
   AccountInfoService
 } from 'applications/settings-integration-settings-app/account-info/account-info.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsIntegrationSettingsMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsIntegrationSettingsMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Component({
-  selector: 'kAccountInfo',
+  selector: 'vAccountInfo',
   templateUrl: './account-info.component.html',
   styleUrls: ['./account-info.component.scss'],
   providers: [
     AccountInfoService,
-    KalturaLogger.createLogger('AccountInfoComponent')
+    VidiunLogger.createLogger('AccountInfoComponent')
   ],
 })
 export class AccountInfoComponent implements OnInit, OnDestroy {
@@ -26,7 +26,7 @@ export class AccountInfoComponent implements OnInit, OnDestroy {
   public _isBusy = false;
 
   constructor(private _accountInfoService: AccountInfoService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsIntegrationSettingsMainView: SettingsIntegrationSettingsMainViewService,
               private _appLocalization: AppLocalization) {
   }

@@ -1,6 +1,6 @@
-<k-area-blocker [showLoader]="_isBusy" [bodyScroll]="true" [classes]="'kAreaBlockerCoverAll'">
+<v-area-blocker [showLoader]="_isBusy" [bodyScroll]="true" [classes]="'vAreaBlockerCoverAll'">
     <router-outlet></router-outlet>
-</k-area-blocker>
+</v-area-blocker>
 <!--router-outlet></router-outlet-->
 <p-confirmDialog
     #confirm
@@ -8,24 +8,24 @@
     [key]="'confirm'"
     [closeOnEscape]="false"
     width="500"
-    [class.kAlignToLeft]="_confirmDialogAlignLeft"
+    [class.vAlignToLeft]="_confirmDialogAlignLeft"
     [acceptLabel]="_confirmationLabels.yes"
     [rejectLabel]="_confirmationLabels.no"
     >
 </p-confirmDialog>
 <p-confirmDialog #alert header="Alert" [key]="'alert'" [closeOnEscape]="true" width="440"
-                 [class.kAlignToLeft]="_confirmDialogAlignLeft">
+                 [class.vAlignToLeft]="_confirmDialogAlignLeft">
     <p-footer>
         <button type="button" pButton icon="fa-check" label="{{_confirmationLabels.ok}}" (click)="alert.accept()"></button>
     </p-footer>
 </p-confirmDialog>
 
-<kPopupWidget #openEmailPopup data-aid="openEmailPopup" [modal]="true" [popupWidth]="500" [popupHeight]="320">
+<vPopupWidget #openEmailPopup data-aid="openEmailPopup" [modal]="true" [popupWidth]="500" [popupHeight]="320">
     <ng-template>
-        <kOpenEmail [parentPopupWidget]="openEmailPopup" [emailConfig]="_openEmailConfig"></kOpenEmail>
+        <vOpenEmail [parentPopupWidget]="openEmailPopup" [emailConfig]="_openEmailConfig"></vOpenEmail>
     </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 <p-growl [(value)]="_growlMessages" [immutable]="true"></p-growl>
-<kPreviewEmbed></kPreviewEmbed>
-<kCaptionRequest></kCaptionRequest>
+<vPreviewEmbed></vPreviewEmbed>
+<vCaptionRequest></vCaptionRequest>

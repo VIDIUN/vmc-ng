@@ -1,12 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {KalturaMediaType} from 'kaltura-ngx-client';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {VidiunMediaType} from 'vidiun-ngx-client';
 import {PrepareEntryComponent} from '../prepare-entry/prepare-entry.component';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KMCFileCreationType } from '../upload-settings/upload-settings.component';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VMCFileCreationType } from '../upload-settings/upload-settings.component';
 
 @Component({
-  selector: 'kUploadButton',
+  selector: 'vUploadButton',
   templateUrl: './upload-button.component.html',
   styleUrls: ['./upload-button.component.scss'],
 })
@@ -19,16 +19,16 @@ export class UploadButtonComponent {
   @ViewChild('createFromYoutube') createFromYoutube: PopupWidgetComponent;
 
     public _disabled = true;
-    public _creationTypes = KMCFileCreationType;
+    public _creationTypes = VMCFileCreationType;
     public _creationType = this._creationTypes.upload;
 
-  constructor(private _appPermissions: KMCPermissionsService) {
+  constructor(private _appPermissions: VMCPermissionsService) {
       this._disabled = !this._appPermissions.hasAnyPermissions([
-          KMCPermissions.CONTENT_INGEST_UPLOAD,
-          KMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
-          KMCPermissions.CONTENT_INGEST_ORPHAN_VIDEO,
-          KMCPermissions.CONTENT_INGEST_ORPHAN_AUDIO,
-          KMCPermissions.LIVE_STREAM_ADD
+          VMCPermissions.CONTENT_INGEST_UPLOAD,
+          VMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
+          VMCPermissions.CONTENT_INGEST_ORPHAN_VIDEO,
+          VMCPermissions.CONTENT_INGEST_ORPHAN_AUDIO,
+          VMCPermissions.LIVE_STREAM_ADD
       ]);
   }
 
@@ -37,23 +37,23 @@ export class UploadButtonComponent {
 
     switch (item) {
       case 'uploadFromDesktop':
-          this._creationType = KMCFileCreationType.upload;
+          this._creationType = VMCFileCreationType.upload;
           this.uploadSettingsPopup.open();
         break;
       case 'bulkUpload':
         this.bulkUploadMenu.open();
         break;
       case 'prepareVideoEntry':
-        this.prepareEntryComponent.prepareEntry(KalturaMediaType.video);
+        this.prepareEntryComponent.prepareEntry(VidiunMediaType.video);
         break;
       case 'prepareAudioEntry':
-        this.prepareEntryComponent.prepareEntry(KalturaMediaType.audio);
+        this.prepareEntryComponent.prepareEntry(VidiunMediaType.audio);
         break;
       case 'createLive':
         this.createLivePopup.open();
         break;
     case 'createFromUrl':
-        this._creationType = KMCFileCreationType.import;
+        this._creationType = VMCFileCreationType.import;
         this.uploadSettingsPopup.open();
         break;
     case 'createFromYoutube':

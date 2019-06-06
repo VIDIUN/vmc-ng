@@ -1,8 +1,8 @@
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
-export abstract class KmcComponentViewBaseService<TArgs> {
+export abstract class VmcComponentViewBaseService<TArgs> {
 
-    protected constructor(protected _logger: KalturaLogger) {
+    protected constructor(protected _logger: VidiunLogger) {
     }
 
     abstract isAvailable(args: TArgs): boolean;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
     ContentCategoriesMainViewService,
     ContentEntriesMainViewService,
@@ -30,7 +30,7 @@ import {
 } from './main-views';
 import { Observable } from 'rxjs';
 
-export interface KMCAppMenuItem {
+export interface VMCAppMenuItem {
     menuTitle: string;
     icon?: string;
     isAvailable: boolean;
@@ -38,18 +38,18 @@ export interface KMCAppMenuItem {
     position?: string;
     open?: () => void;
     openWithState?: Observable<{ opened: boolean }>;
-    children?: KMCAppMenuItem[];
+    children?: VMCAppMenuItem[];
 }
 
 @Injectable()
-export class KmcMainViewsService {
+export class VmcMainViewsService {
 
-    private _logger: KalturaLogger;
-    private _cache: KMCAppMenuItem[] = [];
+    private _logger: VidiunLogger;
+    private _cache: VMCAppMenuItem[] = [];
 
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         private _contentEntriesMain: ContentEntriesMainViewService,
         private _contentCategoriesMain: ContentCategoriesMainViewService,
         private _contentModerationMain: ContentModerationMainViewService,
@@ -77,10 +77,10 @@ export class KmcMainViewsService {
         private _settingsAccountInformationMain: SettingsAccountInformationMainViewService,
         private _appLocalization: AppLocalization
     ) {
-        this._logger = logger.subLogger('KmcMainViewsService');
+        this._logger = logger.subLogger('VmcMainViewsService');
     }
 
-    private _getMainViewsList(): KMCAppMenuItem[] {
+    private _getMainViewsList(): VMCAppMenuItem[] {
         return [
             {
                 menuTitle: this._appLocalization.get('app.titles.content'),
@@ -229,7 +229,7 @@ export class KmcMainViewsService {
                 isActiveView: (activePath: string) => activePath.indexOf(`/settings`) !== -1,
                 isAvailable: true,
                 menuTitle: this._appLocalization.get('app.titles.settings'),
-                icon: 'kIcongear',
+                icon: 'vIcongear',
                 position: 'right',
                 children: [
                     {
@@ -300,7 +300,7 @@ export class KmcMainViewsService {
                 isActiveView: (activePath: string) => activePath.indexOf(`/administration`) !== -1,
                 isAvailable: true,
                 menuTitle: this._appLocalization.get('app.titles.administration'),
-                icon: 'kIconuser',
+                icon: 'vIconuser',
                 position: 'right',
                 children: [
                     {
@@ -335,7 +335,7 @@ export class KmcMainViewsService {
         ];
     }
 
-    getMenu(): KMCAppMenuItem[] {
+    getMenu(): VMCAppMenuItem[] {
         return this._cache;
     }
 
@@ -343,13 +343,13 @@ export class KmcMainViewsService {
     public rebuildMenu(): void {
         this._logger.info('build app menu');
 
-        const openFirstChild = function(this: KMCAppMenuItem): void {
+        const openFirstChild = function(this: VMCAppMenuItem): void {
               if (this.children && this.children.length > 0) {
                   this.children[0].open();
               }
         };
 
-        const processItem = (target: KMCAppMenuItem[], item: KMCAppMenuItem): KMCAppMenuItem[] => {
+        const processItem = (target: VMCAppMenuItem[], item: VMCAppMenuItem): VMCAppMenuItem[] => {
             if (item.children && item.children.length) {
                 item.children = item.children.reduce(processItem, []);
             }

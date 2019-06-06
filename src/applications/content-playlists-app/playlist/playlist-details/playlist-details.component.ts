@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
 import { PlaylistDetailsWidget } from './playlist-details-widget.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kPlaylistDetails',
+  selector: 'vPlaylistDetails',
   templateUrl: './playlist-details.component.html',
   styleUrls: ['./playlist-details.component.scss']
 })
 export class PlaylistDetailsComponent implements OnInit, OnDestroy {
-  public _currentPlaylist: KalturaPlaylist;
+  public _currentPlaylist: VidiunPlaylist;
   public _isNew = false;
 
   constructor(public _widgetService: PlaylistDetailsWidget) {

@@ -1,12 +1,12 @@
-import { KalturaMediaEntryFilterForPlaylist } from 'kaltura-ngx-client';
-import { KalturaPlayableEntryOrderBy } from 'kaltura-ngx-client';
+import { VidiunMediaEntryFilterForPlaylist } from 'vidiun-ngx-client';
+import { VidiunPlayableEntryOrderBy } from 'vidiun-ngx-client';
 
 export interface PlaylistRule {
   selectionId?: string;
   name: string;
   entriesCount: number;
   entriesDuration: number;
-  orderBy: KalturaPlayableEntryOrderBy;
+  orderBy: VidiunPlayableEntryOrderBy;
   limit: number;
-  originalFilter: KalturaMediaEntryFilterForPlaylist
+  originalFilter: VidiunMediaEntryFilterForPlaylist
 }

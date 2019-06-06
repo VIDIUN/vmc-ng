@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EqualFieldsValidator } from 'app-shared/kmc-shell/validators/equalFields.validator';
+import { EqualFieldsValidator } from 'app-shared/vmc-shell/validators/equalFields.validator';
 
 @Component({
-  selector: 'kKMCRestorePassword',
+  selector: 'vVMCRestorePassword',
   templateUrl: './restore-password-form.component.html',
   styleUrls: ['./restore-password-form.component.scss']
 })

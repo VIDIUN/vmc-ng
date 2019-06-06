@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService, KMCPermissions } from '../../kmc-permissions';
+import { VMCPermissionsService, VMCPermissions } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { KalturaExternalMediaEntry } from 'kaltura-ngx-client';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { VidiunExternalMediaEntry } from 'vidiun-ngx-client';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum ContentEntryViewSections {
     Metadata = 'Metadata',
@@ -34,7 +34,7 @@ export enum ContentEntryViewSections {
 }
 
 export interface ContentEntryViewArgs {
-    entry: KalturaMediaEntry;
+    entry: VidiunMediaEntry;
     section: ContentEntryViewSections;
     activatedRoute?: ActivatedRoute;
     reloadEntriesListOnNavigateOut?: boolean;
@@ -43,13 +43,13 @@ export interface ContentEntryViewArgs {
 
 
 @Injectable()
-export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEntryViewArgs> {
-    constructor(private _appPermissions: KMCPermissionsService,
+export class ContentEntryViewService extends VmcDetailsViewBaseService<ContentEntryViewArgs> {
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('ContentEntryViewService'), _browserService, _titleService, _contextualHelpService);
@@ -72,11 +72,11 @@ export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEn
         return this._isSectionEnabled(section, args.entry);
     }
 
-    private _isLiveMediaEntry(mediaType: KalturaMediaType): boolean {
-        return mediaType === KalturaMediaType.liveStreamFlash ||
-            mediaType === KalturaMediaType.liveStreamWindowsMedia ||
-            mediaType === KalturaMediaType.liveStreamRealMedia ||
-            mediaType === KalturaMediaType.liveStreamQuicktime;
+    private _isLiveMediaEntry(mediaType: VidiunMediaType): boolean {
+        return mediaType === VidiunMediaType.liveStreamFlash ||
+            mediaType === VidiunMediaType.liveStreamWindowsMedia ||
+            mediaType === VidiunMediaType.liveStreamRealMedia ||
+            mediaType === VidiunMediaType.liveStreamQuicktime;
     }
 
     private _getSectionFromActivatedRoute(activatedRoute: ActivatedRoute): ContentEntryViewSections {
@@ -182,7 +182,7 @@ export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEn
         return result;
     }
 
-    private _isSectionEnabled(section: ContentEntryViewSections, entry: KalturaMediaEntry): boolean {
+    private _isSectionEnabled(section: ContentEntryViewSections, entry: VidiunMediaEntry): boolean {
         const availableByData = this._isAvailableByData(section, entry);
         const availableByPermission = this._isAvailableByPermission(section);
 
@@ -190,30 +190,30 @@ export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEn
         return availableByData && availableByPermission;
     }
 
-    private _isAvailableByData(section: ContentEntryViewSections, entry: KalturaMediaEntry): boolean {
+    private _isAvailableByData(section: ContentEntryViewSections, entry: VidiunMediaEntry): boolean {
         this._logger.debug(`check section availability by data for entry`, { categoryId: entry.id, section });
         const mediaType = entry.mediaType;
-        const externalMedia = entry instanceof KalturaExternalMediaEntry;
+        const externalMedia = entry instanceof VidiunExternalMediaEntry;
         let result = false;
         switch (section) {
             case ContentEntryViewSections.Thumbnails:
-                result = mediaType !== KalturaMediaType.image;
+                result = mediaType !== VidiunMediaType.image;
                 break;
             case ContentEntryViewSections.Flavours:
-                result = mediaType !== KalturaMediaType.image && !this._isLiveMediaEntry(entry.mediaType) && !externalMedia;
+                result = mediaType !== VidiunMediaType.image && !this._isLiveMediaEntry(entry.mediaType) && !externalMedia;
                 break;
             case ContentEntryViewSections.Captions:
             case ContentEntryViewSections.Advertisements:
-                result = mediaType !== KalturaMediaType.image && !this._isLiveMediaEntry(entry.mediaType);
+                result = mediaType !== VidiunMediaType.image && !this._isLiveMediaEntry(entry.mediaType);
                 break;
             case ContentEntryViewSections.Live:
                 result = this._isLiveMediaEntry(entry.mediaType);
                 break;
             case ContentEntryViewSections.Clips:
-                result = mediaType !== KalturaMediaType.image && !externalMedia;
+                result = mediaType !== VidiunMediaType.image && !externalMedia;
                 break;
             case ContentEntryViewSections.Distribution:
-                result = !this._isLiveMediaEntry(entry.mediaType) && mediaType !== KalturaMediaType.audio && mediaType !== KalturaMediaType.image;
+                result = !this._isLiveMediaEntry(entry.mediaType) && mediaType !== VidiunMediaType.audio && mediaType !== VidiunMediaType.image;
                 break;
             case ContentEntryViewSections.AccessControl:
             case ContentEntryViewSections.Scheduling:
@@ -236,22 +236,22 @@ export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEn
         let result = false;
         switch (section) {
             case ContentEntryViewSections.Users:
-                result = this._appPermissions.hasPermission(KMCPermissions.FEATURE_END_USER_MANAGE);
+                result = this._appPermissions.hasPermission(VMCPermissions.FEATURE_END_USER_MANAGE);
                 break;
             case ContentEntryViewSections.Related:
-                result = this._appPermissions.hasPermission(KMCPermissions.ATTACHMENT_PLUGIN_PERMISSION);
+                result = this._appPermissions.hasPermission(VMCPermissions.ATTACHMENT_PLUGIN_PERMISSION);
                 break;
             case ContentEntryViewSections.Live:
-                result = this._appPermissions.hasPermission(KMCPermissions.FEATURE_LIVE_STREAM);
+                result = this._appPermissions.hasPermission(VMCPermissions.FEATURE_LIVE_STREAM);
                 break;
             case ContentEntryViewSections.Advertisements:
-                result = this._appPermissions.hasPermission(KMCPermissions.ADCUEPOINT_PLUGIN_PERMISSION);
+                result = this._appPermissions.hasPermission(VMCPermissions.ADCUEPOINT_PLUGIN_PERMISSION);
                 break;
             case ContentEntryViewSections.Captions:
-                result = this._appPermissions.hasPermission(KMCPermissions.CAPTION_PLUGIN_PERMISSION);
+                result = this._appPermissions.hasPermission(VMCPermissions.CAPTION_PLUGIN_PERMISSION);
                 break;
             case ContentEntryViewSections.Distribution:
-                result = this._appPermissions.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_BASE);
+                result = this._appPermissions.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_BASE);
                 break;
             case ContentEntryViewSections.Thumbnails:
             case ContentEntryViewSections.Flavours:
@@ -286,20 +286,20 @@ export class ContentEntryViewService extends KmcDetailsViewBaseService<ContentEn
         this._logger.info('handle open entry view by id request by the user, load entry data', { entryId });
         const baseEntryAction = new BaseEntryGetAction({ entryId })
             .setRequestOptions({
-                responseProfile: new KalturaDetachedResponseProfile({
-                    type: KalturaResponseProfileType.includeFields,
+                responseProfile: new VidiunDetachedResponseProfile({
+                    type: VidiunResponseProfileType.includeFields,
                     fields: 'id,mediaType'
                 })
             });
 
-        this._kalturaClient
+        this._vidiunClient
             .request(baseEntryAction)
             .pipe(tag('block-shell'))
             .map(response => {
-                if (response instanceof KalturaMediaEntry) {
+                if (response instanceof VidiunMediaEntry) {
                     return response;
                 } else {
-                    throw new Error(`invalid type provided, expected KalturaMediaEntry, got ${typeof response}`);
+                    throw new Error(`invalid type provided, expected VidiunMediaEntry, got ${typeof response}`);
                 }
             })
             .subscribe(

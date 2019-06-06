@@ -1,82 +1,82 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaFlavorReadyBehaviorType } from 'kaltura-ngx-client';
-import { KalturaAssetParamsOrigin } from 'kaltura-ngx-client';
-import { KalturaNullableBoolean } from 'kaltura-ngx-client';
-import { KalturaAssetParamsDeletePolicy } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunFlavorReadyBehaviorType } from 'vidiun-ngx-client';
+import { VidiunAssetParamsOrigin } from 'vidiun-ngx-client';
+import { VidiunNullableBoolean } from 'vidiun-ngx-client';
+import { VidiunAssetParamsDeletePolicy } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
-  ExtendedKalturaConversionProfileAssetParams,
-  KalturaConversionProfileWithAsset
+  ExtendedVidiunConversionProfileAssetParams,
+  VidiunConversionProfileWithAsset
 } from '../../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaObjectBaseFactory } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunObjectBaseFactory } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kEditMediaFlavor',
+  selector: 'vEditMediaFlavor',
   templateUrl: './edit-media-flavor.component.html',
   styleUrls: ['./edit-media-flavor.component.scss'],
-  providers: [KalturaLogger.createLogger('EditMediaFlavorComponent')]
+  providers: [VidiunLogger.createLogger('EditMediaFlavorComponent')]
 })
 export class EditMediaFlavorComponent implements OnInit {
-  @Input() profile: KalturaConversionProfileWithAsset;
-  @Input() flavor: KalturaFlavorParams;
+  @Input() profile: VidiunConversionProfileWithAsset;
+  @Input() flavor: VidiunFlavorParams;
   @Input() parentPopupWidget: PopupWidgetComponent;
 
-  @Output() saveFlavor = new EventEmitter<ExtendedKalturaConversionProfileAssetParams>();
+  @Output() saveFlavor = new EventEmitter<ExtendedVidiunConversionProfileAssetParams>();
 
-  private _assetParams: ExtendedKalturaConversionProfileAssetParams;
+  private _assetParams: ExtendedVidiunConversionProfileAssetParams;
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _availabilityOptions = [
     {
-      value: KalturaFlavorReadyBehaviorType.inheritFlavorParams,
+      value: VidiunFlavorReadyBehaviorType.inheritFlavorParams,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.noImpact')
     },
     {
-      value: KalturaFlavorReadyBehaviorType.required,
+      value: VidiunFlavorReadyBehaviorType.required,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.required')
     },
     {
-      value: KalturaFlavorReadyBehaviorType.optional,
+      value: VidiunFlavorReadyBehaviorType.optional,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.optional')
     }
   ];
   public _originOptions = [
     {
-      value: KalturaAssetParamsOrigin.convert,
+      value: VidiunAssetParamsOrigin.convert,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.always')
     },
     {
-      value: KalturaAssetParamsOrigin.convertWhenMissing,
+      value: VidiunAssetParamsOrigin.convertWhenMissing,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.asAFallback')
     },
     {
-      value: KalturaAssetParamsOrigin.ingest,
+      value: VidiunAssetParamsOrigin.ingest,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.never')
     }
   ];
   public _genOptions = [
     {
-      value: KalturaNullableBoolean.falseValue,
-      label: this._appLocalization.get('applications.settings.transcoding.editFlavor.useKalturaOptimization')
+      value: VidiunNullableBoolean.falseValue,
+      label: this._appLocalization.get('applications.settings.transcoding.editFlavor.useVidiunOptimization')
     },
     {
-      value: KalturaNullableBoolean.trueValue,
+      value: VidiunNullableBoolean.trueValue,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.forceFlavorGeneration')
     },
   ];
   public _handleOptions = [
     {
-      value: KalturaAssetParamsDeletePolicy.keep,
+      value: VidiunAssetParamsDeletePolicy.keep,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.keepFlavor')
     },
     {
-      value: KalturaAssetParamsDeletePolicy.delete,
+      value: VidiunAssetParamsDeletePolicy.delete,
       label: this._appLocalization.get('applications.settings.transcoding.editFlavor.deleteFlavor')
     },
   ];
@@ -90,8 +90,8 @@ export class EditMediaFlavorComponent implements OnInit {
   public _deletePolicyField: AbstractControl;
 
   constructor(private _fb: FormBuilder,
-              private _permissionsService: KMCPermissionsService,
-              private _logger: KalturaLogger,
+              private _permissionsService: VMCPermissionsService,
+              private _logger: VidiunLogger,
               private _appLocalization: AppLocalization) {
     this._buildForm();
   }
@@ -111,24 +111,24 @@ export class EditMediaFlavorComponent implements OnInit {
     // default values:
     const isSourceAssetParam = this.flavor.tags && this.flavor.tags.indexOf('source') > -1;
     if (isSourceAssetParam) {
-      assetParams.origin = KalturaAssetParamsOrigin.ingest;
+      assetParams.origin = VidiunAssetParamsOrigin.ingest;
       if (typeof assetParams.readyBehavior === 'undefined') {
-        assetParams.readyBehavior = KalturaFlavorReadyBehaviorType.inheritFlavorParams;
+        assetParams.readyBehavior = VidiunFlavorReadyBehaviorType.inheritFlavorParams;
       }
       this._originField.disable({ onlySelf: true });
     }
 
     if (this.flavor.id === 0) {
       this._forceNoneCompliedField.disable({ onlySelf: true });
-      assetParams.forceNoneComplied = KalturaNullableBoolean.falseValue;
+      assetParams.forceNoneComplied = VidiunNullableBoolean.falseValue;
     }
 
     if (typeof assetParams.readyBehavior === 'undefined') {
-      assetParams.readyBehavior = KalturaFlavorReadyBehaviorType.optional;
+      assetParams.readyBehavior = VidiunFlavorReadyBehaviorType.optional;
     }
 
     if (typeof assetParams.origin === 'undefined') {
-      assetParams.origin = KalturaAssetParamsOrigin.convert;
+      assetParams.origin = VidiunAssetParamsOrigin.convert;
     }
 
     if (!assetParams.systemName) {
@@ -136,11 +136,11 @@ export class EditMediaFlavorComponent implements OnInit {
     }
 
     if (typeof assetParams.forceNoneComplied === 'undefined') {
-      assetParams.forceNoneComplied = KalturaNullableBoolean.falseValue;
+      assetParams.forceNoneComplied = VidiunNullableBoolean.falseValue;
     }
 
     if (typeof assetParams.deletePolicy === 'undefined') {
-      assetParams.deletePolicy = KalturaAssetParamsDeletePolicy.keep;
+      assetParams.deletePolicy = VidiunAssetParamsDeletePolicy.keep;
     }
 
     this._assetParams = assetParams;
@@ -155,20 +155,20 @@ export class EditMediaFlavorComponent implements OnInit {
       deletePolicy: assetParams.deletePolicy
     }, { emitEvent: false });
 
-    if (!this._permissionsService.hasPermission(KMCPermissions.FEATURE_MULTI_FLAVOR_INGESTION)) {
+    if (!this._permissionsService.hasPermission(VMCPermissions.FEATURE_MULTI_FLAVOR_INGESTION)) {
         this._editFlavorForm.get('systemName').disable({onlySelf: true});
         this._originField.disable({onlySelf: true});
     }
   }
 
-  private _getFlavorAssetParams(): ExtendedKalturaConversionProfileAssetParams {
+  private _getFlavorAssetParams(): ExtendedVidiunConversionProfileAssetParams {
     const assets = this.profile.assets || [];
     const relevantAssetParam = assets.find(({ assetParamsId }) => this.flavor.id === assetParamsId);
-    if (relevantAssetParam instanceof KalturaConversionProfileAssetParams) {
-      return Object.assign(KalturaObjectBaseFactory.createObject(relevantAssetParam), relevantAssetParam);
+    if (relevantAssetParam instanceof VidiunConversionProfileAssetParams) {
+      return Object.assign(VidiunObjectBaseFactory.createObject(relevantAssetParam), relevantAssetParam);
     }
 
-    const newAssetParam = new KalturaConversionProfileAssetParams();
+    const newAssetParam = new VidiunConversionProfileAssetParams();
     // bypass readonly mode
     (<any>newAssetParam).conversionProfileId = this.profile.id;
     (<any>newAssetParam).assetParamsId = this.flavor.id;
@@ -210,7 +210,7 @@ export class EditMediaFlavorComponent implements OnInit {
     assetParams.forceNoneComplied = formData.forceNoneComplied;
     assetParams.updated = this._editFlavorForm.dirty;
 
-    if (this._permissionsService.hasPermission(KMCPermissions.WIDEVINE_PLUGIN_PERMISSION)) {
+    if (this._permissionsService.hasPermission(VMCPermissions.WIDEVINE_PLUGIN_PERMISSION)) {
       assetParams.deletePolicy = formData.deletePolicy;
     }
 

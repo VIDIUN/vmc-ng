@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService, KMCPermissions } from '../../kmc-permissions';
+import { VMCPermissionsService, VMCPermissions } from '../../vmc-permissions';
 import { Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KmcComponentViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-component-view-base.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VmcComponentViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-component-view-base.service';
 import { serverConfig } from 'config/server';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import {KalturaEntryStatus} from 'kaltura-ngx-client';
-import {KalturaEntryReplacementStatus} from 'kaltura-ngx-client';
-import {KalturaExternalMediaEntry} from 'kaltura-ngx-client';
-import {KalturaMediaType} from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import {VidiunEntryStatus} from 'vidiun-ngx-client';
+import {VidiunEntryReplacementStatus} from 'vidiun-ngx-client';
+import {VidiunExternalMediaEntry} from 'vidiun-ngx-client';
+import {VidiunMediaType} from 'vidiun-ngx-client';
 
 export interface QuizAppViewArgs {
-    entry: KalturaMediaEntry;
+    entry: VidiunMediaEntry;
     hasSource: boolean;
 }
 
 @Injectable()
-export class QuizAppViewService extends KmcComponentViewBaseService<QuizAppViewArgs> {
+export class QuizAppViewService extends VmcComponentViewBaseService<QuizAppViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger) {
+                _logger: VidiunLogger) {
         super(_logger.subLogger('QuizAppViewService'));
     }
 
@@ -53,14 +53,14 @@ export class QuizAppViewService extends KmcComponentViewBaseService<QuizAppViewA
 
     private _isAvailableByData(args: QuizAppViewArgs): boolean {
         const { entry, hasSource} = args;
-        const entryReady = entry.status === KalturaEntryStatus.ready;
-        const isEntryReplacing = entry.replacementStatus !== KalturaEntryReplacementStatus.none;
-        const isLiveEntry = entry.mediaType === KalturaMediaType.liveStreamFlash ||
-            entry.mediaType === KalturaMediaType.liveStreamWindowsMedia ||
-            entry.mediaType === KalturaMediaType.liveStreamRealMedia ||
-            entry.mediaType === KalturaMediaType.liveStreamQuicktime;
-        const isExternalMedia = entry instanceof KalturaExternalMediaEntry;
-        const isEntryRelevant = [KalturaMediaType.video, KalturaMediaType.audio].indexOf(entry.mediaType) !== -1 && !isExternalMedia;
+        const entryReady = entry.status === VidiunEntryStatus.ready;
+        const isEntryReplacing = entry.replacementStatus !== VidiunEntryReplacementStatus.none;
+        const isLiveEntry = entry.mediaType === VidiunMediaType.liveStreamFlash ||
+            entry.mediaType === VidiunMediaType.liveStreamWindowsMedia ||
+            entry.mediaType === VidiunMediaType.liveStreamRealMedia ||
+            entry.mediaType === VidiunMediaType.liveStreamQuicktime;
+        const isExternalMedia = entry instanceof VidiunExternalMediaEntry;
+        const isEntryRelevant = [VidiunMediaType.video, VidiunMediaType.audio].indexOf(entry.mediaType) !== -1 && !isExternalMedia;
 
         const result = hasSource && entryReady && !isEntryReplacing && isEntryRelevant && !isLiveEntry;
 

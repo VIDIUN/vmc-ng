@@ -1,15 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { EntryWidget } from '../entry-widget';
 import { async } from 'rxjs/scheduler/async';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 function datesValidation(checkRequired: boolean = false): ValidatorFn {
 	return (c: AbstractControl): {[key: string]: boolean} | null => {
@@ -42,9 +42,9 @@ export class EntrySchedulingWidget extends EntryWidget implements OnDestroy
 
     constructor(
 				private _appLocalization: AppLocalization,
-				private _permissionsService: KMCPermissionsService,
+				private _permissionsService: VMCPermissionsService,
 				private _fb: FormBuilder,
-                logger: KalturaLogger)
+                logger: VidiunLogger)
     {
         super(ContentEntryViewSections.Scheduling, logger);
 	    this.createForm();
@@ -55,7 +55,7 @@ export class EntrySchedulingWidget extends EntryWidget implements OnDestroy
 		this.setValidators(false);
 	}
 
-	protected onDataSaving(data: KalturaMediaEntry, request: KalturaMultiRequest)
+	protected onDataSaving(data: VidiunMediaEntry, request: VidiunMultiRequest)
 	{
 		const startDate = this.schedulingForm.get('startDate').value;
 		const endDate = this.schedulingForm.get('endDate').value;
@@ -99,7 +99,7 @@ export class EntrySchedulingWidget extends EntryWidget implements OnDestroy
 			enableEndDate: enableEndDate
 		});
 
-    if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_SCHEDULE)) {
+    if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_SCHEDULE)) {
       this.schedulingForm.disable({ emitEvent: false });
     }
   }
@@ -112,7 +112,7 @@ export class EntrySchedulingWidget extends EntryWidget implements OnDestroy
       enableEndDate: false
     }, { validator: datesValidation(false) });
 
-    if (this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_SCHEDULE)) {
+    if (this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_SCHEDULE)) {
       this.schedulingForm.get('scheduling').valueChanges
         .pipe(cancelOnDestroy(this))
         .subscribe(

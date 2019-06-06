@@ -1,5 +1,5 @@
-<kPopupWidget #transcodingProfileSelectMenu data-aid="transcodingProfileSelectMenu" [popupWidth]="586" [popupHeight]="289" [closeBtn]="true" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #transcodingProfileSelectMenu data-aid="transcodingProfileSelectMenu" [popupWidth]="586" [popupHeight]="289" [closeBtn]="true" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kTranscodingProfileSelect (onTranscodingProfileSelected)="_loadEntry($event)" [parentPopupWidget]="transcodingProfileSelectMenu" [mediaType]="_selectedMediaType"></kTranscodingProfileSelect>
+    <vTranscodingProfileSelect (onTranscodingProfileSelected)="_loadEntry($event)" [parentPopupWidget]="transcodingProfileSelectMenu" [mediaType]="_selectedMediaType"></vTranscodingProfileSelect>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

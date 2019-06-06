@@ -1,22 +1,22 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AreaBlockerMessage, PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage, PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MultiAccountStoreService} from '../multi-account-store/multi-account-store.service';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import {KalturaPartner, KalturaPartnerStatus, KalturaPartnerType} from 'kaltura-ngx-client';
-import {cancelOnDestroy} from '@kaltura-ng/kaltura-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import {VidiunPartner, VidiunPartnerStatus, VidiunPartnerType} from 'vidiun-ngx-client';
+import {cancelOnDestroy} from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kNewAccount',
+  selector: 'vNewAccount',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.scss']
 })
 
 export class NewAccountComponent implements OnInit, OnDestroy {
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() parentAccount: KalturaPartner;
-  @Input() templateAccounts: KalturaPartner[];
+  @Input() parentAccount: VidiunPartner;
+  @Input() templateAccounts: VidiunPartner[];
 
   public _accountForm: FormGroup;
   public _adminField: AbstractControl;
@@ -72,8 +72,8 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       // init templates dropdown data
       this._templatesList.push({value: 0, label: this._appLocalization.get('applications.administration.accounts.defaultTemplate')}); // default template account
       // add active template accounts to the dropdown
-      this.templateAccounts.forEach( (account: KalturaPartner) => {
-          if (account.status === KalturaPartnerStatus.active) {
+      this.templateAccounts.forEach( (account: VidiunPartner) => {
+          if (account.status === VidiunPartnerStatus.active) {
               this._templatesList.push({value: account.id, label: account.name});
           }
       });
@@ -109,9 +109,9 @@ export class NewAccountComponent implements OnInit, OnDestroy {
       this._isBusy = true;
 
       const { admin, name, email, phone, website, template, refid } = this._accountForm.getRawValue();
-      const partner: KalturaPartner = new KalturaPartner({
+      const partner: VidiunPartner = new VidiunPartner({
           description: 'Multi-publishers console',
-          type: KalturaPartnerType.adminConsole,
+          type: VidiunPartnerType.adminConsole,
           adminName: admin,
           adminEmail: email,
           referenceId: refid,
@@ -122,7 +122,7 @@ export class NewAccountComponent implements OnInit, OnDestroy {
 
       this._accountStore.addAccount(partner, template)
           .pipe(cancelOnDestroy(this))
-          .subscribe((newAccount: KalturaPartner) => {
+          .subscribe((newAccount: VidiunPartner) => {
               this._isBusy = false;
               this._accountStore.reload();
               this.parentPopupWidget.close();

@@ -1,13 +1,13 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { BulkUploadMonitorService } from './bulk-upload-monitor.service';
 import { NewUploadMonitorService } from './new-upload-monitor.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { DropFoldersMonitorService } from './drop-folders-monitor.service';
 import {
     ContentBulkUploadsMainViewService,
     ContentDropFoldersMainViewService,
     ContentUploadsMainViewService
-} from 'app-shared/kmc-shared/kmc-views';
+} from 'app-shared/vmc-shared/vmc-views';
 import { buildDeployUrl } from 'config/server';
 
 export interface UploadMonitorStatuses {
@@ -18,7 +18,7 @@ export interface UploadMonitorStatuses {
 }
 
 @Component({
-  selector: 'kUploadMonitor',
+  selector: 'vUploadMonitor',
   templateUrl: './upload-monitor.component.html',
   styleUrls: ['./upload-monitor.component.scss']
 })

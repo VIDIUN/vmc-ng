@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
-import { AppAuthentication, AppShellService, BrowserService, PartnerPackageTypes } from "app-shared/kmc-shell";
+import { AppAuthentication, AppShellService, BrowserService, PartnerPackageTypes } from "app-shared/vmc-shell";
 
 import * as $ from 'jquery';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 
 @Component({
-  selector: 'kKMCDashboard',
+  selector: 'vVMCDashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })

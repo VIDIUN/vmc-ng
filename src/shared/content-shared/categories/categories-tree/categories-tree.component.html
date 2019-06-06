@@ -1,9 +1,9 @@
-<k-area-blocker [showLoader]="_loading" [message]="_blockerMessage">
-  <div class="kTreeContainer kOverrideFAIcons">
+<v-area-blocker [showLoader]="_loading" [message]="_blockerMessage">
+  <div class="vTreeContainer vOverrideFAIcons">
 
     <p-tree #tree
             *ngIf="selectionMode === 'multiple'"
-            kCategoriesTreePropagation
+            vCategoriesTreePropagation
             [propagateDownMode]="disablePropagation ? 'none' : 'preventNested'"
             [propagateUpMode]="disablePropagation ? 'none' : 'visualOnly'"
             [value]="_categories"
@@ -12,16 +12,16 @@
             (onNodeUnselect)="_onNodeUnselect($event)"
             (onNodeExpand)="_onNodeExpand($event)">
       <ng-template let-node pTemplate="default">
-        <div class="kTreeNodeLabelWrapper">
-          <span class="kTreeNodeLabel" [kTooltip]="node.label" [delay]="1000">{{node.label}}</span>
-          <span class="kTreeNodeNumChildren" *ngIf="node.childrenCount">{{node.childrenCount}}</span>
+        <div class="vTreeNodeLabelWrapper">
+          <span class="vTreeNodeLabel" [vTooltip]="node.label" [delay]="1000">{{node.label}}</span>
+          <span class="vTreeNodeNumChildren" *ngIf="node.childrenCount">{{node.childrenCount}}</span>
         </div>
         <div *ngIf="node.expanded && node.childrenStatus === 1"
-             class="kLoadingMessage" (click)="_blockTreeSelection($event)">
+             class="vLoadingMessage" (click)="_blockTreeSelection($event)">
           {{'entriesShared.categoriesFilters.loading' | translate}}
         </div>
         <div *ngIf="node.expanded && node.childrenStatus === 2"
-             class="kLoadingErrorMessage" (click)="_blockTreeSelection($event)">
+             class="vLoadingErrorMessage" (click)="_blockTreeSelection($event)">
           {{ node.childrenLoadError || 'entriesShared.categoriesFilters.loadingError' | translate }}
         </div>
       </ng-template>
@@ -32,20 +32,20 @@
             (onNodeExpand)="_onNodeExpand($event)"
             [value]="_categories">
       <ng-template let-node pTemplate="default">
-        <div class="kTreeNodeLabelWrapper" (click)="_onNodeSelect(node)">
+        <div class="vTreeNodeLabelWrapper" (click)="_onNodeSelect(node)">
           <p-radioButton [value]="node" [ngModel]="_selectedTreeNode"></p-radioButton>
-          <span class="kTreeNodeLabel kTreeNodeLabelSingle" [kTooltip]="node.label" [delay]="1000">{{node.label}}</span>
-          <span class="kTreeNodeNumChildren" *ngIf="node.childrenCount">{{node.childrenCount}}</span>
+          <span class="vTreeNodeLabel vTreeNodeLabelSingle" [vTooltip]="node.label" [delay]="1000">{{node.label}}</span>
+          <span class="vTreeNodeNumChildren" *ngIf="node.childrenCount">{{node.childrenCount}}</span>
         </div>
         <div *ngIf="node.expanded && node.childrenStatus === 1"
-             class="kLoadingMessage" (click)="_blockTreeSelection($event)">
+             class="vLoadingMessage" (click)="_blockTreeSelection($event)">
           {{'entriesShared.categoriesFilters.loading' | translate}}
         </div>
         <div *ngIf="node.expanded && node.childrenStatus === 2"
-             class="kLoadingErrorMessage" (click)="_blockTreeSelection($event)">
+             class="vLoadingErrorMessage" (click)="_blockTreeSelection($event)">
           {{ node.childrenLoadError || 'entriesShared.categoriesFilters.loadingError' | translate }}
         </div>
       </ng-template>
     </p-tree>
   </div>
-</k-area-blocker>
+</v-area-blocker>

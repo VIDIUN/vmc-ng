@@ -1,26 +1,26 @@
 @import 'app-theme/_variables.scss';
 
-.kEditWin{
-  .kHeader {
+.vEditWin{
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer{
+  .vContainer{
     margin: 24px;
     height: 278px;
   }
-  .kFooter{
+  .vFooter{
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,13 +29,13 @@
     }
   }
 
-	.kRow{
+	.vRow{
 		display: flex;
     align-items: center;
 		flex-direction: row;
 		margin-top: 24px;
 		font-size: 15px;
-		.kLabel{
+		.vLabel{
 			width: 120px;
 			flex: 0 0 auto;
 		}
@@ -44,23 +44,23 @@
 		}
 	}
 
-	.kUpload{
+	.vUpload{
 		padding-left: 120px;
 		margin-top: 18px;
 		overflow-x: hidden;
 	}
-	.kUploadButton{
+	.vUploadButton{
 		font-weight: 400;
 		height: 32px;
         margin-top: 4px;
 		margin-bottom: 4px;
 	}
-	.kCaptionUrl{
+	.vCaptionUrl{
 		margin-top: 18px;
 		margin-left: 120px;
 		width: 212px;
 	}
-	.kUploadFileName{
+	.vUploadFileName{
         width: 200px;
         text-overflow: ellipsis;
 		white-space: nowrap;
@@ -68,8 +68,8 @@
 		overflow: hidden;
 		padding-left: 4px;
 	}
-	.kInvalid{
-		color: $kDandger;
+	.vInvalid{
+		color: $vDandger;
 		font-size: 12px;
 		margin-left: 122px;
 		font-weight: 700;

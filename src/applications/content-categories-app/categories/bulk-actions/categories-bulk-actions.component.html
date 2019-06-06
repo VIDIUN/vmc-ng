@@ -1,26 +1,26 @@
-<div class="kBulkActions">
-  <button pButton icon="kIcontrash" class="kButtonDanger kBulkDeleteBtn"
-          [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
+<div class="vBulkActions">
+  <button pButton icon="vIcontrash" class="vButtonDanger vBulkDeleteBtn"
+          [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
           (click)="deleteCategories()"></button>
-  <button class="kButtonDefault kBulkActionsBtn" icon="kIcondropdown_arrow_bottom" iconPos="right" pButton label="{{'applications.content.categories.bulkActions' | translate}}"
-          [disabled]="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kDisabledIfNotPermitted"
+  <button class="vButtonDefault vBulkActionsBtn" icon="vIcondropdown_arrow_bottom" iconPos="right" pButton label="{{'applications.content.categories.bulkActions' | translate}}"
+          [disabled]="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vDisabledIfNotPermitted"
           (click)="menu.toggle($event)"></button>
 </div>
 
 <!--since we append the menu to the body, any styling modifications are currently not available-->
-<p-tieredMenu #menu kMenuCloseOnScroll [model]="_bulkActionsMenu" [popup]="true" [styleClass]="menu" class="kOverrideFAIcons" [appendTo]="'body'"></p-tieredMenu>
+<p-tieredMenu #menu vMenuCloseOnScroll [model]="_bulkActionsMenu" [popup]="true" [styleClass]="menu" class="vOverrideFAIcons" [appendTo]="'body'"></p-tieredMenu>
 
-<kPopupWidget #bulkActionsPopup data-aid="bulkActionsPopup" [modal]="true" [popupWidth]="500">
+<vPopupWidget #bulkActionsPopup data-aid="bulkActionsPopup" [modal]="true" [popupWidth]="500">
   <ng-template>
     <div [ngSwitch]="_bulkAction">
-      <kCategoriesBulkAddTags *ngSwitchCase="'addTags'" [parentPopupWidget]="bulkActionsPopup" (addTagsChanged)="onAddTagsChanged($event)"></kCategoriesBulkAddTags>
-      <kCategoriesBulkRemoveTags *ngSwitchCase="'removeTags'" [selectedCategories]="selectedCategories" [parentPopupWidget]="bulkActionsPopup"
-        (removeTagsChanged)="onRemoveTagsChanged($event)"></kCategoriesBulkRemoveTags>
-      <kCategoriesBulkChangeOwner *ngSwitchCase="'changeOwner'" [parentPopupWidget]="bulkActionsPopup" (ownerChanged)="onOwnerChanged($event)"></kCategoriesBulkChangeOwner>
-      <kCategoriesBulkChangeContentPrivacy *ngSwitchCase="'changeContentPrivacy'" [parentPopupWidget]="bulkActionsPopup" (changeContentPrivacyChanged)="onChangeContentPrivacyChanged($event)"></kCategoriesBulkChangeContentPrivacy>
-      <kCategoriesBulkChangeCategoryListing *ngSwitchCase="'changeCategoryListing'" [parentPopupWidget]="bulkActionsPopup" (changeCategoryListingChanged)="onChangeCategoryListingChanged($event)"></kCategoriesBulkChangeCategoryListing>
-      <kCategoriesBulkChangeContributionPolicy *ngSwitchCase="'changeContributionPolicy'" [parentPopupWidget]="bulkActionsPopup" (changeContributionPolicyChanged)="onChangeContributionPolicyChanged($event)"></kCategoriesBulkChangeContributionPolicy>
-      <kMoveCategory *ngSwitchCase="'moveCategories'" [parentPopupWidget]="bulkActionsPopup" [selectedCategories]="selectedCategories" (onMovedCategories)="onBulkChange.emit({reload: false})"></kMoveCategory>
+      <vCategoriesBulkAddTags *ngSwitchCase="'addTags'" [parentPopupWidget]="bulkActionsPopup" (addTagsChanged)="onAddTagsChanged($event)"></vCategoriesBulkAddTags>
+      <vCategoriesBulkRemoveTags *ngSwitchCase="'removeTags'" [selectedCategories]="selectedCategories" [parentPopupWidget]="bulkActionsPopup"
+        (removeTagsChanged)="onRemoveTagsChanged($event)"></vCategoriesBulkRemoveTags>
+      <vCategoriesBulkChangeOwner *ngSwitchCase="'changeOwner'" [parentPopupWidget]="bulkActionsPopup" (ownerChanged)="onOwnerChanged($event)"></vCategoriesBulkChangeOwner>
+      <vCategoriesBulkChangeContentPrivacy *ngSwitchCase="'changeContentPrivacy'" [parentPopupWidget]="bulkActionsPopup" (changeContentPrivacyChanged)="onChangeContentPrivacyChanged($event)"></vCategoriesBulkChangeContentPrivacy>
+      <vCategoriesBulkChangeCategoryListing *ngSwitchCase="'changeCategoryListing'" [parentPopupWidget]="bulkActionsPopup" (changeCategoryListingChanged)="onChangeCategoryListingChanged($event)"></vCategoriesBulkChangeCategoryListing>
+      <vCategoriesBulkChangeContributionPolicy *ngSwitchCase="'changeContributionPolicy'" [parentPopupWidget]="bulkActionsPopup" (changeContributionPolicyChanged)="onChangeContributionPolicyChanged($event)"></vCategoriesBulkChangeContributionPolicy>
+      <vMoveCategory *ngSwitchCase="'moveCategories'" [parentPopupWidget]="bulkActionsPopup" [selectedCategories]="selectedCategories" (onMovedCategories)="onBulkChange.emit({reload: false})"></vMoveCategory>
     </div>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

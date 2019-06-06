@@ -1,20 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaStorageProfile } from 'kaltura-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunStorageProfile } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { StorageProfilesStore } from 'app-shared/kmc-shared/storage-profiles';
-import { BaseEntryGetAction } from 'kaltura-ngx-client';
-import { KalturaAPIException, KalturaClient } from 'kaltura-ngx-client';
-import { CreateNewTranscodingProfileEvent } from 'app-shared/kmc-shared/events/transcoding-profile-creation';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { StorageProfilesStore } from 'app-shared/vmc-shared/storage-profiles';
+import { BaseEntryGetAction } from 'vidiun-ngx-client';
+import { VidiunAPIException, VidiunClient } from 'vidiun-ngx-client';
+import { CreateNewTranscodingProfileEvent } from 'app-shared/vmc-shared/events/transcoding-profile-creation';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface NewTranscodingProfileFormData {
   name: string;
@@ -24,13 +24,13 @@ export interface NewTranscodingProfileFormData {
 }
 
 @Component({
-  selector: 'kAddNewTranscodingProfile',
+  selector: 'vAddNewTranscodingProfile',
   templateUrl: './add-new-profile.component.html',
   styleUrls: ['./add-new-profile.component.scss']
 })
 export class AddNewProfileComponent implements OnInit, OnDestroy {
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() profileType: KalturaConversionProfileType;
+  @Input() profileType: VidiunConversionProfileType;
 
   public _addNewProfileForm: FormGroup;
   public _nameField: AbstractControl;
@@ -45,9 +45,9 @@ export class AddNewProfileComponent implements OnInit, OnDestroy {
   constructor(private _formBuilder: FormBuilder,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _storageProfilesStore: StorageProfilesStore,
-              private _kalturaClient: KalturaClient,
+              private _vidiunClient: VidiunClient,
               private _appEvents: AppEventsService) {
     // build FormControl group
     this._addNewProfileForm = _formBuilder.group({
@@ -71,8 +71,8 @@ export class AddNewProfileComponent implements OnInit, OnDestroy {
   }
 
   private _prepare(): void {
-    const hasStorageProfilesPermission = this._permissionsService.hasPermission(KMCPermissions.FEATURE_REMOTE_STORAGE_INGEST);
-    this._hideIngestFromRemoteStorage = (this.profileType && this.profileType === KalturaConversionProfileType.liveStream) || !hasStorageProfilesPermission;
+    const hasStorageProfilesPermission = this._permissionsService.hasPermission(VMCPermissions.FEATURE_REMOTE_STORAGE_INGEST);
+    this._hideIngestFromRemoteStorage = (this.profileType && this.profileType === VidiunConversionProfileType.liveStream) || !hasStorageProfilesPermission;
     if (!this._hideIngestFromRemoteStorage) {
       this._dataLoading = true;
       this._loadRemoteStorageProfiles()
@@ -107,9 +107,9 @@ export class AddNewProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _loadRemoteStorageProfiles(): Observable<KalturaStorageProfile[]> {
+  private _loadRemoteStorageProfiles(): Observable<VidiunStorageProfile[]> {
     const createEmptyRemoteStorageProfile = () => {
-      const emptyProfile = new KalturaStorageProfile({ name: this._appLocalization.get('applications.settings.transcoding.na') });
+      const emptyProfile = new VidiunStorageProfile({ name: this._appLocalization.get('applications.settings.transcoding.na') });
       (<any>emptyProfile).id = null;
       return emptyProfile;
     };
@@ -125,23 +125,23 @@ export class AddNewProfileComponent implements OnInit, OnDestroy {
   }
 
   private _validateEntryExists(entryId: string): Observable<boolean> {
-    return this._kalturaClient.request(new BaseEntryGetAction({ entryId }))
+    return this._vidiunClient.request(new BaseEntryGetAction({ entryId }))
       .map(Boolean)
       .catch(
-        error => (error instanceof KalturaAPIException && error.code === 'ENTRY_ID_NOT_FOUND')
+        error => (error instanceof VidiunAPIException && error.code === 'ENTRY_ID_NOT_FOUND')
           ? Observable.of(false)
           : Observable.throw(error.message)
       );
   }
 
-  private _proceedSave(profile: KalturaConversionProfile): void {
+  private _proceedSave(profile: VidiunConversionProfile): void {
     this._appEvents.publish(new CreateNewTranscodingProfileEvent({ profile }));
     this.parentPopupWidget.close();
   }
 
-  private _mapFormDataToProfile(formData: NewTranscodingProfileFormData): KalturaConversionProfile {
+  private _mapFormDataToProfile(formData: NewTranscodingProfileFormData): VidiunConversionProfile {
 
-    const newConversionProfile = new KalturaConversionProfile({
+    const newConversionProfile = new VidiunConversionProfile({
       type: this.profileType,
       name: formData.name
     });

@@ -1,44 +1,44 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
 import { Observable } from 'rxjs';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { IsUserExistsStatuses } from './user-exists-statuses';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaUserRole } from 'kaltura-ngx-client';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
-import { UserRoleListAction } from 'kaltura-ngx-client';
-import { KalturaUserRoleFilter } from 'kaltura-ngx-client';
-import { KalturaUserRoleStatus } from 'kaltura-ngx-client';
-import { KalturaUserRoleOrderBy } from 'kaltura-ngx-client';
-import { UserListAction } from 'kaltura-ngx-client';
-import { KalturaUserFilter } from 'kaltura-ngx-client';
-import { KalturaNullableBoolean } from 'kaltura-ngx-client';
-import { KalturaUserStatus } from 'kaltura-ngx-client';
-import { KalturaUserOrderBy } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { PartnerGetInfoAction } from 'kaltura-ngx-client';
-import { UserUpdateAction } from 'kaltura-ngx-client';
-import { UserDeleteAction } from 'kaltura-ngx-client';
-import { UserGetByLoginIdAction } from 'kaltura-ngx-client';
-import { UserGetAction } from 'kaltura-ngx-client';
-import { UserEnableLoginAction } from 'kaltura-ngx-client';
-import { UserAddAction } from 'kaltura-ngx-client';
-import { AdminUsersMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunUserRole } from 'vidiun-ngx-client';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
+import { UserRoleListAction } from 'vidiun-ngx-client';
+import { VidiunUserRoleFilter } from 'vidiun-ngx-client';
+import { VidiunUserRoleStatus } from 'vidiun-ngx-client';
+import { VidiunUserRoleOrderBy } from 'vidiun-ngx-client';
+import { UserListAction } from 'vidiun-ngx-client';
+import { VidiunUserFilter } from 'vidiun-ngx-client';
+import { VidiunNullableBoolean } from 'vidiun-ngx-client';
+import { VidiunUserStatus } from 'vidiun-ngx-client';
+import { VidiunUserOrderBy } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { PartnerGetInfoAction } from 'vidiun-ngx-client';
+import { UserUpdateAction } from 'vidiun-ngx-client';
+import { UserDeleteAction } from 'vidiun-ngx-client';
+import { UserGetByLoginIdAction } from 'vidiun-ngx-client';
+import { UserGetAction } from 'vidiun-ngx-client';
+import { UserEnableLoginAction } from 'vidiun-ngx-client';
+import { UserAddAction } from 'vidiun-ngx-client';
+import { AdminUsersMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 export interface QueryData {
   pageIndex: number;
   pageSize: number;
 }
 
-export interface ExtendedKalturaUser extends KalturaUser {
+export interface ExtendedVidiunUser extends VidiunUser {
     roleName: string;
 }
 
 interface UsersData {
-  users: { items: ExtendedKalturaUser[], totalCount: number };
-  roles: { items: KalturaUserRole[], totalCount: number };
+  users: { items: ExtendedVidiunUser[], totalCount: number };
+  roles: { items: VidiunUserRole[], totalCount: number };
   partnerInfo: { adminLoginUsersQuota: number, adminUserId: string };
 }
 
@@ -64,7 +64,7 @@ export class UsersStore implements OnDestroy {
   public query$ = this._querySource;
   public readonly users = { data$: this._users.data.asObservable(), state$: this._users.state.asObservable() };
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
               private _appAuthentication: AppAuthentication,
@@ -97,23 +97,23 @@ export class UsersStore implements OnDestroy {
 
   private _loadData(): void {
     this._users.state.next({ loading: true, error: null });
-    this._kalturaServerClient
+    this._vidiunServerClient
       .multiRequest([
         new UserRoleListAction({
-          filter: new KalturaUserRoleFilter({
-            statusEqual: KalturaUserRoleStatus.active,
-            orderBy: KalturaUserRoleOrderBy.idAsc.toString(),
-            tagsMultiLikeOr: 'kmc'
+          filter: new VidiunUserRoleFilter({
+            statusEqual: VidiunUserRoleStatus.active,
+            orderBy: VidiunUserRoleOrderBy.idAsc.toString(),
+            tagsMultiLikeOr: 'vmc'
           })
         }),
         new UserListAction({
-          filter: new KalturaUserFilter({
-            isAdminEqual: KalturaNullableBoolean.trueValue,
-            loginEnabledEqual: KalturaNullableBoolean.trueValue,
-            statusIn: KalturaUserStatus.active + ',' + KalturaUserStatus.blocked,
-            orderBy: KalturaUserOrderBy.createdAtAsc.toString()
+          filter: new VidiunUserFilter({
+            isAdminEqual: VidiunNullableBoolean.trueValue,
+            loginEnabledEqual: VidiunNullableBoolean.trueValue,
+            statusIn: VidiunUserStatus.active + ',' + VidiunUserStatus.blocked,
+            orderBy: VidiunUserOrderBy.createdAtAsc.toString()
           }),
-          pager: new KalturaFilterPager(this._querySource.value)
+          pager: new VidiunFilterPager(this._querySource.value)
         }),
         new PartnerGetInfoAction()
       ])
@@ -152,11 +152,11 @@ export class UsersStore implements OnDestroy {
       );
   }
 
-  public isCurrentUser(user: KalturaUser): boolean {
+  public isCurrentUser(user: VidiunUser): boolean {
       return this._appAuthentication.appUser.id === user.id;
   }
 
-  public toggleUserStatus(user: KalturaUser): Observable<void> {
+  public toggleUserStatus(user: VidiunUser): Observable<void> {
     const isCurrentUser = this.isCurrentUser(user);
     const isAdminUser = this._usersDataValue && this._usersDataValue.partnerInfo.adminUserId === user.id;
 
@@ -167,18 +167,18 @@ export class UsersStore implements OnDestroy {
     const relevantUser = this._usersDataValue.users.items.find(item => user.id === item.id);
     const newStatus = Number(relevantUser && !relevantUser.status);
 
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(
         new UserUpdateAction({
           userId: user.id,
-          user: new KalturaUser({ status: newStatus })
+          user: new VidiunUser({ status: newStatus })
         })
       ).map(() => {
         return;
       });
   }
 
-  public deleteUser(user: KalturaUser): Observable<void> {
+  public deleteUser(user: VidiunUser): Observable<void> {
     const isCurrentUser = this.isCurrentUser(user);
     const isAdminUser = this._usersDataValue && this._usersDataValue.partnerInfo.adminUserId === user.id;
 
@@ -186,7 +186,7 @@ export class UsersStore implements OnDestroy {
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.users.cantPerform')));
     }
 
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new UserDeleteAction({ userId: user.id }))
       .map(() => {
         return;
@@ -194,21 +194,21 @@ export class UsersStore implements OnDestroy {
   }
 
   public isUserAlreadyExists(email: string): Observable<IsUserExistsStatuses | null> {
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new UserGetByLoginIdAction({ loginId: email }))
       .map(() => {
-        return IsUserExistsStatuses.kmcUser;
+        return IsUserExistsStatuses.vmcUser;
       })
       .catch(error => {
         const status = error.code === 'LOGIN_DATA_NOT_FOUND'
           ? IsUserExistsStatuses.unknownUser :
-          (error.code === 'USER_NOT_FOUND' ? IsUserExistsStatuses.otherKMCUser : null);
+          (error.code === 'USER_NOT_FOUND' ? IsUserExistsStatuses.otherVMCUser : null);
         return Observable.of(status);
       });
   }
 
-  public getUserById(userId: string): Observable<KalturaUser> {
-    return this._kalturaServerClient.request(new UserGetAction({ userId }));
+  public getUserById(userId: string): Observable<VidiunUser> {
+    return this._vidiunServerClient.request(new UserGetAction({ userId }));
   }
 
   public addUser(userData: { roleIds: string, id: string, email: string, firstName: string, lastName: string }): Observable<void> {
@@ -218,7 +218,7 @@ export class UsersStore implements OnDestroy {
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.users.addUserError')));
     }
 
-    const user = new KalturaUser({
+    const user = new VidiunUser({
       email,
       firstName,
       lastName,
@@ -228,7 +228,7 @@ export class UsersStore implements OnDestroy {
       loginEnabled: true
     });
 
-    return this._kalturaServerClient
+    return this._vidiunServerClient
         .request(new UserAddAction({ user }))
         .map(() => {});
   }
@@ -240,32 +240,32 @@ export class UsersStore implements OnDestroy {
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.users.invalidUserId')));
     }
 
-    const user = new KalturaUser({
+    const user = new VidiunUser({
       roleIds,
       id: id || email,
         email: email
     });
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .request(new UserUpdateAction({ userId, user }))
       .map(() => {
         return;
       });
   }
 
-  public associateUserToAccount(userProvidedEmail: string, user: KalturaUser, roleIds: string): Observable<void> {
+  public associateUserToAccount(userProvidedEmail: string, user: VidiunUser, roleIds: string): Observable<void> {
 
       if (!user || !roleIds) {
           return Observable.throw(new Error('cannot associate user to account'));
       }
-    const updatedUser = new KalturaUser({
+    const updatedUser = new VidiunUser({
       roleIds: roleIds,
       isAdmin: true
     });
-    const request = new KalturaMultiRequest(
+    const request = new VidiunMultiRequest(
       new UserUpdateAction({ userId: user.id, user: updatedUser }),
       new UserEnableLoginAction({ userId: user.id, loginId: userProvidedEmail })
     );
-    return this._kalturaServerClient
+    return this._vidiunServerClient
       .multiRequest(request)
       .map((responses) => {
         if (responses.hasErrors()) {

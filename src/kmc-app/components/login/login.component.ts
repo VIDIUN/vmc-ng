@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { AppAuthentication, AutomaticLoginErrorReasons, BrowserService, LoginError, LoginResponse } from 'app-shared/kmc-shell';
+import { AppAuthentication, AutomaticLoginErrorReasons, BrowserService, LoginError, LoginResponse } from 'app-shared/vmc-shell';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { serverConfig } from 'config/server';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { RestorePasswordViewService } from 'app-shared/kmc-shared/kmc-views/details-views/restore-password-view.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { RestorePasswordViewService } from 'app-shared/vmc-shared/vmc-views/details-views/restore-password-view.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum LoginScreens {
   Login,
@@ -17,7 +17,7 @@ export enum LoginScreens {
 }
 
 @Component({
-  selector: 'kKMCLogin',
+  selector: 'vVMCLogin',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -31,15 +31,15 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   public _loginScreens = LoginScreens;
   public _currentScreen = LoginScreens.Login;
   public _passwordReset = false;
-  public _signUpLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.signUp;
+  public _signUpLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.signUp;
   public _restorePasswordHash: string;
   public _passwordRestored = false;
 
   // Caution: this is extremely dirty hack, don't do something similar to that
   @HostListener('window:resize')
   onResize() {
-    const areaBlocker = <any>document.querySelector('k-area-blocker');
-    const content = this._el.nativeElement.querySelector('.kLoginCenter');
+    const areaBlocker = <any>document.querySelector('v-area-blocker');
+    const content = this._el.nativeElement.querySelector('.vLoginCenter');
     if (content) {
       const windowHeight = window.innerHeight;
       const height = windowHeight <= content.offsetHeight ? 'auto' : '100%';
@@ -233,7 +233,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public _signUp(): void {
-    this._browserService.openLink(serverConfig.externalLinks.kaltura.signUp, {}, '_self');
+    this._browserService.openLink(serverConfig.externalLinks.vidiun.signUp, {}, '_self');
   }
 
   public _restorePassword(payload: {newPassword: string, hashKey: string}): void {

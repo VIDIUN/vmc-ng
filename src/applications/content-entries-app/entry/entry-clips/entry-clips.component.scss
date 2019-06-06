@@ -1,13 +1,13 @@
 @import 'app-theme/_variables.scss';
 
-.kClips{
-	.kTitle{
-		color: $kGrayscale1;
+.vClips{
+	.vTitle{
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 		padding-left: 24px;
 	}
-  .kButtons{
+  .vButtons{
     display: flex;
     padding-left: 24px;
     padding-top: 12px;
@@ -18,14 +18,14 @@
       margin-right: 20px;
     }
   }
-	.kTable{
+	.vTable{
 		margin-top: 24px;
 	}
 }
 :host /deep/ .ui-paginator {
 	padding-right: 12px;
 }
-:host /deep/ .kTableFooter {
+:host /deep/ .vTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

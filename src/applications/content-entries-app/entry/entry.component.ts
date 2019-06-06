@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { KalturaEntryStatus, KalturaExternalMediaEntry, KalturaMediaEntry, KalturaMediaType, KalturaSourceType } from 'kaltura-ngx-client';
+import { VidiunEntryStatus, VidiunExternalMediaEntry, VidiunMediaEntry, VidiunMediaType, VidiunSourceType } from 'vidiun-ngx-client';
 import { ActionTypes, EntryStore, NotificationTypes } from './entry-store.service';
 import { EntrySectionsListWidget } from './entry-sections-list/entry-sections-list-widget.service';
 import { EntryMetadataWidget } from './entry-metadata/entry-metadata-widget.service';
@@ -16,26 +16,26 @@ import { EntryThumbnailsWidget } from './entry-thumbnails/entry-thumbnails-widge
 import { EntrySchedulingWidget } from './entry-scheduling/entry-scheduling-widget.service';
 import { EntryUsersWidget } from './entry-users/entry-users-widget.service';
 import { EntryWidgetsManager } from './entry-widgets-manager';
-import { AreaBlockerMessage, AreaBlockerMessageButton, PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AreaBlockerMessage, AreaBlockerMessageButton, PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
 import { EntriesStore } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 import { EntryDistributionWidget } from './entry-distribution/entry-distribution-widget.service';
 import { EntryAdvertisementsWidget } from './entry-advertisements/entry-advertisements-widget.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { ClipAndTrimAppViewService, LiveDashboardAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { ClipAndTrimAppViewService, LiveDashboardAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
 import { CustomMenuItem } from 'app-shared/content-shared/entries/entries-list/entries-list.component';
-import { PreviewAndEmbedEvent } from 'app-shared/kmc-shared/events';
-import { AppEventsService } from 'app-shared/kmc-shared';
+import { PreviewAndEmbedEvent } from 'app-shared/vmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared';
 import { ContentEntriesAppService } from '../content-entries-app.service';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AnalyticsNewMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AnalyticsNewMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Component({
-	selector: 'kEntry',
+	selector: 'vEntry',
 	templateUrl: './entry.component.html',
 	styleUrls: ['./entry.component.scss'],
 	providers : [
@@ -56,7 +56,7 @@ import { AnalyticsNewMainViewService } from 'app-shared/kmc-shared/kmc-views';
 		EntryPreviewWidget,
 		EntryDistributionWidget,
 		EntryAdvertisementsWidget,
-        KalturaLogger.createLogger('EntryComponent')
+        VidiunLogger.createLogger('EntryComponent')
 	]
 })
 export class EntryComponent implements OnInit, OnDestroy {
@@ -64,7 +64,7 @@ export class EntryComponent implements OnInit, OnDestroy {
     @ViewChild('clipAndTrim') _clipAndTrim: PopupWidgetComponent;
     @ViewChild('bulkActionsPopup') _bulkActionsPopup: PopupWidgetComponent;
 	public _entryName: string;
-	public _entryType: KalturaMediaType;
+	public _entryType: VidiunMediaType;
 
 	public _showLoader = false;
 	public _areaBlockerMessage: AreaBlockerMessage;
@@ -72,7 +72,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	public _enablePrevButton: boolean;
 	public _enableNextButton: boolean;
 	public _entryHasChanges : boolean;
-	public _kmcPermissions = KMCPermissions;
+	public _vmcPermissions = VMCPermissions;
     public _items: CustomMenuItem[] = [
         {
             label: this._appLocalization.get('applications.content.table.liveDashboard'),
@@ -98,23 +98,23 @@ export class EntryComponent implements OnInit, OnDestroy {
         {
             label: this._appLocalization.get('applications.content.table.delete'),
             commandName: 'delete',
-            styleClass: 'kDanger'
+            styleClass: 'vDanger'
         }
     ];
     public _menuItems: CustomMenuItem[] = [];
 
 	public get _isSaveDisabled(): boolean {
     const editAccessControlAllowed = this._permissionsService.hasAnyPermissions([
-      KMCPermissions.CONTENT_MANAGE_ASSIGN_CATEGORIES,
-      KMCPermissions.CONTENT_MANAGE_RECONVERT,
-      KMCPermissions.CONTENT_MANAGE_ENTRY_USERS,
-      KMCPermissions.CONTENT_MANAGE_METADATA,
-      KMCPermissions.CONTENT_MANAGE_SCHEDULE,
-      KMCPermissions.CONTENT_MANAGE_THUMBNAIL,
-      KMCPermissions.CONTENT_MANAGE_ACCESS_CONTROL,
-      KMCPermissions.CONTENT_MODERATE_METADATA,
-      KMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
-      KMCPermissions.LIVE_STREAM_UPDATE,
+      VMCPermissions.CONTENT_MANAGE_ASSIGN_CATEGORIES,
+      VMCPermissions.CONTENT_MANAGE_RECONVERT,
+      VMCPermissions.CONTENT_MANAGE_ENTRY_USERS,
+      VMCPermissions.CONTENT_MANAGE_METADATA,
+      VMCPermissions.CONTENT_MANAGE_SCHEDULE,
+      VMCPermissions.CONTENT_MANAGE_THUMBNAIL,
+      VMCPermissions.CONTENT_MANAGE_ACCESS_CONTROL,
+      VMCPermissions.CONTENT_MODERATE_METADATA,
+      VMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
+      VMCPermissions.LIVE_STREAM_UPDATE,
     ]);
 
 		return !this._entryStore.entryIsDirty || !editAccessControlAllowed;
@@ -138,7 +138,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 	            widget13: EntryPreviewWidget,
 	            widget14: EntryDistributionWidget,
 	            widget15: EntryAdvertisementsWidget,
-	            private _permissionsService: KMCPermissionsService,
+	            private _permissionsService: VMCPermissionsService,
 	            private _entriesStore: EntriesStore,
 	            private _appLocalization: AppLocalization,
 	            public _entryStore: EntryStore,
@@ -149,7 +149,7 @@ export class EntryComponent implements OnInit, OnDestroy {
                 private _browserService: BrowserService,
                 private _appEvents: AppEventsService,
                 private _entryRoute: ActivatedRoute,
-                private _logger: KalturaLogger,
+                private _logger: VidiunLogger,
                 private _analyticsNewMainViewService: AnalyticsNewMainViewService,
                 private _router: Router) {
 		entryWidgetsManager.registerWidgets([
@@ -164,32 +164,32 @@ export class EntryComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 	}
 
-    private _hideMenuItems(entry: KalturaMediaEntry,
+    private _hideMenuItems(entry: VidiunMediaEntry,
                            { commandName }: { commandName: string }): boolean {
         const { sourceType, status, mediaType } = entry;
-        const isReadyStatus = status === KalturaEntryStatus.ready;
+        const isReadyStatus = status === VidiunEntryStatus.ready;
         const isPreviewCommand = commandName === 'preview';
-        const isKalturaLiveStream = sourceType === KalturaSourceType.liveStream;
+        const isVidiunLiveStream = sourceType === VidiunSourceType.liveStream;
         const isLiveDashboardCommand = commandName === 'liveDashboard';
-        const cannotDeleteEntry = commandName === 'delete' && !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DELETE);
+        const cannotDeleteEntry = commandName === 'delete' && !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DELETE);
         const isDownloadCommand = commandName === 'download';
-        const isExternalMedia = entry instanceof KalturaExternalMediaEntry;
-        const isNotVideoAudioImage = [KalturaMediaType.video, KalturaMediaType.audio, KalturaMediaType.image].indexOf(mediaType) === -1;
+        const isExternalMedia = entry instanceof VidiunExternalMediaEntry;
+        const isNotVideoAudioImage = [VidiunMediaType.video, VidiunMediaType.audio, VidiunMediaType.image].indexOf(mediaType) === -1;
         return !(
             (!isReadyStatus && isPreviewCommand) || // hide if trying to share & embed entry that isn't ready
-            (isLiveDashboardCommand && !isKalturaLiveStream) || // hide live-dashboard menu item for entry that isn't kaltura live
+            (isLiveDashboardCommand && !isVidiunLiveStream) || // hide live-dashboard menu item for entry that isn't vidiun live
             (isDownloadCommand && (isNotVideoAudioImage || isExternalMedia)) ||
             cannotDeleteEntry
         );
     }
 
-    private _buildMenu(entry: KalturaMediaEntry): void {
+    private _buildMenu(entry: VidiunMediaEntry): void {
         this._menuItems = this._items
             .filter(item => this._hideMenuItems(entry, item))
             .map(item => {
                 switch (item.commandName) {
                     case 'preview':
-                        item.disabled = entry.status === KalturaEntryStatus.noContent;
+                        item.disabled = entry.status === VidiunEntryStatus.noContent;
                         item.command = () => this._appEvents.publish(new PreviewAndEmbedEvent(entry));
                         break;
                     case 'liveDashboard':
@@ -211,7 +211,7 @@ export class EntryComponent implements OnInit, OnDestroy {
                         break;
                     case 'download':
                         item.command = () => this._downloadEntry(entry);
-                        item.disabled = entry.status !== KalturaEntryStatus.ready || !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DOWNLOAD);
+                        item.disabled = entry.status !== VidiunEntryStatus.ready || !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DOWNLOAD);
                         break;
                     default:
                         break;
@@ -220,8 +220,8 @@ export class EntryComponent implements OnInit, OnDestroy {
             });
     }
 
-    private _downloadEntry(entry: KalturaMediaEntry): void {
-	    if (entry.mediaType === KalturaMediaType.video) {
+    private _downloadEntry(entry: VidiunMediaEntry): void {
+	    if (entry.mediaType === VidiunMediaType.video) {
             this._bulkActionsPopup.open();
         } else {
             this._browserService.openLink(entry.downloadUrl);
@@ -400,7 +400,7 @@ export class EntryComponent implements OnInit, OnDestroy {
 					}
 				},
 				error => {
-					// TODO [kmc] navigate to error page
+					// TODO [vmc] navigate to error page
 					throw error;
 				});
 	}

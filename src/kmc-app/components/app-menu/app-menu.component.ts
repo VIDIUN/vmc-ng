@@ -1,24 +1,24 @@
 import { Component, OnInit, OnDestroy, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AppAuthentication, AppUser} from 'app-shared/kmc-shell';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { AppAuthentication, AppUser} from 'app-shared/vmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { serverConfig, buildBaseUri } from 'config/server';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KmcLoggerConfigurator } from 'app-shared/kmc-shell/kmc-logs/kmc-logger-configurator';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KMCAppMenuItem, KmcMainViewsService } from 'app-shared/kmc-shared/kmc-views';
-import { ContextualHelpLink, ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VmcLoggerConfigurator } from 'app-shared/vmc-shell/vmc-logs/vmc-logger-configurator';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VMCAppMenuItem, VmcMainViewsService } from 'app-shared/vmc-shared/vmc-views';
+import { ContextualHelpLink, ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 import { globalConfig } from 'config/global';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { UpdateMenuEvent, ResetMenuEvent } from 'app-shared/kmc-shared/events';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { UpdateMenuEvent, ResetMenuEvent } from 'app-shared/vmc-shared/events';
 
 @Component({
-    selector: 'kKMCAppMenu',
+    selector: 'vVMCAppMenu',
     templateUrl: './app-menu.component.html',
     styleUrls: ['./app-menu.component.scss'],
     providers: [
-        KalturaLogger.createLogger('AppMenuComponent')
+        VidiunLogger.createLogger('AppMenuComponent')
     ]
 
 })
@@ -27,32 +27,32 @@ export class AppMenuComponent implements OnInit, OnDestroy{
     @ViewChild('helpmenu') private _helpmenu: PopupWidgetComponent;
     @ViewChild('supportPopup') private _supportPopup: PopupWidgetComponent;
     @ViewChild('leftMenu') private leftMenu: ElementRef;
-    private _appCachedVersionToken = 'kmc-cached-app-version';
+    private _appCachedVersionToken = 'vmc-cached-app-version';
 
     public _showChangelog = false;
     public _helpMenuOpened = false;
     public _powerUser = false;
-    public _userManualLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.userManual;
-    public _kmcOverviewLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.kmcOverview;
-    public _mediaManagementLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.mediaManagement;
-    public _supportLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.customerCare && !!serverConfig.externalLinks.kaltura.customerPortal;
+    public _userManualLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.userManual;
+    public _vmcOverviewLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.vmcOverview;
+    public _mediaManagementLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.mediaManagement;
+    public _supportLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.customerCare && !!serverConfig.externalLinks.vidiun.customerPortal;
     public _supportLegacyExists = true;
     public _contextualHelp: ContextualHelpLink[] = [];
-    public menuID = 'kmc'; // used when switching menus to Analytics menu or future application menus
+    public menuID = 'vmc'; // used when switching menus to Analytics menu or future application menus
 
-    menuConfig: KMCAppMenuItem[];
-    leftMenuConfig: KMCAppMenuItem[];
-    rightMenuConfig: KMCAppMenuItem[];
-    selectedMenuItem: KMCAppMenuItem;
+    menuConfig: VMCAppMenuItem[];
+    leftMenuConfig: VMCAppMenuItem[];
+    rightMenuConfig: VMCAppMenuItem[];
+    selectedMenuItem: VMCAppMenuItem;
     showSubMenu = true;
 
-    public _customerCareLink = this._supportLinkExists ? serverConfig.externalLinks.kaltura.customerCare : "";
-    public _customerPortalLink = this._supportLinkExists ? serverConfig.externalLinks.kaltura.customerPortal : "";
+    public _customerCareLink = this._supportLinkExists ? serverConfig.externalLinks.vidiun.customerCare : "";
+    public _customerPortalLink = this._supportLinkExists ? serverConfig.externalLinks.vidiun.customerPortal : "";
 
-    constructor(public _kmcLogs: KmcLoggerConfigurator,
+    constructor(public _vmcLogs: VmcLoggerConfigurator,
                 private _contextualHelpService: ContextualHelpService,
                 public _userAuthentication: AppAuthentication,
-                private _kmcMainViews: KmcMainViewsService,
+                private _vmcMainViews: VmcMainViewsService,
                 private router: Router,
                 private renderer: Renderer2,
                 private _appEvents: AppEventsService,
@@ -71,11 +71,11 @@ export class AppMenuComponent implements OnInit, OnDestroy{
                     this.setSelectedRoute(event.urlAfterRedirects);
                 }
             });
-        this.menuConfig = this._kmcMainViews.getMenu();
-        this.leftMenuConfig = this.menuConfig.filter((item: KMCAppMenuItem) => {
+        this.menuConfig = this._vmcMainViews.getMenu();
+        this.leftMenuConfig = this.menuConfig.filter((item: VMCAppMenuItem) => {
             return item.position === 'left';
         });
-        this.rightMenuConfig = this.menuConfig.filter((item: KMCAppMenuItem) => {
+        this.rightMenuConfig = this.menuConfig.filter((item: VMCAppMenuItem) => {
             return item.position === 'right';
         });
         if (router.navigated) {
@@ -99,15 +99,15 @@ export class AppMenuComponent implements OnInit, OnDestroy{
         this._appEvents.event(ResetMenuEvent)
             .pipe(cancelOnDestroy(this))
             .subscribe((event) => {
-                const menu = this.menuConfig.filter((item: KMCAppMenuItem) => {
+                const menu = this.menuConfig.filter((item: VMCAppMenuItem) => {
                     return item.position === 'left';
                 });
-                this.replaceMenu('kmc', menu);
+                this.replaceMenu('vmc', menu);
             });
 
     }
 
-    private replaceMenu(menuID: string,  menu: KMCAppMenuItem[]): void{
+    private replaceMenu(menuID: string,  menu: VMCAppMenuItem[]): void{
         this.renderer.setStyle(this.leftMenu.nativeElement, 'opacity', 0);
         this.renderer.setStyle(this.leftMenu.nativeElement, 'marginLeft', '100px');
         setTimeout( ()=> {
@@ -136,16 +136,16 @@ export class AppMenuComponent implements OnInit, OnDestroy{
         let link = '';
         switch (key){
             case 'manual':
-                link = serverConfig.externalLinks.kaltura.userManual;
+                link = serverConfig.externalLinks.vidiun.userManual;
                 break;
-            case 'kmcOverview':
-                link = serverConfig.externalLinks.kaltura.kmcOverview;
+            case 'vmcOverview':
+                link = serverConfig.externalLinks.vidiun.vmcOverview;
                 break;
             case 'mediaManagement':
-                link = serverConfig.externalLinks.kaltura.mediaManagement;
+                link = serverConfig.externalLinks.vidiun.mediaManagement;
                 break;
             case 'legacy':
-                link = buildBaseUri('/index.php/kmc');
+                link = buildBaseUri('/index.php/vmc');
                 break;
         }
         if (link.length > 0) {

@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kLoginForm {
+.vLoginForm {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -15,10 +15,10 @@
     text-align: center;
   }
 
-  .kErrorMessage {
+  .vErrorMessage {
     margin-top: -16px;
     margin-bottom: 40px;
-    color: $kDandger;
+    color: $vDandger;
     text-align: center;
     font-size: 14px;
     line-height: 17px;
@@ -34,27 +34,27 @@
       height: 48px;
       padding: 14px 16px;
       margin-bottom: 40px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       font-size: 16px;
       border-radius: 4px;
 
       &:placeholder-shown, &:-webkit-autofill:placeholder-shown {
-        background-color: $kGrayscale6;
+        background-color: $vGrayscale6;
       }
 
       &.has-error {
-        border: 2px solid $kDandger;
+        border: 2px solid $vDandger;
       }
 
       &.has-success:focus {
-        border: 2px solid $kPrimary;
+        border: 2px solid $vPrimary;
       }
 
       /* Override chrome's autofill styles */
-      -webkit-text-fill-color: $kGrayscale3;
+      -webkit-text-fill-color: $vGrayscale3;
 
       &:-webkit-autofill {
-        -webkit-box-shadow:0 0 0 48px $kGrayscale6 inset;
+        -webkit-box-shadow:0 0 0 48px $vGrayscale6 inset;
       }
 
       &:-webkit-autofill:focus {
@@ -62,27 +62,27 @@
       }
 
       &:-webkit-autofill:placeholder-shown {
-        background-color: $kGrayscale6;
+        background-color: $vGrayscale6;
       }
     }
   }
 
-  .kControlLinks {
+  .vControlLinks {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
 
     a {
       font-size: 16px;
-      color: $kGrayscale2;
+      color: $vGrayscale2;
       text-decoration: none;
     }
   }
 
-  .kButtonDefault {
+  .vButtonDefault {
     width: 160px;
     height: 48px;
-    background-color: $kPrimary;
+    background-color: $vPrimary;
     color: white;
     font-weight: normal;
     font-size: 16px;
@@ -95,7 +95,7 @@
     font-size: 16px;
     font-weight: normal;
     line-height: 19px;
-    color: $kGrayscale2;
+    color: $vGrayscale2;
     margin-left: 10px;
   }
 

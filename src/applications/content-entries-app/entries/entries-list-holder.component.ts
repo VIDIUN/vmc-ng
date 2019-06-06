@@ -1,34 +1,34 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {EntriesListComponent} from 'app-shared/content-shared/entries/entries-list/entries-list.component';
-import {BrowserService, NewEntryUploadFile} from 'app-shared/kmc-shell';
+import {BrowserService, NewEntryUploadFile} from 'app-shared/vmc-shell';
 import {EntriesStore} from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
 import {EntriesTableColumns} from 'app-shared/content-shared/entries/entries-table/entries-table.component';
 import {ContentEntriesAppService} from '../content-entries-app.service';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { PreviewAndEmbedEvent } from 'app-shared/kmc-shared/events';
-import {UploadManagement} from '@kaltura-ng/kaltura-common';
-import {TrackedFileStatuses} from '@kaltura-ng/kaltura-common';
-import {UpdateEntriesListEvent} from 'app-shared/kmc-shared/events/update-entries-list-event';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { PreviewAndEmbedEvent } from 'app-shared/vmc-shared/events';
+import {UploadManagement} from '@vidiun-ng/vidiun-common';
+import {TrackedFileStatuses} from '@vidiun-ng/vidiun-common';
+import {UpdateEntriesListEvent} from 'app-shared/vmc-shared/events/update-entries-list-event';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { EntriesListService } from './entries-list.service';
 import {
     ContentEntryViewSections,
     ContentEntryViewService,
     ReachAppViewService,
     ReachPages
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { LiveDashboardAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
-import { ContentEntriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { ClearEntriesSelectionEvent } from 'app-shared/kmc-shared/events/clear-entries-selection-event';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { LiveDashboardAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
+import { ContentEntriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { ClearEntriesSelectionEvent } from 'app-shared/vmc-shared/events/clear-entries-selection-event';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kEntriesListHolder',
+  selector: 'vEntriesListHolder',
   templateUrl: './entries-list-holder.component.html',
     providers: [
         ColumnsResizeManagerService,
@@ -77,7 +77,7 @@ export class EntriesListHolderComponent implements OnInit, OnDestroy {
     {
       label: this._appLocalization.get('applications.content.table.delete'),
       commandName: 'delete',
-      styleClass: 'kDanger'
+      styleClass: 'vDanger'
     }
   ];
 
@@ -88,7 +88,7 @@ export class EntriesListHolderComponent implements OnInit, OnDestroy {
               private _appEvents: AppEventsService,
               private _appLocalization: AppLocalization,
               private _uploadManagement: UploadManagement,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               public _entriesStore: EntriesStore,
               private _contentEntryViewService: ContentEntryViewService,
               private _contentEntriesAppService: ContentEntriesAppService,
@@ -130,7 +130,7 @@ export class EntriesListHolderComponent implements OnInit, OnDestroy {
           .pipe(cancelOnDestroy(this))
           .subscribe(() => this._entriesStore.reload());
 
-      const hasEmbedPermission = this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EMBED_CODE);
+      const hasEmbedPermission = this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EMBED_CODE);
       if (!hasEmbedPermission) {
           this._rowActions[0].label = this._appLocalization.get('applications.content.table.previewInPlayer');
       }

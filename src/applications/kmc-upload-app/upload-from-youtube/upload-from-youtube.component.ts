@@ -1,30 +1,30 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import {
     ExternalMediaAddAction,
-    KalturaClient,
-    KalturaExternalMediaEntry,
-    KalturaExternalMediaSourceType,
-    KalturaMediaType,
-    KalturaMultiRequest,
-    KalturaThumbAsset,
-    KalturaUrlResource,
+    VidiunClient,
+    VidiunExternalMediaEntry,
+    VidiunExternalMediaSourceType,
+    VidiunMediaType,
+    VidiunMultiRequest,
+    VidiunThumbAsset,
+    VidiunUrlResource,
     ThumbAssetAddAction,
     ThumbAssetSetAsDefaultAction,
     ThumbAssetSetContentAction
-} from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+} from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import * as moment from 'moment';
-import { UpdateEntriesListEvent } from 'app-shared/kmc-shared/events/update-entries-list-event';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { AppEventsService } from 'app-shared/kmc-shared';
+import { UpdateEntriesListEvent } from 'app-shared/vmc-shared/events/update-entries-list-event';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { AppEventsService } from 'app-shared/vmc-shared';
 import { serverConfig } from 'config/server';
-import { KalturaMultiResponse } from 'kaltura-ngx-client/lib/api/kaltura-multi-response';
+import { VidiunMultiResponse } from 'vidiun-ngx-client/lib/api/vidiun-multi-response';
 
 export interface YoutubeMetadata {
     title: string;
@@ -32,7 +32,7 @@ export interface YoutubeMetadata {
 }
 
 @Component({
-    selector: 'kKMCUploadFromYoutube',
+    selector: 'vVMCUploadFromYoutube',
     templateUrl: './upload-from-youtube.component.html',
     styleUrls: ['./upload-from-youtube.component.scss']
 })
@@ -47,7 +47,7 @@ export class UploadFromYoutubeComponent implements OnDestroy {
                 private _contentEntryViewService: ContentEntryViewService,
                 private _appEvents: AppEventsService,
                 private _browserService: BrowserService,
-                private _serverClient: KalturaClient) {
+                private _serverClient: VidiunClient) {
         if (!serverConfig.externalAPI || !serverConfig.externalAPI
             || !serverConfig.externalAPI.youtube || !serverConfig.externalAPI.youtube.uri) {
             this._browserService.alert({

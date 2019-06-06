@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SettingsMetadataProfile } from '../../schemas-store/settings-metadata-profile.interface';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KalturaMetadataObjectType } from 'kaltura-ngx-client';
-import { KalturaAPIException } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunMetadataObjectType } from 'vidiun-ngx-client';
+import { VidiunAPIException } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kCustomSchemaForm',
+  selector: 'vCustomSchemaForm',
   templateUrl: './custom-schema-form.component.html',
   styleUrls: ['./custom-schema-form.component.scss']
 })
 export class CustomSchemaFormComponent {
 
-    public _kmcPermissions = KMCPermissions;
+    public _vmcPermissions = VMCPermissions;
 
-  @Input() set serverValidationError(value: KalturaAPIException) {
+  @Input() set serverValidationError(value: VidiunAPIException) {
     if (value) {
       if (value.code === 'SYSTEM_NAME_ALREADY_EXISTS') {
         this._systemNameField.setErrors({ 'incorrect': true });
@@ -37,7 +37,7 @@ export class CustomSchemaFormComponent {
 
           if (!this._schema.isNew) {
 
-              if (!this._permissionsService.hasPermission(KMCPermissions.CUSTOM_DATA_PROFILE_UPDATE)) {
+              if (!this._permissionsService.hasPermission(VMCPermissions.CUSTOM_DATA_PROFILE_UPDATE)) {
                   this._schemaForm.disable();
               } else {
                   this._applyToField.disable({onlySelf: true});
@@ -59,8 +59,8 @@ export class CustomSchemaFormComponent {
   public _systemNameField: AbstractControl;
   public _applyToField: AbstractControl;
   public _applyToValues = {
-    entry: KalturaMetadataObjectType.entry.toString(),
-    category: KalturaMetadataObjectType.category.toString()
+    entry: VidiunMetadataObjectType.entry.toString(),
+    category: VidiunMetadataObjectType.category.toString()
   };
     public _nameMaxLength = 32;
 
@@ -69,7 +69,7 @@ export class CustomSchemaFormComponent {
     }
 
   constructor(private _fb: FormBuilder,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
   ) {
     this._buildForm();
   }
@@ -79,7 +79,7 @@ export class CustomSchemaFormComponent {
       name: ['', Validators.compose([Validators.required, Validators.maxLength(this._nameMaxLength)])],
       description: '',
       systemName: '',
-      applyTo: KalturaMetadataObjectType.entry.toString()
+      applyTo: VidiunMetadataObjectType.entry.toString()
     });
 
     this._nameField = this._schemaForm.controls['name'];

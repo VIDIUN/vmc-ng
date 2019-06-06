@@ -1,21 +1,21 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
-import { UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { NewEntryUploadFile, NewEntryUploadService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage, FileDialogComponent } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { TranscodingProfileManagement } from 'app-shared/kmc-shared/transcoding-profile-management';
+import { UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { NewEntryUploadFile, NewEntryUploadService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage, FileDialogComponent } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { TranscodingProfileManagement } from 'app-shared/vmc-shared/transcoding-profile-management';
 import { globalConfig } from 'config/global';
-import { urlRegex } from '@kaltura-ng/kaltura-ui';
-import { UpdateEntriesListEvent } from 'app-shared/kmc-shared/events/update-entries-list-event';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { NewEntryCreateFromUrlService } from 'app-shared/kmc-shell/new-entry-create-from-url';
-import { AppEventsService } from 'app-shared/kmc-shared';
+import { urlRegex } from '@vidiun-ng/vidiun-ui';
+import { UpdateEntriesListEvent } from 'app-shared/vmc-shared/events/update-entries-list-event';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { NewEntryCreateFromUrlService } from 'app-shared/vmc-shell/new-entry-create-from-url';
+import { AppEventsService } from 'app-shared/vmc-shared';
 
-export enum KMCFileCreationType {
+export enum VMCFileCreationType {
     upload = 'upload',
     import = 'import'
 }
@@ -23,7 +23,7 @@ export enum KMCFileCreationType {
 export interface UploadSettingsFile {
     url?: string;
   file?: File;
-  mediaType?: KalturaMediaType;
+  mediaType?: VidiunMediaType;
   name?: string;
   isEditing?: boolean;
   hasError?: boolean;
@@ -33,16 +33,16 @@ export interface UploadSettingsFile {
 
 
 @Component({
-  selector: 'kKMCUploadSettings',
+  selector: 'vVMCUploadSettings',
   templateUrl: './upload-settings.component.html',
   styleUrls: ['./upload-settings.component.scss']
 })
 export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
-    @Input() creationType = KMCFileCreationType.upload;
+    @Input() creationType = VMCFileCreationType.upload;
   @Input() parentPopupWidget: PopupWidgetComponent;
   @ViewChild('fileDialog') _fileDialog: FileDialogComponent;
 
-    public _creationTypes = KMCFileCreationType;
+    public _creationTypes = VMCFileCreationType;
     public _uploadBtnLabel: string;
     public _title: string;
   public _tableScrollableWrapper: Element;
@@ -55,15 +55,15 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
   public _fileTypes: SelectItem[] = [
     {
       'label': this._appLocalization.get('applications.upload.uploadSettings.mediaTypes.video'),
-      'value': KalturaMediaType.video
+      'value': VidiunMediaType.video
     },
     {
       'label': this._appLocalization.get('applications.upload.uploadSettings.mediaTypes.audio'),
-      'value': KalturaMediaType.audio
+      'value': VidiunMediaType.audio
     },
     {
       'label': this._appLocalization.get('applications.upload.uploadSettings.mediaTypes.image'),
-      'value': KalturaMediaType.image
+      'value': VidiunMediaType.image
     },
   ];
 
@@ -94,7 +94,7 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
       },0);
 
 
-    this._tableScrollableWrapper = document.querySelector('.kUploadSettings .ui-table-scrollable-body');
+    this._tableScrollableWrapper = document.querySelector('.vUploadSettings .ui-table-scrollable-body');
   }
 
   ngOnDestroy() {
@@ -104,7 +104,7 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
   ngOnInit() {
     this._loadTranscodingProfiles();
       this._uploadBtnLabel = this._appLocalization.get('applications.upload.uploadSettings.upload');
-      this._title = this.creationType === KMCFileCreationType.import
+      this._title = this.creationType === VMCFileCreationType.import
           ? this._appLocalization.get('applications.upload.uploadSettings.uploadFromUrl')
           : this._appLocalization.get('applications.upload.uploadSettings.uploadSettings');
   }
@@ -128,7 +128,7 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
     return typeof extension === "undefined" ? '' : extension.toLowerCase();
   }
 
-  private _getMediaTypeFromExtension(extension: string): KalturaMediaType | null {
+  private _getMediaTypeFromExtension(extension: string): VidiunMediaType | null {
     const imageFiles = ['jpg', 'jpeg', 'gif', 'png'];
     const audioFiles = [
       'flv', 'asf', 'qt', 'mov', 'mpg',
@@ -145,11 +145,11 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
 
     switch (true) {
       case videoFiles.indexOf(extension) !== -1:
-        return KalturaMediaType.video;
+        return VidiunMediaType.video;
       case audioFiles.indexOf(extension) !== -1:
-        return KalturaMediaType.audio;
+        return VidiunMediaType.audio;
       case imageFiles.indexOf(extension) !== -1:
-        return KalturaMediaType.image;
+        return VidiunMediaType.image;
       default:
         return null;
     }
@@ -275,7 +275,7 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
           return;
       }
 
-      if (this.creationType === KMCFileCreationType.import) {
+      if (this.creationType === VMCFileCreationType.import) {
           this._importFiles(transcodingProfileId);
       } else {
           this._uploadFiles(transcodingProfileId);
@@ -307,8 +307,8 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
   private _validateUploadFiles(files: UploadSettingsFile[]): boolean {
 
     let result = true;
-    const allowedTypes = [KalturaMediaType.audio, KalturaMediaType.video, KalturaMediaType.image];
-    const maxFileSize = globalConfig.kalturaServer.maxUploadFileSize;
+    const allowedTypes = [VidiunMediaType.audio, VidiunMediaType.video, VidiunMediaType.image];
+    const maxFileSize = globalConfig.vidiunServer.maxUploadFileSize;
 
     files.forEach(file => {
       const fileSize = file.size / 1024 / 1024; // convert to Mb
@@ -354,7 +354,7 @@ export class UploadSettingsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
     public _addFile(): void {
-      if (this.creationType === KMCFileCreationType.import) {
+      if (this.creationType === VMCFileCreationType.import) {
           setTimeout(() => {
               this._files = [...this._files, { url: '' }];
           }, 0);

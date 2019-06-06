@@ -8,16 +8,16 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {EndUserPermissionsUser} from '../manage-end-user-permissions.service';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
-import {KalturaCategoryUserStatus} from 'kaltura-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
+import {VidiunCategoryUserStatus} from 'vidiun-ngx-client';
 import {UserActionData} from '../manage-end-user-permissions.component';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kManageEndUserPermissionsTable',
+  selector: 'vManageEndUserPermissionsTable',
   templateUrl: './manage-end-user-permissions-table.component.html',
   styleUrls: ['./manage-end-user-permissions-table.component.scss']
 })
@@ -25,7 +25,7 @@ export class ManageEndUserPermissionsTableComponent implements OnInit, AfterView
   public _users: EndUserPermissionsUser[] = [];
   private _deferredUsers: any[];
   public _deferredLoading = true;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   @Input()
   set users(data: EndUserPermissionsUser[]) {
@@ -57,7 +57,7 @@ export class ManageEndUserPermissionsTableComponent implements OnInit, AfterView
 
   public _permissionLevelOptions: { value: number, label: string }[] = [];
   public _updateMethodOptions: { value: number, label: string }[] = [];
-  public _kalturaCategoryUserStatus = KalturaCategoryUserStatus;
+  public _vidiunCategoryUserStatus = VidiunCategoryUserStatus;
   public _emptyMessage = '';
 
   public rowTrackBy: Function = (index: number, item: any) => {
@@ -76,27 +76,27 @@ export class ManageEndUserPermissionsTableComponent implements OnInit, AfterView
 
   private _fillPermissionLevelOptions() {
     this._permissionLevelOptions = [{
-      value: KalturaCategoryUserPermissionLevel.member,
+      value: VidiunCategoryUserPermissionLevel.member,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.member')
     }, {
-      value: KalturaCategoryUserPermissionLevel.contributor,
+      value: VidiunCategoryUserPermissionLevel.contributor,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.contributor')
     }, {
-      value: KalturaCategoryUserPermissionLevel.moderator,
+      value: VidiunCategoryUserPermissionLevel.moderator,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.moderator')
     }, {
-      value: KalturaCategoryUserPermissionLevel.manager,
+      value: VidiunCategoryUserPermissionLevel.manager,
       label: this._appLocalization.get('applications.content.categoryDetails.entitlements.defaultPermissionLevel.manager')
     }];
   }
 
   private _fillUpdateMethodOptions() {
     this._updateMethodOptions = [{
-      value: KalturaUpdateMethodType.automatic,
+      value: VidiunUpdateMethodType.automatic,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.table.updateMethodOptions.automatic')
     }, {
-      value: KalturaUpdateMethodType.manual,
+      value: VidiunUpdateMethodType.manual,
       label: this._appLocalization
         .get('applications.content.categoryDetails.entitlements.usersPermissions.table.updateMethodOptions.manual')
     }];

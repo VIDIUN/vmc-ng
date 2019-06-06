@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 
 @Component({
-  selector: 'kLiveDashboard',
+  selector: 'vLiveDashboard',
   templateUrl: './live-dashboard.component.html',
   styleUrls: ['./live-dashboard.component.scss']
 })
@@ -15,7 +15,7 @@ export class LiveDashboardComponent implements OnInit, OnDestroy {
   @Input() parentPopupWidget: PopupWidgetComponent;
 
 
-  constructor(private _logger: KalturaLogger) {
+  constructor(private _logger: VidiunLogger) {
   }
 
   ngOnInit() {

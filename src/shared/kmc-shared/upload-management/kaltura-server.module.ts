@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { KalturaClientModule } from 'kaltura-ngx-client';
-import { UploadFileAdapterToken, UploadManagementModule } from '@kaltura-ng/kaltura-common';
-import { KalturaUploadAdapter } from './kaltura-upload-adapter.service';
+import { VidiunClientModule } from 'vidiun-ngx-client';
+import { UploadFileAdapterToken, UploadManagementModule } from '@vidiun-ng/vidiun-common';
+import { VidiunUploadAdapter } from './vidiun-upload-adapter.service';
 
 @NgModule({
     imports: <any[]>[
-        KalturaClientModule,
+        VidiunClientModule,
         UploadManagementModule
     ],
     declarations: <any[]>[
@@ -15,11 +15,11 @@ import { KalturaUploadAdapter } from './kaltura-upload-adapter.service';
     providers: <any[]>[
         {
             provide : UploadFileAdapterToken,
-            useClass : KalturaUploadAdapter,
+            useClass : VidiunUploadAdapter,
             multi : true
         }
     ]
 })
-export class KalturaServerModule {
+export class VidiunServerModule {
 
 }

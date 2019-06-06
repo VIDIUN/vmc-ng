@@ -2,7 +2,7 @@ import { Component, Input, HostListener } from '@angular/core';
 import { BrowserService } from '../../providers/browser.service';
 
 @Component({
-	selector: 'kScrollToTop',
+	selector: 'vScrollToTop',
 	templateUrl: './scroll-to-top.component.html',
 	styleUrls: ['./scroll-to-top.component.scss']
 })

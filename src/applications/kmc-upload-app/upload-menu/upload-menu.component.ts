@@ -1,17 +1,17 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {BrowserService} from 'app-shared/kmc-shell';
+import {BrowserService} from 'app-shared/vmc-shell';
 import { serverConfig } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kKMCUploadMenu',
+  selector: 'vVMCUploadMenu',
   templateUrl: './upload-menu.component.html',
   styleUrls: ['./upload-menu.component.scss']
 })
 export class UploadMenuComponent {
   @Output() onItemSelected = new EventEmitter<string>();
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _showHighSpeedLink: boolean;
   public _enableHighSpeedLink: boolean;
   public _showNeedHighSpeedLink: boolean;
@@ -21,17 +21,17 @@ export class UploadMenuComponent {
     public _bulkUploadAvailable: boolean;
 
   constructor(private _browserService: BrowserService,
-              private _permissionsService: KMCPermissionsService) {
-      this._showHighSpeedLink = this._permissionsService.hasPermission(KMCPermissions.FEATURE_SHOW_ASPERA_UPLOAD_BUTTON);
+              private _permissionsService: VMCPermissionsService) {
+      this._showHighSpeedLink = this._permissionsService.hasPermission(VMCPermissions.FEATURE_SHOW_ASPERA_UPLOAD_BUTTON);
       this._enableHighSpeedLink =  !!serverConfig.externalLinks.uploads && !!serverConfig.externalLinks.uploads.highSpeedUpload;
-      this._showNeedHighSpeedLink = !!serverConfig.externalLinks.uploads && !this._showHighSpeedLink && !this._permissionsService.hasPermission(KMCPermissions.FEATURE_HIDE_ASPERA_LINK);
+      this._showNeedHighSpeedLink = !!serverConfig.externalLinks.uploads && !this._showHighSpeedLink && !this._permissionsService.hasPermission(VMCPermissions.FEATURE_HIDE_ASPERA_LINK);
       this._enableNeedHighSpeedLink = !!serverConfig.externalLinks.uploads && !!serverConfig.externalLinks.uploads.needHighSpeedUpload;
       this._enableBulkUploadSamples = !!serverConfig.externalLinks.uploads && !!serverConfig.externalLinks.uploads.bulkUploadSamples;
       this._bulkUploadAvailable = this._permissionsService.hasAnyPermissions([
-          KMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
-          KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
-          KMCPermissions.ADMIN_USER_BULK,
-          KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS
+          VMCPermissions.CONTENT_INGEST_BULK_UPLOAD,
+          VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES,
+          VMCPermissions.ADMIN_USER_BULK,
+          VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS
       ]);
   }
 

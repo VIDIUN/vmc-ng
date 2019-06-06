@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kAccountSettingsWrapper {
+.vAccountSettingsWrapper {
   height: 100%;
   border: none;
   position: relative;
@@ -12,45 +12,45 @@
   -ms-flex-direction: column;
   flex-direction: column;
 
-  .kHeader {
+  .vHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 24px 0 0 0;
 
-    .kTitle {
-      color: $kGrayscale1;
+    .vTitle {
+      color: $vGrayscale1;
       font-weight: 700;
       height: 29px;
       font-size: 24px;
       font-weight: bold;
       line-height: 29px;
-      .kTitleIcon:before {
+      .vTitleIcon:before {
         font-size: 32px;
         vertical-align: middle;
         padding-right: 9px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
       }
     }
   }
-  .kFormMetadata {
+  .vFormMetadata {
     margin-top: 14px;
-    .kReadonlyData {
-      color: $kGrayscale3;
+    .vReadonlyData {
+      color: $vGrayscale3;
       margin: 10px 0 24px 0;
       display: inline-block;
       height: 16px;
       font-size: 13px;
       line-height: 16px;
 
-      .kIconhelp_full {
+      .vIconhelp_full {
         font-size: 15px;
         padding-left: 6px;
       }
     }
 
-    .kInvalidFields {
-      color: $kDandger;
+    .vInvalidFields {
+      color: $vDandger;
       float: right;
       margin-top: 4px;
       font-size: 14px;
@@ -66,7 +66,7 @@
 
 }
 
-.kFormContainer {
+.vFormContainer {
   background: white;
 
   hr {
@@ -78,19 +78,19 @@
     margin: 0;
   }
 
-  .kFormSection {
+  .vFormSection {
     font-size: 15px;
     padding: 29px 27px;
     width: 710px;
 
-    .kIconwarning {
+    .vIconwarning {
       font-size: 18px;
       padding-right: 10px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       vertical-align: text-bottom;
     }
 
-    .kRow {
+    .vRow {
 
       &:first-child {
         padding-top: 11px;
@@ -101,37 +101,37 @@
       display: flex;
       padding-top: 20px;
 
-      .kLabel {
+      .vLabel {
         width: 272px;
         -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
         flex: 0 0 auto;
         height: 18px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         font-size: 15px;
         line-height: 18px;
       }
 
-      .kRequired {
+      .vRequired {
         width: 20px;
         font-size: 24px;
-        color: $kGrayscale3;
-        &.kHasError {
-          color: $kDandger;
+        color: $vGrayscale3;
+        &.vHasError {
+          color: $vDandger;
           font-weight: bold;
         }
       }
-      .kRequired, .kLabel {
+      .vRequired, .vLabel {
         padding: 8px 4px;
         height: 18px;
       }
-      .kControl {
+      .vControl {
         height: 34px;
-        color: $kGrayscale2;
+        color: $vGrayscale2;
         width: 400px;
         border-radius: 3px;
-        &.kHasError {
-          border: 1px solid $kDandger;
+        &.vHasError {
+          border: 1px solid $vDandger;
           background: initial;
         }
       }
@@ -139,9 +139,9 @@
         padding-top: 8px;
       }
 
-      &.kSaveBtnContainer {
+      &.vSaveBtnContainer {
         padding-top: 60px;
-        .kSaveBtn {
+        .vSaveBtn {
           margin-left: auto;
           width: 125px;
           height: 34px;

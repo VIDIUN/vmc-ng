@@ -1,17 +1,17 @@
-<div class="kContent kOverrideFAIcons">
-  <span class="kTitle">{{'applications.content.categories.bActions.changeContributionPolicy' | translate}}</span>
-  <div class="kContainer">
+<div class="vContent vOverrideFAIcons">
+  <span class="vTitle">{{'applications.content.categories.bActions.changeContributionPolicy' | translate}}</span>
+  <div class="vContainer">
       <span
-        class="kLabel">{{'applications.content.categories.bActions.changeContributionPolicyLabel' | translate}}</span>
-    <div class="kBlock">
-      <p-radioButton class="kRadio" [(ngModel)]="_selectedPolicy" [value]="_availablePolicies.all" name="policy"
+        class="vLabel">{{'applications.content.categories.bActions.changeContributionPolicyLabel' | translate}}</span>
+    <div class="vBlock">
+      <p-radioButton class="vRadio" [(ngModel)]="_selectedPolicy" [value]="_availablePolicies.all" name="policy"
                      label="{{'applications.content.categories.noRestriction' | translate}}"></p-radioButton>
-      <p-radioButton class="kRadio" [(ngModel)]="_selectedPolicy" [value]="_availablePolicies.membersWithContributionPermission"
+      <p-radioButton class="vRadio" [(ngModel)]="_selectedPolicy" [value]="_availablePolicies.membersWithContributionPermission"
                      name="policy" label="{{'applications.content.categories.private' | translate}}"></p-radioButton>
     </div>
   </div>
-  <div class="kFooter">
-    <button type="button" class="kButtonBranded" pButton
+  <div class="vFooter">
+    <button type="button" class="vButtonBranded" pButton
             label="{{'app.common.apply' | translate}}"
             [disabled]="_selectedPolicy === null"
             (click)="_apply()"></button>

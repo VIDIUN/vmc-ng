@@ -1,12 +1,12 @@
 /**
- * A list of permission tokens as provided by the server and supported in the KMC.
+ * A list of permission tokens as provided by the server and supported in the VMC.
  *
  * DEVELOPER NOTICE:
  * - All the tokens must be UPPER_CASED and use underline (_) instead of dot ('.')
- * - if the original name doesn't match the naming standards, add the mapping manually in file 'kmc-permissions-rules' property 'customPermissionKeyToNameMapping'
+ * - if the original name doesn't match the naming standards, add the mapping manually in file 'vmc-permissions-rules' property 'customPermissionKeyToNameMapping'
  *
  */
-export enum KMCPermissions {
+export enum VMCPermissions {
     'ACCESS_CONTROL_ADD' = 1000,
     'ACCESS_CONTROL_DELETE' = 1001,
     'ACCESS_CONTROL_UPDATE' = 1002,
@@ -94,23 +94,23 @@ export enum KMCPermissions {
     'ADVERTISING_UPDATE_SETTINGS' = 1084,
     'ANALYTICS_BASE' = 1085,
     'CONTENTDISTRIBUTION_PLUGIN_PERMISSION' = 1086,
-    'DYNAMIC_FLAG_KMC_CHUNKED_CATEGORY_LOAD' = 1087,
+    'DYNAMIC_FLAG_VMC_CHUNKED_CATEGORY_LOAD' = 1087,
     'FEATURE_ALLOW_VAST_CUE_POINT_NO_URL' = 1088,
     'FEATURE_ANALYTICS_TAB' = 1089,
     'FEATURE_DISABLE_CATEGORY_LIMIT' = 1090,
-    'FEATURE_DISABLE_KMC_DRILL_DOWN_THUMB_RESIZE' = 1091,
-    'FEATURE_DISABLE_KMC_KDP_ALERTS' = 1092,
-    'FEATURE_DISABLE_KMC_LIST_THUMBNAILS' = 1093,
+    'FEATURE_DISABLE_VMC_DRILL_DOWN_THUMB_RESIZE' = 1091,
+    'FEATURE_DISABLE_VMC_VDP_ALERTS' = 1092,
+    'FEATURE_DISABLE_VMC_LIST_THUMBNAILS' = 1093,
     'FEATURE_DRAFT_ENTRY_CONV_PROF_SELECTION' = 1094,
     'FEATURE_END_USER_MANAGE' = 1095,
     'FEATURE_END_USER_REPORTS' = 1096,
     'FEATURE_ENTITLEMENT' = 1097,
     'FEATURE_ENTRY_REPLACEMENT' = 1098,
     'FEATURE_HIDE_ASPERA_LINK' = 1099,
-    'FEATURE_KALTURA_LIVE_STREAM' = 1100,
-    'FEATURE_KMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION' = 1101,
-    'FEATURE_KMC_DRILLDOWN_TAGS_COLUMN' = 1102,
-    'FEATURE_KMC_VERIFY_MODERATION' = 1103,
+    'FEATURE_VIDIUN_LIVE_STREAM' = 1100,
+    'FEATURE_VMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION' = 1101,
+    'FEATURE_VMC_DRILLDOWN_TAGS_COLUMN' = 1102,
+    'FEATURE_VMC_VERIFY_MODERATION' = 1103,
     'FEATURE_LIVE_STREAM' = 1104,
     'FEATURE_LIVE_STREAM_RECORD' = 1105,
     'FEATURE_MULTI_FLAVOR_INGESTION' = 1106,

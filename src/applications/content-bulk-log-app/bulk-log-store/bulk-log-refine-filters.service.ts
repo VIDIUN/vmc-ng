@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DefaultFiltersList } from './default-filters-list';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaBulkUploadObjectType } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunBulkUploadObjectType } from 'vidiun-ngx-client';
 
 export interface RefineListItem {
   value: string;
@@ -20,7 +20,7 @@ export class RefineList {
 @Injectable()
 export class BulkLogRefineFiltersService {
   constructor(private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService) {
+              private _permissionsService: VMCPermissionsService) {
 
   }
 
@@ -29,8 +29,8 @@ export class BulkLogRefineFiltersService {
   }
 
   private _buildDefaultFiltersGroup(): RefineList[] {
-    const hasEntitlementPermission = this._permissionsService.hasPermission(KMCPermissions.FEATURE_ENTITLEMENT);
-    const hasEndUserPermission = this._permissionsService.hasPermission(KMCPermissions.FEATURE_END_USER_MANAGE);
+    const hasEntitlementPermission = this._permissionsService.hasPermission(VMCPermissions.FEATURE_ENTITLEMENT);
+    const hasEndUserPermission = this._permissionsService.hasPermission(VMCPermissions.FEATURE_END_USER_MANAGE);
     return DefaultFiltersList.map((list) => {
       const refineList = new RefineList(
         list.name,
@@ -38,11 +38,11 @@ export class BulkLogRefineFiltersService {
       );
 
       list.items.forEach((item: any) => {
-        if (item.value === KalturaBulkUploadObjectType.user && !hasEndUserPermission) {
+        if (item.value === VidiunBulkUploadObjectType.user && !hasEndUserPermission) {
           return;
         }
 
-	    if (item.value === KalturaBulkUploadObjectType.categoryUser && !hasEntitlementPermission) {
+	    if (item.value === VidiunBulkUploadObjectType.categoryUser && !hasEntitlementPermission) {
 	        return;
 	    }
 

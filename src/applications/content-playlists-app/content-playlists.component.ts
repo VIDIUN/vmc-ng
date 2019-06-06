@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { PlaylistsStore } from './playlists/playlists-store/playlists-store.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaLoggerName } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunLoggerName } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-    selector: 'kPlaylists',
+    selector: 'vPlaylists',
     templateUrl: './content-playlists.component.html',
     styleUrls: ['./content-playlists.component.scss'],
     providers: [
       PlaylistsStore,
-        KalturaLogger,
+        VidiunLogger,
         {
-            provide: KalturaLoggerName, useValue: 'playlists-store.service'
+            provide: VidiunLoggerName, useValue: 'playlists-store.service'
         }
     ]
 })

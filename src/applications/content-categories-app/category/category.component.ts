@@ -5,8 +5,8 @@ import {NotificationTypes, ActionTypes, CategoryService} from './category.servic
 import {CategorySectionsListWidget} from './category-sections-list/category-sections-list-widget.service';
 import {CategoriesService} from '../categories/categories.service';
 import {CategoryWidgetsManager} from './category-widgets-manager';
-import {AreaBlockerMessage, AreaBlockerMessageButton} from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {AreaBlockerMessage, AreaBlockerMessageButton} from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
 import {CategoryEntitlementsWidget} from './category-entitlements/category-entitlements-widget.service';
 import {CategorySubcategoriesWidget} from './category-subcategories/category-subcategories-widget.service';
@@ -15,14 +15,14 @@ import {
   CategoriesStatus,
   CategoriesStatusMonitorService
 } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategory',
+  selector: 'vCategory',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss'],
   providers: [
@@ -33,7 +33,7 @@ import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
     CategoryMetadataWidget,
       CategoryEntitlementsWidget,
     CategorySubcategoriesWidget,
-      KalturaLogger.createLogger('CategoryComponent')
+      VidiunLogger.createLogger('CategoryComponent')
   ]
 })
 export class CategoryComponent implements OnInit, OnDestroy {
@@ -44,7 +44,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   public _currentCategoryId: number;
   public _enablePrevButton: boolean;
   public _enableNextButton: boolean;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor(categoryWidgetsManager: CategoryWidgetsManager,
               widget1: CategorySectionsListWidget,
@@ -57,7 +57,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
               private _categoriesStore: CategoriesService,
               private _appLocalization: AppLocalization,
               private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _contentCategoryView: ContentCategoryViewService,
               private _categoryRoute: ActivatedRoute) {
 
@@ -211,13 +211,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
               }
             },
             error => {
-              // TODO [kmcng] navigate to error page
+              // TODO [vmcng] navigate to error page
               throw error;
             });
   }
 
   private _updateNavigationState(): void {
-    // TODO [kmcng] find a better way that doesn't need access to the category directly
+    // TODO [vmcng] find a better way that doesn't need access to the category directly
     const categories = this._categoriesStore.categories;
     if (categories.data() && categories.data().length && this._currentCategoryId) {
       const currentCategoryIndex = categories.data().findIndex(category => category.id === +this._currentCategoryId);

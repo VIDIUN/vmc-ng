@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DestinationComponentBase, FeedFormMode } from '../../feed-details.component';
-import { KalturaITunesSyndicationFeed } from 'kaltura-ngx-client';
+import { VidiunITunesSyndicationFeed } from 'vidiun-ngx-client';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KalturaValidators } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { KalturaITunesSyndicationFeedAdultValues } from 'kaltura-ngx-client';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { LanguageOptionsService } from 'app-shared/kmc-shared/language-options';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunValidators } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { VidiunITunesSyndicationFeedAdultValues } from 'vidiun-ngx-client';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { LanguageOptionsService } from 'app-shared/vmc-shared/language-options';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kItunesDestinationForm',
+  selector: 'vItunesDestinationForm',
   templateUrl: './itunes-destination-form.component.html',
   styleUrls: ['./itunes-destination-form.component.scss'],
   providers: [
@@ -22,8 +22,8 @@ import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
 })
 export class ItunesDestinationFormComponent extends DestinationComponentBase implements OnInit, OnDestroy {
   @Input() mode: FeedFormMode;
-  @Input() contentFlavors: KalturaFlavorParams[] = null;
-  @Input() feed: KalturaITunesSyndicationFeed = null;
+  @Input() contentFlavors: VidiunFlavorParams[] = null;
+  @Input() feed: VidiunITunesSyndicationFeed = null;
 
   @Output() onFormStateChanged = new EventEmitter<{ isValid: boolean, isDirty: boolean }>();
 
@@ -112,20 +112,20 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
   public _languageField: AbstractControl;
   public _adultContentField: AbstractControl;
 
-  public _contentFlavors: KalturaFlavorParams[] = [];
+  public _contentFlavors: VidiunFlavorParams[] = [];
   public _languages = [];
   public _adultContentOptions: { value: any, label: string }[] = [
     {
       label: this._appLocalization.get('applications.content.syndication.details.destinationsForms.itunes.adultContent.options.yes'),
-      value: KalturaITunesSyndicationFeedAdultValues.yes
+      value: VidiunITunesSyndicationFeedAdultValues.yes
     },
     {
       label: this._appLocalization.get('applications.content.syndication.details.destinationsForms.itunes.adultContent.options.no'),
-      value: KalturaITunesSyndicationFeedAdultValues.no
+      value: VidiunITunesSyndicationFeedAdultValues.no
     },
     {
       label: this._appLocalization.get('applications.content.syndication.details.destinationsForms.itunes.adultContent.options.clean'),
-      value: KalturaITunesSyndicationFeedAdultValues.clean
+      value: VidiunITunesSyndicationFeedAdultValues.clean
     }
   ];
   public _availableCategories: { value: string, label: string }[] = [];
@@ -133,7 +133,7 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
 
   constructor(private _fb: FormBuilder,
               private _languageOptions: LanguageOptionsService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _appLocalization: AppLocalization,
               private _appAuth: AppAuthentication) {
     super();
@@ -159,7 +159,7 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
     this._fillAvailableContentFlavors();
     this._fillFormData();
 
-    if (this.mode === 'edit' && !this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE)) {
+    if (this.mode === 'edit' && !this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE)) {
       this._form.disable({ emitEvent: false });
     } else {
       this.onFormStateChanged.emit({
@@ -230,8 +230,8 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
     } else {
       this._form.patchValue({
         adultContent: this._appAuth.appUser.partnerInfo.adultContent
-          ? KalturaITunesSyndicationFeedAdultValues.yes
-          : KalturaITunesSyndicationFeedAdultValues.no
+          ? VidiunITunesSyndicationFeedAdultValues.yes
+          : VidiunITunesSyndicationFeedAdultValues.no
       }, { emitEvent: false });
     }
   }
@@ -240,10 +240,10 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
     this._form = this._fb.group({
       contentFlavor: '',
       addToDefaultTranscodingProfile: '',
-      landingPage: ['', [KalturaValidators.urlHttp, Validators.required]],
+      landingPage: ['', [VidiunValidators.urlHttp, Validators.required]],
       feedAuthor: '',
         enforceFeedAuthor: false,
-      website: ['', KalturaValidators.urlHttp],
+      website: ['', VidiunValidators.urlHttp],
       feedDescription: '',
       categories: ['', Validators.required],
       feedImageUrl: '',
@@ -268,14 +268,14 @@ export class ItunesDestinationFormComponent extends DestinationComponentBase imp
     this._adultContentField = this._form.controls['adultContent'];
   }
 
-  public getData(): KalturaITunesSyndicationFeed {
+  public getData(): VidiunITunesSyndicationFeed {
     if (!this._form.valid) {
       this._markFormFieldsAsTouched();
       return null;
     }
 
     const formData = this._form.value;
-    return new KalturaITunesSyndicationFeed({
+    return new VidiunITunesSyndicationFeed({
       flavorParamId: formData.contentFlavor,
       addToDefaultConversionProfile: formData.addToDefaultTranscodingProfile,
       landingPage: formData.landingPage,

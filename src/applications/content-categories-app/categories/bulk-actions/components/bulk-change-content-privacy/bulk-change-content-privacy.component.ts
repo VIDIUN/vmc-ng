@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 
 export enum PrivacyMode {
   NoRestriction = 0,
@@ -13,7 +13,7 @@ export enum PrivacyMode {
 }
 
 @Component({
-  selector: 'kCategoriesBulkChangeContentPrivacy',
+  selector: 'vCategoriesBulkChangeContentPrivacy',
   templateUrl: './bulk-change-content-privacy.component.html',
   styleUrls: ['./bulk-change-content-privacy.component.scss']
 })
@@ -33,7 +33,7 @@ export class CategoriesBulkChangeContentPrivacy implements OnInit, OnDestroy, Af
   public _privacyModes = PrivacyMode;
   public _privacyMode = null;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
   }
 
   ngOnInit() {

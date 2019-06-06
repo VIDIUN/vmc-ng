@@ -1,30 +1,30 @@
-<k-area-blocker [showLoader]="_isBusy">
-  <div class="kContainer">
-    <div class="kGraphicsContainer">
-      <i *ngIf="_showTrialUserInfo" class="kIcon kIconsettings-upgrade-2"></i>
-      <i *ngIf="!_showTrialUserInfo" class="kIcon kIconsettings-upgrade-1"></i>
+<v-area-blocker [showLoader]="_isBusy">
+  <div class="vContainer">
+    <div class="vGraphicsContainer">
+      <i *ngIf="_showTrialUserInfo" class="vIcon vIconsettings-upgrade-2"></i>
+      <i *ngIf="!_showTrialUserInfo" class="vIcon vIconsettings-upgrade-1"></i>
 
     </div>
-    <div class="kAccountInfoContainer">
-      <div class="kHeader">
+    <div class="vAccountInfoContainer">
+      <div class="vHeader">
         {{'applications.settings.accountInformation.accountInfo.header' | translate}}
       </div>
-      <div *ngIf="_showTrialUserInfo" class="kTrialExpiration">
+      <div *ngIf="_showTrialUserInfo" class="vTrialExpiration">
         {{'applications.settings.accountInformation.accountInfo.trial' | translate: {'0': _trialExpirationDateString} }}
       </div>
-      <div class="kStatistics">
-        <div class="kBandwidth">
+      <div class="vStatistics">
+        <div class="vBandwidth">
             {{'applications.settings.accountInformation.accountInfo.bandwidth' | translate: {'0': _bandwidth} }}
             <span *ngIf="!_bandwidthNA">{{'applications.settings.accountInformation.accountInfo.gb' | translate}}</span>
         </div>
-        <div class="kStorage">
+        <div class="vStorage">
             {{'applications.settings.accountInformation.accountInfo.storage' | translate: {'0': _storage} }}
             <span *ngIf="!_storageNA">{{'applications.settings.accountInformation.accountInfo.gb' | translate}}</span>
         </div>
       </div>
-      <div class="kContactUs">
+      <div class="vContactUs">
         {{'applications.settings.accountInformation.accountInfo.contactUs' | translate}}
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

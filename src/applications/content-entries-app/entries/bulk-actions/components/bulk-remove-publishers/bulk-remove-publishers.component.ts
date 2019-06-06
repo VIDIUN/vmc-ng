@@ -1,35 +1,35 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ISubscription} from 'rxjs/Subscription';
 
-import {KalturaClient} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kBulkRemovePublishers',
+  selector: 'vBulkRemovePublishers',
   templateUrl: './bulk-remove-publishers.component.html',
   styleUrls: ['./bulk-remove-publishers.component.scss']
 })
 export class BulkRemovePublishersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Output() removePublishersChanged = new EventEmitter<string[]>();
 
   public _loading = false;
   public _sectionBlockerMessage: AreaBlockerMessage;
 
-  public users: KalturaUser[] = [];
+  public users: VidiunUser[] = [];
   public usersToRemove: string[] = [];
 
   private _parentPopupStateChangeSubscribe: ISubscription;
   private _confirmClose = true;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
   }
 
   ngOnInit() {

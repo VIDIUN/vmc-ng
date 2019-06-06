@@ -1,35 +1,35 @@
 @import "app-theme/_variables.scss";
 
 $autoCompleteWidth: 326px;
-.kTitle {
-  color: $kGrayscale1;
+.vTitle {
+  color: $vGrayscale1;
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  border-bottom: 1px solid $kGrayscale4;
+  border-bottom: 1px solid $vGrayscale4;
   height: 78px;
   line-height: 78px;
 }
 
-.kContent {
+.vContent {
   display: flex;
   flex-direction: column;
   height: 449px;
   width: 790px;
 
-  .kContainer {
+  .vContainer {
     height: 303px;
     padding: 32px;
     overflow: hidden;
 
-    .kRow {
+    .vRow {
       display: flex;
       padding-top: 16px;
 
       width: 574px;
       margin: 0 auto;
 
-      .kLabel {
+      .vLabel {
         width: 150px;
         flex: 0 0 auto;
         word-wrap: break-word;
@@ -51,27 +51,27 @@ $autoCompleteWidth: 326px;
         height: 76px;
       }
 
-      .kControl, k-prime-control {
+      .vControl, v-prime-control {
         width: 100%;
       }
     }
 
-    .kRow:first-child {
+    .vRow:first-child {
       padding-top: 0;
     }
 
-    .kMultipleRow{
-      .kLabel{
+    .vMultipleRow{
+      .vLabel{
         padding-top:0;
       }
     }
 
-    .kBlock {
+    .vBlock {
       display: flex;
       align-items: center;
       justify-content: center;
       padding-bottom: 20px;
-      .kRadio {
+      .vRadio {
         padding-right: 40px;
 
         /deep/ .ui-radiobutton-label {
@@ -80,28 +80,28 @@ $autoCompleteWidth: 326px;
       }
     }
 
-    .kAutoCompleteContainer {
+    .vAutoCompleteContainer {
       width: $autoCompleteWidth !important;
       margin: 0 auto;
     }
   }
 }
 
-.kFooter {
+.vFooter {
 
   display: flex;
   height: 66px;
   padding: 7px;
-  border-top: 1px solid $kGrayscale4;
+  border-top: 1px solid $vGrayscale4;
   align-items: center;
   justify-content: center;
 
-  .kButtonDefault, .kButtonBranded {
+  .vButtonDefault, .vButtonBranded {
     height: 34px;
     width: 160px;
   }
 
-  .kButtonDefault {
+  .vButtonDefault {
     border-radius: 0;
     margin-right: 16px;
   }
@@ -112,7 +112,7 @@ $autoCompleteWidth: 326px;
   font-size: 15px;
 
     li.userAdded {
-        background-color: transparentize($kPrimary, 0.5) !important;
+        background-color: transparentize($vPrimary, 0.5) !important;
     }
 
   input {
@@ -137,10 +137,10 @@ $autoCompleteWidth: 326px;
   .ui-dropdown {
     height: 34px;
     width: 326px !important;
-    border: 1px solid $kGrayscale4;
+    border: 1px solid $vGrayscale4;
 
     .ui-dropdown-label {
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
     }
   }

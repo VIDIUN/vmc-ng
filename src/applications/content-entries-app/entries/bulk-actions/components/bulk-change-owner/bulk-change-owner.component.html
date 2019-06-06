@@ -1,10 +1,10 @@
-<k-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
-  <div class="kContent kOverrideFAIcons">
-    <span class="kTitle">{{'applications.content.bulkActions.changeOwner' | translate}}</span>
-    <div class="kContainer">
-      <span class="kLabel">{{'applications.content.bulkActions.changeOwnerLabel' | translate}}</span>
+<v-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
+  <div class="vContent vOverrideFAIcons">
+    <span class="vTitle">{{'applications.content.bulkActions.changeOwner' | translate}}</span>
+    <div class="vContainer">
+      <span class="vLabel">{{'applications.content.bulkActions.changeOwnerLabel' | translate}}</span>
 
-      <kAutoComplete [(ngModel)]="_owner"
+      <vAutoComplete [(ngModel)]="_owner"
                      suggestionItemField="item"
                      suggestionLabelField="name"
                      field="screenName"
@@ -19,16 +19,16 @@
                      (onUnselect)="_updateApplyButtonState()"
                      (onSelect)="_updateApplyButtonState()"
                      (completeMethod)="_searchUsers($event)">
-      </kAutoComplete>
+      </vAutoComplete>
 
     </div>
-    <div class="kFooter">
+    <div class="vFooter">
       <button type="button"
-              class="kButtonBranded"
+              class="vButtonBranded"
               pButton
               [label]="'applications.content.bulkActions.apply' | translate"
               [disabled]="_disableApplyButton"
               (click)="_apply()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

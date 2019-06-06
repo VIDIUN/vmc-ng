@@ -1,38 +1,38 @@
 @import 'app-theme/_variables.scss';
 
-.kFlavorImport{
-	.kHeader {
+.vFlavorImport{
+	.vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 32px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 16px;
       font-weight: 700;
     }
 	}
-  .kContainer{
+  .vContainer{
     margin: 24px;
     height: 70px;
   }
-  .kFooter{
+  .vFooter{
     text-align: center;
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     button{
       margin-top: 16px;
       height: 34px;
     }
   }
-	.kFlavorUrl{
+	.vFlavorUrl{
 		margin-top: 6px;
 		width: 100%;
 	}
-	.kInvalid{
-		color: $kDandger;
+	.vInvalid{
+		color: $vDandger;
 		font-size: 12px;
 		font-weight: 700;
 	}

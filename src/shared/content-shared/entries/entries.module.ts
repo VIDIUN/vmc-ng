@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
 
 import {
   ButtonModule,
@@ -16,9 +16,9 @@ import {
 } from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import {AutoCompleteModule, KalturaPrimeNgUIModule, KPTableModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import {AutoCompleteModule, VidiunPrimeNgUIModule, VPTableModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 
 import {EntryStatusPipe} from './pipes/entry-status.pipe';
 import {SchedulingComponent} from './scheduling/scheduling.component';
@@ -28,12 +28,12 @@ import {MaxEntriesPipe} from './pipes/max-entries.pipe';
 import {EntriesRefineFiltersComponent} from './entries-refine-filters/entries-refine-filters.component';
 import {EntriesTableComponent} from './entries-table/entries-table.component';
 import {EntriesListComponent} from './entries-list/entries-list.component';
-import {TagsModule} from '@kaltura-ng/kaltura-ui';
+import {TagsModule} from '@vidiun-ng/vidiun-ui';
 import {PrimeTableSortTransformPipe} from './pipes/prime-table-sort-transform.pipe';
 import {ModerationPipe} from './pipes/moderation.pipe';
 import {EntriesSelectorComponent} from './entries-selector/entries-selector.component';
 import {EntriesListTagsComponent} from './entries-list/entries-list-tags.component';
-import {FiltersModule} from '@kaltura-ng/mc-shared';
+import {FiltersModule} from '@vidiun-ng/mc-shared';
 import {CategoriesModule} from '../categories/categories.module';
 import {EntriesStoreDataProvider} from 'app-shared/content-shared/entries/entries-store/entries-store-data-provider.service';
 import {EntriesDataProviderToken} from 'app-shared/content-shared/entries/entries-store/entries-store.service';
@@ -42,8 +42,8 @@ import {LiveDashboardHostComponent} from 'app-shared/content-shared/entries/live
 import { LinkedEntriesTableComponent } from './link-entries-selector/linked-entries-table/linked-entries-table.component';
 import { LinkedEntriesAddEntriesComponent } from './link-entries-selector/linked-entries-add-entries/linked-entries-add-entries.component';
 import {LinkedEntriesComponent} from './link-entries-selector/linked-entries/linked-entries.component';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
@@ -55,9 +55,9 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     ReactiveFormsModule,
     TreeModule,
     LocalizationModule,
-    KalturaPrimeNgUIModule,
-    KPTableModule,
-    KalturaUIModule,
+    VidiunPrimeNgUIModule,
+    VPTableModule,
+    VidiunUIModule,
     DropdownModule,
     ButtonModule,
     CalendarModule,
@@ -73,7 +73,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     StickyModule,
     FiltersModule,
     CategoriesModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       DateFormatModule
   ],
   declarations: [

@@ -1,11 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Menu, MenuItem } from 'primeng/primeng';
 import { PlaylistRule } from '../playlist-rule/playlist-rule.interface';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kPlaylistRulesTable',
+  selector: 'vPlaylistRulesTable',
   templateUrl: './playlist-rules-table.component.html',
   styleUrls: ['./playlist-rules-table.component.scss']
 })
@@ -44,10 +44,10 @@ export class PlaylistRulesTableComponent implements AfterViewInit, OnInit, OnDes
   public _deferredLoading = true;
   public _items: MenuItem[];
   public _isNewPlaylist: boolean;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor(private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _cdRef: ChangeDetectorRef) {
   }
 
@@ -88,7 +88,7 @@ export class PlaylistRulesTableComponent implements AfterViewInit, OnInit, OnDes
       },
       {
         label: this._appLocalization.get('applications.content.bulkActions.deleteRule'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this.onActionSelected.emit({ action: 'remove', rule: rule })
       }
     ];
@@ -106,7 +106,7 @@ export class PlaylistRulesTableComponent implements AfterViewInit, OnInit, OnDes
   }
 
   public _viewRule(rule: PlaylistRule): void {
-    if (this._permissionsService.hasPermission(KMCPermissions.PLAYLIST_UPDATE)) {
+    if (this._permissionsService.hasPermission(VMCPermissions.PLAYLIST_UPDATE)) {
       this.onActionSelected.emit({ action: 'view', rule: rule });
     }
   }

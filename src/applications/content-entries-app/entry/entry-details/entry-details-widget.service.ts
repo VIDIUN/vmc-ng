@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import {
     EntryWidget
 } from '../entry-widget';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { AppAuthentication } from 'app-shared/kmc-shell';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { AppAuthentication } from 'app-shared/vmc-shell';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
 export class EntryDetailsWidget extends EntryWidget
@@ -15,9 +15,9 @@ export class EntryDetailsWidget extends EntryWidget
     public _landingPage : string;
 
     constructor(
-                kalturaServerClient: KalturaClient,
+                vidiunServerClient: VidiunClient,
                 private appAuthentication: AppAuthentication,
-                logger: KalturaLogger)
+                logger: VidiunLogger)
 
     {
         super('entryDetails', logger);
@@ -33,7 +33,7 @@ export class EntryDetailsWidget extends EntryWidget
     }
 
     protected onActivate(firstTimeActivating: boolean) {
-        const entry: KalturaMediaEntry = this.data;
+        const entry: VidiunMediaEntry = this.data;
 
 	    this._landingPage = null;
 

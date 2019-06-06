@@ -1,20 +1,20 @@
 import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
-import { KMCAppMenuItem } from 'app-shared/kmc-shared/kmc-views';
+import { VMCAppMenuItem } from 'app-shared/vmc-shared/vmc-views';
 import { Router, NavigationEnd } from '@angular/router';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kKMCAppContentMenu',
+  selector: 'vVMCAppContentMenu',
   templateUrl: './app-menu-content.component.html',
   styleUrls: ['./app-menu-content.component.scss']
 })
 export class AppMenuContentComponent implements OnChanges, OnDestroy {
 
-    public _items: Array<KMCAppMenuItem>;
-    private _selectedMenuItem: KMCAppMenuItem;
+    public _items: Array<VMCAppMenuItem>;
+    private _selectedMenuItem: VMCAppMenuItem;
 
     @Input()
-    menuItems: KMCAppMenuItem[];
+    menuItems: VMCAppMenuItem[];
 
     @Input()
     position: 'right' | 'left';

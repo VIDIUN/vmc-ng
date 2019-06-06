@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kDropFolders {
+.vDropFolders {
   font-size: 15px;
   background-color: $appBkgColor;
   height: $contentArea;
@@ -12,10 +12,10 @@
   flex-flow: row wrap;
   margin: 0;
 
-  .kSearchInput {
+  .vSearchInput {
     width: 280px;
     height: 34px;
-    background: $kMagnifyingGlassBkg;
+    background: $vMagnifyingGlassBkg;
     margin-right: 8px;
     padding: 9px 4px 8px 38px;
 
@@ -24,12 +24,12 @@
     }
   }
 
-  .kFilters {
+  .vFilters {
     display: flex;
     margin-left: auto;
   }
 
-  .kDropFoldersHolder {
+  .vDropFoldersHolder {
     min-height: $minTableHeight;
     height: 100%;
     border: none;
@@ -38,8 +38,8 @@
     flex-direction: column;
   }
 
-  .kDropFoldersTableFilters {
-    color: $kGrayscale1;
+  .vDropFoldersTableFilters {
+    color: $vGrayscale1;
     height: 66px;
     background-color: white;
     flex: 0 0 auto;
@@ -50,32 +50,32 @@
     border-top-right-radius: 5px;
     display: flex;
 
-    .kSelectedDropFoldersNum {
+    .vSelectedDropFoldersNum {
       padding-left: 16px;
     }
   }
 
-  .kSelectedDropFoldersLabel {
+  .vSelectedDropFoldersLabel {
     font-weight: bold;
     margin-right: 36px;
     margin-left: 5px;
   }
 
-  .kDropFoldersTable {
+  .vDropFoldersTable {
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
   }
 
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
 
     &:active {
       box-shadow: none;
@@ -84,22 +84,22 @@
 
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
 
-  .kTagContent {
+  .vTagContent {
     display: flex;
     align-items: center;
   }
 
-  .kTagLabel {
+  .vTagLabel {
     flex: 0 0 auto;
     user-select: none;
     cursor: default;
   }
 
-  .kTagRemove {
+  .vTagRemove {
     flex: 0 0 auto;
     margin-top: 2px;
     margin-left: 8px;
@@ -114,67 +114,67 @@
     }
   }
 
-  .kBulkOperations {
+  .vBulkOperations {
     display: flex;
     align-items: center;
 
-    .kBulkDeleteBtn {
+    .vBulkDeleteBtn {
       margin-right: 10px;
       width: 44px;
       font-size: 24px;
     }
   }
 
-  .kBulkCancel {
+  .vBulkCancel {
     margin-left: 10px;
   }
 
-  .kBulkDeleteBtn {
+  .vBulkDeleteBtn {
     margin-right: 10px;
     width: 44px;
     font-size: 24px;
   }
 
-  .kBulkActionsBtn {
+  .vBulkActionsBtn {
     font-weight: 400;
     font-size: 15px;
   }
 
-  .kFilters {
+  .vFilters {
     display: flex;
     margin-left: auto;
   }
 
-  .kHidden {
+  .vHidden {
     visibility: hidden;
     width: 0;
     height: 0;
   }
 
-  .kDropFoldersTableFooter {
+  .vDropFoldersTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
     padding: 0 14px 28px;
     display: block;
   }
-  .kDropFoldersPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vDropFoldersPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
 
-  .kStatusesFilter {
+  .vStatusesFilter {
     display: flex;
     height: 32px;
     align-items: center;
     cursor: pointer;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     width: 178px;
     position: relative;
     margin-right: 8px;
@@ -182,7 +182,7 @@
     i {
       margin-right: 12px;
       margin-left: 8px;
-      color: $kGrayscale4;
+      color: $vGrayscale4;
       &.dropdown {
         font-size: 10px;
       }
@@ -195,15 +195,15 @@
     }
   }
 
-  .kRefineFilters {
+  .vRefineFilters {
     margin: 12px;
     background-color: white;
   }
 
-  .kTreeContainer {
+  .vTreeContainer {
     overflow-y: auto;
     overflow-x: hidden;
-    border-bottom: 1px solid $kGrayscale6;
+    border-bottom: 1px solid $vGrayscale6;
     margin-left: -20px;
     padding-left: 20px;
     margin-right: -20px;
@@ -212,12 +212,12 @@
     position: relative;
   }
 
-  .kClose {
+  .vClose {
     float: right;
   }
 
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
@@ -232,7 +232,7 @@
   margin-bottom: 34px;
 }
 
-:host /deep/ span.ui-button-icon-left.pi-kIcontrash {
+:host /deep/ span.ui-button-icon-left.pi-vIcontrash {
   margin-left: -.5em;
 }
 
@@ -240,7 +240,7 @@
   width: 380px;
 }
 
-:host /deep/ .ui-button-icon-right.kIcondropdown_arrow_bottom {
+:host /deep/ .ui-button-icon-right.vIcondropdown_arrow_bottom {
   font-size: 10px;
   margin-right: 2px;
   pointer-events: none;
@@ -258,15 +258,15 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kActionsMenu .ui-menuitem-text {
-  color: $kDandger;
+:host /deep/ .vActionsMenu .ui-menuitem-text {
+  color: $vDandger;
 }
 
-:host /deep/ .kStickyClass {
-  border-bottom: 1px solid $kGrayscale5;
+:host /deep/ .vStickyClass {
+  border-bottom: 1px solid $vGrayscale5;
 }
 
-:host /deep/ .kDropFoldersTableFooter {
+:host /deep/ .vDropFoldersTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

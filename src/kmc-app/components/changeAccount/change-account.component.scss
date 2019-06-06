@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kChangeAccountWin {
+.vChangeAccountWin {
   width: 100%;
   height: 100%;
 
@@ -8,35 +8,35 @@
     width: 100%;
     height: 100%;
   }
-  .kHeader {
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer {
+  .vContainer {
     margin: 28px;
     min-height: 169px;
-    .kPartnersList{
+    .vPartnersList{
       max-height: 128px;
       overflow: auto;
       margin-top:24px;
 
-      .kRow:first-child{
+      .vRow:first-child{
         margin-top: 0;
       }
     }
   }
-  .kFooter {
+  .vFooter {
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,15 +45,15 @@
     }
   }
 
-  .kRow {
+  .vRow {
     display: flex;
     align-items: center;
     flex-direction: row;
     margin-top: 24px;
     font-size: 15px;
-    .kLabel {
+    .vLabel {
       flex: 0 0 auto;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
     }
   }
 }
@@ -63,7 +63,7 @@
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
-  color: $kGrayscale1;
+  color: $vGrayscale1;
 }
 
 :host /deep/ .ui-radiobutton-label {
@@ -71,6 +71,6 @@
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
-  color: $kGrayscale1;
+  color: $vGrayscale1;
 }
 

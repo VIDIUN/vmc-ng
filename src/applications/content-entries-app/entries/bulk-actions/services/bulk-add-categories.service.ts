@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaCategoryEntry } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunCategoryEntry } from 'vidiun-ngx-client';
 import { BulkActionBaseService } from './bulk-action-base.service';
-import { CategoryEntryAddAction } from 'kaltura-ngx-client';
-import { CategoryEntryListAction } from 'kaltura-ngx-client';
-import { KalturaCategoryEntryFilter } from 'kaltura-ngx-client';
+import { CategoryEntryAddAction } from 'vidiun-ngx-client';
+import { CategoryEntryListAction } from 'vidiun-ngx-client';
+import { VidiunCategoryEntryFilter } from 'vidiun-ngx-client';
 import { CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Injectable()
 export class BulkAddCategoriesService extends BulkActionBaseService<CategoryData[]> {
 
-  constructor(_kalturaServerClient: KalturaClient,
+  constructor(_vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService) {
-    super(_kalturaServerClient);
+    super(_vidiunServerClient);
   }
 
-  public execute(entries: KalturaMediaEntry[], categories: CategoryData[]): Observable<void> {
+  public execute(entries: VidiunMediaEntry[], categories: CategoryData[]): Observable<void> {
     return Observable.create(observer => {
       if (!entries || !entries.length || !categories || !categories.length) {
         observer.error(new Error(this._appLocalization.get('applications.content.bulkActions.noCategoriesOrEntries')));
       }
 
       // load all category entries so we can check if an entry category already exists and prevent sending it
-      const filter = new KalturaCategoryEntryFilter({
+      const filter = new VidiunCategoryEntryFilter({
         entryIdIn: entries.map(({ id }) => id).join(',')
       });
-      this._kalturaServerClient
+      this._vidiunServerClient
         .request(new CategoryEntryListAction({ filter }))
         .subscribe(
           response => {
             // got all entry categoriesId - continue with execution
-            const entryCategories: KalturaCategoryEntry[] = response.objects;
+            const entryCategories: VidiunCategoryEntry[] = response.objects;
             const requests: CategoryEntryAddAction[] = [];
             const alreadyAdded: { entryName: string, categoryName: string }[] = [];
             entries.forEach(entry => {
@@ -45,7 +45,7 @@ export class BulkAddCategoriesService extends BulkActionBaseService<CategoryData
                 // add the request only if the category entry doesn't exist yet
                 if (!this.categoryEntryExists(entry.id, category.id, entryCategories)) {
                   requests.push(new CategoryEntryAddAction({
-                    categoryEntry: new KalturaCategoryEntry({
+                    categoryEntry: new VidiunCategoryEntry({
                       entryId: entry.id,
                       categoryId: category.id
                     })
@@ -93,7 +93,7 @@ export class BulkAddCategoriesService extends BulkActionBaseService<CategoryData
     });
   }
 
-  private categoryEntryExists(entryId: string, categoryId: number, entryCategories: KalturaCategoryEntry[]): boolean {
+  private categoryEntryExists(entryId: string, categoryId: number, entryCategories: VidiunCategoryEntry[]): boolean {
     return !!entryCategories.find(entryCategory => {
       return entryCategory.categoryId === categoryId && entryCategory.entryId === entryId;
     });

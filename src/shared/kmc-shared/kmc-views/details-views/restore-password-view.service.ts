@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissionsService } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
     DetailsViewMetadata,
-    KmcDetailsViewBaseService
-} from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+    VmcDetailsViewBaseService
+} from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { Title } from '@angular/platform-browser';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 export interface RestorePasswordViewArgs {
     hash: string;
@@ -19,13 +19,13 @@ export interface RestorePasswordViewArgs {
 
 
 @Injectable()
-export class RestorePasswordViewService extends KmcDetailsViewBaseService<RestorePasswordViewArgs> {
+export class RestorePasswordViewService extends VmcDetailsViewBaseService<RestorePasswordViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('RestorePasswordViewService'), _browserService,

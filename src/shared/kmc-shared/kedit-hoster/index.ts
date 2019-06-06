@@ -1,1 +1,1 @@
-export * from './kedit-hoster.module';
+export * from './vedit-hoster.module';

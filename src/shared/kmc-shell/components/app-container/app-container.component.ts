@@ -4,7 +4,7 @@ import { AppShellService } from "../../providers/app-shell.service";
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'kKMCAppContainer',
+  selector: 'vVMCAppContainer',
   templateUrl: './app-container.component.html',
   styleUrls: ['./app-container.component.scss']
 })

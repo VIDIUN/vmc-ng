@@ -1,24 +1,24 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <div class="kAdvertisements">
-        <div class="kTitle">{{'applications.content.entryDetails.advertisements.title' | translate}}</div>
-        <div class="kDescription">{{'applications.content.entryDetails.advertisements.description' | translate}}</div>
-        <div class="kButtons">
+    <div class="vAdvertisements">
+        <div class="vTitle">{{'applications.content.entryDetails.advertisements.title' | translate}}</div>
+        <div class="vDescription">{{'applications.content.entryDetails.advertisements.description' | translate}}</div>
+        <div class="vButtons">
             <div>
-                <button pButton class="kButtonDefault"
+                <button pButton class="vButtonDefault"
                         [disabled]="!_advertisementsEnabled"
                         (click)="advertisements.open()"
                         label="{{'applications.content.entryDetails.advertisements.manageAdvertisements' | translate}}"></button>
             </div>
         </div>
     </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #advertisements data-aid="advertisements" [fullScreen]="true">
+<vPopupWidget #advertisements data-aid="advertisements" [fullScreen]="true">
   <ng-template>
-    <kEntryEditor [entry]="_widgetService.data"
+    <vEntryEditor [entry]="_widgetService.data"
                   [entryHasSource]="true"
                   [tab]="'advertisements'"
-                  [parentPopupWidget]="advertisements"></kEntryEditor>
+                  [parentPopupWidget]="advertisements"></vEntryEditor>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

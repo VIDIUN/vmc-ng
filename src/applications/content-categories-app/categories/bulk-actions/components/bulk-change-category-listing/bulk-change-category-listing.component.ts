@@ -2,17 +2,17 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitte
 import { ISubscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaUserFilter } from 'kaltura-ngx-client';
-import { UserListAction } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunUserFilter } from 'vidiun-ngx-client';
+import { UserListAction } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum AppearInListType {
   NoRestriction = 0,
@@ -20,7 +20,7 @@ export enum AppearInListType {
 }
 
 @Component({
-  selector: 'kCategoriesBulkChangeCategoryListing',
+  selector: 'vCategoriesBulkChangeCategoryListing',
   templateUrl: './bulk-change-category-listing.component.html',
   styleUrls: ['./bulk-change-category-listing.component.scss']
 })
@@ -34,7 +34,7 @@ export class CategoriesBulkChangeCategoryListing implements OnInit, OnDestroy, A
   public _sectionBlockerMessage: AreaBlockerMessage;
 
   public _usersProvider = new Subject<SuggestionsProviderData>();
-  public _owner: KalturaUser = null;
+  public _owner: VidiunUser = null;
 
   private _searchUsersSubscription: ISubscription;
   private _parentPopupStateChangeSubscribe: ISubscription;
@@ -44,7 +44,7 @@ export class CategoriesBulkChangeCategoryListing implements OnInit, OnDestroy, A
   public _appearInListType = AppearInListType;
   public _appearInList = null;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
   }
 
   ngOnInit() {
@@ -92,13 +92,13 @@ export class CategoriesBulkChangeCategoryListing implements OnInit, OnDestroy, A
       this._searchUsersSubscription = null;
     }
 
-    this._searchUsersSubscription = this._kalturaServerClient.request(
+    this._searchUsersSubscription = this._vidiunServerClient.request(
       new UserListAction(
         {
-          filter: new KalturaUserFilter({
+          filter: new VidiunUserFilter({
             idOrScreenNameStartsWith: event.query
           }),
-          pager: new KalturaFilterPager({
+          pager: new VidiunFilterPager({
             pageIndex: 0,
             pageSize: 30
           })
@@ -109,7 +109,7 @@ export class CategoriesBulkChangeCategoryListing implements OnInit, OnDestroy, A
       .subscribe(
       data => {
         const suggestions = [];
-        (data.objects || []).forEach((suggestedUser: KalturaUser) => {
+        (data.objects || []).forEach((suggestedUser: VidiunUser) => {
           let isSelectable = true;
           suggestions.push({
             name: `${suggestedUser.screenName} (${suggestedUser.id})`,
@@ -125,11 +125,11 @@ export class CategoriesBulkChangeCategoryListing implements OnInit, OnDestroy, A
       );
   }
 
-  public _convertUserInputToValidValue(value: string): KalturaUser {
+  public _convertUserInputToValidValue(value: string): VidiunUser {
     let result = null;
 
     if (value) {
-      result = new KalturaUser(
+      result = new VidiunUser(
         {
           id: value,
           screenName: value

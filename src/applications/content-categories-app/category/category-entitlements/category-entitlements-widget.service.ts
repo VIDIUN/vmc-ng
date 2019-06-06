@@ -2,34 +2,34 @@ import { Observable } from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Injectable, OnDestroy} from '@angular/core';
 import {CategoryWidget} from '../category-widget';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {CategoryService} from '../category.service';
-import {KalturaClient, KalturaMultiRequest} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {CategoryGetAction} from 'kaltura-ngx-client';
-import {KalturaInheritanceType} from 'kaltura-ngx-client';
-import {KalturaNullableBoolean} from 'kaltura-ngx-client';
-import {KalturaUser} from 'kaltura-ngx-client';
-import {UserGetAction} from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentCategoryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunClient, VidiunMultiRequest} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {CategoryGetAction} from 'vidiun-ngx-client';
+import {VidiunInheritanceType} from 'vidiun-ngx-client';
+import {VidiunNullableBoolean} from 'vidiun-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
+import {UserGetAction} from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentCategoryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class CategoryEntitlementsWidget extends CategoryWidget implements OnDestroy {
 
   public entitlementsForm: FormGroup;
-  public parentCategory: KalturaCategory = null;
+  public parentCategory: VidiunCategory = null;
 
   public inheritUsersPermissionsOriginalValue: boolean;
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _formBuilder: FormBuilder,
               private _appLocalization: AppLocalization,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _categoryService: CategoryService,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(ContentCategoryViewSections.Entitlements, logger);
 
     this._buildForm();
@@ -37,7 +37,7 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
 
   public fetchUpdatedMembersCount(): Observable<number> {
       if (this.data) {
-          return this._kalturaClient.request(
+          return this._vidiunClient.request(
               new CategoryGetAction({id: this.data.id})
           ).pipe(cancelOnDestroy(this, this.widgetReset$))
               .map(value => {
@@ -49,7 +49,7 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
   }
 
   protected onActivate(firstTimeActivating: boolean): Observable<{ failed: boolean }> {
-    if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS)) {
+    if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS)) {
 	    this.entitlementsForm.disable({emitEvent: false});
     }
 
@@ -72,9 +72,9 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
   }
 
 
-  private _fetchAdditionalData(): Observable<{owner: KalturaUser, parentCategory?: KalturaCategory}> {
+  private _fetchAdditionalData(): Observable<{owner: VidiunUser, parentCategory?: VidiunCategory}> {
 
-      const multiRequest = new KalturaMultiRequest();
+      const multiRequest = new VidiunMultiRequest();
       if (this.data.owner) {
           multiRequest.requests.push(
               new UserGetAction({userId: this.data.owner})
@@ -88,7 +88,7 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
       }
 
       if (multiRequest.requests.length) {
-          return this._kalturaClient.multiRequest(multiRequest)
+          return this._vidiunClient.multiRequest(multiRequest)
               .map(
                   data => {
                       if (data.hasErrors()) {
@@ -105,12 +105,12 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
                           }
                       }
 
-                      let owner: KalturaUser = null;
+                      let owner: VidiunUser = null;
                       let parentCategory = null;
                       data.forEach(response => {
-                          if (response.result instanceof KalturaCategory) {
+                          if (response.result instanceof VidiunCategory) {
                               parentCategory = response.result;
-                          } else if (response.result instanceof KalturaUser) {
+                          } else if (response.result instanceof VidiunUser) {
                               owner = response.result;
                           }
                       });
@@ -158,17 +158,17 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
     });
   }
 
-  private _resetFormData(owner: KalturaUser) {
+  private _resetFormData(owner: VidiunUser) {
 
-      const hasCanModifyPermission = this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_CATEGORY_USERS);
+      const hasCanModifyPermission = this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_CATEGORY_USERS);
 
-    this.inheritUsersPermissionsOriginalValue = this.parentCategory && this.data.inheritanceType === KalturaInheritanceType.inherit;
+    this.inheritUsersPermissionsOriginalValue = this.parentCategory && this.data.inheritanceType === VidiunInheritanceType.inherit;
     this.entitlementsForm.reset(
       {
         contentPrivacy: this.data.privacy,
         categoryListing: this.data.appearInList,
         contentPublishPermissions: this.data.contributionPolicy,
-        moderateContent: this.data.moderation === KalturaNullableBoolean.trueValue,
+        moderateContent: this.data.moderation === VidiunNullableBoolean.trueValue,
         inheritUsersPermissions: this.inheritUsersPermissionsOriginalValue,
         defaultPermissionLevel: {
           value: this.data.defaultPermissionLevel,
@@ -184,7 +184,7 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
   }
 
 
-  protected onDataSaving(newData: KalturaCategory, request: KalturaMultiRequest): void {
+  protected onDataSaving(newData: VidiunCategory, request: VidiunMultiRequest): void {
 
     if (!this.entitlementsForm.valid) {
       throw new Error('Cannot perform save operation since the entitlement form is invalid');
@@ -195,8 +195,8 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
     newData.privacy = metadataFormValue.contentPrivacy;
     newData.appearInList = metadataFormValue.categoryListing;
     newData.contributionPolicy = metadataFormValue.contentPublishPermissions;
-    newData.moderation = metadataFormValue.moderateContent !== true ? KalturaNullableBoolean.falseValue : KalturaNullableBoolean.trueValue;
-    newData.inheritanceType = metadataFormValue.inheritUsersPermissions ? KalturaInheritanceType.inherit : KalturaInheritanceType.manual;
+    newData.moderation = metadataFormValue.moderateContent !== true ? VidiunNullableBoolean.falseValue : VidiunNullableBoolean.trueValue;
+    newData.inheritanceType = metadataFormValue.inheritUsersPermissions ? VidiunInheritanceType.inherit : VidiunInheritanceType.manual;
     if (!metadataFormValue.inheritUsersPermissions) {
       newData.defaultPermissionLevel = metadataFormValue.defaultPermissionLevel;
 
@@ -228,7 +228,7 @@ export class CategoryEntitlementsWidget extends CategoryWidget implements OnDest
   ngOnDestroy() {
   }
 
-  public openCategory(category: KalturaCategory): void {
+  public openCategory(category: VidiunCategory): void {
     if (category && category.id) {
       this._categoryService.openCategory(category);
     }

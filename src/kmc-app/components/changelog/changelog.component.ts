@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 
 @Component({
-  selector: 'kChangelog',
+  selector: 'vChangelog',
   templateUrl: './changelog.component.html',
   styleUrls: ['./changelog.component.scss']
 })

@@ -1,12 +1,12 @@
 @import '_variables.scss';
 
-$mc-theme-font-path : '~@kaltura-ng/mc-theme/themes/default/fonts';
-@import '~@kaltura-ng/mc-theme/themes/default/scss/index.scss';
+$mc-theme-font-path : '~@vidiun-ng/mc-theme/themes/default/fonts';
+@import '~@vidiun-ng/mc-theme/themes/default/scss/index.scss';
 
 $spinner-circle-radius: 4px;
 $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 166, 26), rgb(27, 74, 151), rgb(0, 171, 204), rgb(177, 210, 56), rgb(252, 210, 3);
 
-@keyframes kaltura-spinner {
+@keyframes vidiun-spinner {
   0% {
     transform: rotate(0deg) scale(0.7);
     opacity: 1;
@@ -46,7 +46,7 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
   width: 100px;
   height: 100px;
   position: relative;
-  animation: kaltura-spinner 2.5s infinite;
+  animation: vidiun-spinner 2.5s infinite;
 
   span {
     width: $spinner-circle-radius * 2; height: $spinner-circle-radius * 2;
@@ -65,14 +65,14 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
   }
 }
 
-.kModal {
+.vModal {
     overflow: hidden;
 
     .appMenu {
         z-index: 501 !important;
     }
 }
-.kmcDetailsLayout {
+.vmcDetailsLayout {
   font-size: 15px;
   background-color: $appBkgColor;
   padding-top: 20px;
@@ -81,23 +81,23 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
   button{
     cursor: pointer;
   }
-  .kDetailsWrapper{
+  .vDetailsWrapper{
     display: flex;
     flex-direction: column;
     height: 100%;
-    .kDetailsHeader{
+    .vDetailsHeader{
       display: flex;
       flex-direction: row;
       align-items: center;
       flex: 0 0 auto;
-      .kBackBtn{
+      .vBackBtn{
         margin-top: 4px;
         margin-left: -46px;
         margin-right: 28px;
         border: none;
         outline: none;
         background-color: transparent;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         height: 20px;
         width: 18px;
         font-size: 24px;
@@ -105,18 +105,18 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
           box-shadow: none;
         }
         &:hover{
-          color: $kPrimary;
+          color: $vPrimary;
         }
       }
-      .kTypeIcon{
+      .vTypeIcon{
         width: 24px;
         height: 24px;
         margin-top: 2px;
         font-size: 24px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
       }
-      .kTitle{
-        color: $kGrayscale1;
+      .vTitle{
+        color: $vGrayscale1;
         font-size: 24px;
         font-weight: 700;
         margin-right: 40px;
@@ -124,43 +124,43 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      .kSaveBtn{
+      .vSaveBtn{
         margin-left: auto;
         width: 100px;
         margin-right: 24px;
       }
-      .kNavigationBtn{
+      .vNavigationBtn{
         font-size: 24px;
         margin-left: auto;
         width: 40px;
         margin-left: 0px;
         margin-right: 0px;
       }
-      .kNavigationBtnLeft{
-        @extend .kNavigationBtn;
+      .vNavigationBtnLeft{
+        @extend .vNavigationBtn;
         border-right: none;
         border-bottom-right-radius: 0px;
         border-top-right-radius: 0px;
       }
-      .kNavigationBtnRight{
-        @extend .kNavigationBtn;
+      .vNavigationBtnRight{
+        @extend .vNavigationBtn;
         border-bottom-left-radius: 0px;
         border-top-left-radius: 0px;
       }
     }
-    .kHeaderDetails{
+    .vHeaderDetails{
       width: 100%;
       height: 54px;
       padding-top: 12px;
       box-sizing: border-box;
       flex: 0 0 auto;
     }
-    .kDetailsMain{
+    .vDetailsMain{
       display: flex;
       flex-direction: row;
       height: 100%;
       min-height: 0;
-      .kSections{
+      .vSections{
         display: flex;
         flex-direction: column;
         overflow-y: hidden;
@@ -174,26 +174,26 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
               li {
                   line-height: 44px;
                   cursor: pointer;
-                  color: $kGrayscale3;
+                  color: $vGrayscale3;
                   font-weight: 700;
                   padding-left: 24px;
                   &:hover {
-                      background-color: $kGrayscale7;
+                      background-color: $vGrayscale7;
                   }
                   &.active {
-                      color: $kTertiary;
+                      color: $vTertiary;
                       cursor: default;
                   }
               }
           }
-        .kSectionHasErrors::before {
-          font-family: 'kmcng-icon-pack';
+        .vSectionHasErrors::before {
+          font-family: 'vmcng-icon-pack';
           content: '\e922';
-          color: $kDandger;
+          color: $vDandger;
           margin-right: 8px;
           font-size: 10px;
         }
-        .kPreview{
+        .vPreview{
           width: 280px;
           background-color: #ffffff;
           margin-bottom: 20px;
@@ -202,7 +202,7 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
           border-radius: 3px;
         }
       }
-      .kDetailsContent{
+      .vDetailsContent{
         width: 100%;
         height: 100%;
         background-color: #ffffff;
@@ -213,22 +213,22 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
       }
     }
   }
-  .kSpacer{
+  .vSpacer{
     display: block;
     height: 40px;
   }
 }
-.kForceFix{
+.vForceFix{
   position: fixed !important;
   margin-top: 0px !important;
 }
-.kLocked{
+.vLocked{
   opacity: 0.5;
   pointer-events: none;
 }
-.kNotification{
+.vNotification{
   height: 66px;
-  background-color: $kGrayscale4;
+  background-color: $vGrayscale4;
   color: black;
   border-radius: 3px;
   font-size: 15px;
@@ -238,36 +238,36 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
   align-items: center;
 }
 
-.kHidden {
+.vHidden {
   visibility: hidden;
   width: 0 !important;
   height: 0 !important;
   padding: 0 !important;
 }
-.kMoreActionsButton {
-  color: $kGrayscale3 !important;
+.vMoreActionsButton {
+  color: $vGrayscale3 !important;
   background-color: rgba(0, 0, 0, 0) !important;
   border: none !important;
   font-size: 24px !important;
   outline: 0;
   &:active, &:hover{
-    color: $kGrayscale1 !important;
+    color: $vGrayscale1 !important;
   }
 }
 
-.kDisabledLink {
-  color: $kGrayscale5;
+.vDisabledLink {
+  color: $vGrayscale5;
   pointer-events: none;
   cursor: not-allowed;
 }
 @media screen and (max-width: 1090px) {
-  .kmcDetailsLayout .kDetailsWrapper .kDetailsHeader .kBackBtn {
+  .vmcDetailsLayout .vDetailsWrapper .vDetailsHeader .vBackBtn {
     margin-left: 0px;
     margin-right: 12px;
   }
 }
 
-.kTableColumn {
+.vTableColumn {
   display: inline-block;
   max-width: 100%;
   overflow: hidden;
@@ -275,12 +275,12 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
   white-space: nowrap;
 }
 
-.kShowAsDisabled {
+.vShowAsDisabled {
   opacity: 0.5 !important;
   cursor: default !important;
 }
 
-.kPermissionsListPanel {
+.vPermissionsListPanel {
   width: 320px;
 
   &.ui-multiselect-panel {
@@ -322,16 +322,16 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
     margin-right: 15px;
   }
 
-  .kPermissionItem {
+  .vPermissionItem {
     font-size: 15px;
   }
 }
-.kDropdown{
-    border: 1px solid $kGrayscale4;
+.vDropdown{
+    border: 1px solid $vGrayscale4;
     border-radius: 4px;
     background-color: #ffffff;
     &:hover{
-        border: 1px solid $kPrimary;
+        border: 1px solid $vPrimary;
     }
     &:active{
         box-shadow: 0 0 0 3px rgba(0,167,132,0.4);
@@ -343,7 +343,7 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
     transition: all 100ms ease-in-out;
 }
 .ui-column-resizer-helper {
-    background-color: $kGrayscale5;
+    background-color: $vGrayscale5;
 }
 .ui-button{
     .ui-button-icon-left{
@@ -373,16 +373,16 @@ $spinner-colors: rgb(218, 31, 38), rgb(6, 168, 133), rgb(0, 147, 68), rgb(248, 1
     }
 }
 body {
-    kpopupwidget[data-aid="categoriesFilterPopup"],
-    kpopupwidget[data-aid="entriesRefinePopup"],
-    kpopupwidget[data-aid="resultsLimitPopup"],
-    kpopupwidget[data-aid="manageUsersRefinePopup"],
-    kpopupwidget[data-aid="bulkLogRefinePopup"],
-    kpopupwidget[data-aid="dropFoldersRefinePopup"],
-    kpopupwidget[data-aid="categoriesPref"],
-    kpopupwidget[data-aid="usersettings"],
-    kpopupwidget[data-aid="categoriesRefinePopup"] {
-        .kPopupWidget {
+    vpopupwidget[data-aid="categoriesFilterPopup"],
+    vpopupwidget[data-aid="entriesRefinePopup"],
+    vpopupwidget[data-aid="resultsLimitPopup"],
+    vpopupwidget[data-aid="manageUsersRefinePopup"],
+    vpopupwidget[data-aid="bulkLogRefinePopup"],
+    vpopupwidget[data-aid="dropFoldersRefinePopup"],
+    vpopupwidget[data-aid="categoriesPref"],
+    vpopupwidget[data-aid="usersettings"],
+    vpopupwidget[data-aid="categoriesRefinePopup"] {
+        .vPopupWidget {
             box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .24);
         }
     }

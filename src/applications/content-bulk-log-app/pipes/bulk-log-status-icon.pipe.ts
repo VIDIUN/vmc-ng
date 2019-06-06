@@ -1,28 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaBatchJobStatus } from 'kaltura-ngx-client';
+import { VidiunBatchJobStatus } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kBulkLogTableStatusIcon' })
+@Pipe({ name: 'vBulkLogTableStatusIcon' })
 export class BulkLogStatusIconPipe implements PipeTransform {
   transform(value: number): string {
     switch (value) {
-      case KalturaBatchJobStatus.pending:
-      case KalturaBatchJobStatus.queued:
-      case KalturaBatchJobStatus.dontProcess:
-        return 'kIconUpload2 kBulkLogTablePending';
+      case VidiunBatchJobStatus.pending:
+      case VidiunBatchJobStatus.queued:
+      case VidiunBatchJobStatus.dontProcess:
+        return 'vIconUpload2 vBulkLogTablePending';
 
-      case KalturaBatchJobStatus.processing:
-      case KalturaBatchJobStatus.almostDone:
-        return 'kIconSync kBulkLogTableProgress';
+      case VidiunBatchJobStatus.processing:
+      case VidiunBatchJobStatus.almostDone:
+        return 'vIconSync vBulkLogTableProgress';
 
-      case KalturaBatchJobStatus.finished:
-      case KalturaBatchJobStatus.finishedPartially: // waiting for icon
-        return 'kIconComplete kBulkLogTableSuccess';
+      case VidiunBatchJobStatus.finished:
+      case VidiunBatchJobStatus.finishedPartially: // waiting for icon
+        return 'vIconComplete vBulkLogTableSuccess';
 
-      case KalturaBatchJobStatus.failed:
-      case KalturaBatchJobStatus.fatal:
-      case KalturaBatchJobStatus.aborted: // waiting for icon
-      case KalturaBatchJobStatus.retry: // waiting for icon
-        return 'kIconError kBulkLogTableFailed';
+      case VidiunBatchJobStatus.failed:
+      case VidiunBatchJobStatus.fatal:
+      case VidiunBatchJobStatus.aborted: // waiting for icon
+      case VidiunBatchJobStatus.retry: // waiting for icon
+        return 'vIconError vBulkLogTableFailed';
 
       default:
         return '';

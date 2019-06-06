@@ -2,20 +2,20 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitte
 import { ISubscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { TagSearchAction } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaTagFilter } from 'kaltura-ngx-client';
-import { KalturaTaggedObjectType } from 'kaltura-ngx-client';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { TagSearchAction } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunTagFilter } from 'vidiun-ngx-client';
+import { VidiunTaggedObjectType } from 'vidiun-ngx-client';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kBulkAddTags',
+  selector: 'vBulkAddTags',
   templateUrl: './bulk-add-tags.component.html',
   styleUrls: ['./bulk-add-tags.component.scss']
 })
@@ -34,7 +34,7 @@ export class BulkAddTags implements OnInit, OnDestroy, AfterViewInit {
   private _parentPopupStateChangeSubscribe : ISubscription;
   private _confirmClose: boolean = true;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService) {
   }
 
   ngOnInit() {
@@ -83,16 +83,16 @@ export class BulkAddTags implements OnInit, OnDestroy, AfterViewInit {
       this._searchTagsSubscription = null;
     }
 
-    const requestSubscription = this._kalturaServerClient.request(
+    const requestSubscription = this._vidiunServerClient.request(
       new TagSearchAction(
         {
-          tagFilter: new KalturaTagFilter(
+          tagFilter: new VidiunTagFilter(
             {
               tagStartsWith : event.query,
-              objectTypeEqual : KalturaTaggedObjectType.entry
+              objectTypeEqual : VidiunTaggedObjectType.entry
             }
           ),
-          pager: new KalturaFilterPager({
+          pager: new VidiunFilterPager({
             pageIndex : 0,
             pageSize : 30
           })

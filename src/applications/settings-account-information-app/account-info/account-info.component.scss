@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
-.kContainer {
+.vContainer {
   width: 100%;
-  background-color: $kSecondary;
+  background-color: $vSecondary;
   display: flex;
   border-radius: 3px;
   color: #FFFFFF;
@@ -10,39 +10,39 @@
   padding-bottom: 40px;
 
 
-  .kGraphicsContainer {
+  .vGraphicsContainer {
     flex: 0 0 auto;
     width: 160px;
     text-align: center;
 
-    .kIcon {
+    .vIcon {
       font-size: 128px;
     }
   }
-  .kAccountInfoContainer {
+  .vAccountInfoContainer {
     flex: 1 1 auto;
 
     padding-right: 35px;
     width: 100%;
 
-    .kHeader {
+    .vHeader {
       font-size: 24px;
     }
 
-    .kTrialExpiration{
+    .vTrialExpiration{
       padding-top: 16px;
       font-size: 18px;
     }
 
-    .kStatistics {
+    .vStatistics {
       padding-top: 16px;
-      .kBandwidth, .kStorage {
+      .vBandwidth, .vStorage {
         font-size: 18px;
         line-height: 24px;
       }
     }
 
-    .kContactUs {
+    .vContactUs {
       padding-top: 16px;
       font-size: 15px;
     }

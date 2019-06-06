@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginScreens } from '../login.component';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { serverConfig } from 'config/server';
 
 @Component({
-  selector: 'kKMCForgotPasswordForm',
+  selector: 'vVMCForgotPasswordForm',
   templateUrl: './forgot-password-form.component.html',
   styleUrls: ['./forgot-password-form.component.scss']
 })
@@ -26,7 +26,7 @@ export class ForgotPasswordFormComponent {
   public _forgotPasswordForm: FormGroup;
   public _emailField: AbstractControl;
   public _displayEmailField = true;
-  public _contactUsLinkExists = !!serverConfig.externalLinks.kaltura && !!serverConfig.externalLinks.kaltura.contactUs;
+  public _contactUsLinkExists = !!serverConfig.externalLinks.vidiun && !!serverConfig.externalLinks.vidiun.contactUs;
 
   public get _emailValidationMessage(): string {
     return this._emailField.invalid && this._emailField.touched ? 'app.login.error.email' : '';
@@ -61,6 +61,6 @@ export class ForgotPasswordFormComponent {
   }
 
   public _openContactUs(): void {
-    this._browserService.openLink(serverConfig.externalLinks.kaltura.contactUs);
+    this._browserService.openLink(serverConfig.externalLinks.vidiun.contactUs);
   }
 }

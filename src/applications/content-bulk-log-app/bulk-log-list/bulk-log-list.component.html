@@ -1,71 +1,71 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kBulkLog kOverrideFAIcons">
-    <div #entriesTableHolder class="kBulkLogHolder kContent">
-      <kSticky [stickyClass]="'kStickyClass'" stickyId="bulklogFilters" [scrollOffset]="80" [sticksTo]="'header'">
-        <div class="kBulkLogTableFilters kContent">
-          <span class="kSelectedEntriesNum" *ngIf="(_store.bulkLog.data$ | async)?.totalCount">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vBulkLog vOverrideFAIcons">
+    <div #entriesTableHolder class="vBulkLogHolder vContent">
+      <vSticky [stickyClass]="'vStickyClass'" stickyId="bulklogFilters" [scrollOffset]="80" [sticksTo]="'header'">
+        <div class="vBulkLogTableFilters vContent">
+          <span class="vSelectedEntriesNum" *ngIf="(_store.bulkLog.data$ | async)?.totalCount">
             {{(_store.bulkLog.data$ | async)?.totalCount}} {{'applications.content.bulkUpload.table.header' | translate}}
           </span>
 
-          <div [class.kHidden]="!selectedBulkLogItems.length" class="kBulkOperations">
-            <span class="kSelectedEntriesLabel">
+          <div [class.vHidden]="!selectedBulkLogItems.length" class="vBulkOperations">
+            <span class="vSelectedEntriesLabel">
               • {{selectedBulkLogItems.length}} {{'applications.content.bulkUpload.list.selected' | translate}}
             </span>
-            <button pButton icon="kIcontrash" class="kButtonDanger kBulkDeleteBtn"
-                    [disabled]="_kmcPermissions.BULK_LOG_DELETE | kDisabledIfNotPermitted"
+            <button pButton icon="vIcontrash" class="vButtonDanger vBulkDeleteBtn"
+                    [disabled]="_vmcPermissions.BULK_LOG_DELETE | vDisabledIfNotPermitted"
                     (click)="_deleteFiles()"></button>
 
-            <a class="kBulkCancel" (click)="_clearSelection()">
+            <a class="vBulkCancel" (click)="_clearSelection()">
               {{'applications.content.bulkUpload.list.cancel' | translate}}
             </a>
           </div>
-          <div [class.kHidden]="selectedBulkLogItems.length" class="kFilters">
-            <div #refineBtn class="kRefine kDropdown">
-              <i class="kIconfilter"></i>
+          <div [class.vHidden]="selectedBulkLogItems.length" class="vFilters">
+            <div #refineBtn class="vRefine vDropdown">
+              <i class="vIconfilter"></i>
               <span>{{'applications.content.bulkUpload.list.refine' | translate}}</span>
-              <i class="kIcondropdown_arrow_bottom dropdown"></i>
+              <i class="vIcondropdown_arrow_bottom dropdown"></i>
             </div>
           </div>
           <button pButton
-                  class="kButtonDefault kRefreshBtn small"
+                  class="vButtonDefault vRefreshBtn small"
                   type="text"
-                  icon="kIconrefresh"
-                  [kTooltip]="'applications.content.bulkUpload.list.refresh' | translate"
+                  icon="vIconrefresh"
+                  [vTooltip]="'applications.content.bulkUpload.list.refresh' | translate"
                   (click)="_reload()"></button>
         </div>
-      </kSticky>
-      <kSticky #tags [stickyClass]="'kStickyClass'" stickyId="bulklogTags" [sticksTo]="'bulklogFilters'">
-        <div class="kContent">
-          <k-bulk-log-tags   [refineFilters]="_refineFilters"
-                             (onTagsChange)="_onTagsChange()"></k-bulk-log-tags>
+      </vSticky>
+      <vSticky #tags [stickyClass]="'vStickyClass'" stickyId="bulklogTags" [sticksTo]="'bulklogFilters'">
+        <div class="vContent">
+          <v-bulk-log-tags   [refineFilters]="_refineFilters"
+                             (onTagsChange)="_onTagsChange()"></v-bulk-log-tags>
         </div>
-      </kSticky>
+      </vSticky>
 
-      <k-area-blocker [showLoader]="_tableIsBusy"
+      <v-area-blocker [showLoader]="_tableIsBusy"
                       [message]="_tableBlockerMessage"
                       [bodyScroll]="true">
-      <kBulkLogTable class="kBulkLogTable"
+      <vBulkLogTable class="vBulkLogTable"
                      [list]="(_store.bulkLog.data$ | async)?.items"
                      [filter]="_query"
                      (actionSelected)="_onActionSelected($event)"
                      [(selectedBulkLogItems)]="selectedBulkLogItems"
-      ></kBulkLogTable>
-      </k-area-blocker>
+      ></vBulkLogTable>
+      </v-area-blocker>
 
-      <div class="kBulkLogTableFooter kContent" #footer *ngIf="(_store.bulkLog.data$ | async)?.totalCount">
+      <div class="vBulkLogTableFooter vContent" #footer *ngIf="(_store.bulkLog.data$ | async)?.totalCount">
         <p-paginator
           [rows]="_query.pageSize"
           [first]="_query.pageIndex * _query.pageSize"
           [totalRecords]="(_store.bulkLog.data$ | async)?.totalCount"
           [rowsPerPageOptions]="[25,50,100,250]"
           (onPageChange)="_onPaginationChanged($event)"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #refinePopup
+<vPopupWidget #refinePopup
               data-aid="bulkLogRefinePopup"
               placement="top"
               [popupWidth]="400"
@@ -73,12 +73,12 @@
               [closeBtn]="false"
               [targetRef]="refineBtn"
               [targetOffset]="{'x':-236, 'y': -15}"
-              kSticky [sticksTo]="'header'" [stickyClass]="'kForceFix'" [stickyId]="'bulklogFilterPopup'"
+              vSticky [sticksTo]="'header'" [stickyClass]="'vForceFix'" [stickyId]="'bulklogFilterPopup'"
               [scrollOffset]="80">
   <ng-template>
-    <k-bulk-log-refine-filters   [refineFilters]="_refineFilters"
-                                 [parentPopupWidget]="refinePopup"></k-bulk-log-refine-filters>
+    <v-bulk-log-refine-filters   [refineFilters]="_refineFilters"
+                                 [parentPopupWidget]="refinePopup"></v-bulk-log-refine-filters>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 

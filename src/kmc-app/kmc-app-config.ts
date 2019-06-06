@@ -1,7 +1,7 @@
 
-export interface KmcAppConfig {
+export interface VmcAppConfig {
   storageNamespace: string;
-  kalturaServer: {
+  vidiunServer: {
       expiry: number;
       privileges: string;
   },
@@ -17,11 +17,11 @@ export interface KmcAppConfig {
 }
 
 
-export const kmcAppConfig: KmcAppConfig = {
-  'storageNamespace': 'kmc-ng',
-  'kalturaServer': {
+export const vmcAppConfig: VmcAppConfig = {
+  'storageNamespace': 'vmc-ng',
+  'vidiunServer': {
       "expiry": 86400,
-      "privileges": "disableentitlement,appid:kmc"
+      "privileges": "disableentitlement,appid:vmc"
   },
   'routing': {
     'errorRoute': '/error',

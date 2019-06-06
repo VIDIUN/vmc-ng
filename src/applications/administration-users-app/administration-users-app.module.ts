@@ -6,14 +6,14 @@ import { AdministrationUsersComponent } from './administration-users.component';
 import { UsersComponentsList } from './users/users-components-list';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule } from '@kaltura-ng/kaltura-ui';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
+import { AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule } from '@vidiun-ng/vidiun-ui';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
 import { ButtonModule, DropdownModule, MenuModule, PaginatorModule } from 'primeng/primeng';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
@@ -27,14 +27,14 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     PopupWidgetModule,
     FormsModule,
     ReactiveFormsModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     DropdownModule,
-    KalturaUIModule,
+    VidiunUIModule,
     TooltipModule,
     StickyModule,
     RouterModule.forChild(routing),
     TooltipModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       DateFormatModule,
   ],
   declarations: [

@@ -1,17 +1,17 @@
 import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
-import { AppAuthentication, BrowserService } from 'shared/kmc-shell/index';
-import { buildCDNUrl, getKalturaServerUri, serverConfig } from 'config/server';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { LiveAnalyticsMainViewService } from '../kmc-views/main-views/live-analytics-main-view.service';
+import { AppAuthentication, BrowserService } from 'shared/vmc-shell/index';
+import { buildCDNUrl, getVidiunServerUri, serverConfig } from 'config/server';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { LiveAnalyticsMainViewService } from '../vmc-views/main-views/live-analytics-main-view.service';
 
 @Component({
-    selector: 'kAnalyticsLiveFrame',
+    selector: 'vAnalyticsLiveFrame',
     template: '<iframe frameborder="0px" [src]="_url | safe"></iframe>',
     styles: [
         ':host { display: block; width: 100%; height: 100%; }',
         'iframe { width: 100%; height: 100% }'
     ],
-    providers: [KalturaLogger.createLogger('AnalyticsLiveFrameComponent')]
+    providers: [VidiunLogger.createLogger('AnalyticsLiveFrameComponent')]
 })
 export class AnalyticsLiveFrameComponent implements OnInit, OnDestroy, OnChanges {
     @Input() entryId: string;
@@ -19,7 +19,7 @@ export class AnalyticsLiveFrameComponent implements OnInit, OnDestroy, OnChanges
     public _url = null;
 
     constructor(private appAuthentication: AppAuthentication,
-                private logger: KalturaLogger,
+                private logger: VidiunLogger,
                 private browserService: BrowserService,
                 private _liveAnalyticsView: LiveAnalyticsMainViewService
     ) {
@@ -50,12 +50,12 @@ export class AnalyticsLiveFrameComponent implements OnInit, OnDestroy, OnChanges
 
             let cdn_host = buildCDNUrl('');
             cdn_host = cdn_host.substr(cdn_host.indexOf('://')+3); // remove protocol as Live Analytivs app adds it itself
-            window['kmc'] = {
+            window['vmc'] = {
                 'vars': {
-                    'ks': this.appAuthentication.appUser.ks,
+                    'vs': this.appAuthentication.appUser.vs,
                     'partner_id': this.appAuthentication.appUser.partnerId,
                     'cdn_host':  cdn_host,
-                    'service_url': getKalturaServerUri(),
+                    'service_url': getVidiunServerUri(),
                     'liveanalytics': {
                         'player_id': +serverConfig.externalApps.liveAnalytics.uiConfId || '',
                         map_urls: serverConfig.externalApps.liveAnalytics.mapUrls || [],
@@ -71,12 +71,12 @@ export class AnalyticsLiveFrameComponent implements OnInit, OnDestroy, OnChanges
         } catch (ex) {
             this.logger.warn(`Could not load live real-time dashboard, please check that liveAnalytics configurations are loaded correctly\n error: ${ex}`);
             this._url = null;
-            window['kmc'] = null;
+            window['vmc'] = null;
         }
     }
 
     ngOnDestroy() {
         this._url = null;
-        window['kmc'] = null;
+        window['vmc'] = null;
     }
 }

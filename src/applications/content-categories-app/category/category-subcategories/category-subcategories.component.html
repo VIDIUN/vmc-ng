@@ -1,27 +1,27 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader"
                 [message]="_widgetService.sectionBlockerMessage">
-  <div class="kSubcategoriesHolder">
-    <kSubcategoriesListBulkOperationsContent
+  <div class="vSubcategoriesHolder">
+    <vSubcategoriesListBulkOperationsContent
       [itemsTotalCount]="_subcategoriesCount"
       (deleteItems)="_deleteSelected($event)"
       (clearSelection)="_clearSelection()"
       (moveItems)="_widgetService.moveSubcategories($event)"
       [selectedItems]="_selectedSubcategories"
       (addItem)="addNewSubcategory.open()">
-    </kSubcategoriesListBulkOperationsContent>
+    </vSubcategoriesListBulkOperationsContent>
 
-    <kCategorySubcategoriesTable
-      class="kSubcategoriesTable"
+    <vCategorySubcategoriesTable
+      class="vSubcategoriesTable"
       [(selectedSubcategories)]="_selectedSubcategories"
       [subcategories]="_subcategories"
       (onActionSelected)="_onActionSelected($event)">
-    </kCategorySubcategoriesTable>
+    </vCategorySubcategoriesTable>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
 
-<kPopupWidget #addNewSubcategory data-aid="addNewSubcategory" [popupWidth]="586" [popupHeight]="260" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #addNewSubcategory data-aid="addNewSubcategory" [popupWidth]="586" [popupHeight]="260" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kNewSubcategory [categoryParentId]="_widgetService.data?.id" (onSubCategoryAdded)="_widgetService.addSubcategoryToList($event)" [parentPopupWidget]="addNewSubcategory"></kNewSubcategory>
+    <vNewSubcategory [categoryParentId]="_widgetService.data?.id" (onSubCategoryAdded)="_widgetService.addSubcategoryToList($event)" [parentPopupWidget]="addNewSubcategory"></vNewSubcategory>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

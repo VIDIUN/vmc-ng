@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLanguage } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLanguage } from 'vidiun-ngx-client';
 
 @Injectable()
 export class LanguageOptionsService {
@@ -13,8 +13,8 @@ export class LanguageOptionsService {
     private _prepare(): void {
         // load all supported languages
         this._options = [];
-        const excludedLanguages = ['he', 'id', 'yi']; // duplicated languages TODO [KMCNG] - should be checked with backend
-        for (const lang in KalturaLanguage) {
+        const excludedLanguages = ['he', 'id', 'yi']; // duplicated languages TODO [VMCNG] - should be checked with backend
+        for (const lang in VidiunLanguage) {
             if (lang !== 'en' && excludedLanguages.indexOf(lang) === -1) { // we push English to the top of the array after sorting
                 const value = lang.toUpperCase();
                 const label = this._appLocalization.get(`languages.${value}`);
@@ -34,14 +34,14 @@ export class LanguageOptionsService {
         this._options.unshift({ label: this._appLocalization.get('languages.EN'), value: 'EN' });
     }
 
-    public getLabelByValue(value: string) : KalturaLanguage {
+    public getLabelByValue(value: string) : VidiunLanguage {
         let result = null;
         if (value) {
             let langCode = value.toString().toLowerCase();
             if (langCode.length === 4) {
                 langCode = langCode.substr(0, 2) + langCode.charAt(2).toUpperCase() + langCode.slice(3);
             }
-            result = KalturaLanguage[langCode];
+            result = VidiunLanguage[langCode];
         }
 
         return result;
@@ -52,8 +52,8 @@ export class LanguageOptionsService {
         let result = null;
         if (label) {
             const excludedLanguages = ['he', 'id', 'yi'];
-            for (const lang in KalturaLanguage) {
-                if (KalturaLanguage[lang] === label && excludedLanguages.indexOf(lang) === -1) {
+            for (const lang in VidiunLanguage) {
+                if (VidiunLanguage[lang] === label && excludedLanguages.indexOf(lang) === -1) {
                     result = lang.toUpperCase();
                 }
             }

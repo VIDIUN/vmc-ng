@@ -1,4 +1,4 @@
-<div class="kEntriesTable" [class.noResults]="!_entries?.length" [class.kTagsVisible]="isTagsBarVisible">
+<div class="vEntriesTable" [class.noResults]="!_entries?.length" [class.vTagsVisible]="isTagsBarVisible">
     <p-table
             [scrollable]="true"
             scrollHeight="100%"
@@ -13,12 +13,12 @@
             (onColResize)="_columnsResizeManager.onColumnResize($event)"
             [(selection)]="selectedEntries"
             (selectionChange)="_onSelectionChange($event)"
-            kStickyHeader [sticksTo]="'entriesTags'" stickyClass="stickyHeader" [stickyId]="'entriesTable'">
+            vStickyHeader [sticksTo]="'entriesTags'" stickyClass="stickyHeader" [stickyId]="'entriesTable'">
         <ng-template pTemplate="colgroup" let-columns>
             <colgroup>
                 <col style="width:44px; padding-left: 13px" *ngIf="showBulkSelect">
                 <col data-cid="thumbnailUrl"
-                     *ngIf="_columnsMetadata.thumbnailUrl && !(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)"
+                     *ngIf="_columnsMetadata.thumbnailUrl && !(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)"
                      [ngStyle]="_columnsMetadata.thumbnailUrl.style">
                 <col data-cid="name"
                      *ngIf="_columnsMetadata.name"
@@ -62,12 +62,12 @@
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th data-cid="thumbnailUrl" pResizableColumn [ngStyle]="_columnsMetadata.thumbnailUrl.style"
-                    *ngIf="_columnsMetadata.thumbnailUrl && !(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
+                    *ngIf="_columnsMetadata.thumbnailUrl && !(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
                     {{'applications.content.table.thumbnail' | translate}}
                 </th>
                 <th data-cid="name" pResizableColumn [ngStyle]="_columnsMetadata.name.style"
                     *ngIf="_columnsMetadata.name"
-                    [kpSortableColumn]="_columnsMetadata.name.sortable ? 'name' : null">
+                    [vpSortableColumn]="_columnsMetadata.name.sortable ? 'name' : null">
                     {{'applications.content.table.name' | translate}}
                     <p-sortIcon [field]="'name'"  ></p-sortIcon>
                 </th>
@@ -76,19 +76,19 @@
                 </th>
                 <th data-cid="mediaType" pResizableColumn [ngStyle]="_columnsMetadata.mediaType.style"
                     *ngIf="_columnsMetadata.mediaType"
-                    [kpSortableColumn]="_columnsMetadata.mediaType.sortable ? 'mediaType' : null">
+                    [vpSortableColumn]="_columnsMetadata.mediaType.sortable ? 'mediaType' : null">
                     {{'applications.content.table.type' | translate}}
                     <p-sortIcon [field]="'mediaType'"></p-sortIcon>
                 </th>
                 <th data-cid="moderationCount" pResizableColumn [ngStyle]="_columnsMetadata.moderationCount.style"
                     *ngIf="_columnsMetadata.moderationCount"
-                    [kpSortableColumn]="_columnsMetadata.moderationCount.sortable ? 'moderationCount' : null">
+                    [vpSortableColumn]="_columnsMetadata.moderationCount.sortable ? 'moderationCount' : null">
                     {{'applications.content.table.flags' | translate}}
                     <p-sortIcon [field]="'moderationCount'"></p-sortIcon>
                 </th>
                 <th data-cid="createdAt" pResizableColumn [ngStyle]="_columnsMetadata.createdAt.style"
                     *ngIf="_columnsMetadata.createdAt"
-                    [kpSortableColumn]="_columnsMetadata.createdAt.sortable ? 'createdAt' : null">
+                    [vpSortableColumn]="_columnsMetadata.createdAt.sortable ? 'createdAt' : null">
                     {{'applications.content.table.createdOn' | translate}}
                     <p-sortIcon [field]="'createdAt'"></p-sortIcon>
                 </th>
@@ -98,13 +98,13 @@
                 </th>
                 <th data-cid="duration" pResizableColumn [ngStyle]="_columnsMetadata.duration.style"
                     *ngIf="_columnsMetadata.duration"
-                    [kpSortableColumn]="_columnsMetadata.duration.sortable ? 'duration' : null">
+                    [vpSortableColumn]="_columnsMetadata.duration.sortable ? 'duration' : null">
                     {{'applications.content.table.duration' | translate}}
                     <p-sortIcon [field]="'duration'"></p-sortIcon>
                 </th>
                 <th data-cid="plays" pResizableColumn [ngStyle]="_columnsMetadata.plays.style"
                     *ngIf="_columnsMetadata.plays"
-                    [kpSortableColumn]="_columnsMetadata.plays.sortable ? 'plays' : null">
+                    [vpSortableColumn]="_columnsMetadata.plays.sortable ? 'plays' : null">
                     {{'applications.content.table.plays' | translate}}
                     <p-sortIcon [field]="'plays'"></p-sortIcon>
                 </th>
@@ -125,20 +125,20 @@
                 </td>
 
                 <td class="ui-resizable-column"
-                    *ngIf="_columnsMetadata.thumbnailUrl && !(_kmcPermissions.FEATURE_DISABLE_KMC_LIST_THUMBNAILS | kNgIfPermitted)">
-                    <div class="kThumbnailHolder" #holder
+                    *ngIf="_columnsMetadata.thumbnailUrl && !(_vmcPermissions.FEATURE_DISABLE_VMC_LIST_THUMBNAILS | vNgIfPermitted)">
+                    <div class="vThumbnailHolder" #holder
                          [class.disable]="!_allowDrilldown('view', entry.mediaType,entry.status)"
                          (click)="_onActionSelected('view',entry)">
                         <img *ngIf="entry.thumbnailUrl" [src]="entry.thumbnailUrl" onError="this.onerror=null;this.style.display='none'" (error)="holder.classList.add('error')">
-                        <i class="kIconwarning"></i>
-                        <i class="kIconyoutube kThumbnailTypeIcon" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></i>
-                        <div class="kYoutubeIconFix" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></div>
-                        <i class="kIconquiz kThumbnailTypeIcon" *ngIf="entry.isQuizEntry"></i>
+                        <i class="vIconwarning"></i>
+                        <i class="vIconyoutube vThumbnailTypeIcon" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></i>
+                        <div class="vYoutubeIconFix" *ngIf="entry.externalSourceType === _youtubeExternalSourceType"></div>
+                        <i class="vIconquiz vThumbnailTypeIcon" *ngIf="entry.isQuizEntry"></i>
                     </div>
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.name">
-                    <span class="kTitle kTableColumn" [kTooltip]="entry.name" [showOnEllipsis]="true"
+                    <span class="vTitle vTableColumn" [vTooltip]="entry.name" [showOnEllipsis]="true"
                          [class.disable]="!_allowDrilldown('view', entry.mediaType,entry.status)"
                          (click)="_onActionSelected('view',entry)">
                         {{entry.name}}
@@ -146,11 +146,11 @@
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.id">
-                    <span class="kTableColumn" [kTooltip]="entry.id" [showOnEllipsis]="true">{{entry.id}}</span>
+                    <span class="vTableColumn" [vTooltip]="entry.id" [showOnEllipsis]="true">{{entry.id}}</span>
                 </td>
 
-                <td class="ui-resizable-column kMediaTypeIcon" *ngIf="_columnsMetadata.mediaType">
-                    <div [kTooltip]="entry.mediaType | entryType: true"
+                <td class="ui-resizable-column vMediaTypeIcon" *ngIf="_columnsMetadata.mediaType">
+                    <div [vTooltip]="entry.mediaType | entryType: true"
                          [class]="entry.mediaType | entryType: false"></div>
                 </td>
 
@@ -159,20 +159,20 @@
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.createdAt">
-                    <span class="kTableColumn" [kTooltip]="entry.createdAt | kmcDate" [showOnEllipsis]="true">
-                        {{entry.createdAt | kmcDate}}
+                    <span class="vTableColumn" [vTooltip]="entry.createdAt | vmcDate" [showOnEllipsis]="true">
+                        {{entry.createdAt | vmcDate}}
                     </span>
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.moderationStatus">
-                    <span class="kTableColumn" [kTooltip]="entry.moderationStatus | kModerationStatus" [showOnEllipsis]="true">
-                        {{entry.moderationStatus | kModerationStatus}}
+                    <span class="vTableColumn" [vTooltip]="entry.moderationStatus | vModerationStatus" [showOnEllipsis]="true">
+                        {{entry.moderationStatus | vModerationStatus}}
                     </span>
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.duration">
-                    <span class="kTableColumn" [kTooltip]="entry.duration | kTime | entryDuration:entry" [showOnEllipsis]="true">
-                        {{entry.duration | kTime | entryDuration:entry}}
+                    <span class="vTableColumn" [vTooltip]="entry.duration | vTime | entryDuration:entry" [showOnEllipsis]="true">
+                        {{entry.duration | vTime | entryDuration:entry}}
                     </span>
                 </td>
 
@@ -181,21 +181,21 @@
                 </td>
 
                 <td class="ui-resizable-column" *ngIf="_columnsMetadata.status">
-                    <span class="kTableColumn" [kTooltip]="entry | entryStatus" [showOnEllipsis]="true">
+                    <span class="vTableColumn" [vTooltip]="entry | entryStatus" [showOnEllipsis]="true">
                         {{entry | entryStatus}}
                     </span>
                 </td>
 
                 <td *ngIf="rowActions?.length">
-                    <div class="kEntriesTableActions">
-                        <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
+                    <div class="vEntriesTableActions">
+                        <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
                                 (click)="_openActionsMenu($event, entry)"></button>
                     </div>
                 </td>
 
                 <td *ngIf="_columnsMetadata.addToBucket">
-                    <div class="kEntriesTableActions">
-                        <button type="button" pButton class="kButtonDefault kButtonAddToBucket" label="+"
+                    <div class="vEntriesTableActions">
+                        <button type="button" pButton class="vButtonDefault vButtonAddToBucket" label="+"
                                 (click)="_onActionSelected('addToBucket', entry)"></button>
                     </div>
                 </td>
@@ -205,7 +205,7 @@
 
         <ng-template pTemplate="emptymessage">
             <div class="emptymessage">
-                <div class="kEmptyMessage">{{_emptyMessage}}</div>
+                <div class="vEmptyMessage">{{_emptyMessage}}</div>
             </div>
         </ng-template>
     </p-table>

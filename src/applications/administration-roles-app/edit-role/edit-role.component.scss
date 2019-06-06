@@ -1,103 +1,103 @@
 @import 'app-theme/_variables.scss';
 
-.kEditRole {
+.vEditRole {
   width: 100%;
 
-  .kFloater {
+  .vFloater {
     display: flex;
     flex-direction: column;
 
-    .kHeader {
+    .vHeader {
       height: 78px;
       width: 100%;
       padding: 0 24px;
       box-sizing: border-box;
-      border-bottom: 1px solid $kGrayscale4;
+      border-bottom: 1px solid $vGrayscale4;
       flex: 0 0 auto;
       display: flex;
       align-items: center;
 
-      .kTitle {
+      .vTitle {
         color: #333333;
         font-size: 15px;
         font-weight: 700;
       }
 
-      .kButtons {
+      .vButtons {
         display: flex;
         margin-left: auto;
 
-        .kSaveBtn {
+        .vSaveBtn {
           width: 100px;
         }
 
-        .kCancel {
+        .vCancel {
           font-size: 15px;
           color: #333333;
           align-self: center;
           margin-right: 24px;
         }
 
-        .kButtonDefault {
+        .vButtonDefault {
           font-weight: normal;
         }
       }
     }
 
-    .kContainer {
+    .vContainer {
       flex: 1 1 auto;
       overflow-y: auto;
       max-height: calc(100vh - 158px);
 
-      .kHasDisabledPermissions {
+      .vHasDisabledPermissions {
         padding: 0 0 20px 30px;
       }
 
-      .kRoleForm {
+      .vRoleForm {
         padding: 0 28px 53px 28px;
       }
 
-      .kRow {
+      .vRow {
         display: flex;
         padding-top: 24px;
 
-        .kLabel {
+        .vLabel {
           width: 200px;
           flex: 0 0 auto;
           height: 18px;
-          color: $kGrayscale1;
+          color: $vGrayscale1;
           font-size: 15px;
           line-height: 18px;
         }
 
-        .kRequired {
+        .vRequired {
           width: 20px;
           font-size: 24px;
-          color: $kGrayscale3;
-          &.kHasError {
-            color: $kDandger;
+          color: $vGrayscale3;
+          &.vHasError {
+            color: $vDandger;
             font-weight: bold;
           }
         }
-        .kRequired, .kLabel {
+        .vRequired, .vLabel {
           padding: 8px 4px;
           height: 18px;
         }
-        .kControl {
+        .vControl {
           height: 34px;
           width: 500px;
-          &.kHasError {
-            border: 1px solid $kDandger;
+          &.vHasError {
+            border: 1px solid $vDandger;
             background: initial;
           }
         }
 
-        textarea.kControl {
+        textarea.vControl {
           height: 76px;
         }
 
-        .kError {
-          color: $kDandger;
+        .vError {
+          color: $vDandger;
           padding-top: 8px;
         }
       }

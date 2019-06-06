@@ -9,7 +9,7 @@ a {
   cursor: pointer;
   text-decoration: none;
   &.disabled {
-    color: $kGrayscale4;
+    color: $vGrayscale4;
     border: 0px solid white;
     pointer-events: none;
   }
@@ -37,10 +37,10 @@ a {
 
 .subMenuContainer {
   position: relative;
-  &.kLeft {
+  &.vLeft {
     margin-right: 30px;
   }
-  &.kRight {
+  &.vRight {
     margin-left: 30px;
   }
   &.active {
@@ -55,10 +55,10 @@ a {
 
 @media screen and (max-width: 1310px) {
   .subMenuContainer {
-    &.kLeft {
+    &.vLeft {
       margin-right: 20px;
     }
-    &.kRight {
+    &.vRight {
       margin-left: 20px;
     }
     a{

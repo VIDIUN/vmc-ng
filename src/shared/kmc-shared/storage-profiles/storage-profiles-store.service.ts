@@ -1,24 +1,24 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PartnerProfileStore } from '../partner-profile';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaStorageProfileStatus } from 'kaltura-ngx-client';
-import { KalturaStorageProfileFilter } from 'kaltura-ngx-client';
-import { StorageProfileListAction } from 'kaltura-ngx-client';
-import { KalturaStorageProfileListResponse } from 'kaltura-ngx-client';
-import { KalturaStorageProfile } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunStorageProfileStatus } from 'vidiun-ngx-client';
+import { VidiunStorageProfileFilter } from 'vidiun-ngx-client';
+import { StorageProfileListAction } from 'vidiun-ngx-client';
+import { VidiunStorageProfileListResponse } from 'vidiun-ngx-client';
+import { VidiunStorageProfile } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class StorageProfilesStore extends PartnerProfileStore implements OnDestroy {
 
-  private _getStorageProfiles$: Observable<{ items: KalturaStorageProfile[] }>;
+  private _getStorageProfiles$: Observable<{ items: VidiunStorageProfile[] }>;
 
-  constructor(private _kalturaServerClient: KalturaClient) {
+  constructor(private _vidiunServerClient: VidiunClient) {
     super();
   }
 
-  public get(): Observable<{ items: KalturaStorageProfile[] }> {
+  public get(): Observable<{ items: VidiunStorageProfile[] }> {
     if (!this._getStorageProfiles$) {
       // execute the request
       this._getStorageProfiles$ = this._buildGetRequest()
@@ -41,10 +41,10 @@ export class StorageProfilesStore extends PartnerProfileStore implements OnDestr
   ngOnDestroy() {
   }
 
-  private _buildGetRequest(): Observable<KalturaStorageProfileListResponse> {
-    return this._kalturaServerClient.request(new StorageProfileListAction({
-      filter: new KalturaStorageProfileFilter({
-        statusIn: [KalturaStorageProfileStatus.automatic, KalturaStorageProfileStatus.manual].join(',')
+  private _buildGetRequest(): Observable<VidiunStorageProfileListResponse> {
+    return this._vidiunServerClient.request(new StorageProfileListAction({
+      filter: new VidiunStorageProfileFilter({
+        statusIn: [VidiunStorageProfileStatus.automatic, VidiunStorageProfileStatus.manual].join(',')
       })
     }));
   }

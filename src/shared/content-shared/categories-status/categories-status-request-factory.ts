@@ -1,8 +1,8 @@
-import { PartnerListFeatureStatusAction } from 'kaltura-ngx-client';
-import { KalturaFeatureStatusListResponse } from 'kaltura-ngx-client';
-import { RequestFactory } from '@kaltura-ng/kaltura-common';
+import { PartnerListFeatureStatusAction } from 'vidiun-ngx-client';
+import { VidiunFeatureStatusListResponse } from 'vidiun-ngx-client';
+import { RequestFactory } from '@vidiun-ng/vidiun-common';
 
-export class CategoriesStatusRequestFactory implements RequestFactory<PartnerListFeatureStatusAction, KalturaFeatureStatusListResponse> {
+export class CategoriesStatusRequestFactory implements RequestFactory<PartnerListFeatureStatusAction, VidiunFeatureStatusListResponse> {
 
   constructor() {
   }

@@ -6,7 +6,7 @@ import { Tree } from 'primeng/primeng';
 import { CategoriesTreeNode } from './categories-tree-node';
 
 @Directive({
-    selector: 'p-tree[kCategoriesTreePropagation]',
+    selector: 'p-tree[vCategoriesTreePropagation]',
 })
 export class CategoriesTreePropagationDirective implements OnInit, DoCheck, OnChanges {
 
@@ -85,7 +85,7 @@ export class CategoriesTreePropagationDirective implements OnInit, DoCheck, OnCh
             {
                 if (hasParentThatIsSelected && this.propagateDownMode === 'preventNested')
                 {
-                    console.warn('[kmcng] cannot select the requested node since a parent of that node is already selected');
+                    console.warn('[vmcng] cannot select the requested node since a parent of that node is already selected');
                 }else
                 {
                     this._treeComponent.selection = [...this._treeComponent.selection, node];

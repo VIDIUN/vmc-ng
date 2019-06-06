@@ -1,27 +1,27 @@
 @import 'app-theme/_variables.scss';
 
-.kMatchDropFolder {
-    color: $kGrayscale1;
+.vMatchDropFolder {
+    color: $vGrayscale1;
     height: 560px;
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
 
-    &.kMatchDropFolderFlavor {
+    &.vMatchDropFolderFlavor {
         height: 486px;
     }
 
-    .kHeader, .kFooter {
+    .vHeader, .vFooter {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .kHeader {
+    .vHeader {
         text-align: center;
         height: 77px;
-        border-bottom: 1px $kGrayscale4 solid;
+        border-bottom: 1px $vGrayscale4 solid;
 
         h1 {
             font-size: 24px;
@@ -30,25 +30,25 @@
 
     }
 
-    .kMatchDropFolderContent {
+    .vMatchDropFolderContent {
         width: 100%;
 
-        .kMatchDropFolderControls {
+        .vMatchDropFolderControls {
             height: 98px;
-            border-bottom: 1px solid $kGrayscale6;
+            border-bottom: 1px solid $vGrayscale6;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             padding: 0 28px;
 
-            .kMatchDropFolderControlsLabel {
+            .vMatchDropFolderControlsLabel {
                 font-weight: bold;
                 font-size: 15px;
             }
 
-            .kDropFoldersList {
-                .kDropFoldersListItem {
+            .vDropFoldersList {
+                .vDropFoldersListItem {
                     white-space: nowrap;
                     display: inline-block;
                     overflow: hidden;
@@ -58,45 +58,45 @@
                 }
             }
 
-            .kDropFolderSearch /deep/ {
-                .k-clearable-input-input {
+            .vDropFolderSearch /deep/ {
+                .v-clearable-input-input {
                     width: 284px;
                     height: 34px;
-                    background: $kMagnifyingGlassBkg;
+                    background: $vMagnifyingGlassBkg;
                     padding-left: 38px;
                     margin-right: 8px;
                 }
 
-                .k-clearable-input-clear-btn {
+                .v-clearable-input-clear-btn {
                     right: 13px;
                 }
             }
 
-            .kRefreshBtn {
+            .vRefreshBtn {
                 font-size: 24px;
                 border: none;
                 min-width: inherit;
                 outline: 0;
-                color: $kGrayscale3;
+                color: $vGrayscale3;
                 &:active {
                     box-shadow: none;
                     transform: rotate(45deg);
                 }
                 &:hover {
                     background-color: #ffffff;
-                    color: $kPrimary;
+                    color: $vPrimary;
                 }
             }
         }
 
-        .kMatchDropFolderReferenceId {
+        .vMatchDropFolderReferenceId {
             padding: 0 28px;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
             height: 74px;
-            border-bottom: 1px solid $kGrayscale6;
+            border-bottom: 1px solid $vGrayscale6;
             font-size: 15px;
 
             span {
@@ -104,49 +104,49 @@
             }
         }
 
-        .kMatchDropFolderTable {
+        .vMatchDropFolderTable {
             .emptymessage {
                 border: none;
             }
 
-            .kFileName {
+            .vFileName {
                 font-size: 15px;
                 font-weight: bold;
-                color: $kGrayscale1;
+                color: $vGrayscale1;
             }
 
-            .kCreatedAt {
+            .vCreatedAt {
                 font-size: 15px;
                 font-weight: bold;
-                color: $kGrayscale3;
+                color: $vGrayscale3;
             }
 
-            .k-arrow-right {
+            .v-arrow-right {
                 display: block;
                 width: 0;
                 height: 0;
                 border-top: 8px solid transparent;
-                border-left: 12px solid $kGrayscale4;
+                border-left: 12px solid $vGrayscale4;
                 border-bottom: 8px solid transparent;
                 margin-top: 2px;
             }
 
-            .k-arrow-down {
+            .v-arrow-down {
                 display: block;
                 width: 0;
                 height: 0;
                 border-left: 8px solid transparent;
                 border-right: 8px solid transparent;
-                border-top: 12px solid $kGrayscale4;
+                border-top: 12px solid $vGrayscale4;
                 margin-left: -3px;
                 margin-top: 4px;
             }
 
-            .kDropFolderFiles {
-                background-color: $kGrayscale6;
-                border-left: 4px solid $kGrayscale3;
+            .vDropFolderFiles {
+                background-color: $vGrayscale6;
+                border-left: 4px solid $vGrayscale3;
                 font-size: 15px;
-                color: $kGrayscale3;
+                color: $vGrayscale3;
                 overflow-y: auto;
                 max-height: 195px;
                 padding: 12px 0;
@@ -169,13 +169,13 @@
         }
     }
 
-    .kFooter {
+    .vFooter {
         z-index: 1;
         height: 66px;
-        border-top: 1px $kGrayscale4 solid;
+        border-top: 1px $vGrayscale4 solid;
         text-align: center;
 
-        .kUploadButton {
+        .vUploadButton {
             min-width: 100px;
             height: 34px;
             font-weight: normal;
@@ -189,7 +189,7 @@
     }
 }
 
-:host /deep/ .kDropFoldersList {
+:host /deep/ .vDropFoldersList {
     .ui-dropdown-panel {
         width: 238px;
     }
@@ -198,7 +198,7 @@
         text-overflow: ellipsis;
         font-weight: normal;
         font-size: 15px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
     }
 
     .ui-dropdown.ui-widget {
@@ -206,7 +206,7 @@
     }
 }
 
-:host /deep/ .kMatchDropFolderTable {
+:host /deep/ .vMatchDropFolderTable {
     .ui-table .ui-table-scrollable-body {
         max-height: 208px !important;
         height: 208px !important;
@@ -220,7 +220,7 @@
         margin-top: -2px;
     }
 
-    .kAvoidClick {
+    .vAvoidClick {
         pointer-events: none;
         touch-action: none;
 

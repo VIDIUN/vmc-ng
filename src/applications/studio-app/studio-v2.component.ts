@@ -1,14 +1,14 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import {AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import {AppEventsService} from 'app-shared/kmc-shared';
-import { buildCDNUrl, getKalturaServerUri, serverConfig } from 'config/server';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { PlayersUpdatedEvent } from 'app-shared/kmc-shared/events';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { StudioV3MainViewService, StudioV2MainViewService } from 'app-shared/kmc-shared/kmc-views';
+import {AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import {AppEventsService} from 'app-shared/vmc-shared';
+import { buildCDNUrl, getVidiunServerUri, serverConfig } from 'config/server';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { PlayersUpdatedEvent } from 'app-shared/vmc-shared/events';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { StudioV3MainViewService, StudioV2MainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Component({
-  selector: 'kStudioV2',
+  selector: 'vStudioV2',
   templateUrl: './studio-v2.component.html',
   styleUrls: ['./studio-v2.component.scss']
 })
@@ -18,22 +18,22 @@ export class StudioV2Component implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
                 private appAuthentication: AppAuthentication,
-                private _appEvents: AppEventsService, private logger: KalturaLogger,
+                private _appEvents: AppEventsService, private logger: VidiunLogger,
                 private browserService: BrowserService,
                 private _studioV2MainView: StudioV2MainViewService) {
     }
 
     ngOnInit() {
         if (this._studioV2MainView.viewEntered()) {
-            window['kmc'] = {
+            window['vmc'] = {
                 'preview_embed': {
                     'updateList': (isPlaylist: boolean) => {
                         this._updatePlayers(isPlaylist);
                     }
                 },
                 'vars': {
-                    'ks': this.appAuthentication.appUser.ks,
-                    'api_url': getKalturaServerUri(),
+                    'vs': this.appAuthentication.appUser.vs,
+                    'api_url': getVidiunServerUri(),
                     'studio': {
                         'config': {
                             'name': 'Video Studio V2',
@@ -60,6 +60,6 @@ export class StudioV2Component implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         this.studioUrl = '';
-        window['kmc'] = null;
+        window['vmc'] = null;
     }
 }

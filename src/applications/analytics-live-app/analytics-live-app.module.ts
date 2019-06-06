@@ -4,15 +4,15 @@ import {RouterModule} from '@angular/router';
 
 import {routing} from './analytics-live-app.routes';
 import {AnalyticsLiveComponent} from './analytics-live.component';
-import {KalturaUIModule} from '@kaltura-ng/kaltura-ui';
-import { AnalyticsLiveModule } from 'app-shared/kmc-shared/analytics-live/analytics-live.module';
-import { LocalizationModule } from '@kaltura-ng/mc-shared';
+import {VidiunUIModule} from '@vidiun-ng/vidiun-ui';
+import { AnalyticsLiveModule } from 'app-shared/vmc-shared/analytics-live/analytics-live.module';
+import { LocalizationModule } from '@vidiun-ng/mc-shared';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routing),
-        KalturaUIModule,
+        VidiunUIModule,
         AnalyticsLiveModule,
         LocalizationModule
     ],

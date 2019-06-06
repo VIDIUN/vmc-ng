@@ -1,14 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaEntryReplacementStatus } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunEntryReplacementStatus } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kFlavorReplacementStatus' })
+@Pipe({ name: 'vFlavorReplacementStatus' })
 export class FlavorReplacementStatusPipe implements PipeTransform {
     constructor(private _appLocalization: AppLocalization) {
 
     }
 
-    transform(replacementStatus: KalturaEntryReplacementStatus, type: 'icon' | 'label'): string {
+    transform(replacementStatus: VidiunEntryReplacementStatus, type: 'icon' | 'label'): string {
         const result = {
             icon: '',
             label: ''
@@ -19,18 +19,18 @@ export class FlavorReplacementStatusPipe implements PipeTransform {
         }
 
         switch (replacementStatus) {
-            case KalturaEntryReplacementStatus.approvedButNotReady:
-            case KalturaEntryReplacementStatus.notReadyAndNotApproved:
+            case VidiunEntryReplacementStatus.approvedButNotReady:
+            case VidiunEntryReplacementStatus.notReadyAndNotApproved:
                 result.label = this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.replacementStatus.replacementInProcess');
-                result.icon = 'kIconsync';
+                result.icon = 'vIconsync';
                 break;
-            case KalturaEntryReplacementStatus.readyButNotApproved:
+            case VidiunEntryReplacementStatus.readyButNotApproved:
                 result.label = this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.replacementStatus.readyForReplacement');
-                result.icon = 'kIconcomplete';
+                result.icon = 'vIconcomplete';
                 break;
-            case KalturaEntryReplacementStatus.failed:
+            case VidiunEntryReplacementStatus.failed:
                 result.label = this._appLocalization.get('applications.content.entryDetails.flavours.replaceVideo.replacementStatus.replacementFailed');
-                result.icon = 'kIconerror';
+                result.icon = 'vIconerror';
                 break;
             default:
                 break;

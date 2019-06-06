@@ -1,17 +1,17 @@
 import { Component, ViewChild, AfterViewInit,OnInit, OnDestroy } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { ISubscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { EntryUsersWidget } from './entry-users-widget.service';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 
 @Component({
-  selector: 'kEntryUsers',
+  selector: 'vEntryUsers',
   templateUrl: './entry-users.component.html',
   styleUrls: ['./entry-users.component.scss']
 })
@@ -21,7 +21,7 @@ export class EntryUsers implements AfterViewInit, OnInit, OnDestroy {
 
 	private _searchUsersSubscription : ISubscription;
 	public _usersProvider = new Subject<SuggestionsProviderData>();
-	public _kmcPermissions = KMCPermissions;
+	public _vmcPermissions = VMCPermissions;
 	public _disableSaveButton = true;
 
 	constructor(public _widgetService: EntryUsersWidget,
@@ -92,7 +92,7 @@ export class EntryUsers implements AfterViewInit, OnInit, OnDestroy {
 
 		this._searchUsersSubscription = this._widgetService.searchUsers(event.query).subscribe(data => {
 				const suggestions = [];
-				(data || []).forEach((suggestedUser: KalturaUser) => {
+				(data || []).forEach((suggestedUser: VidiunUser) => {
                     suggestedUser['__tooltip'] = suggestedUser.id;
 					let isSelectable = true;
 					if (formControl){

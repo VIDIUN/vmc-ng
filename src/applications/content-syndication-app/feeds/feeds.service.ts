@@ -1,42 +1,42 @@
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
 import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import {ISubscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
-import {KalturaFilterPager, PlaylistGetAction} from 'kaltura-ngx-client';
-import {KalturaClient, KalturaMultiRequest, KalturaMultiResponse, KalturaRequest} from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import {VidiunFilterPager, PlaylistGetAction} from 'vidiun-ngx-client';
+import {VidiunClient, VidiunMultiRequest, VidiunMultiResponse, VidiunRequest} from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 import {
   FiltersStoreBase,
   NumberTypeAdapter,
   StringTypeAdapter,
   TypeAdaptersMapping
-} from '@kaltura-ng/mc-shared';
-import {KalturaSearchOperator} from 'kaltura-ngx-client';
-import {KalturaSearchOperatorType} from 'kaltura-ngx-client';
-import {SyndicationFeedListAction} from 'kaltura-ngx-client';
-import {KalturaBaseSyndicationFeedFilter} from 'kaltura-ngx-client';
-import {KalturaTubeMogulSyndicationFeedOrderBy} from 'kaltura-ngx-client';
-import {KalturaBaseSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaGenericSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaGenericXsltSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaBaseSyndicationFeedListResponse} from 'kaltura-ngx-client';
-import {KalturaPlaylistFilter} from 'kaltura-ngx-client';
-import {KalturaPlaylist} from 'kaltura-ngx-client';
-import {PlaylistListAction} from 'kaltura-ngx-client';
-import {KalturaPlaylistOrderBy} from 'kaltura-ngx-client';
-import {KalturaPlaylistListResponse} from 'kaltura-ngx-client';
-import {SyndicationFeedDeleteAction} from 'kaltura-ngx-client';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {KalturaSyndicationFeedEntryCount} from 'kaltura-ngx-client';
-import {SyndicationFeedGetEntryCountAction} from 'kaltura-ngx-client';
-import {SyndicationFeedAddAction} from 'kaltura-ngx-client';
-import {SyndicationFeedUpdateAction} from 'kaltura-ngx-client';
+} from '@vidiun-ng/mc-shared';
+import {VidiunSearchOperator} from 'vidiun-ngx-client';
+import {VidiunSearchOperatorType} from 'vidiun-ngx-client';
+import {SyndicationFeedListAction} from 'vidiun-ngx-client';
+import {VidiunBaseSyndicationFeedFilter} from 'vidiun-ngx-client';
+import {VidiunTubeMogulSyndicationFeedOrderBy} from 'vidiun-ngx-client';
+import {VidiunBaseSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunGenericSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunGenericXsltSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunBaseSyndicationFeedListResponse} from 'vidiun-ngx-client';
+import {VidiunPlaylistFilter} from 'vidiun-ngx-client';
+import {VidiunPlaylist} from 'vidiun-ngx-client';
+import {PlaylistListAction} from 'vidiun-ngx-client';
+import {VidiunPlaylistOrderBy} from 'vidiun-ngx-client';
+import {VidiunPlaylistListResponse} from 'vidiun-ngx-client';
+import {SyndicationFeedDeleteAction} from 'vidiun-ngx-client';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {VidiunSyndicationFeedEntryCount} from 'vidiun-ngx-client';
+import {SyndicationFeedGetEntryCountAction} from 'vidiun-ngx-client';
+import {SyndicationFeedAddAction} from 'vidiun-ngx-client';
+import {SyndicationFeedUpdateAction} from 'vidiun-ngx-client';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { ContentSyndicationMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { ContentSyndicationMainViewService } from 'app-shared/vmc-shared/vmc-views';
 import { globalConfig } from 'config/global';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface UpdateStatus {
   loading: boolean;
@@ -44,7 +44,7 @@ export interface UpdateStatus {
 }
 
 export interface Feeds {
-  items: KalturaBaseSyndicationFeed[],
+  items: VidiunBaseSyndicationFeed[],
   totalCount: number
 }
 
@@ -83,11 +83,11 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
   private readonly _pageSizeCacheKey = 'feeds.list.pageSize';
 
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               contentSyndicationMainView: ContentSyndicationMainViewService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger);
     if (contentSyndicationMainView.isAvailable()) {
         this._prepare();
@@ -166,13 +166,13 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
   private buildQueryRequest(): Observable<Feeds> {
     try {
       // create request items
-      const filter: KalturaBaseSyndicationFeedFilter = new KalturaBaseSyndicationFeedFilter({
-        orderBy: KalturaTubeMogulSyndicationFeedOrderBy.createdAtDesc.toString()
+      const filter: VidiunBaseSyndicationFeedFilter = new VidiunBaseSyndicationFeedFilter({
+        orderBy: VidiunTubeMogulSyndicationFeedOrderBy.createdAtDesc.toString()
       });
-      let pagination: KalturaFilterPager = null;
+      let pagination: VidiunFilterPager = null;
 
-      const advancedSearch = filter.advancedSearch = new KalturaSearchOperator({});
-      advancedSearch.type = KalturaSearchOperatorType.searchAnd;
+      const advancedSearch = filter.advancedSearch = new VidiunSearchOperator({});
+      advancedSearch.type = VidiunSearchOperatorType.searchAnd;
 
       const data: FeedsFilters = this._getFiltersAsReadonly();
 
@@ -184,7 +184,7 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pagination = new KalturaFilterPager(
+        pagination = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -198,16 +198,16 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
       }
 
       // build the request
-      return this._kalturaClient.request(
+      return this._vidiunClient.request(
         new SyndicationFeedListAction({
           filter,
           pager: pagination
         })
-      ).map((response: KalturaBaseSyndicationFeedListResponse) => {
-        const feedsArray: KalturaBaseSyndicationFeed[] = [];
+      ).map((response: VidiunBaseSyndicationFeedListResponse) => {
+        const feedsArray: VidiunBaseSyndicationFeed[] = [];
         response.objects.forEach(feed => {
-          if (feed instanceof KalturaBaseSyndicationFeed) {
-            if (feed instanceof KalturaGenericSyndicationFeed && !(feed instanceof KalturaGenericXsltSyndicationFeed)) {
+          if (feed instanceof VidiunBaseSyndicationFeed) {
+            if (feed instanceof VidiunGenericSyndicationFeed && !(feed instanceof VidiunGenericXsltSyndicationFeed)) {
               this._logger.warn(
                 `feed was removed from list since it's a generic syndication feed with XSLT type which is not generic.`, { id: feed.id });
               return undefined; // stop processing this iteration if it's a generic syndication feed with XSLT type which is not generic
@@ -225,20 +225,20 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
 
   }
 
-  public getPlaylists(freeText = ''): Observable<KalturaPlaylist[]> {
-    const filter = new KalturaPlaylistFilter({orderBy: KalturaPlaylistOrderBy.createdAtDesc.toString(), freeText: freeText || ''});
-    const pager = new KalturaFilterPager({pageSize: 500});
+  public getPlaylists(freeText = ''): Observable<VidiunPlaylist[]> {
+    const filter = new VidiunPlaylistFilter({orderBy: VidiunPlaylistOrderBy.createdAtDesc.toString(), freeText: freeText || ''});
+    const pager = new VidiunFilterPager({pageSize: 500});
 
-    return this._kalturaClient.request(
+    return this._vidiunClient.request(
       new PlaylistListAction({filter, pager})
     )
-      .map((response: KalturaPlaylistListResponse) => {
+      .map((response: VidiunPlaylistListResponse) => {
         return response.objects;
       });
 
   }
-  public getPlaylist(id: string): Observable<KalturaPlaylist> {
-    return this._kalturaClient.request(
+  public getPlaylist(id: string): Observable<VidiunPlaylist> {
+    return this._vidiunClient.request(
       new PlaylistGetAction({id})
     );
   }
@@ -273,26 +273,26 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
       });
   }
 
-  private _transmit(requests: KalturaRequest<any>[], chunk: boolean): Observable<{}> {
+  private _transmit(requests: VidiunRequest<any>[], chunk: boolean): Observable<{}> {
     let maxRequestsPerMultiRequest = requests.length;
     if (chunk) {
       maxRequestsPerMultiRequest = subApplicationsConfig.shared.bulkActionsLimit;
     }
 
-    const multiRequests: Observable<KalturaMultiResponse>[] = [];
-    let mr: KalturaMultiRequest = new KalturaMultiRequest();
+    const multiRequests: Observable<VidiunMultiResponse>[] = [];
+    let mr: VidiunMultiRequest = new VidiunMultiRequest();
 
     let counter = 0;
     for (let i = 0; i < requests.length; i++) {
       if (counter === maxRequestsPerMultiRequest) {
-        multiRequests.push(this._kalturaClient.multiRequest(mr));
-        mr = new KalturaMultiRequest();
+        multiRequests.push(this._vidiunClient.multiRequest(mr));
+        mr = new VidiunMultiRequest();
         counter = 0;
       }
       mr.requests.push(requests[i]);
       counter++;
     }
-    multiRequests.push(this._kalturaClient.multiRequest(mr));
+    multiRequests.push(this._vidiunClient.multiRequest(mr));
 
     return Observable.forkJoin(multiRequests)
       .map(responses => {
@@ -342,7 +342,7 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
     };
   }
 
-  public confirmDelete(feeds: KalturaBaseSyndicationFeed[]): Observable<{ confirmed: boolean, error?: Error }> {
+  public confirmDelete(feeds: VidiunBaseSyndicationFeed[]): Observable<{ confirmed: boolean, error?: Error }> {
 
     if (!feeds || !feeds.length) {
       return Observable.throw(new Error(this._appLocalization.get('applications.content.syndication.errors.deleteAttemptFailed')))
@@ -376,28 +376,28 @@ export class FeedsService extends FiltersStoreBase<FeedsFilters> implements OnDe
     });
   }
 
-  public getFeedEntryCount(feedId: string): Observable<KalturaSyndicationFeedEntryCount> {
+  public getFeedEntryCount(feedId: string): Observable<VidiunSyndicationFeedEntryCount> {
     if (!feedId) {
       return Observable.throw(new Error(this._appLocalization.get('applications.content.syndication.errors.getFeedEntryCount')))
     }
 
-    return this._kalturaClient.request(
+    return this._vidiunClient.request(
       new SyndicationFeedGetEntryCountAction({feedId})
     );
   }
 
-  public update(id: string, syndicationFeed: KalturaBaseSyndicationFeed): Observable<void> {
-    return this._kalturaClient.request(
+  public update(id: string, syndicationFeed: VidiunBaseSyndicationFeed): Observable<void> {
+    return this._vidiunClient.request(
       new SyndicationFeedUpdateAction({id, syndicationFeed})
     )
       .map(() => undefined);
   }
 
-  public create(syndicationFeed: KalturaBaseSyndicationFeed): Observable<KalturaBaseSyndicationFeed> {
+  public create(syndicationFeed: VidiunBaseSyndicationFeed): Observable<VidiunBaseSyndicationFeed> {
     if (syndicationFeed.id) {
       return Observable.throw(new Error('An error occurred while trying to Add Feed. \n Unable to add feed that already exists.'));
     }
-    return this._kalturaClient.request(
+    return this._vidiunClient.request(
       new SyndicationFeedAddAction({syndicationFeed})
     );
   }

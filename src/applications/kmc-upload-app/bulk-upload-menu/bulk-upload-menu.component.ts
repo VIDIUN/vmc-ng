@@ -1,19 +1,19 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AreaBlockerMessage, FileDialogComponent } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppAuthentication } from 'app-shared/kmc-shell';
-import { KalturaAPIException } from 'kaltura-ngx-client';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { BulkUploadService, BulkUploadTypes } from 'app-shared/kmc-shell/bulk-upload';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { BulkLogUploadingStartedEvent } from 'app-shared/kmc-shared/events';
-import { KalturaBulkUpload } from 'kaltura-ngx-client';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentBulkUploadsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AreaBlockerMessage, FileDialogComponent } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppAuthentication } from 'app-shared/vmc-shell';
+import { VidiunAPIException } from 'vidiun-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { BulkUploadService, BulkUploadTypes } from 'app-shared/vmc-shell/bulk-upload';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { BulkLogUploadingStartedEvent } from 'app-shared/vmc-shared/events';
+import { VidiunBulkUpload } from 'vidiun-ngx-client';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentBulkUploadsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 @Component({
-  selector: 'kKMCBulkUploadMenu',
+  selector: 'vVMCBulkUploadMenu',
   templateUrl: './bulk-upload-menu.component.html',
   styleUrls: ['./bulk-upload-menu.component.scss'],
 })
@@ -35,7 +35,7 @@ export class BulkUploadMenuComponent {
   public _allowedExtensions = '';
   public _showFileDialog = true;
   public _blockerMessage: AreaBlockerMessage;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor(private _bulkUploadService: BulkUploadService,
               private _appLocalization: AppLocalization,
@@ -52,20 +52,20 @@ export class BulkUploadMenuComponent {
     setTimeout(() => this.fileDialog.open(), 0);
   }
 
-  private _handleUploadSuccess(response: KalturaBulkUpload): void {
+  private _handleUploadSuccess(response: VidiunBulkUpload): void {
     this._selectedFiles = null;
     this.uploadSucceed.open();
     this._appEvents.publish(new BulkLogUploadingStartedEvent(response.id, response.status, response.uploadedOn));
   }
 
-  private _handleUploadError(error: KalturaAPIException): void {
+  private _handleUploadError(error: VidiunAPIException): void {
     if (error.code === 'SERVICE_FORBIDDEN') {
       this._showErrorAlert(this._appLocalization.get(
         'applications.content.bulkUpload.menu.messages.uploadError.message',
         { value: error.message }
       ));
-    } else if (error.code === 'INVALID_KS') {
-        // todo kmcng
+    } else if (error.code === 'INVALID_VS') {
+        // todo vmcng
     } else {
       this._showErrorAlert(error.message);
     }

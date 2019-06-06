@@ -1,24 +1,24 @@
-$kmc-flags-path: '../../styles/flags/';
+$vmc-flags-path: '../../styles/flags/';
 @import "../../styles/flags/flags.scss";
 @import 'app-theme/_variables.scss';
 
-.kAccessControlProfilesTable {
+.vAccessControlProfilesTable {
     background-color: white;
     overflow-y: hidden;
     position: absolute;
     padding: 0;
-    .kAccessControlProfileTableName {
+    .vAccessControlProfileTableName {
         font-weight: bold;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         cursor: pointer;
         max-width: calc(100% - 10px);
     }
-    .kThumbnailHolder {
+    .vThumbnailHolder {
         overflow: hidden;
         position: relative;
         width: 80px;
         height: 46px;
-        background-color: $kGrayscale6;
+        background-color: $vGrayscale6;
         white-space: nowrap;
         text-align: center;
         border-radius: 3px;
@@ -38,52 +38,52 @@ $kmc-flags-path: '../../styles/flags/';
             border-radius: 3px;
         }
     }
-    .kTitle {
-        color: $kGrayscale1;
+    .vTitle {
+        color: $vGrayscale1;
         font-weight: 700;
         cursor: pointer;
         &:hover {
             color: #000000;
         }
         &.disable {
-            color: $kGrayscale4;
+            color: $vGrayscale4;
             cursor: auto;
         }
     }
-    .kAccessControlProfilesTableActions {
+    .vAccessControlProfilesTableActions {
         width: 100%;
         text-align: center;
     }
 
-    .kAccessControlRestriction {
+    .vAccessControlRestriction {
         span, i {
             vertical-align: middle;
         }
 
-        .kAccessControlRestrictionIcon {
+        .vAccessControlRestrictionIcon {
             font-size: 15px;
             margin-right: 10px;
 
             &.authorized {
-                color: $kSuccess;
+                color: $vSuccess;
             }
 
             &.blocked {
-                color: $kDandger;
+                color: $vDandger;
             }
         }
     }
 
-    .kAccessControlProfilesDetailRow {
-        background-color: $kGrayscale6;
-        border-left: 4px solid $kGrayscale3;
+    .vAccessControlProfilesDetailRow {
+        background-color: $vGrayscale6;
+        border-left: 4px solid $vGrayscale3;
         font-size: 15px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         overflow-y: auto;
         max-height: 195px;
         padding: 12px 0;
 
-        .kNoAdditionalInfo {
+        .vNoAdditionalInfo {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -100,7 +100,7 @@ $kmc-flags-path: '../../styles/flags/';
                     padding: 0;
                     vertical-align: top;
 
-                    .kDescription {
+                    .vDescription {
                         word-wrap: break-word;
                     }
 
@@ -115,8 +115,8 @@ $kmc-flags-path: '../../styles/flags/';
                         }
                     }
 
-                    &.kCountryList {
-                        .kCountryListFlag {
+                    &.vCountryList {
+                        .vCountryListFlag {
                             margin-right: 6px;
                         }
                     }
@@ -124,11 +124,11 @@ $kmc-flags-path: '../../styles/flags/';
             }
         }
 
-        .kStub1 {
+        .vStub1 {
             width: 42px;
         }
 
-        .kStub2 {
+        .vStub2 {
             width: 80px;
         }
     }
@@ -141,7 +141,7 @@ $kmc-flags-path: '../../styles/flags/';
     flex-direction: column;
 }
 
-:host /deep/ .kAccessControlProfilesTable p-table {
+:host /deep/ .vAccessControlProfilesTable p-table {
     .ui-table .ui-table-tbody .pi-chevron-circle-down {
         margin-left: 0;
         margin-top: 3px;

@@ -1,15 +1,15 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { KalturaLogger, LogLevels } from '@kaltura-ng/kaltura-logger';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger, LogLevels } from '@vidiun-ng/vidiun-logger';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
 import { globalConfig } from 'config/global';
 import * as moment from 'moment';
 
 @Component({
-    selector: 'k-logs-record',
+    selector: 'v-logs-record',
     templateUrl: './logs-record.component.html',
     styleUrls: ['./logs-record.component.scss'],
-    providers: [KalturaLogger.createLogger('LogsRecordComponent')]
+    providers: [VidiunLogger.createLogger('LogsRecordComponent')]
 })
 export class LogsRecordComponent {
     @Input() mode: 'link' | 'button';
@@ -49,7 +49,7 @@ export class LogsRecordComponent {
     ];
     public _logLevelValues = this._logLevelOptions.map(({ value }) => value);
 
-    constructor(private _logger: KalturaLogger,
+    constructor(private _logger: VidiunLogger,
                 private _appAuth: AppAuthentication,
                 private _browserService: BrowserService) {
     }

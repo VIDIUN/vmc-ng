@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule, Optional, Self } from '@angular/core';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @NgModule({
     imports: <any[]>[],

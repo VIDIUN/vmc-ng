@@ -1,10 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification/page-exit-verification.service';
-import { NewEntryUploadFile } from 'app-shared/kmc-shell/new-entry-upload';
-import { NewEntryFlavourFile } from 'app-shared/kmc-shell/new-entry-flavour-file';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification/page-exit-verification.service';
+import { NewEntryUploadFile } from 'app-shared/vmc-shell/new-entry-upload';
+import { NewEntryFlavourFile } from 'app-shared/vmc-shell/new-entry-flavour-file';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class UploadPageExitVerificationService implements OnDestroy {

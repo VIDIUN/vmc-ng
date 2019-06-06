@@ -1,19 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {CategorySubcategoriesWidget} from './category-subcategories-widget.service';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategorySubcategories',
+  selector: 'vCategorySubcategories',
   templateUrl: './category-subcategories.component.html',
   styleUrls: ['./category-subcategories.component.scss']
 })
 export class CategorySubcategoriesComponent implements OnInit, OnDestroy {
 
   public _emptyMessage: string = this._appLocalization.get('applications.content.table.noResults');
-  public _selectedSubcategories: KalturaCategory[] = [];
-  public _subcategories: KalturaCategory[] = [];
+  public _selectedSubcategories: VidiunCategory[] = [];
+  public _subcategories: VidiunCategory[] = [];
   public _subcategoriesCount: number;
 
   constructor(public _widgetService: CategorySubcategoriesWidget,
@@ -43,12 +43,12 @@ export class CategorySubcategoriesComponent implements OnInit, OnDestroy {
     this._selectedSubcategories = [];
   }
 
-  public _onActionSelected(event: { action: 'delete' | 'moveUp' | 'moveDown', subcategory: KalturaCategory }): void {
+  public _onActionSelected(event: { action: 'delete' | 'moveUp' | 'moveDown', subcategory: VidiunCategory }): void {
     this._clearSelection();
     this._widgetService.onActionSelected(event);
   }
 
-  public _deleteSelected(selectedSubcategories: KalturaCategory[]): void {
+  public _deleteSelected(selectedSubcategories: VidiunCategory[]): void {
     // this._clearSelection();
     this._widgetService.deleteSelectedSubcategories(selectedSubcategories);
   }

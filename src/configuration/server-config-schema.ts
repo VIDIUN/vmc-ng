@@ -14,7 +14,7 @@
 
 export const ServerConfigSchema = {
     properties: {
-        kalturaServer: {
+        vidiunServer: {
             properties: {
                 uri: {type: 'string'},
                 defaultPrivileges: {type: ['string', 'null']},
@@ -94,7 +94,7 @@ export const ServerConfigSchema = {
                     required: ['uri'],
                     additionalProperties: true
                 },
-                kmcAnalytics: {
+                vmcAnalytics: {
                     properties: {
                         uri: {type: 'string'}
                     },
@@ -146,9 +146,9 @@ export const ServerConfigSchema = {
                     required: [],
                     additionalProperties: true
                 },
-                kaltura: {
+                vidiun: {
                     properties: {
-                        kmcOverview: {type: 'string'},
+                        vmcOverview: {type: 'string'},
                         mediaManagement: {type: 'string'},
                         userManual: {type: 'string'},
                         support: {type: 'string'},
@@ -191,6 +191,6 @@ export const ServerConfigSchema = {
             additionalProperties: true
         }
     },
-    required: ['kalturaServer', 'cdnServers', 'externalApps', 'externalLinks'],
+    required: ['vidiunServer', 'cdnServers', 'externalApps', 'externalLinks'],
     additionalProperties: true
 };

@@ -1,19 +1,19 @@
-<div class="kOpenEmailWin" #changeAccount>
+<div class="vOpenEmailWin" #changeAccount>
 
-  <div class="kHeader">
-    <span class="kTitle">{{emailConfig?.title}}</span>
+  <div class="vHeader">
+    <span class="vTitle">{{emailConfig?.title}}</span>
   </div>
 
-  <div class="kContainer">
+  <div class="vContainer">
     <div>{{emailConfig?.message}}</div>
       <div class="emailLink" *ngIf="emailConfig?.email">
           <a (click)="openEmail()">{{emailConfig.email}}</a>
-          <kCopyToClipboard class="kIcon" [text]="emailConfig.email" [iconSwitchTimeout]="5000" [tooltips]="_copyToClipboardTooltips"></kCopyToClipboard>
+          <vCopyToClipboard class="vIcon" [text]="emailConfig.email" [iconSwitchTimeout]="5000" [tooltips]="_copyToClipboardTooltips"></vCopyToClipboard>
       </div>
   </div>
 
-  <div class="kFooter">
-    <button type="button" class="kButtonBranded" (click)="close()" pButton label="{{'app.common.close'| translate}}"></button>
+  <div class="vFooter">
+    <button type="button" class="vButtonBranded" (click)="close()" pButton label="{{'app.common.close'| translate}}"></button>
   </div>
 
 </div>

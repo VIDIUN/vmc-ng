@@ -1,11 +1,11 @@
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { RequestFactory } from '@kaltura-ng/kaltura-common';
-import { DropFolderFileListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileListResponse } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileFilter } from 'kaltura-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { RequestFactory } from '@vidiun-ng/vidiun-common';
+import { DropFolderFileListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileListResponse } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileFilter } from 'vidiun-ngx-client';
 
-export class DropFoldersRequestFactory implements RequestFactory<DropFolderFileListAction, KalturaDropFolderFileListResponse> {
+export class DropFoldersRequestFactory implements RequestFactory<DropFolderFileListAction, VidiunDropFolderFileListResponse> {
   public uploadedOn: Date;
   public dropFolderIdIn: string;
 
@@ -18,13 +18,13 @@ export class DropFoldersRequestFactory implements RequestFactory<DropFolderFileL
     }
 
     return new DropFolderFileListAction({
-      filter: new KalturaDropFolderFileFilter({
+      filter: new VidiunDropFolderFileFilter({
         createdAtGreaterThanOrEqual: this.uploadedOn,
         dropFolderIdIn: this.dropFolderIdIn
       })
     }).setRequestOptions({
-        responseProfile: new KalturaDetachedResponseProfile({
-          type: KalturaResponseProfileType.includeFields,
+        responseProfile: new VidiunDetachedResponseProfile({
+          type: VidiunResponseProfileType.includeFields,
           fields: 'id,status,createdAt'
       })
     });

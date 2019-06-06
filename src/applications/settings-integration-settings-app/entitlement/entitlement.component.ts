@@ -1,33 +1,33 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {EntitlementSectionData, EntitlementService} from './entitlement.service';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from "app-shared/kmc-shell";
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from "app-shared/vmc-shell";
 import { serverConfig } from 'config/server';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { SettingsIntegrationSettingsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { SettingsIntegrationSettingsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kEntitlement',
+  selector: 'vEntitlement',
   templateUrl: './entitlement.component.html',
   styleUrls: ['./entitlement.component.scss'],
   providers: [
     EntitlementService,
-    KalturaLogger.createLogger('EntitlementComponent')
+    VidiunLogger.createLogger('EntitlementComponent')
   ]
 })
 export class EntitlementComponent implements OnInit, OnDestroy {
 
-  public _entitlements: KalturaCategory[];
+  public _entitlements: VidiunCategory[];
   public _partnerDefaultEntitlementEnforcement: boolean;
   public _blockerMessage: AreaBlockerMessage = null;
   public _isBusy = false;
-  public _currentEditEntitlement: KalturaCategory = null;
-  public _kmcPermissions = KMCPermissions;
+  public _currentEditEntitlement: VidiunCategory = null;
+  public _vmcPermissions = VMCPermissions;
   public _manageHelpLinkExists = !!serverConfig.externalLinks.entitlements && !!serverConfig.externalLinks.entitlements.manage;
 
   @ViewChild('editEntitlementPopup') editEntitlementPopup: PopupWidgetComponent;
@@ -36,7 +36,7 @@ export class EntitlementComponent implements OnInit, OnDestroy {
 
   constructor(private _entitlementService: EntitlementService,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _settingsIntegrationSettingsMainView: SettingsIntegrationSettingsMainViewService,
               private _browserService: BrowserService) {
   }
@@ -50,7 +50,7 @@ export class EntitlementComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  public _onActionSelected({action, entitlement}: { action: string, entitlement: KalturaCategory }) {
+  public _onActionSelected({action, entitlement}: { action: string, entitlement: VidiunCategory }) {
     switch (action) {
       case 'edit':
         this._logger.info(`handle edit entitlement action by user`, { id: entitlement.id, name: entitlement.name });
@@ -81,7 +81,7 @@ export class EntitlementComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _deleteEntitlement(entitlement: KalturaCategory) {
+  private _deleteEntitlement(entitlement: VidiunCategory) {
     this._logger.info(`handle delete entitlement request by user`);
     this._updateAreaBlockerState(true, null);
     this._entitlementService.deleteEntitlement({

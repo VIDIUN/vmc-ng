@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ContentEntriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { ContentEntriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Injectable()
 export class EntriesListService {

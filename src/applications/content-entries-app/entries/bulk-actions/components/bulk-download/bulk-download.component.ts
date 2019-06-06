@@ -1,26 +1,26 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { FlavorParamsListAction } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { FlavorParamsListAction } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
 
 import {SelectItem} from 'primeng/primeng';
 
 @Component({
-	selector: 'kBulkDownload',
+	selector: 'vBulkDownload',
 	templateUrl: './bulk-download.component.html',
 	styleUrls: ['./bulk-download.component.scss']
 })
 export class BulkDownload implements OnInit, OnDestroy, AfterViewInit {
 
-	@Input() selectedEntries: KalturaMediaEntry[];
+	@Input() selectedEntries: VidiunMediaEntry[];
 	@Input() parentPopupWidget: PopupWidgetComponent;
 	@Output() downloadChanged = new EventEmitter<number>();
 
@@ -36,7 +36,7 @@ export class BulkDownload implements OnInit, OnDestroy, AfterViewInit {
 	private _downloadLabel = {};
 	private _selectionChanged = false;
 
-	constructor(private _kalturaServerClient: KalturaClient,
+	constructor(private _vidiunServerClient: VidiunClient,
                 private _appLocalization: AppLocalization,
                 private _browserService: BrowserService) {
 	}
@@ -48,16 +48,16 @@ export class BulkDownload implements OnInit, OnDestroy, AfterViewInit {
 		this._loading = true;
 		this._sectionBlockerMessage = null;
 
-		let pager: KalturaFilterPager = new KalturaFilterPager();
+		let pager: VidiunFilterPager = new VidiunFilterPager();
 		pager.pageSize = 500;
 		pager.pageIndex = 1;
-		this._kalturaServerClient.request(new FlavorParamsListAction({
+		this._vidiunServerClient.request(new FlavorParamsListAction({
 			pager: pager
 		})).subscribe(
 			response => {
 				this._loading = false;
 				response.objects.forEach(flavor => {
-					if (flavor instanceof KalturaFlavorParams){
+					if (flavor instanceof VidiunFlavorParams){
 						this._flavors.push({'label': flavor.name, 'value': flavor.id});
 						if (flavor.id === 0){ // source
 							this._selectedFlavor = flavor.id;

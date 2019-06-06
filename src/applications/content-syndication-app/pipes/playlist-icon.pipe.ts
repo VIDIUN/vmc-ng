@@ -1,13 +1,13 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {KalturaPlaylist} from 'kaltura-ngx-client';
-import {KalturaPlaylistType} from 'kaltura-ngx-client';
+import {VidiunPlaylist} from 'vidiun-ngx-client';
+import {VidiunPlaylistType} from 'vidiun-ngx-client';
 
-@Pipe({name: 'kToPlaylistIcon'})
+@Pipe({name: 'vToPlaylistIcon'})
 export class PlaylistIconPipe implements PipeTransform {
   constructor() {
   }
 
-  transform(playlistId: string, playlistsIdToNameMap: Map<string, KalturaPlaylist>): string {
+  transform(playlistId: string, playlistsIdToNameMap: Map<string, VidiunPlaylist>): string {
     if (!playlistId) {
       return '';
     }
@@ -24,13 +24,13 @@ export class PlaylistIconPipe implements PipeTransform {
 
     if (typeof(playlistType) !== 'undefined' && playlistType !== null) {
       switch (playlistType) {
-        case KalturaPlaylistType.dynamic:
-        case KalturaPlaylistType.external:
-          return 'kIconPlaylist_RuleBased';
-        case KalturaPlaylistType.staticList:
-          return 'kIconPlaylist_Manual';
+        case VidiunPlaylistType.dynamic:
+        case VidiunPlaylistType.external:
+          return 'vIconPlaylist_RuleBased';
+        case VidiunPlaylistType.staticList:
+          return 'vIconPlaylist_Manual';
         default:
-          return 'kIconUnknown';
+          return 'vIconUnknown';
       }
     }
   }

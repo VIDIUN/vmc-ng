@@ -5,9 +5,9 @@ import {routing} from "./settings-account-settings-app.routes";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ButtonModule, DropdownModule, InputTextModule} from "primeng/primeng";
-import {AreaBlockerModule} from "@kaltura-ng/kaltura-ui";
+import {AreaBlockerModule} from "@vidiun-ng/vidiun-ui";
 import {TranslateModule} from "@ngx-translate/core";
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { SettingsAccountSettingsCanDeactivateService } from './settings-account-settings-can-deactivate.service';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { SettingsAccountSettingsCanDeactivateService } from './settings-account-
     ButtonModule,
     AreaBlockerModule,
     TranslateModule,
-    KMCPermissionsModule
+    VMCPermissionsModule
   ],
   declarations: [SettingsAccountSettingsComponent],
     providers:[SettingsAccountSettingsCanDeactivateService]

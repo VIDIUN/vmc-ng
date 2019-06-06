@@ -2,38 +2,38 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { IterableDiffers, IterableDiffer, IterableChangeRecord } from '@angular/core';
 import { async } from 'rxjs/scheduler/async';
 import { Observable } from 'rxjs';
-import { KalturaCategoryEntryFilter } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaTagFilter } from 'kaltura-ngx-client';
-import { KalturaTaggedObjectType } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { TagSearchAction } from 'kaltura-ngx-client';
-import { CategoryEntryListAction } from 'kaltura-ngx-client';
-import { KalturaLiveStreamEntry } from 'kaltura-ngx-client';
-import { MetadataListAction } from 'kaltura-ngx-client';
-import { KalturaMetadataFilter } from 'kaltura-ngx-client';
-import { KalturaMetadata } from 'kaltura-ngx-client';
-import { MetadataUpdateAction } from 'kaltura-ngx-client';
-import { MetadataAddAction } from 'kaltura-ngx-client';
-import { KalturaMetadataObjectType } from 'kaltura-ngx-client';
-import { CategoryEntryAddAction } from 'kaltura-ngx-client';
-import { CategoryEntryDeleteAction } from 'kaltura-ngx-client';
-import { KalturaCategoryEntry } from 'kaltura-ngx-client';
-import { MetadataProfileStore, MetadataProfileTypes, MetadataProfileCreateModes } from 'app-shared/kmc-shared';
+import { VidiunCategoryEntryFilter } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunTagFilter } from 'vidiun-ngx-client';
+import { VidiunTaggedObjectType } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { TagSearchAction } from 'vidiun-ngx-client';
+import { CategoryEntryListAction } from 'vidiun-ngx-client';
+import { VidiunLiveStreamEntry } from 'vidiun-ngx-client';
+import { MetadataListAction } from 'vidiun-ngx-client';
+import { VidiunMetadataFilter } from 'vidiun-ngx-client';
+import { VidiunMetadata } from 'vidiun-ngx-client';
+import { MetadataUpdateAction } from 'vidiun-ngx-client';
+import { MetadataAddAction } from 'vidiun-ngx-client';
+import { VidiunMetadataObjectType } from 'vidiun-ngx-client';
+import { CategoryEntryAddAction } from 'vidiun-ngx-client';
+import { CategoryEntryDeleteAction } from 'vidiun-ngx-client';
+import { VidiunCategoryEntry } from 'vidiun-ngx-client';
+import { MetadataProfileStore, MetadataProfileTypes, MetadataProfileCreateModes } from 'app-shared/vmc-shared';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { KalturaMultiRequest } from 'kaltura-ngx-client';
-import { DynamicMetadataForm, DynamicMetadataFormFactory } from 'app-shared/kmc-shared';
+import { VidiunMultiRequest } from 'vidiun-ngx-client';
+import { DynamicMetadataForm, DynamicMetadataFormFactory } from 'app-shared/vmc-shared';
 import { CategoriesSearchService, CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import 'rxjs/add/observable/forkJoin';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/catch';
 import { EntryWidget } from '../entry-widget';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 
 @Injectable()
@@ -41,19 +41,19 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
 {
     private _entryCategoriesDiffers : IterableDiffer<CategoryData>;
     public _entryCategories: CategoryData[]  = [];
-    private _entryMetadata: KalturaMetadata[] = [];
+    private _entryMetadata: VidiunMetadata[] = [];
 
     public isLiveEntry : boolean;
     public metadataForm : FormGroup;
     public customDataForms : DynamicMetadataForm[] = [];
 
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
                 private _categoriesSearchService : CategoriesSearchService,
                 private _formBuilder : FormBuilder,
                 private _iterableDiffers : IterableDiffers,
-                private _permissionsService: KMCPermissionsService,
+                private _permissionsService: VMCPermissionsService,
                 private _dynamicMetadataFormFactory : DynamicMetadataFormFactory,
-                logger: KalturaLogger,
+                logger: VidiunLogger,
                 private _metadataProfileStore : MetadataProfileStore)
     {
         super(ContentEntryViewSections.Metadata, logger);
@@ -63,7 +63,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
     private _buildForm() : void {
         const categoriesValidator = (input: FormControl) => {
           const categoriesCount = (Array.isArray(input.value) ? input.value : []).length;
-            const isCategoriesValid = this._permissionsService.hasPermission(KMCPermissions.FEATURE_DISABLE_CATEGORY_LIMIT)
+            const isCategoriesValid = this._permissionsService.hasPermission(VMCPermissions.FEATURE_DISABLE_CATEGORY_LIMIT)
                 ? categoriesCount <= subApplicationsConfig.contentEntriesApp.maxLinkedCategories.extendedLimit
                 : categoriesCount <= subApplicationsConfig.contentEntriesApp.maxLinkedCategories.defaultLimit;
 
@@ -86,15 +86,15 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         const formsChanges: Observable<any>[] = [];
 
         if (this._permissionsService.hasAnyPermissions([
-            KMCPermissions.CONTENT_MANAGE_METADATA,
-            KMCPermissions.CONTENT_MODERATE_METADATA
+            VMCPermissions.CONTENT_MANAGE_METADATA,
+            VMCPermissions.CONTENT_MODERATE_METADATA
         ])) {
             formGroups.push(this.metadataForm);
         }
 
       if (this._permissionsService.hasAnyPermissions([
-            KMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
-            KMCPermissions.CONTENT_MODERATE_METADATA
+            VMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
+            VMCPermissions.CONTENT_MODERATE_METADATA
         ])) {
             formGroups.push(...this.customDataForms.map(customDataForm => customDataForm.formGroup));
         }
@@ -144,9 +144,9 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         super._showLoader();
         super._removeBlockerMessage();
 
-        this.isLiveEntry = this.data instanceof KalturaLiveStreamEntry;
+        this.isLiveEntry = this.data instanceof VidiunLiveStreamEntry;
 
-        if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_ASSIGN_CATEGORIES)) {
+        if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_ASSIGN_CATEGORIES)) {
           this.metadataForm.get('categories').disable({ onlySelf: true });
         }
 
@@ -154,7 +154,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
             this._loadEntryCategories(this.data),
         ];
 
-        if (this._permissionsService.hasPermission(KMCPermissions.METADATA_PLUGIN_PERMISSION)) {
+        if (this._permissionsService.hasPermission(VMCPermissions.METADATA_PLUGIN_PERMISSION)) {
             actions.push(this._loadEntryMetadata(this.data));
 
             if (firstTimeActivating) {
@@ -163,8 +163,8 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         }
 
         if (!this._permissionsService.hasAnyPermissions([
-          KMCPermissions.CONTENT_MANAGE_METADATA,
-          KMCPermissions.CONTENT_MODERATE_METADATA
+          VMCPermissions.CONTENT_MANAGE_METADATA,
+          VMCPermissions.CONTENT_MODERATE_METADATA
         ])) {
           this.metadataForm.get('name').disable({ onlySelf: true });
           this.metadataForm.get('description').disable({ onlySelf: true });
@@ -206,7 +206,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
                 description: this.data.description || null,
                 tags: (this.data.tags ? this.data.tags.split(',').map(item => item.trim()) : null), // for backward compatibility we handle values separated with ',{space}'
                 categories: this._entryCategories,
-                offlineMessage: this.data instanceof KalturaLiveStreamEntry ? (this.data.offlineMessage || null) : '',
+                offlineMessage: this.data instanceof VidiunLiveStreamEntry ? (this.data.offlineMessage || null) : '',
                 referenceId: this.data.referenceId || null
             }
         );
@@ -224,8 +224,8 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         {
             this.customDataForms.forEach(customDataForm => {
                 if (!this._permissionsService.hasAnyPermissions([
-                    KMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
-                    KMCPermissions.CONTENT_MODERATE_METADATA
+                    VMCPermissions.CONTENT_MANAGE_CUSTOM_DATA,
+                    VMCPermissions.CONTENT_MODERATE_METADATA
                 ])) {
                   customDataForm.disable();
                 }
@@ -239,14 +239,14 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         this._monitorFormChanges();
     }
 
-    private _loadEntryMetadata(entry : KalturaMediaEntry) : Observable<boolean> {
+    private _loadEntryMetadata(entry : VidiunMediaEntry) : Observable<boolean> {
 
         // update entry categories
         this._entryMetadata = [];
 
-        return this._kalturaServerClient.request(new MetadataListAction(
+        return this._vidiunServerClient.request(new MetadataListAction(
             {
-                filter: new KalturaMetadataFilter(
+                filter: new VidiunMetadataFilter(
                     {
                         objectIdEqual: entry.id
                     }
@@ -264,18 +264,18 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
             });
     }
 
-    private _loadEntryCategories(entry : KalturaMediaEntry) : Observable<boolean> {
+    private _loadEntryCategories(entry : VidiunMediaEntry) : Observable<boolean> {
 
         // update entry categories
         this._entryCategories = [];
 
-        return this._kalturaServerClient.request(
+        return this._vidiunServerClient.request(
             new CategoryEntryListAction(
                 {
-                    filter: new KalturaCategoryEntryFilter({
+                    filter: new VidiunCategoryEntryFilter({
                         entryIdEqual: entry.id
                     }),
-                    pager: new KalturaFilterPager({
+                    pager: new VidiunFilterPager({
                         pageSize: 500
                     })
                 }
@@ -326,7 +326,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
             });
     }
 
-    protected onDataSaving(newData : KalturaMediaEntry, request : KalturaMultiRequest) : void
+    protected onDataSaving(newData : VidiunMediaEntry, request : VidiunMultiRequest) : void
     {
 
 	    const metadataFormValue = this.metadataForm.getRawValue();
@@ -336,7 +336,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
         newData.description = metadataFormValue.description;
         newData.referenceId = metadataFormValue.referenceId || null;
         newData.tags = (metadataFormValue.tags || []).join(',');
-        if (newData instanceof KalturaLiveStreamEntry)
+        if (newData instanceof VidiunLiveStreamEntry)
         {
             newData.offlineMessage = metadataFormValue.offlineMessage;
         }
@@ -350,7 +350,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
                 changes.forEachAddedItem((change : IterableChangeRecord<CategoryData>) =>
                 {
                     request.requests.push(new CategoryEntryAddAction({
-                        categoryEntry : new KalturaCategoryEntry({
+                        categoryEntry : new VidiunCategoryEntry({
                             entryId : this.data.id,
                             categoryId : Number(change.item.id)
                         })
@@ -389,7 +389,7 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
                         }else
                         {
                             request.requests.push(new MetadataAddAction({
-                                objectType : KalturaMetadataObjectType.entry,
+                                objectType : VidiunMetadataObjectType.entry,
                                 objectId : this.data.id,
                                 metadataProfileId : customDataForm.metadataProfile.id,
                                 xmlData: customDataValue.xml
@@ -405,16 +405,16 @@ export class EntryMetadataWidget extends EntryWidget implements OnDestroy
     {
         return Observable.create(
             observer => {
-                const requestSubscription = this._kalturaServerClient.request(
+                const requestSubscription = this._vidiunServerClient.request(
                     new TagSearchAction(
                         {
-                            tagFilter: new KalturaTagFilter(
+                            tagFilter: new VidiunTagFilter(
                                 {
                                     tagStartsWith : text,
-                                    objectTypeEqual : KalturaTaggedObjectType.entry
+                                    objectTypeEqual : VidiunTaggedObjectType.entry
                                 }
                             ),
-                            pager: new KalturaFilterPager({
+                            pager: new VidiunFilterPager({
                                 pageIndex : 0,
                                 pageSize : 30
                             })

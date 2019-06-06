@@ -1,12 +1,12 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {KalturaUser} from 'kaltura-ngx-client';
+import {VidiunUser} from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kCategoryOwnerName' })
+@Pipe({ name: 'vCategoryOwnerName' })
 export class CategoryOwnerNamePipe implements PipeTransform {
   constructor() {
   }
 
-  transform(value: KalturaUser): string {
+  transform(value: VidiunUser): string {
     return value.email || value.id;
   }
 }

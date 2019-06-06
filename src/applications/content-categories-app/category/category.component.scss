@@ -1,13 +1,13 @@
 @import 'app-theme/_variables.scss';
 
-.kSectionsWrapper{
+.vSectionsWrapper{
   min-width: 178px;
   border: 0px solid white;
   border-top-left-radius: 3px;
   flex: 0 0 auto;
   z-index: 0;
 }
-:host /deep/ span.ui-button-icon-left.pi-kIconarrow_forward, :host /deep/ span.ui-button-icon-left.pi-kIconarrow_backward{
+:host /deep/ span.ui-button-icon-left.pi-vIconarrow_forward, :host /deep/ span.ui-button-icon-left.pi-vIconarrow_backward{
   margin-left: -.5em;
 }
 
@@ -24,6 +24,6 @@
   width: 100% !important;
 }
 
-.kTitle {
+.vTitle {
   margin-left: 0 !important;
 }

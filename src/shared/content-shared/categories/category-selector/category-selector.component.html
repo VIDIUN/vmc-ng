@@ -1,10 +1,10 @@
-<p-radioButton *ngIf="enableNoParentSelection" class="kNoParentOption" [value]="null" [(ngModel)]="_selectedCategory"
+<p-radioButton *ngIf="enableNoParentSelection" class="vNoParentOption" [value]="null" [(ngModel)]="_selectedCategory"
                [ngModelOptions]="{standalone: true}"
                (click)="_clearSelection()"
                label="{{('applications.content.moveCategory.noParent') | translate}}"></p-radioButton>
 
-<div class="kMain">
-  <kAutoComplete #autoComplete
+<div class="vMain">
+  <vAutoComplete #autoComplete
                  [disabled]="!_categoriesLoaded"
                  [multiple]="false"
                  field="name"
@@ -16,11 +16,11 @@
                  (onSelect)="_onAutoCompleteSelected()"
                  [suggestionsProvider]="_categoriesProvider"
                  (completeMethod)="_onAutoCompleteSearch($event)">
-  </kAutoComplete>
-  <k-categories-tree #categoriesTree
+  </vAutoComplete>
+  <v-categories-tree #categoriesTree
                      [selectionMode]="'single'"
                      [(selectedCategory)]="_selectedCategory"
                      (onCategoriesLoaded)="_categoriesLoaded = true"
-                     (onCategorySelected)="_onCategorySelected($event)"></k-categories-tree>
+                     (onCategorySelected)="_onCategorySelected($event)"></v-categories-tree>
 </div>
-<div class="kSelectedCategoryTooltip" [kTooltip]="_selectionTooltip">{{ _selectionTooltip }}</div>
+<div class="vSelectedCategoryTooltip" [vTooltip]="_selectionTooltip">{{ _selectionTooltip }}</div>

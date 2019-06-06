@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
 
 import {
   ButtonModule,
@@ -13,15 +13,15 @@ import {
   TreeModule
 } from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import {AutoCompleteModule, KalturaPrimeNgUIModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import {AutoCompleteModule, VidiunPrimeNgUIModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 
 import { CategoriesTreeComponent } from './categories-tree/categories-tree.component';
 import { CategoriesFilterPrefsComponent } from './categories-filter-preferences/categories-filter-preferences.component';
 import { CategoriesFilterComponent } from './categories-filter/categories-filter.component';
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
-import { FiltersModule } from '@kaltura-ng/mc-shared';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
+import { FiltersModule } from '@vidiun-ng/mc-shared';
 import { CategoriesTreePropagationDirective } from './categories-tree/categories-tree-propagation.directive';
 import { CategoriesSearchService } from './categories-search.service';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
@@ -37,8 +37,8 @@ import { CategoryTooltipPipe } from 'app-shared/content-shared/categories/catego
     ReactiveFormsModule,
     TreeModule,
     LocalizationModule,
-    KalturaPrimeNgUIModule,
-    KalturaUIModule,
+    VidiunPrimeNgUIModule,
+    VidiunUIModule,
     ButtonModule,
     CalendarModule,
     RadioButtonModule,

@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
-import { AppPermissionsServiceBase } from '@kaltura-ng/mc-shared';
-import { KMCPermissions } from './kmc-permissions';
-import { KMCPermissionsRules } from 'app-shared/kmc-shared/kmc-permissions/kmc-permissions-rules';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppPermissionsServiceBase } from '@vidiun-ng/mc-shared';
+import { VMCPermissions } from './vmc-permissions';
+import { VMCPermissionsRules } from 'app-shared/vmc-shared/vmc-permissions/vmc-permissions-rules';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class KMCPermissionsService extends AppPermissionsServiceBase<KMCPermissions> {
-    private _logger: KalturaLogger;
+export class VMCPermissionsService extends AppPermissionsServiceBase<VMCPermissions> {
+    private _logger: VidiunLogger;
     private _restrictionsApplied = false;
     private _customPermissionNameToKeyMapping: { [name: string]: number} = {};
     get restrictionsApplied(): boolean {
         return this._restrictionsApplied;
     }
 
-    constructor(logger: KalturaLogger) {
+    constructor(logger: VidiunLogger) {
         super();
-        this._logger = logger.subLogger('KMCPermissionsService');
+        this._logger = logger.subLogger('VMCPermissionsService');
 
-        Object.keys(KMCPermissionsRules.customPermissionKeyToNameMapping).forEach((key) => {
-            const customName = KMCPermissionsRules.customPermissionKeyToNameMapping[key] as any; // bypass typescript issue with implicit type checking
+        Object.keys(VMCPermissionsRules.customPermissionKeyToNameMapping).forEach((key) => {
+            const customName = VMCPermissionsRules.customPermissionKeyToNameMapping[key] as any; // bypass typescript issue with implicit type checking
             this._customPermissionNameToKeyMapping[customName] = (<any>key);
         });
     }
 
-    public getPermissionKeyByName(name: string): KMCPermissions {
+    public getPermissionKeyByName(name: string): VMCPermissions {
         const customPermissionKey = this._customPermissionNameToKeyMapping[name];
-        return customPermissionKey ? customPermissionKey : KMCPermissions[name];
+        return customPermissionKey ? customPermissionKey : VMCPermissions[name];
     }
 
-    public getPermissionNameByKey(key: KMCPermissions): string {
-        const customPermissionName = KMCPermissionsRules.customPermissionKeyToNameMapping[key];
-        return customPermissionName ? customPermissionName : KMCPermissions[key];
+    public getPermissionNameByKey(key: VMCPermissions): string {
+        const customPermissionName = VMCPermissionsRules.customPermissionKeyToNameMapping[key];
+        return customPermissionName ? customPermissionName : VMCPermissions[key];
     }
 
-    public getLinkedPermissionByKey(key: KMCPermissions): KMCPermissions {
-        return KMCPermissionsRules.linkedPermissionMapping[key];
+    public getLinkedPermissionByKey(key: VMCPermissions): VMCPermissions {
+        return VMCPermissionsRules.linkedPermissionMapping[key];
     }
 
     load(rawRolePermissionList: string[], rawPartnerPermissionList: string[]): void {
@@ -47,10 +47,10 @@ export class KMCPermissionsService extends AppPermissionsServiceBase<KMCPermissi
             rawPartnerPermissionList
         }));
 
-        const rolePermissionList: Set<KMCPermissions> = new Set();
-        const partnerPermissionList: Set<KMCPermissions> = new Set();
-        const filteredRolePermissionList: Set<KMCPermissions> = new Set<KMCPermissions>();
-        const linkedPermissionList: Set<KMCPermissions> = new Set<KMCPermissions>();
+        const rolePermissionList: Set<VMCPermissions> = new Set();
+        const partnerPermissionList: Set<VMCPermissions> = new Set();
+        const filteredRolePermissionList: Set<VMCPermissions> = new Set<VMCPermissions>();
+        const linkedPermissionList: Set<VMCPermissions> = new Set<VMCPermissions>();
         let restrictionsApplied = false;
 
         const ignoredPartnerPermissionList: string[] = [];
@@ -95,11 +95,11 @@ export class KMCPermissionsService extends AppPermissionsServiceBase<KMCPermissi
 
         // traverse on each role permission and add it to user permissions set if possible
         rolePermissionList.forEach(permission => {
-            const requiredPermission = KMCPermissionsRules.requiredPermissionMapping[permission];
-            const linkedPermission = KMCPermissionsRules.linkedPermissionMapping[permission];
+            const requiredPermission = VMCPermissionsRules.requiredPermissionMapping[permission];
+            const linkedPermission = VMCPermissionsRules.linkedPermissionMapping[permission];
 
             if (requiredPermission && !partnerPermissionList.has(requiredPermission)) {
-                this._logger.info(`removing role permission '${KMCPermissions[permission]}' since a partner permission '${KMCPermissions[requiredPermission]}' is not available`);
+                this._logger.info(`removing role permission '${VMCPermissions[permission]}' since a partner permission '${VMCPermissions[requiredPermission]}' is not available`);
                 restrictionsApplied = true;
             } else {
                 if (linkedPermission) {
@@ -116,11 +116,11 @@ export class KMCPermissionsService extends AppPermissionsServiceBase<KMCPermissi
         linkedPermissionList.forEach(linkedPermission => {
 
             if (!filteredRolePermissionList.has(linkedPermission)) {
-                const requiredPermission = KMCPermissionsRules.requiredPermissionMapping[linkedPermission];
+                const requiredPermission = VMCPermissionsRules.requiredPermissionMapping[linkedPermission];
 
                 if (!requiredPermission ||
                     (requiredPermission && partnerPermissionList.has(requiredPermission))) {
-                    this._logger.info(`adding linked role permission '${KMCPermissions[linkedPermission]}'`);
+                    this._logger.info(`adding linked role permission '${VMCPermissions[linkedPermission]}'`);
                     filteredRolePermissionList.add(linkedPermission);
                 }
             }
@@ -138,8 +138,8 @@ export class KMCPermissionsService extends AppPermissionsServiceBase<KMCPermissi
         this._restrictionsApplied = restrictionsApplied;
     }
 
-    isPermissionEnabled(permission: KMCPermissions): boolean {
-        const requiredPermission = KMCPermissionsRules.requiredPermissionMapping[permission];
+    isPermissionEnabled(permission: VMCPermissions): boolean {
+        const requiredPermission = VMCPermissionsRules.requiredPermissionMapping[permission];
         return !requiredPermission || ((requiredPermission) && super.hasPermission(requiredPermission));
     }
 }

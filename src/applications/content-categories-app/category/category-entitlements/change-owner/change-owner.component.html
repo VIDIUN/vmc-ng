@@ -1,13 +1,13 @@
-<k-area-blocker [message]="_blockerMessage">
-  <div class="kFloater kOverrideFAIcons">
-    <div class="kHeader">
-      <span class="kTitle">{{'applications.content.categoryDetails.entitlements.owner.changeOwner' | translate}}</span>
+<v-area-blocker [message]="_blockerMessage">
+  <div class="vFloater vOverrideFAIcons">
+    <div class="vHeader">
+      <span class="vTitle">{{'applications.content.categoryDetails.entitlements.owner.changeOwner' | translate}}</span>
     </div>
 
-    <div class="kContainer">
-      <span class="kLabel">{{'applications.content.categoryDetails.entitlements.owner.changeOwnerLabel' | translate}}</span>
+    <div class="vContainer">
+      <span class="vLabel">{{'applications.content.categoryDetails.entitlements.owner.changeOwnerLabel' | translate}}</span>
 
-      <kAutoComplete [(ngModel)]="_owner"
+      <vAutoComplete [(ngModel)]="_owner"
                      suggestionItemField="item"
                      suggestionLabelField="name"
                      field="screenName"
@@ -20,15 +20,15 @@
                      [minLength]="3"
                      [suggestionsProvider]="_usersProvider"
                      (completeMethod)="_searchUsers($event)">
-      </kAutoComplete>
+      </vAutoComplete>
     </div>
 
-    <div class="kFooter">
-      <button type="button" class="kButtonDefault" pButton
+    <div class="vFooter">
+      <button type="button" class="vButtonDefault" pButton
               label="{{'app.common.cancel' | translate}}" (click)="parentPopupWidget.close()"></button>
-      <button type="button" class="kButtonBranded" pButton
+      <button type="button" class="vButtonBranded" pButton
               label="{{'app.common.apply' | translate}}" (click)="_apply()"
               [disabled]="!_owner"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

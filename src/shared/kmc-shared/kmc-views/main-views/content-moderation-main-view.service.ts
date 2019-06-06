@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class ContentModerationMainViewService extends KmcMainViewBaseService {
+export class ContentModerationMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -25,9 +25,9 @@ export class ContentModerationMainViewService extends KmcMainViewBaseService {
 
     isAvailable(): boolean {
         return this._appPermissions.hasAnyPermissions([
-            KMCPermissions.CONTENT_MODERATE_BASE,
-            KMCPermissions.CONTENT_MODERATE_METADATA,
-            KMCPermissions.CONTENT_MODERATE_CUSTOM_DATA
+            VMCPermissions.CONTENT_MODERATE_BASE,
+            VMCPermissions.CONTENT_MODERATE_METADATA,
+            VMCPermissions.CONTENT_MODERATE_CUSTOM_DATA
         ]);
     }
 

@@ -1,4 +1,4 @@
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-playlist-view.service';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-playlist-view.service';
 
 export const SectionsList = [
   {

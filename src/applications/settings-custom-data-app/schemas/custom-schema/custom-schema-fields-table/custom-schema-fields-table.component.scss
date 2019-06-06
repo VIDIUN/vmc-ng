@@ -1,45 +1,45 @@
 @import 'app-theme/_variables.scss';
 
-.kFieldsTable {
+.vFieldsTable {
   background-color: white;
   height: auto;
   padding: 0;
 
-  .kTitle {
-    color: $kGrayscale1;
+  .vTitle {
+    color: $vGrayscale1;
     font-weight: 700;
     cursor: pointer;
     max-height: 45px;
     &:hover {
       color: #000000;
     }
-    &.kProfileDisabled {
-      color: $kGrayscale4;
+    &.vProfileDisabled {
+      color: $vGrayscale4;
       cursor: text;
     }
   }
 
-  .kTypeIcon {
+  .vTypeIcon {
     font-size: 24px;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     vertical-align: middle;
   }
 
-  .kFieldNameWrap {
+  .vFieldNameWrap {
     display: flex;
     align-items: center;
 
-    .kMediaTypeIcon {
+    .vMediaTypeIcon {
       font-size: 26px;
       margin-right: 23px;
     }
   }
 
-  .kFieldsTableActions {
+  .vFieldsTableActions {
     display: none;
     align-content: center;
     justify-content: center;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
 
     i {
       margin-right: 10px;
@@ -50,17 +50,17 @@
         margin-right: 0;
       }
 
-      &.kActionDisabled {
-        color: $kGrayscale3;
+      &.vActionDisabled {
+        color: $vGrayscale3;
         cursor: text;
       }
 
-      &.kActionMoveDown {
+      &.vActionMoveDown {
         transform: rotate(180deg);
       }
 
-      &.kActionDelete {
-        color: $kDandger
+      &.vActionDelete {
+        color: $vDandger
       }
     }
   }
@@ -73,12 +73,12 @@
   flex-direction: column;
 }
 
-:host /deep/ .kFieldsTable {
-  tr.kProfileDisabled .ui-cell-data {
-    color: $kGrayscale4;
+:host /deep/ .vFieldsTable {
+  tr.vProfileDisabled .ui-cell-data {
+    color: $vGrayscale4;
   }
 
-  tr:hover .kFieldsTableActions {
+  tr:hover .vFieldsTableActions {
     display: flex !important;
   }
 

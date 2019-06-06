@@ -1,38 +1,38 @@
 @import 'app-theme/_variables.scss';
 
-.kScheduling{
+.vScheduling{
 	padding: 20px;
 	p{
 		height: 30px;
 	}
-	.kTitle{
-		color: $kGrayscale1;
+	.vTitle{
+		color: $vGrayscale1;
 		font-size: 20px;
 		font-weight: 700;
 	}
-	.kBlock{
+	.vBlock{
 		display: block;
 		width: 100%;
 		margin-bottom: 24px;
 	}
-	.kNote{
+	.vNote{
 		margin-top: 24px;
 	}
-	.kSchedulingDetails{
+	.vSchedulingDetails{
 		padding-right: 12px;
 		margin-top: 12px;
 		width: 100%;
-		.kRow{
+		.vRow{
 			display: flex;
 			padding-top: 18px;
 		}
-		.kLabels{
+		.vLabels{
 			margin-top: 5px;
 			width: 130px;
 			flex: 0 0 auto;
 		}
 	}
-	.kDisabled{
+	.vDisabled{
 		opacity: 0.3;
 		cursor: default;
 		pointer-events: none;

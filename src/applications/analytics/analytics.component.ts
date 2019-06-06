@@ -2,21 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
     AnalyticsNewMainViewService,
-    KMCAppMenuItem,
+    VMCAppMenuItem,
     LiveAnalyticsMainViewService
-} from 'app-shared/kmc-shared/kmc-views';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { ResetMenuEvent, UpdateMenuEvent } from 'app-shared/kmc-shared/events';
-import { BrowserService } from 'app-shared/kmc-shell';
+} from 'app-shared/vmc-shared/vmc-views';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { ResetMenuEvent, UpdateMenuEvent } from 'app-shared/vmc-shared/events';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-    selector: 'kAnalytics',
+    selector: 'vAnalytics',
     templateUrl: './analytics.component.html',
     styleUrls: ['./analytics.component.scss']
 })
 export class AnalyticsComponent implements OnInit, OnDestroy {
-    private menuConfig: KMCAppMenuItem[] = [];
+    private menuConfig: VMCAppMenuItem[] = [];
 
     constructor(private _appLocalization: AppLocalization,
                 private _appEvents: AppEventsService,

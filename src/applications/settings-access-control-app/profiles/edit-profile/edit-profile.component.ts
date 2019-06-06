@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KalturaSiteRestrictionType } from 'kaltura-ngx-client';
-import { KalturaCountryRestrictionType } from 'kaltura-ngx-client';
-import { KalturaIpAddressRestrictionType } from 'kaltura-ngx-client';
-import { KalturaLimitFlavorsRestrictionType } from 'kaltura-ngx-client';
-import { AccessControlProfilesStore, ExtendedKalturaAccessControl } from '../profiles-store/profiles-store.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaAccessControl } from 'kaltura-ngx-client';
-import { KalturaSiteRestriction } from 'kaltura-ngx-client';
-import { KalturaCountryRestriction } from 'kaltura-ngx-client';
-import { KalturaIpAddressRestriction } from 'kaltura-ngx-client';
-import { KalturaLimitFlavorsRestriction } from 'kaltura-ngx-client';
-import { KalturaSessionRestriction } from 'kaltura-ngx-client';
-import { KalturaPreviewRestriction } from 'kaltura-ngx-client';
+import { VidiunSiteRestrictionType } from 'vidiun-ngx-client';
+import { VidiunCountryRestrictionType } from 'vidiun-ngx-client';
+import { VidiunIpAddressRestrictionType } from 'vidiun-ngx-client';
+import { VidiunLimitFlavorsRestrictionType } from 'vidiun-ngx-client';
+import { AccessControlProfilesStore, ExtendedVidiunAccessControl } from '../profiles-store/profiles-store.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunAccessControl } from 'vidiun-ngx-client';
+import { VidiunSiteRestriction } from 'vidiun-ngx-client';
+import { VidiunCountryRestriction } from 'vidiun-ngx-client';
+import { VidiunIpAddressRestriction } from 'vidiun-ngx-client';
+import { VidiunLimitFlavorsRestriction } from 'vidiun-ngx-client';
+import { VidiunSessionRestriction } from 'vidiun-ngx-client';
+import { VidiunPreviewRestriction } from 'vidiun-ngx-client';
 import { globalConfig } from 'config/global';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 export interface AccessControlAutocompleteItem {
   value: string;
@@ -27,24 +27,24 @@ export interface AccessControlAutocompleteItem {
 }
 
 @Component({
-  selector: 'kAccessControlProfilesEditProfile',
+  selector: 'vAccessControlProfilesEditProfile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
-  providers: [KalturaLogger.createLogger('EditProfileComponent')]
+  providers: [VidiunLogger.createLogger('EditProfileComponent')]
 })
 export class EditProfileComponent implements OnInit, OnDestroy {
   @Input() parentPopup: PopupWidgetComponent;
 
-  @Input() profile: ExtendedKalturaAccessControl | null;
+  @Input() profile: ExtendedVidiunAccessControl | null;
 
-  @Output() onSave = new EventEmitter<KalturaAccessControl>();
+  @Output() onSave = new EventEmitter<VidiunAccessControl>();
 
-  private _profile: ExtendedKalturaAccessControl = null;
+  private _profile: ExtendedVidiunAccessControl = null;
   public _headerTitle: string;
 
   public _ipsFormatError = false;
   public _domainsFormatError = false;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public get _saveBtnDisabled(): boolean {
     return this._domainsFormatError || this._ipsFormatError || this._nameField.invalid;
@@ -75,16 +75,16 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   public _allowPreviewField: AbstractControl;
   public _previewField: AbstractControl;
 
-  public _siteRestrictionType = KalturaSiteRestrictionType;
-  public _countryRestrictionType = KalturaCountryRestrictionType;
-  public _ipAddressRestrictionType = KalturaIpAddressRestrictionType;
-  public _flavorsRestrictionType = KalturaLimitFlavorsRestrictionType;
+  public _siteRestrictionType = VidiunSiteRestrictionType;
+  public _countryRestrictionType = VidiunCountryRestrictionType;
+  public _ipAddressRestrictionType = VidiunIpAddressRestrictionType;
+  public _flavorsRestrictionType = VidiunLimitFlavorsRestrictionType;
 
   constructor(private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               private _fb: FormBuilder,
-              private _permissionsService: KMCPermissionsService,
-              private _logger: KalturaLogger,
+              private _permissionsService: VMCPermissionsService,
+              private _logger: VidiunLogger,
               public _store: AccessControlProfilesStore) {
     this._convertDomainsUserInputToValidValue = this._convertDomainsUserInputToValidValue.bind(this);
     this._convertIpsUserInputToValidValue = this._convertIpsUserInputToValidValue.bind(this);
@@ -110,12 +110,12 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       this._headerTitle = this._appLocalization.get('applications.settings.accessControl.addAccessControlProfile');
     }
 
-    if (!this._permissionsService.hasPermission(KMCPermissions.ACCESS_CONTROL_UPDATE)) {
+    if (!this._permissionsService.hasPermission(VMCPermissions.ACCESS_CONTROL_UPDATE)) {
       this._profileForm.disable({ emitEvent: false });
     }
   }
 
-  private _setInitialValue(profile: ExtendedKalturaAccessControl): void {
+  private _setInitialValue(profile: ExtendedVidiunAccessControl): void {
     let domainsType = null;
     let allowedDomains = [];
     let restrictedDomains = [];
@@ -123,7 +123,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       const domain = profile.view.domain;
       if (domain.isAuthorized !== null) {
           const isAuthorized = domain.isAuthorized;
-          domainsType = isAuthorized ? KalturaSiteRestrictionType.allowSiteList : KalturaSiteRestrictionType.restrictSiteList;
+          domainsType = isAuthorized ? VidiunSiteRestrictionType.allowSiteList : VidiunSiteRestrictionType.restrictSiteList;
           allowedDomains = isAuthorized ? domain.details.map(value => ({value, __tooltip: value})) : [];
           restrictedDomains = !isAuthorized ? domain.details.map(value => ({value, __tooltip: value})) : [];
       }
@@ -136,7 +136,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       const countries = profile.view.countries;
         if (countries.isAuthorized !== null) {
             const isAuthorized = countries.isAuthorized;
-            countriesType = isAuthorized ? KalturaCountryRestrictionType.allowCountryList : KalturaCountryRestrictionType.restrictCountryList;
+            countriesType = isAuthorized ? VidiunCountryRestrictionType.allowCountryList : VidiunCountryRestrictionType.restrictCountryList;
             allowedCountries = isAuthorized ? countries.details : [];
             restrictedCountries = !isAuthorized ? countries.details : [];
         }
@@ -149,7 +149,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       const ips = profile.view.ips;
         if (ips.isAuthorized !== null) {
             const isAuthorized = ips.isAuthorized;
-            ipsType = isAuthorized ? KalturaIpAddressRestrictionType.allowList : KalturaIpAddressRestrictionType.restrictList;
+            ipsType = isAuthorized ? VidiunIpAddressRestrictionType.allowList : VidiunIpAddressRestrictionType.restrictList;
             allowedIps = isAuthorized ? ips.details.map(value => ({value, __tooltip: value})) : [];
             restrictedIps = !isAuthorized ? ips.details.map(value => ({value, __tooltip: value})) : [];
         }
@@ -162,7 +162,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       const flavors = profile.view.flavors;
         if (flavors.isAuthorized !== null) {
             const isAuthorized = flavors.isAuthorized;
-            flavorsType = isAuthorized ? KalturaLimitFlavorsRestrictionType.allowList : KalturaLimitFlavorsRestrictionType.restrictList;
+            flavorsType = isAuthorized ? VidiunLimitFlavorsRestrictionType.allowList : VidiunLimitFlavorsRestrictionType.restrictList;
             allowedFlavors = isAuthorized ? flavors.details.map(item => item.id) : [];
             restrictedFlavors = !isAuthorized ? flavors.details.map(item => item.id) : [];
         }
@@ -256,10 +256,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this._domainsTypeField.valueChanges
       .pipe(cancelOnDestroy(this))
       .subscribe(value => {
-        if (value === KalturaSiteRestrictionType.allowSiteList) {
+        if (value === VidiunSiteRestrictionType.allowSiteList) {
           this._allowedDomainsField.enable();
           this._restrictedDomainsField.disable();
-        } else if (value === KalturaSiteRestrictionType.restrictSiteList) {
+        } else if (value === VidiunSiteRestrictionType.restrictSiteList) {
           this._restrictedDomainsField.enable();
           this._allowedDomainsField.disable();
         } else {
@@ -271,11 +271,11 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this._countriesTypeField.valueChanges
       .pipe(cancelOnDestroy(this))
       .subscribe(value => {
-        if (value === KalturaCountryRestrictionType.allowCountryList) {
+        if (value === VidiunCountryRestrictionType.allowCountryList) {
           this._allowedCountriesField.enable();
           this._restrictedCountriesField.setValue([]);
           this._restrictedCountriesField.disable();
-        } else if (value === KalturaCountryRestrictionType.restrictCountryList) {
+        } else if (value === VidiunCountryRestrictionType.restrictCountryList) {
           this._restrictedCountriesField.enable();
           this._allowedCountriesField.setValue([]);
           this._allowedCountriesField.disable();
@@ -290,10 +290,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this._ipsTypeField.valueChanges
       .pipe(cancelOnDestroy(this))
       .subscribe(value => {
-        if (value === KalturaIpAddressRestrictionType.allowList) {
+        if (value === VidiunIpAddressRestrictionType.allowList) {
           this._allowedIpsField.enable();
           this._restrictedIpsField.disable();
-        } else if (value === KalturaIpAddressRestrictionType.restrictList) {
+        } else if (value === VidiunIpAddressRestrictionType.restrictList) {
           this._restrictedIpsField.enable();
           this._allowedIpsField.disable();
         } else {
@@ -305,11 +305,11 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     this._flavorsTypeField.valueChanges
       .pipe(cancelOnDestroy(this))
       .subscribe(value => {
-        if (value === KalturaLimitFlavorsRestrictionType.allowList) {
+        if (value === VidiunLimitFlavorsRestrictionType.allowList) {
           this._allowedFlavorsField.enable();
           this._restrictedFlavorsField.setValue([]);
           this._restrictedFlavorsField.disable();
-        } else if (value === KalturaLimitFlavorsRestrictionType.restrictList) {
+        } else if (value === VidiunLimitFlavorsRestrictionType.restrictList) {
           this._restrictedFlavorsField.enable();
           this._allowedFlavorsField.setValue([]);
           this._allowedFlavorsField.disable();
@@ -379,26 +379,26 @@ export class EditProfileComponent implements OnInit, OnDestroy {
     let message = '';
 
     const { domainsType, allowedDomains, restrictedDomains } = formValue;
-    if (domainsType === KalturaSiteRestrictionType.allowSiteList && (!allowedDomains || !allowedDomains.length)
-      || domainsType === KalturaSiteRestrictionType.restrictSiteList && (!restrictedDomains || !restrictedDomains.length)) {
+    if (domainsType === VidiunSiteRestrictionType.allowSiteList && (!allowedDomains || !allowedDomains.length)
+      || domainsType === VidiunSiteRestrictionType.restrictSiteList && (!restrictedDomains || !restrictedDomains.length)) {
       message += this._appLocalization.get('applications.settings.accessControl.editForm.validationMessage.authorizedDomains') + '\n';
     }
 
     const { countriesType, allowedCountries, restrictedCountries } = formValue;
-    if (countriesType === KalturaCountryRestrictionType.allowCountryList && (!allowedCountries || !allowedCountries.length)
-      || countriesType === KalturaCountryRestrictionType.restrictCountryList && (!restrictedCountries || !restrictedCountries.length)) {
+    if (countriesType === VidiunCountryRestrictionType.allowCountryList && (!allowedCountries || !allowedCountries.length)
+      || countriesType === VidiunCountryRestrictionType.restrictCountryList && (!restrictedCountries || !restrictedCountries.length)) {
       message += this._appLocalization.get('applications.settings.accessControl.editForm.validationMessage.authorizedCountries') + '\n';
     }
 
     const { ipsType, allowedIps, restrictedIps } = formValue;
-    if (ipsType === KalturaIpAddressRestrictionType.allowList && (!allowedIps || !allowedIps.length)
-      || ipsType === KalturaIpAddressRestrictionType.restrictList && (!restrictedIps || !restrictedIps.length)) {
+    if (ipsType === VidiunIpAddressRestrictionType.allowList && (!allowedIps || !allowedIps.length)
+      || ipsType === VidiunIpAddressRestrictionType.restrictList && (!restrictedIps || !restrictedIps.length)) {
       message += this._appLocalization.get('applications.settings.accessControl.editForm.validationMessage.authorizedIps') + '\n';
     }
 
     const { flavorsType, allowedFlavors, restrictedFlavors } = formValue;
-    if (flavorsType === KalturaLimitFlavorsRestrictionType.allowList && (!allowedFlavors || !allowedFlavors.length)
-      || flavorsType === KalturaLimitFlavorsRestrictionType.restrictList && (!restrictedFlavors || !restrictedFlavors.length)) {
+    if (flavorsType === VidiunLimitFlavorsRestrictionType.allowList && (!allowedFlavors || !allowedFlavors.length)
+      || flavorsType === VidiunLimitFlavorsRestrictionType.restrictList && (!restrictedFlavors || !restrictedFlavors.length)) {
       message += this._appLocalization.get('applications.settings.accessControl.editForm.validationMessage.authorizedFlavors') + '\n';
     }
 
@@ -418,7 +418,7 @@ export class EditProfileComponent implements OnInit, OnDestroy {
   }
   private _proceedSave(): void {
     const formValue = this._profileForm.getRawValue();
-    const accessControlProfile = this._profile || new KalturaAccessControl();
+    const accessControlProfile = this._profile || new VidiunAccessControl();
 
     accessControlProfile.name = formValue.name;
     accessControlProfile.description = formValue.description;
@@ -426,10 +426,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     const { domainsType, allowedDomains, restrictedDomains } = formValue;
     if (domainsType !== null) {
-      const items = domainsType === KalturaSiteRestrictionType.allowSiteList ? allowedDomains : restrictedDomains;
+      const items = domainsType === VidiunSiteRestrictionType.allowSiteList ? allowedDomains : restrictedDomains;
       const siteList = this._getAutocompleteList(items);
       if (siteList) {
-        accessControlProfile.restrictions.push(new KalturaSiteRestriction({
+        accessControlProfile.restrictions.push(new VidiunSiteRestriction({
           siteList,
           siteRestrictionType: domainsType
         }));
@@ -438,10 +438,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     const { countriesType, allowedCountries, restrictedCountries } = formValue;
     if (countriesType !== null) {
-      const items = countriesType === KalturaCountryRestrictionType.allowCountryList ? allowedCountries : restrictedCountries;
+      const items = countriesType === VidiunCountryRestrictionType.allowCountryList ? allowedCountries : restrictedCountries;
       const countryList = this._getList(items);
       if (countryList) {
-        accessControlProfile.restrictions.push(new KalturaCountryRestriction({
+        accessControlProfile.restrictions.push(new VidiunCountryRestriction({
           countryList,
           countryRestrictionType: countriesType
         }));
@@ -450,10 +450,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     const { ipsType, allowedIps, restrictedIps } = formValue;
     if (ipsType !== null) {
-      const items = ipsType === KalturaIpAddressRestrictionType.allowList ? allowedIps : restrictedIps;
+      const items = ipsType === VidiunIpAddressRestrictionType.allowList ? allowedIps : restrictedIps;
       const ipAddressList = this._getAutocompleteList(items);
       if (ipAddressList) {
-        accessControlProfile.restrictions.push(new KalturaIpAddressRestriction({
+        accessControlProfile.restrictions.push(new VidiunIpAddressRestriction({
           ipAddressList,
           ipAddressRestrictionType: ipsType
         }));
@@ -462,10 +462,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     const { flavorsType, allowedFlavors, restrictedFlavors } = formValue;
     if (flavorsType !== null) {
-      const items = flavorsType === KalturaLimitFlavorsRestrictionType.allowList ?  allowedFlavors : restrictedFlavors;
+      const items = flavorsType === VidiunLimitFlavorsRestrictionType.allowList ?  allowedFlavors : restrictedFlavors;
       const flavorParamsIds = this._getList(items);
       if (flavorParamsIds) {
-        accessControlProfile.restrictions.push(new KalturaLimitFlavorsRestriction({
+        accessControlProfile.restrictions.push(new VidiunLimitFlavorsRestriction({
           flavorParamsIds,
           limitFlavorsRestrictionType: flavorsType
         }));
@@ -474,10 +474,10 @@ export class EditProfileComponent implements OnInit, OnDestroy {
 
     const { secureVideo, allowPreview, preview } = formValue;
     if (secureVideo) {
-      accessControlProfile.restrictions.push(new KalturaSessionRestriction());
+      accessControlProfile.restrictions.push(new VidiunSessionRestriction());
 
       if (allowPreview && preview >= 0) {
-        accessControlProfile.restrictions.push(new KalturaPreviewRestriction({
+        accessControlProfile.restrictions.push(new VidiunPreviewRestriction({
           previewLength: preview
         }));
       }

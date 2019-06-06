@@ -1,28 +1,28 @@
 @import 'app-theme/_variables.scss';
 
-.kContainer {
+.vContainer {
   overflow: hidden;
   height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  .kHeader {
+  .vHeader {
     flex: 0 0 auto;
     height: 72px;
     width: 100%;
     padding: 18px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kButton {
+    border-bottom: 1px solid $vGrayscale4;
+    .vButton {
       float: right;
       height: 34px;
       width: 88px;
     }
-    .kTitle {
+    .vTitle {
       float: left;
       font-weight: 700;
       padding: 8px;
     }
-    .kInheritanceMessage {
+    .vInheritanceMessage {
       display: block;
       clear: both;
       padding: 0 8px;
@@ -30,72 +30,72 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      color: $kDandger;
+      color: $vDandger;
     }
   }
-  .kHeader.kInheritance {
+  .vHeader.vInheritance {
     height: 80px;
   }
 
-  .kBulkActionsContainer {
+  .vBulkActionsContainer {
     flex: 0 0 auto;
     padding: 9px 0 9px 24px;
     font-size: 15px;
     display: inline-flex;
     align-items: center;
-    border-bottom: 1px solid $kGrayscale4;
-    .kAddItemBtn {
+    border-bottom: 1px solid $vGrayscale4;
+    .vAddItemBtn {
         flex: 0 0 auto;
       height: 34px;
     }
 
-    .kItemsNum {
+    .vItemsNum {
       padding-left: 24px;
       display: inline-block;
       width: 392px;
     }
 
-    .kItemsNum.kSelected {
+    .vItemsNum.vSelected {
       width: auto;
       padding-left: 0px;
     }
 
-    .kBulkActions {
+    .vBulkActions {
       margin-left: 16px;
       display: inline-block;
 
-      .kSelectedItems {
+      .vSelectedItems {
         font-weight: bold;
       }
 
-      .kBulkCancel {
+      .vBulkCancel {
         padding: 0 24px;
         color: #333333;
       }
     }
 
-    .kFiltersContainer {
+    .vFiltersContainer {
       display: flex;
-      .kSearchInput {
-        background: $kMagnifyingGlassBkg;
+      .vSearchInput {
+        background: $vMagnifyingGlassBkg;
         padding-left: 38px;
         margin-right: 16px;
         width: 258px;
       }
 
-      .kRefine {
+      .vRefine {
         display: flex;
         height: 32px;
         align-items: center;
         cursor: pointer;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         width: 160px;
         position: relative;
         i {
           margin-right: 12px;
           margin-left: 8px;
           font-size: 24px;
-          color: $kGrayscale4;
+          color: $vGrayscale4;
           &.dropdown {
             font-size: 10px;
           }
@@ -108,28 +108,28 @@
       }
     }
 
-    .kHidden {
+    .vHidden {
       visibility: hidden;
       width: 0px;
       height: 0px;
     }
   }
 
-  .kManageEndUserPermissionsTable {
+  .vManageEndUserPermissionsTable {
     flex: 1 1 auto;
     overflow-y: auto;
     padding-bottom: 34px;
   }
-  kManageEndUserPermissionsTable{
+  vManageEndUserPermissionsTable{
     width: 100%;
   }
 
-  .kTableFooter {
+  .vTableFooter {
     flex: 0 0 auto;
     bottom: 0;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     padding: 0 14px 28px;
@@ -137,8 +137,8 @@
     width: 996px;
   }
 
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
@@ -149,15 +149,15 @@
 :host /deep/ {
   .ui-dropdown {
     height: 34px;
-    border: 1px solid $kGrayscale4;
+    border: 1px solid $vGrayscale4;
 
     .ui-dropdown-label {
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
     }
   }
 }
-.kBulkActionsBtn {
+.vBulkActionsBtn {
   font-size: 15px;
 }
 
@@ -165,36 +165,36 @@
   width: 100%;
 }
 
-:host /deep/  .kIcondropdown_arrow_bottom {
+:host /deep/  .vIcondropdown_arrow_bottom {
   font-size: 12px;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
 }
 
 :host /deep/  .ui-widget-header.ui-table-scrollable-header {
   border-top: 0px solid white;
 }
-:host /deep/ ktags .kTags {
+:host /deep/ vtags .vTags {
   border-top: 0px solid white;
-  border-bottom: 1px solid $kGrayscale4;
+  border-bottom: 1px solid $vGrayscale4;
 }
 
 :host /deep/  .ui-button-text-icon-right .ui-button-text {
   padding-left: 10px;
 }
 
-:host /deep/ kSticky {
+:host /deep/ vSticky {
   width: 100%;
 }
 
-:host /deep/ .kStickyHeader {
+:host /deep/ .vStickyHeader {
   background-color: white;
-  border-top: 2px solid $kGrayscale6;
-  box-shadow: $kGrayscale5 0px 1px 0px;
+  border-top: 2px solid $vGrayscale6;
+  box-shadow: $vGrayscale5 0px 1px 0px;
   display: flex;
   height: 68px;
   width: inherit;
 }
-:host /deep/ .kTableFooter {
+:host /deep/ .vTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

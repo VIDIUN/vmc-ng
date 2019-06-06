@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
 import {
   AccordionModule,
   ButtonModule,
@@ -21,28 +21,28 @@ import {
   TieredMenuModule,
   TreeModule
 } from 'primeng/primeng';
-import { KMCShellModule } from 'app-shared/kmc-shell';
+import { VMCShellModule } from 'app-shared/vmc-shell';
 
 import { routing } from './administration-roles-app.routes';
 import { AdministrationRolesComponent } from './administration-roles.component';
 
-import { DynamicMetadataFormModule } from 'app-shared/kmc-shared';
+import { DynamicMetadataFormModule } from 'app-shared/vmc-shared';
 
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule } from '@kaltura-ng/kaltura-ui';
-import { AutoCompleteModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
-import { DynamicFormModule } from '@kaltura-ng/kaltura-ui';
-import { DynamicFormModule as PrimeDynamicFormModule } from '@kaltura-ng/kaltura-primeng-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule } from '@vidiun-ng/vidiun-ui';
+import { AutoCompleteModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
+import { DynamicFormModule } from '@vidiun-ng/vidiun-ui';
+import { DynamicFormModule as PrimeDynamicFormModule } from '@vidiun-ng/vidiun-primeng-ui';
 import { EditRoleComponent } from './edit-role/edit-role.component';
 import { PermissionsTableComponent } from './permissions-table/permissions-table.component';
 import { TableModule } from 'primeng/table';
-import { MultiSelectModule } from '@kaltura-ng/kaltura-primeng-ui';
+import { MultiSelectModule } from '@vidiun-ng/vidiun-primeng-ui';
 import { RolesListComponent } from './roles-list/roles-list.component';
 import { RolesTableComponent } from './roles-table/roles-table.component';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
@@ -61,9 +61,9 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     InputTextModule,
     LocalizationModule,
     DynamicMetadataFormModule,
-    KalturaPrimeNgUIModule,
-    KalturaUIModule,
-    KMCShellModule,
+    VidiunPrimeNgUIModule,
+    VidiunUIModule,
+    VMCShellModule,
     MenuModule,
     MultiSelectModule,
     PaginatorModule,
@@ -79,7 +79,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     TooltipModule,
     TreeModule,
     StickyModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
     TableModule,
     InputSwitchModule,
       DateFormatModule,

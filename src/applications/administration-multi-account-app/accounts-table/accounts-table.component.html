@@ -1,5 +1,5 @@
-<div class="kAccountsTable" [class.noResults]="!_accounts?.length">
-  <p-table kStickyHeader [scrollable]="true" stickyClass="stickyHeader" scrollHeight="100%" dataKey="id"
+<div class="vAccountsTable" [class.noResults]="!_accounts?.length">
+  <p-table vStickyHeader [scrollable]="true" stickyClass="stickyHeader" scrollHeight="100%" dataKey="id"
                [rowTrackBy]="_rowTrackBy"
                [resizableColumns]="true"
                [sticksTo]="'accountsFilters'"
@@ -62,54 +62,54 @@
       <ng-template pTemplate="body" let-account>
           <tr>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%', 'padding-left': '1em'}">
-                  <span class="kTableColumn" kTooltip="{{account.name}} {{account.id.toString() === currentPartnerId ? ('applications.administration.accounts.currentUser' | translate) : ''}}" [showOnEllipsis]="true">
+                  <span class="vTableColumn" vTooltip="{{account.name}} {{account.id.toString() === currentPartnerId ? ('applications.administration.accounts.currentUser' | translate) : ''}}" [showOnEllipsis]="true">
                       {{account.name}} {{account.id.toString() === currentPartnerId ? ('applications.administration.accounts.currentUser' | translate) : ''}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '80px'}">
-                  <span class="kTableColumn">
+                  <span class="vTableColumn">
                       {{account.id}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '80px'}">
-                  <span class="kTableColumn">
+                  <span class="vTableColumn">
                       {{account.status | status}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%'}">
-                  <span class="kTableColumn" [kTooltip]="account.adminName" [showOnEllipsis]="true">
+                  <span class="vTableColumn" [vTooltip]="account.adminName" [showOnEllipsis]="true">
                       {{account.adminName || 'app.common.n_a' | translate}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%'}">
-                  <span class="kTableColumn" [kTooltip]="account.adminEmail" [showOnEllipsis]="true">
+                  <span class="vTableColumn" [vTooltip]="account.adminEmail" [showOnEllipsis]="true">
                       {{account.adminEmail || 'app.common.n_a' | translate}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%'}">
-                  <span class="kTableColumn" [kTooltip]="account.phone" [showOnEllipsis]="true">
+                  <span class="vTableColumn" [vTooltip]="account.phone" [showOnEllipsis]="true">
                       {{account.phone || 'app.common.n_a' | translate}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100px'}">
-                  <span class="kTableColumn">
+                  <span class="vTableColumn">
                       {{account.referenceId || 'app.common.n_a' | translate}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%'}">
-                  <span class="kTableColumn" [kTooltip]="account.website" [showOnEllipsis]="true">
+                  <span class="vTableColumn" [vTooltip]="account.website" [showOnEllipsis]="true">
                       {{account.website || 'app.common.n_a' | translate}}
                   </span>
               </td>
               <td class="ui-resizable-column" [ngStyle]="{'width': '100%'}">
-                  <span class="kTableColumn" [kTooltip]="account.createdAt | kmcDate" [showOnEllipsis]="true">
-                      {{account.createdAt | kmcDate}}
+                  <span class="vTableColumn" [vTooltip]="account.createdAt | vmcDate" [showOnEllipsis]="true">
+                      {{account.createdAt | vmcDate}}
                   </span>
               </td>
               <td [ngStyle]="{'overflow': 'hidden', 'width': '80px'}">
-                  <div class="kAccountsTableActions">
-                      <button type="button" pButton icon="kIconmore"
-                              [disabled]="account.status === 3" class="kMoreActionsButton"
+                  <div class="vAccountsTableActions">
+                      <button type="button" pButton icon="vIconmore"
+                              [disabled]="account.status === 3" class="vMoreActionsButton"
                               (click)="_openActionsMenu($event, account)"></button>
                   </div>
               </td>
@@ -118,9 +118,9 @@
 
       <ng-template pTemplate="emptymessage">
           <div class="emptymessage">
-              <div class="kEmptyMessage">{{_emptyMessage}}</div>
+              <div class="vEmptyMessage">{{_emptyMessage}}</div>
           </div>
       </ng-template>
   </p-table>
-  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 </div>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MetadataProfile, MetadataItemTypes, MetadataItem } from '../custom-metadata';
-import { DynamicSectionControl, DynamicFormControlBase, TextAreaControl, DatePickerControl, ListControl, TextboxControl, DynamicDropdownControl } from '@kaltura-ng/kaltura-ui';
+import { DynamicSectionControl, DynamicFormControlBase, TextAreaControl, DatePickerControl, ListControl, TextboxControl, DynamicDropdownControl } from '@vidiun-ng/vidiun-ui';
 import { LinkedEntriesControl } from './linked-entries-control';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Injectable()
 export class DynamicMetadataSectionFactory {
@@ -88,7 +88,7 @@ export class DynamicMetadataSectionFactory {
                 allowMultipleEntries : item.allowMultiple,
                 key: item.name,
                 description: item.description,
-                styleClass: 'kLinkedEntries',
+                styleClass: 'vLinkedEntries',
                 inputHelperConfig:{
                     title: item.key,
                     body: item.description

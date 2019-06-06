@@ -1,22 +1,22 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PermissionTreeNode } from '../roles-store/permission-tree-nodes';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { RolesStoreService } from '../roles-store/roles-store.service';
 
 export interface RolePermissionFormValue extends PermissionTreeNode {
   checked?: boolean;
-  formValue?: KMCPermissions[];
+  formValue?: VMCPermissions[];
   items?: RolePermissionFormValue[];
   hasError?: boolean;
   disabled?: boolean;
 }
 
 @Component({
-  selector: 'kRolePermissionsTable',
+  selector: 'vRolePermissionsTable',
   templateUrl: './permissions-table.component.html',
   styleUrls: ['./permissions-table.component.scss'],
-  providers: [KalturaLogger.createLogger('PermissionsTableComponent')]
+  providers: [VidiunLogger.createLogger('PermissionsTableComponent')]
 })
 export class PermissionsTableComponent implements OnInit {
   @Input() permissions: string[];
@@ -27,11 +27,11 @@ export class PermissionsTableComponent implements OnInit {
   @Output() setDirty = new EventEmitter<void>();
 
   public _rolePermissions: RolePermissionFormValue[] = [];
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
-  constructor(private _permissionsService: KMCPermissionsService,
+  constructor(private _permissionsService: VMCPermissionsService,
               private _rolesService: RolesStoreService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {

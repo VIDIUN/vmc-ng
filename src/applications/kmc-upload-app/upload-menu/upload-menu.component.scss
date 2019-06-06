@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kUploadMenu {
+.vUploadMenu {
   color: #FFFFFF;
 
   a {
@@ -14,7 +14,7 @@
     }
   }
 
-  .kUploadMenuListItem {
+  .vUploadMenuListItem {
     height: 64px;
     margin-bottom: 33px;
     display: flex;
@@ -30,28 +30,28 @@
       line-height: 48px;
       width: 48px;
       height: 48px;
-      background-color: $kPrimary;
+      background-color: $vPrimary;
       border-radius: 50%;
       flex: 0 0 auto;
 
-      &.kUploadMenuLiveStreamIcon {
+      &.vUploadMenuLiveStreamIcon {
         cursor: pointer;
-        background-color: $kDandger;
+        background-color: $vDandger;
       }
 
-      &.kUploadMenuLinkIcon {
+      &.vUploadMenuLinkIcon {
         cursor: pointer;
-        background-color: $kPrimary;
+        background-color: $vPrimary;
       }
 
-      &.kUploadMenuBulkUploadIcon {
+      &.vUploadMenuBulkUploadIcon {
         cursor: pointer;
-        background-color: $kOrange;
+        background-color: $vOrange;
       }
 
-      &.kUploadMenuUploadIcon {
+      &.vUploadMenuUploadIcon {
         cursor: pointer;
-        background-color: $kSecondary;
+        background-color: $vSecondary;
       }
     }
 
@@ -59,11 +59,11 @@
       margin-left: 35px;
         margin-top: 30px;
 
-        &.kSingleItem {
+        &.vSingleItem {
             margin-top: 0;
         }
 
-        &.kUploadMenuListItemLive {
+        &.vUploadMenuListItemLive {
             margin-top: 0;
         }
 
@@ -72,13 +72,13 @@
         font-weight: bold;
       }
 
-      .kBulkUploadSamplesLink {
+      .vBulkUploadSamplesLink {
         margin-top: 16px;
         display: block;
         opacity: 0.6;
         font-size: 14px;
         font-weight: normal;
-        &.kDisabled{
+        &.vDisabled{
             opacity: 0.2;
             cursor: default;
             pointer-events: none;
@@ -87,17 +87,17 @@
     }
   }
 
-  .kPrepareEntryList {
+  .vPrepareEntryList {
     margin-left: 83px;
 
-    .kPrepareEntryListTitle {
+    .vPrepareEntryListTitle {
       font-size: 14px;
       text-transform: uppercase;
       opacity: 0.6;
         letter-spacing: 1.75px;
     }
 
-    .kPrepareEntryListItem {
+    .vPrepareEntryListItem {
       font-size: 16px;
       font-weight: bold;
       line-height: 19px;

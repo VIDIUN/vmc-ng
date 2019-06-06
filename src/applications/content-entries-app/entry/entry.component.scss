@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kSectionsWrapper{
+.vSectionsWrapper{
 	min-width: 178px;
 	border: 0px solid white;
 	border-top-left-radius: 3px;
@@ -8,14 +8,14 @@
 	z-index: 0;
 }
 
-.kEntryActionsWrapper {
+.vEntryActionsWrapper {
     margin-left: auto;
     display: flex;
     align-items: center;
 
-    .kAnalytics {
+    .vAnalytics {
         margin-right: 24px;
-        /deep/ .kIconstatistic {
+        /deep/ .vIconstatistic {
             font-size: 24px;
         }
         /deep/ .ui-button-text{
@@ -24,7 +24,7 @@
         }
     }
 
-    .kEntryActions {
+    .vEntryActions {
         font-size: 24px;
         margin-left: auto;
         margin-right: 24px;
@@ -32,7 +32,7 @@
     }
 }
 
-:host /deep/ span.ui-button-icon-left.pi-kIconarrow_forward, :host /deep/ span.ui-button-icon-left.pi-kIconarrow_backward{
+:host /deep/ span.ui-button-icon-left.pi-vIconarrow_forward, :host /deep/ span.ui-button-icon-left.pi-vIconarrow_backward{
 	margin-left: -.5em;
 }
 

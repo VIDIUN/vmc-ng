@@ -1,23 +1,23 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
 import { BulkRemoveCategoriesService } from '../../services/';
-import { KalturaCategory } from 'kaltura-ngx-client';
+import { VidiunCategory } from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kBulkRemoveCategories',
+  selector: 'vBulkRemoveCategories',
   templateUrl: './bulk-remove-categories.component.html',
   styleUrls: ['./bulk-remove-categories.component.scss']
 })
 export class BulkRemoveCategories implements OnInit, OnDestroy, AfterViewInit {
 
-  @Input() selectedEntries: KalturaMediaEntry[];
+  @Input() selectedEntries: VidiunMediaEntry[];
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Output() removeCategoriesChanged = new EventEmitter<string[]>();
 
@@ -30,7 +30,7 @@ export class BulkRemoveCategories implements OnInit, OnDestroy, AfterViewInit {
   private _parentPopupStateChangeSubscribe : ISubscription;
   private _confirmClose: boolean = true;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService, private _bulkRemoveCategoriesService: BulkRemoveCategoriesService) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService, private _bulkRemoveCategoriesService: BulkRemoveCategoriesService) {
   }
 
   ngOnInit() {

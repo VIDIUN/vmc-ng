@@ -1,11 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AppAuthentication, BrowserService} from 'app-shared/kmc-shell';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {getKalturaServerUri, serverConfig} from 'config/server';
-import { LiveDashboardAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
+import {AppAuthentication, BrowserService} from 'app-shared/vmc-shell';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {getVidiunServerUri, serverConfig} from 'config/server';
+import { LiveDashboardAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
 
 @Component({
-  selector: 'kLiveDashboardHost',
+  selector: 'vLiveDashboardHost',
   templateUrl: './live-dashboard-host.component.html',
   styleUrls: ['./live-dashboard-host.component.scss']
 })
@@ -16,7 +16,7 @@ export class LiveDashboardHostComponent implements OnInit, OnDestroy {
   public _liveDashboardUrl = null;
 
   constructor(private appAuthentication: AppAuthentication,
-              private logger: KalturaLogger,
+              private logger: VidiunLogger,
               private _browserService: BrowserService,
               private _liveDasboardAppViewService: LiveDashboardAppViewService) {
   }
@@ -35,12 +35,12 @@ export class LiveDashboardHostComponent implements OnInit, OnDestroy {
     try {
       this._liveDashboardUrl = serverConfig.externalApps.liveDashboard.uri;
 
-      const currentLang = this._browserService.getFromLocalStorage('kmc_lang');
+      const currentLang = this._browserService.getFromLocalStorage('vmc_lang');
       window['lang'] = currentLang || 'en';
-      window['kmc'] = {
+      window['vmc'] = {
         'vars': {
-          'ks': this.appAuthentication.appUser.ks,
-          'service_url': getKalturaServerUri(),
+          'vs': this.appAuthentication.appUser.vs,
+          'service_url': getVidiunServerUri(),
           'liveDashboard': {
             'entryId': this.entryId
           }
@@ -49,14 +49,14 @@ export class LiveDashboardHostComponent implements OnInit, OnDestroy {
     } catch (ex) {
       this.logger.warn(`Could not load live dashboard, please check that live dashboard configurations are loaded correctly\n error: ${ex}`);
       this._liveDashboardUrl = null;
-      window['kmc'] = null;
+      window['vmc'] = null;
       window['lang'] = null;
     }
   }
 
   ngOnDestroy() {
     this._liveDashboardUrl = null;
-    window['kmc'] = null;
+    window['vmc'] = null;
     window['lang'] = null;
   }
 

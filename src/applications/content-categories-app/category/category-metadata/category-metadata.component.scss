@@ -11,20 +11,20 @@ hr{
 		font-weight: 400;
 		height: 34px;
     /deep/
-    .ui-button-icon-right.kIcondropdown_arrow_bottom{
+    .ui-button-icon-right.vIcondropdown_arrow_bottom{
       font-size: 10px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       margin-right: 4px;
     }
 	}
 }
-.kMetadataDetails{
+.vMetadataDetails{
   padding: 30px 30px 30px 24px;
 	overflow-y: auto;
 	width: 100%;
 
-	.kSchemaTitle{
-		color: $kGrayscale1;
+	.vSchemaTitle{
+		color: $vGrayscale1;
 		font-size: 18px;
 		font-weight: 700;
 		padding-top: 50px;
@@ -33,25 +33,25 @@ hr{
 
 	/deep/ {
 
-		.kRow {
+		.vRow {
 			display: flex;
 			padding-top: 22px;
 
-			.kFormLabelContainer{
+			.vFormLabelContainer{
 				width:190px;
 				display: flex;
 				justify-content: space-between;
-				.kFormRequiredIndicator{
+				.vFormRequiredIndicator{
 					margin-right: 8px;
 				}
 
-				.kLabel {
+				.vLabel {
 					flex: 0 0 auto;
 					word-wrap: break-word;
 					padding-right: 12px;
 				}
 			}
-			.kLabel {
+			.vLabel {
 				width: 196px;
 				flex: 0 0 auto;
 				word-wrap: break-word;
@@ -70,27 +70,27 @@ hr{
 				height: 76px;
 			}
 
-            kmultiselect{
+            vmultiselect{
                 max-width: 500px;
                 display: block;
             }
 
-			.kControl, k-prime-control
+			.vControl, v-prime-control
 			{
 				width:100%;
-                .kHasError {
-                  border: 1px solid $kDandger;
+                .vHasError {
+                  border: 1px solid $vDandger;
                   background: initial;
                 }
 			}
 
 		}
 
-        .kNameRow{
+        .vNameRow{
           height: 40px;
           padding-top: 10px;
 
-          .kControl {
+          .vControl {
             height: 40px;
 
             .error {
@@ -104,78 +104,78 @@ hr{
 		/* Multiple Items  */
 		/*******************/
 
-		.kMultiple{
+		.vMultiple{
 			display: flex;
 			flex-direction: column;
 			width: 100%;
 		}
-		.kSingleItem{
+		.vSingleItem{
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			padding-bottom: 12px;
 		}
 
-		.kDelete{
+		.vDelete{
 			margin-left: 14px;
 			&:not(.disabled) {
-				color: $kDandger;
+				color: $vDandger;
                 cursor: pointer;
 			}
 		}
-		.kDeleteDate{
+		.vDeleteDate{
 			margin-left: 46px;
 		}
 
-		.kGroupTitle{
-			color: $kGrayscale1;
+		.vGroupTitle{
+			color: $vGrayscale1;
 			font-size: 16px;
 			font-weight: 700;
 			padding-top: 12px;
 			padding-bottom: 12px;
 		}
-		.kGroupContainer{
+		.vGroupContainer{
 			margin-bottom: 12px;
 			background-color: #ffffff;
-			border: 1px solid $kGrayscale3;
+			border: 1px solid $vGrayscale3;
 			border-radius: 3px;
 			width: 100%;
 			padding: 8px;
 		}
-        .kButton{
+        .vButton{
             height: 30px;
             font-weight: 400;
-            color: $kGrayscale1;
+            color: $vGrayscale1;
             background: white;
-            border: 1px solid $kGrayscale4;
+            border: 1px solid $vGrayscale4;
             cursor: pointer;
             border-radius: 3px;
             &:focus {
                 outline:0;
             }
             &:hover{
-                color: $kPrimary;
+                color: $vPrimary;
             }
             &:active:not(:disabled){
                 box-shadow: inset 0px 1px 3px 0 rgba(0,0,0,0.50);
             }
             &:disabled{
-                color: $kGrayscale4;
+                color: $vGrayscale4;
                 background: transparent;
-                border: 1px solid $kGrayscale4;
+                border: 1px solid $vGrayscale4;
                 cursor: default;
             }
         }
-		.kGroupButtons{
+		.vGroupButtons{
 			padding-bottom: 12px;
 		}
-		.kDeleteGroup{
+		.vDeleteGroup{
 			text-align: left;
 			padding-left: 208px;
 			padding-top: 8px;
 			padding-bottom: 4px;
 			a{
-				color: $kDandger;
+				color: $vDandger;
                 cursor: pointer;
 			}
 		}
@@ -197,14 +197,14 @@ hr{
 			width: 100% !important;
 		}
 		  .ui-multiselect-label-container{
-			color: $kGrayscale3;
+			color: $vGrayscale3;
 		}
 
 		  .ui-multiselect-trigger .pi-pi-caret-down{
 			margin-top: 0px;
 			  right: 8px;
 			position: absolute;
-			color: $kGrayscale3;
+			color: $vGrayscale3;
 		}
 
 		  .ui-autocomplete.ui-widget{
@@ -213,7 +213,7 @@ hr{
 				width: 100%;
 			}
 		}
-		  .ui-button-icon-right.ui-c.pi-pi-fw.kIcondropdown_arrow_bottom{
+		  .ui-button-icon-right.ui-c.pi-pi-fw.vIcondropdown_arrow_bottom{
 			font-size: 11px;
 			padding-right: 4px;
 		}
@@ -233,18 +233,18 @@ hr{
 		}
 
 		  .ui-multiselect-panel .ui-multiselect-filter-container .pi{
-			color: $kGrayscale3;
+			color: $vGrayscale3;
 			font-size: 14px;
 			font-weight: 400;
 		}
 
-		  kAutoComplete{
+		  vAutoComplete{
 			width: 100%;
             max-width: 500px;
             display: block;
 
       .ui-state-disabled {
-        background-color: $kGrayscale5;
+        background-color: $vGrayscale5;
       }
 		}
 
@@ -260,16 +260,16 @@ hr{
 
 	}
 
-	.kValign{
+	.vValign{
 		align-items: center;
 	}
-	.kLink{
+	.vLink{
 		margin-top: -4px;
 		margin-bottom: 4px;
 		cursor: pointer;
-		color: $kBlack;
+		color: $vBlack;
 	}
 }
-:host /deep/ kautocomplete input{
+:host /deep/ vautocomplete input{
 	height: auto !important;
 }

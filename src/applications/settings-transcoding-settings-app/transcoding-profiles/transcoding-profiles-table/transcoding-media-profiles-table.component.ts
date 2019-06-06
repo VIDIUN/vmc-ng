@@ -1,11 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 import { TranscodingProfilesTableComponent } from './transcoding-profiles-table.component';
-import { KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Component({
-    selector: 'k-transcoding-media-profiles-table',
+    selector: 'v-transcoding-media-profiles-table',
     templateUrl: './transcoding-profiles-table.component.html',
     styleUrls: ['./transcoding-profiles-table.component.scss'],
     providers: [
@@ -15,7 +15,7 @@ import { AppLocalization } from '@kaltura-ng/mc-shared';
 })
 export class TranscodingMediaProfilesTableComponent extends TranscodingProfilesTableComponent implements AfterViewInit {
     constructor(protected _appLocalization: AppLocalization,
-                protected _permissionsService: KMCPermissionsService,
+                protected _permissionsService: VMCPermissionsService,
                 protected _cdRef: ChangeDetectorRef,
                 private _columnsResizeManager: ColumnsResizeManagerService,
                 private _el: ElementRef<HTMLElement>) {

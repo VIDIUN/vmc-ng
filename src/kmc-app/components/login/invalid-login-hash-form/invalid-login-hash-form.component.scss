@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kLoginForm {
+.vLoginForm {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -26,13 +26,13 @@
     text-align: center;
     margin-top: 0;
     margin-bottom: 40px;
-    color: $kGrayscale2
+    color: $vGrayscale2
   }
 
-  .kErrorMessage {
+  .vErrorMessage {
     margin-top: -16px;
     margin-bottom: 40px;
-    color: $kDandger;
+    color: $vDandger;
     text-align: center;
     font-size: 14px;
     line-height: 17px;
@@ -48,38 +48,38 @@
       height: 48px;
       padding: 14px 16px;
       margin-bottom: 40px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       font-size: 16px;
       border-radius: 4px;
 
       &:placeholder-shown {
-        background-color: $kGrayscale6;
+        background-color: $vGrayscale6;
       }
 
       &.has-error {
-        border: 2px solid $kDandger;
+        border: 2px solid $vDandger;
       }
 
       &.has-success:focus {
-        border: 2px solid $kPrimary;
+        border: 2px solid $vPrimary;
       }
     }
   }
 
-  .kRedirectTo {
+  .vRedirectTo {
     margin-top: -16px;
     margin-bottom: 0;
 
-    .kUnderlined {
+    .vUnderlined {
       text-decoration: underline;
-      color: $kGrayscale2;
+      color: $vGrayscale2;
     }
   }
 
-  .kButtonDefault {
+  .vButtonDefault {
     width: 160px;
     height: 48px;
-    background-color: $kPrimary;
+    background-color: $vPrimary;
     color: white;
     font-weight: normal;
     font-size: 16px;

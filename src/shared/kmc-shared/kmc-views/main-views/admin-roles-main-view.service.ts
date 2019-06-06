@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class AdminRolesMainViewService extends KmcMainViewBaseService {
+export class AdminRolesMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -24,10 +24,10 @@ export class AdminRolesMainViewService extends KmcMainViewBaseService {
     }
 
     isAvailable(): boolean {
-        return this._appPermissions.hasPermission(KMCPermissions.ADMIN_BASE) && this._appPermissions.hasAnyPermissions([
-            KMCPermissions.ADMIN_ROLE_ADD,
-            KMCPermissions.ADMIN_ROLE_UPDATE,
-            KMCPermissions.ADMIN_ROLE_DELETE
+        return this._appPermissions.hasPermission(VMCPermissions.ADMIN_BASE) && this._appPermissions.hasAnyPermissions([
+            VMCPermissions.ADMIN_ROLE_ADD,
+            VMCPermissions.ADMIN_ROLE_UPDATE,
+            VMCPermissions.ADMIN_ROLE_DELETE
         ]);
     }
 

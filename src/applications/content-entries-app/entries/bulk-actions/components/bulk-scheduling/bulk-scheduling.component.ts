@@ -3,13 +3,13 @@ import { FormGroup, FormBuilder, AbstractControl, ValidatorFn } from '@angular/f
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 import { SchedulingParams } from '../../services';
 import { async } from 'rxjs/scheduler/async';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 function datesValidation(checkRequired: boolean = false): ValidatorFn {
   return (c: AbstractControl): {[key: string]: boolean} | null => {
@@ -35,7 +35,7 @@ function datesValidation(checkRequired: boolean = false): ValidatorFn {
 }
 
 @Component({
-  selector: 'kBulkScheduling',
+  selector: 'vBulkScheduling',
   templateUrl: './bulk-scheduling.component.html',
   styleUrls: ['./bulk-scheduling.component.scss']
 })

@@ -1,61 +1,61 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
-  <div class="kEntitlementsDetails" *ngIf="_widgetService.data">
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+  <div class="vEntitlementsDetails" *ngIf="_widgetService.data">
 
-    <span class="kSchemaTitle">{{'applications.content.categoryDetails.entitlements.title' | translate}}</span>
-    <div class="kSchemaDescription">{{'applications.content.categoryDetails.entitlements.description' | translate}}
+    <span class="vSchemaTitle">{{'applications.content.categoryDetails.entitlements.title' | translate}}</span>
+    <div class="vSchemaDescription">{{'applications.content.categoryDetails.entitlements.description' | translate}}
     </div>
     <form [formGroup]="_widgetService.entitlementsForm" novalidate>
 
       <!--Parivacy Content Label-->
-      <div class="kRow">
-        <span class="kLabel">
-         <span class="kLabelText">{{'applications.content.categoryDetails.entitlements.privacyContentLabel.label' | translate}}</span>
-          <kInputHelper icon="kIconlife_donut"
-                        [title]="'applications.content.categoryDetails.entitlements.privacyContentLabel.label' | translate" class="kHelp">
+      <div class="vRow">
+        <span class="vLabel">
+         <span class="vLabelText">{{'applications.content.categoryDetails.entitlements.privacyContentLabel.label' | translate}}</span>
+          <vInputHelper icon="vIconlife_donut"
+                        [title]="'applications.content.categoryDetails.entitlements.privacyContentLabel.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.privacyContentLabel.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
+        <div class="vControl">
           {{_widgetService.data.privacyContexts}}
         </div>
       </div>
 
       <!--Content Privacy-->
-      <div class="kRow">
-        <span class="kLabel">
-          <span class="kLabelText">{{'applications.content.categoryDetails.entitlements.contentPrivacy.label' | translate}}</span>
-           <kInputHelper icon="kIconlife_donut"
-                         [title]="'applications.content.categoryDetails.entitlements.contentPrivacy.label' | translate" class="kHelp">
+      <div class="vRow">
+        <span class="vLabel">
+          <span class="vLabelText">{{'applications.content.categoryDetails.entitlements.contentPrivacy.label' | translate}}</span>
+           <vInputHelper icon="vIconlife_donut"
+                         [title]="'applications.content.categoryDetails.entitlements.contentPrivacy.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.contentPrivacy.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
+        <div class="vControl">
           <!--No Restrictions-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="contentPrivacy" [value]="_contentPrivacyOptions.all" formControlName="contentPrivacy"
                            label="{{'applications.content.categoryDetails.entitlements.contentPrivacy.noRestrictions' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.contentPrivacy.noRestrictions_explanation' | translate}}
             </div>
           </div>
           <!--Requires Authentication-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="contentPrivacy" [value]="_contentPrivacyOptions.authenticatedUsers"
                            formControlName="contentPrivacy"
                            label="{{'applications.content.categoryDetails.entitlements.contentPrivacy.requiresAuthentication' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.contentPrivacy.requiresAuthentication_explanation' | translate}}
             </div>
           </div>
           <!--Private-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="contentPrivacy" [value]="_contentPrivacyOptions.membersOnly"
                            formControlName="contentPrivacy"
                            label="{{'applications.content.categoryDetails.entitlements.contentPrivacy.private' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.contentPrivacy.private_explanation' | translate}}
             </div>
           </div>
@@ -63,32 +63,32 @@
       </div>
 
       <!--Category Listing-->
-      <div class="kRow">
-        <span class="kLabel">
-         <span class="kLabelText"> {{'applications.content.categoryDetails.entitlements.categoryListing.label' | translate}}</span>
-         <kInputHelper icon="kIconlife_donut"
-                       [title]="'applications.content.categoryDetails.entitlements.categoryListing.label' | translate" class="kHelp">
+      <div class="vRow">
+        <span class="vLabel">
+         <span class="vLabelText"> {{'applications.content.categoryDetails.entitlements.categoryListing.label' | translate}}</span>
+         <vInputHelper icon="vIconlife_donut"
+                       [title]="'applications.content.categoryDetails.entitlements.categoryListing.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.categoryListing.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
+        <div class="vControl">
           <!--No Restrictions-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="categoryListing" [value]="_categoryListingOptions.partnerOnly"
                            formControlName="categoryListing"
                            label="{{'applications.content.categoryDetails.entitlements.categoryListing.noRestrictions' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.categoryListing.noRestrictions_explanation' | translate}}
             </div>
           </div>
           <!--Private-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="categoryListing" [value]="_categoryListingOptions.categoryMembersOnly"
                            formControlName="categoryListing"
                            label="{{'applications.content.categoryDetails.entitlements.categoryListing.private' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.categoryListing.private_explanation' | translate}}
             </div>
           </div>
@@ -96,33 +96,33 @@
       </div>
 
       <!--Content Publish Permissions-->
-      <div class="kRow">
-        <span class="kLabel">
-          <span class="kLabelText">{{'applications.content.categoryDetails.entitlements.contentPublishPermissions.label' | translate}}</span>
-          <kInputHelper icon="kIconlife_donut"
-                        [title]="'applications.content.categoryDetails.entitlements.contentPublishPermissions.label' | translate" class="kHelp">
+      <div class="vRow">
+        <span class="vLabel">
+          <span class="vLabelText">{{'applications.content.categoryDetails.entitlements.contentPublishPermissions.label' | translate}}</span>
+          <vInputHelper icon="vIconlife_donut"
+                        [title]="'applications.content.categoryDetails.entitlements.contentPublishPermissions.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.contentPublishPermissions.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
+        <div class="vControl">
           <!--No Restrictions-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="contentPublishPermissions" [value]="_contentPublishPermissionsOptions.all"
                            formControlName="contentPublishPermissions"
                            label="{{'applications.content.categoryDetails.entitlements.contentPublishPermissions.noRestrictions' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.contentPublishPermissions.noRestrictions_explanation' | translate}}
             </div>
           </div>
           <!--Private-->
-          <div class="kRadioOption">
+          <div class="vRadioOption">
             <p-radioButton name="contentPublishPermissions"
                            [value]="_contentPublishPermissionsOptions.membersWithContributionPermission"
                            formControlName="contentPublishPermissions"
                            label="{{'applications.content.categoryDetails.entitlements.contentPublishPermissions.private' | translate}}">
             </p-radioButton>
-            <div class="kExplanation">
+            <div class="vExplanation">
               {{'applications.content.categoryDetails.entitlements.contentPublishPermissions.private_explanation' | translate}}
             </div>
           </div>
@@ -130,74 +130,74 @@
       </div>
 
       <!--Moderate Content-->
-      <div class="kRow">
+      <div class="vRow">
         <span
-          class="kLabel">
-          <span class="kLabelText">{{'applications.content.categoryDetails.entitlements.moderateContent.label' | translate}}</span>
-          <kInputHelper icon="kIconlife_donut"
-                        [title]="'applications.content.categoryDetails.entitlements.moderateContent.label' | translate" class="kHelp">
+          class="vLabel">
+          <span class="vLabelText">{{'applications.content.categoryDetails.entitlements.moderateContent.label' | translate}}</span>
+          <vInputHelper icon="vIconlife_donut"
+                        [title]="'applications.content.categoryDetails.entitlements.moderateContent.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.moderateContent.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
-          <p-inputSwitch class="kInputSwitch" formControlName="moderateContent"></p-inputSwitch>
+        <div class="vControl">
+          <p-inputSwitch class="vInputSwitch" formControlName="moderateContent"></p-inputSwitch>
           <span>{{_widgetService.entitlementsForm.controls['moderateContent'].value ? ( 'app.common.yes' | translate) : ( 'app.common.no' | translate)}}</span>
         </div>
       </div>
 
       <!--Inherit Users Permissions-->
-      <div class="kRow" *ngIf="_widgetService.data?.parentId > 0">
-        <span class="kLabel">
-          <span class="kLabelText">{{'applications.content.categoryDetails.entitlements.inheritUsersPermissions.label' | translate}}</span>
-           <kInputHelper icon="kIconlife_donut"
-                         [title]="'applications.content.categoryDetails.entitlements.inheritUsersPermissions.label' | translate" class="kHelp">
+      <div class="vRow" *ngIf="_widgetService.data?.parentId > 0">
+        <span class="vLabel">
+          <span class="vLabelText">{{'applications.content.categoryDetails.entitlements.inheritUsersPermissions.label' | translate}}</span>
+           <vInputHelper icon="vIconlife_donut"
+                         [title]="'applications.content.categoryDetails.entitlements.inheritUsersPermissions.label' | translate" class="vHelp">
              <span>{{'applications.content.categoryDetails.entitlements.inheritUsersPermissions.help' | translate}}</span>
-          </kInputHelper>
+          </vInputHelper>
         </span>
-        <div class="kControl">
-          <p-inputSwitch class="kInputSwitch" formControlName="inheritUsersPermissions"
+        <div class="vControl">
+          <p-inputSwitch class="vInputSwitch" formControlName="inheritUsersPermissions"
                          (onChange)="_toggleInherit($event)"></p-inputSwitch>
           <span>{{_widgetService.entitlementsForm.get('inheritUsersPermissions').value ? ( 'app.common.yes' | translate) : ( 'app.common.no' | translate)}}</span>
-          <div *ngIf="_widgetService.entitlementsForm.get('inheritUsersPermissions').value" class="kExplanation">
+          <div *ngIf="_widgetService.entitlementsForm.get('inheritUsersPermissions').value" class="vExplanation">
             <span>{{'applications.content.categoryDetails.entitlements.inheritUsersPermissions.parentCategory' | translate}}</span>
-            <a class="kParentLink" (click)="_widgetService.openCategory(_widgetService.parentCategory)">{{_widgetService.parentCategory?.name}}</a>
+            <a class="vParentLink" (click)="_widgetService.openCategory(_widgetService.parentCategory)">{{_widgetService.parentCategory?.name}}</a>
           </div>
         </div>
       </div>
 
       <!--Default Permission Level-->
-      <div class="kRow">
-        <span class="kLabel"><span class="kLabelText">{{'applications.content.categoryDetails.entitlements.defaultPermissionLevel.label' | translate}}</span></span>
-        <p-dropdown class="kControl" formControlName="defaultPermissionLevel"
+      <div class="vRow">
+        <span class="vLabel"><span class="vLabelText">{{'applications.content.categoryDetails.entitlements.defaultPermissionLevel.label' | translate}}</span></span>
+        <p-dropdown class="vControl" formControlName="defaultPermissionLevel"
                     [options]="_defaultPermissionLevelOptions" [autoWidth]="false"></p-dropdown>
       </div>
 
       <!--Owner-->
-      <div class="kRow kChangeOwner">
-        <span class="kLabel"><span class="kLabelText">{{'applications.content.categoryDetails.entitlements.owner.label' | translate}}</span></span>
-        <div class="kControl">
+      <div class="vRow vChangeOwner">
+        <span class="vLabel"><span class="vLabelText">{{'applications.content.categoryDetails.entitlements.owner.label' | translate}}</span></span>
+        <div class="vControl">
           <!--If current category doesn't inherit users permissions then show the owner of the category-->
           <span *ngIf="!_widgetService.entitlementsForm.get('inheritUsersPermissions').value">
-            <span *ngIf="_widgetService.entitlementsForm.get('owner').value" class="kOwner" [kTooltip]="_widgetService.entitlementsForm.get('owner').value | kCategoryOwnerName">
-              {{_widgetService.entitlementsForm.get('owner').value | kCategoryOwnerName}}
+            <span *ngIf="_widgetService.entitlementsForm.get('owner').value" class="vOwner" [vTooltip]="_widgetService.entitlementsForm.get('owner').value | vCategoryOwnerName">
+              {{_widgetService.entitlementsForm.get('owner').value | vCategoryOwnerName}}
             </span>
-            <span *ngIf="!_widgetService.entitlementsForm.get('owner').value" class="kOwner" >{{'applications.content.categoryDetails.entitlements.owner.notSpecified' | translate}}</span>
+            <span *ngIf="!_widgetService.entitlementsForm.get('owner').value" class="vOwner" >{{'applications.content.categoryDetails.entitlements.owner.notSpecified' | translate}}</span>
           </span>
           <!--If current category inherits users permissions then show the owner of the parent category-->
           <span *ngIf="_widgetService.entitlementsForm.get('inheritUsersPermissions').value">
-            <span *ngIf="_widgetService.parentCategory?.owner" class="kOwner" [kTooltip]="_widgetService.parentCategory.owner">{{_widgetService.parentCategory.owner}}</span>
-            <span *ngIf="!_widgetService.parentCategory?.owner" class="kOwner" >{{'applications.content.categoryDetails.entitlements.owner.notSpecified' | translate}}</span>
+            <span *ngIf="_widgetService.parentCategory?.owner" class="vOwner" [vTooltip]="_widgetService.parentCategory.owner">{{_widgetService.parentCategory.owner}}</span>
+            <span *ngIf="!_widgetService.parentCategory?.owner" class="vOwner" >{{'applications.content.categoryDetails.entitlements.owner.notSpecified' | translate}}</span>
           </span>
-          <a [class.disabled]="_widgetService.entitlementsForm.get('owner').disabled || (_kmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | kDisabledIfNotPermitted)" class="kActionLink"
+          <a [class.disabled]="_widgetService.entitlementsForm.get('owner').disabled || (_vmcPermissions.CONTENT_MANAGE_CATEGORY_USERS | vDisabledIfNotPermitted)" class="vActionLink"
              (click)="changeOwnerPopup.open()">{{'applications.content.categoryDetails.entitlements.owner.changeOwner' | translate}}</a>
         </div>
       </div>
 
       <!--Permitted Users-->
-      <div class="kRow">
+      <div class="vRow">
         <span
-          class="kLabel"><span class="kLabelText">{{'applications.content.categoryDetails.entitlements.permittedUsers.label' | translate}}</span></span>
-        <div class="kControl">
+          class="vLabel"><span class="vLabelText">{{'applications.content.categoryDetails.entitlements.permittedUsers.label' | translate}}</span></span>
+        <div class="vControl">
           <span *ngIf="!_membersCount.loading && !_membersCount.hasError && _membersCount.value">
         {{ 'applications.content.categoryDetails.entitlements.permittedUsers.count' | translate: {'0': _membersCount.value } }}
       </span>
@@ -205,7 +205,7 @@
         {{'applications.content.categoryDetails.entitlements.permittedUsers.loading' | translate}} </span>
           <span *ngIf="!_membersCount.loading && !_membersCount.hasError && !_membersCount.value">
         {{'applications.content.categoryDetails.entitlements.permittedUsers.none' | translate}} </span>
-          <a class="kActionLink"
+          <a class="vActionLink"
              (click)="mananageUsersPermissions()">
             <span *ngIf="!_widgetService.entitlementsForm.controls['inheritUsersPermissions'].value">{{'applications.content.categoryDetails.entitlements.permittedUsers.manageUsers' | translate}}</span>
             <span *ngIf="_widgetService.entitlementsForm.controls['inheritUsersPermissions'].value">{{'applications.content.categoryDetails.entitlements.permittedUsers.viewUsers' | translate}}</span>
@@ -215,20 +215,20 @@
 
     </form>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget #changeOwnerPopup data-aid="changeOwnerPopup" [popupWidth]="586" [popupHeight]="278" [closeBtn]="true" [modal]="true">
+<vPopupWidget #changeOwnerPopup data-aid="changeOwnerPopup" [popupWidth]="586" [popupHeight]="278" [closeBtn]="true" [modal]="true">
   <ng-template>
-    <kCategoryChangeOwner [parentPopupWidget]="changeOwnerPopup" (ownerChanged)="onOwnerChanged($event)"
-                          [category]="_widgetService.data"></kCategoryChangeOwner>
+    <vCategoryChangeOwner [parentPopupWidget]="changeOwnerPopup" (ownerChanged)="onOwnerChanged($event)"
+                          [category]="_widgetService.data"></vCategoryChangeOwner>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
 
-<kPopupWidget #manageUsersPopup data-aid="manageUsersPopup" [popupWidth]="996" [slider]="true">
+<vPopupWidget #manageUsersPopup data-aid="manageUsersPopup" [popupWidth]="996" [slider]="true">
   <ng-template>
-    <kManageEndUsers
+    <vManageEndUsers
       [categoryInheritUserPermissions]="_widgetService.entitlementsForm.controls['inheritUsersPermissions'].value"
-      [category]="_widgetService.data" [parentCategory]="_widgetService.parentCategory" [parentPopupWidget]="manageUsersPopup" ></kManageEndUsers>
+      [category]="_widgetService.data" [parentCategory]="_widgetService.parentCategory" [parentPopupWidget]="manageUsersPopup" ></vManageEndUsers>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

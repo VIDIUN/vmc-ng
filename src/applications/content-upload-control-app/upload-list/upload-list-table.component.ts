@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { TrackedFileStatuses } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { TrackedFileStatuses } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { UploadFileData } from './upload-list.component';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 
 @Component({
-  selector: 'kUploadListTable',
+  selector: 'vUploadListTable',
   templateUrl: './upload-list-table.component.html',
   styleUrls: ['./upload-list-table.component.scss'],
     providers: [

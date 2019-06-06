@@ -18,7 +18,7 @@ var source = {
         },
         "helpMenu":{
             "gettingStarted": "Getting Started",
-            "kmcOverview": "KMC Overview",
+            "vmcOverview": "VMC Overview",
             "mediaManagement": "Media Management & Workflow",
             "productTour": "Watch the product tour",
             "support": "Help and Support",
@@ -32,7 +32,7 @@ var source = {
     },
     "applications":{
         "dashboard":{
-            "main_screen_welcome_title":"{{0}}, Welcome to the Kaltura Management Console. You are logged in as a {{1}} user in the {{2}} account."
+            "main_screen_welcome_title":"{{0}}, Welcome to the Vidiun Management Console. You are logged in as a {{1}} user in the {{2}} account."
         },
         "content":{
             "entries":{

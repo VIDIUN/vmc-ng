@@ -1,27 +1,27 @@
-import { KalturaCategory } from 'kaltura-ngx-client';
+import { VidiunCategory } from 'vidiun-ngx-client';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { CategoriesBulkActionBaseService } from "./categories-bulk-action-base.service";
-import { CategoryUpdateAction } from 'kaltura-ngx-client';
+import { CategoryUpdateAction } from 'vidiun-ngx-client';
 
 
 @Injectable()
 export class CategoriesBulkAddTagsService extends CategoriesBulkActionBaseService<string[]> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedCategories: KalturaCategory[], tags : string[]) : Observable<{}>{
+  public execute(selectedCategories: VidiunCategory[], tags : string[]) : Observable<{}>{
     return Observable.create(observer =>{
 
       let requests: CategoryUpdateAction[] = [];
 
       selectedCategories.forEach(category => {
-        let updatedCategory: KalturaCategory = new KalturaCategory();
+        let updatedCategory: VidiunCategory = new VidiunCategory();
 
-        // update category tags. trim tags due to legacy KMC bugs
+        // update category tags. trim tags due to legacy VMC bugs
         let categoryTags = [];
         if (category.tags && category.tags.length){
           categoryTags = category.tags.split(",").map(tag => {

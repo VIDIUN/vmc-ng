@@ -1,3 +1,3 @@
-export * from './kmc-permissions.module';
-export * from './kmc-permissions.service';
-export * from './kmc-permissions';
+export * from './vmc-permissions.module';
+export * from './vmc-permissions.service';
+export * from './vmc-permissions';

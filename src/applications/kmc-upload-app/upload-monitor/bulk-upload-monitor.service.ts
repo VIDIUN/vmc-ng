@@ -1,27 +1,27 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { BulkListAction } from 'kaltura-ngx-client';
-import { KalturaBatchJobStatus } from 'kaltura-ngx-client';
-import { KalturaBulkUploadFilter } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { BulkListAction } from 'vidiun-ngx-client';
+import { VidiunBatchJobStatus } from 'vidiun-ngx-client';
+import { VidiunBulkUploadFilter } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { KalturaBulkUploadListResponse } from 'kaltura-ngx-client';
-import { KmcServerPolls } from 'app-shared/kmc-shared/server-polls';
-import { BulkLogUploadingStartedEvent } from 'app-shared/kmc-shared/events';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { KalturaBulkUpload } from 'kaltura-ngx-client';
+import { VidiunBulkUploadListResponse } from 'vidiun-ngx-client';
+import { VmcServerPolls } from 'app-shared/vmc-shared/server-polls';
+import { BulkLogUploadingStartedEvent } from 'app-shared/vmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { VidiunBulkUpload } from 'vidiun-ngx-client';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UploadMonitorStatuses } from './upload-monitor.component';
-import { KalturaBulkUploadObjectType } from 'kaltura-ngx-client';
+import { VidiunBulkUploadObjectType } from 'vidiun-ngx-client';
 import { BulkUploadRequestFactory } from './bulk-upload-request-factory';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 interface BulkUploadFile
 {
-  status: KalturaBatchJobStatus;
+  status: VidiunBatchJobStatus;
   uploadedOn: Date;
   id: number;
 }
@@ -50,25 +50,25 @@ export class BulkUploadMonitorService implements OnDestroy {
 
     private _bulkUploadChangesFactory = new BulkUploadRequestFactory();
     private _bulkUploadObjectTypeIn = [
-        KalturaBulkUploadObjectType.entry,
-        KalturaBulkUploadObjectType.category,
-        KalturaBulkUploadObjectType.user,
-        KalturaBulkUploadObjectType.categoryUser
+        VidiunBulkUploadObjectType.entry,
+        VidiunBulkUploadObjectType.category,
+        VidiunBulkUploadObjectType.user,
+        VidiunBulkUploadObjectType.categoryUser
     ];
     private _activeStatuses = [
-        KalturaBatchJobStatus.dontProcess,
-        KalturaBatchJobStatus.pending,
-        KalturaBatchJobStatus.queued,
-        KalturaBatchJobStatus.processing,
-        KalturaBatchJobStatus.almostDone,
-        KalturaBatchJobStatus.retry
+        VidiunBatchJobStatus.dontProcess,
+        VidiunBatchJobStatus.pending,
+        VidiunBatchJobStatus.queued,
+        VidiunBatchJobStatus.processing,
+        VidiunBatchJobStatus.almostDone,
+        VidiunBatchJobStatus.retry
     ];
 
-    constructor(private _kalturaClient: KalturaClient,
-                private _kmcServerPolls: KmcServerPolls,
+    constructor(private _vidiunClient: VidiunClient,
+                private _vmcServerPolls: VmcServerPolls,
                 private _appEvents: AppEventsService,
                 private _browserService: BrowserService,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
         this._logger.debug('constructor()');
         this._logger.debug(`registering to app event 'BulkLogUploadingStartedEvent'`);
         this._appEvents
@@ -109,25 +109,25 @@ export class BulkUploadMonitorService implements OnDestroy {
         } else {
             return this._getTrackedFiles().reduce((totals, upload) => {
                 switch (upload.status) {
-                    case KalturaBatchJobStatus.pending:
-                    case KalturaBatchJobStatus.queued:
-                    case KalturaBatchJobStatus.dontProcess:
+                    case VidiunBatchJobStatus.pending:
+                    case VidiunBatchJobStatus.queued:
+                    case VidiunBatchJobStatus.dontProcess:
                         totals.queued += 1;
                         break;
-                    case KalturaBatchJobStatus.processing:
-                    case KalturaBatchJobStatus.almostDone:
-                    case KalturaBatchJobStatus.retry:
+                    case VidiunBatchJobStatus.processing:
+                    case VidiunBatchJobStatus.almostDone:
+                    case VidiunBatchJobStatus.retry:
                         totals.uploading += 1;
                         break;
-                    case KalturaBatchJobStatus.finished:
-                    case KalturaBatchJobStatus.finishedPartially:
-                    case KalturaBatchJobStatus.processed:
+                    case VidiunBatchJobStatus.finished:
+                    case VidiunBatchJobStatus.finishedPartially:
+                    case VidiunBatchJobStatus.processed:
                         totals.completed += 1;
                         break;
-                    case KalturaBatchJobStatus.failed:
-                    case KalturaBatchJobStatus.fatal:
-                    case KalturaBatchJobStatus.aborted:
-                    case KalturaBatchJobStatus.movefile:
+                    case VidiunBatchJobStatus.failed:
+                    case VidiunBatchJobStatus.fatal:
+                    case VidiunBatchJobStatus.aborted:
+                    case VidiunBatchJobStatus.movefile:
                         totals.errors += 1;
                         break;
                     default:
@@ -139,23 +139,23 @@ export class BulkUploadMonitorService implements OnDestroy {
         }
     }
 
-    private _getActiveUploadsList(): Observable<KalturaBulkUploadListResponse> {
+    private _getActiveUploadsList(): Observable<VidiunBulkUploadListResponse> {
         const activeUploads = new BulkListAction({
-            bulkUploadFilter: new KalturaBulkUploadFilter({
+            bulkUploadFilter: new VidiunBulkUploadFilter({
                 statusIn: this._activeStatuses.join(','),
                 bulkUploadObjectTypeIn: this._bulkUploadObjectTypeIn.join(','),
             })
         }).setRequestOptions({
-            responseProfile: new KalturaDetachedResponseProfile({
-                type: KalturaResponseProfileType.includeFields,
+            responseProfile: new VidiunDetachedResponseProfile({
+                type: VidiunResponseProfileType.includeFields,
                 fields: 'id,status,uploadedOn'
             })
         });
 
-        return this._kalturaClient.request(activeUploads);
+        return this._vidiunClient.request(activeUploads);
     }
 
-    private _cleanDeletedUploads(uploads: KalturaBulkUpload[]): void {
+    private _cleanDeletedUploads(uploads: VidiunBulkUpload[]): void {
         const uploadIds = uploads.map(({id}) => id);
         this._getTrackedFiles().forEach(file => {
             const trackedUploadIsNotInResponse = uploadIds.indexOf(Number(file.id)) === -1;
@@ -213,7 +213,7 @@ export class BulkUploadMonitorService implements OnDestroy {
             this._logger.info(`start server polling every 10 seconds to sync bulk upload status`);
 
 
-            this._kmcServerPolls.register<KalturaBulkUploadListResponse>(10, this._bulkUploadChangesFactory)
+            this._vmcServerPolls.register<VidiunBulkUploadListResponse>(10, this._bulkUploadChangesFactory)
                 .pipe(cancelOnDestroy(this))
                 .subscribe((response) => {
                     if (response.error) {

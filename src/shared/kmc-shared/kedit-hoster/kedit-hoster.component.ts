@@ -1,36 +1,36 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, OnChanges} from '@angular/core';
-import {AppAuthentication} from 'app-shared/kmc-shell/auth';
-import {getKalturaServerUri, serverConfig} from 'config/server';
-import {KMCPermissions, KMCPermissionsService} from 'app-shared/kmc-shared/kmc-permissions';
-import {UpdateClipsEvent} from 'app-shared/kmc-shared/events/update-clips-event';
-import {AppEventsService} from 'app-shared/kmc-shared/app-events';
+import {AppAuthentication} from 'app-shared/vmc-shell/auth';
+import {getVidiunServerUri, serverConfig} from 'config/server';
+import {VMCPermissions, VMCPermissionsService} from 'app-shared/vmc-shared/vmc-permissions';
+import {UpdateClipsEvent} from 'app-shared/vmc-shared/events/update-clips-event';
+import {AppEventsService} from 'app-shared/vmc-shared/app-events';
 import {
     AdvertisementsAppViewService,
     ClipAndTrimAppViewService,
     QuizAppViewService,
     HotspotsAppViewService
-} from 'app-shared/kmc-shared/kmc-views/component-views';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLiveEntry } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
+} from 'app-shared/vmc-shared/vmc-views/component-views';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLiveEntry } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
 
 
 @Component({
-  selector: 'kKeditHoster',
-  templateUrl: './kedit-hoster.component.html',
-  styleUrls: ['./kedit-hoster.component.scss'],
+  selector: 'vVeditHoster',
+  templateUrl: './vedit-hoster.component.html',
+  styleUrls: ['./vedit-hoster.component.scss'],
     providers: [
-        KalturaLogger.createLogger('KeditHosterComponent')
+        VidiunLogger.createLogger('VeditHosterComponent')
     ]
 })
-export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
+export class VeditHosterComponent implements OnInit, OnDestroy, OnChanges {
 
-  @Input() entry: KalturaMediaEntry | KalturaLiveEntry = null;
+  @Input() entry: VidiunMediaEntry | VidiunLiveEntry = null;
   @Input() tab: 'quiz' | 'editor' | 'advertisements' | 'hotspots' = null;
     @Input() entryHasSource = false;
 
@@ -39,9 +39,9 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
     @Output() closeEditor = new EventEmitter<void>();
 
 
-  public keditUrl: string;
+  public veditUrl: string;
   public _windowEventListener = null;
-  public _keditConfig: any = null;
+  public _veditConfig: any = null;
 
   constructor(private _appAuthentication: AppAuthentication,
               private _contentEntryViewService: ContentEntryViewService,
@@ -49,10 +49,10 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
               private _clipAndTrimAppViewService: ClipAndTrimAppViewService,
               private _quizAppViewService: QuizAppViewService,
               private _hotspotsAppViewService: HotspotsAppViewService,
-              private _permissionService: KMCPermissionsService,
+              private _permissionService: VMCPermissionsService,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _appEvents: AppEventsService,
               ) {
   }
@@ -71,21 +71,21 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
           }
 
           /* request for init params,
-		  * should return a message where messageType = kea-config */
-          if (postMessageData.messageType === 'kea-bootstrap') {
-              e.source.postMessage(this._keditConfig, e.origin);
+		  * should return a message where messageType = vea-config */
+          if (postMessageData.messageType === 'vea-bootstrap') {
+              e.source.postMessage(this._veditConfig, e.origin);
           }
 
 
           /* request for user display name.
 		  * message.data = {userId}
-		  * should return a message {messageType:kea-display-name, data: display name}
+		  * should return a message {messageType:vea-display-name, data: display name}
 		  */
-          if (postMessageData.messageType === 'kea-get-display-name') {
+          if (postMessageData.messageType === 'vea-get-display-name') {
               // send the user's display name based on the user ID
               const displayName = this._appAuthentication.appUser.fullName;
               e.source.postMessage({
-                  'messageType': 'kea-display-name',
+                  'messageType': 'vea-display-name',
                   'data': displayName
               }, e.origin);
           }
@@ -96,16 +96,16 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
 				*  newEntryId,
 				*  newEntryName
 				* }
-				* should return a message where message.messageType = kea-clip-message,
+				* should return a message where message.messageType = vea-clip-message,
 				* and message.data is the (localized) text to show the user.
 				* */
-          if (postMessageData.messageType === 'kea-clip-created') {
+          if (postMessageData.messageType === 'vea-clip-created') {
               this._appEvents.publish(new UpdateClipsEvent());
 
-              // send a message to KEA which will show up after clip has been created.
+              // send a message to VEA which will show up after clip has been created.
               const message = 'Clip was successfully created.';
               e.source.postMessage({
-                  'messageType': 'kea-clip-message',
+                  'messageType': 'vea-clip-message',
                   'data': message
               }, e.origin);
           }
@@ -115,7 +115,7 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
 		  * Fired when modifying advertisements (save not performed yet).
 		  * message.data = {entryId}
 		  */
-          if (postMessageData.messageType === 'kea-advertisements-modified') {
+          if (postMessageData.messageType === 'vea-advertisements-modified') {
               this.enteredDraftMode.emit();
           }
 
@@ -123,23 +123,23 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
 		   * Fired when saving advertisements
 		   * message.data = {entryId}
 		   */
-          if (postMessageData.messageType === 'kea-advertisements-saved') {
+          if (postMessageData.messageType === 'vea-advertisements-saved') {
               this.exitDraftMode.emit();
-          } else if (postMessageData.messageType === 'kea-go-to-media') {
+          } else if (postMessageData.messageType === 'vea-go-to-media') {
               this.closeEditor.emit();
               this._contentEntryViewService.openById(postMessageData.data, ContentEntryViewSections.Metadata);
           }
 
-          /* request for user ks.
-		  * message.data = {userKS}
-		  * should return a message {messageType:kea-ks, data: ks}
+          /* request for user vs.
+		  * message.data = {userVS}
+		  * should return a message {messageType:vea-vs, data: vs}
 		  */
-          if (postMessageData.messageType === 'kea-get-ks') {
+          if (postMessageData.messageType === 'vea-get-vs') {
               // send the user's display name based on the user ID
-              const ks = this._appAuthentication.appUser.ks;
+              const vs = this._appAuthentication.appUser.vs;
               e.source.postMessage({
-                  'messageType': 'kea-ks',
-                  'data': ks
+                  'messageType': 'vea-vs',
+                  'data': vs
               }, e.origin);
           }
       };
@@ -156,23 +156,23 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
 
   private _updateState(): void {
       if (!this.entry || !this.tab) {
-          this._logger.info('remove kedit application since some required data is missing', {
+          this._logger.info('remove vedit application since some required data is missing', {
               hasEntry: !!this.entry,
               hasTab: !!this.tab
           });
-          this.keditUrl = null;
-          this._keditConfig = null;
+          this.veditUrl = null;
+          this._veditConfig = null;
           this._removePostMessagesListener();
           return;
       }
 
       setTimeout(() => {
-          this._logger.info('initialize kedit application', {tab: this.tab});
+          this._logger.info('initialize vedit application', {tab: this.tab});
 
-          this.keditUrl = null;
-          this._keditConfig = null;
+          this.veditUrl = null;
+          this._veditConfig = null;
 
-          const serviceUrl = getKalturaServerUri();
+          const serviceUrl = getVidiunServerUri();
           const tabs = {};
           const clipAndTrimAvailable = this._clipAndTrimAppViewService.isAvailable({
               entry: this.entry,
@@ -195,13 +195,13 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
               this._logger.debug('clip&trim views are available, add configuration for tabs: edit, quiz');
               const clipAndTrimPermissions = [];
               if (this._permissionService.hasAnyPermissions([
-                  KMCPermissions.CONTENT_INGEST_INTO_READY,
-                  KMCPermissions.CONTENT_INGEST_REPLACE])
+                  VMCPermissions.CONTENT_INGEST_INTO_READY,
+                  VMCPermissions.CONTENT_INGEST_REPLACE])
               ) {
                   clipAndTrimPermissions.push('trim');
               }
 
-              if (this._permissionService.hasPermission(KMCPermissions.CONTENT_INGEST_CLIP_MEDIA)) {
+              if (this._permissionService.hasPermission(VMCPermissions.CONTENT_INGEST_CLIP_MEDIA)) {
                   clipAndTrimPermissions.push('clip');
               }
 
@@ -218,8 +218,8 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
               this._logger.debug('advertisements view is available, add configuration for tabs: advertisements');
               tabs['advertisements'] = {
                   name: 'advertisements',
-                  permissions: ['FEATURE_ALLOW_VAST_CUE_POINT_NO_URL', 'CUEPOINT_MANAGE', 'FEATURE_DISABLE_KMC_KDP_ALERTS']
-                      .filter(permission => this._permissionService.hasPermission(KMCPermissions[permission])),
+                  permissions: ['FEATURE_ALLOW_VAST_CUE_POINT_NO_URL', 'CUEPOINT_MANAGE', 'FEATURE_DISABLE_VMC_VDP_ALERTS']
+                      .filter(permission => this._permissionService.hasPermission(VMCPermissions[permission])),
                   userPermissions: []
               };
           }
@@ -241,63 +241,63 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
           }
 
           let requestedTabIsNotAvailable = false;
-          let keditUrl = null;
+          let veditUrl = null;
           switch (this.tab) {
               case 'quiz':
                   if (quizAvailable) {
-                      keditUrl = serverConfig.externalApps.editor.uri;
+                      veditUrl = serverConfig.externalApps.editor.uri;
                   } else {
                       requestedTabIsNotAvailable = true;
                   }
                   break;
               case 'editor':
                   if (clipAndTrimAvailable) {
-                      keditUrl = serverConfig.externalApps.editor.uri;
+                      veditUrl = serverConfig.externalApps.editor.uri;
                   } else {
                       requestedTabIsNotAvailable = true;
                   }
                   break;
               case 'advertisements':
                   if (advertismentsAvailable) {
-                      keditUrl = serverConfig.externalApps.editor.uri;
+                      veditUrl = serverConfig.externalApps.editor.uri;
                   } else {
                       requestedTabIsNotAvailable = true;
                   }
                   break;
               case 'hotspots':
                   if (hotspotsAvailable) {
-                      keditUrl = serverConfig.externalApps.editor.uri;
+                      veditUrl = serverConfig.externalApps.editor.uri;
                   } else {
                       requestedTabIsNotAvailable = true;
                   }
                   break;
               default:
-                  keditUrl = null;
+                  veditUrl = null;
                   break;
           }
 
 
-          if (keditUrl) {
-              this._logger.debug('show kedit application', {keditUrl: keditUrl, tab: this.tab});
+          if (veditUrl) {
+              this._logger.debug('show vedit application', {veditUrl: veditUrl, tab: this.tab});
               const isLiveEntry = [
-                  KalturaMediaType.liveStreamFlash,
-                  KalturaMediaType.liveStreamWindowsMedia,
-                  KalturaMediaType.liveStreamRealMedia,
-                  KalturaMediaType.liveStreamQuicktime
+                  VidiunMediaType.liveStreamFlash,
+                  VidiunMediaType.liveStreamWindowsMedia,
+                  VidiunMediaType.liveStreamRealMedia,
+                  VidiunMediaType.liveStreamQuicktime
               ].indexOf(this.entry.mediaType) !== -1;
-              const entryId = isLiveEntry ? (<KalturaLiveEntry>this.entry).recordedEntryId : this.entry.id;
-              this.keditUrl = keditUrl;
-              this._keditConfig = {
-                  'messageType': 'kea-config',
+              const entryId = isLiveEntry ? (<VidiunLiveEntry>this.entry).recordedEntryId : this.entry.id;
+              this.veditUrl = veditUrl;
+              this._veditConfig = {
+                  'messageType': 'vea-config',
                   'data': {
-                      /* URL of the Kaltura Server to use */
+                      /* URL of the Vidiun Server to use */
                       'service_url': serviceUrl,
 
                       /* the partner ID to use */
                       'partner_id': this._appAuthentication.appUser.partnerId,
 
-                      /* Kaltura session key to use */
-                      'ks': this._appAuthentication.appUser.ks,
+                      /* Vidiun session key to use */
+                      'vs': this._appAuthentication.appUser.vs,
 
                       /* language - used by priority:
 					  * 1. Custom locale (locale_url)
@@ -308,8 +308,8 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
                       'language_code': 'en',
                       'locale_url': '',
 
-                      /* URL to be used for "Go to User Manual" in KEdit help component */
-                      'help_link': 'https://knowledge.kaltura.com/node/1912',
+                      /* URL to be used for "Go to User Manual" in VEdit help component */
+                      'help_link': 'https://knowledge.vidiun.com/node/1912',
 
                       /* tabs to show in navigation */
                       'tabs': tabs,
@@ -323,8 +323,8 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
                       /* id of the entry to start with */
                       'entry_id': entryId,
 
-                      /* should a KS be appended to the thumbnails url, for access control issues */
-                      'load_thumbnail_with_ks': false,
+                      /* should a VS be appended to the thumbnails url, for access control issues */
+                      'load_thumbnail_with_vs': false,
 
                       /* should hide the navigation bar (sidebar holding the tabs) */
                       'hide_navigation_bar': false
@@ -332,7 +332,7 @@ export class KeditHosterComponent implements OnInit, OnDestroy, OnChanges {
               };
               this._addPostMessagesListener();
           } else {
-              this._logger.warn('abort initialization of kedit application, missing required parameters', {
+              this._logger.warn('abort initialization of vedit application, missing required parameters', {
                   requestedTabIsNotAvailable,
                   tab: this.tab
               });

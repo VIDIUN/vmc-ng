@@ -2,45 +2,45 @@ import {Injectable, Optional, Inject} from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import {KalturaClient, KalturaMultiRequest, KalturaRequestOptions} from 'kaltura-ngx-client';
-import {UserLoginByLoginIdAction} from 'kaltura-ngx-client';
-import {UserGetByLoginIdAction} from 'kaltura-ngx-client';
-import {UserGetAction} from 'kaltura-ngx-client';
-import {PartnerGetInfoAction} from 'kaltura-ngx-client';
-import {PermissionListAction} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaPermissionFilter} from 'kaltura-ngx-client';
-import {KalturaPermissionListResponse} from 'kaltura-ngx-client';
-import {KalturaUserRole} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaPermissionStatus} from 'kaltura-ngx-client';
-import {UserRoleGetAction} from 'kaltura-ngx-client';
+import {VidiunClient, VidiunMultiRequest, VidiunRequestOptions} from 'vidiun-ngx-client';
+import {UserLoginByLoginIdAction} from 'vidiun-ngx-client';
+import {UserGetByLoginIdAction} from 'vidiun-ngx-client';
+import {UserGetAction} from 'vidiun-ngx-client';
+import {PartnerGetInfoAction} from 'vidiun-ngx-client';
+import {PermissionListAction} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunPermissionFilter} from 'vidiun-ngx-client';
+import {VidiunPermissionListResponse} from 'vidiun-ngx-client';
+import {VidiunUserRole} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunPermissionStatus} from 'vidiun-ngx-client';
+import {UserRoleGetAction} from 'vidiun-ngx-client';
 import * as Immutable from 'seamless-immutable';
 import {AppUser} from './app-user';
-import {UserResetPasswordAction} from 'kaltura-ngx-client';
-import {AdminUserUpdatePasswordAction} from 'kaltura-ngx-client';
-import { PageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification/page-exit-verification.service';
-import { UserLoginStatusEvent } from 'app-shared/kmc-shared/events';
-import { KalturaPartner } from 'kaltura-ngx-client';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { AppEventsService } from 'app-shared/kmc-shared/app-events';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import {UserResetPasswordAction} from 'vidiun-ngx-client';
+import {AdminUserUpdatePasswordAction} from 'vidiun-ngx-client';
+import { PageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification/page-exit-verification.service';
+import { UserLoginStatusEvent } from 'app-shared/vmc-shared/events';
+import { VidiunPartner } from 'vidiun-ngx-client';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { AppEventsService } from 'app-shared/vmc-shared/app-events';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { serverConfig } from 'config/server';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { UserLoginByKsAction } from 'kaltura-ngx-client';
-import { KmcServerPolls } from '../../kmc-shared/server-polls';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { UserLoginByVsAction } from 'vidiun-ngx-client';
+import { VmcServerPolls } from '../../vmc-shared/server-polls';
 import { HttpClient } from '@angular/common/http';
 import { buildBaseUri } from 'config/server';
-import { KmcMainViewsService } from 'app-shared/kmc-shared/kmc-views/kmc-main-views.service';
-import { kmcAppConfig } from '../../../kmc-app/kmc-app-config';
+import { VmcMainViewsService } from 'app-shared/vmc-shared/vmc-views/vmc-main-views.service';
+import { vmcAppConfig } from '../../../vmc-app/vmc-app-config';
 
 
 
-const ksSessionStorageKey = 'auth.login.ks';
-import { AdminUserSetInitialPasswordAction } from 'kaltura-ngx-client';
-import { RestorePasswordViewService } from 'app-shared/kmc-shared/kmc-views/details-views/restore-password-view.service';
+const vsSessionStorageKey = 'auth.login.vs';
+import { AdminUserSetInitialPasswordAction } from 'vidiun-ngx-client';
+import { RestorePasswordViewService } from 'app-shared/vmc-shared/vmc-views/details-views/restore-password-view.service';
 import { switchMap, map } from 'rxjs/operators';
 import { of as ObservableOf } from 'rxjs';
 
@@ -82,8 +82,8 @@ export class AppAuthentication {
     }
 
     private _defaultUrl: string;
-    private _automaticLogin: {  ks: string, persistCredentials: boolean } = { ks: null, persistCredentials: false };
-    private _logger: KalturaLogger;
+    private _automaticLogin: {  vs: string, persistCredentials: boolean } = { vs: null, persistCredentials: false };
+    private _logger: VidiunLogger;
     private _appUser: Immutable.ImmutableObject<AppUser> = null;
     private _autoLoginAttempted = false;
 
@@ -91,16 +91,16 @@ export class AppAuthentication {
         return this._defaultUrl;
     }
 
-    constructor(private kalturaServerClient: KalturaClient,
+    constructor(private vidiunServerClient: VidiunClient,
                 private _browserService: BrowserService,
                 private _pageExitVerificationService: PageExitVerificationService,
-                logger: KalturaLogger,
-                private _serverPolls: KmcServerPolls,
-                private _permissionsService: KMCPermissionsService,
+                logger: VidiunLogger,
+                private _serverPolls: VmcServerPolls,
+                private _permissionsService: VMCPermissionsService,
                 private _http: HttpClient,
                 private _appEvents: AppEventsService,
                 private _location: Location,
-                private _kmcViewsManager: KmcMainViewsService,
+                private _vmcViewsManager: VmcMainViewsService,
                 private _restorePasswordView: RestorePasswordViewService) {
         this._logger = logger.subLogger('AppAuthentication');
     }
@@ -112,12 +112,12 @@ export class AppAuthentication {
         const errors = {
             'USER_NOT_FOUND': 'app.login.error.badCredentials',
             'USER_WRONG_PASSWORD': 'app.login.error.badCredentials',
-            'ADMIN_KUSER_NOT_FOUND': 'app.login.error.userNotFound',
+            'ADMIN_VUSER_NOT_FOUND': 'app.login.error.userNotFound',
             'PASSWORD_STRUCTURE_INVALID': 'app.login.error.invalidStructure',
             'PASSWORD_ALREADY_USED': 'app.login.error.alreadyUsed',
             'NEW_PASSWORD_HASH_KEY_INVALID': 'app.login.error.newPasswordHashKeyInvalid',
             'NEW_PASSWORD_HASH_KEY_EXPIRED': 'app.login.error.newPasswordHashKeyExpired',
-            'ADMIN_KUSER_WRONG_OLD_PASSWORD': 'app.login.error.wrongOldPassword',
+            'ADMIN_VUSER_WRONG_OLD_PASSWORD': 'app.login.error.wrongOldPassword',
             'WRONG_OLD_PASSWORD': 'app.login.error.wrongOldPassword',
             'INVALID_FIELD_VALUE': 'app.login.error.invalidField',
             'USER_FORBIDDEN_FOR_BETA': 'app.login.error.userForbiddenForBeta'
@@ -148,12 +148,12 @@ export class AppAuthentication {
     }
 
     validateResetPasswordHash(hash: string): Observable<string> {
-        if (!serverConfig.kalturaServer.resetPasswordUri) {
+        if (!serverConfig.vidiunServer.resetPasswordUri) {
             this._logger.warn(`resetPasswordUri was not provided by configuration, abort request`);
             return Observable.of('RESET_URI_NOT_DEFINED');
         }
 
-        const url = serverConfig.kalturaServer.resetPasswordUri.replace('{hash}', hash);
+        const url = serverConfig.vidiunServer.resetPasswordUri.replace('{hash}', hash);
 
         this._logger.debug(`check if provided hash is valid`, { hash, url });
 
@@ -167,35 +167,35 @@ export class AppAuthentication {
 
     resetPassword(email: string): Observable<void> {
         if (!this.isLogged()) {
-            return this.kalturaServerClient.request(new UserResetPasswordAction({email}));
+            return this.vidiunServerClient.request(new UserResetPasswordAction({email}));
         } else {
             return Observable.throw(new Error('cannot reset password, user is logged'));
         }
     }
 
     updatePassword(payload: UpdatePasswordPayload): Observable<{ email: string, password: string }> {
-        return this.kalturaServerClient.request(new AdminUserUpdatePasswordAction(payload))
+        return this.vidiunServerClient.request(new AdminUserUpdatePasswordAction(payload))
             .catch(error => Observable.throw(this._getLoginErrorMessage({error})));
     }
 
     setInitalPassword(payload: { newPassword: string, hashKey: string }): Observable<void> {
-        return this.kalturaServerClient.request(new AdminUserSetInitialPasswordAction(payload))
+        return this.vidiunServerClient.request(new AdminUserSetInitialPasswordAction(payload))
             .catch(error => Observable.throw(this._getLoginErrorMessage({error})));
     }
 
     login(loginId: string, password: string): Observable<LoginResponse> {
 
-        const expiry = kmcAppConfig.kalturaServer.expiry;
-        let privileges = kmcAppConfig.kalturaServer.privileges || '';
+        const expiry = vmcAppConfig.vidiunServer.expiry;
+        let privileges = vmcAppConfig.vidiunServer.privileges || '';
 
-        if (serverConfig.kalturaServer.defaultPrivileges) {
-            privileges += `${privileges ? ',' : ''}${serverConfig.kalturaServer.defaultPrivileges}`;
+        if (serverConfig.vidiunServer.defaultPrivileges) {
+            privileges += `${privileges ? ',' : ''}${serverConfig.vidiunServer.defaultPrivileges}`;
         }
 
         this._automaticLoginErrorReason = null;
-        this._browserService.removeFromSessionStorage(ksSessionStorageKey);  // clear session storage
+        this._browserService.removeFromSessionStorage(vsSessionStorageKey);  // clear session storage
 
-        const request = new KalturaMultiRequest(
+        const request = new VidiunMultiRequest(
             new UserLoginByLoginIdAction(
                 {
                     loginId,
@@ -206,41 +206,41 @@ export class AppAuthentication {
                 }),
             new UserGetByLoginIdAction({loginId})
                 .setRequestOptions(
-                    new KalturaRequestOptions({})
-                        .setDependency(['ks', 0])
+                    new VidiunRequestOptions({})
+                        .setDependency(['vs', 0])
                 ),
             new PartnerGetInfoAction({}).setRequestOptions(
-                new KalturaRequestOptions({})
-                    .setDependency(['ks', 0])
+                new VidiunRequestOptions({})
+                    .setDependency(['vs', 0])
                     .setDependency(['id', 1, 'partnerId'])
             ),
             new UserRoleGetAction({userRoleId: 0})
                 .setRequestOptions(
-                    new KalturaRequestOptions({})
-                        .setDependency(['ks', 0])
+                    new VidiunRequestOptions({})
+                        .setDependency(['vs', 0])
                 )
                 .setDependency(['userRoleId', 1, 'roleIds']),
             new PermissionListAction({
-                filter: new KalturaPermissionFilter({
-                    statusEqual: KalturaPermissionStatus.active,
+                filter: new VidiunPermissionFilter({
+                    statusEqual: VidiunPermissionStatus.active,
                     typeIn: '2,3'
                 }),
-                pager: new KalturaFilterPager({
+                pager: new VidiunFilterPager({
                     pageSize: 500
                 })
             })
                 .setRequestOptions(
-                    new KalturaRequestOptions({
-                        responseProfile: new KalturaDetachedResponseProfile({
-                            type: KalturaResponseProfileType.includeFields,
+                    new VidiunRequestOptions({
+                        responseProfile: new VidiunDetachedResponseProfile({
+                            type: VidiunResponseProfileType.includeFields,
                             fields: 'name'
                         })
                     })
-                        .setDependency(['ks', 0])
+                        .setDependency(['vs', 0])
                 )
         );
 
-        return <any>(this.kalturaServerClient.multiRequest(request)
+        return <any>(this.vidiunServerClient.multiRequest(request)
                 .pipe(
                     switchMap(response => {
                         if (!response.hasErrors()) {
@@ -275,36 +275,36 @@ export class AppAuthentication {
         );
     }
 
-    private _checkIfPartnerCanAccess(partner: KalturaPartner): Observable<boolean> {
-        if (!serverConfig.kalturaServer.limitAccess){
+    private _checkIfPartnerCanAccess(partner: VidiunPartner): Observable<boolean> {
+        if (!serverConfig.vidiunServer.limitAccess){
             return Observable.of(true);
         }
-        const serviceUrl = serverConfig.kalturaServer.limitAccess.serviceUrl;
+        const serviceUrl = serverConfig.vidiunServer.limitAccess.serviceUrl;
 
         const url = buildBaseUri(serviceUrl + partner.id);
-        this._logger.debug(`check if partner can access the KMC`, {partnerId: partner.id, limitAccess: true, url});
+        this._logger.debug(`check if partner can access the VMC`, {partnerId: partner.id, limitAccess: true, url});
 
         return this._http.get(url, { responseType: 'json' })
             .map(res => {
                 const {isPartnerPartOfBeta: canPartnerAccess} = <any>res;
 
                 this._automaticLoginErrorReason = canPartnerAccess ? null : AutomaticLoginErrorReasons.closedForBeta;
-                this._logger.info(`query service to check if partner can access the KMC`, {
+                this._logger.info(`query service to check if partner can access the VMC`, {
                     partnerId: partner.id,
                     canPartnerAccess
                 });
                 return canPartnerAccess;
             })
             .catch((e) => {
-                this._logger.error('Failed to check if partner can access the KMC', e);
-                throw Error('Failed to check if partner can access the KMC');
+                this._logger.error('Failed to check if partner can access the VMC', e);
+                throw Error('Failed to check if partner can access the VMC');
             });
     }
 
-    private _afterLogin(ks: string, storeCredentialsInSessionStorage: boolean, user: KalturaUser, partner: KalturaPartner, userRole: KalturaUserRole, permissionList: KalturaPermissionListResponse): void {
+    private _afterLogin(vs: string, storeCredentialsInSessionStorage: boolean, user: VidiunUser, partner: VidiunPartner, userRole: VidiunUserRole, permissionList: VidiunPermissionListResponse): void {
 
         if (storeCredentialsInSessionStorage) {
-            this._browserService.setInSessionStorage(ksSessionStorageKey, ks);  // save ks in session storage
+            this._browserService.setInSessionStorage(vsSessionStorageKey, vs);  // save vs in session storage
         }
 
         const partnerPermissionList = permissionList.objects.map(item => item.name);
@@ -312,7 +312,7 @@ export class AppAuthentication {
         this._permissionsService.load(userRolePermissionList, partnerPermissionList);
 
         const appUser: Immutable.ImmutableObject<AppUser> = Immutable({
-            ks,
+            vs,
             id: user.id,
             partnerId: user.partnerId,
             fullName: user.fullName,
@@ -331,11 +331,11 @@ export class AppAuthentication {
             }
         });
 
-        this._kmcViewsManager.rebuildMenu();
-        this.kalturaServerClient.setDefaultRequestOptions({
-            ks: appUser.ks
+        this._vmcViewsManager.rebuildMenu();
+        this.vidiunServerClient.setDefaultRequestOptions({
+            vs: appUser.vs
         });
-        window['kmcng'] = {ks};
+        window['vmcng'] = {vs};
 
         this._appUser = appUser;
         this._appEvents.publish(new UserLoginStatusEvent(true));
@@ -350,7 +350,7 @@ export class AppAuthentication {
 
     private _clearSessionCredentials(): void {
         this._logger.debug(`clear previous stored credentials in session storage if found`);
-        this._browserService.removeFromSessionStorage(ksSessionStorageKey);
+        this._browserService.removeFromSessionStorage(vsSessionStorageKey);
     }
 
     logout() {
@@ -359,44 +359,44 @@ export class AppAuthentication {
         this._logout();
     }
 
-    private _loginByKS(loginToken: string, storeCredentialsInSessionStorage): Observable<boolean> {
+    private _loginByVS(loginToken: string, storeCredentialsInSessionStorage): Observable<boolean> {
         return Observable.create((observer: any) => {
             if (!this.isLogged()) {
                 if (loginToken) {
                     const requests = [
                         new UserGetAction({})
                             .setRequestOptions({
-                                ks: loginToken
+                                vs: loginToken
                             }),
                         new PartnerGetInfoAction({})
                             .setRequestOptions({
-                                ks: loginToken
+                                vs: loginToken
                             })
                             .setDependency(['id', 0, 'partnerId']),
                         new UserRoleGetAction({ userRoleId: 0})
                             .setRequestOptions({
-                                ks: loginToken
+                                vs: loginToken
                             })
                             .setDependency(['userRoleId', 0, 'roleIds']),
                         new PermissionListAction({
-                            filter: new KalturaPermissionFilter({
-                                statusEqual: KalturaPermissionStatus.active,
+                            filter: new VidiunPermissionFilter({
+                                statusEqual: VidiunPermissionStatus.active,
                                 typeIn: '2,3'
                             }),
-                            pager: new KalturaFilterPager({
+                            pager: new VidiunFilterPager({
                                 pageSize: 500
                             })
                         })
                             .setRequestOptions({
-                                ks: loginToken,
-                                responseProfile: new KalturaDetachedResponseProfile({
-                                    type: KalturaResponseProfileType.includeFields,
+                                vs: loginToken,
+                                responseProfile: new VidiunDetachedResponseProfile({
+                                    type: VidiunResponseProfileType.includeFields,
                                     fields: 'name'
                                 })
                             })
                     ];
 
-                    this.kalturaServerClient.multiRequest(requests)
+                    this.vidiunServerClient.multiRequest(requests)
                         .pipe(
                             switchMap(
                                 response => {
@@ -434,8 +434,8 @@ export class AppAuthentication {
         });
     }
 
-    public setAutomaticLoginCredentials(ks: string, persistCredentials = false) {
-        this._automaticLogin.ks = ks;
+    public setAutomaticLoginCredentials(vs: string, persistCredentials = false) {
+        this._automaticLogin.vs = vs;
         this._automaticLogin.persistCredentials = persistCredentials;
     }
 
@@ -460,11 +460,11 @@ export class AppAuthentication {
         }
 
         this._autoLoginAttempted = true;
-        const ksFromApp = this._automaticLogin.ks;
-        if (ksFromApp) {
-            this._logger.info(`try to login automatically with KS provided explicitly by the app`);
+        const vsFromApp = this._automaticLogin.vs;
+        if (vsFromApp) {
+            this._logger.info(`try to login automatically with VS provided explicitly by the app`);
             this._clearSessionCredentials();
-            return this._loginByKS(ksFromApp, this._automaticLogin.persistCredentials);
+            return this._loginByVS(vsFromApp, this._automaticLogin.persistCredentials);
         }
 
         const forbiddenUrls = ['/error', '/actions', '/login'];
@@ -475,24 +475,24 @@ export class AppAuthentication {
             this._logger.info(`set default url to ${url}`);
         }
 
-        const ksFromSession = this._browserService.getFromSessionStorage(ksSessionStorageKey);  // get ks from session storage;
+        const vsFromSession = this._browserService.getFromSessionStorage(vsSessionStorageKey);  // get vs from session storage;
 
-        if (ksFromSession) {
-            this._logger.info(`try to login automatically with KS stored in session storage`);
-            return this._loginByKS(ksFromSession, true);
+        if (vsFromSession) {
+            this._logger.info(`try to login automatically with VS stored in session storage`);
+            return this._loginByVS(vsFromSession, true);
         }
 
-        this._logger.debug(`ignore automatic login logic as no session ks found `);
+        this._logger.debug(`ignore automatic login logic as no session vs found `);
         return Observable.of(false);
     }
 
     public switchPartnerId(partnerId: number): Observable<void> {
         return Observable.create((observer: any) => {
-            return this.kalturaServerClient.request(new UserLoginByKsAction({requestedPartnerId: partnerId}))
+            return this.vidiunServerClient.request(new UserLoginByVsAction({requestedPartnerId: partnerId}))
                 .subscribe(
                     result => {
                         this._logger.info(`switch partner account`, { partnerId });
-                        this._browserService.setInSessionStorage(ksSessionStorageKey, result.ks);
+                        this._browserService.setInSessionStorage(vsSessionStorageKey, result.vs);
                         this._forceReload();
 
                         // DEVELOPER NOTICE: observer next/complete not implemented by design
@@ -525,9 +525,9 @@ export class AppAuthentication {
 
     private _logout(reloadPage = true) {
         this._logger.info(`log out user from the application`, { forceReload: reloadPage });
-        this.kalturaServerClient.setDefaultRequestOptions({});
+        this.vidiunServerClient.setDefaultRequestOptions({});
         this._permissionsService.flushPermissions();
-        delete window['kmcng'];
+        delete window['vmcng'];
         this._appUser = null;
         this._appEvents.publish(new UserLoginStatusEvent(false));
         this._pageExitVerificationService.removeAll();

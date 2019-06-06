@@ -1,17 +1,17 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
-import { CaptionRequestEvent } from 'app-shared/kmc-shared/events';
-import { ReachData } from 'app-shared/kmc-shared/reach-frame';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ReachPages } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
+import { CaptionRequestEvent } from 'app-shared/vmc-shared/events';
+import { ReachData } from 'app-shared/vmc-shared/reach-frame';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ReachPages } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 @Component({
-    selector: 'kCaptionRequest',
+    selector: 'vCaptionRequest',
     templateUrl: './caption-request-app.component.html',
     styleUrls: ['./caption-request-app.component.scss'],
-    providers: [KalturaLogger.createLogger('CaptionRequestAppComponent')]
+    providers: [VidiunLogger.createLogger('CaptionRequestAppComponent')]
 })
 export class CaptionRequestAppComponent implements OnDestroy {
     @ViewChild('captionRequest') captionRequest: PopupWidgetComponent;
@@ -19,7 +19,7 @@ export class CaptionRequestAppComponent implements OnDestroy {
     public _data: ReachData;
     public _page: ReachPages;
 
-    constructor(private _logger: KalturaLogger,
+    constructor(private _logger: VidiunLogger,
                 appEvents: AppEventsService) {
         appEvents.event(CaptionRequestEvent)
             .pipe(cancelOnDestroy(this))

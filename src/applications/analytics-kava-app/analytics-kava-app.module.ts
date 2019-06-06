@@ -4,13 +4,13 @@ import {RouterModule} from '@angular/router';
 
 import {routing} from './analytics-kava-app.routes';
 import {AnalyticsKavaComponent} from './analytics-kava.component';
-import {KalturaUIModule} from '@kaltura-ng/kaltura-ui';
+import {VidiunUIModule} from '@vidiun-ng/vidiun-ui';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(routing),
-        KalturaUIModule
+        VidiunUIModule
     ],
     declarations: [
         AnalyticsKavaComponent

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
 import { EntriesFilters } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
 
 @Component({
-  selector: 'kAddEntry',
+  selector: 'vAddEntry',
   templateUrl: './playlist-add-entry.component.html',
   styleUrls: ['./playlist-add-entry.component.scss'],
     providers: [
@@ -16,17 +16,17 @@ import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shar
 })
 export class PlaylistAddEntryComponent {
   @Output() onClosePopupWidget = new EventEmitter<void>();
-  @Output() onAddEntries = new EventEmitter<KalturaMediaEntry[]>();
+  @Output() onAddEntries = new EventEmitter<VidiunMediaEntry[]>();
 
-  public _selectedEntries: KalturaMediaEntry[] = [];
+  public _selectedEntries: VidiunMediaEntry[] = [];
   public _addButtonLabel = '';
   public _addButtonLabelTranslation = '';
   public _enforcedFilters: Partial<EntriesFilters> = {
     'ingestionStatuses': [
-      KalturaEntryStatus.preconvert.toString(),
-      KalturaEntryStatus.ready.toString(),
-      KalturaEntryStatus.moderate.toString(),
-      KalturaEntryStatus.blocked.toString()
+      VidiunEntryStatus.preconvert.toString(),
+      VidiunEntryStatus.ready.toString(),
+      VidiunEntryStatus.moderate.toString(),
+      VidiunEntryStatus.blocked.toString()
     ]
   };
 
@@ -34,7 +34,7 @@ export class PlaylistAddEntryComponent {
     this._addButtonLabelTranslation = this._addButtonLabel = this._appLocalization.get('applications.content.playlists.addToPlaylist');
   }
 
-  public _selectionChanged(entries: KalturaMediaEntry[]): void {
+  public _selectionChanged(entries: VidiunMediaEntry[]): void {
     this._addButtonLabel = entries.length > 0
       ? `${this._addButtonLabelTranslation} ${entries.length}`
       : this._addButtonLabelTranslation;

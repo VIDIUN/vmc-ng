@@ -1,19 +1,19 @@
 import {Component, Input, OnInit, AfterViewInit, OnDestroy, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {ISubscription} from 'rxjs/Subscription';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {AppAuthentication, BrowserService} from 'app-shared/kmc-shell';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaClient} from 'kaltura-ngx-client';
-import {PartnerListPartnersForUserAction} from 'kaltura-ngx-client';
-import {KalturaPartnerFilter} from 'kaltura-ngx-client';
-import {KalturaPartnerStatus} from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {AppAuthentication, BrowserService} from 'app-shared/vmc-shell';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {PartnerListPartnersForUserAction} from 'vidiun-ngx-client';
+import {VidiunPartnerFilter} from 'vidiun-ngx-client';
+import {VidiunPartnerStatus} from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
 
 @Component({
-  selector: 'kChangeAccount',
+  selector: 'vChangeAccount',
   templateUrl: './change-account.component.html',
   styleUrls: ['./change-account.component.scss']
 })
@@ -29,7 +29,7 @@ export class ChangeAccountComponent implements OnInit {
 
   constructor(private _fb: FormBuilder,
               private _appLocalization: AppLocalization,
-              private _kalturaServerClient: KalturaClient,
+              private _vidiunServerClient: VidiunClient,
               private _userAuthentication: AppAuthentication) {
   }
 
@@ -95,12 +95,12 @@ export class ChangeAccountComponent implements OnInit {
   }
 
   private getAvailablePartners(): Observable<{ 'id': number, 'name': string }[]> {
-    const pager: KalturaFilterPager = new KalturaFilterPager({pageSize: 500});
-    const filter = new KalturaPartnerFilter({
-      statusEqual: KalturaPartnerStatus.active
+    const pager: VidiunFilterPager = new VidiunFilterPager({pageSize: 500});
+    const filter = new VidiunPartnerFilter({
+      statusEqual: VidiunPartnerStatus.active
     });
 
-    return this._kalturaServerClient.request(new PartnerListPartnersForUserAction({
+    return this._vidiunServerClient.request(new PartnerListPartnersForUserAction({
       partnerFilter: filter,
         pager: pager
     }))

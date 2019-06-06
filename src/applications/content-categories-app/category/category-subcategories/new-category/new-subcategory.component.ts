@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {CategoriesService} from '../../../categories/categories.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kNewSubcategory',
+  selector: 'vNewSubcategory',
   templateUrl: './new-subcategory.component.html',
   styleUrls: ['./new-subcategory.component.scss']
 })
@@ -16,7 +16,7 @@ export class NewSubcategoryComponent implements OnInit, OnDestroy {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Input() categoryParentId: number;
-  @Output() onSubCategoryAdded = new EventEmitter<{category: KalturaCategory}>();
+  @Output() onSubCategoryAdded = new EventEmitter<{category: VidiunCategory}>();
 
   public _blockerMessage: AreaBlockerMessage = null;
   public newCategoryForm: FormGroup;
@@ -75,7 +75,7 @@ export class NewSubcategoryComponent implements OnInit, OnDestroy {
       this._categoriesService.addNewCategory({categoryParentId: categoryParentId, name: categoryName})
         .pipe(cancelOnDestroy(this))
         .pipe(tag('block-shell'))
-        .subscribe(({category}: {category: KalturaCategory}) => {
+        .subscribe(({category}: {category: VidiunCategory}) => {
             this.onSubCategoryAdded.emit({category});
             if (this.parentPopupWidget) {
               this.parentPopupWidget.close();

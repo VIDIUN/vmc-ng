@@ -1,28 +1,28 @@
 @import "app-theme/_variables.scss";
 
-.kRefineFilters {
+.vRefineFilters {
   margin: 12px;
   background-color: white;
 }
 
-.kFiltersGroupTitle {
-  color: $kGrayscale3;
+.vFiltersGroupTitle {
+  color: $vGrayscale3;
   line-height: 40px;
   letter-spacing: 0.1em;
   font-size: 13px;
-  border-top: 1px solid $kGrayscale6;
-  border-bottom: 1px solid $kGrayscale6;
+  border-top: 1px solid $vGrayscale6;
+  border-bottom: 1px solid $vGrayscale6;
   margin-left: -12px;
   padding-left: 20px;
   margin-right: -20px;
   margin-bottom: 8px;
 }
 
-.kTreeContainer {
+.vTreeContainer {
   overflow-y: auto;
   overflow-x: hidden;
   height: 434px;
-  border-bottom: 1px solid $kGrayscale6;
+  border-bottom: 1px solid $vGrayscale6;
   margin-left: -20px;
   padding-left: 20px;
   margin-right: -20px;
@@ -30,32 +30,32 @@
   position: relative;
 }
 
-.kDateRange {
+.vDateRange {
   display: flex;
   align-items: center;
 }
 
-.kClearAll {
+.vClearAll {
   margin-bottom: 6px;
   margin-top: 4px;
   display: block;
 }
 
-.kClose {
+.vClose {
   float: right;
 }
 
-.kError {
+.vError {
   font-size: 14px;
-  color: $kDandger;
+  color: $vDandger;
 }
 
-.kTreeNodeLabel {
+.vTreeNodeLabel {
   width: 100%;
   font-size: 14px;
   font-weight: 700;
   line-height: 43px;
-  color: $kGrayscale1;
+  color: $vGrayscale1;
   text-overflow: ellipsis;
   margin-left: 5px;
 }
@@ -63,29 +63,29 @@
 a.disabled {
   pointer-events: none;
   cursor: not-allowed;
-  color: $kGrayscale5;
+  color: $vGrayscale5;
   border: none;
 }
 
-.kTreeNodeNumChildren {
+.vTreeNodeNumChildren {
   font-size: 14px;
   font-weight: 400;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
   margin-left: 10px;
 }
 
 /* prevent calendars from being cut by the popup widget borders */
-:host /deep/ .kPullLeft100 .ui-datepicker.ui-widget {
+:host /deep/ .vPullLeft100 .ui-datepicker.ui-widget {
   margin-left: -100px;
   left: 0px !important;
 }
 
-:host /deep/ .kPullLeft120 .ui-datepicker.ui-widget {
+:host /deep/ .vPullLeft120 .ui-datepicker.ui-widget {
   margin-left: -120px;
   left: 0px !important;
 }
 
-:host /deep/ .kDateRange .kDateRangeFirst .ui-calendar.ui-calendar-w-btn {
+:host /deep/ .vDateRange .vDateRangeFirst .ui-calendar.ui-calendar-w-btn {
   border-bottom-left-radius: 3px;
   border-top-left-radius: 3px;
 }
@@ -98,8 +98,8 @@ a.disabled {
   width: 120px;
 }
 
-:host /deep/ .kDateRange .kDateRangeLast .ui-calendar.ui-calendar-w-btn {
-  border-left: 0px solid $kGrayscale4;
+:host /deep/ .vDateRange .vDateRangeLast .ui-calendar.ui-calendar-w-btn {
+  border-left: 0px solid $vGrayscale4;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -113,6 +113,6 @@ a.disabled {
   margin-top: 14px;
 }
 
-:host /deep/ .kErrorMessage {
+:host /deep/ .vErrorMessage {
   width: 320px !important;
 }

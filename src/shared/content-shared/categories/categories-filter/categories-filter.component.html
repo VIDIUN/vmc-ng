@@ -1,8 +1,8 @@
-<div class="kOverrideFAIcons kContainer">
-  <div class="kHeader">
-    <kAutoComplete
+<div class="vOverrideFAIcons vContainer">
+  <div class="vHeader">
+    <vAutoComplete
       [disabled]="!_categoriesLoaded"
-      inputStyleClass="kSearchCategory"
+      inputStyleClass="vSearchCategory"
       #searchCategory
       field="label"
       placeholder="{{'applications.content.filters.findCategory' | translate}}"
@@ -11,30 +11,30 @@
       (onSelect)="_onSuggestionSelected()"
       [suggestionsProvider]="_suggestionsProvider"
       (completeMethod)="_searchSuggestions($event)"
-    ></kAutoComplete>
-    <i #config class="kIcongear kTreeConfig"
-       [kTooltip]="'applications.content.filters.preferences.preferences' | translate"></i>
-    <div class="kAllCategories">
+    ></vAutoComplete>
+    <i #config class="vIcongear vTreeConfig"
+       [vTooltip]="'applications.content.filters.preferences.preferences' | translate"></i>
+    <div class="vIdlCategories">
       <span>{{'applications.content.filters.allCategories' | translate | uppercase}} </span>
     </div>
   </div>
-  <kScrollToTopContainer class="kTreeContainer">
-    <k-categories-tree #categoriesTree
+  <vScrollToTopContainer class="vTreeContainer">
+    <v-categories-tree #categoriesTree
                        [disablePropagation]="selectionMode === _CategoriesModes.Self"
                        [selectedCategories]="selection"
                        (onCategoriesLoaded)="_categoriesLoaded = true"
                        (onCategorySelected)="_onCategorySelected($event)"
                        (onCategoryUnselected)="onCategoriesUnselected.emit([$event])"
                        >
-    </k-categories-tree>
-  </kScrollToTopContainer>
+    </v-categories-tree>
+  </vScrollToTopContainer>
 
   <p>
     <a (click)="_clearAll()">{{'applications.content.filters.clearAll' | translate}}</a>
-    <a class="kClose" (click)="close()">{{'applications.content.filters.close' | translate}}</a>
+    <a class="vClose" (click)="close()">{{'applications.content.filters.close' | translate}}</a>
   </p>
 </div>
-<kPopupWidget #categoriesPref
+<vPopupWidget #categoriesPref
               data-aid="categoriesPref"
               [popupWidth]="360"
               [popupHeight]="220"
@@ -44,9 +44,9 @@
               [targetRef]="config"
               [targetOffset]="{'x':-324, 'y': -24}"
               [parentPopup]="parentPopupWidget"
-              kSticky [stickyClass]="'kForceFix'" [stickyId]="'categoriesPref'" [sticksTo]="'header'" [scrollOffset]="80">
+              vSticky [stickyClass]="'vForceFix'" [stickyId]="'categoriesPref'" [sticksTo]="'header'" [scrollOffset]="80">
   <ng-template>
-    <kCategoriesFilterPrefs [selectionMode]="selectionMode"
-                            (selectionModeChange)="_onSelectionModeChanged($event)"></kCategoriesFilterPrefs>
+    <vCategoriesFilterPrefs [selectionMode]="selectionMode"
+                            (selectionModeChange)="_onSelectionModeChanged($event)"></vCategoriesFilterPrefs>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationTypes, ActionTypes, TranscodingProfileStore } from './transcoding-profile-store.service';
-import { AreaBlockerMessage, AreaBlockerMessageButton } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AreaBlockerMessage, AreaBlockerMessageButton } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable } from 'rxjs';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
 import { TranscodingProfileWidgetsManager } from './transcoding-profile-widgets-manager';
 import { TranscodingProfileSectionsListWidget } from './transcoding-profile-sections-list/transcoding-profile-sections-list-widget.service';
 import { TranscodingProfileDetailsWidget } from './transcoding-profile-details/transcoding-profile-details-widget.service';
@@ -13,15 +13,15 @@ import { TranscodingProfileFlavorsWidget } from './transcoding-profile-flavors/t
 import { BaseTranscodingProfilesStore } from '../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
 import { MediaTranscodingProfilesStore } from '../transcoding-profiles/transcoding-profiles-store/media-transcoding-profiles-store.service';
 import { LiveTranscodingProfilesStore } from '../transcoding-profiles/transcoding-profiles-store/live-transcoding-profiles-store.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import {
     SettingsTranscodingProfileViewSections,
     SettingsTranscodingProfileViewService
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kTranscodingProfile',
+  selector: 'vTranscodingProfile',
   templateUrl: './transcoding-profile.component.html',
   styleUrls: ['./transcoding-profile.component.scss'],
   providers: [
@@ -37,7 +37,7 @@ export class TranscodingProfileComponent implements OnInit, OnDestroy {
   public _profilesStore: BaseTranscodingProfilesStore;
 
   public _profileName: string;
-  public _profileType: KalturaConversionProfileType;
+  public _profileType: VidiunConversionProfileType;
   public _showLoader = false;
   public _areaBlockerMessage: AreaBlockerMessage;
   public _currentProfileId: string;
@@ -46,7 +46,7 @@ export class TranscodingProfileComponent implements OnInit, OnDestroy {
   public _profileHasChanges: boolean;
 
   public get _isSaveDisabled(): boolean {
-    const updateAllowed = this._profileWidgetsManager.isNewData || this._permissionsService.hasPermission(KMCPermissions.TRANSCODING_UPDATE);
+    const updateAllowed = this._profileWidgetsManager.isNewData || this._permissionsService.hasPermission(VMCPermissions.TRANSCODING_UPDATE);
     return !this._profileStore.profileIsDirty || !updateAllowed;
   }
 
@@ -54,7 +54,7 @@ export class TranscodingProfileComponent implements OnInit, OnDestroy {
               widget2: TranscodingProfileDetailsWidget,
               widget3: TranscodingProfileMetadataWidget,
               widget4: TranscodingProfileFlavorsWidget,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _profileWidgetsManager: TranscodingProfileWidgetsManager,
               private _appLocalization: AppLocalization,
               private _mediaTranscodingProfilesStore: MediaTranscodingProfilesStore,
@@ -69,13 +69,13 @@ export class TranscodingProfileComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  private _setProfilesStoreServiceByType(serviceType: KalturaConversionProfileType): void {
-    if (serviceType === KalturaConversionProfileType.media) {
+  private _setProfilesStoreServiceByType(serviceType: VidiunConversionProfileType): void {
+    if (serviceType === VidiunConversionProfileType.media) {
       this._profilesStore = this._mediaTranscodingProfilesStore;
-    } else if (serviceType === KalturaConversionProfileType.liveStream) {
+    } else if (serviceType === VidiunConversionProfileType.liveStream) {
       this._profilesStore = this._liveTranscodingProfilesStore;
     } else {
-      throw Error('Incorrect serviceType provided. It can be either KalturaConversionProfileType.media or KalturaConversionProfileType.liveStream type');
+      throw Error('Incorrect serviceType provided. It can be either VidiunConversionProfileType.media or VidiunConversionProfileType.liveStream type');
     }
   }
 
@@ -213,7 +213,7 @@ export class TranscodingProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          // TODO [kmc] navigate to error page
+          // TODO [vmc] navigate to error page
           throw error;
         });
   }

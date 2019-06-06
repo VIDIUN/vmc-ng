@@ -1,25 +1,25 @@
-<div class="kDashboard">
+<div class="vDashboard">
   <div id="appMenu" #appMenu>
-      <kKMCAppMenu></kKMCAppMenu>
-      <div class="kPopupWidgetModalOverlay kMenuCover"></div>
+      <vVMCAppMenu></vVMCAppMenu>
+      <div class="vPopupWidgetModalOverlay vMenuCover"></div>
   </div>
   <router-outlet></router-outlet>
-  <kScrollToTop [scrollOffset]="50"></kScrollToTop>
+  <vScrollToTop [scrollOffset]="50"></vScrollToTop>
 </div>
 
-<kPopupWidget #whatsNew data-aid="whatsNew" [popupWidth]="644" [popupHeight]="617" [modal]="true" [closeBtn]="false">
+<vPopupWidget #whatsNew data-aid="whatsNew" [popupWidth]="644" [popupHeight]="617" [modal]="true" [closeBtn]="false">
     <div class="whatsNew">
-        <div class="kIcon"></div>
-        <div class="kHeader">
-            <span class="kTitle">Welcome to the New KMC!</span>
+        <div class="vIcon"></div>
+        <div class="vHeader">
+            <span class="vTitle">Welcome to the New VMC!</span>
         </div>
-        <div class="kWelcomeContent">
-            <span>We are happy to introduce you to the new version of the Kaltura Management Console. The KMC has undergone a full facelift and is now Flash-free, with a fresh design, enhanced usability and faster performance.</span>
+        <div class="vWelcomeContent">
+            <span>We are happy to introduce you to the new version of the Vidiun Management Console. The VMC has undergone a full facelift and is now Flash-free, with a fresh design, enhanced usability and faster performance.</span>
             <span class="enjoy">Enjoy!</span>
         </div>
 
-        <div class="kFooter">
-            <button class="kButtonBranded" type="button" pButton label="Lets Go!" (click)="closeWin()"></button>
+        <div class="vFooter">
+            <button class="vButtonBranded" type="button" pButton label="Lets Go!" (click)="closeWin()"></button>
         </div>
     </div>
-</kPopupWidget>
+</vPopupWidget>

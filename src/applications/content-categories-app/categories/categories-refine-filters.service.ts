@@ -4,20 +4,20 @@ import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/forkJoin';
 
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
 import {
   MetadataItemTypes,
   MetadataProfile,
   MetadataProfileCreateModes,
   MetadataProfileStore,
   MetadataProfileTypes
-} from 'app-shared/kmc-shared';
+} from 'app-shared/vmc-shared';
 
 import {EntitlementsFiltersList} from './default-filters-list';
 
 import * as R from 'ramda';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 export interface RefineGroupListItem {
   value: string,
@@ -43,10 +43,10 @@ export class CategoriesRefineFiltersService {
 
   private _getRefineFilters$: Observable<RefineGroup[]>;
 
-  constructor(private _kalturaServerClient: KalturaClient,
-              private _permissionsService: KMCPermissionsService,
+  constructor(private _vidiunServerClient: VidiunClient,
+              private _permissionsService: VMCPermissionsService,
               private _metadataProfileStore: MetadataProfileStore,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
       this._logger = _logger.subLogger('CategoriesRefineFiltersService');
   }
 
@@ -60,7 +60,7 @@ export class CategoriesRefineFiltersService {
               this._logger.trace(`handle successful get categories refine filters request, mapping response`);
 
             const result = [];
-            if (this._permissionsService.hasPermission(KMCPermissions.FEATURE_ENTITLEMENT)) {
+            if (this._permissionsService.hasPermission(VMCPermissions.FEATURE_ENTITLEMENT)) {
               result.push(this._buildEntitlementsFiltersGroup());
             } else {
                 this._logger.debug(`user doesn't have entitlement feature, ignore entitlements filters group`);
@@ -87,7 +87,7 @@ export class CategoriesRefineFiltersService {
   }
 
   private _getMetadataFilters(): Observable<{ items: MetadataProfile[] }> {
-      if (this._permissionsService.hasPermission(KMCPermissions.METADATA_PLUGIN_PERMISSION)) {
+      if (this._permissionsService.hasPermission(VMCPermissions.METADATA_PLUGIN_PERMISSION)) {
           return this._metadataProfileStore.get({
               type: MetadataProfileTypes.Category,
               ignoredCreateMode: MetadataProfileCreateModes.App

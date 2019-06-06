@@ -2,29 +2,29 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 
-import {KalturaClient} from 'kaltura-ngx-client';
-import {KalturaMediaEntryFilter} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaClipAttributes} from 'kaltura-ngx-client';
-import {KalturaOperationAttributes} from 'kaltura-ngx-client';
-import {BaseEntryListAction} from 'kaltura-ngx-client';
-import {KalturaUtils} from '@kaltura-ng/kaltura-common';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {VidiunMediaEntryFilter} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunClipAttributes} from 'vidiun-ngx-client';
+import {VidiunOperationAttributes} from 'vidiun-ngx-client';
+import {BaseEntryListAction} from 'vidiun-ngx-client';
+import {VidiunUtils} from '@vidiun-ng/vidiun-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
 
 
 import {EntryStore} from '../entry-store.service';
-import {BrowserService} from "app-shared/kmc-shell/providers/browser.service";
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {BrowserService} from "app-shared/vmc-shell/providers/browser.service";
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 import {EntryWidget} from '../entry-widget';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { ContentEntryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-entry-view.service';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { UpdateClipsEvent } from 'app-shared/kmc-shared/events/update-clips-event';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { ContentEntryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-entry-view.service';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { UpdateClipsEvent } from 'app-shared/vmc-shared/events/update-clips-event';
 
 export interface ClipsData
 {
@@ -53,11 +53,11 @@ export class EntryClipsWidget extends EntryWidget implements OnDestroy {
   public pageSizesAvailable = [25, 50, 75, 100];
 
   constructor(private _store: EntryStore,
-              private _kalturaServerClient: KalturaClient,
+              private _vidiunServerClient: VidiunClient,
               private browserService: BrowserService,
               private _appLocalization: AppLocalization,
               private _appEvents: AppEventsService,
-              logger: KalturaLogger) {
+              logger: VidiunLogger) {
     super(ContentEntryViewSections.Clips, logger);
 
       this._appEvents.event(UpdateClipsEvent)
@@ -97,7 +97,7 @@ export class EntryClipsWidget extends EntryWidget implements OnDestroy {
     }
   }
 
-  public navigateToEntry(entry: KalturaMediaEntry): void {
+  public navigateToEntry(entry: VidiunMediaEntry): void {
     this._store.openEntry(entry);
   }
 
@@ -109,47 +109,47 @@ export class EntryClipsWidget extends EntryWidget implements OnDestroy {
     return clips;
   }
 
-  private _getClipOffset(entry: KalturaMediaEntry): string {
+  private _getClipOffset(entry: VidiunMediaEntry): string {
     let offset: number = -1;
     if (entry.operationAttributes && entry.operationAttributes.length) {
-      entry.operationAttributes.forEach((attr: KalturaOperationAttributes) => {
-        if (attr instanceof KalturaClipAttributes) {
-          if (attr.offset && offset === -1) { // take the first offset we find as in legacy KMC
+      entry.operationAttributes.forEach((attr: VidiunOperationAttributes) => {
+        if (attr instanceof VidiunClipAttributes) {
+          if (attr.offset && offset === -1) { // take the first offset we find as in legacy VMC
             offset = attr.offset / 1000;
           }
         }
       });
     }
-    return offset !== -1 ? KalturaUtils.formatTime(offset) : this._appLocalization.get('applications.content.entryDetails.clips.n_a');
+    return offset !== -1 ? VidiunUtils.formatTime(offset) : this._appLocalization.get('applications.content.entryDetails.clips.n_a');
   }
 
-  private _getClipDuration(entry: KalturaMediaEntry): string {
-    return entry.duration ? KalturaUtils.formatTime(entry.duration) : this._appLocalization.get('applications.content.entryDetails.clips.n_a');
+  private _getClipDuration(entry: VidiunMediaEntry): string {
+    return entry.duration ? VidiunUtils.formatTime(entry.duration) : this._appLocalization.get('applications.content.entryDetails.clips.n_a');
   }
 
   private _getEntryClips(origin: 'activation' | 'reload'): Observable<{ failed: boolean, error?: Error }> {
     return Observable.create(observer => {
-      const entry: KalturaMediaEntry = this.data;
+      const entry: VidiunMediaEntry = this.data;
 
       super._showLoader();
 
       // build the request
-      let requestSubscription = this._kalturaServerClient.request(new BaseEntryListAction({
-        filter: new KalturaMediaEntryFilter(
+      let requestSubscription = this._vidiunServerClient.request(new BaseEntryListAction({
+        filter: new VidiunMediaEntryFilter(
           {
             rootEntryIdEqual: entry.id,
             orderBy: `${this.sortOrder === 1 ? '+' : '-'}${this.sortBy}`
           }
         ),
-        pager: new KalturaFilterPager(
+        pager: new VidiunFilterPager(
           {
             pageSize: this.pageSize,
             pageIndex: this.pageIndex + 1
           }
         )
       }).setRequestOptions({
-        responseProfile: new KalturaDetachedResponseProfile({
-          type: KalturaResponseProfileType.includeFields,
+        responseProfile: new VidiunDetachedResponseProfile({
+          type: VidiunResponseProfileType.includeFields,
           fields: 'id,name,plays,createdAt,duration,status,offset,operationAttributes,moderationStatus'
         })
       }))
@@ -199,7 +199,7 @@ export class EntryClipsWidget extends EntryWidget implements OnDestroy {
   }
 
   protected onActivate(firstTimeActivating: boolean) {
-    const entry: KalturaMediaEntry = this.data ? this.data as KalturaMediaEntry : null;
+    const entry: VidiunMediaEntry = this.data ? this.data as VidiunMediaEntry : null;
     return this._getEntryClips('activation');
   }
 

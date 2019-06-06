@@ -1,28 +1,28 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
-  <div class="kFloater kOverrideFAIcons">
-    <div class="kHeader">
-      <div class="kTitle">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage">
+  <div class="vFloater vOverrideFAIcons">
+    <div class="vHeader">
+      <div class="vTitle">
         <span *ngIf="!_isNewUser">{{'applications.administration.users.editUser' | translate}}</span>
         <span *ngIf="_isNewUser">{{'applications.administration.users.addUser' | translate}}</span>
       </div>
     </div>
 
-    <div class="kContainer">
+    <div class="vContainer">
       <form [formGroup]="_userForm" novalidate>
-        <div class="kCaption">{{'applications.administration.users.personalDetails' | translate}}</div>
-        <div class="kRow kValign">
-          <span class="kLabel">{{'applications.administration.users.loginEmailAddress' | translate}}</span>
-          <div class="kRequired"
-               [ngClass]="{'kHasError':(_emailField.invalid && _emailField.touched) || (_emailServerError && _emailField.pristine)}">
+        <div class="vCaption">{{'applications.administration.users.personalDetails' | translate}}</div>
+        <div class="vRow vValign">
+          <span class="vLabel">{{'applications.administration.users.loginEmailAddress' | translate}}</span>
+          <div class="vRequired"
+               [ngClass]="{'vHasError':(_emailField.invalid && _emailField.touched) || (_emailServerError && _emailField.pristine)}">
               *
           </div>
-          <div class="kControl">
+          <div class="vControl">
             <input [formControl]="_emailField"
-                   [ngClass]="{'kHasError': (_emailField.invalid && _emailField.touched) || (_emailServerError && _emailField.pristine)}"
+                   [ngClass]="{'vHasError': (_emailField.invalid && _emailField.touched) || (_emailServerError && _emailField.pristine)}"
                    type="text" pInputText/>
           </div>
         </div>
-        <div class="kErrorRow" *ngIf="_emailField.invalid && _emailField.touched">
+        <div class="vErrorRow" *ngIf="_emailField.invalid && _emailField.touched">
           <div class="invalid" *ngIf="_emailField.value === ''">
             {{'applications.administration.users.required' | translate}}
           </div>
@@ -30,37 +30,37 @@
             {{'applications.administration.users.emailFormat' | translate}}
           </div>
         </div>
-        <div class="kRow kValign">
-          <span class="kLabel">{{'applications.administration.users.firstName' | translate}}</span>
-          <div class="kRequired" [ngClass]="{'kHasError': _firstNameField.invalid && _firstNameField.touched}">*</div>
-          <div class="kControl">
+        <div class="vRow vValign">
+          <span class="vLabel">{{'applications.administration.users.firstName' | translate}}</span>
+          <div class="vRequired" [ngClass]="{'vHasError': _firstNameField.invalid && _firstNameField.touched}">*</div>
+          <div class="vControl">
             <input [formControl]="_firstNameField" type="text" pInputText/>
           </div>
         </div>
-        <div class="kErrorRow" *ngIf="_firstNameField.invalid && _firstNameField.touched">
+        <div class="vErrorRow" *ngIf="_firstNameField.invalid && _firstNameField.touched">
           <div class="invalid">{{'applications.administration.users.required' | translate}}</div>
         </div>
-        <div class="kRow kValign">
-          <span class="kLabel">{{'applications.administration.users.lastName' | translate}}</span>
-          <div class="kRequired" [ngClass]="{'kHasError': _lastNameField.invalid && _lastNameField.touched}">*</div>
-          <div class="kControl">
+        <div class="vRow vValign">
+          <span class="vLabel">{{'applications.administration.users.lastName' | translate}}</span>
+          <div class="vRequired" [ngClass]="{'vHasError': _lastNameField.invalid && _lastNameField.touched}">*</div>
+          <div class="vControl">
             <input [formControl]="_lastNameField" type="text" pInputText/>
           </div>
         </div>
-        <div class="kErrorRow" *ngIf="_lastNameField.invalid && _lastNameField.touched">
+        <div class="vErrorRow" *ngIf="_lastNameField.invalid && _lastNameField.touched">
           <div class="invalid">{{'applications.administration.users.required' | translate}}</div>
         </div>
-        <div class="kCaption kExtraPadding">{{'applications.administration.users.accountSpecificDetails' | translate}}
+        <div class="vCaption vExtraPadding">{{'applications.administration.users.accountSpecificDetails' | translate}}
         </div>
-        <div class="kRow kValign">
-          <span class="kLabel kExtraWidth">{{'applications.administration.users.publisherUserId' | translate}}</span>
-          <div class="kControl">
-            <input [formControl]="_idField" [ngClass]="{'kHasError': _idField.pristine && _idServerError}" type="text" pInputText/>
+        <div class="vRow vValign">
+          <span class="vLabel vExtraWidth">{{'applications.administration.users.publisherUserId' | translate}}</span>
+          <div class="vControl">
+            <input [formControl]="_idField" [ngClass]="{'vHasError': _idField.pristine && _idServerError}" type="text" pInputText/>
           </div>
         </div>
-        <div class="kRow kValign">
-          <span class="kLabel kExtraWidth">{{'applications.administration.users.userRole' | translate}}</span>
-          <div class="kControl">
+        <div class="vRow vValign">
+          <span class="vLabel vExtraWidth">{{'applications.administration.users.userRole' | translate}}</span>
+          <div class="vControl">
             <p-dropdown styleClass="rolesList"
                         [options]="_rolesList"
                         [formControl]="_roleIdsField"
@@ -68,21 +68,21 @@
                         (onChange)="this._setRoleDescription($event)"></p-dropdown>
           </div>
         </div>
-        <div class="kRow kValign">
-          <span class="kLabel kExtraWidth"></span>
-          <div class="kControl">
-            <div class="kSelectedRole">{{_selectedRoleDescription}}</div>
+        <div class="vRow vValign">
+          <span class="vLabel vExtraWidth"></span>
+          <div class="vControl">
+            <div class="vSelectedRole">{{_selectedRoleDescription}}</div>
           </div>
         </div>
       </form>
     </div>
 
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded"
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded"
               *ngIf="_saveBtnShown"
               [disabled]="!_userForm.dirty" pButton
               [label]="'applications.administration.users.save' | translate"
               (click)="_saveUser()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

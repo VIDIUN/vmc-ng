@@ -1,9 +1,9 @@
 @import 'app-theme/_variables.scss';
 
-.kCustomSchemaForm {
+.vCustomSchemaForm {
   padding: 32px 28px 23px 32px;
 
-  .kRow {
+  .vRow {
     &:first-child {
       padding-top: 0;
     }
@@ -14,69 +14,69 @@
     display: flex;
     padding-top: 20px;
 
-      .kErrorMessage {
-          color: $kDandger;
+      .vErrorMessage {
+          color: $vDandger;
           font-size: 14px;
           margin-top: 5px;
           margin-bottom: -15px;
       }
 
-    .kSelectApplyTo {
+    .vSelectApplyTo {
       display: flex;
       justify-content: center;
       align-items: center;
 
-      .kRadioLeft,
-      .kRadioRight {
+      .vRadioLeft,
+      .vRadioRight {
         display: flex;
         margin-right: 55px;
       }
     }
 
-    .kLabel {
+    .vLabel {
       width: 237px;
       flex: 0 0 auto;
       height: 18px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       font-size: 15px;
       line-height: 18px;
         position: relative;
     }
 
-    .kRequired {
+    .vRequired {
       width: 20px;
       font-size: 24px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       margin-left: -24px;
         position: absolute;
         top: 5px;
         right: 0;
 
-        &.kControlInvalid {
-            color: $kDandger;
+        &.vControlInvalid {
+            color: $vDandger;
         }
     }
-    .kRequired, .kLabel {
+    .vRequired, .vLabel {
       padding: 8px 4px 8px 0px;
       height: 18px;
     }
-    .kControl {
+    .vControl {
       height: 34px;
-      color: $kGrayscale2;
+      color: $vGrayscale2;
       width: 529px;
       border-radius: 3px;
 
-      &.kControlInvalid {
-        border: 1px solid $kDandger;
+      &.vControlInvalid {
+        border: 1px solid $vDandger;
       }
     }
-    .KTextArea {
+    .VTextArea {
       height: 60px;
     }
   }
 }
 
-:host /deep/ .kSelectApplyTo .ui-radiobutton-label {
+:host /deep/ .vSelectApplyTo .ui-radiobutton-label {
   font-weight: normal;
   font-size: 15px;
   margin-left: 5px;

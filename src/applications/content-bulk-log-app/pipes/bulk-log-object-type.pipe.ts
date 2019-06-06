@@ -1,26 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaBulkUploadObjectType } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunBulkUploadObjectType } from 'vidiun-ngx-client';
 
-@Pipe({ name: 'kBulkLogTableObjectType' })
+@Pipe({ name: 'vBulkLogTableObjectType' })
 
 export class BulkLogObjectTypePipe implements PipeTransform {
 
   constructor(private _appLocalization: AppLocalization) {
   }
 
-  transform(value: KalturaBulkUploadObjectType): string {
+  transform(value: VidiunBulkUploadObjectType): string {
     switch (true) {
-      case KalturaBulkUploadObjectType.category === value:
+      case VidiunBulkUploadObjectType.category === value:
         return this._appLocalization.get('applications.content.bulkUpload.objectType.category');
 
-      case KalturaBulkUploadObjectType.categoryUser === value:
+      case VidiunBulkUploadObjectType.categoryUser === value:
         return this._appLocalization.get('applications.content.bulkUpload.objectType.categoryUser');
 
-      case KalturaBulkUploadObjectType.entry === value:
+      case VidiunBulkUploadObjectType.entry === value:
         return this._appLocalization.get('applications.content.bulkUpload.objectType.entry');
 
-      case KalturaBulkUploadObjectType.user === value:
+      case VidiunBulkUploadObjectType.user === value:
         return this._appLocalization.get('applications.content.bulkUpload.objectType.user');
 
       default:

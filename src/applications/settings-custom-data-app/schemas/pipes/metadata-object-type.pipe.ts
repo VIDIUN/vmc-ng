@@ -1,20 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { KalturaMetadataObjectType } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunMetadataObjectType } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kMetadataObjectType' })
+@Pipe({ name: 'vMetadataObjectType' })
 export class MetadataObjectTypePipe implements PipeTransform {
   constructor(private _appLocalization: AppLocalization) {
 
   }
 
-  transform(value: KalturaMetadataObjectType): string {
+  transform(value: VidiunMetadataObjectType): string {
     if (value) {
-      if (value === KalturaMetadataObjectType.entry) {
+      if (value === VidiunMetadataObjectType.entry) {
         return this._appLocalization.get('applications.settings.metadata.applyTo.entries');
       }
 
-      if (value === KalturaMetadataObjectType.category) {
+      if (value === VidiunMetadataObjectType.category) {
         return this._appLocalization.get('applications.settings.metadata.applyTo.categories');
       }
     }

@@ -9,9 +9,9 @@ import { BrowserService } from './providers/browser.service';
 import { AppContainerComponent } from './components/app-container/app-container.component';
 import { ReleaseNotesComponent } from './components/release-notes/release-notes.component';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
-import { EntryTypePipe } from 'app-shared/kmc-shell/pipes/entry-type.pipe';
-import { PageExitVerificationService, UploadPageExitVerificationService } from 'app-shared/kmc-shell/page-exit-verification';
-import { PreventPasswordAutofillDirective } from 'app-shared/kmc-shell/directives/prevent-password-autofill.directive';
+import { EntryTypePipe } from 'app-shared/vmc-shell/pipes/entry-type.pipe';
+import { PageExitVerificationService, UploadPageExitVerificationService } from 'app-shared/vmc-shell/page-exit-verification';
+import { PreventPasswordAutofillDirective } from 'app-shared/vmc-shell/directives/prevent-password-autofill.directive';
 
 @NgModule({
     imports: <any[]>[
@@ -36,7 +36,7 @@ import { PreventPasswordAutofillDirective } from 'app-shared/kmc-shell/directive
     ],
     providers: <any[]>[]
 })
-export class KMCShellModule {
+export class VMCShellModule {
     constructor(@Optional() @Self()  _uploadPageExitVerificationService: UploadPageExitVerificationService,
                 @Optional() @Self()  _browserService: BrowserService) {
         if (_uploadPageExitVerificationService) {
@@ -50,7 +50,7 @@ export class KMCShellModule {
 
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: KMCShellModule,
+            ngModule: VMCShellModule,
             providers: <any[]>[
                 BrowserService,
                 AppShellService,

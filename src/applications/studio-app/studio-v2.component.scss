@@ -1,13 +1,13 @@
 @import "app-theme/_variables.scss";
 
-.kStudio{
+.vStudio{
   height: $contentArea;
   iframe{
     width: 100%;
     height: calc(100vh - 50px);
   }
 }
-.kDevMsg{
+.vDevMsg{
   display: block;
   text-align: center;
   margin-top: 50px;

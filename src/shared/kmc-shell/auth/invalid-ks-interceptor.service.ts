@@ -3,10 +3,10 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } fr
 import { Observable } from 'rxjs';
 import { AppAuthentication } from './app-authentication.service';
 import { BrowserService } from '../providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 
 @Injectable()
-export class InvalidKsInterceptorService implements HttpInterceptor {
+export class InvalidVsInterceptorService implements HttpInterceptor {
     constructor(private _appAuth: AppAuthentication,
                 private _appLocalization: AppLocalization,
                 private _browserService: BrowserService) {
@@ -17,7 +17,7 @@ export class InvalidKsInterceptorService implements HttpInterceptor {
         return Observable.create(observer => {
             this._browserService.alert({
                 header: this._appLocalization.get('app.common.attention'),
-                message: this._appLocalization.get('app.common.invalidKs'),
+                message: this._appLocalization.get('app.common.invalidVs'),
                 accept: () => {
                     this._appAuth.logout();
                     // don't complete the 'observer' because we don't want the application to handle this error
@@ -30,7 +30,7 @@ export class InvalidKsInterceptorService implements HttpInterceptor {
         return next.handle(request)
             .switchMap((event: HttpResponse<any>) => {
 
-                if (event.body && event.body.objectType === "KalturaAPIException" && event.body.code === 'INVALID_KS') {
+                if (event.body && event.body.objectType === "VidiunAPIException" && event.body.code === 'INVALID_VS') {
                     return this._createAlert();
                 }
 

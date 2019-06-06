@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {PlaylistsFilters, PlaylistsStore} from '../playlists-store/playlists-store.service';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
-import { BrowserService } from 'app-shared/kmc-shell';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { BrowserService } from 'app-shared/vmc-shell';
 export interface TagItem {
   type: string,
   value: any,
@@ -12,7 +12,7 @@ export interface TagItem {
 }
 
 @Component({
-  selector: 'k-playlists-tags',
+  selector: 'v-playlists-tags',
   templateUrl: './playlists-tags.component.html',
   styleUrls: ['./playlists-tags.component.scss']
 

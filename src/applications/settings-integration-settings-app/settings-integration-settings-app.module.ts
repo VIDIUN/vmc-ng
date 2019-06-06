@@ -4,17 +4,17 @@ import {routing} from './settings-integration-settings-app.routes';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule, DropdownModule, InputTextModule, MenuModule} from 'primeng/primeng';
-import {AreaBlockerModule, InputHelperModule, StickyModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, InputHelperModule, StickyModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
 import {TranslateModule} from '@ngx-translate/core';
 import {SettingsIntegrationSettingsComponent} from './settings-integration-settings.component';
 import {AccountInfoComponent} from './account-info/account-info.component';
 import {EntitlementComponent} from './entitlement/entitlement.component';
 import {EntitlementTableComponent} from './entitlement/entitlement-table/entitlement-table.component';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 import {NewEntitlementComponent} from './entitlement/new-entitlement/new-entitlement.component';
 import {EditEntitlementComponent} from './entitlement/edit-entitlement/edit-entitlement.component';
 import {CategoriesModule} from 'app-shared/content-shared/categories/categories.module';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
 
 @NgModule({
@@ -32,9 +32,9 @@ import { TableModule } from 'primeng/table';
     PopupWidgetModule,
     StickyModule,
     CategoriesModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
     InputHelperModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       TableModule
   ],
   declarations: [

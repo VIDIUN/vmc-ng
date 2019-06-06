@@ -1,24 +1,24 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage"
                 [bodyScroll]="true">
-    <kFileDialog #fileDialog [filter]="'image/*'"
-                 (onFileSelected)="_widgetService._onFileSelected($event)"></kFileDialog>
-    <div class="kThumbnails" #thumbnails>
-        <div class="kHeader">
-            <p class="kTitle">{{'applications.content.entryDetails.thumbnails.thumbnails' | translate}}</p>
-            <div class="kButtons">
-                <button pButton class="kButtonDefault"
-                        *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted"
+    <vFileDialog #fileDialog [filter]="'image/*'"
+                 (onFileSelected)="_widgetService._onFileSelected($event)"></vFileDialog>
+    <div class="vThumbnails" #thumbnails>
+        <div class="vHeader">
+            <p class="vTitle">{{'applications.content.entryDetails.thumbnails.thumbnails' | translate}}</p>
+            <div class="vButtons">
+                <button pButton class="vButtonDefault"
+                        *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted"
                         (click)="fileDialog.open($event)"
-                        icon="kIconupload"
+                        icon="vIconupload"
                         label="{{'applications.content.entryDetails.thumbnails.upload' | translate}}"></button>
-                <button pButton class="kButtonDefault"
+                <button pButton class="vButtonDefault"
                         (click)="capturePopup.open()"
-                        *ngIf="_widgetService.allowGrabFromVideo && _kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted"
-                        icon="kIconimage"
+                        *ngIf="_widgetService.allowGrabFromVideo && _vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted"
+                        icon="vIconimage"
                         label="{{'applications.content.entryDetails.thumbnails.capture.choose' | translate}}"></button>
             </div>
         </div>
-        <div class="kTable">
+        <div class="vTable">
             <p-table scrollHeight="100%"
                      sortField="width"
                      [value]="(_widgetService._thumbnails$ | async)?.items"
@@ -29,52 +29,52 @@
                         <th [ngStyle]="{'width':'124px', 'padding-left': '24px'}">
                             {{'applications.content.entryDetails.thumbnails.thumbnail' | translate}}
                         </th>
-                        <th [kpSortableColumn]="'width'" [ngStyle]="{'width':'120px'}">
+                        <th [vpSortableColumn]="'width'" [ngStyle]="{'width':'120px'}">
                             {{'applications.content.entryDetails.thumbnails.dimensions' | translate}}
                             <p-sortIcon [field]="'width'"></p-sortIcon>
                         </th>
                         <th [ngStyle]="{'width':'120px'}">
                             {{'applications.content.entryDetails.thumbnails.size' | translate}}
                         </th>
-                        <th *ngIf="_kmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | kNgIfPermitted">
+                        <th *ngIf="_vmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | vNgIfPermitted">
                             {{'applications.content.entryDetails.thumbnails.distributors' | translate}}
                         </th>
                         <th>
                             {{'applications.content.entryDetails.thumbnails.tags' | translate}}
                         </th>
-                        <th *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
+                        <th *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
                             {{'applications.content.entryDetails.thumbnails.defaultTitle' | translate}}
                         </th>
-                        <th  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted"></th>
+                        <th  [ngStyle]="{'width':'80px'}" *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted"></th>
                     </tr>
                 </ng-template>
 
                 <ng-template pTemplate="body" let-thumb>
                     <tr [ngClass]="_widgetService.getRowStyle(thumb)">
                         <td [ngStyle]="{'width':'124px', 'padding-left': '24px'}">
-                            <div #holder class="kThumbnailHolder">
+                            <div #holder class="vThumbnailHolder">
                                 <img [src]="thumb.url" onError="this.onerror=null;this.style.display='none'" (error)="holder.classList.add('error')">
-                                <i class="kIconimage"></i>
+                                <i class="vIconimage"></i>
                             </div>
                         </td>
                         <td [ngStyle]="{'width':'120px'}">
-                            <span class="kDimensions">{{thumb.width}}x{{thumb.height}}</span>
+                            <span class="vDimensions">{{thumb.width}}x{{thumb.height}}</span>
                         </td>
-                        <td [ngStyle]="{'width':'120px'}">{{thumb.size | kFileSize}}</td>
-                        <td *ngIf="_kmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | kNgIfPermitted">
+                        <td [ngStyle]="{'width':'120px'}">{{thumb.size | vFileSize}}</td>
+                        <td *ngIf="_vmcPermissions.CONTENTDISTRIBUTION_PLUGIN_PERMISSION | vNgIfPermitted">
                             {{thumb.distributors}}
                         </td>
-                        <td [kTooltip]="thumb.tags" [showOnEllipsis]="true">{{thumb.tags}}</td>
-                        <td *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
+                        <td [vTooltip]="thumb.tags" [showOnEllipsis]="true">{{thumb.tags}}</td>
+                        <td *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
                             <span *ngIf="thumb.isDefault">{{'applications.content.entryDetails.thumbnails.default' | translate}}</span>
                             <a (click)="_widgetService._setAsDefault(thumb)"
                                *ngIf="!thumb.isDefault && thumb.status?.toString()==='2'">
                                 {{'applications.content.entryDetails.thumbnails.setDefault' | translate}}
                             </a>
                         </td>
-                        <td  [ngStyle]="{'width':'80px'}" *ngIf="_kmcPermissions.CONTENT_MANAGE_THUMBNAIL | kNgIfPermitted">
-                            <div class="kThumbnailsTableActions" *ngIf="thumb.id !== ''">
-                                <button type="button" pButton class="kMoreActionsButton" icon="kIconmore"
+                        <td  [ngStyle]="{'width':'80px'}" *ngIf="_vmcPermissions.CONTENT_MANAGE_THUMBNAIL | vNgIfPermitted">
+                            <div class="vThumbnailsTableActions" *ngIf="thumb.id !== ''">
+                                <button type="button" pButton class="vMoreActionsButton" icon="vIconmore"
                                         (click)="openActionsMenu($event, thumb)"></button>
                             </div>
                         </td>
@@ -88,12 +88,12 @@
         </div>
     </div>
 
-    <kPopupWidget #capturePopup data-aid="capturePopup" [popupWidth]="586" [popupHeight]="475" [modal]="true">
+    <vPopupWidget #capturePopup data-aid="capturePopup" [popupWidth]="586" [popupHeight]="475" [modal]="true">
         <ng-template>
-            <kThumbnailCapture [entryId]="_widgetService.data?.id"
-                               [parentPopupWidget]="capturePopup"></kThumbnailCapture>
+            <vThumbnailCapture [entryId]="_widgetService.data?.id"
+                               [parentPopupWidget]="capturePopup"></vThumbnailCapture>
         </ng-template>
-    </kPopupWidget>
-</k-area-blocker>
+    </vPopupWidget>
+</v-area-blocker>
 
-<p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+<p-menu #actionsmenu [popup]="true" [model]="_actions" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>

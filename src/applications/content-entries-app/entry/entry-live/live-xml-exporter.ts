@@ -1,10 +1,10 @@
-import { KalturaLiveStreamEntry } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
-import { KalturaLiveStreamBitrate } from 'kaltura-ngx-client';
+import { VidiunLiveStreamEntry } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
+import { VidiunLiveStreamBitrate } from 'vidiun-ngx-client';
 
 export class LiveXMLExporter
 {
-	static exportXML(entry: KalturaLiveStreamEntry, liveType: string, customBitrates: any[]) {
+	static exportXML(entry: VidiunLiveStreamEntry, liveType: string, customBitrates: any[]) {
 		const xmlString =
 			`<flashmedialiveencoder_profile>
                 <preset>
@@ -99,13 +99,13 @@ export class LiveXMLExporter
 		// assign bitrates
 		let bitratesString = "";
 		let dimensionsStrings = "";
-		let bitrates: KalturaLiveStreamBitrate[] = [];
-		if (liveType === "kaltura") {
+		let bitrates: VidiunLiveStreamBitrate[] = [];
+		if (liveType === "vidiun") {
 			bitrates = entry.bitrates;
 		} else if (liveType === "universal") {
 			customBitrates.forEach (br => {
 				if (br.enabled) {
-					bitrates.push(new KalturaLiveStreamBitrate({
+					bitrates.push(new VidiunLiveStreamBitrate({
 						bitrate: br.bitrate,
 						width: br.width,
 						height: br.height
@@ -113,7 +113,7 @@ export class LiveXMLExporter
 				}
 			});
 		}
-		bitrates.forEach((br: KalturaLiveStreamBitrate) => {
+		bitrates.forEach((br: VidiunLiveStreamBitrate) => {
 			bitratesString += br.bitrate.toString() + ";";
 			dimensionsStrings += br.width.toString() + "x" + br.height.toString() + ";";
 		});
@@ -125,7 +125,7 @@ export class LiveXMLExporter
 		audio.getElementsByTagName("format")[0].appendChild(xml.createTextNode("MP3"));
 		audio.getElementsByTagName("datarate")[0].appendChild(xml.createTextNode("128"));
 		// additional
-		if (entry.sourceType.toString() === KalturaSourceType.liveStream.toString() || entry.sourceType.toString() === KalturaSourceType.akamaiUniversalLive.toString()) {
+		if (entry.sourceType.toString() === VidiunSourceType.liveStream.toString() || entry.sourceType.toString() === VidiunSourceType.akamaiUniversalLive.toString()) {
 			video.getElementsByTagName("format")[0].appendChild(xml.createTextNode("H.264"));
 			video.getElementsByTagName("advanced")[0].getElementsByTagName("profile")[0].appendChild(xml.createTextNode("Baseline"));
 			video.getElementsByTagName("advanced")[0].getElementsByTagName("level")[0].appendChild(xml.createTextNode("3.1"));

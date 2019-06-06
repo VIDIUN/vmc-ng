@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaCategory } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunCategory } from 'vidiun-ngx-client';
 import { modulesConfig } from 'config/modules';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { CategoryGetAction } from 'kaltura-ngx-client';
-import { KalturaResponseProfileType } from 'kaltura-ngx-client';
-import { KalturaDetachedResponseProfile } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { CategoryGetAction } from 'vidiun-ngx-client';
+import { VidiunResponseProfileType } from 'vidiun-ngx-client';
+import { VidiunDetachedResponseProfile } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum ContentCategoryViewSections {
     Metadata = 'Metadata',
@@ -24,22 +24,22 @@ export enum ContentCategoryViewSections {
 }
 
 export interface ContentCategoryViewArgs {
-    category: KalturaCategory;
+    category: VidiunCategory;
     section: ContentCategoryViewSections;
     activatedRoute?: ActivatedRoute;
     ignoreWarningTag?: boolean;
 }
 
 @Injectable()
-export class ContentCategoryViewService extends KmcDetailsViewBaseService<ContentCategoryViewArgs> {
+export class ContentCategoryViewService extends VmcDetailsViewBaseService<ContentCategoryViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
-                private _kalturaClient: KalturaClient,
+                private _vidiunClient: VidiunClient,
                 private _router: Router,
                 _browserService: BrowserService,
                 _title: Title,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('ContentCategoryViewService'), _browserService, _title, _contextualHelpService);
     }
@@ -111,7 +111,7 @@ export class ContentCategoryViewService extends KmcDetailsViewBaseService<Conten
         return result;
     }
 
-    private _isSectionEnabled(section: ContentCategoryViewSections, category: KalturaCategory): boolean {
+    private _isSectionEnabled(section: ContentCategoryViewSections, category: VidiunCategory): boolean {
         if (!section) {
             this._logger.debug('missing target section, reject request');
             return false;
@@ -124,7 +124,7 @@ export class ContentCategoryViewService extends KmcDetailsViewBaseService<Conten
         return availableByData && availableByPermission;
     }
 
-    private _isAvailableByData(section: ContentCategoryViewSections, category: KalturaCategory): boolean {
+    private _isAvailableByData(section: ContentCategoryViewSections, category: VidiunCategory): boolean {
         this._logger.debug(`check section availability by data for category`, { categoryId: category.id, section });
         let result = false;
         switch (section) {
@@ -152,7 +152,7 @@ export class ContentCategoryViewService extends KmcDetailsViewBaseService<Conten
         let result = false;
         switch (section) {
             case ContentCategoryViewSections.Entitlements:
-                result = this._appPermissions.hasPermission(KMCPermissions.FEATURE_ENTITLEMENT);
+                result = this._appPermissions.hasPermission(VMCPermissions.FEATURE_ENTITLEMENT);
                 break;
             case ContentCategoryViewSections.SubCategories:
                 result = true;
@@ -208,13 +208,13 @@ export class ContentCategoryViewService extends KmcDetailsViewBaseService<Conten
         this._logger.info('handle open category view by id request by the user, load category data', {categoryId});
         const categoryGetAction = new CategoryGetAction({id: categoryId})
             .setRequestOptions({
-                responseProfile: new KalturaDetachedResponseProfile({
-                    type: KalturaResponseProfileType.includeFields,
+                responseProfile: new VidiunDetachedResponseProfile({
+                    type: VidiunResponseProfileType.includeFields,
                     fields: 'id,tags,privacyContexts,directSubCategoriesCount'
                 })
             });
 
-        this._kalturaClient
+        this._vidiunClient
             .request(categoryGetAction)
             .pipe(tag('block-shell'))
             .subscribe(

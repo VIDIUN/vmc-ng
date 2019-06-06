@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Pipe({
-    name: 'kmcDate'
+    name: 'vmcDate'
 })
 export class DatePipe implements PipeTransform {
     constructor(private _browserService: BrowserService) {

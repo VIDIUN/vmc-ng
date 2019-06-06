@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
-import { NewEntryUploadFile } from 'app-shared/kmc-shell';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
+import { NewEntryUploadFile } from 'app-shared/vmc-shell';
 import { UploadMonitorStatuses } from './upload-monitor.component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { NewEntryFlavourFile } from 'app-shared/kmc-shell/new-entry-flavour-file';
-import { NewReplaceVideoUploadFile } from 'app-shared/kmc-shell/new-replace-video-upload';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { NewEntryFlavourFile } from 'app-shared/vmc-shell/new-entry-flavour-file';
+import { NewReplaceVideoUploadFile } from 'app-shared/vmc-shell/new-replace-video-upload';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class NewUploadMonitorService implements OnDestroy {

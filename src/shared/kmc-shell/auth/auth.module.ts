@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthCanActivate } from './auth-can-activate.service';
 import { AppAuthentication } from './app-authentication.service';
 import { AppBootstrap } from './app-bootstrap.service';
-import { InvalidKsInterceptorService } from './invalid-ks-interceptor.service';
+import { InvalidVsInterceptorService } from './invalid-vs-interceptor.service';
 
 @NgModule({
     imports: <any>[
@@ -27,7 +27,7 @@ export class AuthModule {
             providers: <any[]>[
                 {
                     provide: HTTP_INTERCEPTORS,
-                    useClass: InvalidKsInterceptorService,
+                    useClass: InvalidVsInterceptorService,
                     multi: true
                 }
             ]

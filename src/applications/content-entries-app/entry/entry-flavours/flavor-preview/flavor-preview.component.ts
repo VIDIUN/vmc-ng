@@ -1,28 +1,28 @@
 import { Component, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { FlavorAssetGetUrlAction } from 'kaltura-ngx-client';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { FlavorAssetGetUrlAction } from 'vidiun-ngx-client';
 import { Flavor } from '../flavor';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-	selector: 'kFlavorPreview',
+	selector: 'vFlavorPreview',
 	templateUrl: './flavor-preview.component.html',
 	styleUrls: ['./flavor-preview.component.scss']
 })
 export class FlavorPreview implements AfterViewInit, OnDestroy {
 
 	@Input() currentFlavor: Flavor;
-	@Input() currentEntry: KalturaMediaEntry;
+	@Input() currentEntry: VidiunMediaEntry;
 	@Input() parentPopupWidget: PopupWidgetComponent;
 
 	private _parentPopupStateChangeSubscribe: ISubscription;
 	public _previewSource = "";
 	public _loadingError = "";
 
-	constructor(private _kalturaServerClient: KalturaClient) {
+	constructor(private _vidiunServerClient: VidiunClient) {
 
 	}
 
@@ -33,7 +33,7 @@ export class FlavorPreview implements AfterViewInit, OnDestroy {
 			this._parentPopupStateChangeSubscribe = this.parentPopupWidget.state$
 				.subscribe(event => {
 					if (event.state === PopupWidgetStates.Open) {
-						this._kalturaServerClient.request(new FlavorAssetGetUrlAction({
+						this._vidiunServerClient.request(new FlavorAssetGetUrlAction({
 							id: this.currentFlavor.id
 						}))
 							.pipe(cancelOnDestroy(this))

@@ -37,7 +37,7 @@ export interface ExternalApplications {
     usageDashboard?: {
         uri: string,
     };
-    kmcAnalytics?: {
+    vmcAnalytics?: {
         uri: string,
     };
     liveAnalytics?: {
@@ -55,7 +55,7 @@ export interface ExternalApplications {
 }
 
 export interface ServerConfig {
-    kalturaServer: {
+    vidiunServer: {
         uri: string,
         defaultPrivileges?: string,
         deployUrl?: string,
@@ -86,9 +86,9 @@ export interface ServerConfig {
         entitlements?: {
             manage?: string
         },
-        kaltura?: {
+        vidiun?: {
             userManual?: string,
-            kmcOverview?: string,
+            vmcOverview?: string,
             mediaManagement?: string,
             support?: string,
             signUp?: string,
@@ -217,7 +217,7 @@ export const externalAppsConfigurationAdapter: ExternalAppsAdapter<ExternalAppli
 
         return result;
     },
-    kmcAnalytics: (configuration) => {
+    vmcAnalytics: (configuration) => {
         let result = false;
 
         if (configuration) {
@@ -285,15 +285,15 @@ export function buildCDNUrl(suffix: string): string {
 }
 
 export function buildDeployUrl(suffix: string): string {
-    return `${serverConfig.kalturaServer.deployUrl || ''}${suffix}`;
+    return `${serverConfig.vidiunServer.deployUrl || ''}${suffix}`;
 }
 
-export function getKalturaServerUri(suffix: string = ''): string {
-    if (serverConfig.kalturaServer && serverConfig.kalturaServer.uri) {
-        const serverEndpoint = serverConfig.kalturaServer.uri;
+export function getVidiunServerUri(suffix: string = ''): string {
+    if (serverConfig.vidiunServer && serverConfig.vidiunServer.uri) {
+        const serverEndpoint = serverConfig.vidiunServer.uri;
         return buildUrlWithClientProtocol(`${serverEndpoint}${suffix}`);
     } else {
-        throw new Error(`cannot provide kaltura server uri. server configuration wasn't loaded already`);
+        throw new Error(`cannot provide vidiun server uri. server configuration wasn't loaded already`);
     }
 }
 

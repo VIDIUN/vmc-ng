@@ -1,34 +1,34 @@
 @import 'app-theme/_variables.scss';
 
-.kUploadMonitorSection {
+.vUploadMonitorSection {
   height: 42px;
-  border-bottom: 1px solid $kGrayscale6;
+  border-bottom: 1px solid $vGrayscale6;
   padding: 24px;
 
-  .kUploadMonitorSectionHeading {
+  .vUploadMonitorSectionHeading {
     display: flex;
     justify-content: space-between;
 
-    .kUploadMonitorSectionHeadingTitle {
+    .vUploadMonitorSectionHeadingTitle {
       text-transform: uppercase;
       font-size: 12px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
     }
 
-    .kUploadMonitorSectionHeadingDetails {
+    .vUploadMonitorSectionHeadingDetails {
       font-size: 13px;
     }
   }
 
-  .kUploadMonitorSectionContent {
+  .vUploadMonitorSectionContent {
     margin-top: 16px;
 
-    .kUploadMonitorStatus {
+    .vUploadMonitorStatus {
 
       margin-right: 30px;
       font-size: 14px;
 
-      .kUploadMonitorStatusIcon {
+      .vUploadMonitorStatusIcon {
         color: #FFFFFF;
         font-size: 11px;
         border-radius: 50%;
@@ -41,21 +41,21 @@
         vertical-align: bottom;
 
         &.uploading {
-          background-color: $kSecondary;
+          background-color: $vSecondary;
         }
 
         &.queued {
-          color: $kOrange;
+          color: $vOrange;
           font-size: 17px;
           margin-bottom: 1px;
         }
 
         &.completed {
-          background-color: $kSuccess;
+          background-color: $vSuccess;
         }
 
         &.error {
-          color: $kDandger;
+          color: $vDandger;
           font-size: 17px;
           margin-bottom: 1px;
         }

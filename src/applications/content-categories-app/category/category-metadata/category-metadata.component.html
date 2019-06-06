@@ -1,19 +1,19 @@
-<k-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
+<v-area-blocker [showLoader]="_widgetService.showSectionLoader" [message]="_widgetService.sectionBlockerMessage">
   <div class="jumpTo">
-    <p-menu #menu [popup]="true" [model]="_jumpToMenu" [appendTo]="'body'" kMenuCloseOnScroll [style]="{width: '220px'}"></p-menu>
-    <button type="button" class="kButtonDefault" pButton icon="kIcondropdown_arrow_bottom" iconPos="right" label="{{'applications.content.categoryDetails.metadata.jumpTo' | translate}}"
+    <p-menu #menu [popup]="true" [model]="_jumpToMenu" [appendTo]="'body'" vMenuCloseOnScroll [style]="{width: '220px'}"></p-menu>
+    <button type="button" class="vButtonDefault" pButton icon="vIcondropdown_arrow_bottom" iconPos="right" label="{{'applications.content.categoryDetails.metadata.jumpTo' | translate}}"
       (click)="menu.toggle($event)"></button>
   </div>
-  <div class="kMetadataDetails" #metadataContainer *ngIf="_widgetService.data">
+  <div class="vMetadataDetails" #metadataContainer *ngIf="_widgetService.data">
 
-    <k-jump-to-section [label]="'Metadata'"></k-jump-to-section>
-    <span class="kSchemaTitle">{{'applications.content.categoryDetails.sections.metadata' | translate}}</span>
+    <v-jump-to-section [label]="'Metadata'"></v-jump-to-section>
+    <span class="vSchemaTitle">{{'applications.content.categoryDetails.sections.metadata' | translate}}</span>
     <form [formGroup]="_widgetService.metadataForm" novalidate>
-      <div class="kRow kValign kNameRow">
-        <span class="kLabel">{{'applications.content.categoryDetails.metadata.categoryName' | translate}}</span>
-        <div class="kControl">
+      <div class="vRow vValign vNameRow">
+        <span class="vLabel">{{'applications.content.categoryDetails.metadata.categoryName' | translate}}</span>
+        <div class="vControl">
           <input  formControlName="name" pInputText
-                 [ngClass]="{'kHasError':!_widgetService.metadataForm.controls['name'].valid &&
+                 [ngClass]="{'vHasError':!_widgetService.metadataForm.controls['name'].valid &&
                    _widgetService.metadataForm.controls['name'].touched}">
           <div *ngIf="_widgetService.metadataForm.controls['name'].touched &&
                  _widgetService.metadataForm.controls['name'].hasError('required')"
@@ -22,23 +22,23 @@
           </div>
         </div>
       </div>
-      <div class="kRow">
-        <span class="kLabel">{{'applications.content.categoryDetails.metadata.description' | translate}}</span>
-        <div class="kControl TextAreaControl">
+      <div class="vRow">
+        <span class="vLabel">{{'applications.content.categoryDetails.metadata.description' | translate}}</span>
+        <div class="vControl TextAreaControl">
           <textarea formControlName="description" class="threeRows" pInputTextarea></textarea>
         </div>
       </div>
-      <div class="kRow kValign">
-        <span class="kLabel">{{'applications.content.categoryDetails.metadata.tags' | translate}}</span>
-        <div class="kControl">
-          <kAutoComplete formControlName="tags" suggestionItemField="item" suggestionSelectableField="isSelectable" [multiple]="true"
+      <div class="vRow vValign">
+        <span class="vLabel">{{'applications.content.categoryDetails.metadata.tags' | translate}}</span>
+        <div class="vControl">
+          <vAutoComplete formControlName="tags" suggestionItemField="item" suggestionSelectableField="isSelectable" [multiple]="true"
             [limitToSuggestions]="false" [minLength]="3" [suggestionsProvider]="_tagsProvider" (completeMethod)="_searchTags($event)">
-          </kAutoComplete>
+          </vAutoComplete>
         </div>
       </div>
-      <div class="kRow kValign">
-        <span class="kLabel">{{'applications.content.categoryDetails.metadata.refId' | translate}}</span>
-        <div class="kControl">
+      <div class="vRow vValign">
+        <span class="vLabel">{{'applications.content.categoryDetails.metadata.refId' | translate}}</span>
+        <div class="vControl">
           <input formControlName="referenceId" type="text" pInputText/>
         </div>
       </div>
@@ -46,24 +46,24 @@
 
 
     <div *ngFor="let customDataForm of _widgetService.customDataForms; let last = last">
-      <k-jump-to-section [label]="customDataForm.metadataProfile.name"></k-jump-to-section>
-      <div class="kSchemaTitle">{{customDataForm.metadataProfile.name}}</div>
+      <v-jump-to-section [label]="customDataForm.metadataProfile.name"></v-jump-to-section>
+      <div class="vSchemaTitle">{{customDataForm.metadataProfile.name}}</div>
       <div *ngIf="customDataForm && customDataForm.isReady">
         <form novalidate [formGroup]="customDataForm.formGroup">
-          <k-dynamic-form-item [control]="customDataForm.formSectionControl" [form]="customDataForm.formGroup">
+          <v-dynamic-form-item [control]="customDataForm.formSectionControl" [form]="customDataForm.formGroup">
             <ng-template let-item="item">
-              <k-linked-entries *ngIf="item.control.controlType === 'LinkedEntriesComponent'"
+              <v-linked-entries *ngIf="item.control.controlType === 'LinkedEntriesComponent'"
                                 [profileName]="customDataForm.metadataProfile.name"
                                 [formControlName]="item.control.key"
                                 [control]="item.control"
-                                [form]="item.form"></k-linked-entries>
-              <k-prime-control *ngIf="item.control.controlType !== 'LinkedEntriesComponent'" [control]="item.control" [form]="item.form"></k-prime-control>
+                                [form]="item.form"></v-linked-entries>
+              <v-prime-control *ngIf="item.control.controlType !== 'LinkedEntriesComponent'" [control]="item.control" [form]="item.form"></v-prime-control>
             </ng-template>
-          </k-dynamic-form-item>
+          </v-dynamic-form-item>
         </form>
       </div>
 
     </div>
   </div>
 
-</k-area-blocker>
+</v-area-blocker>

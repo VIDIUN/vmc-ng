@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
-import { KalturaCategory, KalturaEntryStatus, KalturaExternalMediaEntry, KalturaMediaEntry, KalturaMediaType } from 'kaltura-ngx-client';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
+import { VidiunCategory, VidiunEntryStatus, VidiunExternalMediaEntry, VidiunMediaEntry, VidiunMediaType } from 'vidiun-ngx-client';
 import { serverConfig } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from 'shared/kmc-shared/kmc-permissions/index';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { VMCPermissions, VMCPermissionsService } from 'shared/vmc-shared/vmc-permissions/index';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 import { Title } from '@angular/platform-browser';
-import { AppEventsService } from 'app-shared/kmc-shared/app-events';
-import { CaptionRequestEvent } from 'app-shared/kmc-shared/events';
+import { AppEventsService } from 'app-shared/vmc-shared/app-events';
+import { CaptionRequestEvent } from 'app-shared/vmc-shared/events';
 import { Observable, of as ObservableOf } from 'rxjs';
 
 export enum ReachPages {
@@ -21,21 +21,21 @@ export enum ReachPages {
 }
 
 export interface ReachAppViewArgs {
-    entry?: KalturaMediaEntry;
-    entries?: KalturaMediaEntry[];
-    category?: KalturaCategory;
+    entry?: VidiunMediaEntry;
+    entries?: VidiunMediaEntry[];
+    category?: VidiunCategory;
     page: ReachPages;
 }
 
 @Injectable()
-export class ReachAppViewService extends KmcDetailsViewBaseService<ReachAppViewArgs> {
+export class ReachAppViewService extends VmcDetailsViewBaseService<ReachAppViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
                 private _router: Router,
                 private _appEvents: AppEventsService,
                 _browserService: BrowserService,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('ReachAppViewService'), _browserService,
@@ -43,11 +43,11 @@ export class ReachAppViewService extends KmcDetailsViewBaseService<ReachAppViewA
     }
 
     private _availableByPermission(args: ReachAppViewArgs): boolean {
-        let _available: boolean = this._appPermissions.hasPermission(KMCPermissions.REACH_PLUGIN_PERMISSION);
+        let _available: boolean = this._appPermissions.hasPermission(VMCPermissions.REACH_PLUGIN_PERMISSION);
         if (args.page === ReachPages.category) {
-            _available = _available && this._appPermissions.hasPermission(KMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES);
+            _available = _available && this._appPermissions.hasPermission(VMCPermissions.CONTENT_MANAGE_EDIT_CATEGORIES);
         } else if (args.page === ReachPages.entry || args.page === ReachPages.entries){
-            _available = _available && this._appPermissions.hasPermission(KMCPermissions.CAPTION_MODIFY);
+            _available = _available && this._appPermissions.hasPermission(VMCPermissions.CAPTION_MODIFY);
         }
         return _available;
     }
@@ -60,16 +60,16 @@ export class ReachAppViewService extends KmcDetailsViewBaseService<ReachAppViewA
             case ReachPages.dashboard:
                 return true; // since we build bulk actions menu before entries are selected, always allow by data
             case ReachPages.category:
-                return args.category instanceof KalturaCategory;
+                return args.category instanceof VidiunCategory;
             default:
                 return false;
         }
     }
 
-    public isRelevantEntry(entry: KalturaMediaEntry): boolean {
+    public isRelevantEntry(entry: VidiunMediaEntry): boolean {
         if (entry) {
-            const isVideoAudio = entry.mediaType === KalturaMediaType.video || entry.mediaType === KalturaMediaType.audio;
-            const isReady = entry.status === KalturaEntryStatus.ready;
+            const isVideoAudio = entry.mediaType === VidiunMediaType.video || entry.mediaType === VidiunMediaType.audio;
+            const isReady = entry.status === VidiunEntryStatus.ready;
             return isReady && isVideoAudio;
         }
         return false;

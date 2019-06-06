@@ -1,33 +1,33 @@
-<k-area-blocker [showLoader]="_showLoader" [message]="_areaBlockerMessage" [bodyScroll]="true">
-	<div class="kmcDetailsLayout kOverrideFAIcons">
-		<div class="kContent kDetailsWrapper">
-			<kSticky stickyId="playlistHeader" [sticksTo]="'header'" stickyClass="stickyHeader">
-				<div class="kDetailsHeader">
-					<div class="kContent">
-						<button pButton class="kButtonDefault kBackBtn small" icon="kIconarrow_backward" (click)="_backToList()"></button>
-						<div class="kTitle">{{ _playlistName }}</div>
-						<button pButton class="kButtonBranded kSaveBtn"
+<v-area-blocker [showLoader]="_showLoader" [message]="_areaBlockerMessage" [bodyScroll]="true">
+	<div class="vmcDetailsLayout vOverrideFAIcons">
+		<div class="vContent vDetailsWrapper">
+			<vSticky stickyId="playlistHeader" [sticksTo]="'header'" stickyClass="stickyHeader">
+				<div class="vDetailsHeader">
+					<div class="vContent">
+						<button pButton class="vButtonDefault vBackBtn small" icon="vIconarrow_backward" (click)="_backToList()"></button>
+						<div class="vTitle">{{ _playlistName }}</div>
+						<button pButton class="vButtonBranded vSaveBtn"
                     [label]="'app.common.save' | translate"
                     [disabled]="!_enableSaveBtn"
                     (click)="save()"></button>
-						<button pButton class="kButtonDefault kNavigationBtnLeft"  icon="kIconarrow_backward" (click)="_navigateToPlaylist('prev')" [disabled]="!_enablePrevButton"></button>
-						<button pButton class="kButtonDefault kNavigationBtnRight" icon="kIconarrow_forward"  (click)="_navigateToPlaylist('next')" [disabled]="!_enableNextButton"></button>
+						<button pButton class="vButtonDefault vNavigationBtnLeft"  icon="vIconarrow_backward" (click)="_navigateToPlaylist('prev')" [disabled]="!_enablePrevButton"></button>
+						<button pButton class="vButtonDefault vNavigationBtnRight" icon="vIconarrow_forward"  (click)="_navigateToPlaylist('next')" [disabled]="!_enableNextButton"></button>
 					</div>
 				</div>
-			</kSticky>
-			<div class="kHeaderDetails">
-				<kPlaylistDetails></kPlaylistDetails>
+			</vSticky>
+			<div class="vHeaderDetails">
+				<vPlaylistDetails></vPlaylistDetails>
 			</div>
-			<div class="kDetailsMain">
-				<div class="kSections">
-					<kPlaylistSectionsList></kPlaylistSectionsList>
+			<div class="vDetailsMain">
+				<div class="vSections">
+					<vPlaylistSectionsList></vPlaylistSectionsList>
 				</div>
-				<div class="kDetailsContent">
+				<div class="vDetailsContent">
 					<router-outlet></router-outlet>
 				</div>
 			</div>
-			<div class="kSpacer"></div>
+			<div class="vSpacer"></div>
 		</div>
 
 	</div>
-</k-area-blocker>
+</v-area-blocker>

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { AppAuthentication } from './app-authentication.service';
-import { kmcAppConfig } from '../../../kmc-app/kmc-app-config';
+import { vmcAppConfig } from '../../../vmc-app/vmc-app-config';
 import { globalConfig } from 'config/global';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { serverConfig } from 'config/server';
 
 export enum BoostrappingStatus
@@ -52,7 +52,7 @@ export class AppBootstrap implements CanActivate {
                             // we must modify document.location instead of using Angular router because
                             // router is not supported until at least once component
                             // was initialized
-                            document.location.href = kmcAppConfig.routing.errorRoute;
+                            document.location.href = vmcAppConfig.routing.errorRoute;
                             if (statusChangeSubscription) statusChangeSubscription.unsubscribe();
                         }
                     }
@@ -64,7 +64,7 @@ export class AppBootstrap implements CanActivate {
                     // we must modify document.location instead of using Angular router because
                     // router is not supported until at least once component
                     // was initialized
-                    document.location.href = kmcAppConfig.routing.errorRoute;
+                    document.location.href = vmcAppConfig.routing.errorRoute;
                     if (statusChangeSubscription) statusChangeSubscription.unsubscribe();
                 }
             );
@@ -75,14 +75,14 @@ export class AppBootstrap implements CanActivate {
 
         if (!this._initialized) {
             const bootstrapFailure = (error: any) => {
-                console.log("Bootstrap Error::" + error); // TODO [kmc-infra] - move to log
+                console.log("Bootstrap Error::" + error); // TODO [vmc-infra] - move to log
                 this._bootstrapStatusSource.next(BoostrappingStatus.Error);
             }
 
             this._initialized = true;
 
             // init localization, wait for localization to load before continuing
-            const prefix = serverConfig.kalturaServer.deployUrl ? `${serverConfig.kalturaServer.deployUrl}i18n/` : null;
+            const prefix = serverConfig.vidiunServer.deployUrl ? `${serverConfig.vidiunServer.deployUrl}i18n/` : null;
             this.appLocalization.setFilesHash(globalConfig.client.appVersion, prefix);
 
             const language = this.getCurrentLanguage();
@@ -101,9 +101,9 @@ export class AppBootstrap implements CanActivate {
     private getCurrentLanguage(): string {
         let lang: string = null;
         // try getting last selected language from local storage
-        if (this._browserService.getFromLocalStorage('kmc_lang') !== null) {
-            const userLanguage: string = this._browserService.getFromLocalStorage('kmc_lang');
-            if (kmcAppConfig.locales.find(locale => locale.id === userLanguage)) {
+        if (this._browserService.getFromLocalStorage('vmc_lang') !== null) {
+            const userLanguage: string = this._browserService.getFromLocalStorage('vmc_lang');
+            if (vmcAppConfig.locales.find(locale => locale.id === userLanguage)) {
                 lang = userLanguage;
             }
         }

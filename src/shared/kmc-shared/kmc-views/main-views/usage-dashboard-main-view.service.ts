@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
 import {serverConfig} from 'config/server';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class UsageDashboardMainViewService extends KmcMainViewBaseService {
+export class UsageDashboardMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -26,8 +26,8 @@ export class UsageDashboardMainViewService extends KmcMainViewBaseService {
 
     isAvailable(): boolean {
         return !!serverConfig.externalApps.usageDashboard &&
-            this._appPermissions.hasPermission(KMCPermissions.FEATURE_ENABLE_USAGE_DASHBOARD) &&
-            this._appPermissions.hasPermission(KMCPermissions.ANALYTICS_BASE);
+            this._appPermissions.hasPermission(VMCPermissions.FEATURE_ENABLE_USAGE_DASHBOARD) &&
+            this._appPermissions.hasPermission(VMCPermissions.ANALYTICS_BASE);
     }
 
     getRoutePath(): string {

@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
-@import '../../styles/scss/kmc-logo';
+@import '../../styles/scss/vmc-logo';
 
-.kMainMenuWrapper{
+.vMainMenuWrapper{
     height: 54px;
 }
 
@@ -17,7 +17,7 @@
     position: fixed;
     z-index: 700;
     width: 100%;
-    a.kMenuLink {
+    a.vMenuLink {
         color: $mainLinkColor;
         outline: 0;
         opacity: 0.6;
@@ -29,7 +29,7 @@
         letter-spacing: 1.2px;
         text-decoration: none;
 		&.disabled{
-			color: $kGrayscale4;
+			color: $vGrayscale4;
 			border: 0px solid $menuBkgColor;
 			pointer-events: none;
 		}
@@ -70,7 +70,7 @@
         margin-left: -20px;
         margin-right: -20px;
         border: 0;
-        border-top: 1px solid $kGrayscale6;
+        border-top: 1px solid $vGrayscale6;
     }
     .widgetLink {
         color: $widgetLinkColor;
@@ -81,26 +81,26 @@
         margin-top: 15px;
         float: right;
     }
-    .kMenu-left{
+    .vMenu-left{
         opacity: 1;
         display: flex;
         align-items: center;
         transition: all 0.25s ease-in-out;
     }
-    .kMenu-right {
+    .vMenu-right {
         margin-left: auto;
         display: flex;
         align-items: center;
 
-        .kIconhelp.has-notification:after {
+        .vIconhelp.has-notification:after {
           content: ' \25CF';
-          color: lighten($kPrimary, 10%);
+          color: lighten($vPrimary, 10%);
           position: absolute;
           right: -4px;
           bottom: -4px;
         }
     }
-    .kUserName {
+    .vUserName {
         display: flex;
         align-items: center;
         opacity: 0.6;
@@ -123,13 +123,13 @@
             margin-top: 2px;
         }
     }
-    .kLogo {
+    .vLogo {
         color: white;
         font-size: 32px;
         margin-left: 16px;
         margin-right: 18px;
     }
-    .kAnalytics {
+    .vAnalytics {
         display: flex;
         align-items: center;
         padding-bottom: 2px;
@@ -157,7 +157,7 @@
                 margin-right: 0px;
             }
         }
-        .k-analytics-logo{
+        .v-analytics-logo{
             margin-top: 3px;
             flex: 0 0 auto;
             cursor: default;
@@ -165,37 +165,37 @@
     }
 }
 
-.kHelpMenu{
+.vHelpMenu{
     background-color: white;
     padding-left: 16px;
     padding-right: 16px;
     overflow: hidden;
     border: 0px solid white;
     border-radius: 3px;
-    .kHelpTitle{
+    .vHelpTitle{
         font-size: 12px;
         margin-top: 20px;
         letter-spacing: 1.5px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
     }
-    .kDisabled{
-        color: $kGrayscale5;
+    .vDisabled{
+        color: $vGrayscale5;
         cursor: default;
     }
-    .kHelpLink{
+    .vHelpLink{
         text-decoration: none;
         font-size: 14px;
         cursor: pointer;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         &:hover{
             color: #0D499D;
         }
     }
-    .kHelpLinkHidden {
+    .vHelpLinkHidden {
         display: none;
     }
-    .kContexualHelp{
-        // background-color: $kGrayscale7;
+    .vContexualHelp{
+        // background-color: $vGrayscale7;
         margin: -15px;
         padding: 15px;
         padding-top: 0px;
@@ -205,40 +205,40 @@
 
 .appSubMenu {
     background-color: white;
-    border-bottom: 2px solid $kGrayscale5;
+    border-bottom: 2px solid $vGrayscale5;
 
-    .kSubMenuHolder {
+    .vSubMenuHolder {
         justify-content: space-between;
     }
 
-    .kSubMenu {
+    .vSubMenu {
         display: flex;
     }
 }
 
-.kHeader {
+.vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
         color: #333333;
         font-size: 24px;
         font-weight: 700;
     }
 }
-.kContainer {
+.vContainer {
     margin: 28px;
     min-height: 169px;
     .spaceTop{
       margin-top: 24px;
     }
 }
-.kFooter {
+.vFooter {
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,12 +248,12 @@
 }
 
 // prioritize sticky elements of header above other sticky elements in the page
-:host /deep/ .kStickyClass{
+:host /deep/ .vStickyClass{
     z-index: 550 !important;
 }
 :host /deep/ .uploadMonitorPopup .tooltipUp{
     margin-left: 234px !important;
 }
-:host /deep/ .kPopupWidget {
+:host /deep/ .vPopupWidget {
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .24);
 }

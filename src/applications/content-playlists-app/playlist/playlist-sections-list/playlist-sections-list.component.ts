@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PlaylistStore } from '../playlist-store.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { StickyComponent } from '@kaltura-ng/kaltura-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { StickyComponent } from '@vidiun-ng/vidiun-ui';
 import { PlaylistSectionsListWidget, SectionWidgetItem } from './playlist-sections-list-widget.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kPlaylistSectionsList',
+  selector: 'vPlaylistSectionsList',
   templateUrl: './playlist-sections-list.component.html',
   styleUrls: ['./playlist-sections-list.component.scss']
 })

@@ -1,6 +1,6 @@
 @import 'app-theme/_variables.scss';
 
-.kPreviewAndEmbed{
+.vPreviewAndEmbed{
   display: flex;
   flex-flow: column;
   width: 100%;
@@ -9,21 +9,21 @@
   form{
     height: 100%;
   }
-  /deep/ .kPopupWidget{
+  /deep/ .vPopupWidget{
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .24);
   }
-  .kHeader{
+  .vHeader{
     height: 58px;
     width: 100%;
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    background-color: $kGrayscale1;
+    background-color: $vGrayscale1;
     color: white;
-    border-bottom: 1px solid $kGrayscale4;
-    .kClose{
-      color: $kGrayscale3;
+    border-bottom: 1px solid $vGrayscale4;
+    .vClose{
+      color: $vGrayscale3;
       font-size: 18px;
       margin-left: 24px;
       cursor: pointer;
@@ -31,21 +31,21 @@
         color: white;
       }
     }
-    .kTitle{
+    .vTitle{
       margin-left: 24px;
       font-size: 18px;
       font-weight: 700;
     }
-    .kSelectPlayer{
+    .vSelectPlayer{
       display: flex;
       flex-flow: row;
       align-items: center;
       span{
         margin-right: 24px;
       }
-      .kPlayerSettings{
+      .vPlayerSettings{
         font-size: 24px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         margin-left: 12px;
         cursor: pointer;
         &:hover{
@@ -53,25 +53,25 @@
         }
       }
     }
-    .kToggleParamsIcon{
+    .vToggleParamsIcon{
       font-size: 24px;
       color: white;
       cursor: pointer;
       margin-right: 24px;
-      &.kHighlight{
-        color: $kGrayscale3;
+      &.vHighlight{
+        color: $vGrayscale3;
       }
     }
 
   }
 
-  .kPreview{
+  .vPreview{
     width: 100%;
     height: calc(100vh - 60px);
     flex: 1 1 auto;
     display: flex;
     flex-flow: row;
-    .kPreviewContainer{
+    .vPreviewContainer{
       flex: 1 1 auto;
       position: relative;
       iframe{
@@ -82,7 +82,7 @@
         bottom: 0px;
       }
     }
-    .kPreviewParams{
+    .vPreviewParams{
       width: 450px;
       height: 100%;
       overflow-y: auto;
@@ -90,47 +90,47 @@
       display: flex;
       flex-flow: column;
       box-sizing: border-box;
-      border-left: 1px solid $kGrayscale4;
+      border-left: 1px solid $vGrayscale4;
       transition: max-width 0.3s;
       overflow-x: hidden;
-      .kParamsContainer{
+      .vParamsContainer{
         padding: 20px;
       }
-      .kTitle{
+      .vTitle{
         display: block;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         font-size: 18px;
         font-weight: 700;
         margin-bottom: 32px;
       }
-      .kRow{
+      .vRow{
         display: block;
         margin-bottom: 28px;
       }
-      .kSection{
+      .vSection{
         display: flex;
         flex-flow: row;
         align-items: center;
         i{
           font-size: 20px;
         }
-        .kCol{
+        .vCol{
           width: 120px;
           margin-right: 20px;
           line-height: 18px;
         }
-        .kSectionHeader{
-          color: $kGrayscale1;
+        .vSectionHeader{
+          color: $vGrayscale1;
           font-size: 16px;
           font-weight: 700;
           margin-left: 8px;
         }
-        .kHelpTip{
+        .vHelpTip{
           font-size: 15px;
           margin-left: 8px;
           cursor: pointer;
           &:hover{
-            color: $kSecondary;
+            color: $vSecondary;
           }
         }
 
@@ -139,32 +139,32 @@
           height: 100px;
         }
 
-        .kCopyCode{
+        .vCopyCode{
           width: 80px;
           margin-left: 320px;
           margin-top: 10px;
         }
 
-        /deep/ .kQRCodeCanvas img {
+        /deep/ .vQRCodeCanvas img {
           margin-left: -10px;
           width: 80px;
         }
 
-        .kAdvancedArrow{
+        .vAdvancedArrow{
           font-size: 11px;
           margin-top: 2px;
-          color: $kGrayscale3;
+          color: $vGrayscale3;
           margin-left: 6px;
           transition: transform 0.3s;
         }
-        .kArrowDown{
+        .vArrowDown{
           transform: rotate(90deg);
         }
       }
-      .kAlignTop{
+      .vIdignTop{
         align-items: flex-start;
       }
-      .kAdvanced{
+      .vAdvanced{
         transition: max-height 0.3s;
         overflow-y: hidden;
         height: 250px;
@@ -172,7 +172,7 @@
     }
   }
 
-  .kSettings{
+  .vSettings{
     padding: 28px;
     box-sizing: border-box;
     display: flex;
@@ -181,30 +181,30 @@
       line-height: 40px;
       letter-spacing: 0.1em;
       font-size: 13px;
-      color: $kGrayscale3;
+      color: $vGrayscale3;
       margin-bottom: 20px;
     }
   }
 
-  .kTooltip{
+  .vTooltip{
     padding: 24px;
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
-    color: $kGrayscale3;
-    .kHelpTitle{
+    color: $vGrayscale3;
+    .vHelpTitle{
       display: flex;
       flex-flow: row;
       align-items: center;
       font-weight: 700;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       i{
         margin-right: 8px;
         font-size: 24px;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
       }
     }
-    .kTooltipContent{
+    .vTooltipContent{
       display: block;
       margin-top: 20px;
     }
@@ -212,15 +212,15 @@
 
 }
 
-:host /deep/ .kHeader p-dropdown{
+:host /deep/ .vHeader p-dropdown{
   .ui-dropdown{
-    background: $kGrayscale1 !important;
+    background: $vGrayscale1 !important;
     width: 380px !important;
-    border: 1px solid $kGrayscale2;
+    border: 1px solid $vGrayscale2;
   }
   .ui-dropdown-label.ui-inputtext, .ui-dropdown .ui-dropdown-trigger{
-    background-color: $kBlack;
-    color: $kGrayscale3;
+    background-color: $vBlack;
+    color: $vGrayscale3;
   }
   .ui-dropdown-panel .ui-dropdown-filter-container{
       padding-left: 12px;
@@ -229,7 +229,7 @@
     width: 350px;
   }
   .pi-pi-search:before{
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     font-size: 20px;
     content: "\e911";
   }
@@ -254,7 +254,7 @@
     }
 }
 
-:host /deep/ .kPreview p-dropdown{
+:host /deep/ .vPreview p-dropdown{
   .ui-dropdown{
     width: 260px !important;
   }
@@ -280,7 +280,7 @@
 
   .ui-radiobutton-label {
     margin-left: 12px;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.02em;

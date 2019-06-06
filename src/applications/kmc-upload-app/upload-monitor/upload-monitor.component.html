@@ -1,16 +1,16 @@
 <i #openuploadmonitor
-   class="kIconfolder_large kUploadMonitorToggler"
-   [class.kDisabled]="!_isAvailable"
+   class="vIconfolder_large vUploadMonitorToggler"
+   [class.vDisabled]="!_isAvailable"
    [class.upToDate]="_upToDate"
    [class.open]="_menuOpened"
-   [kTooltip]="'app.titles.uploadMonitor' | translate"
+   [vTooltip]="'app.titles.uploadMonitor' | translate"
    [placement]="'bottom'">
-    <!--img *ngIf="!_upToDate && !_showErrorIcon" class="kIconrefresh_small" [src]="_syncUri"-->
-    <i *ngIf="!_upToDate && !_showErrorIcon" class="kIconrefresh_small"></i>
-    <i *ngIf="_showErrorIcon" class="kIconerror"></i>
+    <!--img *ngIf="!_upToDate && !_showErrorIcon" class="vIconrefresh_small" [src]="_syncUri"-->
+    <i *ngIf="!_upToDate && !_showErrorIcon" class="vIconrefresh_small"></i>
+    <i *ngIf="_showErrorIcon" class="vIconerror"></i>
 </i>
 
-<kPopupWidget #uploadmonitor class="uploadMonitorPopup"
+<vPopupWidget #uploadmonitor class="uploadMonitorPopup"
               data-aid="uploadmonitor"
               [closeOnResize]="true"
               [appendTo]="appmenu"
@@ -22,7 +22,7 @@
               (onOpen)="_onMonitorOpen()"
               (onClose)="_onMonitorClose()">
   <ng-template>
-    <kUploadMonitorSection [detailsViewService]="_contentUploadsMainViewService"
+    <vUploadMonitorSection [detailsViewService]="_contentUploadsMainViewService"
                            *ngIf="_isUploadAvailable"
                            [uploadMonitorPopup]="uploadmonitor"
                            [title]="'applications.upload.uploadMonitor.uploadFromDesktop' | translate"
@@ -30,8 +30,8 @@
                            [queued]="_uploadFromDesktop.queued"
                            [completed]="_uploadFromDesktop.completed"
                            [layout]="'totals'"
-                           [errors]="_uploadFromDesktop.errors"></kUploadMonitorSection>
-    <kUploadMonitorSection [detailsViewService]="_contentBulkUploadsMainViewService"
+                           [errors]="_uploadFromDesktop.errors"></vUploadMonitorSection>
+    <vUploadMonitorSection [detailsViewService]="_contentBulkUploadsMainViewService"
                            *ngIf="_isBulkAvailable"
                            [title]="'applications.upload.uploadMonitor.bulkUpload' | translate"
                            [uploadMonitorPopup]="uploadmonitor"
@@ -40,8 +40,8 @@
                            [completed]="_bulkUpload.completed"
                            [errors]="_bulkUpload.errors"
                            [layout]="_bulkUploadLayout"
-                           (requestToRecover)="_bulkTryReconnect()"></kUploadMonitorSection>
-    <kUploadMonitorSection *ngIf="_isDropFolderAvailable && _dropFoldersLayout"
+                           (requestToRecover)="_bulkTryReconnect()"></vUploadMonitorSection>
+    <vUploadMonitorSection *ngIf="_isDropFolderAvailable && _dropFoldersLayout"
                            type="dropFolder"
                            [detailsViewService]="_contentDropFoldersMainViewService"
                            [title]="'applications.upload.uploadMonitor.dropFolders' | translate"
@@ -51,6 +51,6 @@
                            [completed]="_dropFolders.completed"
                            [errors]="_dropFolders.errors"
                            [layout]="_dropFoldersLayout"
-                           (requestToRecover)="_dropFoldersTryReconnect()"></kUploadMonitorSection>
+                           (requestToRecover)="_dropFoldersTryReconnect()"></vUploadMonitorSection>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

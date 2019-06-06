@@ -1,14 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 import {EntryAdvertisementsWidget} from './entry-advertisements-widget.service';
-import { AdvertisementsAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AdvertisementsAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { EntryStore } from '../entry-store.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/merge';
 
 @Component({
-    selector: 'kEntryAdvertisements',
+    selector: 'vEntryAdvertisements',
     templateUrl: './entry-advertisements.component.html',
     styleUrls: ['./entry-advertisements.component.scss']
 })
@@ -19,7 +19,7 @@ export class EntryAdvertisementsComponent implements OnInit, OnDestroy {
     constructor(public _widgetService: EntryAdvertisementsWidget,
                 public _store: EntryStore,
                 private _advertisementsAppViewService: AdvertisementsAppViewService,
-                logger: KalturaLogger) {
+                logger: VidiunLogger) {
     }
 
     ngOnInit() {

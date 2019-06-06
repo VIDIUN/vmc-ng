@@ -3,23 +3,23 @@ import { PartnerProfileStore } from '../partner-profile';
 import { ISubscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/throw';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaMetadataObjectType } from 'kaltura-ngx-client';
-import { MetadataProfileListAction } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunMetadataObjectType } from 'vidiun-ngx-client';
+import { MetadataProfileListAction } from 'vidiun-ngx-client';
 import { MetadataProfile } from './metadata-profile';
-import { MetadataProfileParser } from './kaltura-metadata-parser';
-import { KalturaMetadataProfileCreateMode } from 'kaltura-ngx-client';
-import { KalturaMetadataProfileFilter } from 'kaltura-ngx-client';
-import { KalturaMetadataProfileListResponse } from 'kaltura-ngx-client';
-import { AppEventsService } from 'app-shared/kmc-shared/app-events';
-import { MetadataProfileUpdatedEvent } from 'app-shared/kmc-shared/events/metadata-profile-updated.event';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { MetadataProfileParser } from './vidiun-metadata-parser';
+import { VidiunMetadataProfileCreateMode } from 'vidiun-ngx-client';
+import { VidiunMetadataProfileFilter } from 'vidiun-ngx-client';
+import { VidiunMetadataProfileListResponse } from 'vidiun-ngx-client';
+import { AppEventsService } from 'app-shared/vmc-shared/app-events';
+import { MetadataProfileUpdatedEvent } from 'app-shared/vmc-shared/events/metadata-profile-updated.event';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum MetadataProfileCreateModes {
     Api,
     App,
-    Kmc
+    Vmc
 }
 
 export enum MetadataProfileTypes {
@@ -38,8 +38,8 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
 {
     private _cachedProfiles : { [key : string] : MetadataProfile[]} = {};
 
-    constructor(private _kalturaServerClient: KalturaClient,
-                private _permissionsService: KMCPermissionsService,
+    constructor(private _vidiunServerClient: VidiunClient,
+                private _permissionsService: VMCPermissionsService,
                 _appEvents: AppEventsService) {
         super();
 
@@ -60,7 +60,7 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
 
     public get(filters : GetFilters) : Observable<{items : MetadataProfile[]}>
     {
-        if (!this._permissionsService.hasPermission(KMCPermissions.METADATA_PLUGIN_PERMISSION)) {
+        if (!this._permissionsService.hasPermission(VMCPermissions.METADATA_PLUGIN_PERMISSION)) {
             return Observable.of({ items: [] });
         }
 
@@ -82,9 +82,9 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
                         const parsedProfiles = [];
                         let parseFirstError: Error = null;
 
-                        response.objects.forEach(kalturaProfile =>
+                        response.objects.forEach(vidiunProfile =>
                         {
-                            const parsedProfile = parser.parse(<any>kalturaProfile);
+                            const parsedProfile = parser.parse(<any>vidiunProfile);
                             if (parsedProfile.error)
                             {
                                 parseFirstError = parsedProfile.error;
@@ -129,20 +129,20 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
         }
     }
 
-    private _getAPICreateMode(createMode : MetadataProfileCreateModes) : KalturaMetadataProfileCreateMode
+    private _getAPICreateMode(createMode : MetadataProfileCreateModes) : VidiunMetadataProfileCreateMode
     {
-        let result : KalturaMetadataProfileCreateMode;
+        let result : VidiunMetadataProfileCreateMode;
 
         switch (createMode)
         {
             case MetadataProfileCreateModes.Api:
-                result = KalturaMetadataProfileCreateMode.api;
+                result = VidiunMetadataProfileCreateMode.api;
                 break;
             case MetadataProfileCreateModes.App:
-                result = KalturaMetadataProfileCreateMode.app;
+                result = VidiunMetadataProfileCreateMode.app;
                 break;
-            case MetadataProfileCreateModes.Kmc:
-                result = KalturaMetadataProfileCreateMode.kmc;
+            case MetadataProfileCreateModes.Vmc:
+                result = VidiunMetadataProfileCreateMode.vmc;
                 break;
             default:
         }
@@ -150,8 +150,8 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
         return result;
     }
 
-     private _buildGetRequest(filters: GetFilters): Observable<KalturaMetadataProfileListResponse> {
-        const metadataProfilesFilter = new KalturaMetadataProfileFilter();
+     private _buildGetRequest(filters: GetFilters): Observable<VidiunMetadataProfileListResponse> {
+        const metadataProfilesFilter = new VidiunMetadataProfileFilter();
         metadataProfilesFilter.createModeNotEqual = this._getAPICreateMode(filters.ignoredCreateMode);
         metadataProfilesFilter.orderBy = '-createdAt';
 
@@ -161,16 +161,16 @@ export class MetadataProfileStore extends PartnerProfileStore implements OnDestr
 
             switch (filterType) {
                 case MetadataProfileTypes.Entry:
-                    metadataProfilesFilter.metadataObjectTypeEqual = KalturaMetadataObjectType.entry;
+                    metadataProfilesFilter.metadataObjectTypeEqual = VidiunMetadataObjectType.entry;
                     break;
                 case MetadataProfileTypes.Category:
-                    metadataProfilesFilter.metadataObjectTypeEqual = KalturaMetadataObjectType.category;
+                    metadataProfilesFilter.metadataObjectTypeEqual = VidiunMetadataObjectType.category;
                     break;
 
             }
         }
 
-        return <any>this._kalturaServerClient.request(new MetadataProfileListAction({
+        return <any>this._vidiunServerClient.request(new MetadataProfileListAction({
             filter: metadataProfilesFilter
         }));
     }

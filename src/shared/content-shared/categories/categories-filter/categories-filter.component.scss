@@ -1,38 +1,38 @@
 @import "app-theme/_variables.scss";
 
-.kContainer {
+.vContainer {
   margin: 12px;
 }
 
-.kClose {
+.vClose {
   float: right;
 }
 
-.kAllCategories {
-  color: $kGrayscale3;
+.vIdlCategories {
+  color: $vGrayscale3;
   line-height: 40px;
   letter-spacing: 0.1em;
   font-size: 13px;
-  border-top: 1px solid $kGrayscale6;
-  border-bottom: 1px solid $kGrayscale6;
+  border-top: 1px solid $vGrayscale6;
+  border-bottom: 1px solid $vGrayscale6;
   margin-left: -12px;
   padding-left: 12px;
   margin-right: -12px;
   margin-top: 18px;
 }
 
-.kFilterPrefs {
-  color: $kGrayscale3;
+.vFilterPrefs {
+  color: $vGrayscale3;
   line-height: 40px;
   letter-spacing: 0.1em;
   font-size: 13px;
 }
 
-.kTreeContainer {
+.vTreeContainer {
   overflow-y: auto;
   overflow-x: hidden;
   height: 340px;
-  border-bottom: 1px solid $kGrayscale6;
+  border-bottom: 1px solid $vGrayscale6;
   margin-left: -12px;
   padding-left: 12px;
   margin-right: -12px;
@@ -42,40 +42,40 @@
 a.disabled {
   pointer-events: none;
   cursor: not-allowed;
-  color: $kGrayscale5;
+  color: $vGrayscale5;
   border: none;
 }
 
-.kTreeConfig {
+.vTreeConfig {
   font-size: 24px;
   position: absolute;
   right: 16px;
   top: 26px;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
   cursor: pointer;
   &:hover {
-    color: $kPrimary;
+    color: $vPrimary;
   }
 }
 
-.kHeader {
+.vHeader {
   padding-top: 10px;
-  kautocomplete{
+  vautocomplete{
     margin-left: 4px;
   }
 }
 
-.kLoadingMessage {
+.vLoadingMessage {
   cursor: auto;
-  color: $kPrimary;
+  color: $vPrimary;
   padding-left: 6px;
 }
 
-.kLoadingErrorMessage {
+.vLoadingErrorMessage {
   cursor: auto;
   white-space: pre-line;
   margin-top: -16px;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
   padding-left: 6px;
 }
 
@@ -94,17 +94,17 @@ a.disabled {
   margin-top: 15px;
 }
 
-:host /deep/ .kSearchCategory {
+:host /deep/ .vSearchCategory {
   width: 338px;
   height: 34px;
 }
 
-:host /deep/ .kHighlightedText {
+:host /deep/ .vHighlightedText {
   font-weight: 700;
   text-decoration: underline;
 }
 
-:host /deep/ kautocomplete ul.ui-autocomplete-multiple-container.ui-inputtext {
+:host /deep/ vautocomplete ul.ui-autocomplete-multiple-container.ui-inputtext {
   padding: 0px;
   .ui-autocomplete-input-token {
     padding: 0px;

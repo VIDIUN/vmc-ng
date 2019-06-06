@@ -1,32 +1,32 @@
 import { Injectable, IterableChangeRecord, IterableDiffer, IterableDiffers, OnDestroy } from '@angular/core';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import { TranscodingProfileWidget } from '../transcoding-profile-widget';
 import {
-  ExtendedKalturaConversionProfileAssetParams,
-  KalturaConversionProfileWithAsset
+  ExtendedVidiunConversionProfileAssetParams,
+  VidiunConversionProfileWithAsset
 } from '../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { FlavoursStore } from 'app-shared/kmc-shared';
-import { KalturaConversionProfileType } from 'kaltura-ngx-client';
-import { KalturaLiveParams } from 'kaltura-ngx-client';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell/providers';
-import { ConversionProfileAssetParamsUpdateAction } from 'kaltura-ngx-client';
-import { SettingsTranscodingProfileViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { FlavoursStore } from 'app-shared/vmc-shared';
+import { VidiunConversionProfileType } from 'vidiun-ngx-client';
+import { VidiunLiveParams } from 'vidiun-ngx-client';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell/providers';
+import { ConversionProfileAssetParamsUpdateAction } from 'vidiun-ngx-client';
+import { SettingsTranscodingProfileViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class TranscodingProfileFlavorsWidget extends TranscodingProfileWidget implements OnDestroy {
   private _flavorParamsIds: string[] = [];
   private _flavorParasIdsListDiffer: IterableDiffer<string>;
-  public flavors: KalturaFlavorParams[] = [];
-  public selectedFlavors: KalturaFlavorParams[] = [];
+  public flavors: VidiunFlavorParams[] = [];
+  public selectedFlavors: VidiunFlavorParams[] = [];
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _appLocalization: AppLocalization,
-              logger: KalturaLogger,
+              logger: VidiunLogger,
               private _listDiffers: IterableDiffers,
               private _flavorsStore: FlavoursStore) {
     super(SettingsTranscodingProfileViewSections.Flavors, logger);
@@ -39,7 +39,7 @@ export class TranscodingProfileFlavorsWidget extends TranscodingProfileWidget im
     return Observable.of({ isValid: true });
   }
 
-  protected onDataSaving(data: KalturaConversionProfileWithAsset, request: KalturaMultiRequest): void {
+  protected onDataSaving(data: VidiunConversionProfileWithAsset, request: VidiunMultiRequest): void {
     if (this.wasActivated) {
       if (this._flavorParasIdsListDiffer) {
         const selectedFlavors = this.selectedFlavors.map(({ id }) => String(id));
@@ -103,14 +103,14 @@ export class TranscodingProfileFlavorsWidget extends TranscodingProfileWidget im
 
     return this._flavorsStore.get()
       .pipe(cancelOnDestroy(this, this.widgetReset$))
-      .map((response: { items: KalturaFlavorParams[] }) => {
+      .map((response: { items: VidiunFlavorParams[] }) => {
         const items = response.items;
-        const profileType: KalturaConversionProfileType = this.data.type;
+        const profileType: VidiunConversionProfileType = this.data.type;
         let flavors = [];
-        if (profileType === KalturaConversionProfileType.liveStream) {
-          flavors = items.filter(item => item instanceof KalturaLiveParams);
-        } else if (profileType === KalturaConversionProfileType.media) {
-          flavors = items.filter(item => !(item instanceof KalturaLiveParams));
+        if (profileType === VidiunConversionProfileType.liveStream) {
+          flavors = items.filter(item => item instanceof VidiunLiveParams);
+        } else if (profileType === VidiunConversionProfileType.media) {
+          flavors = items.filter(item => !(item instanceof VidiunLiveParams));
         } else {
           flavors = [];
         }
@@ -155,7 +155,7 @@ export class TranscodingProfileFlavorsWidget extends TranscodingProfileWidget im
     this.updateState({ isDirty: true });
   }
 
-  public updateFlavorAssetParams(assetParams: ExtendedKalturaConversionProfileAssetParams): void {
+  public updateFlavorAssetParams(assetParams: ExtendedVidiunConversionProfileAssetParams): void {
     if (!Array.isArray(this.data.assets)) {
       this.data.assets = [];
     }

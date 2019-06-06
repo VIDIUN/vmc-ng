@@ -1,20 +1,20 @@
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import {KalturaCategoryFilter} from 'kaltura-ngx-client';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import {VidiunCategoryFilter} from 'vidiun-ngx-client';
 import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import {ISubscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {CategoryListAction} from 'kaltura-ngx-client';
-import {KalturaClient, KalturaMultiRequest} from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {KalturaCategoryListResponse} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {CategoryDeleteAction} from 'kaltura-ngx-client';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {CategoryListAction} from 'vidiun-ngx-client';
+import {VidiunClient, VidiunMultiRequest} from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {VidiunCategoryListResponse} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {CategoryDeleteAction} from 'vidiun-ngx-client';
 import {
     DatesRangeAdapter,
     DatesRangeType,
@@ -24,35 +24,35 @@ import {
     NumberTypeAdapter,
     StringTypeAdapter,
     TypeAdaptersMapping
-} from '@kaltura-ng/mc-shared';
+} from '@vidiun-ng/mc-shared';
 import {
     AppEventsService, MetadataProfileCreateModes, MetadataProfileStore,
     MetadataProfileTypes
-} from 'app-shared/kmc-shared';
-import {KalturaSearchOperator} from 'kaltura-ngx-client';
-import {KalturaSearchOperatorType} from 'kaltura-ngx-client';
-import {KalturaUtils} from '@kaltura-ng/kaltura-common';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {KalturaMetadataSearchItem} from 'kaltura-ngx-client';
-import {KalturaSearchCondition} from 'kaltura-ngx-client';
-import {CategoryMoveAction} from 'kaltura-ngx-client';
-import {CategoryAddAction} from 'kaltura-ngx-client';
-import {KalturaInheritanceType} from 'kaltura-ngx-client';
-import {KalturaContributionPolicyType} from 'kaltura-ngx-client';
-import {KalturaAppearInListType} from 'kaltura-ngx-client';
-import {KalturaPrivacyType} from 'kaltura-ngx-client';
-import {KalturaCategoryEntry} from 'kaltura-ngx-client';
-import {CategoryEntryAddAction} from 'kaltura-ngx-client';
+} from 'app-shared/vmc-shared';
+import {VidiunSearchOperator} from 'vidiun-ngx-client';
+import {VidiunSearchOperatorType} from 'vidiun-ngx-client';
+import {VidiunUtils} from '@vidiun-ng/vidiun-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {VidiunMetadataSearchItem} from 'vidiun-ngx-client';
+import {VidiunSearchCondition} from 'vidiun-ngx-client';
+import {CategoryMoveAction} from 'vidiun-ngx-client';
+import {CategoryAddAction} from 'vidiun-ngx-client';
+import {VidiunInheritanceType} from 'vidiun-ngx-client';
+import {VidiunContributionPolicyType} from 'vidiun-ngx-client';
+import {VidiunAppearInListType} from 'vidiun-ngx-client';
+import {VidiunPrivacyType} from 'vidiun-ngx-client';
+import {VidiunCategoryEntry} from 'vidiun-ngx-client';
+import {CategoryEntryAddAction} from 'vidiun-ngx-client';
 
 import {
   CategoriesModeAdapter,
   CategoriesModes,
   CategoriesModeType
 } from 'app-shared/content-shared/categories/categories-mode-type';
-import { CategoriesGraphUpdatedEvent } from 'app-shared/kmc-shared/app-events/categories-graph-updated/categories-graph-updated';
+import { CategoriesGraphUpdatedEvent } from 'app-shared/vmc-shared/app-events/categories-graph-updated/categories-graph-updated';
 import { CategoriesSearchService, CategoryData } from 'app-shared/content-shared/categories/categories-search.service';
-import { ContentCategoriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { ContentCategoriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface UpdateStatus {
   loading: boolean;
@@ -60,7 +60,7 @@ export interface UpdateStatus {
 }
 
 export interface Categories {
-  items: KalturaCategory[],
+  items: VidiunCategory[],
   totalCount: number
 }
 
@@ -70,7 +70,7 @@ export enum SortDirection {
 }
 
 export interface MoveCategoryData {
-  categories: KalturaCategory[];
+  categories: VidiunCategory[];
   categoryParent: { id?: number, fullIds: number[] };
 }
 
@@ -120,14 +120,14 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
     private readonly _pageSizeCacheKey = 'categories.list.pageSize';
 
 
-    constructor(private _kalturaClient: KalturaClient,
+    constructor(private _vidiunClient: VidiunClient,
                 private browserService: BrowserService,
                 private metadataProfileService: MetadataProfileStore,
                 private _appEvents: AppEventsService,
                 private _categoriesSearchService: CategoriesSearchService,
                 private _appLocalization: AppLocalization,
                 contentCategoriesMainViewService: ContentCategoriesMainViewService,
-                _logger: KalturaLogger) {
+                _logger: VidiunLogger) {
         super(_logger.subLogger('CategoriesService'));
         if (contentCategoriesMainViewService.isAvailable()) {
             this._prepare();
@@ -281,19 +281,19 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
                 });
     }
 
-  private buildQueryRequest(): Observable<KalturaCategoryListResponse> {
+  private buildQueryRequest(): Observable<VidiunCategoryListResponse> {
     try {
       // create request items
-      const filter: KalturaCategoryFilter = new KalturaCategoryFilter({});
-      let pagination: KalturaFilterPager = null;
+      const filter: VidiunCategoryFilter = new VidiunCategoryFilter({});
+      let pagination: VidiunFilterPager = null;
       // update desired fields of entries
-      const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-        type: KalturaResponseProfileType.includeFields,
+      const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+        type: VidiunResponseProfileType.includeFields,
         fields: 'id, name, createdAt, directSubCategoriesCount, entriesCount, fullName, tags, parentId, privacyContexts'
       });
 
-      const advancedSearch = filter.advancedSearch = new KalturaSearchOperator({});
-      advancedSearch.type = KalturaSearchOperatorType.searchAnd;
+      const advancedSearch = filter.advancedSearch = new VidiunSearchOperator({});
+      advancedSearch.type = VidiunSearchOperatorType.searchAnd;
 
       const data: CategoriesFilters = this._getFiltersAsReadonly();
 
@@ -305,11 +305,11 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
       // filter 'createdAt'
       if (data.createdAt) {
         if (data.createdAt.fromDate) {
-          filter.createdAtGreaterThanOrEqual = KalturaUtils.getStartDateValue(data.createdAt.fromDate);
+          filter.createdAtGreaterThanOrEqual = VidiunUtils.getStartDateValue(data.createdAt.fromDate);
         }
 
         if (data.createdAt.toDate) {
-          filter.createdAtLessThanOrEqual = KalturaUtils.getEndDateValue(data.createdAt.toDate);
+          filter.createdAtLessThanOrEqual = VidiunUtils.getEndDateValue(data.createdAt.toDate);
         }
       }
 
@@ -319,10 +319,10 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
         this._metadataProfiles.forEach(metadataProfile => {
           // create advanced item for all metadata profiles regardless if the user filtered by them or not.
           // this is needed so freetext will include all metadata profiles while searching.
-          const metadataItem: KalturaMetadataSearchItem = new KalturaMetadataSearchItem(
+          const metadataItem: VidiunMetadataSearchItem = new VidiunMetadataSearchItem(
             {
               metadataProfileId: metadataProfile.id,
-              type: KalturaSearchOperatorType.searchAnd,
+              type: VidiunSearchOperatorType.searchAnd,
               items: []
             }
           );
@@ -331,15 +331,15 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
           metadataProfile.lists.forEach(list => {
             const metadataProfileFilters = data.customMetadata[list.id];
             if (metadataProfileFilters && metadataProfileFilters.length > 0) {
-              const innerMetadataItem: KalturaMetadataSearchItem = new KalturaMetadataSearchItem({
+              const innerMetadataItem: VidiunMetadataSearchItem = new VidiunMetadataSearchItem({
                 metadataProfileId: metadataProfile.id,
-                type: KalturaSearchOperatorType.searchOr,
+                type: VidiunSearchOperatorType.searchOr,
                 items: []
               });
               metadataItem.items.push(innerMetadataItem);
 
               metadataProfileFilters.forEach(filterItem => {
-                const searchItem = new KalturaSearchCondition({
+                const searchItem = new VidiunSearchCondition({
                   field: `/*[local-name()='metadata']/*[local-name()='${list.name}']`,
                   value: filterItem
                 });
@@ -369,7 +369,7 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pagination = new KalturaFilterPager(
+        pagination = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -386,11 +386,11 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
       if (data.categoryListing) {
         if (data.categoryListing.length === 1) {
           switch (data.categoryListing[0]) {
-            case KalturaAppearInListType.categoryMembersOnly.toString():
-              filter.appearInListEqual = KalturaAppearInListType.categoryMembersOnly;
+            case VidiunAppearInListType.categoryMembersOnly.toString():
+              filter.appearInListEqual = VidiunAppearInListType.categoryMembersOnly;
               break;
-            case KalturaAppearInListType.partnerOnly.toString():
-              filter.appearInListEqual = KalturaAppearInListType.partnerOnly;
+            case VidiunAppearInListType.partnerOnly.toString():
+              filter.appearInListEqual = VidiunAppearInListType.partnerOnly;
               break;
             default:
               break
@@ -403,11 +403,11 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
         if (data.contributionPolicy.length === 1) {
           data.contributionPolicy.forEach(item => {
             switch (item) {
-              case KalturaContributionPolicyType.all.toString():
-                filter.contributionPolicyEqual = KalturaContributionPolicyType.all;
+              case VidiunContributionPolicyType.all.toString():
+                filter.contributionPolicyEqual = VidiunContributionPolicyType.all;
                 break;
-              case KalturaContributionPolicyType.membersWithContributionPermission.toString():
-                filter.contributionPolicyEqual = KalturaContributionPolicyType.membersWithContributionPermission;
+              case VidiunContributionPolicyType.membersWithContributionPermission.toString():
+                filter.contributionPolicyEqual = VidiunContributionPolicyType.membersWithContributionPermission;
                 break;
               default:
                 break
@@ -442,7 +442,7 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
       }
 
       // build the request
-      return this._kalturaClient.request(
+      return this._vidiunClient.request(
         new CategoryListAction({
           filter,
           pager: pagination
@@ -461,7 +461,7 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
         return Observable.create(observer => {
             let subscription: ISubscription;
             if (categoryId && categoryId > 0) {
-                subscription = this._kalturaClient.request(new CategoryDeleteAction({id: categoryId})).subscribe(
+                subscription = this._vidiunClient.request(new CategoryDeleteAction({id: categoryId})).subscribe(
                     result => {
                         this._appEvents.publish(new CategoriesGraphUpdatedEvent());
                         observer.next();
@@ -550,29 +550,29 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
      * @param newCategoryData {NewCategoryData} holds name and desired categoryParentId (if null - move to root)
      * @return {Observable<number>} new category ID
      */
-    public addNewCategory(newCategoryData: NewCategoryData): Observable<{ category: KalturaCategory }> {
+    public addNewCategory(newCategoryData: NewCategoryData): Observable<{ category: VidiunCategory }> {
         const newCategoryName = newCategoryData ? (newCategoryData.name || '').trim() : null;
         if (!newCategoryName) {
             const error = new Error('missing category name');
             (<any>error).code = 'missing_category_name';
             return Observable.throw(error);
         }
-        const category = new KalturaCategory({
+        const category = new VidiunCategory({
             name: newCategoryData.name,
             parentId: Number(newCategoryData.categoryParentId) || 0,
-            privacy: KalturaPrivacyType.all,
-            appearInList: KalturaAppearInListType.partnerOnly,
-            contributionPolicy: KalturaContributionPolicyType.all,
-            inheritanceType: KalturaInheritanceType.manual
+            privacy: VidiunPrivacyType.all,
+            appearInList: VidiunAppearInListType.partnerOnly,
+            contributionPolicy: VidiunContributionPolicyType.all,
+            inheritanceType: VidiunInheritanceType.manual
         });
 
-        const multiRequest: KalturaMultiRequest = new KalturaMultiRequest(
+        const multiRequest: VidiunMultiRequest = new VidiunMultiRequest(
             new CategoryAddAction({category})
         );
 
         if (newCategoryData.linkedEntriesIds && newCategoryData.linkedEntriesIds.length) {
             newCategoryData.linkedEntriesIds.forEach((entryId) => {
-                const categoryEntry = new KalturaCategoryEntry({
+                const categoryEntry = new VidiunCategoryEntry({
                     entryId: entryId
                 }).setDependency(['categoryId', 0, 'id']);
 
@@ -582,7 +582,7 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
             });
         }
 
-        return this._kalturaClient.multiRequest(multiRequest)
+        return this._vidiunClient.multiRequest(multiRequest)
             .map(
                 data => {
                     if (data.hasErrors()) {
@@ -623,7 +623,7 @@ export class CategoriesService extends FiltersStoreBase<CategoriesFilters> imple
             return Observable.throw(new Error(categoryMovedFailureErrorMessage));
         }
 
-        return <any>this._kalturaClient.request(
+        return <any>this._vidiunClient.request(
             new CategoryMoveAction({
                 categoryIds: moveCategoryData.categories.map(category => (category.id)).join(','),
                 targetCategoryParentId: moveCategoryData.categoryParent ? moveCategoryData.categoryParent.id : 0

@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { PlaylistStore } from '../../playlist-store.service';
 import { RuleBasedContentWidget } from './rule-based-content-widget.service';
 import { EntriesDataProviderToken, EntriesStore } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import { PlaylistEntriesDataProvider } from './playlist-rule/playlist-entries-data-provider.service';
 import { PlaylistRule } from './playlist-rule/playlist-rule.interface';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 @Component({
-  selector: 'kPlaylistContentRuleBased',
+  selector: 'vPlaylistContentRuleBased',
   templateUrl: './rule-based-content.component.html',
   styleUrls: ['./rule-based-content.component.scss'],
   providers: [

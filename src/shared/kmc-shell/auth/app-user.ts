@@ -1,5 +1,5 @@
 
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 export interface PartnerInfo {
     partnerId: number;
@@ -18,7 +18,7 @@ export enum PartnerPackageTypes {
 
 
 export interface AppUser {
-    ks: string;
+    vs: string;
     id: string;
     partnerId: number;
     fullName: string;

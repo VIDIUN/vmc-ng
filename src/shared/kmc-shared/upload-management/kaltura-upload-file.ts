@@ -1,8 +1,8 @@
-import { UploadFileData } from '@kaltura-ng/kaltura-common';
+import { UploadFileData } from '@vidiun-ng/vidiun-common';
 import 'rxjs/add/observable/throw';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
-export class KalturaUploadFile implements UploadFileData {
+export class VidiunUploadFile implements UploadFileData {
   serverUploadToken: string;
 
 

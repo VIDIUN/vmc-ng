@@ -1,5 +1,5 @@
-<div class="kTable">
-    <k-area-blocker [showLoader]="deferredLoading"
+<div class="vTable">
+    <v-area-blocker [showLoader]="deferredLoading"
                     [message]="_blockerMessage">
         <p-table dataKey="id"
                  scrollHeight="100%"
@@ -26,7 +26,7 @@
                         {{'applications.content.table.entries' | translate}}
                     </th>
                     <th class="actionsColumn"
-                        *ngIf="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kNgIfPermitted"></th>
+                        *ngIf="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vNgIfPermitted"></th>
                 </tr>
             </ng-template>
 
@@ -36,14 +36,14 @@
                         <p-tableCheckbox [value]="subcategory"></p-tableCheckbox>
                     </td>
                     <td class="nameColumn">
-                        <div class="kTitle kTableColumn" [kTooltip]="subcategory.name">
+                        <div class="vTitle vTableColumn" [vTooltip]="subcategory.name">
                             {{subcategory.name}}
                         </div>
                     </td>
-                    <td class="createdAtColumn">{{subcategory.createdAt | kmcDate}}</td>
+                    <td class="createdAtColumn">{{subcategory.createdAt | vmcDate}}</td>
                     <td class="entriesCountColumn">{{subcategory.entriesCount}}</td>
-                    <td class="actionsColumn" *ngIf="_kmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | kNgIfPermitted">
-                        <button type="button" pButton icon="kIconmore" class="kMoreActionsButton"
+                    <td class="actionsColumn" *ngIf="_vmcPermissions.CONTENT_MANAGE_EDIT_CATEGORIES | vNgIfPermitted">
+                        <button type="button" pButton icon="vIconmore" class="vMoreActionsButton"
                                 (click)="_openActionsMenu($event, i, subcategory)"></button>
                     </td>
                 </tr>
@@ -53,6 +53,6 @@
                 <div class="emptymessage">{{_emptyMessage}}</div>
             </ng-template>
         </p-table>
-        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
-    </k-area-blocker>
+        <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
+    </v-area-blocker>
 </div>

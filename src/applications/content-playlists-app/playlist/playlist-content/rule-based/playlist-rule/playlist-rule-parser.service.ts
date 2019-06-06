@@ -1,21 +1,21 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EntriesFilters, EntriesStore, SortDirection } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
-import { KalturaPlayableEntryOrderBy } from 'kaltura-ngx-client';
-import { KalturaSearchOperator } from 'kaltura-ngx-client';
-import { GroupedListType } from '@kaltura-ng/mc-shared';
-import { KalturaMetadataSearchItem } from 'kaltura-ngx-client';
-import { MetadataProfileCreateModes, MetadataProfileStore, MetadataProfileTypes } from 'app-shared/kmc-shared';
-import { MetadataProfile } from 'app-shared/kmc-shared/custom-metadata/metadata-profile';
+import { VidiunPlayableEntryOrderBy } from 'vidiun-ngx-client';
+import { VidiunSearchOperator } from 'vidiun-ngx-client';
+import { GroupedListType } from '@vidiun-ng/mc-shared';
+import { VidiunMetadataSearchItem } from 'vidiun-ngx-client';
+import { MetadataProfileCreateModes, MetadataProfileStore, MetadataProfileTypes } from 'app-shared/vmc-shared';
+import { MetadataProfile } from 'app-shared/vmc-shared/custom-metadata/metadata-profile';
 import { PlaylistRule } from './playlist-rule.interface';
-import { KalturaMediaEntryFilterForPlaylist } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunMediaEntryFilterForPlaylist } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class PlaylistRuleParserService implements OnDestroy {
   constructor(private _metadataProfileService: MetadataProfileStore,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               public _entriesStore: EntriesStore) {
   }
 
@@ -32,7 +32,7 @@ export class PlaylistRuleParserService implements OnDestroy {
       .pipe(cancelOnDestroy(this));
   }
 
-  private _mapCustomMetadata(advancedSearch: KalturaSearchOperator): Observable<GroupedListType<string>> {
+  private _mapCustomMetadata(advancedSearch: VidiunSearchOperator): Observable<GroupedListType<string>> {
     if (!advancedSearch) {
       return Observable.of(null);
     }
@@ -93,7 +93,7 @@ export class PlaylistRuleParserService implements OnDestroy {
 
       return this._getMetadataProfiles()
         .map(metadata => {
-          const relevantItems = advancedSearch.items.filter((searchItem: KalturaMetadataSearchItem) => !!searchItem.items.length);
+          const relevantItems = advancedSearch.items.filter((searchItem: VidiunMetadataSearchItem) => !!searchItem.items.length);
           const assignedItems = relevantItems.map(item => assignMetadataProfileId(item)); // Step 1
           return deepFlatten(assignedItems) // Step 2
             .map(item => createGroupedListItem(metadata, item)) // Step 3
@@ -123,7 +123,7 @@ export class PlaylistRuleParserService implements OnDestroy {
       .concat(...((originalFilter.categoriesIdsMatchOr || '').split(',')));
     const uniqueCategoriesIds = Array.from(new Set<number>(categoriesIds.filter(Number).map(Number)));
 
-    return this._mapCustomMetadata(<KalturaSearchOperator>originalFilter.advancedSearch)
+    return this._mapCustomMetadata(<VidiunSearchOperator>originalFilter.advancedSearch)
       .map(customMetadata => {
         const result = <EntriesFilters>{
           mediaTypes: getListTypeFilterFromRule(originalFilter.mediaTypeIn),
@@ -149,14 +149,14 @@ export class PlaylistRuleParserService implements OnDestroy {
       });
   }
 
-  public toPlaylistRule(payload: { name: string, orderBy: KalturaPlayableEntryOrderBy, limit: number, rule: PlaylistRule }): Observable<PlaylistRule> {
+  public toPlaylistRule(payload: { name: string, orderBy: VidiunPlayableEntryOrderBy, limit: number, rule: PlaylistRule }): Observable<PlaylistRule> {
     const entries = this._entriesStore.entries.data() || [];
     const entriesDuration = entries.reduce((duration, entry) => duration + entry.duration, 0) || 0;
     const entriesCount = entries.length || 0;
 
     return this._entriesStore.convertFiltersToServerStruct()
       .map(originalFilter => {
-        if (originalFilter instanceof KalturaMediaEntryFilterForPlaylist) {
+        if (originalFilter instanceof VidiunMediaEntryFilterForPlaylist) {
             originalFilter.name = payload.name;
 
             return Object.assign({}, payload.rule, {
@@ -168,8 +168,8 @@ export class PlaylistRuleParserService implements OnDestroy {
                 originalFilter
             });
         } else {
-          this._logger.error(`cannot build playlist rule. expected filter of type 'KalturaMediaEntryFilterForPlaylist'.`);
-          throw new Error(`cannot build playlist rule. expected filter of type 'KalturaMediaEntryFilterForPlaylist'.`);
+          this._logger.error(`cannot build playlist rule. expected filter of type 'VidiunMediaEntryFilterForPlaylist'.`);
+          throw new Error(`cannot build playlist rule. expected filter of type 'VidiunMediaEntryFilterForPlaylist'.`);
         }
       });
   }

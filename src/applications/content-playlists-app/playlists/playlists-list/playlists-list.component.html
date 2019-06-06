@@ -1,81 +1,81 @@
-<k-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
-  <div class="kPlaylists kOverrideFAIcons">
-    <div #playlistsTableHolder class="kPlaylistsHolder kContent">
-      <kSticky stickyId="playlistsFilters" [scrollOffset]="80" [sticksTo]="'header'">
-        <div class="kContent kFiltersWrapper">
-          <div class="kPlaylistsTableFilters kContent">
+<v-area-blocker [showLoader]="_isBusy" [message]="_blockerMessage" [bodyScroll]="true">
+  <div class="vPlaylists vOverrideFAIcons">
+    <div #playlistsTableHolder class="vPlaylistsHolder vContent">
+      <vSticky stickyId="playlistsFilters" [scrollOffset]="80" [sticksTo]="'header'">
+        <div class="vContent vFiltersWrapper">
+          <div class="vPlaylistsTableFilters vContent">
             <button
               pButton
               type="button"
               label="{{'applications.content.playlists.addPlaylist' | translate}}"
-              class="kButtonBranded kAddPlaylistBtn" [class.kHidden]="_selectedPlaylists.length"
-              *ngIf="_kmcPermissions.PLAYLIST_ADD | kNgIfPermitted"
+              class="vButtonBranded vAddPlaylistBtn" [class.vHidden]="_selectedPlaylists.length"
+              *ngIf="_vmcPermissions.PLAYLIST_ADD | vNgIfPermitted"
               (click)="_addPlaylist()"></button>
             <span
-              class="kSelectedPlaylistsNum"
+              class="vSelectedPlaylistsNum"
               *ngIf="(_playlistsStore.playlists.data$ | async)?.totalCount">
               {{'applications.content.playlists.playlists' | translate : [(_playlistsStore.playlists.data$ | async)?.totalCount] }}
             </span>
 
-            <div class="kBulkOperations" [class.kHidden]="!_selectedPlaylists.length">
-              <span class="kSelectedPlaylistsLabel">
+            <div class="vBulkOperations" [class.vHidden]="!_selectedPlaylists.length">
+              <span class="vSelectedPlaylistsLabel">
                 • {{ 'applications.content.playlists.selected' | translate : [_selectedPlaylists.length] }}</span>
-              <button pButton icon="kIcontrash" class="kButtonDanger kBulkDeleteBtn"
-                      [disabled]="_kmcPermissions.PLAYLIST_DELETE | kDisabledIfNotPermitted"
+              <button pButton icon="vIcontrash" class="vButtonDanger vBulkDeleteBtn"
+                      [disabled]="_vmcPermissions.PLAYLIST_DELETE | vDisabledIfNotPermitted"
                       (click)="_deletePlaylists(_selectedPlaylists)"></button>
-              <a class="kBulkCancel" (click)="_clearSelection()">
+              <a class="vBulkCancel" (click)="_clearSelection()">
                 {{'applications.content.playlists.cancel' | translate}}
               </a>
             </div>
-            <div [class.kHidden]="_selectedPlaylists.length" class="kFilters">
-              <input type="text" pInputText class="kSearchInput"
+            <div [class.vHidden]="_selectedPlaylists.length" class="vFilters">
+              <input type="text" pInputText class="vSearchInput"
                      [(ngModel)]="_query.freetext"
                      (keyup.enter)="_onFreetextChanged()"
                      placeholder="{{'applications.content.playlists.searchEntries' | translate}}">
-              <div #refineBtn class="kRefine kDropdown"><i class="kIconcalendar"></i></div>
+              <div #refineBtn class="vRefine vDropdown"><i class="vIconcalendar"></i></div>
             </div>
             <button pButton
-                    class="kButtonDefault kRefreshBtn small"
+                    class="vButtonDefault vRefreshBtn small"
                     type="text"
                     (click)="_reload()"
-                    icon="kIconrefresh"
-                    [kTooltip]="'applications.content.playlists.refresh' | translate"></button>
+                    icon="vIconrefresh"
+                    [vTooltip]="'applications.content.playlists.refresh' | translate"></button>
           </div>
         </div>
-      </kSticky>
-      <kSticky #tags [stickyClass]="'kStickyClass'" stickyId="playlistsTags" [sticksTo]="'playlistsFilters'">
-        <div class="kTagsWrapper kContent">
-          <k-playlists-tags   (onTagsChange)="_onTagsChange()"></k-playlists-tags>
+      </vSticky>
+      <vSticky #tags [stickyClass]="'vStickyClass'" stickyId="playlistsTags" [sticksTo]="'playlistsFilters'">
+        <div class="vTagsWrapper vContent">
+          <v-playlists-tags   (onTagsChange)="_onTagsChange()"></v-playlists-tags>
         </div>
-      </kSticky>
+      </vSticky>
 
-      <k-area-blocker [showLoader]="_tableIsBusy"
+      <v-area-blocker [showLoader]="_tableIsBusy"
                       [message]="_tableBlockerMessage"
                       [bodyScroll]="true">
-      <kPlaylistsTable
-        class="kPlaylistsTable"
+      <vPlaylistsTable
+        class="vPlaylistsTable"
         [playlists]="(_playlistsStore.playlists.data$ | async)?.items"
         (sortChanged)="_onSortChanged($event)"
         [sortField]="_query.sortBy"
         [sortOrder]="_query.sortDirection"
         (actionSelected)="_onActionSelected($event)"
-        [(selectedPlaylists)]="_selectedPlaylists"></kPlaylistsTable>
-      </k-area-blocker>
+        [(selectedPlaylists)]="_selectedPlaylists"></vPlaylistsTable>
+      </v-area-blocker>
 
-      <div class="kPlaylistsTableFooter kContent" #footer *ngIf="(_playlistsStore.playlists.data$ | async)?.totalCount">
+      <div class="vPlaylistsTableFooter vContent" #footer *ngIf="(_playlistsStore.playlists.data$ | async)?.totalCount">
         <p-paginator
           [rows]="_query.pageSize"
           [first]="_query.pageIndex * _query.pageSize"
           [rowsPerPageOptions]="[25,50,100,250]"
           [totalRecords]="(_playlistsStore.playlists.data$ | async)?.totalCount"
           (onPageChange)="_onPaginationChanged($event)"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
 
-<kPopupWidget
+<vPopupWidget
   #refinePopup
   data-aid="playlistsRefinePopup"
   [appendTo]="playlistsTableHolder"
@@ -84,19 +84,19 @@
   [closeBtn]="false"
   [targetRef]="refineBtn"
   [targetOffset]="{'x':-294, 'y': -20}"
-  kSticky
+  vSticky
   [sticksTo]="'header'"
-  [stickyClass]="'kForceFix'"
+  [stickyClass]="'vForceFix'"
   stickyId="playlistsAdditionalFilter"
   [scrollOffset]="80">
   <ng-template>
-    <k-playlists-refine-filters
-            [parentPopupWidget]="refinePopup"></k-playlists-refine-filters>
+    <v-playlists-refine-filters
+            [parentPopupWidget]="refinePopup"></v-playlists-refine-filters>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>
 
-<kPopupWidget #addNewPlaylist data-aid="addNewPlaylist" [popupWidth]="586" [popupHeight]="410" [modal]="true" [preventPageScroll]="true">
+<vPopupWidget #addNewPlaylist data-aid="addNewPlaylist" [popupWidth]="586" [popupHeight]="410" [modal]="true" [preventPageScroll]="true">
   <ng-template>
-    <kAddNewPlaylist [parentPopupWidget]="addNewPlaylist"></kAddNewPlaylist>
+    <vAddNewPlaylist [parentPopupWidget]="addNewPlaylist"></vAddNewPlaylist>
   </ng-template>
-</kPopupWidget>
+</vPopupWidget>

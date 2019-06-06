@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnalyticsLiveFrameComponent } from './analytics-live-frame.component';
 import { AnalyticsLiveComponent } from './analytics-live.component';
-import { KalturaUIModule } from '@kaltura-ng/kaltura-ui';
+import { VidiunUIModule } from '@vidiun-ng/vidiun-ui';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        KalturaUIModule
+        VidiunUIModule
     ],
     declarations: [
         AnalyticsLiveFrameComponent,

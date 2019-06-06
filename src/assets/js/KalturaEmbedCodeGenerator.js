@@ -1,5 +1,5 @@
-/*! Kaltura Embed Code Generator - v1.2.0 - 2018-03-25
- * https://github.com/kaltura/EmbedCodeGenerator
+/*! Vidiun Embed Code Generator - v1.2.0 - 2018-03-25
+ * https://github.com/vidiun/EmbedCodeGenerator
  * Copyright (c) 2018 Ran Yefet; Licensed MIT */
 // lib/handlebars/base.js
 
@@ -318,12 +318,12 @@ Handlebars.template = Handlebars.VM.template;
         return str;
     });
 
-// Include kaltura links
-    Handlebars.registerHelper('kalturaLinks', function() {
-        if( ! this.includeKalturaLinks ) {
+// Include vidiun links
+    Handlebars.registerHelper('vidiunLinks', function() {
+        if( ! this.includeVidiunLinks ) {
             return '';
         }
-        var template = Handlebars.templates['templates/kaltura_links.hbs'];
+        var template = Handlebars.templates['templates/vidiun_links.hbs'];
         return template();
     });
 
@@ -356,8 +356,8 @@ this["Handlebars"]["templates"]["templates/auto.hbs"] = Handlebars.template(func
         if (stack2 = helpers.seoMetadata) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
         else { stack2 = depth0.seoMetadata; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
         if(stack2 || stack2 === 0) { buffer += stack2; }
-        if (stack2 = helpers.kalturaLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-        else { stack2 = depth0.kalturaLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+        if (stack2 = helpers.vidiunLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+        else { stack2 = depth0.vidiunLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
         if(stack2 || stack2 === 0) { buffer += stack2; }
         buffer += "</div>\n";
         return buffer;
@@ -435,16 +435,16 @@ this["Handlebars"]["templates"]["templates/dynamic.hbs"] = Handlebars.template(f
     if (stack2 = helpers.seoMetadata) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
     else { stack2 = depth0.seoMetadata; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    if (stack2 = helpers.kalturaLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-    else { stack2 = depth0.kalturaLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    if (stack2 = helpers.vidiunLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+    else { stack2 = depth0.vidiunLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    buffer += "</div>\n<script>\nkWidget.";
+    buffer += "</div>\n<script>\nvWidget.";
     if (stack2 = helpers.embedMethod) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
     else { stack2 = depth0.embedMethod; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     buffer += escapeExpression(stack2)
         + "(";
-    if (stack2 = helpers.kWidgetObject) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-    else { stack2 = depth0.kWidgetObject; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    if (stack2 = helpers.vWidgetObject) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+    else { stack2 = depth0.vWidgetObject; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
     buffer += ");\n</script>";
     return buffer;
@@ -518,20 +518,20 @@ this["Handlebars"]["templates"]["templates/iframe.hbs"] = Handlebars.template(fu
     if (stack2 = helpers.seoMetadata) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
     else { stack2 = depth0.seoMetadata; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    if (stack2 = helpers.kalturaLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-    else { stack2 = depth0.kalturaLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    if (stack2 = helpers.vidiunLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+    else { stack2 = depth0.vidiunLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
     buffer += "</iframe>";
     return buffer;
 });
 
-this["Handlebars"]["templates"]["templates/kaltura_links.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Handlebars"]["templates"]["templates/vidiun_links.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     this.compilerInfo = [2,'>= 1.0.0-rc.3'];
     helpers = helpers || Handlebars.helpers; data = data || {};
 
 
 
-    return "<a href=\"http://corp.kaltura.com/products/video-platform-features\">Video Platform</a>\n<a href=\"http://corp.kaltura.com/Products/Features/Video-Management\">Video Management</a> \n<a href=\"http://corp.kaltura.com/Video-Solutions\">Video Solutions</a>\n<a href=\"http://corp.kaltura.com/Products/Features/Video-Player\">Video Player</a>";
+    return "<a href=\"http://corp.vidiun.com/products/video-platform-features\">Video Platform</a>\n<a href=\"http://corp.vidiun.com/Products/Features/Video-Management\">Video Management</a> \n<a href=\"http://corp.vidiun.com/Video-Solutions\">Video Solutions</a>\n<a href=\"http://corp.vidiun.com/Products/Features/Video-Player\">Video Player</a>";
 });
 
 this["Handlebars"]["templates"]["templates/legacy.hbs"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -610,8 +610,8 @@ this["Handlebars"]["templates"]["templates/legacy.hbs"] = Handlebars.template(fu
         + "\" />\n	";
     stack2 = helpers['if'].call(depth0, depth0.includeSeoMetadata, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
     if(stack2 || stack2 === 0) { buffer += stack2; }
-    if (stack2 = helpers.kalturaLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-    else { stack2 = depth0.kalturaLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+    if (stack2 = helpers.vidiunLinks) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+    else { stack2 = depth0.vidiunLinks; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
     if(stack2 || stack2 === 0) { buffer += stack2; }
     buffer += "\n</object>";
     return buffer;
@@ -726,7 +726,7 @@ if (!Object.keys) {
 }
 (function( window, undefined ) {
     /**
-     * Kaltura Embed Code Generator
+     * Vidiun Embed Code Generator
      * Used to generate different type of embed codes
      * Depended on Handlebars ( http://handlebarsjs.com/ )
      *
@@ -757,9 +757,9 @@ if (!Object.keys) {
              *
              * @property playerId
              * @type {String}
-             * @default "kaltura_player"
+             * @default "vidiun_player"
              */
-            playerId: 'kaltura_player',
+            playerId: 'vidiun_player',
             /**
              * Embed HTTP protocol to use
              * Can we one of: ['http', 'https']
@@ -770,24 +770,24 @@ if (!Object.keys) {
              */
             protocol: 'http',
             /**
-             * Host for loading html5 library & kdp swf
+             * Host for loading html5 library & vdp swf
              *
              * @property host
              * @type {String}
-             * @default "www.kaltura.com"
+             * @default "www.vidiun.com"
              */
-            host: 'www.kaltura.com',
+            host: 'www.vidiun.com',
             /**
-             * Secured host for loading html5 library & kdp swf
+             * Secured host for loading html5 library & vdp swf
              * Used if protocol is: 'https'
              *
              * @property securedHost
              * @type {String}
-             * @default "www.kaltura.com"
+             * @default "www.vidiun.com"
              */
-            securedHost: 'www.kaltura.com',
+            securedHost: 'www.vidiun.com',
             /**
-             * Kaltura Widget Id
+             * Vidiun Widget Id
              *
              * @property widgetId
              * @type {String}
@@ -795,7 +795,7 @@ if (!Object.keys) {
              */
             widgetId: null,
             /**
-             * Kaltura Partner Id
+             * Vidiun Partner Id
              *
              * @property partnerId
              * @type {Number}
@@ -812,7 +812,7 @@ if (!Object.keys) {
              */
             cacheSt: null,
             /**
-             * Kaltura UiConf Id
+             * Vidiun UiConf Id
              *
              * @property uiConfId
              * @type {Number}
@@ -820,7 +820,7 @@ if (!Object.keys) {
              */
             uiConfId: null,
             /**
-             * Kaltura Entry Id
+             * Vidiun Entry Id
              *
              * @property entryId
              * @type {String}
@@ -832,7 +832,7 @@ if (!Object.keys) {
              * {
 		*	name: 'Foo',
 		*	description: 'Bar',
-		*	thumbUrl: 'http://cdnbakmi.kaltura.com/thumbnail/...'
+		*	thumbUrl: 'http://cdnbakmi.vidiun.com/thumbnail/...'
 		* }
              *
              * @property entryMeta
@@ -881,13 +881,13 @@ if (!Object.keys) {
              */
             flashVars: {},
             /**
-             * Include Kaltura SEO links to embed code
+             * Include Vidiun SEO links to embed code
              *
-             * @property includeKalturaLinks
+             * @property includeVidiunLinks
              * @type {Boolean}
              * @default true,
              */
-            includeKalturaLinks: true,
+            includeVidiunLinks: true,
             /**
              * Include Entry Seo Metadata
              * Metadata is taken from {entryMeta} object
@@ -1043,13 +1043,13 @@ if (!Object.keys) {
             return ( type && Handlebars.templates && Handlebars.templates[ templateName ] ) ? Handlebars.templates[ templateName ] : null;
         },
         /**
-         * Check if embed type is using kWidget embed
+         * Check if embed type is using vWidget embed
          *
-         * @method isKWidgetEmbed
+         * @method isVWidgetEmbed
          * @param {String} type - One of config embed types
          * @return {Boolean} true / false
          */
-        isKWidgetEmbed: function( type ) {
+        isVWidgetEmbed: function( type ) {
             return ( type == 'dynamic' || type == 'thumb' ) ? true : false;
         },
         /**
@@ -1082,7 +1082,7 @@ if (!Object.keys) {
         getSwfUrl: function( params ) {
             var cacheSt = (params.cacheSt) ? '/cache_st/' + params.cacheSt : '';
             var entryId = (params.entryId) ? '/entry_id/' + params.entryId : '';
-            return params.protocol + '://' + this.getHost(params) + '/index.php/kwidget' + cacheSt +
+            return params.protocol + '://' + this.getHost(params) + '/index.php/vwidget' + cacheSt +
                 '/wid/' + params.widgetId + '/uiconf_id/' + params.uiConfId + entryId;
         },
         /**
@@ -1097,7 +1097,7 @@ if (!Object.keys) {
 
             // Add style attribute for dynamic / thumb embeds
             // Or if includeSeoMetadata is true
-            if( this.isKWidgetEmbed( params.embedType ) || params.includeSeoMetadata ) {
+            if( this.isVWidgetEmbed( params.embedType ) || params.includeSeoMetadata ) {
                 attrs['style'] = 'width: ' + params.width + 'px; height: ' + params.height + 'px;';
             }
 
@@ -1117,14 +1117,14 @@ if (!Object.keys) {
             return attrs;
         },
         /**
-         * Generate kWidget object for HTML5 library
+         * Generate vWidget object for HTML5 library
          *
          * @method getEmbedObject
          * @param {Object} params Configuration object
-         * @return {Object} kWidget object
+         * @return {Object} vWidget object
          */
         getEmbedObject: function( params ) {
-            // Used by kWidget.embed
+            // Used by vWidget.embed
             var embedObject = {
                 targetId: params.playerId,
                 wid: params.widgetId,
@@ -1179,9 +1179,9 @@ if (!Object.keys) {
                 data['swfUrl'] = this.getSwfUrl( params );
             }
             // Add embed method and embed object for dynamic embeds
-            if( this.isKWidgetEmbed( params.embedType ) ) {
+            if( this.isVWidgetEmbed( params.embedType ) ) {
                 data['embedMethod'] = (params.embedType == 'dynamic') ? 'embed' : 'thumbEmbed';
-                data['kWidgetObject'] = this.getEmbedObject( params );
+                data['vWidgetObject'] = this.getEmbedObject( params );
             }
             data = this.extend( data, params );
             return template( data );
@@ -1189,6 +1189,6 @@ if (!Object.keys) {
     };
 
 // Export module to window object
-    window.kEmbedCodeGenerator = EmbedCodeGenerator;
+    window.vEmbedCodeGenerator = EmbedCodeGenerator;
 
 })(this);

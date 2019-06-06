@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-    selector: 'k-power-user-console',
+    selector: 'v-power-user-console',
     templateUrl: './power-user-console.component.html',
     styleUrls: ['./power-user-console.component.scss'],
-    providers: [KalturaLogger.createLogger('LogsRecordComponent')]
+    providers: [VidiunLogger.createLogger('LogsRecordComponent')]
 })
 export class PowerUserConsoleComponent {
     public _display = false;
 
-    constructor(private _logger: KalturaLogger) {
+    constructor(private _logger: VidiunLogger) {
 
     }
 

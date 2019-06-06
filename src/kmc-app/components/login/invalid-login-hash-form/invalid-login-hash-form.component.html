@@ -1,4 +1,4 @@
-<form class="kLoginForm"
+<form class="vLoginForm"
       [formGroup]="_resendLinkForm"
       (submit)="_resetPassword($event)">
   <h1>{{ 'app.login.invalidLoginHash.title' | translate }}</h1>
@@ -14,14 +14,14 @@
              'has-error': errorMessage || _emailValidationMessage,
              'has-success': _emailField.valid && _emailField.touched
            }"
-             [kTooltip]="_emailValidationMessage | translate"
+             [vTooltip]="_emailValidationMessage | translate"
              placement="right">
     </div>
 
-    <p *ngIf="errorMessage" class="kErrorMessage" [innerHTML]="errorMessage"></p>
+    <p *ngIf="errorMessage" class="vErrorMessage" [innerHTML]="errorMessage"></p>
 
     <div>
-      <button class="kButtonDefault"
+      <button class="vButtonDefault"
               pButton
               [label]="_resendBtnText | translate"
               [disabled]="inProgress"></button>

@@ -1,27 +1,27 @@
 import { CategoriesService } from '../categories/categories.service';
 import {Host, Injectable, OnDestroy} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observable, Subject, BehaviorSubject, Unsubscribable } from 'rxjs';
 
-import {KalturaClient, KalturaMultiRequest, KalturaObjectBaseFactory} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {CategoryGetAction} from 'kaltura-ngx-client';
-import {CategoryUpdateAction} from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunClient, VidiunMultiRequest, VidiunObjectBaseFactory} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {CategoryGetAction} from 'vidiun-ngx-client';
+import {CategoryUpdateAction} from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import {CategoryWidgetsManager} from './category-widgets-manager';
-import {OnDataSavingReasons} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import {PageExitVerificationService} from 'app-shared/kmc-shell/page-exit-verification';
-import {AppEventsService} from 'app-shared/kmc-shared';
-import { CategoriesGraphUpdatedEvent } from 'app-shared/kmc-shared/app-events/categories-graph-updated/categories-graph-updated';
+import {OnDataSavingReasons} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import {PageExitVerificationService} from 'app-shared/vmc-shell/page-exit-verification';
+import {AppEventsService} from 'app-shared/vmc-shared';
+import { CategoriesGraphUpdatedEvent } from 'app-shared/vmc-shared/app-events/categories-graph-updated/categories-graph-updated';
 import { CategoriesStatusMonitorService } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { CategoryDeleteAction } from 'kaltura-ngx-client';
-import { CategoryListAction } from 'kaltura-ngx-client';
-import { KalturaCategoryFilter } from 'kaltura-ngx-client';
-import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentCategoriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { CategoryDeleteAction } from 'vidiun-ngx-client';
+import { CategoryListAction } from 'vidiun-ngx-client';
+import { VidiunCategoryFilter } from 'vidiun-ngx-client';
+import { ContentCategoryViewSections, ContentCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentCategoriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { modulesConfig } from 'config/modules';
 
 export enum ActionTypes {
@@ -61,7 +61,7 @@ export class CategoryService implements OnDestroy {
         return this._categoryIsDirty;
     }
 
-    private _category: BehaviorSubject<KalturaCategory> = new BehaviorSubject<KalturaCategory>(null);
+    private _category: BehaviorSubject<VidiunCategory> = new BehaviorSubject<VidiunCategory>(null);
     public category$ = this._category.asObservable();
     private _categoryId: number;
 
@@ -69,14 +69,14 @@ export class CategoryService implements OnDestroy {
         return this._categoryId;
     }
 
-    public get category(): KalturaCategory {
+    public get category(): VidiunCategory {
         return this._category.getValue();
     }
 
     public notifyChangesInCategory(): void{
     	this._saveCategoryInvoked = true;
 	}
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
                 private _router: Router,
                 private _browserService: BrowserService,
                 private _categoriesStore: CategoriesService,
@@ -89,7 +89,7 @@ export class CategoryService implements OnDestroy {
                 private _contentCategoryView: ContentCategoryViewService,
                 private _contentCategoriesMainViewService: ContentCategoriesMainViewService,
                 private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
 
         this._logger = _logger.subLogger('CategoryService');
 
@@ -171,7 +171,7 @@ export class CategoryService implements OnDestroy {
 				});
 			}
 
-  private _checkReferenceId(newCategory: KalturaCategory): Observable<boolean> {
+  private _checkReferenceId(newCategory: VidiunCategory): Observable<boolean> {
     if (!newCategory.referenceId ||
 		((newCategory.referenceId || null) === (this.category.referenceId || null))
 	) {
@@ -179,9 +179,9 @@ export class CategoryService implements OnDestroy {
     }
 
     return Observable.create(observer => {
-      this._kalturaServerClient
+      this._vidiunServerClient
         .request(new CategoryListAction({
-          filter: new KalturaCategoryFilter({ referenceIdEqual: newCategory.referenceId })
+          filter: new VidiunCategoryFilter({ referenceIdEqual: newCategory.referenceId })
         }))
         .subscribe(
           response => {
@@ -216,15 +216,15 @@ export class CategoryService implements OnDestroy {
     });
   }
 
-    private _shouldRedirectToMetadata(category: KalturaCategory): boolean {
+    private _shouldRedirectToMetadata(category: VidiunCategory): boolean {
         return (!category.directSubCategoriesCount || category.directSubCategoriesCount > modulesConfig.contentShared.categories.subCategoriesLimit)
           && this._categoryRoute.snapshot.firstChild.url[0].path === 'subcategories';
     }
 
-	private _transmitSaveRequest(newCategory: KalturaCategory) {
+	private _transmitSaveRequest(newCategory: VidiunCategory) {
 		this._state.next({ action: ActionTypes.CategorySaving });
 
-		const request = new KalturaMultiRequest(
+		const request = new VidiunMultiRequest(
 			new CategoryUpdateAction({
 				id: this.categoryId,
 				category: newCategory
@@ -246,7 +246,7 @@ export class CategoryService implements OnDestroy {
 					return this._checkReferenceId(newCategory)
             .switchMap(proceedSaveRequest => {
               if (proceedSaveRequest) {
-                return this._kalturaServerClient.multiRequest(request)
+                return this._vidiunServerClient.multiRequest(request)
                   .pipe(tag('block-shell'))
                   .map(
                     categorySavedResponse => {
@@ -308,9 +308,9 @@ export class CategoryService implements OnDestroy {
 	}
 	public saveCategory(): void {
 
-		const newCategory = KalturaObjectBaseFactory.createObject(this.category);
+		const newCategory = VidiunObjectBaseFactory.createObject(this.category);
 
-		if (newCategory && newCategory instanceof KalturaCategory) {
+		if (newCategory && newCategory instanceof VidiunCategory) {
 			this._transmitSaveRequest(newCategory)
 		} else {
 			console.error(new Error(`Failed to create a new instance of the category type '${this.category ? typeof this.category : 'n/a'}`));
@@ -368,7 +368,7 @@ export class CategoryService implements OnDestroy {
 		if (!id) {
 		    this._logger.info(`no id was provided abort loading`);
       return this._state.next({action: ActionTypes.CategoryLoadingFailed, error: new Error('Missing categoryId')});
-    }this._loadCategorySubscription = this._kalturaServerClient
+    }this._loadCategorySubscription = this._vidiunServerClient
       .request(new CategoryGetAction({id}))
 			.pipe(cancelOnDestroy(this))
 			.subscribe(category => {
@@ -427,8 +427,8 @@ export class CategoryService implements OnDestroy {
 		});
 	}
 
-    public openCategory(category: KalturaCategory | number) {
-        const categoryId = category instanceof KalturaCategory ? category.id : category;
+    public openCategory(category: VidiunCategory | number) {
+        const categoryId = category instanceof VidiunCategory ? category.id : category;
 
         this._logger.info(`handle open category action`, { categoryId });
 
@@ -437,7 +437,7 @@ export class CategoryService implements OnDestroy {
                 .filter(({ allowed }) => allowed)
                 .pipe(cancelOnDestroy(this))
                 .subscribe(() => {
-                    if (category instanceof KalturaCategory) {
+                    if (category instanceof VidiunCategory) {
                         this._contentCategoryView.open({ category, section: ContentCategoryViewSections.Metadata });
                     } else {
                         this._contentCategoryView.openById(category, ContentCategoryViewSections.Metadata);

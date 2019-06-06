@@ -1,8 +1,8 @@
-import { AppEvent } from 'shared/kmc-shared/app-events/app-event';
-import { KalturaConversionProfile } from 'kaltura-ngx-client';
+import { AppEvent } from 'shared/vmc-shared/app-events/app-event';
+import { VidiunConversionProfile } from 'vidiun-ngx-client';
 
 export interface CreateNewTranscodingProfileEventArgs {
-  profile: KalturaConversionProfile;
+  profile: VidiunConversionProfile;
 }
 
 export class CreateNewTranscodingProfileEvent extends AppEvent {

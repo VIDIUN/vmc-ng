@@ -1,5 +1,5 @@
 
-  <div class="kCategoriesTable" [class.noResults]="!_categories?.length">
+  <div class="vCategoriesTable" [class.noResults]="!_categories?.length">
 
     <p-table
             [scrollable]="true"
@@ -15,7 +15,7 @@
             [(selection)]="selectedCategories"
             (selectionChange)="_onSelectionChange($event)"
             (onColResize)="_columnsResizeManager.onColumnResize($event)"
-            kStickyHeader [sticksTo]="'categoriesTags'" stickyClass="stickyHeader" [stickyId]="'categoriesTable'">
+            vStickyHeader [sticksTo]="'categoriesTags'" stickyClass="stickyHeader" [stickyId]="'categoriesTable'">
         <ng-template pTemplate="colgroup" let-columns>
             <colgroup>
                 <col [ngStyle]="{'width': '44px', 'padding-left': '13px'}">
@@ -63,35 +63,35 @@
           </td>
 
           <td class="ui-resizable-column">
-            <div [kTooltip]="category.fullName" class="kTitle kTableColumn" (click)="onActionSelected('edit',category)">
+            <div [vTooltip]="category.fullName" class="vTitle vTableColumn" (click)="onActionSelected('edit',category)">
               {{category.name}}</div>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="category.id" [showOnEllipsis]="true">{{category.id}}</span>
+              <span class="vTableColumn" [vTooltip]="category.id" [showOnEllipsis]="true">{{category.id}}</span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="category.createdAt | kmcDate" [showOnEllipsis]="true">
-                  {{category.createdAt | kmcDate}}
+              <span class="vTableColumn" [vTooltip]="category.createdAt | vmcDate" [showOnEllipsis]="true">
+                  {{category.createdAt | vmcDate}}
               </span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="category.directSubCategoriesCount" [showOnEllipsis]="true">
+              <span class="vTableColumn" [vTooltip]="category.directSubCategoriesCount" [showOnEllipsis]="true">
                   {{category.directSubCategoriesCount}}
               </span>
           </td>
 
           <td class="ui-resizable-column">
-              <span class="kTableColumn" [kTooltip]="category.entriesCount" [showOnEllipsis]="true">
+              <span class="vTableColumn" [vTooltip]="category.entriesCount" [showOnEllipsis]="true">
                   {{category.entriesCount}}
               </span>
           </td>
 
           <td [ngStyle]="{'width': '80px'}">
-            <div class="kCategoriesTableActions">
-              <button class="kMoreActionsButton" type="button" pButton icon="kIconmore" (click)="openActionsMenu($event, category)"></button>
+            <div class="vCategoriesTableActions">
+              <button class="vMoreActionsButton" type="button" pButton icon="vIconmore" (click)="openActionsMenu($event, category)"></button>
             </div>
           </td>
 
@@ -100,11 +100,11 @@
 
       <ng-template pTemplate="emptymessage">
         <div class="emptymessage">
-            <div class="kEmptyMessage">{{_emptyMessage}}</div>
+            <div class="vEmptyMessage">{{_emptyMessage}}</div>
         </div>
       </ng-template>
     </p-table>
 
   </div>
 
-  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>

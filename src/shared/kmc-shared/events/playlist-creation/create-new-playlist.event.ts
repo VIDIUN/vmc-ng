@@ -1,10 +1,10 @@
-import { AppEvent } from 'shared/kmc-shared/app-events/app-event';
-import { KalturaPlaylistType } from 'kaltura-ngx-client';
-import { ContentPlaylistViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { AppEvent } from 'shared/vmc-shared/app-events/app-event';
+import { VidiunPlaylistType } from 'vidiun-ngx-client';
+import { ContentPlaylistViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 export interface CreateNewPlaylistEventArgs {
   name?: string;
-  type: KalturaPlaylistType;
+  type: VidiunPlaylistType;
   description?: string;
   playlistContent?: string; // entry ids separated by comma
 }

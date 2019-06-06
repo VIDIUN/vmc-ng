@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KmcMainViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-main-view-base.service';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VmcMainViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-main-view-base.service';
 
 @Component({
-  selector: 'kUploadMonitorSection',
+  selector: 'vUploadMonitorSection',
   templateUrl: './upload-monitor-section.component.html',
   styleUrls: ['./upload-monitor-section.component.scss'],
 })
 export class UploadMonitorSectionComponent {
   @Input() title: string;
-  @Input() detailsViewService: KmcMainViewBaseService;
+  @Input() detailsViewService: VmcMainViewBaseService;
   @Input() type: 'dropFolder' | 'other' = 'other';
   @Input() uploading = 0;
   @Input() queued = 0;
@@ -29,7 +29,7 @@ export class UploadMonitorSectionComponent {
   }
 
   public _openDetails(): void {
-      if (this.detailsViewService instanceof KmcMainViewBaseService) {
+      if (this.detailsViewService instanceof VmcMainViewBaseService) {
           this.detailsViewService.open();
       }
       this.uploadMonitorPopup.close();

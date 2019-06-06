@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { EntryStore } from '../entry-store.service';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaEntryStatus } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunEntryStatus } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { EntryDetailsWidget } from './entry-details-widget.service';
 
-export interface EntryDetailsKalturaMediaEntry extends KalturaMediaEntry {
+export interface EntryDetailsVidiunMediaEntry extends VidiunMediaEntry {
   recordedEntryId?: string
 }
 
 @Component({
-	selector: 'kEntryDetails',
+	selector: 'vEntryDetails',
 	templateUrl: './entry-details.component.html',
 	styleUrls: ['./entry-details.component.scss']
 })
@@ -25,9 +25,9 @@ export class EntryDetails implements OnInit, OnDestroy {
 	public _hasDuration: boolean = false;
 	public _isClip: boolean = false;
 
-	public _currentEntry: EntryDetailsKalturaMediaEntry;
+	public _currentEntry: EntryDetailsVidiunMediaEntry;
 
-	get currentEntry(): EntryDetailsKalturaMediaEntry {
+	get currentEntry(): EntryDetailsVidiunMediaEntry {
 		return this._currentEntry;
 	}
 
@@ -46,15 +46,15 @@ export class EntryDetails implements OnInit, OnDestroy {
 			data => {
 				if (data) {
 					this._currentEntry = data;
-					this._entryHasContent = this._currentEntry.status.toString() !== KalturaEntryStatus.noContent.toString();
-					this._entryReady = this._currentEntry.status.toString() === KalturaEntryStatus.ready.toString();
+					this._entryHasContent = this._currentEntry.status.toString() !== VidiunEntryStatus.noContent.toString();
+					this._entryReady = this._currentEntry.status.toString() === VidiunEntryStatus.ready.toString();
 					const sourceType = this._currentEntry.sourceType.toString();
-					this._isLive = (sourceType === KalturaSourceType.liveStream.toString() ||
-					sourceType === KalturaSourceType.akamaiLive.toString() ||
-					sourceType === KalturaSourceType.akamaiUniversalLive.toString() ||
-					sourceType === KalturaSourceType.manualLiveStream.toString());
-					this._isRecordedLive = (sourceType === KalturaSourceType.recordedLive.toString());
-					this._hasDuration = (this._currentEntry.status !== KalturaEntryStatus.noContent && !this._isLive && this._currentEntry.mediaType.toString() !== KalturaMediaType.image.toString());
+					this._isLive = (sourceType === VidiunSourceType.liveStream.toString() ||
+					sourceType === VidiunSourceType.akamaiLive.toString() ||
+					sourceType === VidiunSourceType.akamaiUniversalLive.toString() ||
+					sourceType === VidiunSourceType.manualLiveStream.toString());
+					this._isRecordedLive = (sourceType === VidiunSourceType.recordedLive.toString());
+					this._hasDuration = (this._currentEntry.status !== VidiunEntryStatus.noContent && !this._isLive && this._currentEntry.mediaType.toString() !== VidiunMediaType.image.toString());
 					this._isClip = !this._isRecordedLive && (this._currentEntry.id !== this._currentEntry.rootEntryId);
 				}
 			}

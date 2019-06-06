@@ -1,13 +1,13 @@
-<k-area-blocker [showLoader]="_loading">
-	<kSticky #playlistSections stickyId="playlistSections" [sticksTo]="'playlistHeader'" [scrollOffset]="120" [stickyClass]="'kStickySections'">
-		<div class="kSections">
+<v-area-blocker [showLoader]="_loading">
+	<vSticky #playlistSections stickyId="playlistSections" [sticksTo]="'playlistHeader'" [scrollOffset]="120" [stickyClass]="'vStickySections'">
+		<div class="vSections">
 			<ul *ngIf="_showList">
 				<li *ngFor="let section of _sections" [class.active]="section.attached">
-					<div (click)="_navigateToSection(section)" [class.kSectionHasErrors]="!section.isValid">
+					<div (click)="_navigateToSection(section)" [class.vSectionHasErrors]="!section.isValid">
 						{{section.label}}
 					</div>
 				</li>
 			</ul>
 		</div>
-	</kSticky>
-</k-area-blocker>
+	</vSticky>
+</v-area-blocker>

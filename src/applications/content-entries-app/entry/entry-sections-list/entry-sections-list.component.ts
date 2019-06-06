@@ -1,14 +1,14 @@
 import { Component, AfterViewInit,OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { EntryStore } from '../entry-store.service';
-import { StickyComponent } from '@kaltura-ng/kaltura-ui';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { StickyComponent } from '@vidiun-ng/vidiun-ui';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { EntrySectionsListWidget, SectionWidgetItem } from './entry-sections-list-widget.service';
 
 
 
 @Component({
-  selector: 'kEntrySectionsList',
+  selector: 'vEntrySectionsList',
   templateUrl: './entry-sections-list.component.html',
   styleUrls: ['./entry-sections-list.component.scss']
 })

@@ -1,31 +1,31 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, AfterViewInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
 import {CategoriesService} from '../categories.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import {
   CategoriesStatus,
   CategoriesStatusMonitorService
 } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { SelectedCategory } from 'app-shared/content-shared/categories/category-selector/category-selector.component';
-import { KalturaCategory } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContentEntriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { VidiunCategory } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContentEntriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
 
 @Component({
-  selector: 'kNewCategory',
+  selector: 'vNewCategory',
   templateUrl: './new-category.component.html',
   styleUrls: ['./new-category.component.scss'],
-    providers: [KalturaLogger.createLogger('NewCategoryComponent')]
+    providers: [VidiunLogger.createLogger('NewCategoryComponent')]
 })
 export class NewCategoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
   @Input() linkedEntries: {entryId: string}[] = [];
-  @Output() onApply = new EventEmitter<KalturaCategory>();
+  @Output() onApply = new EventEmitter<VidiunCategory>();
 
   public _blockerMessage: AreaBlockerMessage = null;
   public _selectedParentCategory: SelectedCategory = 'missing';
@@ -38,7 +38,7 @@ export class NewCategoryComponent implements OnInit, AfterViewInit, OnDestroy {
               private _fb: FormBuilder,
               private _categoriesService: CategoriesService,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _contentEntriesMainViewServie: ContentEntriesMainViewService,
               private _categoriesStatusMonitorService: CategoriesStatusMonitorService) {
 
@@ -179,7 +179,7 @@ export class NewCategoryComponent implements OnInit, AfterViewInit, OnDestroy {
                         if (navigateToCategory) {
                             this._showConfirmationOnClose = false;
                             if (error.context && error.context.categoryId) {
-                                const category = new KalturaCategory();
+                                const category = new VidiunCategory();
                                 (<any>category).id = error.context.categoryId;
                                 this.onApply.emit(category);
                             }

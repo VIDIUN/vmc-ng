@@ -6,12 +6,12 @@
       width: 100%;
     }
 
-    .kTreeNodeLabelWrapper {
+    .vTreeNodeLabelWrapper {
       display: flex;
       flex-direction: row;
       align-items: center;
 
-      .kTreeNodeLabel {
+      .vTreeNodeLabel {
         font-size: 14px;
         font-weight: 700;
         line-height: 43px;
@@ -21,21 +21,21 @@
         display: inline-block;
         overflow: hidden;
       }
-      .kTreeNodeLabelSingle {
-        color: $kGrayscale1;
+      .vTreeNodeLabelSingle {
+        color: $vGrayscale1;
       }
 
-      .kTreeNodeNumChildren {
+      .vTreeNodeNumChildren {
         font-size: 14px;
         font-weight: 400;
-        color: $kGrayscale3;
+        color: $vGrayscale3;
         margin-left: 10px;
       }
     }
   }
 }
 
-.kTreeContainer {
+.vTreeContainer {
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 340px;
@@ -45,17 +45,17 @@
   width: 387px;
 }
 
-.kLoadingMessage {
+.vLoadingMessage {
   cursor: auto;
-  color: $kPrimary;
+  color: $vPrimary;
   padding-left: 6px;
 }
 
-.kLoadingErrorMessage {
+.vLoadingErrorMessage {
   cursor: auto;
   white-space: pre-line;
   margin-top: -16px;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
   padding-left: 6px;
 }
 

@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AreaBlockerMessage, KalturaValidators} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage, VidiunValidators} from '@vidiun-ng/vidiun-ui';
 import {UniversalLiveService} from './universal-live.service';
 import {UniversalLive} from "./universal-live.interface";
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kUniversalLive',
+  selector: 'vUniversalLive',
   templateUrl: './universal-live.component.html',
   styleUrls: ['./universal-live.component.scss'],
   providers: [UniversalLiveService]
@@ -29,7 +29,7 @@ export class UniversalLiveComponent implements OnInit, OnDestroy {
   blockerState: { isBusy: boolean, message: AreaBlockerMessage };
 
   constructor(private _fb: FormBuilder,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _appLocalization: AppLocalization,
               private universalLiveService: UniversalLiveService) {
   }
@@ -66,8 +66,8 @@ export class UniversalLiveComponent implements OnInit, OnDestroy {
     this._form = this._fb.group({
       name: ['', Validators.required],
       description: [''],
-      primaryEncoderIp: ['', [Validators.required, KalturaValidators.ip]],
-      secondaryEncoderIp: ['', [Validators.required, KalturaValidators.ip]],
+      primaryEncoderIp: ['', [Validators.required, VidiunValidators.ip]],
+      secondaryEncoderIp: ['', [Validators.required, VidiunValidators.ip]],
       broadcastPassword: [''],
       liveDvr: [true]
     });

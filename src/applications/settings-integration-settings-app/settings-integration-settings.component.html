@@ -1,14 +1,14 @@
-<div class="kContainer kContent">
-  <div class="kColumn" [class.kRightColumnShown]="_kmcPermissions.FEATURE_ENTITLEMENT | kNgIfPermitted">
-    <div class="kAccountInfoContainer">
-      <kAccountInfo></kAccountInfo>
+<div class="vContainer vContent">
+  <div class="vColumn" [class.vRightColumnShown]="_vmcPermissions.FEATURE_ENTITLEMENT | vNgIfPermitted">
+    <div class="vAccountInfoContainer">
+      <vAccountInfo></vAccountInfo>
     </div>
-    <div class="kNotifications">
-      <div class="kTitle">{{'applications.settings.integrationSettings.accountInfo.notifications.title' | translate}}</div>
+    <div class="vNotifications">
+      <div class="vTitle">{{'applications.settings.integrationSettings.accountInfo.notifications.title' | translate}}</div>
       <div>{{'applications.settings.integrationSettings.accountInfo.notifications.message' | translate}}</div>
     </div>
   </div>
-  <div class="kColumn kRightColumn" *ngIf="_kmcPermissions.FEATURE_ENTITLEMENT | kNgIfPermitted">
-      <kEntitlement></kEntitlement>
+  <div class="vColumn vRightColumn" *ngIf="_vmcPermissions.FEATURE_ENTITLEMENT | vNgIfPermitted">
+      <vEntitlement></vEntitlement>
   </div>
 </div>

@@ -1,16 +1,16 @@
 @import 'app-theme/_variables.scss';
 
-.kBulkUploadMenu {
-  color: $kGrayscale1;
+.vBulkUploadMenu {
+  color: $vGrayscale1;
   flex-direction: column;
 
-  .kBulkUploadMenuHeader {
+  .vBulkUploadMenuHeader {
     height: 77px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px $kGrayscale4 solid;
+    border-bottom: 1px $vGrayscale4 solid;
 
     h1 {
       font-size: 24px;
@@ -19,12 +19,12 @@
     }
   }
 
-  .kBulkUploadMenuBody {
+  .vBulkUploadMenuBody {
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    .kBulkUploadMenuTypesTitle {
+    .vBulkUploadMenuTypesTitle {
       margin: 33px 0;
       text-align: center;
 
@@ -34,7 +34,7 @@
       }
     }
 
-    .kBulkUploadMenuTypes {
+    .vBulkUploadMenuTypes {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -51,28 +51,28 @@
   }
 }
 
-.kSuccessBulkUpload {
-  .kCenterContent {
+.vSuccessBulkUpload {
+  .vCenterContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  .kSuccessBulkUploadMessage {
+  .vSuccessBulkUploadMessage {
     height: 170px;
     text-align: center;
     padding: 0 20px;
   }
 
-  .kSuccessBulkUploadFooter {
-    border-top: 1px solid $kGrayscale4;
+  .vSuccessBulkUploadFooter {
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 63px;
     width: 100%;
 
-    .kSuccessBulkUploadButton {
+    .vSuccessBulkUploadButton {
       width: 91px;
       height: 27px;
     }

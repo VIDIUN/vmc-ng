@@ -10,16 +10,16 @@ import {
     ViewChild
 } from '@angular/core';
 import {Menu, MenuItem} from 'primeng/primeng';
-import {KalturaDropFolderFile} from 'kaltura-ngx-client';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {VidiunDropFolderFile} from 'vidiun-ngx-client';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 import { globalConfig } from 'config/global';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/kmc-shared/columns-resize-manager';
-import { DatePipe } from 'app-shared/kmc-shared/date-format/date.pipe';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { ColumnsResizeManagerService, ResizableColumnsTableName } from 'app-shared/vmc-shared/columns-resize-manager';
+import { DatePipe } from 'app-shared/vmc-shared/date-format/date.pipe';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Component({
-  selector: 'kDropFoldersListTable',
+  selector: 'vDropFoldersListTable',
   templateUrl: './drop-folders-table.component.html',
   styleUrls: ['./drop-folders-table.component.scss'],
     providers: [
@@ -29,9 +29,9 @@ import { BrowserService } from 'app-shared/kmc-shell';
 })
 
 export class DropFoldersTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() selectedDropFolders: KalturaDropFolderFile[] = [];
+  @Input() selectedDropFolders: VidiunDropFolderFile[] = [];
 
-  @Input() set dropFolders(data: KalturaDropFolderFile[]) {
+  @Input() set dropFolders(data: VidiunDropFolderFile[]) {
     if (!this._deferredLoading) {
       this._dropFolders = [];
       this.cdRef.detectChanges();
@@ -49,14 +49,14 @@ export class DropFoldersTableComponent implements OnInit, AfterViewInit, OnDestr
 
   @ViewChild('actionsmenu') private actionsMenu: Menu;
 
-  private _deferredDropFolders: KalturaDropFolderFile[];
+  private _deferredDropFolders: VidiunDropFolderFile[];
 
   public _deferredLoading = true;
-  public _dropFolders: KalturaDropFolderFile[] = [];
+  public _dropFolders: VidiunDropFolderFile[] = [];
   public _items: MenuItem[];
   public _emptyMessage = '';
   public _defaultSortOrder = globalConfig.client.views.tables.defaultSortOrder;
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor(public _columnsResizeManager: ColumnsResizeManagerService,
               private _appLocalization: AppLocalization,
@@ -87,17 +87,17 @@ export class DropFoldersTableComponent implements OnInit, AfterViewInit, OnDestr
     this.actionsMenu.hide();
   }
 
-  private _buildMenu(rowIndex: number, folder: KalturaDropFolderFile): void {
+  private _buildMenu(rowIndex: number, folder: VidiunDropFolderFile): void {
     this._items = [
       {
         label: this._appLocalization.get('applications.content.dropFolders.table.delete'),
-        styleClass: 'kDanger',
+        styleClass: 'vDanger',
         command: () => this._onActionSelected('remove', rowIndex, folder)
       }
     ];
   }
 
-  private _onActionSelected(action: string, rowIndex: number, folder: KalturaDropFolderFile) {
+  private _onActionSelected(action: string, rowIndex: number, folder: VidiunDropFolderFile) {
     switch (action) {
       case 'remove':
         this.deleteDropFolderFiles.emit(folder);
@@ -114,14 +114,14 @@ export class DropFoldersTableComponent implements OnInit, AfterViewInit, OnDestr
     }
   }
 
-  public _openActionsMenu(event: any, rowIndex: number, folder: KalturaDropFolderFile) {
+  public _openActionsMenu(event: any, rowIndex: number, folder: VidiunDropFolderFile) {
     if (this.actionsMenu) {
       this._buildMenu(rowIndex, folder);
       this.actionsMenu.toggle(event);
     }
   }
 
-  public _dateTooltip(dropFolder: KalturaDropFolderFile) {
+  public _dateTooltip(dropFolder: VidiunDropFolderFile) {
     return this._appLocalization.get('applications.content.dropFolders.table.datesTooltip',
       {
         0: dropFolder.uploadStartDetectedAt ? (new DatePipe(this._browserService)).transform(dropFolder.uploadStartDetectedAt.getTime(), 'dateAndTime') : this._appLocalization.get('applications.content.dropFolders.table.notAvailable'),

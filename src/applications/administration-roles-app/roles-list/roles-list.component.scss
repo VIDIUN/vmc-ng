@@ -1,10 +1,10 @@
 @import 'app-theme/_variables.scss';
 
-.kTagsWrapper {
+.vTagsWrapper {
   z-index: 500;
 }
 
-.kRoles {
+.vRoles {
   font-size: 15px;
   background-color: $appBkgColor;
   padding-top: 24px;
@@ -14,7 +14,7 @@
   display: flex;
   flex-flow: row wrap;
   margin: 0px;
-  .kRolesHolder {
+  .vRolesHolder {
     height: 100%;
     min-height: $minTableHeight;
     border: none;
@@ -22,14 +22,14 @@
     display: flex;
     flex-direction: column;
   }
-  .kRefreshBtn {
+  .vRefreshBtn {
     font-size: 24px;
     border: none;
     min-width: inherit;
     margin-right: 8px;
     width: 40px;
     outline: 0;
-    color: $kGrayscale3;
+    color: $vGrayscale3;
     margin-left: auto;
     &:active {
       box-shadow: none;
@@ -37,16 +37,16 @@
     }
     &:hover {
       background-color: #ffffff;
-      color: $kPrimary;
+      color: $vPrimary;
     }
   }
-  .kFiltersWrapper {
+  .vFiltersWrapper {
     display: block;
     height: 66px;
   }
-  .kRolesTableFilters {
-    color: $kGrayscale1;
-    border-bottom: 1px solid $kGrayscale5;
+  .vRolesTableFilters {
+    color: $vGrayscale1;
+    border-bottom: 1px solid $vGrayscale5;
     z-index: 500;
     height: 66px;
     background-color: white;
@@ -56,41 +56,41 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
-    .kSelectedRolesNum {
+    .vSelectedRolesNum {
       padding-left: 16px;
     }
   }
-  .kRolesTableFooter {
+  .vRolesTableFooter {
     bottom: 0px;
     height: 34px;
     background-color: white;
-    border-top: 1px solid $kGrayscale6;
+    border-top: 1px solid $vGrayscale6;
     position: fixed;
     box-sizing: border-box;
     flex: 0 0 auto;
     padding: 0 14px 28px;
     display: block;
   }
-  .kRolesTable {
+  .vRolesTable {
     border: none;
     position: relative;
     background-color: white;
     flex: 1 1 auto;
     width: 100%;
   }
-  .kPaginatorShowRowsLabel {
-    color: $kGrayscale1;
+  .vPaginatorShowRowsLabel {
+    color: $vGrayscale1;
     position: absolute;
     top: 7px;
     right: 80px;
   }
-  .kAddRoleBtn {
+  .vAddRoleBtn {
     margin-left: 14px;
     height: 36px;
   }
 }
 
-:host /deep/ span.ui-button-icon-left.pi-kIcontrash {
+:host /deep/ span.ui-button-icon-left.pi-vIcontrash {
   margin-left: -.5em;
 }
 
@@ -98,7 +98,7 @@
   width: 380px;
 }
 
-:host /deep/ .ui-button-icon-right.kIcondropdown_arrow_bottom {
+:host /deep/ .ui-button-icon-right.vIcondropdown_arrow_bottom {
   font-size: 10px;
   margin-right: 2px;
   pointer-events: none;
@@ -116,7 +116,7 @@
   margin-left: -.5em;
 }
 
-:host /deep/ .kRolesTableFooter {
+:host /deep/ .vRolesTableFooter {
   .ui-dropdown-panel {
     min-width: 70px;
   }

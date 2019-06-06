@@ -1,54 +1,54 @@
-<k-area-blocker [message]="_blockerMessage">
-  <div class="kUsers kOverrideFAIcons">
-    <div #usersTableHolder class="kUsersHolder kContent">
-      <div class="kUsersHeader">
-        <div class="kUsersNeedMore">
-          <span class="kCurrentStatus">{{'applications.administration.users.currentStatus' | translate}}</span>
+<v-area-blocker [message]="_blockerMessage">
+  <div class="vUsers vOverrideFAIcons">
+    <div #usersTableHolder class="vUsersHolder vContent">
+      <div class="vUsersHeader">
+        <div class="vUsersNeedMore">
+          <span class="vCurrentStatus">{{'applications.administration.users.currentStatus' | translate}}</span>
           {{_usersInfo}}
-          <span class="kMoreUsers">
+          <span class="vMoreUsers">
             {{'applications.administration.users.moreUsers' | translate}}
-            <a class="kClickHere" (click)="_upgradeAccount()">{{'applications.administration.users.clickHere' | translate}}</a>
+            <a class="vClickHere" (click)="_upgradeAccount()">{{'applications.administration.users.clickHere' | translate}}</a>
             {{'applications.administration.users.usersUpgrade' | translate}}
           </span>
         </div>
       </div>
-      <kSticky stickyId="usersFilters" [sticksTo]="'header'" [scrollOffset]="166">
-        <div class="kUsersTableFilters kContent">
-          <button [disabled]="_usersTotalCount >= _partnerInfo.adminLoginUsersQuota || (_kmcPermissions.ADMIN_USER_ADD | kDisabledIfNotPermitted)"
+      <vSticky stickyId="usersFilters" [sticksTo]="'header'" [scrollOffset]="166">
+        <div class="vUsersTableFilters vContent">
+          <button [disabled]="_usersTotalCount >= _partnerInfo.adminLoginUsersQuota || (_vmcPermissions.ADMIN_USER_ADD | vDisabledIfNotPermitted)"
                   pButton
                   type="button"
                   label="{{'applications.administration.users.addUser' | translate}}"
-                  class="kButtonBranded kAddUserBtn"
+                  class="vButtonBranded vAddUserBtn"
                   (click)="_addUser()"></button>
-          <span class="kSelectedUsersNum" *ngIf="_usersAmount">
+          <span class="vSelectedUsersNum" *ngIf="_usersAmount">
             {{_usersAmount}}
           </span>
-          <button pButton class="kButtonDefault kRefreshBtn small" (click)="_reload()" type="text" icon="kIconrefresh"
-                  [kTooltip]="'applications.administration.users.refresh' | translate"></button>
+          <button pButton class="vButtonDefault vRefreshBtn small" (click)="_reload()" type="text" icon="vIconrefresh"
+                  [vTooltip]="'applications.administration.users.refresh' | translate"></button>
         </div>
-      </kSticky>
-      <kUsersTable
-        class="kUsersTable"
+      </vSticky>
+      <vUsersTable
+        class="vUsersTable"
         [users]="_users"
         (editUser)="_onEditUser($event)"
         (toggleUserStatus)="_onToggleUserStatus($event)"
-        (deleteUser)="_onDeleteUser($event)"></kUsersTable>
-      <div class="kUsersTableFooter kContent" #footer *ngIf="(_usersStore.users.data$ | async)?.users.totalCount">
+        (deleteUser)="_onDeleteUser($event)"></vUsersTable>
+      <div class="vUsersTableFooter vContent" #footer *ngIf="(_usersStore.users.data$ | async)?.users.totalCount">
         <p-paginator
           [rows]="_filter.pageSize"
           [first]="_filter.pageIndex * _filter.pageSize"
           [rowsPerPageOptions]="[25,50,100,250,500]"
           [totalRecords]="(_usersStore.users.data$ | async)?.users.totalCount"
           (onPageChange)="_onPaginationChanged($event)"></p-paginator>
-        <span class="kPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
+        <span class="vPaginatorShowRowsLabel">{{'applications.content.paginator.showRows' | translate}}</span>
       </div>
     </div>
   </div>
 
-  <kPopupWidget #editUserPopup data-aid="editUserPopup" [popupWidth]="791" [popupHeight]="670" [modal]="true">
+  <vPopupWidget #editUserPopup data-aid="editUserPopup" [popupWidth]="791" [popupHeight]="670" [modal]="true">
     <ng-template>
-      <kEditUser [parentPopupWidget]="editUserPopup" [user]="_user">
-      </kEditUser>
+      <vEditUser [parentPopupWidget]="editUserPopup" [user]="_user">
+      </vEditUser>
     </ng-template>
-  </kPopupWidget>
-</k-area-blocker>
+  </vPopupWidget>
+</v-area-blocker>

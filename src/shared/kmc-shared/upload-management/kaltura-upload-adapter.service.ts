@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { UploadFileAdapter, UploadFileData } from '@kaltura-ng/kaltura-common';
+import { UploadFileAdapter, UploadFileData } from '@vidiun-ng/vidiun-common';
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/throw';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { UploadTokenAddAction } from 'kaltura-ngx-client';
-import { UploadTokenUploadAction } from 'kaltura-ngx-client';
-import { KalturaUploadToken } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import { KalturaUploadFile } from './kaltura-upload-file';
-import { KalturaRequest } from 'kaltura-ngx-client';
-import { UploadTokenListAction } from 'kaltura-ngx-client';
-import { KalturaUploadTokenFilter } from 'kaltura-ngx-client';
-import { KalturaUploadTokenListResponse } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { UploadTokenAddAction } from 'vidiun-ngx-client';
+import { UploadTokenUploadAction } from 'vidiun-ngx-client';
+import { VidiunUploadToken } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import { VidiunUploadFile } from './vidiun-upload-file';
+import { VidiunRequest } from 'vidiun-ngx-client';
+import { UploadTokenListAction } from 'vidiun-ngx-client';
+import { VidiunUploadTokenFilter } from 'vidiun-ngx-client';
+import { VidiunUploadTokenListResponse } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Injectable()
-export class KalturaUploadAdapter extends UploadFileAdapter<KalturaUploadFile> {
-    constructor(private _serverClient: KalturaClient,
-                private _logger: KalturaLogger) {
+export class VidiunUploadAdapter extends UploadFileAdapter<VidiunUploadFile> {
+    constructor(private _serverClient: VidiunClient,
+                private _logger: VidiunLogger) {
         super();
-        this._logger = _logger.subLogger('KalturaUploadAdapter');
+        this._logger = _logger.subLogger('VidiunUploadAdapter');
     }
 
     get label(): string {
-        return 'Kaltura OVP server';
+        return 'Vidiun OVP server';
     }
 
-    private _getUploadToken(uploadFile: KalturaUploadFile): Observable<string> {
+    private _getUploadToken(uploadFile: VidiunUploadFile): Observable<string> {
 
         return this._serverClient.request(
             new UploadTokenAddAction({
-                uploadToken: new KalturaUploadToken()
+                uploadToken: new VidiunUploadToken()
             })
         )
             .map(
@@ -47,13 +47,13 @@ export class KalturaUploadAdapter extends UploadFileAdapter<KalturaUploadFile> {
         }).supportChunkUpload();
     }
 
-    prepare(files: { id: string, data: KalturaUploadFile }[]): Observable<{ id: string, status: boolean }[]> {
-        const multiRequest: KalturaRequest<any>[] = [];
+    prepare(files: { id: string, data: VidiunUploadFile }[]): Observable<{ id: string, status: boolean }[]> {
+        const multiRequest: VidiunRequest<any>[] = [];
 
         files.forEach(file => {
             multiRequest.push(
                 new UploadTokenAddAction({
-                    uploadToken: new KalturaUploadToken()
+                    uploadToken: new VidiunUploadToken()
                 })
             );
         });
@@ -76,18 +76,18 @@ export class KalturaUploadAdapter extends UploadFileAdapter<KalturaUploadFile> {
     }
 
     canHandle(uploadFile: UploadFileData): boolean {
-        return uploadFile instanceof KalturaUploadFile;
+        return uploadFile instanceof VidiunUploadFile;
     }
 
-    resume(id: string, fileData: KalturaUploadFile): Observable<{ id: string, progress?: number }> {
-      if (!fileData || !(fileData instanceof KalturaUploadFile) || !fileData.serverUploadToken) {
+    resume(id: string, fileData: VidiunUploadFile): Observable<{ id: string, progress?: number }> {
+      if (!fileData || !(fileData instanceof VidiunUploadFile) || !fileData.serverUploadToken) {
         return Observable.throw('missing upload token');
       }
     }
 
-    upload(id: string, fileData: KalturaUploadFile): Observable<{ id: string, progress?: number }> {
+    upload(id: string, fileData: VidiunUploadFile): Observable<{ id: string, progress?: number }> {
         return Observable.create((observer) => {
-            if (fileData && fileData instanceof KalturaUploadFile) {
+            if (fileData && fileData instanceof VidiunUploadFile) {
                 this._logger.info(`starting upload for file '${id}'`);
 
                 let requestSubscription = Observable.of(fileData.serverUploadToken)
@@ -101,9 +101,9 @@ export class KalturaUploadAdapter extends UploadFileAdapter<KalturaUploadFile> {
                         {
                             return this._serverClient.request(
                                 new UploadTokenListAction({
-                                    filter: new KalturaUploadTokenFilter({ idIn: fileData.serverUploadToken })
+                                    filter: new VidiunUploadTokenFilter({ idIn: fileData.serverUploadToken })
                                 })
-                            ).map((response: KalturaUploadTokenListResponse) => {
+                            ).map((response: VidiunUploadTokenListResponse) => {
                                 const uploadedFileSize = response && response.objects && response.objects.length > 0 ? response.objects[0].uploadedFileSize : null;
 
                                 if (typeof uploadedFileSize === 'number') {

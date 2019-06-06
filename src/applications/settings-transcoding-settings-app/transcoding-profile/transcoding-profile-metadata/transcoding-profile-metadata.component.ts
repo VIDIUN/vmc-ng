@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { TranscodingProfileMetadataWidget } from './transcoding-profile-metadata-widget.service';
 
 @Component({
-  selector: 'kTranscodingProfileMetadata',
+  selector: 'vTranscodingProfileMetadata',
   templateUrl: './transcoding-profile-metadata.component.html',
   styleUrls: ['./transcoding-profile-metadata.component.scss']
 })

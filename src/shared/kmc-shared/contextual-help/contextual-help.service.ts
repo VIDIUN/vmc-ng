@@ -4,10 +4,10 @@ import { globalConfig } from 'config/global';
 import { buildDeployUrl } from 'config/server';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import * as Ajv from 'ajv';
 import { ContextualHelpDataSchema } from './contextual-help-data-schema';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface ContextualHelpData {
     viewKey: string;
@@ -28,7 +28,7 @@ export class ContextualHelpService implements OnDestroy {
     public readonly contextualHelpData$ = this._contextualHelp.asObservable();
 
     constructor(private _http: HttpClient,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
         this._logger = this._logger.subLogger('ContextualHelpService');
     }
 

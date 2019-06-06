@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {AreaBlockerMessage} from "@kaltura-ng/kaltura-ui";
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {BrowserService} from "app-shared/kmc-shell";
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from "@vidiun-ng/vidiun-ui";
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {BrowserService} from "app-shared/vmc-shell";
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
 import {EditEntitlementService} from "./edit-entitlement.service";
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 function privacyContextLabelValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -22,17 +22,17 @@ function privacyContextLabelValidator(): ValidatorFn {
 }
 
 @Component({
-  selector: 'kEditEntitlement',
+  selector: 'vEditEntitlement',
   templateUrl: './edit-entitlement.component.html',
   styleUrls: ['./edit-entitlement.component.scss'],
   providers: [
     EditEntitlementService,
-    KalturaLogger.createLogger('EditEntitlementComponent')
+    VidiunLogger.createLogger('EditEntitlementComponent')
   ]
 })
 export class EditEntitlementComponent implements OnInit, OnDestroy {
 
-  @Input() entitlement: KalturaCategory = null;
+  @Input() entitlement: VidiunCategory = null;
   @Input() ownerPopup: PopupWidgetComponent;
   @Output() onEntitlementUpdated = new EventEmitter<void>();
 
@@ -43,7 +43,7 @@ export class EditEntitlementComponent implements OnInit, OnDestroy {
   constructor(private _editEntitlementService: EditEntitlementService,
               private _appLocalization: AppLocalization,
               private _fb: FormBuilder,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               private _browserService: BrowserService) {
   }
 

@@ -1,23 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Flavor } from '../../entry-flavours/flavor';
-import { KalturaDistributionProfile } from 'kaltura-ngx-client';
-import { EntryDistributionWidget, ExtendedKalturaEntryDistribution } from '../entry-distribution-widget.service';
-import { KalturaBaseEntry } from 'kaltura-ngx-client';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { KalturaThumbAsset } from 'kaltura-ngx-client';
-import { KalturaDistributionThumbDimensions } from 'kaltura-ngx-client';
-import { KalturaThumbAssetStatus } from 'kaltura-ngx-client';
-import { getKalturaServerUri } from 'config/server';
+import { VidiunDistributionProfile } from 'vidiun-ngx-client';
+import { EntryDistributionWidget, ExtendedVidiunEntryDistribution } from '../entry-distribution-widget.service';
+import { VidiunBaseEntry } from 'vidiun-ngx-client';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { VidiunThumbAsset } from 'vidiun-ngx-client';
+import { VidiunDistributionThumbDimensions } from 'vidiun-ngx-client';
+import { VidiunThumbAssetStatus } from 'vidiun-ngx-client';
+import { getVidiunServerUri } from 'config/server';
 import { subApplicationsConfig } from 'config/sub-applications';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { KalturaNullableBoolean } from 'kaltura-ngx-client';
-import { KalturaDistributionProfileActionStatus } from 'kaltura-ngx-client';
-import { KalturaEntryDistributionStatus } from 'kaltura-ngx-client';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunNullableBoolean } from 'vidiun-ngx-client';
+import { VidiunDistributionProfileActionStatus } from 'vidiun-ngx-client';
+import { VidiunEntryDistributionStatus } from 'vidiun-ngx-client';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 
-export interface ExtendedKalturaDistributionThumbDimensions extends KalturaDistributionThumbDimensions {
+export interface ExtendedVidiunDistributionThumbDimensions extends VidiunDistributionThumbDimensions {
   entryThumbnails?: {
     size: number,
     url: string;
@@ -26,24 +26,24 @@ export interface ExtendedKalturaDistributionThumbDimensions extends KalturaDistr
 }
 
 @Component({
-  selector: 'kEditDistributionProfile',
+  selector: 'vEditDistributionProfile',
   templateUrl: './edit-distribution-profile.component.html',
   styleUrls: ['./edit-distribution-profile.component.scss']
 })
 export class EditDistributionProfileComponent implements OnInit {
   @Input() parentPopup: PopupWidgetComponent;
-  @Input() distributedProfile: ExtendedKalturaEntryDistribution | null;
-  @Input() undistributedProfile: KalturaDistributionProfile;
+  @Input() distributedProfile: ExtendedVidiunEntryDistribution | null;
+  @Input() undistributedProfile: VidiunDistributionProfile;
   @Input() flavors: Flavor[] = [];
-  @Input() entry: KalturaBaseEntry;
-  @Input() thumbnails: KalturaThumbAsset[] = [];
+  @Input() entry: VidiunBaseEntry;
+  @Input() thumbnails: VidiunThumbAsset[] = [];
 
   @Output() onActionSelected = new EventEmitter<{ action: string, payload: any }>();
 
-  public _profile: KalturaDistributionProfile | ExtendedKalturaEntryDistribution;
+  public _profile: VidiunDistributionProfile | ExtendedVidiunEntryDistribution;
   public _forDistribution = true;
   public _requiredFlavors: Partial<Flavor>[] = [];
-  public _requiredThumbnails: ExtendedKalturaDistributionThumbDimensions[] = [];
+  public _requiredThumbnails: ExtendedVidiunDistributionThumbDimensions[] = [];
   public _profileName = '';
   public _distributionName = '';
   public _createdAtDateRange = subApplicationsConfig.shared.datesRange;
@@ -52,7 +52,7 @@ export class EditDistributionProfileComponent implements OnInit {
   public _missingThumbnailError = '';
   public _requestXmlLink = '';
   public _responseXmlLink = '';
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   public _distributionForm: FormGroup;
   public _updatesField: AbstractControl;
@@ -64,7 +64,7 @@ export class EditDistributionProfileComponent implements OnInit {
               private _widget: EntryDistributionWidget,
               private _fb: FormBuilder,
               private _appAuthentication: AppAuthentication,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _browserService: BrowserService) {
     this._buildForm();
   }
@@ -73,12 +73,12 @@ export class EditDistributionProfileComponent implements OnInit {
     let updateDisabled = false;
     let updateForAutoDistributionDisabled = false;
     if (!this._forDistribution) {
-      const autoUpdates = this.undistributedProfile.submitEnabled === KalturaDistributionProfileActionStatus.automatic;
+      const autoUpdates = this.undistributedProfile.submitEnabled === VidiunDistributionProfileActionStatus.automatic;
 
       updateForAutoDistributionDisabled = autoUpdates
-        && !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND);
+        && !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND);
 
-      updateDisabled = !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE);
+      updateDisabled = !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE);
     }
 
     return !!(this._createdFilterError || this._missingFlavorError || this._missingThumbnailError
@@ -145,7 +145,7 @@ export class EditDistributionProfileComponent implements OnInit {
     }
   }
 
-  public _deleteProfile(profile: ExtendedKalturaEntryDistribution): void {
+  public _deleteProfile(profile: ExtendedVidiunEntryDistribution): void {
     this.onActionSelected.emit({ action: 'delete', payload: profile });
   }
 
@@ -174,37 +174,37 @@ export class EditDistributionProfileComponent implements OnInit {
       this._startDateField.disable({ onlySelf: true });
       this._endDateField.disable({ onlySelf: true });
 
-      if (!this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND)) {
+      if (!this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND)) {
         this._updatesField.disable({ onlySelf: true });
       }
     } else {
       this._distributionName = this._widget.getProviderName(this.undistributedProfile.providerType);
 
-      if (this.distributedProfile.hasSubmitSentDataLog === KalturaNullableBoolean.trueValue) {
-        this._requestXmlLink = getKalturaServerUri(`/api_v3/index.php/service/contentDistribution_entryDistribution/action/serveSentData/actionType/1/id/${this.distributedProfile.id}/ks/${this._appAuthentication.appUser.ks}`);
+      if (this.distributedProfile.hasSubmitSentDataLog === VidiunNullableBoolean.trueValue) {
+        this._requestXmlLink = getVidiunServerUri(`/api_v3/index.php/service/contentDistribution_entryDistribution/action/serveSentData/actionType/1/id/${this.distributedProfile.id}/vs/${this._appAuthentication.appUser.vs}`);
       }
 
-      if (this.distributedProfile.hasSubmitResultsLog === KalturaNullableBoolean.trueValue) {
-        this._responseXmlLink = getKalturaServerUri(`/api_v3/index.php/service/contentDistribution_entryDistribution/action/serveReturnedData/actionType/1/id/${this.distributedProfile.id}/ks/${this._appAuthentication.appUser.ks}`);
+      if (this.distributedProfile.hasSubmitResultsLog === VidiunNullableBoolean.trueValue) {
+        this._responseXmlLink = getVidiunServerUri(`/api_v3/index.php/service/contentDistribution_entryDistribution/action/serveReturnedData/actionType/1/id/${this.distributedProfile.id}/vs/${this._appAuthentication.appUser.vs}`);
       }
 
-      const autoSubmitEnabled = this.undistributedProfile.submitEnabled === KalturaDistributionProfileActionStatus.automatic
-        && this.distributedProfile.status === KalturaEntryDistributionStatus.queued;
+      const autoSubmitEnabled = this.undistributedProfile.submitEnabled === VidiunDistributionProfileActionStatus.automatic
+        && this.distributedProfile.status === VidiunEntryDistributionStatus.queued;
       if (autoSubmitEnabled) {
         this._updatesField.enable({ onlySelf: true });
       } else {
         this._updatesField.disable({ onlySelf: true });
       }
 
-      const hasAutoSubmit = this.undistributedProfile.submitEnabled === KalturaDistributionProfileActionStatus.automatic;
-      const noSendPermissions = !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND);
-      const noWherePermissions = !this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE);
+      const hasAutoSubmit = this.undistributedProfile.submitEnabled === VidiunDistributionProfileActionStatus.automatic;
+      const noSendPermissions = !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND);
+      const noWherePermissions = !this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_DISTRIBUTION_WHERE);
       if (noWherePermissions || (hasAutoSubmit && noSendPermissions)) {
         this._startDateField.disable({ onlySelf: true });
         this._endDateField.disable({ onlySelf: true });
       }
 
-      const updates = this.undistributedProfile.submitEnabled === KalturaDistributionProfileActionStatus.automatic;
+      const updates = this.undistributedProfile.submitEnabled === VidiunDistributionProfileActionStatus.automatic;
       const startDate = this.distributedProfile.sunrise || null;
       const endDate = this.distributedProfile.sunset || null;
       this._distributionForm.setValue(
@@ -223,7 +223,7 @@ export class EditDistributionProfileComponent implements OnInit {
       const requiredFlavors = requiredFlavorsIds.map(flavorId => {
         const relevantFlavor = this.flavors.find(({ paramsId }) => Number(flavorId) === paramsId);
         if (relevantFlavor) {
-          (<any>relevantFlavor).size = Number(relevantFlavor.size); // prevent kFileSize pipe fail on string
+          (<any>relevantFlavor).size = Number(relevantFlavor.size); // prevent vFileSize pipe fail on string
           return relevantFlavor;
         }
         return { id: flavorId, name: '' };
@@ -264,14 +264,14 @@ export class EditDistributionProfileComponent implements OnInit {
   }
 
   private _prepareThumbnails(): void {
-    const entryThumbnails = this.thumbnails.filter(thumbnail => thumbnail.status === KalturaThumbAssetStatus.ready);
+    const entryThumbnails = this.thumbnails.filter(thumbnail => thumbnail.status === VidiunThumbAssetStatus.ready);
     this._requiredThumbnails = this.undistributedProfile.requiredThumbDimensions.map(thumbnail => {
       const relevantEntryThumbnails = entryThumbnails.filter(item => item.width === thumbnail.width && item.height === thumbnail.height);
       if (relevantEntryThumbnails.length) {
-        (<ExtendedKalturaDistributionThumbDimensions>thumbnail).entryThumbnails = relevantEntryThumbnails.map(relevantEntryThumbnail => ({
+        (<ExtendedVidiunDistributionThumbDimensions>thumbnail).entryThumbnails = relevantEntryThumbnails.map(relevantEntryThumbnail => ({
           id: relevantEntryThumbnail.id,
           size: Number(relevantEntryThumbnail.size),
-          url: getKalturaServerUri(`/api_v3/index.php/service/thumbasset/action/serve/ks/${this._appAuthentication.appUser.ks}/thumbAssetId/${relevantEntryThumbnail.id}`)
+          url: getVidiunServerUri(`/api_v3/index.php/service/thumbasset/action/serve/vs/${this._appAuthentication.appUser.vs}/thumbAssetId/${relevantEntryThumbnail.id}`)
         }));
       } else {
         this._missingThumbnailError = this._appLocalization.get('applications.content.entryDetails.distribution.errors.missingThumbnails');

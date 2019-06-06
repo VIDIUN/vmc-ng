@@ -1,15 +1,15 @@
-<form [formGroup]="_form" novalidate class="kContent">
-  <section class="kFormContainer">
-    <div class="kFormSection">
+<form [formGroup]="_form" novalidate class="vContent">
+  <section class="vFormContainer">
+    <div class="vFormSection">
 
-      <div class="kRow">
-        <span class="kLabel">{{'applications.upload.prepareLive.manualStreamType.name' | translate}}</span>
-        <div class="kRequired" [ngClass]="{'kHasError':!_form.controls['name'].valid &&
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.name' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!_form.controls['name'].valid &&
                    _form.controls['name'].touched}">*
         </div>
         <div>
-          <input class="kControl" formControlName="name" pInputText
-                 [ngClass]="{'kHasError':!_form.controls['name'].valid &&
+          <input class="vControl" formControlName="name" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['name'].valid &&
                    _form.controls['name'].touched}">
           <div *ngIf="_form.controls['name'].touched">
             <div *ngIf="_form.controls['name'].hasError('required')"
@@ -20,23 +20,23 @@
         </div>
       </div>
 
-      <div class="kRow">
-        <span class="kLabel">{{'applications.upload.prepareLive.manualStreamType.description' | translate}}</span>
-        <div class="kRequired"></div>
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.description' | translate}}</span>
+        <div class="vRequired"></div>
         <div>
-          <input class="kControl" formControlName="description" pInputText
-                 [ngClass]="{'kHasError':!_form.controls['description'].valid &&
+          <input class="vControl" formControlName="description" pInputText
+                 [ngClass]="{'vHasError':!_form.controls['description'].valid &&
                    _form.controls['description'].touched}">
         </div>
       </div>
     </div>
     <form [formGroup]="_streamUrlForm" novalidate>
-      <div class="kRow">
-        <span class="kLabel">{{'applications.upload.prepareLive.manualStreamType.flashHDSURL' | translate}}</span>
-        <div class="kRequired"></div>
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.flashHDSURL' | translate}}</span>
+        <div class="vRequired"></div>
         <div>
-          <input class="kControl" formControlName="flashHDSURL" pInputText
-                 [ngClass]="{'kHasError':!_streamUrlForm.controls['flashHDSURL'].valid &&
+          <input class="vControl" formControlName="flashHDSURL" pInputText
+                 [ngClass]="{'vHasError':!_streamUrlForm.controls['flashHDSURL'].valid &&
                    _streamUrlForm.controls['flashHDSURL'].touched}">
           <div *ngIf="_streamUrlForm.controls['flashHDSURL'].touched">
             <div *ngIf="_streamUrlForm.controls['flashHDSURL'].hasError('url')"
@@ -47,12 +47,12 @@
         </div>
       </div>
 
-      <div class="kRow">
-        <span class="kLabel">{{'applications.upload.prepareLive.manualStreamType.hlsStreamUrl' | translate}}</span>
-        <div class="kRequired"></div>
+      <div class="vRow">
+        <span class="vLabel">{{'applications.upload.prepareLive.manualStreamType.hlsStreamUrl' | translate}}</span>
+        <div class="vRequired"></div>
         <div>
-          <input class="kControl" formControlName="hlsStreamUrl" pInputText
-                 [ngClass]="{'kHasError':!_streamUrlForm.controls['hlsStreamUrl'].valid &&
+          <input class="vControl" formControlName="hlsStreamUrl" pInputText
+                 [ngClass]="{'vHasError':!_streamUrlForm.controls['hlsStreamUrl'].valid &&
                    _streamUrlForm.controls['hlsStreamUrl'].touched}">
           <div *ngIf="_streamUrlForm.controls['hlsStreamUrl'].touched">
             <div *ngIf="_streamUrlForm.controls['hlsStreamUrl'].hasError('url')"
@@ -63,7 +63,7 @@
         </div>
       </div>
     </form>
-    <div class="kRow">
+    <div class="vRow">
       <div
         *ngIf="_streamUrlForm.touched && _streamUrlForm.hasError('atLeastOneUrl')"
         class="error">
@@ -71,8 +71,8 @@
       </div>
     </div>
 
-    <div class="kRow">
-        <span class="kPreviewMode">
+    <div class="vRow">
+        <span class="vPreviewMode">
           <p-checkbox
             label="{{'applications.upload.prepareLive.manualStreamType.useAkamaiHdProtocol' | translate}}"
             formControlName="useAkamaiHdProtocol" binary="true"></p-checkbox></span>

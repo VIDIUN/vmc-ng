@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
-import { KalturaLogger, LogLevels } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger, LogLevels } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { environment } from '../../../environments/environment';
 
 export interface LogsRecordMode {
@@ -11,7 +11,7 @@ export interface LogsRecordMode {
 }
 
 @Injectable()
-export class KmcLoggerConfigurator implements OnDestroy {
+export class VmcLoggerConfigurator implements OnDestroy {
     private _ready = false;
     private _logsRecordMode = new BehaviorSubject<LogsRecordMode>({ enabled: false, logLevel: 'Off' });
     private _currentLevel: LogLevels;
@@ -25,9 +25,9 @@ export class KmcLoggerConfigurator implements OnDestroy {
     }
 
 
-    constructor(private _logger: KalturaLogger,
+    constructor(private _logger: VidiunLogger,
                 private _browserService: BrowserService) {
-        this._logger = _logger.subLogger('KmcLoggerConfigurator');
+        this._logger = _logger.subLogger('VmcLoggerConfigurator');
     }
 
     ngOnDestroy() {

@@ -1,21 +1,21 @@
 @import 'app-theme/_variables.scss';
 
-.kThumbnail {
+.vThumbnail {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
 
-  .kThumbnailWrapper {
+  .vThumbnailWrapper {
     position: relative;
 
-    .kThumbnailSpinner {
+    .vThumbnailSpinner {
       height: 34px;
       width: 42px;
       border-radius: 5px;
       position: absolute;
       top: -5px;
       right: -5px;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       z-index: 99999;
       display: flex;
       cursor: pointer;
@@ -26,17 +26,17 @@
         outline: none;
       }
 
-      .kIconrefresh {
+      .vIconrefresh {
         font-size: 24px;
         font-weight: 500;
       }
     }
-    .kThumbnailHolder {
+    .vThumbnailHolder {
       overflow: hidden;
       position: relative;
       width: 116px;
       height: 65px;
-      background-color: $kGrayscale7;
+      background-color: $vGrayscale7;
       white-space: nowrap;
       text-align: center;
       border-radius: 5px;
@@ -58,21 +58,21 @@
     }
   }
 
-  .kThumbnailInfo {
+  .vThumbnailInfo {
     margin-left: 16px;
 
-    .kThumbnailDimensions {
+    .vThumbnailDimensions {
       font-size: 15px;
       font-weight: bold;
       margin-bottom: 15px;
     }
 
-    .kThumbnailMetadata {
+    .vThumbnailMetadata {
       font-size: 14px;
-      .kThumbnailMissingMetadata {
-        color: $kDandger;
+      .vThumbnailMissingMetadata {
+        color: $vDandger;
 
-        .kThumbnailMissingIcon {
+        .vThumbnailMissingIcon {
           font-size: 20px;
           margin-right: 8px;
           position: relative;
@@ -82,13 +82,13 @@
         }
       }
 
-      .kThumbnailMetadataDelimiter {
+      .vThumbnailMetadataDelimiter {
         margin: 0 10px;
 
         &:after {
           content: '|';
           font-size: 12px;
-          color: $kGrayscale4;
+          color: $vGrayscale4;
           top: -1px;
           position: relative;
         }

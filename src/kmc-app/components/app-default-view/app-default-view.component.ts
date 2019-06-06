@@ -1,25 +1,25 @@
 import { Component, OnDestroy } from '@angular/core';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KmcMainViewsService } from 'app-shared/kmc-shared/kmc-views';
-import { AppAuthentication, BrowserService } from 'app-shared/kmc-shell';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VmcMainViewsService } from 'app-shared/vmc-shared/vmc-views';
+import { AppAuthentication, BrowserService } from 'app-shared/vmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
 
 @Component({
     selector: 'app-default-view',
     templateUrl: './app-default-view.component.html',
     styleUrls: ['./app-default-view.component.scss'],
     providers: [
-        KalturaLogger.createLogger('AppDefaultViewComponent')
+        VidiunLogger.createLogger('AppDefaultViewComponent')
     ],
 })
 export class AppDefaultViewComponent implements OnDestroy {
     constructor(
-        private _logger: KalturaLogger,
+        private _logger: VidiunLogger,
         private _browserService: BrowserService,
         private _appAuthentication: AppAuthentication,
         private _appLocalization: AppLocalization,
-        private _viewsManager: KmcMainViewsService) {
+        private _viewsManager: VmcMainViewsService) {
         this.navigateToDefault();
     }
 

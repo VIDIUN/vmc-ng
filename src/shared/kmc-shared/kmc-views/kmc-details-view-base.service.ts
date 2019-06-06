@@ -1,8 +1,8 @@
 import { Observable, of as ObservableOf, throwError as ObservableThrowError } from 'rxjs';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 import { catchError, map, tap } from 'rxjs/internal/operators';
 
 
@@ -11,11 +11,11 @@ export interface DetailsViewMetadata {
     viewKey: string;
 }
 
-export abstract class KmcDetailsViewBaseService<TArgs extends {}> {
+export abstract class VmcDetailsViewBaseService<TArgs extends {}> {
 
     private _lastArgsUsedByOpen: TArgs = null;
 
-    protected constructor(protected _logger: KalturaLogger,
+    protected constructor(protected _logger: VidiunLogger,
                           protected _browserService: BrowserService,
                           private _titleService: Title,
                           private _contextualHelpService: ContextualHelpService) {
@@ -79,7 +79,7 @@ export abstract class KmcDetailsViewBaseService<TArgs extends {}> {
         this._logger.info('handle view entered');
         if (this.isAvailable(args)) {
             const metadata = this.getViewMetadata(args);
-            const title = `KMC > ${metadata.title || ''}`;
+            const title = `VMC > ${metadata.title || ''}`;
             this._logger.info('update browser page title', { title });
             this._titleService.setTitle(title);
             this._contextualHelpService.updateHelpItems(metadata.viewKey);

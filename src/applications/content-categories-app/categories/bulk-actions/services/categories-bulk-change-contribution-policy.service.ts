@@ -1,25 +1,25 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
 import {CategoriesBulkActionBaseService} from './categories-bulk-action-base.service';
-import {CategoryUpdateAction} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {KalturaContributionPolicyType} from 'kaltura-ngx-client';
+import {CategoryUpdateAction} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {VidiunContributionPolicyType} from 'vidiun-ngx-client';
 
 @Injectable()
-export class CategoriesBulkChangeContributionPolicyService extends CategoriesBulkActionBaseService<KalturaContributionPolicyType> {
+export class CategoriesBulkChangeContributionPolicyService extends CategoriesBulkActionBaseService<VidiunContributionPolicyType> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedCategories: KalturaCategory[], policyType: KalturaContributionPolicyType): Observable<{}>{
+  public execute(selectedCategories: VidiunCategory[], policyType: VidiunContributionPolicyType): Observable<{}>{
     return Observable.create(observer => {
 
       const requests: CategoryUpdateAction[] = [];
 
       selectedCategories.forEach(category => {
-        const updatedCategory: KalturaCategory = new KalturaCategory();
+        const updatedCategory: VidiunCategory = new VidiunCategory();
         updatedCategory.contributionPolicy = policyType;
         requests.push(new CategoryUpdateAction({
           id: category.id,

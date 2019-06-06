@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'kReleaseNotes',
+  selector: 'vReleaseNotes',
   templateUrl: './release-notes.component.html',
   styleUrls: ['./release-notes.component.scss']
 })

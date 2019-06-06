@@ -1,23 +1,23 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EntryPreviewWidget} from './entry-preview-widget.service';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaEntryStatus} from 'kaltura-ngx-client';
-import {AppEventsService} from 'app-shared/kmc-shared';
-import {PreviewAndEmbedEvent} from 'app-shared/kmc-shared/events';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
-import {KMCPermissionsService} from 'app-shared/kmc-shared/kmc-permissions/kmc-permissions.service';
-import {KMCPermissions} from 'app-shared/kmc-shared/kmc-permissions';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { ClipAndTrimAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunEntryStatus} from 'vidiun-ngx-client';
+import {AppEventsService} from 'app-shared/vmc-shared';
+import {PreviewAndEmbedEvent} from 'app-shared/vmc-shared/events';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
+import {VMCPermissionsService} from 'app-shared/vmc-shared/vmc-permissions/vmc-permissions.service';
+import {VMCPermissions} from 'app-shared/vmc-shared/vmc-permissions';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { ClipAndTrimAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
 import { EntryStore } from '../entry-store.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-	selector: 'kEntryPreview',
+	selector: 'vEntryPreview',
 	templateUrl: './entry-preview.component.html',
 	styleUrls: ['./entry-preview.component.scss'],
   providers: [
-    KalturaLogger.createLogger('EntryPreviewComponent')
+    VidiunLogger.createLogger('EntryPreviewComponent')
   ]
 })
 export class EntryPreview implements OnInit, OnDestroy {
@@ -28,13 +28,13 @@ export class EntryPreview implements OnInit, OnDestroy {
     public _previewDisabled = false;
 
 
-  private _currentEntry: KalturaMediaEntry;
+  private _currentEntry: VidiunMediaEntry;
 
 
 	constructor(public _widgetService: EntryPreviewWidget,
               private _appLocalization: AppLocalization,
                 private _clipAndTrimAppViewService: ClipAndTrimAppViewService,
-                private _permissionsService: KMCPermissionsService,
+                private _permissionsService: VMCPermissionsService,
               private _appEvents: AppEventsService,
                 private _store: EntryStore) {
 	}
@@ -52,7 +52,7 @@ export class EntryPreview implements OnInit, OnDestroy {
     }
 
 	ngOnInit() {
-        const hasEmbedPermission = this._permissionsService.hasPermission(KMCPermissions.CONTENT_MANAGE_EMBED_CODE);
+        const hasEmbedPermission = this._permissionsService.hasPermission(VMCPermissions.CONTENT_MANAGE_EMBED_CODE);
         this._actionLabel = hasEmbedPermission
             ? this._appLocalization.get('applications.content.entryDetails.preview.pande')
             : this._appLocalization.get('applications.content.entryDetails.preview.previewInPlayer');
@@ -72,7 +72,7 @@ export class EntryPreview implements OnInit, OnDestroy {
             data => {
                 if (data) {
                     this._currentEntry = data;
-                    const entryHasContent = this._currentEntry.status.toString() !== KalturaEntryStatus.noContent.toString();
+                    const entryHasContent = this._currentEntry.status.toString() !== VidiunEntryStatus.noContent.toString();
 
                     this._previewDisabled = !entryHasContent;
                 }

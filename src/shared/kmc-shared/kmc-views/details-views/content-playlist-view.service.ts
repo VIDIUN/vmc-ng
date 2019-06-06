@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissionsService } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { KalturaPlaylistType } from 'kaltura-ngx-client';
-import { KalturaPlaylist } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { VidiunPlaylistType } from 'vidiun-ngx-client';
+import { VidiunPlaylist } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 export enum ContentPlaylistViewSections {
     Metadata = 'Metadata',
@@ -19,20 +19,20 @@ export enum ContentPlaylistViewSections {
 }
 
 export interface ContentPlaylistViewArgs {
-    playlist: KalturaPlaylist;
+    playlist: VidiunPlaylist;
     section: ContentPlaylistViewSections;
     activatedRoute?: ActivatedRoute;
 }
 
 
 @Injectable()
-export class ContentPlaylistViewService extends KmcDetailsViewBaseService<ContentPlaylistViewArgs> {
+export class ContentPlaylistViewService extends VmcDetailsViewBaseService<ContentPlaylistViewArgs> {
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _appLocalization: AppLocalization,
                 private _router: Router,
                 _browserService: BrowserService,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {
         super(_logger.subLogger('ContentPlaylistViewService'), _browserService, _titleService, _contextualHelpService);
@@ -55,7 +55,7 @@ export class ContentPlaylistViewService extends KmcDetailsViewBaseService<Conten
         return this._isSectionEnabled(section, args.playlist);
     }
 
-    private _getSectionFromActivatedRoute(activatedRoute: ActivatedRoute, playlist: KalturaPlaylist): ContentPlaylistViewSections {
+    private _getSectionFromActivatedRoute(activatedRoute: ActivatedRoute, playlist: VidiunPlaylist): ContentPlaylistViewSections {
         let result = null;
 
         if (activatedRoute) {
@@ -63,7 +63,7 @@ export class ContentPlaylistViewService extends KmcDetailsViewBaseService<Conten
                 const sectionToken = activatedRoute.snapshot.firstChild.url[0].path;
                 switch (sectionToken) {
                     case 'content':
-                        result = playlist.playlistType === KalturaPlaylistType.staticList
+                        result = playlist.playlistType === VidiunPlaylistType.staticList
                             ? ContentPlaylistViewSections.Content
                             : ContentPlaylistViewSections.ContentRuleBased;
                         break;
@@ -102,14 +102,14 @@ export class ContentPlaylistViewService extends KmcDetailsViewBaseService<Conten
         return result;
     }
 
-    private _isSectionEnabled(section: ContentPlaylistViewSections, playlist: KalturaPlaylist): boolean {
+    private _isSectionEnabled(section: ContentPlaylistViewSections, playlist: VidiunPlaylist): boolean {
         let result = false;
         switch (section) {
             case ContentPlaylistViewSections.Content:
-                result = playlist.playlistType === KalturaPlaylistType.staticList;
+                result = playlist.playlistType === VidiunPlaylistType.staticList;
                 break;
             case ContentPlaylistViewSections.ContentRuleBased:
-                result = playlist.playlistType === KalturaPlaylistType.dynamic;
+                result = playlist.playlistType === VidiunPlaylistType.dynamic;
                 break;
             case ContentPlaylistViewSections.Metadata:
                 // metadata section is always available to the user.

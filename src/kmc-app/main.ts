@@ -7,7 +7,7 @@ import { globalConfig } from 'config/global';
 import { externalAppsConfigurationAdapter } from 'config/server';
 
 declare var __webpack_require__: any;
-declare var kmcConfig;
+declare var vmcConfig;
 
 if (environment.client.useSecuredProtocol && location.protocol !== 'https:') {
     console.error(`user tries to use insecure protocol, redirect to secured protocol`);
@@ -17,17 +17,17 @@ if (environment.client.useSecuredProtocol && location.protocol !== 'https:') {
 // this feature reuires manipulation on the index.html as well so it should be used
 // in production only.
     (function () {
-        if (kmcConfig && kmcConfig.kalturaServer && kmcConfig.kalturaServer.deployUrl) {
+        if (vmcConfig && vmcConfig.vidiunServer && vmcConfig.vidiunServer.deployUrl) {
 
-            __webpack_require__.p = kmcConfig.kalturaServer.deployUrl;
+            __webpack_require__.p = vmcConfig.vidiunServer.deployUrl;
         }
     }());
 
     if (environment.production) {
         enableProdMode();
-        console.log(`Running KMCng version '${globalConfig.client.appVersion}' (Production mode)`);
+        console.log(`Running VMCng version '${globalConfig.client.appVersion}' (Production mode)`);
     } else {
-        console.log(`Running KMCng version '${globalConfig.client.appVersion}' (Development mode)`);
+        console.log(`Running VMCng version '${globalConfig.client.appVersion}' (Development mode)`);
     }
 
 

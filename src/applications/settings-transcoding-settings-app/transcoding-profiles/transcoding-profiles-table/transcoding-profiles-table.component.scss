@@ -1,35 +1,35 @@
 @import 'app-theme/_variables.scss';
 
-.kTranscodingProfilesTable {
+.vTranscodingProfilesTable {
     .emptymessage {
         display: table-row;
         border: 0;
         height: 200px;
 
-        .kEmptyMessage {
+        .vEmptyMessage {
             position: absolute;
             width: 100%;
             height: 200px;
-            border-bottom: 1px solid $kGrayscale4;
+            border-bottom: 1px solid $vGrayscale4;
         }
     }
 
-  .kTranscodingProfileNameWrapper {
+  .vTranscodingProfileNameWrapper {
     display: flex;
     align-items: center;
 
-    .kTranscodingProfileName {
+    .vTranscodingProfileName {
       font-size: 15px;
       font-weight: bold;
-      color: $kGrayscale1;
+      color: $vGrayscale1;
       cursor: pointer;
     }
 
-    .kTranscodingProfileNameDefault {
+    .vTranscodingProfileNameDefault {
       font-size: 12px;
       font-weight: bold;
       color: #FFFFFF;
-      background-color: $kSecondary;
+      background-color: $vSecondary;
       border-radius: 9px;
       padding: 3px 10px;
       margin-left: 35px;
@@ -37,17 +37,17 @@
     }
   }
 
-  .kTranscodingProfilesTableActions {
+  .vTranscodingProfilesTableActions {
     width: 100%;
     text-align: center;
-    .kMoreActionsButton {
+    .vMoreActionsButton {
 
     }
   }
 }
 
-:host /deep/ .kTranscodingProfilesTable {
-    &:not(.kSingleTableMode) {
+:host /deep/ .vTranscodingProfilesTable {
+    &:not(.vSingleTableMode) {
         .ui-table-scrollable-body {
             max-height: 280px !important;
         }
@@ -65,6 +65,6 @@
 
 :host /deep/ p-table {
     .ui-table .ui-table-thead > tr > th {
-        border-left: 1px solid $kGrayscale6;
+        border-left: 1px solid $vGrayscale6;
     }
 }

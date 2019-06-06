@@ -1,29 +1,29 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
 import {
-  ExtendedKalturaConversionProfileAssetParams,
-  KalturaConversionProfileWithAsset
+  ExtendedVidiunConversionProfileAssetParams,
+  VidiunConversionProfileWithAsset
 } from '../../../transcoding-profiles/transcoding-profiles-store/base-transcoding-profiles-store.service';
-import { KalturaFlavorParams } from 'kaltura-ngx-client';
-import { KalturaConversionProfileAssetParams } from 'kaltura-ngx-client';
-import { KalturaObjectBaseFactory } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunFlavorParams } from 'vidiun-ngx-client';
+import { VidiunConversionProfileAssetParams } from 'vidiun-ngx-client';
+import { VidiunObjectBaseFactory } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 
 @Component({
-  selector: 'kEditLiveFlavor',
+  selector: 'vEditLiveFlavor',
   templateUrl: './edit-live-flavor.component.html',
   styleUrls: ['./edit-live-flavor.component.scss'],
-  providers: [KalturaLogger.createLogger('EditLiveFlavorComponent')]
+  providers: [VidiunLogger.createLogger('EditLiveFlavorComponent')]
 })
 export class EditLiveFlavorComponent implements OnInit {
-  @Input() profile: KalturaConversionProfileWithAsset;
-  @Input() flavor: KalturaFlavorParams;
+  @Input() profile: VidiunConversionProfileWithAsset;
+  @Input() flavor: VidiunFlavorParams;
   @Input() parentPopupWidget: PopupWidgetComponent;
 
-  @Output() saveFlavor = new EventEmitter<ExtendedKalturaConversionProfileAssetParams>();
+  @Output() saveFlavor = new EventEmitter<ExtendedVidiunConversionProfileAssetParams>();
 
-  private _assetParams: ExtendedKalturaConversionProfileAssetParams;
+  private _assetParams: ExtendedVidiunConversionProfileAssetParams;
 
   public _editFlavorForm: FormGroup;
   public _profileNameField: AbstractControl;
@@ -31,7 +31,7 @@ export class EditLiveFlavorComponent implements OnInit {
   public _systemNameField: AbstractControl;
 
   constructor(private _fb: FormBuilder,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
     this._buildForm();
   }
 
@@ -60,14 +60,14 @@ export class EditLiveFlavorComponent implements OnInit {
     }, { emitEvent: false });
   }
 
-  private _getFlavorAssetParams(): ExtendedKalturaConversionProfileAssetParams {
+  private _getFlavorAssetParams(): ExtendedVidiunConversionProfileAssetParams {
     const assets = this.profile.assets || [];
     const relevantAssetParam = assets.find(({ assetParamsId }) => this.flavor.id === assetParamsId);
-    if (relevantAssetParam instanceof KalturaConversionProfileAssetParams) {
-      return Object.assign(KalturaObjectBaseFactory.createObject(relevantAssetParam), relevantAssetParam);
+    if (relevantAssetParam instanceof VidiunConversionProfileAssetParams) {
+      return Object.assign(VidiunObjectBaseFactory.createObject(relevantAssetParam), relevantAssetParam);
     }
 
-    const newAssetParam: ExtendedKalturaConversionProfileAssetParams = new KalturaConversionProfileAssetParams();
+    const newAssetParam: ExtendedVidiunConversionProfileAssetParams = new VidiunConversionProfileAssetParams();
     // bypass readonly mode
     (<any>newAssetParam).conversionProfileId = this.profile.id;
     (<any>newAssetParam).assetParamsId = this.flavor.id;

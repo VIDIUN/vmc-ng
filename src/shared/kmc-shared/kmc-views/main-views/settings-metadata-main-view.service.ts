@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class SettingsMetadataMainViewService extends KmcMainViewBaseService {
+export class SettingsMetadataMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -25,10 +25,10 @@ export class SettingsMetadataMainViewService extends KmcMainViewBaseService {
 
     isAvailable(): boolean {
         return this._appPermissions.hasAnyPermissions([
-            KMCPermissions.CUSTOM_DATA_PROFILE_BASE,
-            KMCPermissions.CUSTOM_DATA_PROFILE_ADD,
-            KMCPermissions.CUSTOM_DATA_PROFILE_UPDATE,
-            KMCPermissions.CUSTOM_DATA_PROFILE_DELETE
+            VMCPermissions.CUSTOM_DATA_PROFILE_BASE,
+            VMCPermissions.CUSTOM_DATA_PROFILE_ADD,
+            VMCPermissions.CUSTOM_DATA_PROFILE_UPDATE,
+            VMCPermissions.CUSTOM_DATA_PROFILE_DELETE
         ]);
     }
 

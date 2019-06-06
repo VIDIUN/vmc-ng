@@ -5,9 +5,9 @@ import {
   EntriesStorePaginationCacheToken
 } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 import { EntriesTableColumns } from 'app-shared/content-shared/entries/entries-table/entries-table.component';
-import { KalturaExternalMediaSourceType, KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaObjectBaseFactory } from 'kaltura-ngx-client';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunExternalMediaSourceType, VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunObjectBaseFactory } from 'vidiun-ngx-client';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 export enum EntriesSelectorSelectionMode {
   multiple = 'multiple',
@@ -16,7 +16,7 @@ export enum EntriesSelectorSelectionMode {
 }
 
 @Component({
-  selector: 'kEntriesSelector',
+  selector: 'vEntriesSelector',
   templateUrl: './entries-selector.component.html',
   styleUrls: ['./entries-selector.component.scss'],
   providers: [
@@ -26,11 +26,11 @@ export enum EntriesSelectorSelectionMode {
 })
 export class EntriesSelectorComponent {
 
-  public _kmcPermissions = KMCPermissions;
-    public _youtubeExternalSourceType = KalturaExternalMediaSourceType.youtube;
+  public _vmcPermissions = VMCPermissions;
+    public _youtubeExternalSourceType = VidiunExternalMediaSourceType.youtube;
 
   @Input() selectionMode: EntriesSelectorSelectionMode = EntriesSelectorSelectionMode.multiple;
-  @Input() selectedEntries: KalturaMediaEntry[] = [];
+  @Input() selectedEntries: VidiunMediaEntry[] = [];
   @Input() enforcedFilters: Partial<EntriesFilters>;
   @Input() defaultFilters: Partial<EntriesFilters>;
   @Input() columns: EntriesTableColumns = {
@@ -42,13 +42,13 @@ export class EntriesSelectorComponent {
     addToBucket: { sortable: false, width: '80px' }
   };
 
-  @Output() selectedEntriesChange = new EventEmitter<KalturaMediaEntry[]>();
+  @Output() selectedEntriesChange = new EventEmitter<VidiunMediaEntry[]>();
   @ViewChild(EntriesListComponent) public _entriesList: EntriesListComponent;
 
   constructor(public _entriesStore: EntriesStore) {
   }
 
-  public _onActionSelected({ action, entry }: { action: string, entry: KalturaMediaEntry }): void {
+  public _onActionSelected({ action, entry }: { action: string, entry: VidiunMediaEntry }): void {
     switch (action) {
       case 'addToBucket':
         this._addToBucket(entry);
@@ -58,15 +58,15 @@ export class EntriesSelectorComponent {
     }
   }
 
-  public _removeSelected(entry: KalturaMediaEntry): void {
+  public _removeSelected(entry: VidiunMediaEntry): void {
     this.selectedEntries.splice(this.selectedEntries.indexOf(entry), 1);
     this.selectedEntriesChange.emit(this.selectedEntries);
   }
 
-  public _addToBucket(entry: KalturaMediaEntry): void {
+  public _addToBucket(entry: VidiunMediaEntry): void {
     switch (this.selectionMode) {
       case EntriesSelectorSelectionMode.multiple:
-        const clonedEntry = <KalturaMediaEntry>Object.assign(KalturaObjectBaseFactory.createObject(entry), entry);
+        const clonedEntry = <VidiunMediaEntry>Object.assign(VidiunObjectBaseFactory.createObject(entry), entry);
         this.selectedEntries.push(clonedEntry);
         break;
 

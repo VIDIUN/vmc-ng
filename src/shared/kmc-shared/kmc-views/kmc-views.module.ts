@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { KmcMainViewsService } from './kmc-main-views.service';
+import { VmcMainViewsService } from './vmc-main-views.service';
 import {
     AdminRolesMainViewService,
     AdminUsersMainViewService,
@@ -42,8 +42,8 @@ import {
     ClipAndTrimAppViewService,
     LiveDashboardAppViewService,
 } from './component-views';
-import { QuizAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views';
-import { HotspotsAppViewService } from 'app-shared/kmc-shared/kmc-views/component-views/hotspots-app-view.service';
+import { QuizAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views';
+import { HotspotsAppViewService } from 'app-shared/vmc-shared/vmc-views/component-views/hotspots-app-view.service';
 
 @NgModule({
     imports: <any[]>[],
@@ -51,12 +51,12 @@ import { HotspotsAppViewService } from 'app-shared/kmc-shared/kmc-views/componen
     exports: <any[]>[],
     providers: <any[]>[]
 })
-export class KmcViewsModule {
+export class VmcViewsModule {
     static forRoot(): ModuleWithProviders {
         return {
-            ngModule: KmcViewsModule,
+            ngModule: VmcViewsModule,
             providers: <any[]>[
-                KmcMainViewsService,
+                VmcMainViewsService,
                 ContentEntriesMainViewService,
                 ContentCategoriesMainViewService,
                 ContentModerationMainViewService,
@@ -95,7 +95,7 @@ export class KmcViewsModule {
                 ReachAppViewService,
                 ServicesDashboardMainViewService,
                 AnalyticsNewMainViewService,
-                KmcMainViewsService // NOTICE: this one should be the last since it depends on the others
+                VmcMainViewsService // NOTICE: this one should be the last since it depends on the others
             ]
         };
     }

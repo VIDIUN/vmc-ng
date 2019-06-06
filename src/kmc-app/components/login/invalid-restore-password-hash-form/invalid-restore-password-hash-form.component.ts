@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'kInvalidRetorePasswordHash',
+    selector: 'vInvalidRetorePasswordHash',
     templateUrl: './invalid-restore-password-hash-form.component.html',
     styleUrls: ['./invalid-restore-password-hash-form.component.scss']
 })

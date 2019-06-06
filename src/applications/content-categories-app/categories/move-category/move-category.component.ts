@@ -1,31 +1,31 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
 import { CategoriesService } from '../categories.service';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { KalturaCategory } from 'kaltura-ngx-client';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { VidiunCategory } from 'vidiun-ngx-client';
 import {
   CategoriesStatus,
   CategoriesStatusMonitorService
 } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
 import { SelectedCategory } from 'app-shared/content-shared/categories/category-selector/category-selector.component';
 import { Observable } from 'rxjs';
-import { CategoriesGraphUpdatedEvent } from 'app-shared/kmc-shared/app-events/categories-graph-updated/categories-graph-updated';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { CategoriesGraphUpdatedEvent } from 'app-shared/vmc-shared/app-events/categories-graph-updated/categories-graph-updated';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kMoveCategory',
+  selector: 'vMoveCategory',
   templateUrl: './move-category.component.html',
   styleUrls: ['./move-category.component.scss'],
-    providers: [KalturaLogger.createLogger('MoveCategoryComponent')]
+    providers: [VidiunLogger.createLogger('MoveCategoryComponent')]
 })
 export class MoveCategoryComponent implements OnInit, OnDestroy {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() selectedCategories: KalturaCategory[];
+  @Input() selectedCategories: VidiunCategory[];
   @Output() onMovedCategories = new EventEmitter<null>();
 
   public _blockerMessage: AreaBlockerMessage = null;
@@ -37,7 +37,7 @@ export class MoveCategoryComponent implements OnInit, OnDestroy {
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService,
               private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -180,7 +180,7 @@ export class MoveCategoryComponent implements OnInit, OnDestroy {
         });
   }
 
-  private _validateCategoryMove(categoryToMove: KalturaCategory) {
+  private _validateCategoryMove(categoryToMove: VidiunCategory) {
     if (this._selectedParentCategory === 'missing') {
       return Observable.of(false);
     }

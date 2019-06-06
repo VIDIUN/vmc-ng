@@ -1,15 +1,15 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
-import {IAppStorage} from '@kaltura-ng/kaltura-common';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {IAppStorage} from '@vidiun-ng/vidiun-common';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 import {Subject} from 'rxjs/Subject';
 import { Observable } from 'rxjs';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Router, ActivatedRoute, NavigationExtras, NavigationEnd, RoutesRecognized } from '@angular/router';
-import { kmcAppConfig } from '../../../kmc-app/kmc-app-config';
-import { AppEventsService } from 'app-shared/kmc-shared/app-events/app-events.service';
-import { OpenEmailEvent } from 'app-shared/kmc-shared/events';
-import { EmailConfig } from '../../../kmc-app/components/open-email/open-email.component';
+import { vmcAppConfig } from '../../../vmc-app/vmc-app-config';
+import { AppEventsService } from 'app-shared/vmc-shared/app-events/app-events.service';
+import { OpenEmailEvent } from 'app-shared/vmc-shared/events';
+import { EmailConfig } from '../../../vmc-app/components/open-email/open-email.component';
 import { serverConfig } from 'config/server';
 import { PageExitVerificationService } from '../page-exit-verification';
 import { filter, map, pairwise } from 'rxjs/operators';
@@ -95,7 +95,7 @@ export class BrowserService implements IAppStorage {
     constructor(private localStorage: LocalStorageService,
                 private sessionStorage: SessionStorageService,
                 private _router: Router,
-                private _logger: KalturaLogger,
+                private _logger: VidiunLogger,
                 private _appEvents: AppEventsService,
                 private _appLocalization: AppLocalization,
                 private _pageExitVerificationService: PageExitVerificationService) {
@@ -235,8 +235,8 @@ export class BrowserService implements IAppStorage {
     public openSupport(): void{
         let emailAddress = null;
         let msg = this._appLocalization.get('app.openMail.supportMailMsg');
-        if (serverConfig.externalLinks.kaltura && serverConfig.externalLinks.kaltura.support){
-            emailAddress = serverConfig.externalLinks.kaltura.support;
+        if (serverConfig.externalLinks.vidiun && serverConfig.externalLinks.vidiun.support){
+            emailAddress = serverConfig.externalLinks.vidiun.support;
             msg = this._appLocalization.get('app.openMail.supportMailMsgNoMail');
         }
         this.openEmail({
@@ -409,7 +409,7 @@ export class BrowserService implements IAppStorage {
 
     public navigateToLoginWithStatus(): Observable<boolean> {
         this._logger.info(`navigate to login view`);
-        return Observable.fromPromise(this._router.navigateByUrl(kmcAppConfig.routing.loginRoute, {replaceUrl: true}));
+        return Observable.fromPromise(this._router.navigateByUrl(vmcAppConfig.routing.loginRoute, {replaceUrl: true}));
     }
 
     public navigateToLogin(): void {
@@ -423,12 +423,12 @@ export class BrowserService implements IAppStorage {
             extras = { replaceUrl: true };
         }
         this._logger.info(`navigate to default view`, {removeCurrentFromBrowserHistory});
-        this._router.navigate([kmcAppConfig.routing.defaultRoute], extras);
+        this._router.navigate([vmcAppConfig.routing.defaultRoute], extras);
     }
 
     public navigateToError(): void {
         this._logger.info(`navigate to error view`);
-        this._router.navigateByUrl(kmcAppConfig.routing.errorRoute, { replaceUrl: true });
+        this._router.navigateByUrl(vmcAppConfig.routing.errorRoute, { replaceUrl: true });
     }
 
     public navigate(path: string): void {
@@ -497,7 +497,7 @@ export class BrowserService implements IAppStorage {
     }
 
     public getCurrentDateFormat(forCalendarComponent = false): string {
-        const format = this.getFromLocalStorage('kmc_date_format') || 'month-day-year';
+        const format = this.getFromLocalStorage('vmc_date_format') || 'month-day-year';
         return forCalendarComponent
             ? (format === 'month-day-year' ? 'mm/dd/yy' : 'dd/mm/yy')
             : (format === 'month-day-year' ? 'MM/DD/YYYY' : 'DD/MM/YYYY');

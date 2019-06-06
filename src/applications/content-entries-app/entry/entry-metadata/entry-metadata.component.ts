@@ -2,20 +2,20 @@ import { Component,  QueryList, ViewChildren, ElementRef, Inject, ViewChild, Aft
 import { DOCUMENT } from '@angular/common';
 
 import { Subject } from 'rxjs/Subject';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 
 import { MenuItem } from 'primeng/primeng';
 import { ISubscription } from 'rxjs/Subscription';
 import { EntryMetadataWidget } from './entry-metadata-widget.service';
 import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import { JumpToSection } from './jump-to-section.component';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { CategoryTooltipPipe } from 'app-shared/content-shared/categories/category-tooltip.pipe';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { CategoriesStatusMonitorService, CategoriesStatus } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
 import { subApplicationsConfig } from 'config/sub-applications';
 import {
     EntriesManualExecutionModeToken,
@@ -23,7 +23,7 @@ import {
 } from 'app-shared/content-shared/entries/entries-store/entries-store.service';
 
 @Component({
-    selector: 'kEntryMetadata',
+    selector: 'vEntryMetadata',
     templateUrl: './entry-metadata.component.html',
     styleUrls: ['./entry-metadata.component.scss'],
     providers: [
@@ -38,7 +38,7 @@ export class EntryMetadata implements AfterViewInit, OnInit, OnDestroy {
     private _searchTagsSubscription : ISubscription;
     public _categoriesProvider = new Subject<SuggestionsProviderData>();
     public _tagsProvider = new Subject<SuggestionsProviderData>();
-    public _kmcPermissions = KMCPermissions;
+    public _vmcPermissions = VMCPermissions;
 	public _jumpToMenu: MenuItem[] = [];
 	@ViewChild('categoriesPopup') public categoriesPopup: PopupWidgetComponent;
 	private _popupStateChangeSubscribe: ISubscription;
@@ -55,7 +55,7 @@ export class EntryMetadata implements AfterViewInit, OnInit, OnDestroy {
     };
 
     public get _categoriesErrorMessage(): string {
-        const limit = this._permissionsService.hasPermission(KMCPermissions.FEATURE_DISABLE_CATEGORY_LIMIT)
+        const limit = this._permissionsService.hasPermission(VMCPermissions.FEATURE_DISABLE_CATEGORY_LIMIT)
             ? subApplicationsConfig.contentEntriesApp.maxLinkedCategories.extendedLimit
             : subApplicationsConfig.contentEntriesApp.maxLinkedCategories.defaultLimit;
         return this._appLocalization.get('applications.content.entryDetails.metadata.maxCategoriesLinked', [limit]);
@@ -65,7 +65,7 @@ export class EntryMetadata implements AfterViewInit, OnInit, OnDestroy {
                 private _pageScrollService: PageScrollService,
                 private _appLocalization: AppLocalization,
                 private _browserService: BrowserService,
-                private _permissionsService: KMCPermissionsService,
+                private _permissionsService: VMCPermissionsService,
                 private _categoriesStatusMonitorService: CategoriesStatusMonitorService,
                 @Inject(DOCUMENT) private document: any) {
         this._categoriesTooltipPipe  = new CategoryTooltipPipe(this._appLocalization);

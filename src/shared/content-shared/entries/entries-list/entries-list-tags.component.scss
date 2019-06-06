@@ -2,20 +2,20 @@
 :host {
     width: 100%;
 
-    .kTagContent {
+    .vTagContent {
         display: flex;
         align-items: center;
 
-        &.kTagDisabled {
-            .kTagLabel {
+        &.vTagDisabled {
+            .vTagLabel {
                 margin-right: 8px;
                 line-height: 22px;
             }
 
         }
 
-        &:not(.kTagDisabled) {
-            .kTagRemove {
+        &:not(.vTagDisabled) {
+            .vTagRemove {
                 cursor: pointer;
                 &:hover {
                     background-color: rgba(255, 255, 255, 0.3);
@@ -25,14 +25,14 @@
             }
         }
 
-        .kTagLabel {
+        .vTagLabel {
             flex: 0 0 auto;
             user-select: none;
             cursor: default;
 
         }
 
-        .kTagRemove {
+        .vTagRemove {
             flex: 0 0 auto;
             margin-top: 2px;
             margin-left: 8px;

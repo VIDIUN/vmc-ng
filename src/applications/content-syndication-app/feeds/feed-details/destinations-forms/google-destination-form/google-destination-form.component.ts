@@ -1,23 +1,23 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {KalturaUiConf} from 'kaltura-ngx-client';
-import {KalturaFlavorParams} from 'kaltura-ngx-client';
-import {KalturaGoogleVideoSyndicationFeed} from 'kaltura-ngx-client';
-import {AppAuthentication} from 'app-shared/kmc-shell';
-import {KalturaGoogleSyndicationFeedAdultValues} from 'kaltura-ngx-client';
+import {VidiunUiConf} from 'vidiun-ngx-client';
+import {VidiunFlavorParams} from 'vidiun-ngx-client';
+import {VidiunGoogleVideoSyndicationFeed} from 'vidiun-ngx-client';
+import {AppAuthentication} from 'app-shared/vmc-shell';
+import {VidiunGoogleSyndicationFeedAdultValues} from 'vidiun-ngx-client';
 import { DestinationComponentBase, FeedFormMode } from '../../feed-details.component';
-import {KalturaValidators} from '@kaltura-ng/kaltura-ui';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunValidators} from '@vidiun-ng/vidiun-ui';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kGoogleDestinationForm',
+  selector: 'vGoogleDestinationForm',
   templateUrl: './google-destination-form.component.html',
   styleUrls: ['./google-destination-form.component.scss'],
   providers: [
       {provide: DestinationComponentBase, useExisting: GoogleDestinationFormComponent},
-      KalturaLogger.createLogger('GoogleDestinationFormComponent')
+      VidiunLogger.createLogger('GoogleDestinationFormComponent')
   ]
 })
 export class GoogleDestinationFormComponent extends DestinationComponentBase implements OnInit, OnDestroy {
@@ -27,21 +27,21 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
   onFormStateChanged = new EventEmitter<{ isValid: boolean, isDirty: boolean }>();
 
   @Input()
-  feed: KalturaGoogleVideoSyndicationFeed = null;
+  feed: VidiunGoogleVideoSyndicationFeed = null;
 
   @Input()
-  public players: KalturaUiConf[] = null;
+  public players: VidiunUiConf[] = null;
 
   @Input()
-  public contentFlavors: KalturaFlavorParams[] = null;
+  public contentFlavors: VidiunFlavorParams[] = null;
 
   public _form: FormGroup;
   public _availableContentFlavors: Array<{ value: number, label: string }> = [];
   public _availablePlayers: Array<{ value: number, label: string, version: string }> = [];
 
   constructor(private _fb: FormBuilder,
-              private _logger: KalturaLogger,
-              private _permissionsService: KMCPermissionsService,
+              private _logger: VidiunLogger,
+              private _permissionsService: VMCPermissionsService,
               private _appAuthentication: AppAuthentication) {
     super();
     // prepare form
@@ -53,7 +53,7 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
     this._fillAvailablePlayers();
     this._resetFormData();
 
-    if (this.mode === 'edit' && !this._permissionsService.hasPermission(KMCPermissions.SYNDICATION_UPDATE)) {
+    if (this.mode === 'edit' && !this._permissionsService.hasPermission(VMCPermissions.SYNDICATION_UPDATE)) {
         this._logger.debug(`user doesn't have SYNDICATION_UPDATE permission, disable form for editing`);
       this._form.disable({ emitEvent: false });
     } else {
@@ -78,7 +78,7 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
   ngOnDestroy() {
   }
 
-  public getData(): KalturaGoogleVideoSyndicationFeed {
+  public getData(): VidiunGoogleVideoSyndicationFeed {
       this._logger.info(`handle get feed data action`);
     if (!this._form.valid) {
         this._logger.info(`form is not valid, abort action`);
@@ -86,7 +86,7 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
       return null;
     }
 
-    const data = new KalturaGoogleVideoSyndicationFeed({
+    const data = new VidiunGoogleVideoSyndicationFeed({
       flavorParamId: this._form.get('contentFlavor').value,
       addToDefaultConversionProfile: this._form.get('addToDefaultTranscodingProfile').value,
       landingPage: this._form.get('landingPage').value,
@@ -100,8 +100,8 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
     }
 
     data.adultContent = this._form.get('adultContent').value ?
-      KalturaGoogleSyndicationFeedAdultValues.yes :
-      KalturaGoogleSyndicationFeedAdultValues.no;
+      VidiunGoogleSyndicationFeedAdultValues.yes :
+      VidiunGoogleSyndicationFeedAdultValues.no;
 
 
     return data;
@@ -113,7 +113,7 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
     this._form = this._fb.group({
       contentFlavor: [null],
       addToDefaultTranscodingProfile: [true],
-      landingPage: [null, [KalturaValidators.urlHttp, Validators.required] ],
+      landingPage: [null, [VidiunValidators.urlHttp, Validators.required] ],
       playback: ['fromGoogle'],
       selectedPlayer: [null],
       adultContent: [false]
@@ -128,7 +128,7 @@ export class GoogleDestinationFormComponent extends DestinationComponentBase imp
       playback: this.feed ? (this.feed.allowEmbed ? 'fromGoogle' : 'linkback') : 'fromGoogle',
       selectedPlayer: this.feed ? this.feed.playerUiconfId : this.players && this.players.length && this.players[0].id,
       adultContent: this.feed ?
-        this.feed.adultContent === KalturaGoogleSyndicationFeedAdultValues.yes :
+        this.feed.adultContent === VidiunGoogleSyndicationFeedAdultValues.yes :
         this._appAuthentication.appUser.partnerInfo.adultContent
     });
 

@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { Router } from '@angular/router';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 export interface ViewMetadata {
     viewKey: string;
@@ -12,9 +12,9 @@ export interface ViewMetadata {
     title: string;
 }
 
-export abstract class KmcMainViewBaseService {
+export abstract class VmcMainViewBaseService {
 
-    constructor(protected _logger: KalturaLogger,
+    constructor(protected _logger: VidiunLogger,
                 protected _browserService: BrowserService,
                 private _router: Router,
                 private _titleService: Title,
@@ -88,7 +88,7 @@ export abstract class KmcMainViewBaseService {
         this._logger.info('handle view entered');
         if (this.isAvailable()) {
             const { title, viewKey } = this.getViewMetadata();
-            const formattedTitle = `KMC > ${title || ''}`;
+            const formattedTitle = `VMC > ${title || ''}`;
             this._logger.debug('update browser page title and contextual help information', { title: formattedTitle, viewKey });
             this._titleService.setTitle(formattedTitle);
             this._contextualHelpService.updateHelpItems(viewKey);

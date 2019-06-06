@@ -1,4 +1,4 @@
-<form class="kLoginForm"
+<form class="vLoginForm"
       [formGroup]="_loginForm"
       (submit)="_login($event)">
   <h1>{{ 'app.login.login.title' | translate}}</h1>
@@ -11,7 +11,7 @@
              'has-error': errorMessage || _showError(_usernameField),
              'has-success': _showSuccess(_usernameField)
            }"
-           [kTooltip]="_loginValidationMessage | translate"
+           [vTooltip]="_loginValidationMessage | translate"
            placement="right">
   </div>
 
@@ -24,19 +24,19 @@
   </div>
 
   <p *ngIf="errorMessage && errorCode !== 'LOGIN_BLOCKED' && errorCode !== 'LOGIN_RETRIES_EXCEEDED'"
-     class="kErrorMessage" [innerHTML]="errorMessage"></p>
-  <p *ngIf="errorCode === 'LOGIN_BLOCKED'" class="kErrorMessage">
+     class="vErrorMessage" [innerHTML]="errorMessage"></p>
+  <p *ngIf="errorCode === 'LOGIN_BLOCKED'" class="vErrorMessage">
       {{'app.login.error.loginBlocked.loginDenied' | translate}}
       <a (click)="_contactSupport()">{{_supportAddress}}</a>
       {{'app.login.error.loginBlocked.toUnblockYourAccount' | translate}}
   </p>
-  <p *ngIf="errorCode === 'LOGIN_RETRIES_EXCEEDED'" class="kErrorMessage">
+  <p *ngIf="errorCode === 'LOGIN_RETRIES_EXCEEDED'" class="vErrorMessage">
       {{'app.login.error.retriesExceeded.yourAccountHasBeenLocked' | translate}}
       <a *ngIf="_supportAddress" (click)="_contactSupport()">{{_supportAddress}}</a>
       {{'app.login.error.retriesExceeded.toUnblockYourAccount' | translate}}
   </p>
 
-  <div class="kControlLinks">
+  <div class="vControlLinks">
     <p-checkbox [formControl]="_rememberMeField"
                 [binary]="true"
                 [label]="'app.login.rememberMe' | translate"></p-checkbox>
@@ -44,7 +44,7 @@
   </div>
 
   <div>
-    <button class="kButtonDefault"
+    <button class="vButtonDefault"
             pButton
             [label]="_loginBtnText | translate"
             [disabled]="inProgress"></button>

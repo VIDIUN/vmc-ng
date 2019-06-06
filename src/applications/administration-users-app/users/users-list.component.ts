@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UsersStore } from './users.service';
 import { subApplicationsConfig } from 'config/sub-applications';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent } from '@kaltura-ng/kaltura-ui';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent } from '@vidiun-ng/vidiun-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Observer } from 'rxjs/Observer';
 import { serverConfig } from 'config/server';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { AdminUsersMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { AdminUsersMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface PartnerInfo {
   adminLoginUsersQuota: number,
@@ -18,7 +18,7 @@ export interface PartnerInfo {
 }
 
 @Component({
-  selector: 'kUsersList',
+  selector: 'vUsersList',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
@@ -26,14 +26,14 @@ export interface PartnerInfo {
 export class UsersListComponent implements OnInit, OnDestroy {
   @ViewChild('editUserPopup') editUserPopup: PopupWidgetComponent;
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _usersAmount: string;
   public _usersTotalCount: number;
   public _usersInfo = '';
   public _blockerMessage: AreaBlockerMessage = null;
-  public _users: KalturaUser[];
+  public _users: VidiunUser[];
   public _partnerInfo: PartnerInfo = { adminLoginUsersQuota: 0, adminUserId: null };
-  public _user: KalturaUser;
+  public _user: VidiunUser;
   public _filter = {
     pageIndex: 0,
     pageSize: null // pageSize is set to null by design. It will be modified after the first time loading users
@@ -119,7 +119,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   public _upgradeAccount(): void {
-    this._browserService.openLink(serverConfig.externalLinks.kaltura.upgradeAccount, {}, '_blank');
+    this._browserService.openLink(serverConfig.externalLinks.vidiun.upgradeAccount, {}, '_blank');
   }
 
   public _onPaginationChanged(state: any): void {
@@ -133,12 +133,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _onEditUser(user: KalturaUser): void {
+  public _onEditUser(user: VidiunUser): void {
     this._user = user;
     this.editUserPopup.open();
   }
 
-  public _onToggleUserStatus(user: KalturaUser): void {
+  public _onToggleUserStatus(user: VidiunUser): void {
     const retryFn = () => this._onToggleUserStatus(user);
     this._usersStore.toggleUserStatus(user)
       .pipe(cancelOnDestroy(this))
@@ -146,7 +146,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
       .subscribe(this._getObserver(retryFn));
   }
 
-  public _onDeleteUser(user: KalturaUser): void {
+  public _onDeleteUser(user: VidiunUser): void {
     const retryFn = () => this._onDeleteUser(user);
     this._usersStore.deleteUser(user)
       .pipe(cancelOnDestroy(this))

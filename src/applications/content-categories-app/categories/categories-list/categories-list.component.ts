@@ -1,12 +1,12 @@
-import {KalturaCategory} from 'kaltura-ngx-client';
-import {AreaBlockerMessage, StickyComponent} from '@kaltura-ng/kaltura-ui';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import {AreaBlockerMessage, StickyComponent} from '@vidiun-ng/vidiun-ui';
 import {CategoriesFilters, CategoriesService, SortDirection} from '../categories.service';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CategoriesUtilsService} from '../../categories-utils.service';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
 
 import {CategoriesModes} from "app-shared/content-shared/categories/categories-mode-type";
 import {CategoriesRefineFiltersService, RefineGroup} from '../categories-refine-filters.service';
@@ -14,41 +14,41 @@ import {
   CategoriesStatus,
   CategoriesStatusMonitorService
 } from 'app-shared/content-shared/categories-status/categories-status-monitor.service';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { ViewCategoryEntriesEvent } from 'app-shared/kmc-shared/events/view-category-entries/view-category-entries.event';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { ViewCategoryEntriesEvent } from 'app-shared/vmc-shared/events/view-category-entries/view-category-entries.event';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 import {
     ContentCategoryViewSections,
     ContentCategoryViewService,
     ReachAppViewService, ReachPages
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { ContentNewCategoryViewService } from 'app-shared/kmc-shared/kmc-views/details-views/content-new-category-view.service';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { ContentNewCategoryViewService } from 'app-shared/vmc-shared/vmc-views/details-views/content-new-category-view.service';
 import { async } from 'rxjs/scheduler/async';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContentCategoriesMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContentCategoriesMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategoriesList',
+  selector: 'vCategoriesList',
   templateUrl: './categories-list.component.html',
   styleUrls: ['./categories-list.component.scss'],
     providers: [
         CategoriesRefineFiltersService,
-        KalturaLogger.createLogger('CategoriesListComponent')
+        VidiunLogger.createLogger('CategoriesListComponent')
     ]
 })
 
 export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    public _selectedCategories: KalturaCategory[] = [];
-    public _selectedCategoryToMove: KalturaCategory;
+    public _selectedCategories: VidiunCategory[] = [];
+    public _selectedCategoryToMove: VidiunCategory;
     public _categoriesTotalCount: number = null;
     public _linkedEntries: { entryId: string }[] = [];
     @ViewChild('moveCategory') moveCategoryPopup: PopupWidgetComponent;
     @ViewChild('addNewCategory') addNewCategory: PopupWidgetComponent;
     public _categoriesLocked = false;
     public _categoriesUpdating = false;
-    public _kmcPermissions = KMCPermissions;
+    public _vmcPermissions = VMCPermissions;
 
 
   @ViewChild('tags') private tags: StickyComponent;
@@ -82,7 +82,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit
                 private _contentCategoriesMainViewService: ContentCategoriesMainViewService,
                 private _appEvents: AppEventsService,
                 private _reachAppViewService: ReachAppViewService,
-                private _logger: KalturaLogger) {
+                private _logger: VidiunLogger) {
     }
 
     ngOnInit() {
@@ -176,7 +176,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit
                     }
                 },
                 error => {
-                    console.warn('[kmcng] -> could not load categories'); // navigate to error page
+                    console.warn('[vmcng] -> could not load categories'); // navigate to error page
                     throw error;
                 });
     }
@@ -315,7 +315,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit
         }
     }
 
-    _onActionSelected({action, category}: { action: string, category: KalturaCategory }) {
+    _onActionSelected({action, category}: { action: string, category: VidiunCategory }) {
         switch (action) {
             case 'edit':
                 this._logger.info(`handle edit action by user`, { categoryId: category.id });
@@ -366,7 +366,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit
         }
     }
 
-    private deleteCategory(category: KalturaCategory): void {
+    private deleteCategory(category: VidiunCategory): void {
         this._logger.info(`handle delete category action by user`);
         this._categoriesUtilsService.confirmDelete(category)
             .pipe(cancelOnDestroy(this))
@@ -422,7 +422,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy, AfterViewInit
         this.tags.updateLayout();
     }
 
-    onCategoryAdded(category: KalturaCategory): void {
+    onCategoryAdded(category: VidiunCategory): void {
         this._logger.info(`handle category added event`);
         if (!category) {
             this._logger.info('no category provided, abort action');

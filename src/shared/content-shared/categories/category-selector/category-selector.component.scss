@@ -1,21 +1,21 @@
 @import "app-theme/_variables.scss";
 
-.kNoParentOption {
+.vNoParentOption {
   padding-bottom: 10px;
   display: block;
 }
 
-.kMain {
-  border: 1px solid $kGrayscale4;
+.vMain {
+  border: 1px solid $vGrayscale4;
   border-radius: 4px;
   height: 311px;
   padding: 8px;
   box-sizing: border-box;
 }
-.kSelectedCategoryTooltip {
+.vSelectedCategoryTooltip {
   display: inline-block;
   font-size: 15px;
-  color: $kGrayscale3;
+  color: $vGrayscale3;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -27,16 +27,16 @@
   width: 100%;
 }
 
-:host /deep/ kautocomplete .kKalturaPrimeUIComponent.ui-autocomplete-multiple {
+:host /deep/ vautocomplete .vVidiunPrimeUIComponent.ui-autocomplete-multiple {
   width: 100%;
 }
 
-:host /deep/ kautocomplete ul.ui-autocomplete-multiple-container {
+:host /deep/ vautocomplete ul.ui-autocomplete-multiple-container {
   max-height: 60px;
   overflow-y: auto;
 }
 
-:host /deep/ k-categories-tree .kTreeContainer {
+:host /deep/ v-categories-tree .vTreeContainer {
   margin: 0px;
   padding: 0px;
   width: 100%;
@@ -45,18 +45,18 @@
   min-height: 260px;
 }
 
-:host /deep/ k-area-blocker {
+:host /deep/ v-area-blocker {
   height: 265px;
   overflow-y: hidden;
 }
 
-:host /deep/ ktags {
+:host /deep/ vtags {
   margin-left: 12px;
-  .kTags {
+  .vTags {
     border-top: 0px solid white;
     width: 542px;
   }
-  .kTagRemove {
+  .vTagRemove {
     flex: 0 0 auto;
     margin-top: 2px;
     margin-left: 8px;
@@ -64,14 +64,14 @@
     cursor: pointer;
     font-size: 10px;
   }
-  .kTagContent {
+  .vTagContent {
     display: flex;
     align-items: center;
     cursor: default;
   }
 }
 
-:host /deep/ kautocomplete ul.ui-autocomplete-multiple-container.ui-inputtext {
+:host /deep/ vautocomplete ul.ui-autocomplete-multiple-container.ui-inputtext {
   padding: 0px;
   .ui-autocomplete-input-token {
     padding: 0px;

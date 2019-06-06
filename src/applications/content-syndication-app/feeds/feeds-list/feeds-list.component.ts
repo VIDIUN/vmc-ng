@@ -1,43 +1,43 @@
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
 import {FeedsFilters, FeedsService, SortDirection} from '../feeds.service';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {KalturaBaseSyndicationFeed} from 'kaltura-ngx-client';
-import {KalturaPlaylist} from 'kaltura-ngx-client';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { ContentSyndicationMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunBaseSyndicationFeed} from 'vidiun-ngx-client';
+import {VidiunPlaylist} from 'vidiun-ngx-client';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { ContentSyndicationMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 import { Unsubscribable } from 'rxjs';
 
 @Component({
-  selector: 'kFeedsList',
+  selector: 'vFeedsList',
   templateUrl: './feeds-list.component.html',
   styleUrls: ['./feeds-list.component.scss'],
   providers : [
       FeedsService,
-      KalturaLogger.createLogger('FeedsListComponent')
+      VidiunLogger.createLogger('FeedsListComponent')
   ]
 })
 
 export class FeedsListComponent implements OnInit, OnDestroy {
     private _playlistSearchSubscription: Unsubscribable;
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   public _isBusy = true;
   public _loadingPlaylists = false;
   public _blockerMessage: AreaBlockerMessage = null;
   public _isReady = false; // prevents from calling prepare function twice
   public _tableIsBusy = false;
   public _tableBlockerMessage: AreaBlockerMessage = null;
-  public _selectedFeeds: KalturaBaseSyndicationFeed[] = [];
+  public _selectedFeeds: VidiunBaseSyndicationFeed[] = [];
   public _feedsTotalCount: number = null;
-  public _playlists: KalturaPlaylist[] = null;
-  public _originalPlaylists: KalturaPlaylist[] = null;
-  public _currentEditFeed: KalturaBaseSyndicationFeed = null;
+  public _playlists: VidiunPlaylist[] = null;
+  public _originalPlaylists: VidiunPlaylist[] = null;
+  public _currentEditFeed: VidiunBaseSyndicationFeed = null;
   @ViewChild('feedDetails') feedDetailsPopup: PopupWidgetComponent;
 
   public _query = {
@@ -52,7 +52,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
               private _contentSyndicationMainViewService: ContentSyndicationMainViewService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
   }
 
   ngOnInit() {
@@ -99,7 +99,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  public _onActionSelected({action, feed}: { action: string, feed: KalturaBaseSyndicationFeed }) {
+  public _onActionSelected({action, feed}: { action: string, feed: VidiunBaseSyndicationFeed }) {
     switch (action) {
       case 'edit':
           this._logger.info(`handle edit feed action by user`, { feedId: feed.id, type: feed.type });
@@ -114,7 +114,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _deleteFeed(feed: KalturaBaseSyndicationFeed): void {
+  private _deleteFeed(feed: VidiunBaseSyndicationFeed): void {
       this._logger.info(`handle delete feed action by user`, { feedId: feed.id, type: feed.type });
     const executeDelete = () => {
       this._blockerMessage = null;

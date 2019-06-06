@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaEntryModerationStatus } from 'kaltura-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunEntryModerationStatus } from 'vidiun-ngx-client';
 
-@Pipe({name: 'kModerationStatus'})
+@Pipe({name: 'vModerationStatus'})
 export class ModerationPipe implements PipeTransform {
 	constructor(private appLocalization: AppLocalization) {
 	}
@@ -11,19 +11,19 @@ export class ModerationPipe implements PipeTransform {
 		let moderationStatus: string = "";
 		if (value) {
 			switch (value.toString()) {
-				case KalturaEntryModerationStatus.autoApproved.toString():
+				case VidiunEntryModerationStatus.autoApproved.toString():
 					moderationStatus = this.appLocalization.get("applications.content.entryStatus.autoApprovedStatus");
           break;
-				case KalturaEntryModerationStatus.flaggedForReview.toString():
+				case VidiunEntryModerationStatus.flaggedForReview.toString():
 					moderationStatus = this.appLocalization.get("applications.content.entryStatus.flaggedStatus");
 					break;
-				case KalturaEntryModerationStatus.approved.toString():
+				case VidiunEntryModerationStatus.approved.toString():
 					moderationStatus = this.appLocalization.get("applications.content.entryStatus.approvedStatus");
 					break;
-				case KalturaEntryModerationStatus.pendingModeration.toString():
+				case VidiunEntryModerationStatus.pendingModeration.toString():
 					moderationStatus = this.appLocalization.get("applications.content.entryStatus.pendingStatus");
 					break;
-				case KalturaEntryModerationStatus.rejected.toString():
+				case VidiunEntryModerationStatus.rejected.toString():
 					moderationStatus = this.appLocalization.get("applications.content.entryStatus.rejectedStatus");
 					break;
 			}

@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { BrowserService, NewEntryUploadFile, NewEntryUploadService } from 'app-shared/kmc-shell';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { TrackedFileData } from '@kaltura-ng/kaltura-common';
-import { NewEntryFlavourFile } from 'app-shared/kmc-shell/new-entry-flavour-file';
-import { KalturaUploadFile } from 'app-shared/kmc-shared';
-import { ContentUploadsMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { NewReplaceVideoUploadFile } from 'app-shared/kmc-shell/new-replace-video-upload/new-replace-video-upload-file';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { BrowserService, NewEntryUploadFile, NewEntryUploadService } from 'app-shared/vmc-shell';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { TrackedFileData } from '@vidiun-ng/vidiun-common';
+import { NewEntryFlavourFile } from 'app-shared/vmc-shell/new-entry-flavour-file';
+import { VidiunUploadFile } from 'app-shared/vmc-shared';
+import { ContentUploadsMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { NewReplaceVideoUploadFile } from 'app-shared/vmc-shell/new-replace-video-upload/new-replace-video-upload-file';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 type MonitoredUploadFile = NewEntryUploadFile | NewEntryFlavourFile;
 
@@ -23,13 +23,13 @@ export interface UploadFileData {
   fileSize: number;
   uploadedOn: Date;
   status: string;
-  mediaType: KalturaMediaType;
+  mediaType: VidiunMediaType;
   entryId?: string;
   progress?: number;
 }
 
 @Component({
-  selector: 'kUploadControlList',
+  selector: 'vUploadControlList',
   templateUrl: './upload-list.component.html',
   styleUrls: ['./upload-list.component.scss'],
 })

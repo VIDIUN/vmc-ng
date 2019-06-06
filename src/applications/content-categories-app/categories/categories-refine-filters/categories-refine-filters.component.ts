@@ -1,13 +1,13 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewChildren} from '@angular/core';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { RefinePrimeTree } from '@kaltura-ng/mc-shared';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { RefinePrimeTree } from '@vidiun-ng/mc-shared';
 import { subApplicationsConfig } from 'config/sub-applications';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {ScrollToTopContainerComponent} from '@kaltura-ng/kaltura-ui';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {ScrollToTopContainerComponent} from '@vidiun-ng/vidiun-ui';
 import {CategoriesFilters, CategoriesService} from '../categories.service';
 import {RefineGroup} from '../categories-refine-filters.service';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 const listOfFilterNames: (keyof CategoriesFilters)[] = [
   'createdAt',
@@ -39,7 +39,7 @@ export interface PrimeListsGroup {
 
 
 @Component({
-  selector: 'kCategoriesRefineFilters',
+  selector: 'vCategoriesRefineFilters',
   templateUrl: './categories-refine-filters.component.html',
   styleUrls: ['./categories-refine-filters.component.scss']
 })

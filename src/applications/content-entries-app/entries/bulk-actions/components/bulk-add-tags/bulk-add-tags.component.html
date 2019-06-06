@@ -1,9 +1,9 @@
-<k-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
-  <div class="kContent kOverrideFAIcons">
-    <span class="kTitle">{{'applications.content.bulkActions.addTags' | translate}}</span>
-    <div class="kTags">
-      <span class="kLabel">{{'applications.content.bulkActions.addTagsLabel' | translate}}</span>
-      <kAutoComplete [(ngModel)]="tags"
+<v-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
+  <div class="vContent vOverrideFAIcons">
+    <span class="vTitle">{{'applications.content.bulkActions.addTags' | translate}}</span>
+    <div class="vTags">
+      <span class="vLabel">{{'applications.content.bulkActions.addTagsLabel' | translate}}</span>
+      <vAutoComplete [(ngModel)]="tags"
                      suggestionItemField="item"
                      suggestionSelectableField="isSelectable"
                      [multiple]="true"
@@ -11,10 +11,10 @@
                      [minLength]="3"
                      [suggestionsProvider]="_tagsProvider"
                      (completeMethod)="_searchTags($event)">
-      </kAutoComplete>
+      </vAutoComplete>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

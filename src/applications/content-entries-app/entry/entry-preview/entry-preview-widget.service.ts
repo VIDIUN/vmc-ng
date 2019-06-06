@@ -1,14 +1,14 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {AppAuthentication} from 'app-shared/kmc-shell';
-import {KalturaSourceType} from 'kaltura-ngx-client';
+import {AppAuthentication} from 'app-shared/vmc-shell';
+import {VidiunSourceType} from 'vidiun-ngx-client';
 import {PreviewMetadataChangedEvent} from '../../preview-metadata-changed-event';
-import {AppEventsService} from 'app-shared/kmc-shared';
+import {AppEventsService} from 'app-shared/vmc-shared';
 import {EntryWidget} from '../entry-widget';
-import {serverConfig, getKalturaServerUri} from 'config/server';
-import {KMCPermissions, KMCPermissionsService} from 'app-shared/kmc-shared/kmc-permissions';
+import {serverConfig, getVidiunServerUri} from 'config/server';
+import {VMCPermissions, VMCPermissionsService} from 'app-shared/vmc-shared/vmc-permissions';
 import { EntryStore } from '../entry-store.service';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Injectable()
 export class EntryPreviewWidget extends EntryWidget implements OnDestroy {
@@ -17,9 +17,9 @@ export class EntryPreviewWidget extends EntryWidget implements OnDestroy {
 
     constructor(private appAuthentication: AppAuthentication,
                 private _store: EntryStore,
-                private _permissionsService: KMCPermissionsService,
+                private _permissionsService: VMCPermissionsService,
                 appEvents: AppEventsService,
-                logger: KalturaLogger) {
+                logger: VidiunLogger) {
         super('entryPreview', logger);
 
 
@@ -50,21 +50,21 @@ export class EntryPreviewWidget extends EntryWidget implements OnDestroy {
         if (this.data) {
             const entryId = this.data.id;
             const sourceType = this.data.sourceType.toString();
-            const isLive = (sourceType === KalturaSourceType.liveStream.toString() ||
-                sourceType === KalturaSourceType.akamaiLive.toString() ||
-                sourceType === KalturaSourceType.akamaiUniversalLive.toString() ||
-                sourceType === KalturaSourceType.manualLiveStream.toString());
+            const isLive = (sourceType === VidiunSourceType.liveStream.toString() ||
+                sourceType === VidiunSourceType.akamaiLive.toString() ||
+                sourceType === VidiunSourceType.akamaiUniversalLive.toString() ||
+                sourceType === VidiunSourceType.manualLiveStream.toString());
 
-            const UIConfID = serverConfig.kalturaServer.previewUIConf;
+            const UIConfID = serverConfig.vidiunServer.previewUIConf;
             const partnerID = this.appAuthentication.appUser.partnerId;
-            const ks = this.appAuthentication.appUser.ks || "";
-            const serverUri = getKalturaServerUri();
+            const vs = this.appAuthentication.appUser.vs || "";
+            const serverUri = getVidiunServerUri();
 
-            let flashVars = `flashvars[kAnalony.plugin]=false&flashvars[closedCaptions.plugin]=true&flashvars[closedCaptions.hideWhenEmpty]=true&flashvars[ks]=${ks}`;
+            let flashVars = `flashvars[vAnalony.plugin]=false&flashvars[closedCaptions.plugin]=true&flashvars[closedCaptions.hideWhenEmpty]=true&flashvars[vs]=${vs}`;
             if (isLive) {
                 flashVars += '&flashvars[disableEntryRedirect]=true';
             }
-            const shouldDisableAlerts = this._permissionsService.hasPermission(KMCPermissions.FEATURE_DISABLE_KMC_KDP_ALERTS);
+            const shouldDisableAlerts = this._permissionsService.hasPermission(VMCPermissions.FEATURE_DISABLE_VMC_VDP_ALERTS);
             if (shouldDisableAlerts) {
                 flashVars += '&flashvars[disableAlerts]=true';
             }

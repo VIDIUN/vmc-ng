@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { PlaylistWidget } from '../playlist-widget';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
 @Injectable()
 export class PlaylistDetailsWidget extends PlaylistWidget {
-  constructor(logger: KalturaLogger) {
+  constructor(logger: VidiunLogger) {
     super('playlistDetails', logger);
   }
 

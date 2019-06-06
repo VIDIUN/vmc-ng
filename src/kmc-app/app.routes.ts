@@ -1,14 +1,14 @@
 import { RouterModule, Routes } from '@angular/router';
-import { AppBootstrap, AuthCanActivate } from 'app-shared/kmc-shell';
+import { AppBootstrap, AuthCanActivate } from 'app-shared/vmc-shell';
 
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AppDefaultViewComponent } from './components/app-default-view/app-default-view.component';
-import { LoginByKSComponent } from './components/app-actions/login-by-ks.component';
+import { LoginByVSComponent } from './components/app-actions/login-by-vs.component';
 import { RestorePasswordComponent } from './components/app-actions/restore-password.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-import { PersistLoginByKsComponent } from './components/app-actions/persist-login-by-ks.component';
+import { PersistLoginByVsComponent } from './components/app-actions/persist-login-by-vs.component';
 
 const routes: Routes = <Routes>[
     {
@@ -20,8 +20,8 @@ const routes: Routes = <Routes>[
             {
                 path: 'actions',
                 children: [
-                    { path: 'login-by-ks/:ks', component: LoginByKSComponent, pathMatch: 'full' },
-                    { path: 'persist-login-by-ks/:ks', component: PersistLoginByKsComponent, pathMatch: 'full' },
+                    { path: 'login-by-vs/:vs', component: LoginByVSComponent, pathMatch: 'full' },
+                    { path: 'persist-login-by-vs/:vs', component: PersistLoginByVsComponent, pathMatch: 'full' },
                     { path: 'restore-password/:hash', component: RestorePasswordComponent, pathMatch: 'full'  }
                 ]
             },

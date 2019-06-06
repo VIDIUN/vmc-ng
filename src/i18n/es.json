@@ -70,12 +70,12 @@
         },
         "helpMenu": {
             "gettingStarted": "Primeros pasos",
-            "kmcOverview": "Introducción a la consola de gestión de Kaltura (KMC)",
+            "vmcOverview": "Introducción a la consola de gestión de Vidiun (VMC)",
             "mediaManagement": "Gestión de archivos multimedia y flujo de trabajo",
             "productTour": "Hacer recorrido virtual del producto",
             "support": "Ayuda y soporte técnico",
             "userManual": "Descargar manual de usuario",
-            "legacy": "KMC heredada",
+            "legacy": "VMC heredada",
             "contact": "Contáctese con el soporte técnico.",
             "currentPage": "Página actual",
             "changelog": "Registro de cambios"
@@ -107,7 +107,7 @@
             "save": "Guardar",
             "error": "Error",
             "connectionError": "Error al conectarse con el servidor",
-            "invalidKs": "Ha caducado la sesión de usuario. Reinicie sesión."
+            "invalidVs": "Ha caducado la sesión de usuario. Reinicie sesión."
         },
         "redirect":{
             "redirect1": "Redirigiéndose a la vista predeterminada...",
@@ -115,11 +115,11 @@
             "redirect3": "aquí."
         },
         "openMail":{
-            "supportMailTitle": "Contáctese con el soporte técnico de Kaltura.",
+            "supportMailTitle": "Contáctese con el soporte técnico de Vidiun.",
             "supportMailMsg": "Envíe un mensaje a la siguiente dirección de correo electrónico:",
-            "supportMailMsgNoMail": "Envíe un correo electrónico al equipo de soporte técnico de Kaltura.",
-            "customerCare": "El servicio de Asistencia al cliente de Kaltura está disponible las 24 horas del día, todos los días, los 365 días del año, a través del portal del cliente:",
-            "customerPortal": "La forma más rápida y sencilla para enviar un caso nuevo, comunicarse con asistencia al cliente y hacer el seguimiento del estatus de las consultas es a través del Portal del cliente de Kaltura: "
+            "supportMailMsgNoMail": "Envíe un correo electrónico al equipo de soporte técnico de Vidiun.",
+            "customerCare": "El servicio de Asistencia al cliente de Vidiun está disponible las 24 horas del día, todos los días, los 365 días del año, a través del portal del cliente:",
+            "customerPortal": "La forma más rápida y sencilla para enviar un caso nuevo, comunicarse con asistencia al cliente y hacer el seguimiento del estatus de las consultas es a través del Portal del cliente de Vidiun: "
         },
         "login": {
             "login": {
@@ -171,9 +171,9 @@
                 }
             },
             "restorePassword": {
-                "welcome": "Bienvenido a Kaltura.",
+                "welcome": "Bienvenido a Vidiun.",
                 "selectPassword": "Seleccione su contraseña.",
-                "restored": "Se estableció su nueva contraseña. Inicie sesión en la consola de gestión de Kaltura.",
+                "restored": "Se estableció su nueva contraseña. Inicie sesión en la consola de gestión de Vidiun.",
                 "error": {
                     "equal": "Las contraseñas no coinciden.",
                     "required": "El campo es obligatorio.",
@@ -188,21 +188,21 @@
                 "email": "Formato de correo electrónico incorrecto",
                 "badCredentials": "El nombre de usuario o la contraseña que ingresó es incorrecto.",
                 "retriesExceeded": {
-                    "yourAccountHasBeenLocked":"Su cuenta ha sido bloqueada y no estará disponible por 24 horas. Contáctese con el soporte técnico de Kaltura en ",
+                    "yourAccountHasBeenLocked":"Su cuenta ha sido bloqueada y no estará disponible por 24 horas. Contáctese con el soporte técnico de Vidiun en ",
                     "toUnblockYourAccount": " para desbloquear su cuenta."
                 },
                 "userNotFound": "El nombre de usuario o la contraseña que ingresó es incorrecto.",
                 "invalidStructure": "La contraseña que ingresó tiene una estructura inválida. Las contraseñas deben cumplir las siguientes reglas: - deben tener entre 8 y 14 caracteres; - no deben incluir su nombre; - deben tener por lo menos una letra minúscula (a-z); - deben tener por lo menos un dígito (0-9); - deben incluir por lo menos uno de los siguientes símbolos: %~!@#\\$^*=+?[]{}; - no deben incluir los siguientes caracteres: &lt; o >.",
                 "alreadyUsed": "Contraseña inválida <br> Esta contraseña ya ha sido usada antes. Seleccione una nueva contraseña.",
                 "loginBlocked": {
-                    "loginDenied":"Inicio de sesión denegado Ha excedido la cantidad de intentos de inicio de sesión inválidos. Puede ponerse en contacto con el soporte técnico de Kaltura en ",
+                    "loginDenied":"Inicio de sesión denegado Ha excedido la cantidad de intentos de inicio de sesión inválidos. Puede ponerse en contacto con el soporte técnico de Vidiun en ",
                     "toUnblockYourAccount": " para desbloquear su cuenta."
                 },
                 "newPasswordHashKeyInvalid": "Este enlace no es válido.",
                 "newPasswordHashKeyExpired": "Este enlace tiene más de 24 horas y ya no es válido.",
                 "wrongOldPassword": "La antigua contraseña es incorrecta.",
                 "invalidField": "El valor en el campo {{value}} no es válido.",
-                "userForbiddenForBeta": "Esta es la versión beta de la nueva consola de gestión de Kaltura. Esté atento a su lanzamiento al público muy pronto."
+                "userForbiddenForBeta": "Esta es la versión beta de la nueva consola de gestión de Vidiun. Esté atento a su lanzamiento al público muy pronto."
             },
             "send": "Enviar",
             "wait": "Esperar...",
@@ -218,8 +218,8 @@
         },
         "UnpermittedActionReasons": {
             "header": "Vista deshabilitada",
-            "message": "No se puede cargar la vista. Si el problema persiste, póngase en contacto con el soporte técnico de Kaltura.",
-            "messageNav": "No se puede cargar la vista. Si el problema persiste, póngase en contacto con el soporte técnico de Kaltura. Haga clic en Aceptar para ir a la vista principal."
+            "message": "No se puede cargar la vista. Si el problema persiste, póngase en contacto con el soporte técnico de Vidiun.",
+            "messageNav": "No se puede cargar la vista. Si el problema persiste, póngase en contacto con el soporte técnico de Vidiun. Haga clic en Aceptar para ir a la vista principal."
         }
     },
     "applications": {
@@ -247,7 +247,7 @@
             "helpTip1": "El tipo predeterminado de código de inserción es la inserción automática que es la mejor para introducir reproductores con rapidez en una página sin personalización del tiempo de ejecución.",
             "helpTip2": "Leer más",
             "helpTip3": "sobre los diferentes tipos de códigos de inserción.",
-            "helpTip4": "La lógica para definir el método de entrega es automatizada por el reproductor de Kaltura para garantizarle al usuario la mejor experiencia. ",
+            "helpTip4": "La lógica para definir el método de entrega es automatizada por el reproductor de Vidiun para garantizarle al usuario la mejor experiencia. ",
             "helpTip5": "Más información sobre la aplicación de ",
             "helpTip6": "protocolos de entrega específicos",
             "playersErrorPlaylist": "No se encontraron reproductores de listas de reproducción en esta cuenta. Puede crear nuevos reproductores usando la pestaña Studio.",
@@ -416,12 +416,12 @@
                 "createLiveStreamTitle": "Crear una entrada de retransmisión en directo",
                 "streamTypeLabel": "Tipo de retransmisión",
                 "streamTypes": {
-                    "kaltura": "Kaltura Live Streaming (HDS/HLS/DASH)",
+                    "vidiun": "Vidiun Live Streaming (HDS/HLS/DASH)",
                     "universal": "Retransmisión universal, Flash y móvil (HDS/HLS)",
                     "manual": "Entrada manual de direcciones URL de retransmisión en directo "
                 },
                 "create": "Crear",
-                "kalturaStreamType": {
+                "vidiunStreamType": {
                     "name": "Nombre",
                     "description": "Descripción",
                     "transcodingProfile": "Perfiles de transcodificación en directo",
@@ -454,7 +454,7 @@
                     "description": "Descripción",
                     "primaryEncoderIp": "IP del codificador principal",
                     "secondaryEncoderIp": "IP del codificador secundario",
-                    "secondaryEncoderIp_message": "De manera predeterminada, Kaltura usa su IP pública para acceder a esta KMC.",
+                    "secondaryEncoderIp_message": "De manera predeterminada, Vidiun usa su IP pública para acceder a esta VMC.",
                     "broadcastPassword": "Contraseña de transmisión",
                     "liveDvr": "DVR en directo",
                     "liveDVR_message": "Buscando partes anteriores de la retransmisión en directo La duración predeterminada de la ventana de DVR es de 2 horas.",
@@ -466,7 +466,7 @@
                 "confirmEntryNavigation": {
                     "title": "Satisfactorio",
                     "generalMessage": "La entrada de retransmisión en directo se creó correctamente.",
-                    "kalturaMessage": "La entrada de retransmisión en directo se creó correctamente. ¿Desea ver los detalles de la entrada?",
+                    "vidiunMessage": "La entrada de retransmisión en directo se creó correctamente. ¿Desea ver los detalles de la entrada?",
                     "universalMessage": "La activación de la retransmisión para transmitir con la red de distribución de contenido (CDN) puede llevar hasta 3 horas.",
                     "manualMessage": "Las URL proporcionadas se han asociado con la entrada.{{0}}."
                 }
@@ -516,7 +516,7 @@
                     "fileSize": "Tamaño del archivo",
                     "entryId": "ID de entrada",
                     "status": "Estatus",
-                    "datesTooltip": "Se detectó el inicio de carga el: {{0}} Se detectó la finalización de carga el: {{1}} La transferencia de archivos de la carpeta de entrega a Kaltura se inició el: {{2}} La transferencia de archivos de la carpeta de entrega a Kaltura finalizó el: {{3}}",
+                    "datesTooltip": "Se detectó el inicio de carga el: {{0}} Se detectó la finalización de carga el: {{1}} La transferencia de archivos de la carpeta de entrega a Vidiun se inició el: {{2}} La transferencia de archivos de la carpeta de entrega a Vidiun finalizó el: {{3}}",
                     "notAvailable": "N/A",
                     "unknown": "Desconocido",
                     "delete": "Eliminar"
@@ -544,7 +544,7 @@
                 },
                 "dropFolderStatusTooltips": {
                     "uploading": "Se está cargando el archivo en la carpeta de entrega.",
-                    "downloading": "Se está importando el archivo de la carpeta de entrega a Kaltura.",
+                    "downloading": "Se está importando el archivo de la carpeta de entrega a Vidiun.",
                     "pending": "Finalizó la carga de archivos. Esperando que comience el procesamiento de la carpeta de entrega.",
                     "processing": "El motor de la carpeta de entrega está procesando este archivo.",
                     "parsedFromXml": "Se analizó la referencia del archivo desde el XML. Se espera el archivo, pero aún no está disponible en la carpeta de entrega.",
@@ -553,7 +553,7 @@
                     "error": "Error en el procesamiento del motor de la carpeta de entrega",
                     "deleteFailed": "Error al eliminar el archivo de la carpeta de entrega.",
                     "done": "Se finalizó el procesamiento de la carpeta de entrega para este archivo.",
-                    "downloadFailed": "Error al importar el archivo de la carpeta de entrega a Kaltura"
+                    "downloadFailed": "Error al importar el archivo de la carpeta de entrega a Vidiun"
                 },
                 "errors": {
                     "retry": "Reintentar",
@@ -778,7 +778,7 @@
                         "numOfEntries": "{{0}} Entradas",
                         "warning": "{{0}} Las entradas no se incluyen en esta fuente.",
                         "moreInfo": "Más información",
-                        "warningMoreInfo": "<b>Nota:</b> {{0}} no se incluirán las entradas en la fuente, ya que no están transcodificadas en el sabor {{1}} requerido.<br>Puede transcodificar cualquier entrada a {{1}} yendo a la sección Administrar de la KMC. Abra la entrada específica que desee transcodificar, vaya a la pestaña Sabores y seleccione la opción “Convertir”.",
+                        "warningMoreInfo": "<b>Nota:</b> {{0}} no se incluirán las entradas en la fuente, ya que no están transcodificadas en el sabor {{1}} requerido.<br>Puede transcodificar cualquier entrada a {{1}} yendo a la sección Administrar de la VMC. Abra la entrada específica que desee transcodificar, vaya a la pestaña Sabores y seleccione la opción “Convertir”.",
                         "flavorId": "(ID de sabor) {{0}}"
                     },
                     "destination": "Destino",
@@ -1189,7 +1189,7 @@
                     "messages": {
                         "uploadError": {
                             "header": "Error",
-                            "message": "Se produjo un error inesperado en el permiso. Pruebe a actualizar su navegador. Si el error persiste, póngase en contacto con el soporte técnico de Kaltura para obtener más información. {{value}}"
+                            "message": "Se produjo un error inesperado en el permiso. Pruebe a actualizar su navegador. Si el error persiste, póngase en contacto con el soporte técnico de Vidiun para obtener más información. {{value}}"
                         },
                         "uploadSuccess": {
                             "body": "Se ha enviado su pedido. Siga el avance del trabajo masivo en la ",
@@ -1331,7 +1331,7 @@
                 "removePublishers": "Quitar editores asociados",
                 "removePublishersLabel": "Los editores asociados quitados de esta lista se quitarán de todas las entradas seleccionadas.",
                 "noPublishersToRemove": "No hay editores asociados para quitar.",
-                "userTooltip": "El usuario aún no está en la lista de Kaltura. Se considerará {{0}} como identificador de usuario.",
+                "userTooltip": "El usuario aún no está en la lista de Vidiun. Se considerará {{0}} como identificador de usuario.",
                 "addRemoveEditors": "Agregar / Quitar coeditores",
                 "addEditors": "Agregar coeditores",
                 "addEditorsLabel": "Ingrese los coeditores que se anexarán a todas las entradas seleccionadas.",
@@ -1555,10 +1555,10 @@
                     "fileUrl": "URL del archivo",
                     "urlPlaceholder": "Ingrese la URL del sabor.",
                     "urlInvalid": "Ingrese una URL válida.",
-                    "kStatusNoContent": "No hay sabores de transcodificación disponibles para esta entrada. La entrada no está lista para publicación.",
-                    "kStatusReady": "Están disponibles todos los sabores de transcodificación requeridos. La entrada está lista para publicación.",
-                    "kStatusError": "Se produjo un error durante el procesamiento de los sabores.",
-                    "kStatusErrorProcessing": "Se están procesando los sabores de transcodificación. La entrada estará lista en unos minutos.",
+                    "vStatusNoContent": "No hay sabores de transcodificación disponibles para esta entrada. La entrada no está lista para publicación.",
+                    "vStatusReady": "Están disponibles todos los sabores de transcodificación requeridos. La entrada está lista para publicación.",
+                    "vStatusError": "Se produjo un error durante el procesamiento de los sabores.",
+                    "vStatusErrorProcessing": "Se están procesando los sabores de transcodificación. La entrada estará lista en unos minutos.",
                     "status": {
                         "converting": "Convirtiendo",
                         "error": "Error",
@@ -1691,7 +1691,7 @@
                             "url": "URL de almacenamiento:",
                             "directory": "Directorio de base de almacenamiento:",
                             "noteTitle": "Nota",
-                            "note": "Cuando se requiera la conversión por parte de Kaltura, el archivo definido como fuente se importará a Kaltura."
+                            "note": "Cuando se requiera la conversión por parte de Vidiun, el archivo definido como fuente se importará a Vidiun."
                         },
                         "replacementStatus": {
                             "replacementInProcess": "La sustitución de video está en proceso.",
@@ -1822,7 +1822,7 @@
                 },
                 "advertisements": {
                     "title":"Anuncios",
-                    "description": "Crear y gestionar anuncios basados en el tiempo con la herramienta Kaltura Video Editor",
+                    "description": "Crear y gestionar anuncios basados en el tiempo con la herramienta Vidiun Video Editor",
                     "manageAdvertisements": "Gestionar anuncios",
                     "cancelEdit": "Cancelar edición",
                     "discard": "¿Descarta todos los cambios?"
@@ -1837,7 +1837,7 @@
                     "save": "Guardar",
                     "co-editors": "Co-editores",
                     "co-publishers": "Editores asociados",
-                    "tooltip": "El usuario no está en la lista de Kaltura. {{0}} será considerado como el identificador de usuario.",
+                    "tooltip": "El usuario no está en la lista de Vidiun. {{0}} será considerado como el identificador de usuario.",
                     "noScreenName": "No se puede aplicar el usuario; el nombre en pantalla está vacío."
 
                 },
@@ -1890,7 +1890,7 @@
                         "attUverse": "AttUverse",
                         "avn": "AVN",
                         "comcastMrss": "ComcastMrss",
-                        "crossKaltura": "CrossKaltura",
+                        "crossVidiun": "CrossVidiun",
                         "dailymotion": "Dailymotion",
                         "doubleclick": "Doubleclick",
                         "facebook": "Facebook",
@@ -2098,7 +2098,7 @@
                         "changeOwnerPlaceholder": "Ingresar nombre/ID usuario",
                         "cancelEdit": "Cancelar edición",
                         "discard": "¿Descarta todos los cambios?",
-                        "tooltip": "El usuario aún no está en la lista de Kaltura. {{0}} será considerado como el identificador de usuario.",
+                        "tooltip": "El usuario aún no está en la lista de Vidiun. {{0}} será considerado como el identificador de usuario.",
                         "errors": {
                             "changeOwnerFailed" : "Se produjo un error mientras se cambiaba el propietario.",
                             "unableToChange": "No se pudo cambiar el propietario para la categoría actual.",
@@ -2330,7 +2330,7 @@
             "users": {
                 "user": "usuario",
                 "users": "usuarios",
-                "moreUsers": "¿Necesita más usuarios de KMC?",
+                "moreUsers": "¿Necesita más usuarios de VMC?",
                 "clickHere": "Haga clic aquí",
                 "usersUpgrade": "para actualizar su cuenta.",
                 "you": "Usted",
@@ -2347,7 +2347,7 @@
                 "addRole": "Agregar función",
                 "addUser": "Agregar usuario",
                 "currentStatus": "Estatus actual:",
-                "usersInfo": "{{0}} {{1}} de KMC en uso, {{2}} adicionales disponibles.",
+                "usersInfo": "{{0}} {{1}} de VMC en uso, {{2}} adicionales disponibles.",
                 "failedLoading": "Error al cargar los datos de usuarios",
                 "cantPerform": "No tiene acceso para realizar esta acción.",
                 "successSavingUser": "Los cambios tendrán efecto de inmediato. Debe instruir al usuario para que actualice su navegador.",
@@ -2356,11 +2356,11 @@
                 "required": "Este campo es obligatorio.",
                 "emailFormat": "Formato de correo electrónico inválido",
                 "publisherIdFormat": "Formato de ID de editor inválido",
-                "userAlreadyExist": "{{0}} ya está en la lista del sistema y está asociado con otra cuenta de la KMC. ¿Desea asociar a este usuario con esta cuenta también?",
+                "userAlreadyExist": "{{0}} ya está en la lista del sistema y está asociado con otra cuenta de la VMC. ¿Desea asociar a este usuario con esta cuenta también?",
                 "alreadyExist": "El usuario ya existe.",
                 "alreadyExistError": "El correo electrónico para inicio de sesión {{0}} ya está en la lista del sistema como usuario autorizado en su cuenta.",
                 "userAssociatedCaption": "Usuario asociado",
-                "userAssociated": "El usuario con Id. {{0}} ya existe en la cuenta. ¿Desea habilitar el acceso a la KMC para este usuario?",
+                "userAssociated": "El usuario con Id. {{0}} ya existe en la cuenta. ¿Desea habilitar el acceso a la VMC para este usuario?",
                 "refresh": "Actualizar",
                 "commonError": "Se produjo un error durante la solicitud al servidor.",
                 "addUserError": "Falta uno de los campos obligatorios.",
@@ -2478,7 +2478,7 @@
                     "schemaNameMaxLength": "El nombre debe tener menos de {{0}} caracteres de longitud."
                 },
                 "table": {
-                    "disabledLabel": "El esquema de datos fue configurado manualmente por Kaltura Professional Services. Contacte al gestor de cuentas para actualizaciones / cambios.",
+                    "disabledLabel": "El esquema de datos fue configurado manualmente por Vidiun Professional Services. Contacte al gestor de cuentas para actualizaciones / cambios.",
                     "name": "Título del esquema personalizado",
                     "id": "ID",
                     "systemName": "Nombre del sistema",
@@ -2565,7 +2565,7 @@
                     },
                     "notifications": {
                         "title": "Notificaciones",
-                        "message": " Contacte a su representante de Kaltura para definir la configuración de notificaciones."
+                        "message": " Contacte a su representante de Vidiun para definir la configuración de notificaciones."
                     }
                 },
                 "entitlement": {
@@ -2580,7 +2580,7 @@
                         "title": "Agregar derechos",
                         "explanation": "Seleccione la categoría raíz integrada en su aplicación y etiquétela debajo.",
                         "addPrivacyContextLabel": "Agregar etiqueta de contexto de privacidad",
-                        "confirmation": "Se agregará la configuración de derechos a todas las subcategorías en un proceso asincrónico. Esta operación puede demorar algunos minutos. Nota: Esta acción puede repercutir en el acceso al contenido de la categoría seleccionada a través de las aplicaciones existentes que no fueron actualizadas para que funcionen con los servicios de derechos de Kaltura. ¿Está seguro de que desea continuar?",
+                        "confirmation": "Se agregará la configuración de derechos a todas las subcategorías en un proceso asincrónico. Esta operación puede demorar algunos minutos. Nota: Esta acción puede repercutir en el acceso al contenido de la categoría seleccionada a través de las aplicaciones existentes que no fueron actualizadas para que funcionen con los servicios de derechos de Vidiun. ¿Está seguro de que desea continuar?",
                         "apply": "Aplicar",
                         "errors": {
                             "requiredPrivacyContextLabel": "Debe ingresar una etiqueta de contexto de privacidad."
@@ -2591,7 +2591,7 @@
                         "categoryName": "Nombre de categoría",
                         "privacyContextLabel": "Etiqueta de contexto de privacidad",
                         "confirmationTitle": "Confirmar edición",
-                        "confirmation": "Se agregará la configuración de derechos a todas las subcategorías en un proceso asincrónico. Esta operación puede demorar algunos minutos. Nota: Esta acción puede repercutir en el acceso al contenido de la categoría {{0}} a través de las aplicaciones existentes que no fueron actualizadas para que funcionen con los servicios de derechos de Kaltura. ¿Está seguro de que desea continuar?",
+                        "confirmation": "Se agregará la configuración de derechos a todas las subcategorías en un proceso asincrónico. Esta operación puede demorar algunos minutos. Nota: Esta acción puede repercutir en el acceso al contenido de la categoría {{0}} a través de las aplicaciones existentes que no fueron actualizadas para que funcionen con los servicios de derechos de Vidiun. ¿Está seguro de que desea continuar?",
                         "errors": {
                             "privacyContextLabelRequired": "Ingrese una etiqueta de contexto de privacidad.",
                             "privacyContextLabelExists": "La categoría ya está configurada con una etiqueta de contexto de privacidad.",
@@ -2792,7 +2792,7 @@
                     "profileName": "Nombre de perfil",
                     "flavorName": "Nombre de sabor",
                     "impactOnEntryReadiness": "Impacto en el grado de preparación de la entrada",
-                    "useKalturaTranscoding": "Usar la transcodificación de Kaltura",
+                    "useVidiunTranscoding": "Usar la transcodificación de Vidiun",
                     "systemName": "Nombre del sistema: (Opcional)",
                     "flavorGenerationPolicy": "Política de generación de sabores",
                     "intermediateFlavorHandling": "Manejo de sabor intermedio",
@@ -2863,7 +2863,7 @@
                     "profileName": "Nombre de perfil",
                     "flavorName": "Nombre de sabor",
                     "impactOnEntryReadiness": "Impacto en el grado de preparación de la entrada",
-                    "useKalturaTranscoding": "Usar la transcodificación de Kaltura",
+                    "useVidiunTranscoding": "Usar la transcodificación de Vidiun",
                     "systemName": "Nombre del sistema: (Opcional)",
                     "flavorGenerationPolicy": "Política de generación de sabores",
                     "intermediateFlavorHandling": "Manejo de sabor intermedio",
@@ -2873,7 +2873,7 @@
                     "always": "Siempre",
                     "asAFallback": "A modo de reserva",
                     "never": "Nunca",
-                    "useKalturaOptimization": "Usar optimización de Kaltura",
+                    "useVidiunOptimization": "Usar optimización de Vidiun",
                     "forceFlavorGeneration": "Forzar generación de sabores",
                     "keepFlavor": "Mantener sabor",
                     "deleteFlavor": "Eliminar sabor",
@@ -2883,7 +2883,7 @@
         },
         "analytics": {
             "comingSoon": "¡Muy pronto! Análisis para todo tipo de medios",
-            "releaseSupports": "Esta versión admite análisis para entradas “en directo” únicamente. Para todos los otros medios, <a href=\"{{0}}\" target=\"_blank\">inicie sesión en la KMC heredada</a> para ver y crear análisis e informes. Muy pronto se dispondrá de análisis para todos los medios. "
+            "releaseSupports": "Esta versión admite análisis para entradas “en directo” únicamente. Para todos los otros medios, <a href=\"{{0}}\" target=\"_blank\">inicie sesión en la VMC heredada</a> para ver y crear análisis e informes. Muy pronto se dispondrá de análisis para todos los medios. "
         },
         "reach": {
             "captionRequests": "Solicitudes de subtítulo",

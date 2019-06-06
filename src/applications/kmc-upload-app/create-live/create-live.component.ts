@@ -1,29 +1,29 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CreateLiveService} from './create-live.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {KalturaRecordStatus} from 'kaltura-ngx-client';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaLive} from './kaltura-live-stream/kaltura-live-stream.interface';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {VidiunRecordStatus} from 'vidiun-ngx-client';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunLive} from './vidiun-live-stream/vidiun-live-stream.interface';
 import {ManualLive} from './manual-live/manual-live.interface';
 import {UniversalLive} from './universal-live/universal-live.interface';
-import { KalturaLiveStreamEntry } from 'kaltura-ngx-client';
-import { KalturaSourceType } from 'kaltura-ngx-client';
-import { AppEventsService } from 'app-shared/kmc-shared';
-import { UpdateEntriesListEvent } from 'app-shared/kmc-shared/events/update-entries-list-event';
-import { KMCPermissions, KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/kmc-shared/kmc-views/details-views';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLiveStreamEntry } from 'vidiun-ngx-client';
+import { VidiunSourceType } from 'vidiun-ngx-client';
+import { AppEventsService } from 'app-shared/vmc-shared';
+import { UpdateEntriesListEvent } from 'app-shared/vmc-shared/events/update-entries-list-event';
+import { VMCPermissions, VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { ContentEntryViewSections, ContentEntryViewService } from 'app-shared/vmc-shared/vmc-views/details-views';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum StreamTypes {
-  kaltura,
+  vidiun,
   universal,
   manual
 }
 
 @Component({
-  selector: 'kCreateLive',
+  selector: 'vCreateLive',
   templateUrl: './create-live.component.html',
   styleUrls: ['./create-live.component.scss'],
   providers: [CreateLiveService]
@@ -31,14 +31,14 @@ export enum StreamTypes {
 export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
   private _showConfirmationOnClose = true;
 
-  public _selectedStreamType: StreamTypes = StreamTypes.kaltura;
-  public kalturaLiveStreamData: KalturaLive = {
+  public _selectedStreamType: StreamTypes = StreamTypes.vidiun;
+  public vidiunLiveStreamData: VidiunLive = {
     name: '',
     description: '',
     transcodingProfile: null,
     liveDVR: false,
-    enableRecording: this._permissionsService.hasPermission(KMCPermissions.FEATURE_LIVE_STREAM_RECORD),
-    enableRecordingSelectedOption: KalturaRecordStatus.appended,
+    enableRecording: this._permissionsService.hasPermission(VMCPermissions.FEATURE_LIVE_STREAM_RECORD),
+    enableRecordingSelectedOption: VidiunRecordStatus.appended,
     previewMode: false
   };
   public manualLiveData: ManualLive = {
@@ -61,7 +61,7 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public _blockerMessage: AreaBlockerMessage;
   public _manualStreamOnly = false;
 
-  @ViewChild('kalturaLiveStreamComponent') kalturaLiveStreamComponent;
+  @ViewChild('vidiunLiveStreamComponent') vidiunLiveStreamComponent;
   @ViewChild('manualLiveComponent') manualLiveComponent;
   @ViewChild('universalLiveComponent') universalLiveComponent;
   @Input() parentPopupWidget: PopupWidgetComponent;
@@ -70,16 +70,16 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
               private _appLocalization: AppLocalization,
               private _appEvents: AppEventsService,
               private _browserService: BrowserService,
-              private _permissionsService: KMCPermissionsService,
+              private _permissionsService: VMCPermissionsService,
               private _contentEntryViewService: ContentEntryViewService) {
   }
 
   ngOnInit() {
     this._availableStreamTypes = [
       {
-        id: 'kaltura',
-        value: StreamTypes.kaltura,
-        label: this._appLocalization.get('applications.upload.prepareLive.streamTypes.kaltura')
+        id: 'vidiun',
+        value: StreamTypes.vidiun,
+        label: this._appLocalization.get('applications.upload.prepareLive.streamTypes.vidiun')
       },
       {
         id: 'universal',
@@ -96,8 +96,8 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this._permissionsService.filterList(
       this._availableStreamTypes,
       {
-        'kaltura': KMCPermissions.FEATURE_KALTURA_LIVE_STREAM,
-        'universal': KMCPermissions.FEATURE_KMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION
+        'vidiun': VMCPermissions.FEATURE_VIDIUN_LIVE_STREAM,
+        'universal': VMCPermissions.FEATURE_VMC_AKAMAI_UNIVERSAL_LIVE_STREAM_PROVISION
       }
     );
 
@@ -141,8 +141,8 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   submitCurrentSelectedForm() {
     switch (this._selectedStreamType) {
-      case StreamTypes.kaltura: {
-        this._submitKalturaLiveStreamData();
+      case StreamTypes.vidiun: {
+        this._submitVidiunLiveStreamData();
         break;
       }
       case StreamTypes.universal: {
@@ -172,8 +172,8 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private _isCurrentSelectedFormDirty(): boolean {
     switch (this._selectedStreamType) {
-      case StreamTypes.kaltura: {
-        return this.kalturaLiveStreamComponent.isFormDirty();
+      case StreamTypes.vidiun: {
+        return this.vidiunLiveStreamComponent.isFormDirty();
       }
       case StreamTypes.universal: {
         return this.universalLiveComponent.isFormDirty();
@@ -188,14 +188,14 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  private _confirmEntryNavigation(liveStream: KalturaLiveStreamEntry): void {
+  private _confirmEntryNavigation(liveStream: VidiunLiveStreamEntry): void {
     const header = this._appLocalization.get('applications.upload.prepareLive.confirmEntryNavigation.title');
 
     switch (liveStream.sourceType) {
-      case KalturaSourceType.liveStream:
+      case VidiunSourceType.liveStream:
         this._browserService.confirm({
           header,
-          message: this._appLocalization.get('applications.upload.prepareLive.confirmEntryNavigation.kalturaMessage'),
+          message: this._appLocalization.get('applications.upload.prepareLive.confirmEntryNavigation.vidiunMessage'),
           accept: () => {
               this._contentEntryViewService.open({
                   entry: liveStream,
@@ -213,7 +213,7 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         break;
 
-      case KalturaSourceType.akamaiUniversalLive:
+      case VidiunSourceType.akamaiUniversalLive:
         this._browserService.alert({
           header,
           message: this._appLocalization.get('applications.upload.prepareLive.confirmEntryNavigation.universalMessage'),
@@ -225,7 +225,7 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         break;
 
-      case KalturaSourceType.manualLiveStream:
+      case VidiunSourceType.manualLiveStream:
         this._browserService.alert({
           header,
           message: this._appLocalization.get(
@@ -254,9 +254,9 @@ export class CreateLiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  private _submitKalturaLiveStreamData() {
-    if (this.kalturaLiveStreamComponent.validate()) {
-      this.createLiveService.createKalturaLiveStream(this.kalturaLiveStreamData)
+  private _submitVidiunLiveStreamData() {
+    if (this.vidiunLiveStreamComponent.validate()) {
+      this.createLiveService.createVidiunLiveStream(this.vidiunLiveStreamData)
         .pipe(cancelOnDestroy(this))
         .pipe(tag('block-shell'))
         .subscribe(response => {

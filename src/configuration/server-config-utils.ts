@@ -22,8 +22,8 @@ function validateSeverConfig(data: ServerConfig): { isValid: boolean, error?: st
 
 
 function getConfiguration(): Observable<ServerConfig> {
-    if (window && (<any>window).kmcConfig) {
-        return Observable.of((<any>window).kmcConfig);
+    if (window && (<any>window).vmcConfig) {
+        return Observable.of((<any>window).vmcConfig);
     }
 
     return Observable.create(observer =>

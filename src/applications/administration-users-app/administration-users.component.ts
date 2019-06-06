@@ -3,7 +3,7 @@ import { UsersStore } from './users/users.service';
 
 
 @Component({
-  selector: 'kAdministrationUsers',
+  selector: 'vAdministrationUsers',
   templateUrl: './administration-users.component.html',
   styleUrls: ['./administration-users.component.scss'],
   providers: [UsersStore]

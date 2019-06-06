@@ -1,17 +1,17 @@
 @import 'app-theme/_variables.scss';
 
-.kPlaylistEntriesTable {
+.vPlaylistEntriesTable {
   background-color: white;
   overflow: hidden;
   position: relative;
   padding: 0px;
 
-  .kThumbnailHolder {
+  .vThumbnailHolder {
     overflow: hidden;
     position: relative;
     width: 80px;
     height: 46px;
-    background-color: $kGrayscale6;
+    background-color: $vGrayscale6;
     white-space: nowrap;
     text-align: center;
     border-radius: 3px;
@@ -28,12 +28,12 @@
       border-radius: 3px;
     }
 
-      .kThumbnailTypeIcon {
+      .vThumbnailTypeIcon {
           position: absolute;
           color: #FFFFFF;
 
-          &.kIconyoutube {
-              color: $kDandger;
+          &.vIconyoutube {
+              color: $vDandger;
               font-size: 30px;
               top: 15px;
               left: 1px;
@@ -41,7 +41,7 @@
           }
       }
 
-      .kYoutubeIconFix {
+      .vYoutubeIconFix {
           position: absolute;
           width: 15px;
           height: 15px;
@@ -51,11 +51,11 @@
           z-index: 1;
       }
 
-      .kThumbnailTypeIcon {
+      .vThumbnailTypeIcon {
           position: absolute;
           color: #FFFFFF;
 
-          &.kIconquiz {
+          &.vIconquiz {
               font-size: 30px;
               top: 15px;
               right: 1px;
@@ -63,24 +63,24 @@
       }
   }
 
-  .kPlaylistEntriesTableActions {
+  .vPlaylistEntriesTableActions {
     width: 100%;
     text-align: center;
   }
 
-  .kIconvideo {
+  .vIconvideo {
     font-size: 16px;
   }
 
-  .kIconsound {
+  .vIconsound {
     font-size: 16px;
   }
 
-  .kIconimage {
+  .vIconimage {
     font-size: 16px;
   }
 
-  .kTitle {
+  .vTitle {
     color: #333333;
     font-weight: 700;
     cursor: pointer;

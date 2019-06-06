@@ -1,59 +1,59 @@
-<form [formGroup]="_form" class="kFlavorLink" (submit)="_link()">
-    <div class="kHeader">
-        <span class="kTitle">{{'applications.content.entryDetails.flavours.link.linkRemoteStorage' | translate}}</span>
+<form [formGroup]="_form" class="vFlavorLink" (submit)="_link()">
+    <div class="vHeader">
+        <span class="vTitle">{{'applications.content.entryDetails.flavours.link.linkRemoteStorage' | translate}}</span>
     </div>
-    <div class="kContainer">
-        <div class="kStorageProfileInfo">
-            <div class="kStorageProfileInfoItem">
-                <span class="kStorageProfileInfoItemTitle">
+    <div class="vContainer">
+        <div class="vStorageProfileInfo">
+            <div class="vStorageProfileInfoItem">
+                <span class="vStorageProfileInfoItemTitle">
                     {{'applications.content.entryDetails.flavours.link.remoteStorageName' | translate}}
                 </span>
                 {{storageProfile?.name}}
-                <span class="kDelimiter"></span>
+                <span class="vDelimiter"></span>
             </div>
-            <div class="kStorageProfileInfoItem">
-                <span class="kStorageProfileInfoItemTitle">
+            <div class="vStorageProfileInfoItem">
+                <span class="vStorageProfileInfoItemTitle">
                     {{'applications.content.entryDetails.flavours.link.id' | translate}}
                 </span>
                 {{storageProfile?.id}}
-                <span class="kDelimiter"></span>
+                <span class="vDelimiter"></span>
             </div>
-            <div class="kStorageProfileInfoItem">
-                <span class="kStorageProfileInfoItemTitle">
+            <div class="vStorageProfileInfoItem">
+                <span class="vStorageProfileInfoItemTitle">
                     {{'applications.content.entryDetails.flavours.link.storageUrl' | translate}}
                 </span>
                 {{storageProfile?.storageUrl}}
-                <span class="kDelimiter"></span>
+                <span class="vDelimiter"></span>
             </div>
             <br>
-            <div class="kStorageProfileInfoItem">
-                <span class="kStorageProfileInfoItemTitle">
+            <div class="vStorageProfileInfoItem">
+                <span class="vStorageProfileInfoItemTitle">
                     {{'applications.content.entryDetails.flavours.link.storageBaseDirectory' | translate}}
                 </span>
                 {{storageProfile?.storageBaseDir}}
-                <kInputHelper class="kHelp" icon="kIconlife_donut" trigger="click"
+                <vInputHelper class="vHelp" icon="vIconlife_donut" trigger="click"
                               [title]="'applications.content.entryDetails.flavours.replaceVideo.storageProfile.noteTitle' | translate">
                     <span>{{'applications.content.entryDetails.flavours.replaceVideo.storageProfile.note' | translate}}</span>
-                </kInputHelper>
+                </vInputHelper>
             </div>
         </div>
-        <div class="kFlavorUrlTitle">
+        <div class="vFlavorUrlTitle">
             <span>{{'applications.content.entryDetails.flavours.link.filePathName' | translate}}</span>
         </div>
-        <div class="kFlavorUrl">
+        <div class="vFlavorUrl">
             <input pInputText type="text"
-                   [class.kHasError]="_filePathField.touched && _filePathField.invalid"
+                   [class.vHasError]="_filePathField.touched && _filePathField.invalid"
                    [formControl]="_filePathField"
                    [placeholder]="'applications.content.entryDetails.flavours.link.enterFlavorUrl' | translate"/>
-            <div class="kInvalid" *ngIf="_filePathField.touched && _filePathField.invalid">
+            <div class="vInvalid" *ngIf="_filePathField.touched && _filePathField.invalid">
                 {{'applications.content.entryDetails.flavours.link.required' | translate}}
             </div>
         </div>
     </div>
-    <div class="kFooter">
-        <button type="button" class="kButtonDefault" pButton
+    <div class="vFooter">
+        <button type="button" class="vButtonDefault" pButton
                 [label]="'applications.content.entryDetails.flavours.link.cancel' | translate"></button>
-        <button type="submit" class="kButtonBranded" pButton
+        <button type="submit" class="vButtonBranded" pButton
                 [disabled]="_form.invalid"
                 [label]="'applications.content.entryDetails.flavours.link.link' | translate"></button>
     </div>

@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'kPlaylistEntryListBulkOperationsContent',
+  selector: 'vPlaylistEntryListBulkOperationsContent',
   templateUrl: './bulk-operations.component.html',
   styleUrls: ['./bulk-operations.component.scss'],
 })
 export class BulkOperationsComponent {
-  @Input() selectedEntries: KalturaMediaEntry[] = [];
+  @Input() selectedEntries: VidiunMediaEntry[] = [];
   @Input() entriesTotalCount = 0;
   @Input() duration = 0;
   @Input() isNewPlaylist: boolean;
 
   @Output() addEntry = new EventEmitter<void>();
   @Output() clearSelection = new EventEmitter<void>();
-  @Output() deleteEntries = new EventEmitter<KalturaMediaEntry[]>();
-  @Output() moveEntries = new EventEmitter<{ entries: KalturaMediaEntry[], direction: 'up' | 'down' }>();
+  @Output() deleteEntries = new EventEmitter<VidiunMediaEntry[]>();
+  @Output() moveEntries = new EventEmitter<{ entries: VidiunMediaEntry[], direction: 'up' | 'down' }>();
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
 
   constructor() {
   }

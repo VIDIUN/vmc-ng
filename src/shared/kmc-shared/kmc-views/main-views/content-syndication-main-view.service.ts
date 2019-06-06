@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import { Title } from '@angular/platform-browser';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class ContentSyndicationMainViewService extends KmcMainViewBaseService {
+export class ContentSyndicationMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -25,10 +25,10 @@ export class ContentSyndicationMainViewService extends KmcMainViewBaseService {
 
     isAvailable(): boolean {
         return this._appPermissions.hasAnyPermissions([
-            KMCPermissions.SYNDICATION_BASE,
-            KMCPermissions.SYNDICATION_ADD,
-            KMCPermissions.SYNDICATION_UPDATE,
-            KMCPermissions.SYNDICATION_DELETE
+            VMCPermissions.SYNDICATION_BASE,
+            VMCPermissions.SYNDICATION_ADD,
+            VMCPermissions.SYNDICATION_UPDATE,
+            VMCPermissions.SYNDICATION_DELETE
         ]);
     }
 

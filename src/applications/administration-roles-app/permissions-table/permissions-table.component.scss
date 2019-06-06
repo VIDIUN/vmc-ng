@@ -1,24 +1,24 @@
 @import 'app-theme/_variables.scss';
 
-.kPermissionsTable {
+.vPermissionsTable {
   background-color: white;
   height: auto;
   padding: 0;
   width: 100%;
 
-  .kPermissionGroup {
-    color: $kGrayscale1;
+  .vPermissionGroup {
+    color: $vGrayscale1;
     font-weight: bold;
     font-size: 15px;
   }
 
-  .kIconError {
+  .vIconError {
     position: absolute;
     top: 20px;
     padding-left: 1px;
     margin-left: 20px;
     font-size: 24px;
-    color: $kDandger;
+    color: $vDandger;
   }
 }
 
@@ -29,13 +29,13 @@
   flex-direction: column;
 }
 
-:host /deep/ .kPermissionsTable {
+:host /deep/ .vPermissionsTable {
   p-table .ui-table-scrollable-body{
     margin-bottom: 34px;
   }
 
   .ui-table .ui-table-thead > tr > th {
-    border: 1px solid $kGrayscale6;
+    border: 1px solid $vGrayscale6;
     border-left: none;
     border-right: none;
     padding: 10px auto;
@@ -45,15 +45,15 @@
     position: relative;
   }
 
-  .kHasError .ui-multiselect {
-    border: 1px solid $kDandger;
+  .vHasError .ui-multiselect {
+    border: 1px solid $vDandger;
   }
 
   .ui-multiselect .ui-multiselect-panel{
       z-index: 1;
   }
 
-  .kPermissionsList {
+  .vPermissionsList {
     .ui-multiselect {
       width: 320px;
     }

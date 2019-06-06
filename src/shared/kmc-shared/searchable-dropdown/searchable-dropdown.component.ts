@@ -12,7 +12,7 @@ export const DROPDOWN_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-    selector: 'kSearchableDropdown',
+    selector: 'vSearchableDropdown',
     templateUrl: 'searchable-dropdown.component.html',
     styleUrls: ['searchable-dropdown.component.scss'],
     animations: [

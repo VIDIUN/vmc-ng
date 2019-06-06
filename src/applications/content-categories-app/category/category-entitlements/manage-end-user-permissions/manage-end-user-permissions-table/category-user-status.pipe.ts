@@ -1,19 +1,19 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {KalturaCategoryUserStatus} from 'kaltura-ngx-client';
-import {AppLocalization} from '@kaltura-ng/mc-shared';
+import {VidiunCategoryUserStatus} from 'vidiun-ngx-client';
+import {AppLocalization} from '@vidiun-ng/mc-shared';
 
-@Pipe({ name: 'kCategoryUserStatus' })
+@Pipe({ name: 'vCategoryUserStatus' })
 export class CategoryUserStatusPipe implements PipeTransform {
   constructor(private appLocalization: AppLocalization) {
   }
 
-  transform(value: KalturaCategoryUserStatus): string {
+  transform(value: VidiunCategoryUserStatus): string {
     switch (value) {
-      case KalturaCategoryUserStatus.active:
+      case VidiunCategoryUserStatus.active:
         return this.appLocalization.get('app.common.yes');
-        case KalturaCategoryUserStatus.notActive:
+        case VidiunCategoryUserStatus.notActive:
         return this.appLocalization.get('app.common.no');
-      case KalturaCategoryUserStatus.pending:
+      case VidiunCategoryUserStatus.pending:
         return this.appLocalization.get('applications.content.categoryDetails.entitlements.usersPermissions.table.pendingApproval');
       default:
         return '';

@@ -1,9 +1,9 @@
-import {AppEvent} from 'app-shared/kmc-shared/app-events/app-event';
-import { KMCAppMenuItem } from 'app-shared/kmc-shared/kmc-views';
+import {AppEvent} from 'app-shared/vmc-shared/app-events/app-event';
+import { VMCAppMenuItem } from 'app-shared/vmc-shared/vmc-views';
 
 export class UpdateMenuEvent extends AppEvent {
 
-    constructor(public menuID: string,  public menu: KMCAppMenuItem[], public position: string)
+    constructor(public menuID: string,  public menu: VMCAppMenuItem[], public position: string)
     {
         super('UpdatedMenuEvent');
     }

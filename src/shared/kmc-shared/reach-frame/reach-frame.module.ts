@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReachFrameComponent } from './reach-frame.component';
-import { KalturaUIModule } from '@kaltura-ng/kaltura-ui';
-import { LocalizationModule } from '@kaltura-ng/mc-shared';
+import { VidiunUIModule } from '@vidiun-ng/vidiun-ui';
+import { LocalizationModule } from '@vidiun-ng/mc-shared';
 
 @NgModule({
     imports: [
         CommonModule,
-        KalturaUIModule,
+        VidiunUIModule,
         LocalizationModule
     ],
     declarations: [

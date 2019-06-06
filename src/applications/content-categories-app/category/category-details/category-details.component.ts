@@ -1,22 +1,22 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {KalturaCategory} from 'kaltura-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
 import {CategoryDetailsWidget} from './category-details-widget.service';
 import {ActionTypes, CategoryService} from '../category.service';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategoryDetails',
+  selector: 'vCategoryDetails',
   templateUrl: './category-details.component.html',
   styleUrls: ['./category-details.component.scss'],
-    providers: [KalturaLogger.createLogger('CategoryDetailsComponent')]
+    providers: [VidiunLogger.createLogger('CategoryDetailsComponent')]
 })
 export class CategoryDetailsComponent implements OnInit, OnDestroy {
-  public _currentCategory: KalturaCategory;
+  public _currentCategory: VidiunCategory;
   public _parentCategoryId: number;
 
   constructor(private _categoryStore: CategoryService,
-              private _logger: KalturaLogger,
+              private _logger: VidiunLogger,
               public _widgetService: CategoryDetailsWidget) {
   }
 
@@ -38,7 +38,7 @@ export class CategoryDetailsComponent implements OnInit, OnDestroy {
         }
       },
       error => {
-        // TODO [kmcng] navigate to error page
+        // TODO [vmcng] navigate to error page
         throw error;
       });
   }

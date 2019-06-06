@@ -2,39 +2,39 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitte
 import { ISubscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { SuggestionsProviderData } from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
-import { KalturaUser } from 'kaltura-ngx-client';
-import { KalturaUserFilter } from 'kaltura-ngx-client';
-import { UserListAction } from 'kaltura-ngx-client';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { SuggestionsProviderData } from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
+import { VidiunUser } from 'vidiun-ngx-client';
+import { VidiunUserFilter } from 'vidiun-ngx-client';
+import { UserListAction } from 'vidiun-ngx-client';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategoriesBulkChangeOwner',
+  selector: 'vCategoriesBulkChangeOwner',
   templateUrl: './bulk-change-owner.component.html',
   styleUrls: ['./bulk-change-owner.component.scss']
 })
 export class CategoriesBulkChangeOwner implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Output() ownerChanged = new EventEmitter<KalturaUser>();
+  @Output() ownerChanged = new EventEmitter<VidiunUser>();
 
   public _loading = false;
   public _sectionBlockerMessage: AreaBlockerMessage;
 
   public _usersProvider = new Subject<SuggestionsProviderData>();
-  public _owner: KalturaUser = null;
+  public _owner: VidiunUser = null;
 
   private _searchUsersSubscription : ISubscription;
   private _parentPopupStateChangeSubscribe : ISubscription;
   private _confirmClose: boolean = true;
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _appLocalization: AppLocalization,
               private _browserService: BrowserService) {
     this._convertUserInputToValidValue = this._convertUserInputToValidValue.bind(this);
@@ -86,13 +86,13 @@ export class CategoriesBulkChangeOwner implements OnInit, OnDestroy, AfterViewIn
       this._searchUsersSubscription = null;
     }
 
-    this._searchUsersSubscription = this._kalturaServerClient.request(
+    this._searchUsersSubscription = this._vidiunServerClient.request(
       new UserListAction(
         {
-          filter: new KalturaUserFilter({
+          filter: new VidiunUserFilter({
             idOrScreenNameStartsWith : event.query
           }),
-          pager: new KalturaFilterPager({
+          pager: new VidiunFilterPager({
             pageIndex : 0,
             pageSize : 30
           })
@@ -104,7 +104,7 @@ export class CategoriesBulkChangeOwner implements OnInit, OnDestroy, AfterViewIn
         data =>
         {
           const suggestions = [];
-          (data.objects || []).forEach((suggestedUser: KalturaUser) => {
+          (data.objects || []).forEach((suggestedUser: VidiunUser) => {
               suggestedUser['__tooltip'] = suggestedUser.id;
             suggestions.push({
               name: `${suggestedUser.screenName} (${suggestedUser.id})`,
@@ -121,7 +121,7 @@ export class CategoriesBulkChangeOwner implements OnInit, OnDestroy, AfterViewIn
       );
   }
 
-  public _convertUserInputToValidValue(value: string): KalturaUser {
+  public _convertUserInputToValidValue(value: string): VidiunUser {
     let result = null;
     const tooltip = this._appLocalization.get('applications.content.entryDetails.users.tooltip', [value]);
 

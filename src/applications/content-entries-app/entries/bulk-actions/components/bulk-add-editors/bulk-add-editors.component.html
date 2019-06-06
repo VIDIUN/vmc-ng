@@ -1,9 +1,9 @@
-<k-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
-  <div class="kContent kOverrideFAIcons">
-    <span class="kTitle">{{'applications.content.bulkActions.addEditors' | translate}}</span>
-    <div class="kEditors">
-      <span class="kLabel">{{'applications.content.bulkActions.addEditorsLabel' | translate}}</span>
-      <kAutoComplete [(ngModel)]="users"
+<v-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
+  <div class="vContent vOverrideFAIcons">
+    <span class="vTitle">{{'applications.content.bulkActions.addEditors' | translate}}</span>
+    <div class="vEditors">
+      <span class="vLabel">{{'applications.content.bulkActions.addEditorsLabel' | translate}}</span>
+      <vAutoComplete [(ngModel)]="users"
                      suggestionItemField="item"
                      suggestionSelectableField="isSelectable"
                      suggestionLabelField="name"
@@ -16,10 +16,10 @@
                      [suggestionsProvider]="_usersProvider"
                      [onItemAdding]="_convertUserInputToValidValue"
                      (completeMethod)="_searchUsers($event)">
-      </kAutoComplete>
+      </vAutoComplete>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

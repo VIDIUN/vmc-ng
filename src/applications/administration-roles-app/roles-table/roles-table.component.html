@@ -1,5 +1,5 @@
-<div class="kRolesTable" [class.noResults]="!_roles?.length">
-  <p-table kStickyHeader [scrollable]="true" stickyClass="stickyHeader" scrollHeight="100%" dataKey="id"
+<div class="vRolesTable" [class.noResults]="!_roles?.length">
+  <p-table vStickyHeader [scrollable]="true" stickyClass="stickyHeader" scrollHeight="100%" dataKey="id"
                [rowTrackBy]="_rowTrackBy"
                [sticksTo]="'rolesFilters'"
                [resizableColumns]="true"
@@ -33,24 +33,24 @@
       <ng-template pTemplate="body" let-role>
           <tr>
               <td class="ui-resizable-column" [ngStyle]="{'width': '250px', 'padding-left': '1em'}">
-                  <span class="kRoleName kTableColumn" [kTooltip]="role.name" [showOnEllipsis]="true">
+                  <span class="vRoleName vTableColumn" [vTooltip]="role.name" [showOnEllipsis]="true">
                       {{role.name}}
                   </span>
               </td>
               <td class="ui-resizable-column">
-                  <span class="kTableColumn" [kTooltip]="role.description" [showOnEllipsis]="true">
+                  <span class="vTableColumn" [vTooltip]="role.description" [showOnEllipsis]="true">
                       {{role.description}}
                   </span>
               </td>
               <td>
-                  <span class="kTableColumn" [kTooltip]="role.updatedAt | kmcDate" [showOnEllipsis]="true">
-                      {{role.updatedAt | kmcDate}}
+                  <span class="vTableColumn" [vTooltip]="role.updatedAt | vmcDate" [showOnEllipsis]="true">
+                      {{role.updatedAt | vmcDate}}
                   </span>
               </td>
               <td [ngStyle]="{'overflow': 'hidden', 'width': '80px'}">
-                  <div class="kRolesTableActions">
-                      <button type="button" pButton icon="kIconmore"
-                              [disabled]="role.partnerId === 0" class="kMoreActionsButton"
+                  <div class="vRolesTableActions">
+                      <button type="button" pButton icon="vIconmore"
+                              [disabled]="role.partnerId === 0" class="vMoreActionsButton"
                               (click)="_openActionsMenu($event, role)"></button>
                   </div>
               </td>
@@ -59,9 +59,9 @@
 
       <ng-template pTemplate="emptymessage">
           <div class="emptymessage">
-              <div class="kEmptyMessage">{{_emptyMessage}}</div>
+              <div class="vEmptyMessage">{{_emptyMessage}}</div>
           </div>
       </ng-template>
   </p-table>
-  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" kMenuCloseOnScroll></p-menu>
+  <p-menu #actionsmenu [popup]="true" [model]="_items" [appendTo]="'body'" vMenuCloseOnScroll></p-menu>
 </div>

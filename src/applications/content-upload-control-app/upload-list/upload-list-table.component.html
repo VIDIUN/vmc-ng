@@ -1,5 +1,5 @@
-<div class="kUploadsTableWrapper">
-    <div class="kUploadsTable" [class.noResults]="!uploads?.length">
+<div class="vUploadsTableWrapper">
+    <div class="vUploadsTable" [class.noResults]="!uploads?.length">
         <p-table dataKey="id"
                  scrollHeight="100%"
                  [scrollable]="true"
@@ -8,7 +8,7 @@
                  (selectionChange)="onSelectedEntriesChange.emit($event)"
                  (onColResize)="_columnsResizeManager.onColumnResize($event)"
                  [(selection)]="selectedUploads"
-                 kStickyHeader [sticksTo]="'uploadControlFilters'" stickyClass="stickyHeader"
+                 vStickyHeader [sticksTo]="'uploadControlFilters'" stickyClass="stickyHeader"
                  [stickyId]="'uploadControlTable'">
 
             <ng-template pTemplate="colgroup" let-columns>
@@ -59,47 +59,47 @@
                         <p-tableCheckbox [value]="file"></p-tableCheckbox>
                     </td>
                     <td [ngStyle]="{'width':'80px', 'text-align': 'center'}">
-                        <div class="kIconMediaType"
-                             [kTooltip]="file.mediaType | entryType: true"
+                        <div class="vIconMediaType"
+                             [vTooltip]="file.mediaType | entryType: true"
                              [ngClass]="file.mediaType | entryType: false"></div>
                     </td>
                     <td class="ui-resizable-column">
-                        <span class="kUploadName kTableColumn" [kTooltip]="file.fileName" [showOnEllipsis]="true">
+                        <span class="vUploadName vTableColumn" [vTooltip]="file.fileName" [showOnEllipsis]="true">
                             {{file.fileName}}
                         </span>
                     </td>
                     <td class="ui-resizable-column">
-                        <span class="kTableColumn" [kTooltip]="file.entryId" [showOnEllipsis]="true">
+                        <span class="vTableColumn" [vTooltip]="file.entryId" [showOnEllipsis]="true">
                             {{file.entryId}}
                         </span>
                     </td>
                     <td class="ui-resizable-column">
-                        <span class="kTableColumn" [kTooltip]="file.fileSize | kFileSize" [showOnEllipsis]="true">
-                            {{file.fileSize | kFileSize}}
+                        <span class="vTableColumn" [vTooltip]="file.fileSize | vFileSize" [showOnEllipsis]="true">
+                            {{file.fileSize | vFileSize}}
                         </span>
                     </td>
                     <td class="ui-resizable-column">
-                        <span class="kTableColumn" [kTooltip]="file.uploadedOn | kmcDate" [showOnEllipsis]="true">
-                            {{file.uploadedOn | kmcDate}}
+                        <span class="vTableColumn" [vTooltip]="file.uploadedOn | vmcDate" [showOnEllipsis]="true">
+                            {{file.uploadedOn | vmcDate}}
                         </span>
                     </td>
                     <td class="ui-resizable-column">
-                        <span class="kTableColumn" [kTooltip]="file.status | kUploadStatus" [showOnEllipsis]="true">
-                            {{file.status | kUploadStatus}}
+                        <span class="vTableColumn" [vTooltip]="file.status | vUploadStatus" [showOnEllipsis]="true">
+                            {{file.status | vUploadStatus}}
                         </span>
                     </td>
                     <td>
-                        <kUploadProgress [progress]="file.progress" [status]="file.status"></kUploadProgress>
+                        <vUploadProgress [progress]="file.progress" [status]="file.status"></vUploadProgress>
                     </td>
                     <td [ngStyle]="{'width': '70px', 'text-align': 'center'}">
-                        <i class="kIconplay kIconRemoveFile"
+                        <i class="vIconplay vIconRemoveFile"
                            *ngIf="_hasError(file.status)"
-                           [kTooltip]="'applications.content.uploadControl.table.retry' | translate"
+                           [vTooltip]="'applications.content.uploadControl.table.retry' | translate"
                            placement="top"
                            (click)="onRetryUpload.emit(file)"></i>
-                        <i class="kIcontrash kIconRemoveFile"
+                        <i class="vIcontrash vIconRemoveFile"
                            *ngIf="_canRemoveFile(file)"
-                           [kTooltip]="'applications.content.uploadControl.table.remove' | translate"
+                           [vTooltip]="'applications.content.uploadControl.table.remove' | translate"
                            placement="top"
                            (click)="onCancelUpload.emit(file)"></i>
                     </td>
@@ -108,7 +108,7 @@
 
             <ng-template pTemplate="emptymessage">
                 <div class="emptymessage">
-                    <div class="kEmptyMessage">{{!uploads.length ? _emptyMessage : ''}}</div>
+                    <div class="vEmptyMessage">{{!uploads.length ? _emptyMessage : ''}}</div>
                 </div>
             </ng-template>
         </p-table>

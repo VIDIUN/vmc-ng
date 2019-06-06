@@ -1,7 +1,7 @@
 @import 'app-theme/_variables.scss';
 
-.kFlavorLink {
-    .kHeader {
+.vFlavorLink {
+    .vHeader {
         height: 78px;
         width: 100%;
         text-align: center;
@@ -10,41 +10,41 @@
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        border-bottom: 1px solid $kGrayscale4;
-        .kTitle {
-            color: $kGrayscale1;
+        border-bottom: 1px solid $vGrayscale4;
+        .vTitle {
+            color: $vGrayscale1;
             font-size: 24px;
             font-weight: bold;
         }
     }
-    .kContainer {
+    .vContainer {
         height: 315px;
 
-        .kFlavorUrl {
+        .vFlavorUrl {
             padding: 16px 24px ;
 
             input {
                 margin-top: 6px;
                 width: 500px;
 
-                &.kHasError {
-                    border-color: $kDandger;
+                &.vHasError {
+                    border-color: $vDandger;
                 }
             }
         }
-        .kInvalid {
-            color: $kDandger;
+        .vInvalid {
+            color: $vDandger;
             font-size: 12px;
             font-weight: 700;
             margin-top: 10px;
         }
 
-        .kFlavorUrlTitle {
-            border-top: 1px solid $kGrayscale6;
-            border-bottom: 1px solid $kGrayscale6;
+        .vFlavorUrlTitle {
+            border-top: 1px solid $vGrayscale6;
+            border-bottom: 1px solid $vGrayscale6;
             font-size: 13px;
             font-weight: bold;
-            color: $kGrayscale3;
+            color: $vGrayscale3;
             padding: 9px 0;
 
             span {
@@ -52,35 +52,35 @@
             }
         }
 
-        .kStorageProfileInfo {
+        .vStorageProfileInfo {
             padding: 32px 24px;
 
-            .kStorageProfileInfoItem {
+            .vStorageProfileInfoItem {
                 display: inline-block;
                 padding: 5px 0;
 
-                .kStorageProfileInfoItemTitle {
+                .vStorageProfileInfoItemTitle {
                     font-weight: bold;
                 }
             }
 
-            .kDelimiter {
+            .vDelimiter {
                 margin: 0 10px;
 
                 &:after {
                     content: '|';
                     font-size: 12px;
-                    color: $kGrayscale4;
+                    color: $vGrayscale4;
                     top: -2px;
                     position: relative;
                 }
             }
         }
     }
-    .kFooter {
+    .vFooter {
         text-align: center;
         height: 66px;
-        border-top: 1px solid $kGrayscale4;
+        border-top: 1px solid $vGrayscale4;
         button {
             margin-top: 16px;
             margin-left: 8px;

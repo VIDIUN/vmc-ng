@@ -1,6 +1,6 @@
 
 
-import { ContentCategoryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views';
+import { ContentCategoryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views';
 
 export const CategorySectionsList = [
     {

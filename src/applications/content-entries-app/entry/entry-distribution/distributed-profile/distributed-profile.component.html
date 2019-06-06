@@ -1,55 +1,55 @@
-<div class="kDistributedProfile">
-  <div [class]="'kProfileIcon ' + (_providerType | kEntriesDistributionProviderTypeIcon)"></div>
+<div class="vDistributedProfile">
+  <div [class]="'vProfileIcon ' + (_providerType | vEntriesDistributionProviderTypeIcon)"></div>
 
-  <div class="kDistributedProfileContent">
-    <span class="kTitle">
-      <span class="kTitleLabel" (click)="_openProfile(_profile)">{{_profile?.name}}</span>
-      <a *ngIf="_distributorPageLink" class="kDistributorPageLink" target="_blank"
-         [kTooltip]="'applications.content.entryDetails.distribution.previewDistributorVideo' | translate"
+  <div class="vDistributedProfileContent">
+    <span class="vTitle">
+      <span class="vTitleLabel" (click)="_openProfile(_profile)">{{_profile?.name}}</span>
+      <a *ngIf="_distributorPageLink" class="vDistributorPageLink" target="_blank"
+         [vTooltip]="'applications.content.entryDetails.distribution.previewDistributorVideo' | translate"
          [href]="_distributorPageLink">
-        <i class="kIconexternal_link kTitleIcon"></i>
+        <i class="vIconexternal_link vTitleIcon"></i>
       </a>
     </span>
-    <div class="kMetadata">
-      <span class="kStatus" *ngIf="!_profile?.validationErrors?.length">
-        <i class="kStatusIcon" [ngClass]="_profile | kEntriesDistributionStatus:'icon'"></i>
-        {{_profile | kEntriesDistributionStatus:'label'}}
-        <span class="kDelimiter"></span>
+    <div class="vMetadata">
+      <span class="vStatus" *ngIf="!_profile?.validationErrors?.length">
+        <i class="vStatusIcon" [ngClass]="_profile | vEntriesDistributionStatus:'icon'"></i>
+        {{_profile | vEntriesDistributionStatus:'label'}}
+        <span class="vDelimiter"></span>
       </span>
       <span *ngIf="_profile?.validationErrors?.length">
-        <i class="kStatusUpdateFailed kIconerror"></i>
+        <i class="vStatusUpdateFailed vIconerror"></i>
         {{'applications.content.entryDetails.distribution.status.exportFailed' | translate}}
-        <span class="kDelimiter"></span>
+        <span class="vDelimiter"></span>
       </span>
       <span *ngIf="_isModified">
-        <span class="kModified">{{'applications.content.entryDetails.distribution.modified' | translate}}</span>
-        <span class="kDelimiter"></span>
+        <span class="vModified">{{'applications.content.entryDetails.distribution.modified' | translate}}</span>
+        <span class="vDelimiter"></span>
       </span>
-      <span class="kLastUpdate">
-        {{'applications.content.entryDetails.distribution.lastUpdate' | translate:[(_profile?.updatedAt | kmcDate:'dateOnly')]}}
-        <span class="kDelimiter"></span>
+      <span class="vLastUpdate">
+        {{'applications.content.entryDetails.distribution.lastUpdate' | translate:[(_profile?.updatedAt | vmcDate:'dateOnly')]}}
+        <span class="vDelimiter"></span>
       </span>
-      <span class="kAutoDistribution" *ngIf="_profile?.autoDistribution">
+      <span class="vAutoDistribution" *ngIf="_profile?.autoDistribution">
         {{'applications.content.entryDetails.distribution.auto' | translate}}
-        <span class="kDelimiter"></span>
+        <span class="vDelimiter"></span>
       </span>
-      <a class="kMoreDetails" (click)="_openProfile(_profile)">
+      <a class="vMoreDetails" (click)="_openProfile(_profile)">
         {{'applications.content.entryDetails.distribution.moreDetails' | translate}}
       </a>
     </div>
-    <div class="kValidationErrors" *ngIf="_profile?.validationErrors?.length">
-      <kEntryDistributedProfileErrors [errors]="_profile?.validationErrors"></kEntryDistributedProfileErrors>
+    <div class="vValidationErrors" *ngIf="_profile?.validationErrors?.length">
+      <vEntryDistributedProfileErrors [errors]="_profile?.validationErrors"></vEntryDistributedProfileErrors>
     </div>
   </div>
 
-  <div class="kControls">
+  <div class="vControls">
     <button *ngIf="!_deleteButtonHidden" pButton
-            [disabled]="_kmcPermissions.CONTENT_MANAGE_DISTRIBUTION_REMOVE | kDisabledIfNotPermitted"
-            icon="kIcontrash" class="kButtonDanger kDeleteBtn"
+            [disabled]="_vmcPermissions.CONTENT_MANAGE_DISTRIBUTION_REMOVE | vDisabledIfNotPermitted"
+            icon="vIcontrash" class="vButtonDanger vDeleteBtn"
             (click)="_deleteDistribution(_profile)"></button>
     <button *ngIf="!_actionButtonHidden"
-            pButton class="kButtonDefault kUpdateBtn"
-            [disabled]="_actionButtonDisabled || (_kmcPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND | kDisabledIfNotPermitted)"
+            pButton class="vButtonDefault vUpdateBtn"
+            [disabled]="_actionButtonDisabled || (_vmcPermissions.CONTENT_MANAGE_DISTRIBUTION_SEND | vDisabledIfNotPermitted)"
             [label]="_actionButtonLabel"
             (click)="_performAction(_profile)"></button>
   </div>

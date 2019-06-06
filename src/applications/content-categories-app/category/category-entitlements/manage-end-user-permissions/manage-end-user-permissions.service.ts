@@ -1,26 +1,26 @@
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
 import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import {ISubscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
-import {KalturaDetachedResponseProfile} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {KalturaResponseProfileType} from 'kaltura-ngx-client';
-import {KalturaClient, KalturaMultiRequest} from 'kaltura-ngx-client';
-import {KalturaLogger} from '@kaltura-ng/kaltura-logger';
-import {KalturaUser} from 'kaltura-ngx-client';
-import {CategoryUserDeleteAction} from 'kaltura-ngx-client';
-import {CategoryUserListAction} from 'kaltura-ngx-client';
-import {KalturaCategoryUserFilter} from 'kaltura-ngx-client';
-import {UserGetAction} from 'kaltura-ngx-client';
-import {KalturaCategoryUser} from 'kaltura-ngx-client';
-import {KalturaCategoryUserPermissionLevel} from 'kaltura-ngx-client';
-import {KalturaUpdateMethodType} from 'kaltura-ngx-client';
-import {CategoryUserActivateAction} from 'kaltura-ngx-client';
-import {CategoryUserDeactivateAction} from 'kaltura-ngx-client';
-import {CategoryUserUpdateAction} from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
+import {VidiunDetachedResponseProfile} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {VidiunResponseProfileType} from 'vidiun-ngx-client';
+import {VidiunClient, VidiunMultiRequest} from 'vidiun-ngx-client';
+import {VidiunLogger} from '@vidiun-ng/vidiun-logger';
+import {VidiunUser} from 'vidiun-ngx-client';
+import {CategoryUserDeleteAction} from 'vidiun-ngx-client';
+import {CategoryUserListAction} from 'vidiun-ngx-client';
+import {VidiunCategoryUserFilter} from 'vidiun-ngx-client';
+import {UserGetAction} from 'vidiun-ngx-client';
+import {VidiunCategoryUser} from 'vidiun-ngx-client';
+import {VidiunCategoryUserPermissionLevel} from 'vidiun-ngx-client';
+import {VidiunUpdateMethodType} from 'vidiun-ngx-client';
+import {CategoryUserActivateAction} from 'vidiun-ngx-client';
+import {CategoryUserDeactivateAction} from 'vidiun-ngx-client';
+import {CategoryUserUpdateAction} from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
 import {
   BooleanTypeAdapter,
   FiltersStoreBase,
@@ -28,13 +28,13 @@ import {
     ListTypeAdapter,
   StringTypeAdapter,
   TypeAdaptersMapping
-} from '@kaltura-ng/mc-shared';
-import {KalturaSearchOperator} from 'kaltura-ngx-client';
-import {KalturaSearchOperatorType} from 'kaltura-ngx-client';
-import {KalturaCategoryUserStatus} from 'kaltura-ngx-client';
-import { CategoryGetAction } from 'kaltura-ngx-client';
+} from '@vidiun-ng/mc-shared';
+import {VidiunSearchOperator} from 'vidiun-ngx-client';
+import {VidiunSearchOperatorType} from 'vidiun-ngx-client';
+import {VidiunCategoryUserStatus} from 'vidiun-ngx-client';
+import { CategoryGetAction } from 'vidiun-ngx-client';
 import { switchMap, map } from 'rxjs/operators';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface LoadingStatus {
   loading: boolean;
@@ -44,9 +44,9 @@ export interface LoadingStatus {
 export interface EndUserPermissionsUser {
     id: string,
     name: string, // User Name / ID
-    permissionLevel: KalturaCategoryUserPermissionLevel; // Permission Level
-    status: KalturaCategoryUserStatus; // Active
-    updateMethod: KalturaUpdateMethodType; // Update Method
+    permissionLevel: VidiunCategoryUserPermissionLevel; // Permission Level
+    status: VidiunCategoryUserStatus; // Active
+    updateMethod: VidiunUpdateMethodType; // Update Method
     updatedAt: Date; // Updated On
 }
 
@@ -91,10 +91,10 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
   private readonly _pageSizeCacheKey = 'categories.list.pageSize';
 
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('ManageEndUserPermissionsService'));
     this._prepare();
   }
@@ -193,25 +193,25 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
               return Observable.of({items: [], totalCount: 0, actualUsersCount: 0});
           }
 
-          const filter: KalturaCategoryUserFilter = new KalturaCategoryUserFilter({
+          const filter: VidiunCategoryUserFilter = new VidiunCategoryUserFilter({
               categoryIdEqual: data.categoryId,
               categoryDirectMembers: false
           });
 
-          const pagination = new KalturaFilterPager(
+          const pagination = new VidiunFilterPager(
               {
                   pageSize: data.pageSize,
                   pageIndex: data.pageIndex + 1
               });
 
           // update desired fields of entries
-          const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-              type: KalturaResponseProfileType.includeFields,
+          const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+              type: VidiunResponseProfileType.includeFields,
               fields: 'userId,permissionLevel,status,updateMethod,updatedAt'
           });
 
-          const advancedSearch = filter.advancedSearch = new KalturaSearchOperator({});
-          advancedSearch.type = KalturaSearchOperatorType.searchAnd;
+          const advancedSearch = filter.advancedSearch = new VidiunSearchOperator({});
+          advancedSearch.type = VidiunSearchOperatorType.searchAnd;
 
           // filter 'freeText'
           if (data.freetext) {
@@ -242,7 +242,7 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
               filter.permissionLevelIn = '3,2,1,0';
           }
 
-          const requests = new KalturaMultiRequest(
+          const requests = new VidiunMultiRequest(
               new CategoryUserListAction({
                   filter,
                   pager: pagination
@@ -252,7 +252,7 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
               new CategoryGetAction({id: data.categoryId})
           );
 
-          return this._kalturaClient.multiRequest(requests)
+          return this._vidiunClient.multiRequest(requests)
               .pipe(
                   map(result => {
                       if (result.hasErrors()) {
@@ -266,14 +266,14 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
                   }),
                   switchMap(
                       categoryUserListResult =>
-                          this._getKalturaUsers(categoryUserListResult.users.map(item => item.userId))
+                          this._getVidiunUsers(categoryUserListResult.users.map(item => item.userId))
                           .pipe(
-                              map((getKalturaUsersResult) => {
+                              map((getVidiunUsersResult) => {
                                   const items = categoryUserListResult.users.map((categoryUser, index) => {
-                                      const kalturaUser = getKalturaUsersResult[index];
+                                      const vidiunUser = getVidiunUsersResult[index];
                                       return {
                                           id: categoryUser.userId,
-                                          name: kalturaUser.screenName || categoryUser.userId,
+                                          name: vidiunUser.screenName || categoryUser.userId,
                                           permissionLevel: categoryUser.permissionLevel,
                                           status: categoryUser.status,
                                           updateMethod: categoryUser.updateMethod,
@@ -294,14 +294,14 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       }
   }
 
-  private _getKalturaUsers(categoryUsersId: string[]): Observable<KalturaUser[]> {
+  private _getVidiunUsers(categoryUsersId: string[]): Observable<VidiunUser[]> {
     if (!categoryUsersId) {
       return Observable.throw(new Error('ManageEndUserPermissionsService: Category has no end-users'))
     }
     if (!categoryUsersId.length) {
       return Observable.of([]);
     }
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     categoryUsersId.forEach(userId => {
       multiRequest.requests.push(new UserGetAction({
           userId,
@@ -309,7 +309,7 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       );
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(
         data => {
           if (data.hasErrors()) {
@@ -324,12 +324,12 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       return Observable.throw('Unable to activate users');
     }
 
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     usersIds.forEach(userId => {
       multiRequest.requests.push(new CategoryUserActivateAction({categoryId, userId: userId}));
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(response => {
           if (response.hasErrors()) {
             throw new Error(
@@ -346,12 +346,12 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       return Observable.throw('Unable to deactivate users');
     }
 
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     usersIds.forEach(userId => {
       multiRequest.requests.push(new CategoryUserDeactivateAction({categoryId, userId}));
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(response => {
           if (response.hasErrors()) {
             throw new Error(
@@ -370,12 +370,12 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       return Observable.throw('Unable to delete users');
     }
 
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     usersIds.forEach(userId => {
       multiRequest.requests.push(new CategoryUserDeleteAction({categoryId, userId: userId}));
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(response => {
           if (response.hasErrors()) {
             throw new Error(
@@ -387,19 +387,19 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       .catch(err => Observable.throw(err));
   }
 
-  public setPermissionLevel(categoryId: number, usersId: string[], permissionLevel: KalturaCategoryUserPermissionLevel): Observable<void> {
+  public setPermissionLevel(categoryId: number, usersId: string[], permissionLevel: VidiunCategoryUserPermissionLevel): Observable<void> {
       this._logger.info(`handle set permission level action`, { categoryId, usersId, permissionLevel });
     if (!usersId || !usersId.length || typeof permissionLevel === 'undefined') {
         this._logger.info(`no users or permissionLevel were provided abort action`);
       return Observable.throw('Unable to set permission level for users');
     }
 
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     usersId.forEach(userId => {
       multiRequest.requests.push(new CategoryUserUpdateAction({
         categoryId,
         userId: userId,
-        categoryUser: new KalturaCategoryUser({
+        categoryUser: new VidiunCategoryUser({
           permissionLevel: permissionLevel,
           permissionNames: this._getPermissionsForPermissionLevel(permissionLevel)
         }),
@@ -407,7 +407,7 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       }));
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(response => {
           if (response.hasErrors()) {
             throw new Error(
@@ -419,7 +419,7 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       .catch(err => Observable.throw(err));
   }
 
-  public setUpdateMethod(categoryId: number, usersIds: string[], updateMethod: KalturaUpdateMethodType): Observable<void> {
+  public setUpdateMethod(categoryId: number, usersIds: string[], updateMethod: VidiunUpdateMethodType): Observable<void> {
       this._logger.info(`handle set update method action`, { categoryId, usersIds, updateMethod });
     if (!usersIds || !usersIds.length || typeof updateMethod === 'undefined') {
         this._logger.info(`no users or updateMethod were provided abort action`);
@@ -427,19 +427,19 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
     }
 
 
-    const multiRequest = new KalturaMultiRequest();
+    const multiRequest = new VidiunMultiRequest();
     usersIds.forEach(userId => {
       multiRequest.requests.push(new CategoryUserUpdateAction({
         categoryId,
         userId: userId,
-        categoryUser: new KalturaCategoryUser({
+        categoryUser: new VidiunCategoryUser({
           updateMethod: updateMethod
         }),
         override: true
       }));
     });
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(response => {
           if (response.hasErrors()) {
             throw new Error(
@@ -451,19 +451,19 @@ export class ManageEndUserPermissionsService extends FiltersStoreBase<UsersFilte
       .catch(err => Observable.throw(err));
   }
 
-  private _getPermissionsForPermissionLevel(permissionLevel: KalturaCategoryUserPermissionLevel) {
+  private _getPermissionsForPermissionLevel(permissionLevel: VidiunCategoryUserPermissionLevel) {
     let result: string;
     switch (permissionLevel) {
-      case KalturaCategoryUserPermissionLevel.member:
+      case VidiunCategoryUserPermissionLevel.member:
         result = 'CATEGORY_VIEW';
         break;
-      case KalturaCategoryUserPermissionLevel.contributor:
+      case VidiunCategoryUserPermissionLevel.contributor:
         result = 'CATEGORY_CONTRIBUTE,CATEGORY_VIEW';
         break;
-      case KalturaCategoryUserPermissionLevel.moderator:
+      case VidiunCategoryUserPermissionLevel.moderator:
         result = 'CATEGORY_MODERATE,CATEGORY_CONTRIBUTE,CATEGORY_VIEW';
         break;
-      case KalturaCategoryUserPermissionLevel.manager:
+      case VidiunCategoryUserPermissionLevel.manager:
         result = 'CATEGORY_EDIT,CATEGORY_MODERATE,CATEGORY_CONTRIBUTE,CATEGORY_VIEW';
         break;
     }

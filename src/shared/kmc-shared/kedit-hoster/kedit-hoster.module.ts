@@ -1,19 +1,19 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {KalturaUIModule} from '@kaltura-ng/kaltura-ui';
-import {KeditHosterComponent} from 'app-shared/kmc-shared/kedit-hoster/kedit-hoster.component';
+import {VidiunUIModule} from '@vidiun-ng/vidiun-ui';
+import {VeditHosterComponent} from 'app-shared/vmc-shared/vedit-hoster/vedit-hoster.component';
 
 @NgModule({
   imports: <any[]>[
       CommonModule,
-      KalturaUIModule
+      VidiunUIModule
   ],
   declarations: <any[]>[
-      KeditHosterComponent
+      VeditHosterComponent
   ],
-  exports: <any[]>[KeditHosterComponent],
+  exports: <any[]>[VeditHosterComponent],
   providers: <any[]>[
   ]
 })
-export class KEditHosterModule {
+export class VEditHosterModule {
 }

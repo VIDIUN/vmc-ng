@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 
-import { KalturaClient, KalturaMediaEntry, KalturaUser } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { BrowserService } from 'app-shared/kmc-shell';
-import { AreaBlockerMessage, PopupWidgetComponent, PopupWidgetStates } from '@kaltura-ng/kaltura-ui';
+import { VidiunClient, VidiunMediaEntry, VidiunUser } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { BrowserService } from 'app-shared/vmc-shell';
+import { AreaBlockerMessage, PopupWidgetComponent, PopupWidgetStates } from '@vidiun-ng/vidiun-ui';
 
 @Component({
-    selector: 'kBulkRemoveViewers',
+    selector: 'vBulkRemoveViewers',
     templateUrl: './bulk-remove-viewers.component.html',
     styleUrls: ['./bulk-remove-viewers.component.scss']
 })
 export class BulkRemoveViewersComponent implements OnInit, OnDestroy, AfterViewInit {
-    @Input() selectedEntries: KalturaMediaEntry[];
+    @Input() selectedEntries: VidiunMediaEntry[];
     @Input() parentPopupWidget: PopupWidgetComponent;
     @Output() removeViewersChanged = new EventEmitter<string[]>();
 
@@ -22,10 +22,10 @@ export class BulkRemoveViewersComponent implements OnInit, OnDestroy, AfterViewI
     public _loading = false;
     public _sectionBlockerMessage: AreaBlockerMessage;
 
-    public users: KalturaUser[] = [];
+    public users: VidiunUser[] = [];
     public usersToRemove: string[] = [];
 
-    constructor(private _kalturaServerClient: KalturaClient,
+    constructor(private _vidiunServerClient: VidiunClient,
                 private _appLocalization: AppLocalization,
                 private _browserService: BrowserService) {
     }

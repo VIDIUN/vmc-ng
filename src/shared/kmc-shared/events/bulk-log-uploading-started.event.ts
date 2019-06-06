@@ -1,8 +1,8 @@
-import { AppEvent } from 'app-shared/kmc-shared/app-events/app-event';
-import { KalturaBatchJobStatus } from 'kaltura-ngx-client';
+import { AppEvent } from 'app-shared/vmc-shared/app-events/app-event';
+import { VidiunBatchJobStatus } from 'vidiun-ngx-client';
 
 export class BulkLogUploadingStartedEvent extends AppEvent {
-  constructor(public id: number, public status: KalturaBatchJobStatus, public uploadedOn: Date) {
+  constructor(public id: number, public status: VidiunBatchJobStatus, public uploadedOn: Date) {
     super('BulkLogUploadingStarted');
   }
 }

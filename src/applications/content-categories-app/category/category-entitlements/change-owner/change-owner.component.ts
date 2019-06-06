@@ -2,43 +2,43 @@ import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output
 import {ISubscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 
-import {KalturaClient} from 'kaltura-ngx-client';
-import {KalturaFilterPager} from 'kaltura-ngx-client';
-import {SuggestionsProviderData} from '@kaltura-ng/kaltura-primeng-ui';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import {BrowserService} from 'app-shared/kmc-shell';
-import {AreaBlockerMessage} from '@kaltura-ng/kaltura-ui';
-import {PopupWidgetComponent, PopupWidgetStates} from '@kaltura-ng/kaltura-ui';
-import {KalturaUser} from 'kaltura-ngx-client';
-import {KalturaUserFilter} from 'kaltura-ngx-client';
-import {UserListAction} from 'kaltura-ngx-client';
-import {KalturaCategory} from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import {VidiunClient} from 'vidiun-ngx-client';
+import {VidiunFilterPager} from 'vidiun-ngx-client';
+import {SuggestionsProviderData} from '@vidiun-ng/vidiun-primeng-ui';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import {BrowserService} from 'app-shared/vmc-shell';
+import {AreaBlockerMessage} from '@vidiun-ng/vidiun-ui';
+import {PopupWidgetComponent, PopupWidgetStates} from '@vidiun-ng/vidiun-ui';
+import {VidiunUser} from 'vidiun-ngx-client';
+import {VidiunUserFilter} from 'vidiun-ngx-client';
+import {UserListAction} from 'vidiun-ngx-client';
+import {VidiunCategory} from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 @Component({
-  selector: 'kCategoryChangeOwner',
+  selector: 'vCategoryChangeOwner',
   templateUrl: './change-owner.component.html',
   styleUrls: ['./change-owner.component.scss'],
-    providers: [KalturaLogger.createLogger('CategoryChangeOwnerComponent')]
+    providers: [VidiunLogger.createLogger('CategoryChangeOwnerComponent')]
 })
 export class CategoryChangeOwnerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() parentPopupWidget: PopupWidgetComponent;
-  @Input() category: KalturaCategory;
-  @Output() ownerChanged = new EventEmitter<KalturaUser>();
+  @Input() category: VidiunCategory;
+  @Output() ownerChanged = new EventEmitter<VidiunUser>();
 
   public _blockerMessage: AreaBlockerMessage;
 
   public _usersProvider = new Subject<SuggestionsProviderData>();
-  public _owner: KalturaUser = null;
+  public _owner: VidiunUser = null;
 
   private _searchUsersSubscription: ISubscription;
   private _parentPopupStateChangesSubscription: ISubscription;
   private _confirmClose = true;
 
-  constructor(private _kalturaServerClient: KalturaClient, private _appLocalization: AppLocalization, private _browserService: BrowserService,
-              private _logger: KalturaLogger) {
+  constructor(private _vidiunServerClient: VidiunClient, private _appLocalization: AppLocalization, private _browserService: BrowserService,
+              private _logger: VidiunLogger) {
       this._convertUserInputToValidValue = this._convertUserInputToValidValue.bind(this); // fix scope issues when binding to a property
   }
 
@@ -105,13 +105,13 @@ export class CategoryChangeOwnerComponent implements OnInit, OnDestroy, AfterVie
       this._searchUsersSubscription = null;
     }
 
-    this._searchUsersSubscription = this._kalturaServerClient.request(
+    this._searchUsersSubscription = this._vidiunServerClient.request(
       new UserListAction(
         {
-          filter: new KalturaUserFilter({
+          filter: new VidiunUserFilter({
             idOrScreenNameStartsWith: event.query
           }),
-          pager: new KalturaFilterPager({
+          pager: new VidiunFilterPager({
             pageIndex: 0,
             pageSize: 30
           })
@@ -123,7 +123,7 @@ export class CategoryChangeOwnerComponent implements OnInit, OnDestroy, AfterVie
         data => {
             this._logger.info(`handle successful search users action`);
           const suggestions = [];
-          (data.objects || []).forEach((suggestedUser: KalturaUser) => {
+          (data.objects || []).forEach((suggestedUser: VidiunUser) => {
               suggestedUser['__tooltip'] = suggestedUser.id;
             suggestions.push({
               name: suggestedUser.screenName + '(' + suggestedUser.id + ')',
@@ -140,12 +140,12 @@ export class CategoryChangeOwnerComponent implements OnInit, OnDestroy, AfterVie
       );
   }
 
-  public _convertUserInputToValidValue(value: string): KalturaUser {
+  public _convertUserInputToValidValue(value: string): VidiunUser {
     let result = null;
     const tt: string = this._appLocalization.get('applications.content.categoryDetails.entitlements.owner.tooltip', {0: value});
 
     if (value) {
-      result = new KalturaUser(
+      result = new VidiunUser(
         {
           id: value,
           screenName:  value,
@@ -162,7 +162,7 @@ export class CategoryChangeOwnerComponent implements OnInit, OnDestroy, AfterVie
   }
 
   public _apply() {
-    const owner: KalturaUser = Array.isArray(this._owner) ? this._owner[0] : this._owner;
+    const owner: VidiunUser = Array.isArray(this._owner) ? this._owner[0] : this._owner;
 
       this._logger.info(`handle change owner action by user`, { owner });
 

@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { KalturaClient } from 'kaltura-ngx-client';
-import { KalturaUser } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
+import { VidiunUser } from 'vidiun-ngx-client';
 import { CategoriesBulkActionBaseService } from "./categories-bulk-action-base.service";
-import { CategoryUpdateAction } from 'kaltura-ngx-client';
-import { KalturaCategory } from 'kaltura-ngx-client';
-import { KalturaPrivacyType } from 'kaltura-ngx-client';
+import { CategoryUpdateAction } from 'vidiun-ngx-client';
+import { VidiunCategory } from 'vidiun-ngx-client';
+import { VidiunPrivacyType } from 'vidiun-ngx-client';
 
 @Injectable()
-export class CategoriesBulkChangeContentPrivacyService extends CategoriesBulkActionBaseService<KalturaPrivacyType> {
+export class CategoriesBulkChangeContentPrivacyService extends CategoriesBulkActionBaseService<VidiunPrivacyType> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedCategories: KalturaCategory[], privacyType : KalturaPrivacyType) : Observable<{}>{
+  public execute(selectedCategories: VidiunCategory[], privacyType : VidiunPrivacyType) : Observable<{}>{
     return Observable.create(observer =>{
             let requests: CategoryUpdateAction[] = [];
 
       selectedCategories.forEach(category => {
-        let updatedCategory: KalturaCategory = new KalturaCategory();
+        let updatedCategory: VidiunCategory = new VidiunCategory();
         updatedCategory.privacy = privacyType;
         requests.push(new CategoryUpdateAction({
           id: category.id,

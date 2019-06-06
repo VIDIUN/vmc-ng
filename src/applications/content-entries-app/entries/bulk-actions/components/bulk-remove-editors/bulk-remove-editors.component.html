@@ -1,20 +1,20 @@
-<k-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
-  <div class="kContent kOverrideFAIcons">
-    <span class="kTitle">{{'applications.content.bulkActions.removeEditors' | translate}}</span>
-    <div class="kEditors">
-      <span class="kLabel">{{'applications.content.bulkActions.removeEditorsLabel' | translate}}</span>
-      <span  *ngIf="!users || !users.length" class="kNoItems">{{'applications.content.bulkActions.noEditorsToRemove' | translate}}</span>
-      <kAutoComplete  *ngIf="users && users.length" [ngModel]="users"
+<v-area-blocker [showLoader]="_loading" [message]="_sectionBlockerMessage">
+  <div class="vContent vOverrideFAIcons">
+    <span class="vTitle">{{'applications.content.bulkActions.removeEditors' | translate}}</span>
+    <div class="vEditors">
+      <span class="vLabel">{{'applications.content.bulkActions.removeEditorsLabel' | translate}}</span>
+      <span  *ngIf="!users || !users.length" class="vNoItems">{{'applications.content.bulkActions.noEditorsToRemove' | translate}}</span>
+      <vAutoComplete  *ngIf="users && users.length" [ngModel]="users"
                      [tooltipResolver]="'__tooltip'"
                      [classField]="'__class'"
                      [multiple]="true"
                      [limitToSuggestions]="false"
                      readonly="true"
                      (onUnselect)="_removeUser($event)">
-      </kAutoComplete>
+      </vAutoComplete>
     </div>
-    <div class="kFooter">
-      <button type="button" [disabled]="usersToRemove.length === 0" class="kButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
+    <div class="vFooter">
+      <button type="button" [disabled]="usersToRemove.length === 0" class="vButtonBranded" pButton label="{{'applications.content.bulkActions.apply' | translate}}" (click)="_apply()"></button>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>

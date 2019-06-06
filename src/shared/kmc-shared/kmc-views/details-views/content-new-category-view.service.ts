@@ -1,30 +1,30 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KMCPermissionsService } from '../../kmc-permissions';
+import { VMCPermissionsService } from '../../vmc-permissions';
 import { Observable } from 'rxjs';
-import { DetailsViewMetadata, KmcDetailsViewBaseService } from 'app-shared/kmc-shared/kmc-views/kmc-details-view-base.service';
-import {BrowserService} from 'app-shared/kmc-shell/providers/browser.service';
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { DetailsViewMetadata, VmcDetailsViewBaseService } from 'app-shared/vmc-shared/vmc-views/vmc-details-view-base.service';
+import {BrowserService} from 'app-shared/vmc-shell/providers/browser.service';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { ContentCategoriesMainViewService } from '../main-views/content-categories-main-view.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContentCategoryViewSections } from 'app-shared/kmc-shared/kmc-views/details-views/content-category-view.service';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContentCategoryViewSections } from 'app-shared/vmc-shared/vmc-views/details-views/content-category-view.service';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export interface ContentNewCategoryViewArgs {
-    entries: KalturaMediaEntry[];
+    entries: VidiunMediaEntry[];
 }
 
 
 @Injectable()
-export class ContentNewCategoryViewService extends KmcDetailsViewBaseService<ContentNewCategoryViewArgs> implements OnDestroy {
+export class ContentNewCategoryViewService extends VmcDetailsViewBaseService<ContentNewCategoryViewArgs> implements OnDestroy {
     private _newCategoryData: ContentNewCategoryViewArgs;
 
-    constructor(private _appPermissions: KMCPermissionsService,
+    constructor(private _appPermissions: VMCPermissionsService,
                 private _contentCategoriesMainView: ContentCategoriesMainViewService,
                 private _appLocalization: AppLocalization,
-                _logger: KalturaLogger,
+                _logger: VidiunLogger,
                 _browserService: BrowserService,
                 _titleService: Title,
                 _contextualHelpService: ContextualHelpService) {

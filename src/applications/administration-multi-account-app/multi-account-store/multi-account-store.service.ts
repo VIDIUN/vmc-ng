@@ -1,33 +1,33 @@
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
 import {
-    KalturaClient,
-    KalturaDetachedResponseProfile,
-    KalturaDropFolderFileFilter,
-    KalturaFilterPager,
-    KalturaMultiRequest,
-    KalturaMultiResponse,
-    KalturaPartner,
-    KalturaPartnerFilter,
-    KalturaPartnerGroupType,
-    KalturaPartnerStatus,
-    KalturaResponseProfileType,
-    KalturaSessionType, PartnerGetAction,
+    VidiunClient,
+    VidiunDetachedResponseProfile,
+    VidiunDropFolderFileFilter,
+    VidiunFilterPager,
+    VidiunMultiRequest,
+    VidiunMultiResponse,
+    VidiunPartner,
+    VidiunPartnerFilter,
+    VidiunPartnerGroupType,
+    VidiunPartnerStatus,
+    VidiunResponseProfileType,
+    VidiunSessionType, PartnerGetAction,
     PartnerGetInfoAction,
     PartnerListAction,
     PartnerRegisterAction,
     SessionImpersonateAction,
     VarConsoleUpdateStatusAction
-} from 'kaltura-ngx-client';
+} from 'vidiun-ngx-client';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { AppLocalization, FiltersStoreBase, ListTypeAdapter, NumberTypeAdapter, StringTypeAdapter, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { AppLocalization, FiltersStoreBase, ListTypeAdapter, NumberTypeAdapter, StringTypeAdapter, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { globalConfig } from 'config/global';
-import { AdminMultiAccountMainViewService } from 'app-shared/kmc-shared/kmc-views';
-import { cancelOnDestroy } from '@kaltura-ng/kaltura-common';
-import { AppAuthentication } from "app-shared/kmc-shell";
+import { AdminMultiAccountMainViewService } from 'app-shared/vmc-shared/vmc-views';
+import { cancelOnDestroy } from '@vidiun-ng/vidiun-common';
+import { AppAuthentication } from "app-shared/vmc-shell";
 
 export enum SortDirection {
   Desc = -1,
@@ -50,25 +50,25 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
 
 
   private _accounts = {
-    data: new BehaviorSubject<{ items: KalturaPartner[], totalCount: number, templateAccounts: KalturaPartner[], usedAccountsCount: number }>({ items: [], totalCount: 0, templateAccounts: [], usedAccountsCount: 0 }),
+    data: new BehaviorSubject<{ items: VidiunPartner[], totalCount: number, templateAccounts: VidiunPartner[], usedAccountsCount: number }>({ items: [], totalCount: 0, templateAccounts: [], usedAccountsCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
   private _isReady = false;
   private _querySubscription: ISubscription;
     private _allStatusesList = [
-        KalturaPartnerStatus.active,
-        KalturaPartnerStatus.blocked,
-        KalturaPartnerStatus.fullBlock
+        VidiunPartnerStatus.active,
+        VidiunPartnerStatus.blocked,
+        VidiunPartnerStatus.fullBlock
     ].join(',');
 
   public readonly accounts = { data$: this._accounts.data.asObservable(), state$: this._accounts.state.asObservable() };
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
               private _appAuthentication: AppAuthentication,
               adminMultiAccountMainViewService: AdminMultiAccountMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('AccountsStoreService'));
     if (adminMultiAccountMainViewService.isAvailable()) {
         this._prepare();
@@ -158,7 +158,7 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
     this._querySubscription = this._buildQueryRequest()
       .pipe(cancelOnDestroy(this))
       .subscribe(
-          (responses: KalturaMultiResponse) => {
+          (responses: VidiunMultiResponse) => {
               if (responses.hasErrors()) {
                   this._querySubscription = null;
                   const error = responses.getFirstError();
@@ -185,7 +185,7 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
     return this._accounts.data.value.items.find(item => item['name'] === name) !== undefined;
   }
 
-    private _updateFilterWithJoinedList(list: string[], requestFilter: KalturaPartnerFilter, requestFilterProperty: keyof KalturaDropFolderFileFilter): void {
+    private _updateFilterWithJoinedList(list: string[], requestFilter: VidiunPartnerFilter, requestFilterProperty: keyof VidiunDropFolderFileFilter): void {
         const value = (list || []).map(item => item).join(',');
 
         if (value) {
@@ -193,16 +193,16 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
         }
     }
 
-  private _buildQueryRequest(): Observable<KalturaMultiResponse> {
+  private _buildQueryRequest(): Observable<VidiunMultiResponse> {
     try {
 
-      let pager: KalturaFilterPager = null;
-      const filter = new KalturaPartnerFilter({});
+      let pager: VidiunFilterPager = null;
+      const filter = new VidiunPartnerFilter({});
       const data: AccountFilters = this._getFiltersAsReadonly();
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager(
+        pager = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -237,22 +237,22 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
         }
 
         // create filter for template accounts
-        const templatesFilter = new KalturaPartnerFilter({});
+        const templatesFilter = new VidiunPartnerFilter({});
         templatesFilter.statusIn = '1,2'; // active and blocked
-        templatesFilter.partnerGroupTypeEqual = KalturaPartnerGroupType.template;
+        templatesFilter.partnerGroupTypeEqual = VidiunPartnerGroupType.template;
 
         // create filter for used accounts
-        const accountsFilter = new KalturaPartnerFilter({});
+        const accountsFilter = new VidiunPartnerFilter({});
         accountsFilter.statusIn = '1,2'; // active and blocked
 
         // update desired fields of partners
-        const responseProfile: KalturaDetachedResponseProfile = new KalturaDetachedResponseProfile({
-            type: KalturaResponseProfileType.includeFields,
+        const responseProfile: VidiunDetachedResponseProfile = new VidiunDetachedResponseProfile({
+            type: VidiunResponseProfileType.includeFields,
             fields: 'id,name,status,adminName,website,createdAt,referenceId,adminEmail,phone,createdAt,adminUserId'
         });
 
       // build the request
-      return this._kalturaClient.multiRequest(new KalturaMultiRequest(
+      return this._vidiunClient.multiRequest(new VidiunMultiRequest(
           new PartnerListAction({ filter, pager }).setRequestOptions({ responseProfile }),
           new PartnerListAction({ filter: templatesFilter }).setRequestOptions({ responseProfile }),
           new PartnerListAction({ filter: accountsFilter }).setRequestOptions({ responseProfile })
@@ -263,8 +263,8 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
 
   }
 
-  public updateAccountStatus(id: number, status: KalturaPartnerStatus): Observable<void> {
-      return this._kalturaClient.request(new VarConsoleUpdateStatusAction({id, status}))
+  public updateAccountStatus(id: number, status: VidiunPartnerStatus): Observable<void> {
+      return this._vidiunClient.request(new VarConsoleUpdateStatusAction({id, status}))
           .map(() => {
               return undefined;
           })
@@ -278,36 +278,36 @@ export class MultiAccountStoreService extends FiltersStoreBase<AccountFilters> i
       const requests = [
           new PartnerGetInfoAction({})
               .setRequestOptions({
-                  ks: this._appAuthentication.appUser.ks
+                  vs: this._appAuthentication.appUser.vs
               }),
           new PartnerGetAction({ id: impersonatedPartnerId })
               .setRequestOptions({
-              ks: this._appAuthentication.appUser.ks
+              vs: this._appAuthentication.appUser.vs
           })];
 
-      return this._kalturaClient.multiRequest(requests).switchMap(
-          (responses: KalturaMultiResponse) => {
+      return this._vidiunClient.multiRequest(requests).switchMap(
+          (responses: VidiunMultiResponse) => {
               if (responses.hasErrors()) {
                   throw new Error(`Error occur during session creation for partner ${impersonatedPartnerId}`);
               }
-              return this._kalturaClient.request(new SessionImpersonateAction({
+              return this._vidiunClient.request(new SessionImpersonateAction({
                   secret: responses[0].result.adminSecret,
                   userId: responses[1].result.adminUserId,
                   impersonatedPartnerId,
-                  type: KalturaSessionType.admin,
+                  type: VidiunSessionType.admin,
                   partnerId: this._appAuthentication.appUser.partnerInfo.partnerId,
                   privileges: loggedInUserId !== responses[1].result.adminUserId ? `disableentitlement,enablechangeaccount:${impersonatedPartnerId}` : 'disableentitlement'
 
               })).map(response => {
-                  const ks: string = response;
-                  return ks;
+                  const vs: string = response;
+                  return vs;
               })
           }
       );
   }
 
-  public addAccount(partner: KalturaPartner, templatePartnerId: number): Observable<KalturaPartner> {
-      return this._kalturaClient.request(new PartnerRegisterAction({partner, templatePartnerId}));
+  public addAccount(partner: VidiunPartner, templatePartnerId: number): Observable<VidiunPartner> {
+      return this._vidiunClient.request(new PartnerRegisterAction({partner, templatePartnerId}));
   }
 
   public reload(): void {

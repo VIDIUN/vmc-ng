@@ -1,29 +1,29 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
-import { KmcServerPolls } from 'app-shared/kmc-shared/server-polls';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { VmcServerPolls } from 'app-shared/vmc-shared/server-polls';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UploadMonitorStatuses } from './upload-monitor.component';
-import { KalturaDropFolder } from 'kaltura-ngx-client';
-import { KalturaDropFolderFilter } from 'kaltura-ngx-client';
-import { KalturaDropFolderOrderBy } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerConfig } from 'kaltura-ngx-client';
-import { KalturaDropFolderStatus } from 'kaltura-ngx-client';
-import { DropFolderListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileHandlerType } from 'kaltura-ngx-client';
-import { KalturaDropFolderContentFileHandlerMatchPolicy } from 'kaltura-ngx-client';
-import { DropFolderFileListAction } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileFilter } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileStatus } from 'kaltura-ngx-client';
-import { KalturaDropFolderFileListResponse } from 'kaltura-ngx-client';
+import { VidiunDropFolder } from 'vidiun-ngx-client';
+import { VidiunDropFolderFilter } from 'vidiun-ngx-client';
+import { VidiunDropFolderOrderBy } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerConfig } from 'vidiun-ngx-client';
+import { VidiunDropFolderStatus } from 'vidiun-ngx-client';
+import { DropFolderListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileHandlerType } from 'vidiun-ngx-client';
+import { VidiunDropFolderContentFileHandlerMatchPolicy } from 'vidiun-ngx-client';
+import { DropFolderFileListAction } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileFilter } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileStatus } from 'vidiun-ngx-client';
+import { VidiunDropFolderFileListResponse } from 'vidiun-ngx-client';
 import { DropFoldersRequestFactory } from './drop-folders-request-factory';
-import { KalturaDropFolderFile } from 'kaltura-ngx-client';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VidiunDropFolderFile } from 'vidiun-ngx-client';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 interface DropFoldersUploadFile {
-  status: KalturaDropFolderFileStatus;
+  status: VidiunDropFolderFileStatus;
   uploadedOn: Date;
   id: number;
 }
@@ -50,18 +50,18 @@ export class DropFoldersMonitorService implements OnDestroy {
 
   private _dropFolderChangesFactory = new DropFoldersRequestFactory();
   private _activeStatuses = [
-    KalturaDropFolderFileStatus.uploading,
-    KalturaDropFolderFileStatus.pending,
-    KalturaDropFolderFileStatus.waiting,
-    KalturaDropFolderFileStatus.uploading,
+    VidiunDropFolderFileStatus.uploading,
+    VidiunDropFolderFileStatus.pending,
+    VidiunDropFolderFileStatus.waiting,
+    VidiunDropFolderFileStatus.uploading,
   ];
 
   public readonly totals = { data$: this._totals.data.asObservable(), state$: this._totals.state.asObservable() };
 
-  constructor(private _kalturaClient: KalturaClient,
-              private _kmcServerPolls: KmcServerPolls,
+  constructor(private _vidiunClient: VidiunClient,
+              private _vmcServerPolls: VmcServerPolls,
               private _browserService: BrowserService,
-              private _logger: KalturaLogger) {
+              private _logger: VidiunLogger) {
     this._initTracking();
   }
 
@@ -91,23 +91,23 @@ export class DropFoldersMonitorService implements OnDestroy {
     } else {
       return this._getTrackedFiles().reduce((totals, upload) => {
         switch (upload.status) {
-          case KalturaDropFolderFileStatus.pending:
-          case KalturaDropFolderFileStatus.waiting:
-          case KalturaDropFolderFileStatus.parsed:
-          case KalturaDropFolderFileStatus.noMatch:
+          case VidiunDropFolderFileStatus.pending:
+          case VidiunDropFolderFileStatus.waiting:
+          case VidiunDropFolderFileStatus.parsed:
+          case VidiunDropFolderFileStatus.noMatch:
             totals.queued += 1;
             break;
-          case KalturaDropFolderFileStatus.uploading:
-          case KalturaDropFolderFileStatus.processing:
-          case KalturaDropFolderFileStatus.downloading:
+          case VidiunDropFolderFileStatus.uploading:
+          case VidiunDropFolderFileStatus.processing:
+          case VidiunDropFolderFileStatus.downloading:
             totals.uploading += 1;
             break;
-          case KalturaDropFolderFileStatus.handled:
+          case VidiunDropFolderFileStatus.handled:
             totals.completed += 1;
             break;
-          case KalturaDropFolderFileStatus.errorHandling:
-          case KalturaDropFolderFileStatus.errorDownloading:
-          case KalturaDropFolderFileStatus.errorDeleting:
+          case VidiunDropFolderFileStatus.errorHandling:
+          case VidiunDropFolderFileStatus.errorDownloading:
+          case VidiunDropFolderFileStatus.errorDeleting:
             totals.errors += 1;
             break;
           default:
@@ -119,37 +119,37 @@ export class DropFoldersMonitorService implements OnDestroy {
     }
   }
 
-  private _getDropFolders(): Observable<KalturaDropFolder[]> {
+  private _getDropFolders(): Observable<VidiunDropFolder[]> {
     const dropFolders = new DropFolderListAction({
-      filter: new KalturaDropFolderFilter({
-        orderBy: KalturaDropFolderOrderBy.createdAtDesc.toString(),
-        statusEqual: KalturaDropFolderStatus.enabled
+      filter: new VidiunDropFolderFilter({
+        orderBy: VidiunDropFolderOrderBy.createdAtDesc.toString(),
+        statusEqual: VidiunDropFolderStatus.enabled
       }),
     }).setRequestOptions({
-        acceptedTypes: [KalturaDropFolder, KalturaDropFolderContentFileHandlerConfig]
+        acceptedTypes: [VidiunDropFolder, VidiunDropFolderContentFileHandlerConfig]
     });
 
-    return this._kalturaClient.request(dropFolders)
+    return this._vidiunClient.request(dropFolders)
       .map(response => {
         if (response && response.objects) {
           return response.objects.reduce((list, object) => {
-            if (object instanceof KalturaDropFolder) {
-              if (object.fileHandlerType === KalturaDropFolderFileHandlerType.content) {
-                const cfg = object.fileHandlerConfig as KalturaDropFolderContentFileHandlerConfig;
-                if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.addAsNew) {
+            if (object instanceof VidiunDropFolder) {
+              if (object.fileHandlerType === VidiunDropFolderFileHandlerType.content) {
+                const cfg = object.fileHandlerConfig as VidiunDropFolderContentFileHandlerConfig;
+                if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.addAsNew) {
                   list.push(object);
-                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
+                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrKeepInFolder) {
                   list.push(object);
-                } else if (cfg.contentMatchPolicy === KalturaDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
+                } else if (cfg.contentMatchPolicy === VidiunDropFolderContentFileHandlerMatchPolicy.matchExistingOrAddAsNew) {
                   list.push(object);
                 }
-              } else if (object.fileHandlerType === KalturaDropFolderFileHandlerType.xml) {
+              } else if (object.fileHandlerType === VidiunDropFolderFileHandlerType.xml) {
                 list.push(object);
               }
 
               return list;
             } else {
-              throw new Error(`invalid type provided, expected KalturaDropFolder, got ${typeof object}`);
+              throw new Error(`invalid type provided, expected VidiunDropFolder, got ${typeof object}`);
             }
           }, []);
         }
@@ -158,17 +158,17 @@ export class DropFoldersMonitorService implements OnDestroy {
       });
   }
 
-  private _getActiveUpload(dropFoldersIn: string): Observable<KalturaDropFolderFileListResponse> {
+  private _getActiveUpload(dropFoldersIn: string): Observable<VidiunDropFolderFileListResponse> {
     const activeUploads = new DropFolderFileListAction({
-      filter: new KalturaDropFolderFileFilter({
+      filter: new VidiunDropFolderFileFilter({
         dropFolderIdIn: dropFoldersIn,
         statusIn: this._activeStatuses.join(',')
       })
     });
-    return this._kalturaClient.request(activeUploads)
+    return this._vidiunClient.request(activeUploads)
   }
 
-  private _cleanDeletedUploads(uploads: KalturaDropFolderFile[]): void {
+  private _cleanDeletedUploads(uploads: VidiunDropFolderFile[]): void {
     const uploadIds = uploads.map(({ id }) => id);
     this._getTrackedFiles().forEach(file => {
       const trackedUploadIsNotInResponse = uploadIds.indexOf(Number(file.id)) === -1;
@@ -188,7 +188,7 @@ export class DropFoldersMonitorService implements OnDestroy {
       this._getDropFolders()
         .map(dropFoldersList => {
           if (dropFoldersList.length) {
-            return dropFoldersList.reduce((ids, kdf) => `${ids}${kdf.id},`, '');
+            return dropFoldersList.reduce((ids, vdf) => `${ids}${vdf.id},`, '');
           }
 
           throw new Error('notPermitted');
@@ -242,7 +242,7 @@ export class DropFoldersMonitorService implements OnDestroy {
       this._logger.info(`start server polling every 10 seconds to sync drop folders upload status`);
 
 
-      this._kmcServerPolls.register<KalturaDropFolderFileListResponse>(10, this._dropFolderChangesFactory)
+      this._vmcServerPolls.register<VidiunDropFolderFileListResponse>(10, this._dropFolderChangesFactory)
         .pipe(cancelOnDestroy(this))
         .subscribe((response) => {
           if (response.error) {
@@ -279,7 +279,7 @@ export class DropFoldersMonitorService implements OnDestroy {
     });
   }
 
-  private _updateTrackedFilesFromServer(serverFiles: KalturaDropFolderFile[]): void {
+  private _updateTrackedFilesFromServer(serverFiles: VidiunDropFolderFile[]): void {
     serverFiles.forEach(upload => {
       const currentUploadIsActive = this._activeStatuses.indexOf(upload.status) !== -1;
       const relevantUpload = this._dropFolderFiles[upload.id];

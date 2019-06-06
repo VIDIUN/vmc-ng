@@ -1,29 +1,29 @@
-import { BrowserService } from 'shared/kmc-shell/providers/browser.service';
-import { KalturaUserRoleFilter } from 'kaltura-ngx-client';
+import { BrowserService } from 'shared/vmc-shell/providers/browser.service';
+import { VidiunUserRoleFilter } from 'vidiun-ngx-client';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
-import { KalturaFilterPager } from 'kaltura-ngx-client';
-import { KalturaClient, KalturaMultiRequest } from 'kaltura-ngx-client';
-import { KalturaUserRoleListResponse } from 'kaltura-ngx-client';
-import { KalturaUserRole } from 'kaltura-ngx-client';
-import { UserRoleListAction } from 'kaltura-ngx-client';
-import { KalturaUserRoleStatus } from 'kaltura-ngx-client';
-import { KalturaUserRoleOrderBy } from 'kaltura-ngx-client';
-import { UserRoleDeleteAction } from 'kaltura-ngx-client';
-import { UserRoleUpdateAction } from 'kaltura-ngx-client';
-import { UserRoleCloneAction } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { UserRoleAddAction } from 'kaltura-ngx-client';
-import { FiltersStoreBase, TypeAdaptersMapping } from '@kaltura-ng/mc-shared';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
+import { VidiunFilterPager } from 'vidiun-ngx-client';
+import { VidiunClient, VidiunMultiRequest } from 'vidiun-ngx-client';
+import { VidiunUserRoleListResponse } from 'vidiun-ngx-client';
+import { VidiunUserRole } from 'vidiun-ngx-client';
+import { UserRoleListAction } from 'vidiun-ngx-client';
+import { VidiunUserRoleStatus } from 'vidiun-ngx-client';
+import { VidiunUserRoleOrderBy } from 'vidiun-ngx-client';
+import { UserRoleDeleteAction } from 'vidiun-ngx-client';
+import { UserRoleUpdateAction } from 'vidiun-ngx-client';
+import { UserRoleCloneAction } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { UserRoleAddAction } from 'vidiun-ngx-client';
+import { FiltersStoreBase, TypeAdaptersMapping } from '@vidiun-ng/mc-shared';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
 import { globalConfig } from 'config/global';
-import { NumberTypeAdapter } from '@kaltura-ng/mc-shared';
-import { AdminRolesMainViewService } from 'app-shared/kmc-shared/kmc-views';
+import { NumberTypeAdapter } from '@vidiun-ng/mc-shared';
+import { AdminRolesMainViewService } from 'app-shared/vmc-shared/vmc-views';
 import { PermissionTreeNodes, PermissionTreeNode } from './permission-tree-nodes';
-import { KMCPermissionsService } from 'app-shared/kmc-shared/kmc-permissions';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { VMCPermissionsService } from 'app-shared/vmc-shared/vmc-permissions';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
 export enum SortDirection {
   Desc = -1,
@@ -42,7 +42,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
     static permissionsTree: PermissionTreeNode[] = null;
 
     private _roles = {
-    data: new BehaviorSubject<{ items: KalturaUserRole[], totalCount: number }>({ items: [], totalCount: 0 }),
+    data: new BehaviorSubject<{ items: VidiunUserRole[], totalCount: number }>({ items: [], totalCount: 0 }),
     state: new BehaviorSubject<{ loading: boolean, errorMessage: string }>({ loading: false, errorMessage: null })
   };
   private _isReady = false;
@@ -50,12 +50,12 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
 
   public readonly roles = { data$: this._roles.data.asObservable(), state$: this._roles.state.asObservable() };
 
-  constructor(private _kalturaClient: KalturaClient,
+  constructor(private _vidiunClient: VidiunClient,
               private _browserService: BrowserService,
               private _appLocalization: AppLocalization,
-              private _kmcPermissionsService: KMCPermissionsService,
+              private _vmcPermissionsService: VMCPermissionsService,
               adminRolesMainViewService: AdminRolesMainViewService,
-              _logger: KalturaLogger) {
+              _logger: VidiunLogger) {
     super(_logger.subLogger('RolesStoreService'));
     if (adminRolesMainViewService.isAvailable()) {
         this._prepare();
@@ -65,7 +65,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
   public getPermissionsTree(): PermissionTreeNode[] {
       const extendRoleTreeNode = (treeNode: PermissionTreeNode) => {
           Object.assign(treeNode, {
-              name: this._kmcPermissionsService.getPermissionNameByKey(treeNode.value)
+              name: this._vmcPermissionsService.getPermissionNameByKey(treeNode.value)
           });
 
           if (treeNode.items) {
@@ -170,11 +170,11 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
         });
   }
 
-  private _getDuplicatedRole(role: KalturaUserRole) {
+  private _getDuplicatedRole(role: VidiunUserRole) {
     const duplicateName = this._appLocalization.get('applications.administration.roles.copyOf') + ' ' + role.name;
-    role.tags = 'kmc';
+    role.tags = 'vmc';
 
-    const duplicatedRole = new KalturaUserRole();
+    const duplicatedRole = new VidiunUserRole();
     duplicatedRole.name = this._isNameExist(duplicateName) ? undefined : duplicateName;
     return duplicatedRole;
   }
@@ -183,20 +183,20 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
     return this._roles.data.value.items.find(item => item['name'] === name) !== undefined;
   }
 
-  private _buildQueryRequest(): Observable<KalturaUserRoleListResponse> {
+  private _buildQueryRequest(): Observable<VidiunUserRoleListResponse> {
     try {
-      const filter: KalturaUserRoleFilter = new KalturaUserRoleFilter({
-        statusEqual: KalturaUserRoleStatus.active,
-        orderBy: KalturaUserRoleOrderBy.idAsc.toString(),
-        tagsMultiLikeOr: 'kmc'
+      const filter: VidiunUserRoleFilter = new VidiunUserRoleFilter({
+        statusEqual: VidiunUserRoleStatus.active,
+        orderBy: VidiunUserRoleOrderBy.idAsc.toString(),
+        tagsMultiLikeOr: 'vmc'
       });
-      let pager: KalturaFilterPager = null;
+      let pager: VidiunFilterPager = null;
 
       const data: RolesFilters = this._getFiltersAsReadonly();
 
       // update pagination args
       if (data.pageIndex || data.pageSize) {
-        pager = new KalturaFilterPager(
+        pager = new VidiunFilterPager(
           {
             pageSize: data.pageSize,
             pageIndex: data.pageIndex + 1
@@ -205,7 +205,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       }
 
       // build the request
-      return this._kalturaClient.request(
+      return this._vidiunClient.request(
         new UserRoleListAction({ filter, pager })
       );
     } catch (err) {
@@ -214,7 +214,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
 
   }
 
-  public deleteRole(role: KalturaUserRole): Observable<void> {
+  public deleteRole(role: VidiunUserRole): Observable<void> {
     if (!role) {
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.roles.errors.cantDeleteRole')));
     }
@@ -222,7 +222,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.roles.errors.cantDeleteAdminRole')));
     }
 
-    return this._kalturaClient.request(new UserRoleDeleteAction({
+    return this._vidiunClient.request(new UserRoleDeleteAction({
       userRoleId: role.id
     }))
       .map(() => {
@@ -236,12 +236,12 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       });
   }
 
-  public duplicateRole(role: KalturaUserRole): Observable<KalturaUserRole> {
+  public duplicateRole(role: VidiunUserRole): Observable<VidiunUserRole> {
     if (!role) {
       return Observable.throw(new Error(this._appLocalization.get('applications.administration.roles.errors.cantDuplicateRole')));
     }
 
-    const multiRequest = new KalturaMultiRequest(
+    const multiRequest = new VidiunMultiRequest(
       new UserRoleCloneAction({ userRoleId: role.id }),
       new UserRoleUpdateAction({
         userRoleId: 0,
@@ -249,7 +249,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       }).setDependency(['userRoleId', 0, 'id'])
     );
 
-    return this._kalturaClient.multiRequest(multiRequest)
+    return this._vidiunClient.multiRequest(multiRequest)
       .map(
         data => {
           if (data.hasErrors()) {
@@ -262,7 +262,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       });
   }
 
-  public updateRole(id: number, role: KalturaUserRole): Observable<void> {
+  public updateRole(id: number, role: VidiunUserRole): Observable<void> {
     if (!role) {
       return Observable.throw(new Error('Unable to update role'));
     }
@@ -270,7 +270,7 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
       return Observable.throw(new Error('Unable to update Administrator role'));
     }
 
-    return this._kalturaClient.request(new UserRoleUpdateAction({
+    return this._vidiunClient.request(new UserRoleUpdateAction({
       userRoleId: id,
       userRole: role
     }))
@@ -280,13 +280,13 @@ export class RolesStoreService extends FiltersStoreBase<RolesFilters> implements
 
   }
 
-  public addRole(role: KalturaUserRole): Observable<void> {
+  public addRole(role: VidiunUserRole): Observable<void> {
     if (!role) {
       return Observable.throw(new Error('Unable to add role'));
     }
-    role.tags = 'kmc';
+    role.tags = 'vmc';
 
-    return this._kalturaClient.request(new UserRoleAddAction({ userRole: role }))
+    return this._vidiunClient.request(new UserRoleAddAction({ userRole: role }))
       .map(() => {
         return;
       });

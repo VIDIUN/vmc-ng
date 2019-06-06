@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kmc": {
+    "vmc": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
           "options": {
             "outputPath": "dist",
             "index": "src/index.html",
-            "main": "src/kmc-app/main.ts",
+            "main": "src/vmc-app/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "preserveSymlinks": true,
@@ -36,7 +36,7 @@
                   ]
               },
             "scripts": [
-              "src/assets/js/KalturaEmbedCodeGenerator.min.js"
+              "src/assets/js/VidiunEmbedCodeGenerator.min.js"
             ]
           },
           "configurations": {
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kmc:build"
+            "browserTarget": "vmc:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "kmc:build:production"
+              "browserTarget": "vmc:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kmc:build"
+            "browserTarget": "vmc:build"
           }
         },
         "test": {
@@ -84,7 +84,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "src/assets/js/KalturaEmbedCodeGenerator.min.js"
+              "src/assets/js/VidiunEmbedCodeGenerator.min.js"
             ],
             "styles": [
               "src/styles/app-theme/styles.scss"
@@ -112,14 +112,14 @@
       }
     }
   },
-  "defaultProject": "kmc",
+  "defaultProject": "vmc",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "kmc",
+      "prefix": "vmc",
       "styleext": "scss"
     },
     "@schematics/angular:directive": {
-      "prefix": "kmc"
+      "prefix": "vmc"
     }
   }
 }

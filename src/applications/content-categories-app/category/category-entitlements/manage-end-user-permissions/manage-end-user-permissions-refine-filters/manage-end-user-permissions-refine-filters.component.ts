@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewChildren} from '@angular/core';
-import {RefinePrimeTree} from '@kaltura-ng/mc-shared';
+import {RefinePrimeTree} from '@vidiun-ng/mc-shared';
 import { subApplicationsConfig } from 'config/sub-applications';
-import {PopupWidgetComponent} from '@kaltura-ng/kaltura-ui';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
-import {ScrollToTopContainerComponent} from '@kaltura-ng/kaltura-ui';
+import {PopupWidgetComponent} from '@vidiun-ng/vidiun-ui';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
+import {ScrollToTopContainerComponent} from '@vidiun-ng/vidiun-ui';
 import {ManageEndUserPermissionsService, UsersFilters} from '../manage-end-user-permissions.service';
 import {
     RefineList
@@ -30,7 +30,7 @@ export interface PrimeList {
 
 
 @Component({
-  selector: 'kManageEndUserPermissionsRefineFilters',
+  selector: 'vManageEndUserPermissionsRefineFilters',
   templateUrl: './manage-end-user-permissions-refine-filters.component.html',
   styleUrls: ['./manage-end-user-permissions-refine-filters.component.scss']
 })

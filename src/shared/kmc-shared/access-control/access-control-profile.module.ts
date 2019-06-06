@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AccessControlProfileStore } from 'app-shared/kmc-shared/access-control/access-control-profile-store.service';
+import { AccessControlProfileStore } from 'app-shared/vmc-shared/access-control/access-control-profile-store.service';
 
 @NgModule({
   imports: <any[]>[],

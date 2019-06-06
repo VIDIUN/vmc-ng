@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { AppEventsService } from 'shared/kmc-shared/app-events';
+import { AppEventsService } from 'shared/vmc-shared/app-events';
 import { ISubscription } from 'rxjs/Subscription';
 import { CreateNewTranscodingProfileEvent, CreateNewTranscodingProfileEventArgs } from './create-new-transcoding-profile.event';
 import {
     SettingsTranscodingProfileViewSections,
     SettingsTranscodingProfileViewService
-} from 'app-shared/kmc-shared/kmc-views/details-views';
-import { BrowserService } from 'app-shared/kmc-shell';
+} from 'app-shared/vmc-shared/vmc-views/details-views';
+import { BrowserService } from 'app-shared/vmc-shell';
 
 @Injectable()
 export class TranscodingProfileCreationService implements OnDestroy {

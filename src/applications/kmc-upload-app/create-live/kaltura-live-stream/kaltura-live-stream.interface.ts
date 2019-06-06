@@ -1,11 +1,11 @@
-import {KalturaRecordStatus} from 'kaltura-ngx-client';
+import {VidiunRecordStatus} from 'vidiun-ngx-client';
 
-export interface KalturaLive {
+export interface VidiunLive {
   name: string
   description: string,
   transcodingProfile: number,
   liveDVR: boolean,
   enableRecording: boolean,
-  enableRecordingSelectedOption: KalturaRecordStatus,
+  enableRecordingSelectedOption: VidiunRecordStatus,
   previewMode: boolean
 }

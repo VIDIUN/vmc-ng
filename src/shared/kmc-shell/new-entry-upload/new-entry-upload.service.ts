@@ -1,24 +1,24 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { KalturaClient } from 'kaltura-ngx-client';
+import { VidiunClient } from 'vidiun-ngx-client';
 import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs/Subscription';
-import { KalturaMediaType } from 'kaltura-ngx-client';
-import { TrackedFileStatuses, UploadManagement } from '@kaltura-ng/kaltura-common';
+import { VidiunMediaType } from 'vidiun-ngx-client';
+import { TrackedFileStatuses, UploadManagement } from '@vidiun-ng/vidiun-common';
 import { NewEntryUploadFile } from './new-entry-upload-file';
-import { MediaAddAction } from 'kaltura-ngx-client';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { KalturaUploadedFileTokenResource } from 'kaltura-ngx-client';
-import { KalturaAssetParamsResourceContainer } from 'kaltura-ngx-client';
-import { KalturaAssetsParamsResourceContainers } from 'kaltura-ngx-client';
-import { MediaUpdateContentAction } from 'kaltura-ngx-client';
-import { UploadTokenDeleteAction } from 'kaltura-ngx-client';
-import { TrackedFileData } from '@kaltura-ng/kaltura-common';
+import { MediaAddAction } from 'vidiun-ngx-client';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { VidiunUploadedFileTokenResource } from 'vidiun-ngx-client';
+import { VidiunAssetParamsResourceContainer } from 'vidiun-ngx-client';
+import { VidiunAssetsParamsResourceContainers } from 'vidiun-ngx-client';
+import { MediaUpdateContentAction } from 'vidiun-ngx-client';
+import { UploadTokenDeleteAction } from 'vidiun-ngx-client';
+import { TrackedFileData } from '@vidiun-ng/vidiun-common';
 import { Subject } from 'rxjs/Subject';
-import { cancelOnDestroy, tag } from '@kaltura-ng/kaltura-common';
+import { cancelOnDestroy, tag } from '@vidiun-ng/vidiun-common';
 
-export interface KmcNewEntryUpload {
+export interface VmcNewEntryUpload {
   file: File;
-  mediaType: KalturaMediaType;
+  mediaType: VidiunMediaType;
   entryName: string;
 }
 
@@ -27,7 +27,7 @@ export class NewEntryUploadService implements OnDestroy {
   public _mediaCreated = new Subject<{ id?: string, entryId?: string }>();
   public onMediaCreated$ = this._mediaCreated.asObservable();
 
-  constructor(private _kalturaServerClient: KalturaClient,
+  constructor(private _vidiunServerClient: VidiunClient,
               private _uploadManagement: UploadManagement) {
     this._monitorTrackedFilesChanges();
   }
@@ -83,7 +83,7 @@ export class NewEntryUploadService implements OnDestroy {
         (<NewEntryUploadFile>trackedFile.data).entryId = entry.id;
         this._mediaCreated.next({ id: trackedFile.id, entryId: entry.id });
       })
-      .switchMap((entry: KalturaMediaEntry) => this._updateMediaContent(entry, <NewEntryUploadFile>trackedFile.data))
+      .switchMap((entry: VidiunMediaEntry) => this._updateMediaContent(entry, <NewEntryUploadFile>trackedFile.data))
       .subscribe(
         () => {
         },
@@ -93,25 +93,25 @@ export class NewEntryUploadService implements OnDestroy {
       );
   }
 
-  private _updateMediaContent(entry: KalturaMediaEntry, file: NewEntryUploadFile): Observable<KalturaMediaEntry> {
+  private _updateMediaContent(entry: VidiunMediaEntry, file: NewEntryUploadFile): Observable<VidiunMediaEntry> {
     const entryId = entry.id;
     const conversionProfileId = file.transcodingProfileId;
-    const subSubResource = new KalturaUploadedFileTokenResource({ token: file.serverUploadToken });
+    const subSubResource = new VidiunUploadedFileTokenResource({ token: file.serverUploadToken });
     let resource = null;
 
-    if (file.mediaType === KalturaMediaType.image) {
+    if (file.mediaType === VidiunMediaType.image) {
       resource = subSubResource;
     } else {
-      const subResource = new KalturaAssetParamsResourceContainer({ resource: subSubResource, assetParamsId: 0 });
-      resource = new KalturaAssetsParamsResourceContainers({ resources: [subResource] });
+      const subResource = new VidiunAssetParamsResourceContainer({ resource: subSubResource, assetParamsId: 0 });
+      resource = new VidiunAssetsParamsResourceContainers({ resources: [subResource] });
     }
 
-    return this._kalturaServerClient.request(new MediaUpdateContentAction({ entryId, resource, conversionProfileId }));
+    return this._vidiunServerClient.request(new MediaUpdateContentAction({ entryId, resource, conversionProfileId }));
   }
 
-  private _createMediaEntry(file: NewEntryUploadFile): Observable<KalturaMediaEntry> {
-    return this._kalturaServerClient.request(new MediaAddAction({
-      entry: new KalturaMediaEntry({
+  private _createMediaEntry(file: NewEntryUploadFile): Observable<VidiunMediaEntry> {
+    return this._vidiunServerClient.request(new MediaAddAction({
+      entry: new VidiunMediaEntry({
         mediaType: file.mediaType,
         name: file.entryName,
         conversionProfileId: file.transcodingProfileId
@@ -120,7 +120,7 @@ export class NewEntryUploadService implements OnDestroy {
   }
 
   private _removeUploadToken(uploadTokenId: string): Observable<void> {
-    return this._kalturaServerClient.request(new UploadTokenDeleteAction({ uploadTokenId }))
+    return this._vidiunServerClient.request(new UploadTokenDeleteAction({ uploadTokenId }))
   }
 
   private _formatError(message: string, error: string | { message: string }): string {
@@ -128,7 +128,7 @@ export class NewEntryUploadService implements OnDestroy {
     return `${message}: ${errorMessage}`;
   }
 
-  public upload(files: KmcNewEntryUpload[], trancodingProfileId: number): void {
+  public upload(files: VmcNewEntryUpload[], trancodingProfileId: number): void {
     this._uploadManagement.addFiles(
       files.map(file => new NewEntryUploadFile(file.file, file.mediaType, trancodingProfileId, file.entryName))
     );

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { serverConfig } from 'config/server';
-import { KMCPermissions, KMCPermissionsService } from '../../kmc-permissions';
-import { KalturaLogger } from '@kaltura-ng/kaltura-logger';
-import { KmcMainViewBaseService, ViewMetadata } from '../kmc-main-view-base.service';
+import { VMCPermissions, VMCPermissionsService } from '../../vmc-permissions';
+import { VidiunLogger } from '@vidiun-ng/vidiun-logger';
+import { VmcMainViewBaseService, ViewMetadata } from '../vmc-main-view-base.service';
 import { Router } from '@angular/router';
-import { BrowserService } from 'app-shared/kmc-shell/providers/browser.service';
+import { BrowserService } from 'app-shared/vmc-shell/providers/browser.service';
 import { Title } from '@angular/platform-browser';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { ContextualHelpService } from 'app-shared/kmc-shared/contextual-help/contextual-help.service';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { ContextualHelpService } from 'app-shared/vmc-shared/contextual-help/contextual-help.service';
 
 @Injectable()
-export class ServicesDashboardMainViewService extends KmcMainViewBaseService {
+export class ServicesDashboardMainViewService extends VmcMainViewBaseService {
 
     constructor(
-        logger: KalturaLogger,
+        logger: VidiunLogger,
         browserService: BrowserService,
         router: Router,
-        private _appPermissions: KMCPermissionsService,
+        private _appPermissions: VMCPermissionsService,
         private _appLocalization: AppLocalization,
         titleService: Title,
         contextualHelpService: ContextualHelpService
@@ -26,7 +26,7 @@ export class ServicesDashboardMainViewService extends KmcMainViewBaseService {
 
     isAvailable(): boolean {
         const reachIsAvailable = !!serverConfig.externalApps.reach;
-        return reachIsAvailable && this._appPermissions.hasPermission(KMCPermissions.REACH_PLUGIN_PERMISSION);
+        return reachIsAvailable && this._appPermissions.hasPermission(VMCPermissions.REACH_PLUGIN_PERMISSION);
     }
 
     getRoutePath(): string {

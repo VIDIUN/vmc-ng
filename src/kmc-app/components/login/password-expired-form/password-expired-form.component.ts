@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EqualFieldsValidator } from 'app-shared/kmc-shell/validators/equalFields.validator';
-import { BrowserService } from 'app-shared/kmc-shell';
+import { EqualFieldsValidator } from 'app-shared/vmc-shell/validators/equalFields.validator';
+import { BrowserService } from 'app-shared/vmc-shell';
 import { serverConfig } from 'config/server';
 
 @Component({
-  selector: 'kKMCPasswordExpiredForm',
+  selector: 'vVMCPasswordExpiredForm',
   templateUrl: './password-expired-form.component.html',
   styleUrls: ['./password-expired-form.component.scss']
 })
@@ -49,8 +49,8 @@ export class PasswordExpiredFormComponent {
               private _browserService: BrowserService) {
       this._buildForm();
 
-      if (serverConfig.externalLinks.kaltura && serverConfig.externalLinks.kaltura.support) {
-          this._supportAddress = serverConfig.externalLinks.kaltura.support;
+      if (serverConfig.externalLinks.vidiun && serverConfig.externalLinks.vidiun.support) {
+          this._supportAddress = serverConfig.externalLinks.vidiun.support;
       }
   }
 

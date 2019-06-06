@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { routing } from './content-drop-folders-app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AreaBlockerModule, KalturaUIModule, StickyModule, TooltipModule } from '@kaltura-ng/kaltura-ui';
+import { AreaBlockerModule, VidiunUIModule, StickyModule, TooltipModule } from '@vidiun-ng/vidiun-ui';
 import {
   ButtonModule,
   CalendarModule,
@@ -17,26 +17,26 @@ import {
   TreeModule
 } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import { KalturaPrimeNgUIModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { AutoCompleteModule } from '@kaltura-ng/kaltura-primeng-ui';
-import { TagsModule } from '@kaltura-ng/kaltura-ui';
-import { PopupWidgetModule } from '@kaltura-ng/kaltura-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import { VidiunPrimeNgUIModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { AutoCompleteModule } from '@vidiun-ng/vidiun-primeng-ui';
+import { TagsModule } from '@vidiun-ng/vidiun-ui';
+import { PopupWidgetModule } from '@vidiun-ng/vidiun-ui';
 import { EntriesModule } from 'app-shared/content-shared/entries/entries.module';
 
 import { ContentDropFoldersComponent } from './content-drop-folders.component';
 import { DropFoldersComponentsList } from './drop-folders-components-list';
-import { KMCShellModule } from 'app-shared/kmc-shell';
-import { FiltersModule } from '@kaltura-ng/mc-shared';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
-import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.module';
+import { VMCShellModule } from 'app-shared/vmc-shell';
+import { FiltersModule } from '@vidiun-ng/mc-shared';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
+import { DateFormatModule } from 'app-shared/vmc-shared/date-format/date-format.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AreaBlockerModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     PaginatorModule,
     TooltipModule,
     ButtonModule,
@@ -47,11 +47,11 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     CalendarModule,
     MenuModule,
     TagsModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     AutoCompleteModule,
     TreeModule,
     SharedModule,
-    KMCShellModule,
+    VMCShellModule,
     FormsModule,
     ReactiveFormsModule,
     StickyModule,
@@ -59,7 +59,7 @@ import { DateFormatModule } from 'app-shared/kmc-shared/date-format/date-format.
     RouterModule.forChild(routing),
     FiltersModule,
     TableModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       DateFormatModule,
   ],
   declarations: [

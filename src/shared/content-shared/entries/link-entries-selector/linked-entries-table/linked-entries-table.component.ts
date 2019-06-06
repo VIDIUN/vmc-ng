@@ -1,19 +1,19 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, HostListener } from '@angular/core';
-import { KalturaMediaEntry } from 'kaltura-ngx-client';
-import { AppLocalization } from '@kaltura-ng/mc-shared';
-import { KMCPermissions } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunMediaEntry } from 'vidiun-ngx-client';
+import { AppLocalization } from '@vidiun-ng/mc-shared';
+import { VMCPermissions } from 'app-shared/vmc-shared/vmc-permissions';
 
 @Component({
-  selector: 'k-linked-entries-table',
+  selector: 'v-linked-entries-table',
   templateUrl: './linked-entries-table.component.html',
   styleUrls: ['./linked-entries-table.component.scss']
 })
 export class LinkedEntriesTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  public _kmcPermissions = KMCPermissions;
+  public _vmcPermissions = VMCPermissions;
   @Input() disabled: boolean;
   @Input() allowMultiple: boolean;
-  @Input() selectedEntries: KalturaMediaEntry[] = [];
+  @Input() selectedEntries: VidiunMediaEntry[] = [];
   @Input()
   set entries(data: any[]) {
     if (!this._deferredLoading) {
@@ -26,8 +26,8 @@ export class LinkedEntriesTableComponent implements OnInit, OnDestroy, AfterView
     }
   }
 
-  @Output() selectedEntriesChange = new EventEmitter<KalturaMediaEntry[]>();
-  @Output() deleteEntry = new EventEmitter<KalturaMediaEntry>();
+  @Output() selectedEntriesChange = new EventEmitter<VidiunMediaEntry[]>();
+  @Output() deleteEntry = new EventEmitter<VidiunMediaEntry>();
 
   @HostListener("window:resize", [])
   onWindowResize() {
@@ -35,9 +35,9 @@ export class LinkedEntriesTableComponent implements OnInit, OnDestroy, AfterView
   }
   public _documentWidth: number = 2000;
 
-  private _deferredEntries: KalturaMediaEntry[];
+  private _deferredEntries: VidiunMediaEntry[];
 
-  public _entries: KalturaMediaEntry[] = [];
+  public _entries: VidiunMediaEntry[] = [];
   public _emptyMessage: string;
   public _deferredLoading = true;
 
@@ -71,7 +71,7 @@ export class LinkedEntriesTableComponent implements OnInit, OnDestroy, AfterView
   ngOnDestroy() {
   }
 
-  public _onSelectionChange(event: KalturaMediaEntry[]): void {
+  public _onSelectionChange(event: VidiunMediaEntry[]): void {
     this.selectedEntriesChange.emit(event);
   }
 }

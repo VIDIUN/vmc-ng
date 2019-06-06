@@ -1,26 +1,26 @@
 @import 'app-theme/_variables.scss';
 
-.kEditWin {
-  .kHeader {
+.vEditWin {
+  .vHeader {
     height: 78px;
     width: 100%;
     text-align: center;
     padding-top: 24px;
     box-sizing: border-box;
-    border-bottom: 1px solid $kGrayscale4;
-    .kTitle {
+    border-bottom: 1px solid $vGrayscale4;
+    .vTitle {
       color: #333333;
       font-size: 24px;
       font-weight: 700;
     }
   }
-  .kContainer {
+  .vContainer {
     height: 530px;
     width: 760px;
   }
-  .kFooter {
+  .vFooter {
     height: 66px;
-    border-top: 1px solid $kGrayscale4;
+    border-top: 1px solid $vGrayscale4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,36 +31,36 @@
     }
   }
 
-  .kContainer {
+  .vContainer {
     margin: 0 auto;
-    .kRow {
+    .vRow {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       padding-top: 20px;
       padding-left: 28px;
 
-      .kRequired {
+      .vRequired {
         width: 20px;
         font-size: 24px;
-        color: $kGrayscale2;
+        color: $vGrayscale2;
         height: 18px;
         padding: 8px 0px 8px 4px;
       }
 
-      .kLabel {
+      .vLabel {
         width: 190px;
         -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
         flex: 0 0 auto;
         height: 18px;
-        color: $kGrayscale1;
+        color: $vGrayscale1;
         font-size: 15px;
         line-height: 18px;
         padding: 8px 0px 8px 4px;
       }
 
-      .kManualType {
+      .vManualType {
         flex: 0 0 auto;
         height: 18px;
         color: #333333;
@@ -81,7 +81,7 @@
   .ui-chkbox-label {
     font-weight: normal;
     height: 18px;
-    color: $kGrayscale1;
+    color: $vGrayscale1;
     font-size: 15px;
     line-height: 18px;
   }

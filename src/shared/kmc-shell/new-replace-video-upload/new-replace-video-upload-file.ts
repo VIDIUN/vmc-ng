@@ -1,7 +1,7 @@
-import { KalturaUploadFile } from 'app-shared/kmc-shared/upload-management/kaltura-upload-file';
+import { VidiunUploadFile } from 'app-shared/vmc-shared/upload-management/vidiun-upload-file';
 import { ISubscription } from 'rxjs/Subscription';
 
-export class NewReplaceVideoUploadFile extends KalturaUploadFile {
+export class NewReplaceVideoUploadFile extends VidiunUploadFile {
     public createMediaEntrySubscription: ISubscription;
 
     constructor(file: File,

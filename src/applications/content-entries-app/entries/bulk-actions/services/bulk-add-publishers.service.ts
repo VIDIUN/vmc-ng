@@ -1,28 +1,28 @@
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import {KalturaClient} from 'kaltura-ngx-client';
+import {VidiunClient} from 'vidiun-ngx-client';
 
-import {KalturaMediaEntry} from 'kaltura-ngx-client';
-import {KalturaBaseEntry} from 'kaltura-ngx-client';
-import {BaseEntryUpdateAction} from 'kaltura-ngx-client';
+import {VidiunMediaEntry} from 'vidiun-ngx-client';
+import {VidiunBaseEntry} from 'vidiun-ngx-client';
+import {BaseEntryUpdateAction} from 'vidiun-ngx-client';
 import {BulkActionBaseService} from './bulk-action-base.service';
 
 @Injectable()
 export class BulkAddPublishersService extends BulkActionBaseService<string[]> {
 
-  constructor(_kalturaServerClient: KalturaClient) {
-    super(_kalturaServerClient);
+  constructor(_vidiunServerClient: VidiunClient) {
+    super(_vidiunServerClient);
   }
 
-  public execute(selectedEntries: KalturaMediaEntry[], publishersIds: string[]): Observable<{}> {
+  public execute(selectedEntries: VidiunMediaEntry[], publishersIds: string[]): Observable<{}> {
     return Observable.create(observer => {
 
       const requests: BaseEntryUpdateAction[] = [];
 
       selectedEntries.forEach(entry => {
-        const updatedEntry: KalturaBaseEntry = new KalturaBaseEntry();
+        const updatedEntry: VidiunBaseEntry = new VidiunBaseEntry();
 
-        // update entry publishers. trim publishers due to legacy KMC bugs
+        // update entry publishers. trim publishers due to legacy VMC bugs
         let entryPublishers = [];
         if (entry.entitledUsersPublish && entry.entitledUsersPublish.length) {
           entryPublishers = entry.entitledUsersPublish.split(',').map(publisher => {

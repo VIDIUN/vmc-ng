@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AreaBlockerModule, KalturaUIModule, TooltipModule} from '@kaltura-ng/kaltura-ui';
+import {AreaBlockerModule, VidiunUIModule, TooltipModule} from '@vidiun-ng/vidiun-ui';
 import {
   ButtonModule,
   CheckboxModule,
@@ -11,9 +11,9 @@ import {
   MenuModule,
   SharedModule
 } from 'primeng/primeng';
-import {LocalizationModule} from '@kaltura-ng/mc-shared';
-import {KalturaPrimeNgUIModule} from '@kaltura-ng/kaltura-primeng-ui';
-import {PopupWidgetModule} from '@kaltura-ng/kaltura-ui';
+import {LocalizationModule} from '@vidiun-ng/mc-shared';
+import {VidiunPrimeNgUIModule} from '@vidiun-ng/vidiun-primeng-ui';
+import {PopupWidgetModule} from '@vidiun-ng/vidiun-ui';
 
 import {UploadMenuComponent} from './upload-menu/upload-menu.component';
 import {UploadSettingsComponent} from './upload-settings/upload-settings.component';
@@ -25,13 +25,13 @@ import {ManualLiveComponent} from './create-live/manual-live/manual-live.compone
 import {UniversalLiveComponent} from './create-live/universal-live/universal-live.component';
 import {TranscodingProfileSelectComponent} from './prepare-entry/transcoding-profile-select/transcoding-profile-select.component';
 import {CreateLiveComponent} from './create-live/create-live.component';
-import {KalturaLiveStreamComponent} from './create-live/kaltura-live-stream/kaltura-live-stream.component';
+import {VidiunLiveStreamComponent} from './create-live/vidiun-live-stream/vidiun-live-stream.component';
 import {PrepareEntryComponent} from './prepare-entry/prepare-entry.component';
 import { NewUploadMonitorService } from './upload-monitor/new-upload-monitor.service';
 import { BulkUploadMonitorService } from './upload-monitor/bulk-upload-monitor.service';
 import { DropFoldersMonitorService } from './upload-monitor/drop-folders-monitor.service';
-import { KalturaLogger, KalturaLoggerName } from '@kaltura-ng/kaltura-logger';
-import { KMCPermissionsModule } from 'app-shared/kmc-shared/kmc-permissions';
+import { VidiunLogger, VidiunLoggerName } from '@vidiun-ng/vidiun-logger';
+import { VMCPermissionsModule } from 'app-shared/vmc-shared/vmc-permissions';
 import { TableModule } from 'primeng/table';
 import { UploadFromYoutubeComponent } from './upload-from-youtube/upload-from-youtube.component';
 
@@ -40,7 +40,7 @@ import { UploadFromYoutubeComponent } from './upload-from-youtube/upload-from-yo
     CommonModule,
     AreaBlockerModule,
     LocalizationModule,
-    KalturaUIModule,
+    VidiunUIModule,
     TooltipModule,
     ButtonModule,
     FormsModule,
@@ -49,11 +49,11 @@ import { UploadFromYoutubeComponent } from './upload-from-youtube/upload-from-yo
     DropdownModule,
     PopupWidgetModule,
     MenuModule,
-    KalturaPrimeNgUIModule,
+    VidiunPrimeNgUIModule,
     SharedModule,
     InputSwitchModule,
     CheckboxModule,
-    KMCPermissionsModule,
+    VMCPermissionsModule,
       TableModule
   ],
   declarations: [
@@ -68,7 +68,7 @@ import { UploadFromYoutubeComponent } from './upload-from-youtube/upload-from-yo
     PrepareEntryComponent,
     TranscodingProfileSelectComponent,
     CreateLiveComponent,
-    KalturaLiveStreamComponent,
+    VidiunLiveStreamComponent,
     UniversalLiveComponent,
     ManualLiveComponent,
       UploadFromYoutubeComponent
@@ -78,14 +78,14 @@ import { UploadFromYoutubeComponent } from './upload-from-youtube/upload-from-yo
     UploadMonitorComponent
   ]
 })
-export class KmcUploadAppModule {
+export class VmcUploadAppModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: KmcUploadAppModule,
+      ngModule: VmcUploadAppModule,
       providers: <any[]>[
-        KalturaLogger,
+        VidiunLogger,
         {
-          provide: KalturaLoggerName, useValue: 'upload-monitor'
+          provide: VidiunLoggerName, useValue: 'upload-monitor'
         },
         BulkUploadMonitorService,
         NewUploadMonitorService,

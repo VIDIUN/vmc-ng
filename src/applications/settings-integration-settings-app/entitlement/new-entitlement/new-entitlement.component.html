@@ -1,31 +1,31 @@
-<k-area-blocker [showLoader]="false" [message]="_blockerMessage" style="height: 100%">
+<v-area-blocker [showLoader]="false" [message]="_blockerMessage" style="height: 100%">
 
-  <div class="kTreeContainer kOverrideFAIcons">
+  <div class="vTreeContainer vOverrideFAIcons">
 
-    <div class="kHeader">
-    <span class="kTitle">
+    <div class="vHeader">
+    <span class="vTitle">
       <span>{{('applications.settings.integrationSettings.entitlement.addEntitlement.title') | translate}}</span>
     </span>
     </div>
-    <div class="kContainer">
-      <div class="kRow">
-        <div class="kExplanation">
+    <div class="vContainer">
+      <div class="vRow">
+        <div class="vExplanation">
           {{('applications.settings.integrationSettings.entitlement.addEntitlement.explanation') | translate}}
         </div>
       </div>
-      <div class="kRow">
-        <kCategorySelector (onCategorySelected)="_onCategorySelected($event)"
+      <div class="vRow">
+        <vCategorySelector (onCategorySelected)="_onCategorySelected($event)"
                            [enableNoParentSelection]="false">
-        </kCategorySelector>
+        </vCategorySelector>
       </div>
-      <form class="kRow" [formGroup]="addEntitlementForm" novalidate>
-        <span class="kLabel">{{'applications.settings.integrationSettings.entitlement.addEntitlement.addPrivacyContextLabel' | translate}}</span>
-        <div class="kRequired" [ngClass]="{'kHasError':!addEntitlementForm.get('privacyContextLabel').valid &&
+      <form class="vRow" [formGroup]="addEntitlementForm" novalidate>
+        <span class="vLabel">{{'applications.settings.integrationSettings.entitlement.addEntitlement.addPrivacyContextLabel' | translate}}</span>
+        <div class="vRequired" [ngClass]="{'vHasError':!addEntitlementForm.get('privacyContextLabel').valid &&
                    addEntitlementForm.get('privacyContextLabel').touched}">*
         </div>
         <div>
-          <input class="kControl" formControlName="privacyContextLabel" pInputText
-                 [ngClass]="{'kHasError':!addEntitlementForm.get('privacyContextLabel').valid &&
+          <input class="vControl" formControlName="privacyContextLabel" pInputText
+                 [ngClass]="{'vHasError':!addEntitlementForm.get('privacyContextLabel').valid &&
                    addEntitlementForm.get('privacyContextLabel').touched}">
           <div *ngIf="addEntitlementForm.get('privacyContextLabel').touched &&
                  addEntitlementForm.get('privacyContextLabel').hasError('required')"
@@ -43,12 +43,12 @@
         </div>
       </form>
     </div>
-    <div class="kFooter">
-      <button type="button" class="kButtonBranded" pButton
+    <div class="vFooter">
+      <button type="button" class="vButtonBranded" pButton
               label="{{'applications.content.addNewCategory.apply' | translate}}"
               (click)="_apply()"
               [disabled]="!addEntitlementForm.get('privacyContextLabel').valid || !this._selectedCategory"></button>
-      <a class="kLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
+      <a class="vLink" (click)="_cancel()">{{'applications.content.addNewCategory.cancel' | translate}}</a>
     </div>
   </div>
-</k-area-blocker>
+</v-area-blocker>
